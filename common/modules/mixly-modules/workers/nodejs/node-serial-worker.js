@@ -1,5 +1,4 @@
 importScripts('../common/serial-worker.js');
-const lodash_fp = require('lodash/fp');
 const child_process = require('node:child_process');
 const serialport = require('serialport');
 
