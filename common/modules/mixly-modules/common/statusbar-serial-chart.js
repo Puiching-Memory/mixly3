@@ -78,8 +78,7 @@ class StatusBarSerialChart extends PageBase {
                 show: true,
                 font: {
                     fill: axisFontColor
-                },
-                labelWidth: 30
+                }
             },
             xaxis: {
                 show: true,
@@ -122,7 +121,7 @@ class StatusBarSerialChart extends PageBase {
             if (isNaN(yMin) || yMin >= this.#yMax_) {
                 this.#$yMin_.val(this.#yMin_);
             } else {
-                this.#yMin_ = yMin_;
+                this.#yMin_ = yMin;
                 let { yaxis } = this.#plot_.getAxes();
                 yaxis.options.min = yMin;
             }
