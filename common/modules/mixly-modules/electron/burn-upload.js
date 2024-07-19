@@ -36,7 +36,6 @@ const fs = Mixly.require('node:fs');
 const fs_plus = Mixly.require('fs-plus');
 const fs_extra = Mixly.require('fs-extra');
 const path = Mixly.require('node:path');
-const lodash_fp = Mixly.require('lodash/fp');
 const child_process = Mixly.require('node:child_process');
 const iconv_lite = Mixly.require('iconv-lite');
 const os = Mixly.require('node:os');

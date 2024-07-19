@@ -8,7 +8,6 @@ goog.require('Mixly.Debug');
 goog.require('Mixly.Electron');
 goog.provide('Mixly.Electron.Serial');
 
-const lodash_fp = Mixly.require('lodash/fp');
 const child_process = Mixly.require('node:child_process');
 const serialport = Mixly.require('serialport');
 
