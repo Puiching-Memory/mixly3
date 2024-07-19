@@ -2,11 +2,6 @@ import * as Blockly from 'blockly/core';
 
 const DISPLAY_EXTERN_HUE = '5BA5A5';
 
-
-
-Blockly.FieldColour.COLOURS = ['#f00', '#000'];
-Blockly.FieldColour.COLUMNS = 7;
-
 //var IMG = [["HEART", "HEART"],["HEART_SMALL", "HEART_SMALL"],["HAPPY", "HAPPY"],["SAD", "SAD"],["SMILE", "SMILE"],["SILLY", "SILLY"],["FABULOUS", "FABULOUS"],["SURPRISED", "SURPRISED"],["ASLEEP", "ASLEEP"],["ANGRY", "ANGRY"],["CONFUSED", "CONFUSED"],["NO", "NO"],["YES", "YES"],["LEFT_ARROW", "LEFT_ARROW"],["RIGHT_ARROW", "RIGHT_ARROW"],["DRESS", "DRESS"],["TRANSFORMERS", "TRANSFORMERS"],["SCISSORS", "SCISSORS"],["EXIT", "EXIT"],["TREE", "TREE"],["PACMAN", "PACMAN"],["TARGET", "TARGET"],["TSHIRT", "TSHIRT"],["ROLLERSKATE", "ROLLERSKATE"],["DUCK", "DUCK"],["HOUSE", "HOUSE"],["TORTOISE", "TORTOISE"],["BUTTERFLY", "BUTTERFLY"],["STICKFIGURE", "STICKFIGURE"],["GHOST", "GHOST"],["PITCHFORK", "PITCHFORK"],["MUSIC_QUAVERS", "MUSIC_QUAVERS"],["MUSIC_QUAVER", "MUSIC_QUAVER"],["MUSIC_CROTCHET", "MUSIC_CROTCHET"],["COW", "COW"],["RABBIT", "RABBIT"],["SQUARE_SMALL", "SQUARE_SMALL"],["SQUARE", "SQUARE"],["DIAMOND_SMALL", "DIAMOND_SMALL"],["DIAMOND", "DIAMOND"],["CHESSBOARD", "CHESSBOARD"],["TRIANGLE_LEFT", "TRIANGLE_LEFT"],["TRIANGLE", "TRIANGLE"],["SNAKE", "SNAKE"],["UMBRELLA", "UMBRELLA"],["SKULL", "SKULL"],["GIRAFFE", "GIRAFFE"],["SWORD", "SWORD"]];
 // var IMG = [["HEART", "HEART"], ["HEART_SMALL", "HEART_SMALL"], ["HAPPY", "HAPPY"], ["SAD", "SAD"], ["SMILE", "SMILE"], ["SILLY", "SILLY"], ["FABULOUS", "FABULOUS"], ["SURPRISED", "SURPRISED"], ["ASLEEP", "ASLEEP"], ["ANGRY", "ANGRY"], ["CONFUSED", "CONFUSED"], ["NO", "NO"], ["YES", "YES"]];
 
@@ -590,7 +585,10 @@ export const display_rgb_color = {
             .appendField(Blockly.Msg.MIXLY_RGB_NUM);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_AS)
-            .appendField(new Blockly.FieldColour('#ff0000'), 'FIELDNAME');
+            .appendField(new Blockly.FieldColour('#000', null, {
+                colourOptions: ['#f00', '#000'],
+                columns: 2
+            }), 'FIELDNAME');
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -986,29 +984,10 @@ export const tft_show_image_xy = {
 export const display_color_seclet = {
     init: function () {
         this.setColour(DISPLAY_EXTERN_HUE);
-        let fieldColorObj = new Blockly.FieldColour('#f00');
-        fieldColorObj.setColours([
-            // grays
-            '#ffffff', '#cccccc', '#c0c0c0', '#999999', '#666666', '#333333', '#000000',
-            // reds
-            '#ffcccc', '#ff6666', '#ff0000', '#cc0000', '#990000', '#660000', '#330000',
-            // oranges
-            '#ffcc99', '#ff9966', '#ff9900', '#ff6600', '#cc6600', '#993300', '#663300',
-            // yellows
-            '#ffff99', '#ffff66', '#ffcc66', '#ffcc33', '#cc9933', '#996633', '#663333',
-            // olives
-            '#ffffcc', '#ffff33', '#ffff00', '#ffcc00', '#999900', '#666600', '#333300',
-            // greens
-            '#99ff99', '#66ff99', '#33ff33', '#33cc00', '#009900', '#006600', '#003300',
-            // turquoises
-            '#99ffff', '#33ffff', '#66cccc', '#00cccc', '#339999', '#336666', '#003333',
-            // blues
-            '#ccffff', '#66ffff', '#33ccff', '#3366ff', '#3333ff', '#000099', '#000066',
-            // purples
-            '#ccccff', '#9999ff', '#6666cc', '#6633ff', '#6600cc', '#333399', '#330099',
-            // violets
-            '#ffccff', '#ff99ff', '#cc66cc', '#cc33cc', '#993399', '#663366', '#330033'
-        ]);
+        let fieldColorObj = new Blockly.FieldColour('#f00', null, {
+            colourOptions: ['#f00', '#000'],
+            columns: 2
+        });
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
             .appendField(fieldColorObj, "COLOR");

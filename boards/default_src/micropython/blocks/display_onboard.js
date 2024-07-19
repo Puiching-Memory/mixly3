@@ -3,9 +3,6 @@ import { Boards } from 'mixly';
 
 const DISPLAY_ONBOARD_HUE = '#569A98';
 
-// Blockly.FieldColour.COLOURS = ['#f00', '#000'];
-// Blockly.FieldColour.COLUMNS = 2;
-
 export const display_show_image = {
     init: function () {
         this.setColour(DISPLAY_ONBOARD_HUE);
@@ -110,7 +107,10 @@ export const display_image_create = {
         for (let i = 0; i < 12; i++) {
             let dummyInputObj = this.appendDummyInput();
             for (let j = 0; j < 32; j++) {
-                dummyInputObj.appendField(new Blockly.FieldColour("#000000"), i + '-' + j);
+                dummyInputObj.appendField(new Blockly.FieldColour('#000', null, {
+                    colourOptions: ['#f00', '#000'],
+                    columns: 2
+                }), i + '-' + j);
             }
         }
         this.setOutput(true);
@@ -327,7 +327,10 @@ export const mixgome_display_image_create = {
         for (let i = 0; i < 5; i++) {
             let dummyInputObj = this.appendDummyInput();
             for (let j = 0; j < 8; j++) {
-                dummyInputObj.appendField(new Blockly.FieldColour("#000000"), i + '-' + j);
+                dummyInputObj.appendField(new Blockly.FieldColour('#000', null, {
+                    colourOptions: ['#f00', '#000'],
+                    columns: 2
+                }), i + '-' + j);
             }
         }
         this.setOutput(true);
@@ -343,7 +346,10 @@ export const mixgomini_display_image_create = {
         for (let i = 0; i < 8; i++) {
             let dummyInputObj = this.appendDummyInput();
             for (let j = 0; j < 12; j++) {
-                dummyInputObj.appendField(new Blockly.FieldColour("#000000"), i + '-' + j);
+                dummyInputObj.appendField(new Blockly.FieldColour('#000', null, {
+                    colourOptions: ['#f00', '#000'],
+                    columns: 2
+                }), i + '-' + j);
             }
         }
         this.setOutput(true);
@@ -359,7 +365,10 @@ export const mixgo_display_image_create_new = {
         for (let i = 0; i < 8; i++) {
             let dummyInputObj = this.appendDummyInput();
             for (let j = 0; j < 16; j++) {
-                dummyInputObj.appendField(new Blockly.FieldColour("#000000"), i + '-' + j);
+                dummyInputObj.appendField(new Blockly.FieldColour('#000', null, {
+                    colourOptions: ['#f00', '#000'],
+                    columns: 2
+                }), i + '-' + j);
             }
         }
         this.setOutput(true, "esp32_image");
@@ -819,7 +828,10 @@ export const mixbot_display_image_create = {
         for (let i = 0; i < 5; i++) {
             let dummyInputObj = this.appendDummyInput();
             for (let j = 0; j < 5; j++) {
-                dummyInputObj.appendField(new Blockly.FieldColour("#000000"), i + '-' + j);
+                dummyInputObj.appendField(new Blockly.FieldColour('#000', null, {
+                    colourOptions: ['#f00', '#000'],
+                    columns: 2
+                }), i + '-' + j);
             }
         }
         this.setOutput(true);
@@ -888,7 +900,10 @@ export const bitbot_display_image_create = {
         for (let i = 0; i < 12; i++) {
             let dummyInputObj = this.appendDummyInput();
             for (let j = 0; j < 12; j++) {
-                dummyInputObj.appendField(new Blockly.FieldColour("#000000"), i + '-' + j);
+                dummyInputObj.appendField(new Blockly.FieldColour('#000', null, {
+                    colourOptions: ['#f00', '#000'],
+                    columns: 2
+                }), i + '-' + j);
             }
         }
         this.setOutput(true);
