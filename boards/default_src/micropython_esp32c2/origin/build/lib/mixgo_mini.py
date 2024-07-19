@@ -3,8 +3,6 @@ mixgo_mini onboard resources
 
 Micropython library for the mixgo_mini onboard resources
 =======================================================
-
-#Preliminary composition                   20240618
 @dahanzimin From the Mixly Team
 """
 import time, gc 
@@ -19,7 +17,7 @@ rtc_clock = RTC()
 
 '''I2C-onboard'''
 onboard_i2c = SoftI2C(scl=Pin(10), sda=Pin(18), freq=400000)
-onboard_i2c_scan = onboard_i2c.scan()
+#onboard_i2c_scan = onboard_i2c.scan()
 
 '''ACC-Sensor'''
 try :
@@ -44,28 +42,28 @@ except Exception as e:
 	print("Warning: Failed to communicate with BOT035 (Coprocessor) or",e)
 
 '''BPS-Sensor'''
-if 0x77 in onboard_i2c_scan:
-	try :
-		import spl06_001
-		onboard_bps = spl06_001.SPL06(onboard_i2c)     
-	except Exception as e:
-		print("Warning: Failed to communicate with SPL06-001 (BPS) or",e)
+# if 0x77 in onboard_i2c_scan:
+# 	try :
+# 		import spl06_001
+# 		onboard_bps = spl06_001.SPL06(onboard_i2c)     
+# 	except Exception as e:
+# 		print("Warning: Failed to communicate with SPL06-001 (BPS) or",e)
 
 '''THS-Sensor'''
-if 0x70 in onboard_i2c_scan:
-	try :
-		import shtc3
-		onboard_ths = shtc3.SHTC3(onboard_i2c)     
-	except Exception as e:
-		print("Warning: Failed to communicate with GXHTC3 (THS) or",e)
+# if 0x70 in onboard_i2c_scan:
+# 	try :
+# 		import shtc3
+# 		onboard_ths = shtc3.SHTC3(onboard_i2c)     
+# 	except Exception as e:
+# 		print("Warning: Failed to communicate with GXHTC3 (THS) or",e)
 
 '''MGS-Sensor'''
-if 0x30 in onboard_i2c_scan:
-	try :
-		import mmc5603
-		onboard_mgs = mmc5603.MMC5603(onboard_i2c)
-	except Exception as e:
-		print("Warning: Failed to communicate with MMC5603 (MGS) or",e)
+# if 0x30 in onboard_i2c_scan:
+# 	try :
+# 		import mmc5603
+# 		onboard_mgs = mmc5603.MMC5603(onboard_i2c)
+# 	except Exception as e:
+# 		print("Warning: Failed to communicate with MMC5603 (MGS) or",e)
 
 '''MCU_temperature'''
 def onboard_temperature():
