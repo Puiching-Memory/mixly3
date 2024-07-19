@@ -5,7 +5,7 @@
     },
     "defaultPath": {
         "win32": {
-            "arduinoCli": "../../mixly/mixly2.0-win32-x64/arduino-cli/arduino-cli.exe",
+            "arduinoCli": "None",
             "python3": "None"
         },
         "darwin": {
