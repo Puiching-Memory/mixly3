@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://mixly2.gitee.io/mixly2.0_src">
+  <a href="https://mixly3.gitee.io/mixly3.0_src">
     <img src="https://foruda.gitee.com/images/1677155717148882961/0c044ac0_5225463.png" width="100" alt="Mixly">
   </a>
 </p>
@@ -19,10 +19,6 @@ http://mixly.org
 ### Mixly wiki帮助
 
 http://wiki.mixly.org
-
-### 在线预览地址
-
-[Mixly2.0在线版](https://smilebrightly.gitee.io/mixly2.0_src)
 
 ### 网盘下载地址
 
@@ -54,16 +50,16 @@ http://wiki.mixly.org
 
 ### 更新工具
 
-- Mixly2.0-win32-x64一键更新工具：[下载](http://mixlylibs.cloud:8099/mixly2/update-tools/media/branch/master/mixly2.0-win32-x64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z)
-- Mixly2.0-win32-ia32一键更新工具：[下载](http://mixlylibs.cloud:8099/mixly2/update-tools/media/branch/master/mixly2.0-win32-ia32%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z)
-- Mixly2.0-mac-x64一键更新工具：[下载](http://mixlylibs.cloud:8099/mixly2/update-tools/media/branch/master/mixly2.0-mac-x64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z)
-- Mixly2.0-mac-arm64一键更新工具：[下载](http://mixlylibs.cloud:8099/mixly2/update-tools/media/branch/master/mixly2.0-mac-arm64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z)
-- Mixly2.0-linux-x64一键更新工具：[下载](http://mixlylibs.cloud:8099/mixly2/update-tools/media/branch/master/Mixly2.0-linux-x64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.zip)
-- Mixly2.0-linux-arm64一键更新工具：[下载](http://mixlylibs.cloud:8099/mixly2/update-tools/media/branch/master/Mixly2.0-linux-arm64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.zip)
+- Mixly3.0-win32-x64一键更新工具：[下载](http://mixlylibs.cloud:8099/mixly3/update-tools/media/branch/master/mixly3.0-win32-x64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z)
+- Mixly3.0-win32-ia32一键更新工具：[下载](http://mixlylibs.cloud:8099/mixly3/update-tools/media/branch/master/mixly3.0-win32-ia32%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z)
+- Mixly3.0-mac-x64一键更新工具：[下载](http://mixlylibs.cloud:8099/mixly3/update-tools/media/branch/master/mixly3.0-mac-x64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z)
+- Mixly3.0-mac-arm64一键更新工具：[下载](http://mixlylibs.cloud:8099/mixly3/update-tools/media/branch/master/mixly3.0-mac-arm64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z)
+- Mixly3.0-linux-x64一键更新工具：[下载](http://mixlylibs.cloud:8099/mixly3/update-tools/media/branch/master/Mixly3.0-linux-x64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.zip)
+- Mixly3.0-linux-arm64一键更新工具：[下载](http://mixlylibs.cloud:8099/mixly3/update-tools/media/branch/master/Mixly3.0-linux-arm64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.zip)
 
 ### 更新说明
 
-[更新日志](https://gitee.com/mixly2/mixly2.0_src/blob/master/CHANGELOG.md)
+[更新日志](https://gitee.com/mixly3/mixly3.0_src/blob/master/CHANGELOG.md)
 
 ### 官方交流群
 
