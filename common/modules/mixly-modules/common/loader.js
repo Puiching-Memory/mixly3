@@ -41,8 +41,6 @@ const {
 const { LibManager, File } = goog.isElectron? Electron : Web;
 const { Socket } = WebSocket;
 
-Mixly.Editor = Mixly.Editor ?? {};
-
 
 window.addEventListener('load', () => {
     const app = new App($('body')[0]);

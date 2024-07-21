@@ -42,6 +42,9 @@ API2.init = () => {
     Editor.blockEditor = blockPage.getEditor();
     Editor.codeEditor = codePage.getEditor();
     Object.assign(Blockly.Msg, HUES);
+    Blockly.ALIGN_LEFT = Blockly.inputs.Align.LEFT;
+    Blockly.ALIGN_CENTRE = Blockly.inputs.Align.CENTRE;
+    Blockly.ALIGN_RIGHT = Blockly.inputs.Align.RIGHT;
 }
 
 });

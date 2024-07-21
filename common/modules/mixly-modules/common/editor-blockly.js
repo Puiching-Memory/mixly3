@@ -100,7 +100,7 @@ class EditorBlockly extends EditorBase {
 
         this.addPlugins = () => {
             const { editor } = this;
-            // Blockly.ContextMenuItems.registerCommentOptions();
+            Blockly.ContextMenuItems.registerCommentOptions();
             editor.configureContextMenu = (menuOptions, e) => {
                 const workspaceSearchOption = {
                     text: Blockly.Msg['WORKSPACE_SEARCH_OPEN'],
