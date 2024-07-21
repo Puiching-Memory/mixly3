@@ -18,7 +18,7 @@ class Ampy {
         this.MKDIR = goog.get(path.join(Env.templatePath, 'python/mkdir.py'));
         this.MKFILE = goog.get(path.join(Env.templatePath, 'python/mkfile.py'));
         this.RENAME = goog.get(path.join(Env.templatePath, 'python/rename.py'));
-        this.RM = goog.get(path.join(Env.templatePath, 'python/RM.py'));
+        this.RM = goog.get(path.join(Env.templatePath, 'python/rm.py'));
         this.RMDIR = goog.get(path.join(Env.templatePath, 'python/rmdir.py'));
         this.GET = goog.get(path.join(Env.templatePath, 'python/get.py'));
     }
