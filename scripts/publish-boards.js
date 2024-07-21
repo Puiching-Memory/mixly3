@@ -42,6 +42,6 @@ if (fs_plus.isDirectorySync(DEFAULT_SRC_DIR)) {
             continue;
         }
         shell.cd(now);
-        shell.exec('npm run build:prod');
+        shell.exec('npm run publish:board');
     }
 }
