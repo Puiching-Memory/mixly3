@@ -628,6 +628,7 @@
             "Mixly.LocalStorage",
             "Mixly.Storage",
             "Mixly.Debug",
+            "Mixly.API2",
             "Mixly.Electron.LibManager",
             "Mixly.Electron.File",
             "Mixly.WebSocket.Socket"
@@ -708,6 +709,17 @@
         "require": [],
         "provide": [
             "Mixly"
+        ]
+    },
+    {
+        "path": "/common/mixly2-api.js",
+        "require": [
+            "Blockly",
+            "Mixly"
+        ],
+        "provide": [
+            "Mixly.API2",
+            "Mixly.Editor"
         ]
     },
     {

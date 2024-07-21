@@ -13,6 +13,7 @@ goog.require('Mixly.Title');
 goog.require('Mixly.LocalStorage');
 goog.require('Mixly.Storage');
 goog.require('Mixly.Debug');
+goog.require('Mixly.API2');
 goog.require('Mixly.Electron.LibManager');
 goog.require('Mixly.Electron.File');
 goog.require('Mixly.WebSocket.Socket');
@@ -31,6 +32,7 @@ const {
     LocalStorage,
     Storage,
     Debug,
+    API2,
     Electron = {},
     Web = {},
     WebSocket = {}
@@ -38,6 +40,8 @@ const {
 
 const { LibManager, File } = goog.isElectron? Electron : Web;
 const { Socket } = WebSocket;
+
+Mixly.Editor = Mixly.Editor ?? {};
 
 
 window.addEventListener('load', () => {
@@ -98,6 +102,7 @@ Loader.init = () => {
     Loader.restoreBlocks(editor);
     Mixly.app.removeSkeleton();
     window.addEventListener('unload', () => Loader.backupBlocks(editor), false);
+    API2.init();
 }
 
 Loader.restoreBlocks = (editor) => {
