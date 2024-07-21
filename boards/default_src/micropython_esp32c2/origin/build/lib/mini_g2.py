@@ -15,7 +15,7 @@ ext_i2c = SoftI2C(scl=Pin(7), sda=Pin(8), freq=400000)
 '''RFID_Sensor'''
 try :
     import rc522
-    onboard_rfid = rc522.RC522(ext_i2c)     
+    ext_rfid = rc522.RC522(ext_i2c)     
 except Exception as e:
     print("Warning: Failed to communicate with SI522A (RFID) or",e)
 

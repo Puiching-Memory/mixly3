@@ -33,6 +33,7 @@ En.MSG = {
     catPE_G1:"PE G1",
     catCE_G6:"CE G6",
     catCC_G1:"CC G1",
+    catMINI_G2:"MINI G2",
     catNova_G1:"Nova G1",
     catAIOT:"Intelligent IOT",
     catAIsensor:"MixGoAI Sensor",
@@ -3626,4 +3627,7 @@ En.MIXLY_TO_JSON_TOOLTIP = "Convert dicts to json string";
 En.MIXLY_CONVERT_TO_JSON = "convert json to dicts ";
 En.MIXLY_CONVERT_TO_JSON_TOOLTIP = "convert json string to dicts";
 En.MIXLY_DUTY_RATIO = "value,frequency";
+En.MIXLY_OP_GARBAGE_COLLECT = "operate garbage collection";
+En.MIXLY_GET_MEM_ALLOC = "get the allocated  memory(Bytes)";
+En.MIXLY_GET_MEM_FREE = "get the free memory (Bytes)";
 })();

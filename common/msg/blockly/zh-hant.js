@@ -29,6 +29,7 @@ ZhHant.MSG = {
     catPE_G1:"PE G1",
     catCE_G6:"CE G6",
     catCC_G1:"CC G1",
+    catMINI_G2:"MINI G2",
     catNova_G1:"Nova G1",
     catAIOT:"智能物聯",
     catAIsensor:"MixGoAI智能傳感",
@@ -3598,4 +3599,7 @@ ZhHant.MIXLY_TO_JSON_TOOLTIP = "將字典轉化為json字符串";
 ZhHant.MIXLY_CONVERT_TO_JSON = "json 反序列化";
 ZhHant.MIXLY_CONVERT_TO_JSON_TOOLTIP = "將json字符串轉化爲字典";
 ZhHant.MIXLY_DUTY_RATIO = "(值，頻率)";
+ZhHant.MIXLY_OP_GARBAGE_COLLECT = "運行垃圾回收";
+ZhHant.MIXLY_GET_MEM_ALLOC = "獲取已使用内存容量（Bytes）";
+ZhHant.MIXLY_GET_MEM_FREE = "獲取未使用内存容量（Bytes）";
 })();

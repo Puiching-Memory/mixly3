@@ -252,5 +252,24 @@ export const controls_repeat_ext = function (a, generator) {
     return 'for _my_variable in range(' + times + '):\n' + d;
 }
 
+
+export const garbage_collection = function (_, generator) {
+    generator.definitions_['import_gc'] = 'import gc';
+    var code = 'gc.collect()\n'
+    return code;
+}
+
+export const get_mem_alloc = function (_, generator) {
+    generator.definitions_['import_gc'] = 'import gc';
+    var code = 'gc.mem_alloc()\n';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const get_mem_free = function (_, generator) {
+    generator.definitions_['import_gc'] = 'import gc';
+    var code = 'gc.mem_free()\n';
+    return [code, generator.ORDER_ATOMIC]
+}
+
 // ok
 export const controls_repeat = controls_repeat_ext;

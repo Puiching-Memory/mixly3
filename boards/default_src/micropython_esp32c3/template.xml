@@ -278,6 +278,9 @@
     </block>
     <block type="system_machine_reset">
     </block>
+    <block type="garbage_collection"></block>
+    <block type="get_mem_alloc"></block>
+    <block type="get_mem_free"></block>
   </category>
   <category id="catMath" colour="230">
     <block type="math_number"></block>

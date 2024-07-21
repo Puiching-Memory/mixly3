@@ -278,6 +278,9 @@
     </block>
     <block type="system_machine_reset">
     </block>
+    <block type="garbage_collection"></block>
+    <block type="get_mem_alloc"></block>
+    <block type="get_mem_free"></block>
   </category>
   <category id="catMath" colour="230">
     <block type="math_number"></block>
@@ -1948,8 +1951,7 @@
     </block>
     <block type="me_g1_rfid_status"></block>
   </category>
-  <category id="catCC_G1" colour="40"
-    m-show='micropython:esp32c3:mixgo_cc micropython:esp32c3:mixgo_me'>
+  <category id="catCC_G1" colour="40" m-show="micropython:esp32c2:mixgo_mini">
     <block type="cc_g1_read_bat"></block>
     <block type="cc_g1_read_joystick"></block>
     <block type="cc_g1_read_key"></block>

@@ -989,5 +989,34 @@ export const do_while = {
     }
 };
 
+export const garbage_collection = {
+    init: function () {
+        this.setColour(LOOPS_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_OP_GARBAGE_COLLECT);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+
+export const get_mem_alloc = {
+    init: function () {
+        this.setColour(LOOPS_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_GET_MEM_ALLOC);
+        this.setOutput(true)
+    }
+};
+
+export const get_mem_free = {
+    init: function () {
+        this.setColour(LOOPS_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_GET_MEM_FREE);
+        this.setOutput(true)
+    }
+};
+
 // export const base_type = controls_type;
 // export const controls_TypeLists = controls_typeLists;

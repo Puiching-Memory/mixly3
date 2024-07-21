@@ -269,6 +269,10 @@
       </value>
     </block>
 
+    <block type="garbage_collection"></block>
+    <block type="get_mem_alloc"></block>
+    <block type="get_mem_free"></block>
+
   </category>
 
   <category id="catMath" colour="230">
