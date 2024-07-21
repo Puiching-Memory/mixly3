@@ -219,7 +219,7 @@ export const MQTT_server = {
     init: function () {
         this.setColour(ETHERNET_HUE);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/blynk/iot.png'), 20, 20))
+            .appendField(new Blockly.FieldImage(require('../media/blynk/iot.png'), 20, 20))
             .appendField(Blockly.Msg.MQTT_SERVER);
         this.appendValueInput("server_add")
             .appendField(Blockly.Msg.MQTT_SERVER_ADD)
@@ -248,7 +248,7 @@ export const WIFI_info = {
     init: function () {
         this.setColour(ETHERNET_HUE);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/blynk/iot.png'), 20, 20))
+            .appendField(new Blockly.FieldImage(require('../media/blynk/iot.png'), 20, 20))
             .appendField(Blockly.Msg.MIXLY_NETWORK_INIT);
         this.appendValueInput("SSID")
             .appendField(Blockly.Msg.HTML_NAME);
@@ -324,7 +324,7 @@ export const MQTT_publish = {
     init: function () {
         this.setColour(ETHERNET_HUE);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/blynk/iot.png'), 20, 20))
+            .appendField(new Blockly.FieldImage(require('../media/blynk/iot.png'), 20, 20))
             .appendField(Blockly.Msg.MQTT_publish);
         this.appendValueInput("data");
         this.appendDummyInput("")
@@ -623,7 +623,7 @@ export const WIFI_smartConfig = {
 export const WIFI_ap_or_sta = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/blynk/wifi_udp.png'), 25, 25, "*"))
+            .appendField(new Blockly.FieldImage(require('../media/blynk/wifi_udp.png'), 25, 25, "*"))
             .appendField(Blockly.Msg.MIXLY_SETUP + " UDP WIFI");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_MODE + ":")
@@ -656,7 +656,7 @@ export const WIFI_ap_or_sta = {
 export const WIFI_ap_and_sta = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/blynk/wifi_udp.png'), 25, 25, "*"))
+            .appendField(new Blockly.FieldImage(require('../media/blynk/wifi_udp.png'), 25, 25, "*"))
             .appendField(Blockly.Msg.MIXLY_SETUP + " UDP WIFI");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_MODE + ": AP+STA");
@@ -694,7 +694,7 @@ export const WIFI_ap_and_sta = {
 export const WIFI_incomingPacket = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/blynk/wifi_udp.png'), 25, 25, "*"))
+            .appendField(new Blockly.FieldImage(require('../media/blynk/wifi_udp.png'), 25, 25, "*"))
             .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF + " WIFI UDP " + Blockly.Msg.MIXLY_STM32_SPI_DATA_RECEIVED + "？")
         this.appendValueInput("input_data")
             .setCheck(null)
@@ -715,7 +715,7 @@ export const WIFI_incomingPacket = {
 export const WIFI_send_data = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/blynk/wifi_udp.png'), 25, 25, "*"))
+            .appendField(new Blockly.FieldImage(require('../media/blynk/wifi_udp.png'), 25, 25, "*"))
             .appendField("WIFI UDP " + Blockly.Msg.MIXLY_SEND_DATA);
         this.appendValueInput("data")
             .setCheck(null);
@@ -850,7 +850,7 @@ export const mixio_mqtt_received_the_news = {
 export const asyncelegantota = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/blocks_icons/loop.png'), 15, 15, { alt: "*", flipRtl: "FALSE" }))
+            .appendField(new Blockly.FieldImage(require('../media/blocks_icons/loop.png'), 15, 15, { alt: "*", flipRtl: "FALSE" }))
             .appendField("ElegantOTA");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);

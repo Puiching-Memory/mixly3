@@ -104,7 +104,7 @@ export const tool_modulus = {
 export const uno_pin = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/board_pin/uno.png'), 525, 372, "*"));
+            .appendField(new Blockly.FieldImage(require('../media/boards/uno.png'), 525, 372, "*"));
         this.setColour(TOOLS_HUE);
         this.setTooltip();
         this.setHelpUrl();
@@ -114,7 +114,7 @@ export const uno_pin = {
 export const nano_pin = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/board_pin/nano.png'), 525, 368, "*"));
+            .appendField(new Blockly.FieldImage(require('../media/boards/nano.png'), 525, 368, "*"));
         this.setColour(TOOLS_HUE);
         this.setTooltip();
         this.setHelpUrl();
@@ -124,7 +124,7 @@ export const nano_pin = {
 export const mega_pin = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/board_pin/mega.png'), 525, 736, "*"));
+            .appendField(new Blockly.FieldImage(require('../media/boards/mega.png'), 525, 736, "*"));
         this.setColour(TOOLS_HUE);
         this.setTooltip();
         this.setHelpUrl();
@@ -134,7 +134,7 @@ export const mega_pin = {
 export const promini_pin = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/board_pin/ProMini.png'), 525, 371, "*"));
+            .appendField(new Blockly.FieldImage(require('../media/boards/ProMini.png'), 525, 371, "*"));
         this.setColour(TOOLS_HUE);
         this.setTooltip();
         this.setHelpUrl();
@@ -144,80 +144,10 @@ export const promini_pin = {
 export const leonardo_pin = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/board_pin/leonardo.png'), 525, 371, "*"));
+            .appendField(new Blockly.FieldImage(require('../media/boards/leonardo.png'), 525, 371, "*"));
         this.setColour(TOOLS_HUE);
         this.setTooltip();
         this.setHelpUrl();
-    }
-};
-
-export const esp32s2_pin = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/board_pin/ESP32s2.jpg'), 525, 376, "*"));
-        this.setColour(TOOLS_HUE);
-        this.setTooltip();
-        this.setHelpUrl();
-    }
-};
-
-export const esp32c3_pin = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/board_pin/ESP32c3.jpg'), 525, 376, "*"));
-        this.setColour(TOOLS_HUE);
-        this.setTooltip();
-        this.setHelpUrl();
-    }
-};
-
-export const core_esp32c3_pin = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/board_pin/core_esp32c3_pin.png'), 500, 376, "*"));
-        this.setColour(TOOLS_HUE);
-        this.setTooltip();
-        this.setHelpUrl();
-    }
-};
-
-export const esp32s3_pin = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/board_pin/ESP32s3.jpg'), 500, 350, "*"));
-        this.setColour(TOOLS_HUE);
-        this.setTooltip();
-        this.setHelpUrl();
-    }
-};
-
-export const esp8266_pin = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/board_pin/ESP8266-NodeMCU.png'), 525, 346, "*"));
-        this.setColour(TOOLS_HUE);
-        this.setTooltip();
-        this.setHelpUrl();
-    }
-};
-
-export const wemos_d1_mini_pin = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/board_pin/ESP8266-WeMos-D1-Mini.png'), 525, 264, "*"));
-        this.setColour(TOOLS_HUE);
-        this.setTooltip();
-        this.setHelpUrl();
-    }
-};
-
-export const stm32f103c8t6_pin = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../../../../common/media/board_pin/STM32F103C8T6.png'), 525, 376, "*"));
-        this.setColour(TOOLS_HUE);
-        this.setTooltip();
-        this.setHelpUrl("https://blog.csdn.net/xatsoft/article/details/90687016?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-6.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-6.nonecase");
     }
 };
 

@@ -577,13 +577,6 @@ export const promini_pin = nano_pin;
 export const leonardo_pin = nano_pin;
 export const uno_pin = nano_pin;
 export const mega_pin = nano_pin;
-export const esp8266_pin = nano_pin;
-export const wemos_d1_mini_pin = nano_pin;
-export const stm32f103c8t6_pin = nano_pin;
-export const esp32s2_pin = nano_pin;
-export const esp32c3_pin = nano_pin;
-export const esp32s3_pin = nano_pin;
-export const core_esp32c3_pin = nano_pin;
 
 //获取两个日期差值
 export const get_the_number_of_days_between_the_two_dates = function (_, generator) {
