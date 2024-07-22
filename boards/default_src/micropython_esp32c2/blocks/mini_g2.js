@@ -3,7 +3,7 @@ import { Boards } from 'mixly';
 
 const MEG1_HUE = 40;
 
-export const me_g1_aht11 = {
+export const mini_g2_aht11 = {
     init: function () {
         var version = Boards.getSelectedBoardKey().split(':')[2]
         if (version == "mixgo_me") { var name = 'ME G1' }
@@ -29,7 +29,7 @@ export const me_g1_aht11 = {
     }
 };
 
-export const me_g1_hp203 = {
+export const mini_g2_hp203 = {
     init: function () {
         var version = Boards.getSelectedBoardKey().split(':')[2]
         if (version == "mixgo_me") { var name = 'ME G1' }
@@ -47,7 +47,7 @@ export const me_g1_hp203 = {
     }
 };
 
-export const me_g1_varistor = {
+export const mini_g2_varistor = {
     init: function () {
         var version = Boards.getSelectedBoardKey().split(':')[2]
         if (version == "mixgo_me") { var name = 'ME G1' }
@@ -60,7 +60,7 @@ export const me_g1_varistor = {
     }
 };
 
-export const me_g1_rfid_readid = {
+export const mini_g2_rfid_readid = {
     init: function () {
         var version = Boards.getSelectedBoardKey().split(':')[2]
         if (version == "mixgo_me") { var name = 'ME G1' }
@@ -75,7 +75,7 @@ export const me_g1_rfid_readid = {
     }
 };
 
-export const me_g1_rfid_readcontent = {
+export const mini_g2_rfid_readcontent = {
     init: function () {
         var version = Boards.getSelectedBoardKey().split(':')[2]
         if (version == "mixgo_me") { var name = 'ME G1' }
@@ -92,7 +92,7 @@ export const me_g1_rfid_readcontent = {
     }
 };
 
-export const me_g1_rfid_write = {
+export const mini_g2_rfid_write = {
     init: function () {
         var version = Boards.getSelectedBoardKey().split(':')[2]
         if (version == "mixgo_me") { var name = 'ME G1' }
@@ -110,7 +110,7 @@ export const me_g1_rfid_write = {
     }
 };
 
-export const me_g1_rfid_write_outcome = {
+export const mini_g2_rfid_write_outcome = {
     init: function () {
         var version = Boards.getSelectedBoardKey().split(':')[2]
         if (version == "mixgo_me") { var name = 'ME G1' }
@@ -129,7 +129,7 @@ export const me_g1_rfid_write_outcome = {
     }
 };
 
-export const me_g1_rfid_status = {
+export const mini_g2_rfid_status = {
     init: function () {
         var version = Boards.getSelectedBoardKey().split(':')[2]
         if (version == "mixgo_me") { var name = 'ME G1' }

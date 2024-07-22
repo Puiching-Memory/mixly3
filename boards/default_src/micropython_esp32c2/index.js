@@ -77,11 +77,11 @@ import {
 import {
     MicropythonESP32C2Pins,
     MicropythonESP32C2InoutBlocks,
-    MicropythonESP32C2MEG1Blocks,
+    MicropythonESP32C2MiniG2Blocks,
     MicropythonESP32C2MEGOBlocks,
     MicropythonESP32C2PinsBlocks,
     MicropythonESP32C2InoutGenerators,
-    MicropythonESP32C2MEG1Generators,
+    MicropythonESP32C2MiniG2Generators,
     MicropythonESP32C2MEGOGenerators,
     MicropythonESP32C2PinsGenerators
 } from './';
@@ -132,7 +132,7 @@ Object.assign(
     MicroPythonCCG1Blocks,
     MicroPythonCEGOBlocks,
     MicropythonESP32C2InoutBlocks,
-    MicropythonESP32C2MEG1Blocks,
+    MicropythonESP32C2MiniG2Blocks,
     MicropythonESP32C2MEGOBlocks,
     MicropythonESP32C2PinsBlocks
 );
@@ -172,7 +172,7 @@ Object.assign(
     MicroPythonCCG1Generators,
     MicroPythonCEGOGenerators,
     MicropythonESP32C2InoutGenerators,
-    MicropythonESP32C2MEG1Generators,
+    MicropythonESP32C2MiniG2Generators,
     MicropythonESP32C2MEGOGenerators,
     MicropythonESP32C2PinsGenerators
 );
