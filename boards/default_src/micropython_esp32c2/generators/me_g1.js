@@ -21,8 +21,15 @@ export const me_g1_varistor = function (_, generator) {
 }
 
 export const me_g1_rfid_readid = function (_, generator) {
-    generator.definitions_['import_me_g1'] = 'import me_g1';
-    var code = 'me_g1.ext_rc522.read_card(0, x="id")';
+    var version = Boards.getSelectedBoardKey().split(':')[2];
+    if (version == "mixgo_mini") {
+        generator.definitions_['import_mini_g2_ext_rfid'] = 'from mini_g2 import ext_rfid';
+        var code = 'ext_rfid.read_card(0, x="id")';  
+    }
+    else{    
+        generator.definitions_['import_me_g1'] = 'import me_g1';
+        var code = 'me_g1.ext_rc522.read_card(0, x="id")';
+}
     return [code, generator.ORDER_ATOMIC];
 }
 
