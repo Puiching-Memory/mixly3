@@ -233,15 +233,14 @@ export const sensor_aht11 = function (_, generator) {
     var key = this.getFieldValue('key');
     if (version == 'mixgo_nova' || version == 'mixgo_zero') {
         generator.definitions_['import_' + version + '_onboard_ths'] = "from " + version + " import onboard_ths";
-        var code = 'onboard_ths.' + key + '()';
     } else if(version == 'mixgo_mini') {
         generator.definitions_['import_mixgo_mini_onboard_i2c'] = 'from mixgo_mini import onboard_i2c';
         generator.definitions_['import_shtc3'] = 'import shtc3';
         generator.definitions_['import_onboard_ths'] = 'onboard_ths = shtc3.SHTC3(onboard_i2c)';
     } else {
         generator.definitions_['import_' + version + '_onboard_ths'] = "from " + version + " import onboard_ths";
-        var code = 'onboard_ths.' + key + '()';
     }
+    var code = 'onboard_ths.' + key + '()';
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -568,22 +567,29 @@ export const onboard_RTC_timestamp_totuple = function (_, generator) {
 export const sensor_mixgo_cc_mmc5603_get_magnetic = function (_, generator) {
     var key = this.getFieldValue('key');
     var version = Boards.getSelectedBoardKey().split(':')[2]
-    if (key == 'all') {
-        generator.definitions_['import_' + version + 'onboard_mgs'] = "from " + version + " import onboard_mgs";
-        var code = 'onboard_mgs.getstrength()';
-        return [code, generator.ORDER_ATOMIC];
-    }
     if (version == 'mpython') {
         generator.definitions_['import_mpython_magnetic'] = 'from mpython import magnetic';
-        var code = 'magnetic.getdata()' + key;
+        if (key == 'all') {
+            var code = 'magnetic.getstrength()'; 
+        }else{
+            var code = 'magnetic.getdata()' + key;
+        }
     } else if(version == 'mixgo_mini') {
         generator.definitions_['import_mixgo_mini_onboard_i2c'] = 'from mixgo_mini import onboard_i2c';
         generator.definitions_['import_mmc5603'] = 'import mmc5603';
         generator.definitions_['import_onboard_mgs']= 'onboard_mgs = mmc5603.MMC5603(onboard_i2c)';
-        var code = 'onboard_mgs.getdata()' + key;
+        if (key == 'all') {
+            var code = 'onboard_mgs.getstrength()'; 
+        }else{
+            var code = 'onboard_mgs.getdata()' + key;
+        }
     } else {
         generator.definitions_['import_' + version + '_onboard_mgs'] = "from " + version + " import onboard_mgs";
-        var code = 'onboard_mgs.getdata()' + key;
+        if (key == 'all') {
+            var code = 'onboard_mgs.getstrength()'; 
+        }else{
+            var code = 'onboard_mgs.getdata()' + key;
+        }
     }
     return [code, generator.ORDER_ATOMIC];
 }
