@@ -105,12 +105,14 @@ class MIDI():
 		self._bus.buzzer(self._volume, int(freq))
 
 	def pitch_time(self, freq, delay):
-		self._bus.buzzer(self._volume, int(freq))  
+		self._bus.buzzer(self._volume, int(freq))
 		sleep_ms(delay)
-		self._bus.buzzer(0)  
+		self._bus.buzzer(0)
+		sleep_ms(10)
 		
 	def stop(self):
 		self._bus.buzzer(0)
+		sleep_ms(10)
 
 	BA_DING=('b5:1','e6:3')
 	JUMP_UP=('c5:1','d','e','f','g')
