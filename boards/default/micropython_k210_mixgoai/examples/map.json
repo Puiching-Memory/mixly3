@@ -1,230 +1,230 @@
 {
-    "7pOv8DHDn3M7.mix": {
+    "Lonk4JYHNzdK.mix": {
         "__file__": true,
-        "__name__": "00-KEY irp_按键中断响应.mix"
+        "__name__": "-UEi45Sdxm-q.mix"
     },
-    "HV4VIYj1clfP.mix": {
+    "UYnrk39H3KIW.mix": {
         "__file__": true,
-        "__name__": "01-LED Blink_数字输出控制灯.mix"
+        "__name__": "1oucPTv-5j58.mix"
     },
-    "whH2FRXKqmvW.mix": {
+    "X9zBnWEEggbM.mix": {
         "__file__": true,
-        "__name__": "02-LED PWM_模拟输出控制灯.mix"
+        "__name__": "2DgbO5BWlPKt.mix"
     },
-    "tFL9JZAM83kE.mix": {
+    "FCs-0Nqe2Xg4.mix": {
         "__file__": true,
-        "__name__": "04-Time_定时器执行定时打印.mix"
+        "__name__": "3edv-Y8O1q4Z.mix"
     },
-    "-UEi45Sdxm-q.mix": {
+    "U7vpiT7KOy_P.mix": {
         "__file__": true,
-        "__name__": "07-UART_外部串口通信.mix"
+        "__name__": "4hn15K-fEuTI.mix"
     },
-    "UVN-HmxlKuUZ.mix": {
+    "Oza8dI7MJUis.mix": {
         "__file__": true,
-        "__name__": "08-舵机_定时器调用控制多路舵机.mix"
+        "__name__": "4w_oaKhxyRvG.mix"
     },
-    "jnAz45sZdnlU.mix": {
+    "ZgQTS26jokvK.mix": {
         "__file__": true,
-        "__name__": "09-LCD_屏幕显示累加计数.mix"
+        "__name__": "5Y59VemRb48u.mix"
     },
-    "sR-ga8LrXAz8.mix": {
+    "0VayXpUPGKE-.mix": {
         "__file__": true,
-        "__name__": "10-LCD_屏幕显示切砖块过程.mix"
+        "__name__": "713AIFbqNqhg.mix"
     },
-    "icK8y_ido8i-.mix": {
+    "N3YGFZfxssiT.mix": {
         "__file__": true,
-        "__name__": "11-Audio Play_加载SD卡音频文件播放.mix"
+        "__name__": "7g4e-mIcKJ_6.mix"
     },
-    "rtIsztQ7mzQu.mix": {
+    "cCfWEtRBBP7V.mix": {
         "__file__": true,
-        "__name__": "12-Video Play_加载SD卡视频文件播放.mix"
+        "__name__": "7pOv8DHDn3M7.mix"
     },
-    "PC7mdcg6Il3q.mix": {
+    "4LC7h6BGpsNJ.mix": {
         "__file__": true,
-        "__name__": "13-Video record_录制视频并存放于SD卡.mix"
+        "__name__": "8GhMYgi0HUFf.mix"
     },
-    "tMyHWtgDyIW4.mix": {
+    "FEMOP2cE7D7S.mix": {
         "__file__": true,
-        "__name__": "14-Camera 拍照_持续拍照显示屏幕上.mix"
+        "__name__": "8mDtO4oMg39w.mix"
     },
-    "8P2AiYwagAqf.mix": {
+    "5EgQkaflhCYK.mix": {
         "__file__": true,
-        "__name__": "15-Imge 显示图片_加载SD卡图片文件显示.mix"
+        "__name__": "8P2AiYwagAqf.mix"
     },
-    "8mDtO4oMg39w.mix": {
+    "wv3Lv32ovmvK.mix": {
         "__file__": true,
-        "__name__": "16-Imge 灰度图片_加载SD卡图片文件转换灰度图.mix"
+        "__name__": "8Q9w8vohc5WR.mix"
     },
-    "IN1j-5MK8ehw.mix": {
+    "gjqYFm00Duhp.mix": {
         "__file__": true,
-        "__name__": "17-Imge 绘制文本_在屏幕上绘制文本信息.mix"
+        "__name__": "92bwD0XoQd_L.mix"
     },
-    "Io8lJXCwhD17.mix": {
+    "x8euk6Ys8A9J.mix": {
         "__file__": true,
-        "__name__": "18-Imge 绘制圆形_在屏幕上一直绘制小圈圈.mix"
+        "__name__": "9f8bfsFGpxnl.mix"
     },
-    "bLYZSmITapua.mix": {
+    "qeG0-VNGATcQ.mix": {
         "__file__": true,
-        "__name__": "19-Imge 绘制滤波_采集图形并洪水填充处理.mix"
+        "__name__": "a43B__NOYfhV.mix"
     },
-    "a43B__NOYfhV.mix": {
+    "jTaVxO_pdgCt.mix": {
         "__file__": true,
-        "__name__": "20-Imge 直线识别_识别摄像头采集图片中直线线条.mix"
+        "__name__": "Ar6TmfTMdGsI.mix"
     },
-    "xXWYds-FRqcy.mix": {
+    "xgEks836RojJ.mix": {
         "__file__": true,
-        "__name__": "21-Imge 圆形识别_识别摄像头采集图片中圆形图案.mix"
+        "__name__": "bHUi0z1OIG08.mix"
     },
-    "9f8bfsFGpxnl.mix": {
+    "iN6wlswhscjr.mix": {
         "__file__": true,
-        "__name__": "22-Imge 矩形识别_识别摄像头采集图片中矩形图案.mix"
+        "__name__": "bLYZSmITapua.mix"
     },
-    "4w_oaKhxyRvG.mix": {
+    "FPHE4-oEsow8.mix": {
         "__file__": true,
-        "__name__": "23-Imge 颜色追踪_追踪采集图片中设定色域的颜色.mix"
+        "__name__": "cMOi0831qm5c.mix"
     },
-    "p1UyHWUACext.mix": {
+    "N5roQuq5JvJJ.mix": {
         "__file__": true,
-        "__name__": "24-Imge 颜色识别_识别采集图片中间框区域的颜色值.mix"
+        "__name__": "CtKOboD3djtd.mix"
     },
-    "8Q9w8vohc5WR.mix": {
+    "Z8shSdf8L_XS.mix": {
         "__file__": true,
-        "__name__": "25-Imge 颜色自动识别追踪_先采集图形中心物体颜色，然后自动追踪寻找此颜色.mix"
+        "__name__": "cxIIqKds2Tc2.mix"
     },
-    "bHUi0z1OIG08.mix": {
+    "RbRW3IMD68-a.mix": {
         "__file__": true,
-        "__name__": "26-Imge 特征识别_识别采集图片的特征点并绘画出.mix"
+        "__name__": "DBDjugkTFKW8.mix"
     },
-    "Tzqv3DsL0FQD.mix": {
+    "OaciuH4yeJfT.mix": {
         "__file__": true,
-        "__name__": "27-Imge 二维码识别_识别采集图片的二维码并解析信息.mix"
+        "__name__": "DKW9oi3L1nDA.mix"
     },
-    "qBfsmxHuyLxY.mix": {
+    "OU4qKWOtDvd7.mix": {
         "__file__": true,
-        "__name__": "28-Imge 条形码识别_识别采集图片的条形码并解析信息.mix"
+        "__name__": "F7J1UDlRPrM1.mix"
     },
-    "nHdNRO2GJkBA.mix": {
+    "ECKSY-TMpS5i.mix": {
         "__file__": true,
-        "__name__": "29-AI 人脸追踪_识别追踪采集图片的人脸.mix"
+        "__name__": "gBLDmE4Ok_Qb.mix"
     },
-    "7g4e-mIcKJ_6.mix": {
+    "2qyUcOL8i3Yz.mix": {
         "__file__": true,
-        "__name__": "30-AI 20种物体识别_识别采集图片的20种物体的类别.mix"
+        "__name__": "ggvZec342Pqo.mix"
     },
-    "1oucPTv-5j58.mix": {
+    "v_Q1PyDqzn1C.mix": {
         "__file__": true,
-        "__name__": "31-AI 网络模型-1_加载SD中网络模型并运行解析.mix"
+        "__name__": "GIbMhfg1Um4z.mix"
     },
-    "713AIFbqNqhg.mix": {
+    "rqH_TEr5NPh9.mix": {
         "__file__": true,
-        "__name__": "31-AI 网络模型_加载SD中网络模型并运行解析.mix"
+        "__name__": "HlUZa3UkmG0K.mix"
     },
-    "gBLDmE4Ok_Qb.mix": {
+    "Ej0GrzieUcVZ.mix": {
         "__file__": true,
-        "__name__": "32-AI 网络模型-2_加载SD中网络模型并运行解析.mix"
+        "__name__": "HV4VIYj1clfP.mix"
     },
-    "DKW9oi3L1nDA.mix": {
+    "jFsQecrCDD91.mix": {
         "__file__": true,
-        "__name__": "32-Sonar 超声波测距_串口打印超声波测算的距离.mix"
+        "__name__": "icK8y_ido8i-.mix"
     },
-    "x5hjcWsko_GJ.mix": {
+    "e5-c9AVDbw2a.mix": {
         "__file__": true,
-        "__name__": "33-Irremote 红外接收_遥控控制灯亮灭.mix"
+        "__name__": "IN1j-5MK8ehw.mix"
     },
-    "4hn15K-fEuTI.mix": {
+    "mIM68Xwi-xsD.mix": {
         "__file__": true,
-        "__name__": "34-Bmp280 大气压_读取大气压传感器数字串口打印.mix"
+        "__name__": "Io8lJXCwhD17.mix"
     },
-    "cxIIqKds2Tc2.mix": {
+    "8_QbzXzh8zPZ.mix": {
         "__file__": true,
-        "__name__": "34-DHT11 温湿度_采集温湿度并显示.mix"
+        "__name__": "JCu40fMqKuxe.mix"
     },
-    "Ar6TmfTMdGsI.mix": {
+    "bRQdoVzhPE2P.mix": {
         "__file__": true,
-        "__name__": "35-Sonar 超声波测距_串口打印超声波测算的距离.mix"
+        "__name__": "Je7lKmHs_j51.mix"
     },
-    "DBDjugkTFKW8.mix": {
+    "DhzTitymtdlO.mix": {
         "__file__": true,
-        "__name__": "36-Irremote 红外接收_遥控控制灯亮灭.mix"
+        "__name__": "jnAz45sZdnlU.mix"
     },
-    "ggvZec342Pqo.mix": {
+    "l5CS81qc-b1F.mix": {
         "__file__": true,
-        "__name__": "36-SHT20_读取温湿度传感器数字串口打印.mix"
+        "__name__": "LucMhnreSdri.mix"
     },
-    "cMOi0831qm5c.mix": {
+    "LJYgZDHUjIAU.mix": {
         "__file__": true,
-        "__name__": "37-Bmp280 大气压_读取大气压传感器数字串口打印.mix"
+        "__name__": "maspDCBL9A7Q.mix"
     },
-    "3edv-Y8O1q4Z.mix": {
+    "E9oxgBXF6q5K.mix": {
         "__file__": true,
-        "__name__": "38-MPU9250 九轴_读取九轴传感器数字串口打印.mix"
+        "__name__": "mF5PdNfcro01.mix"
     },
-    "HlUZa3UkmG0K.mix": {
+    "uc8h6D9-N6Pr.mix": {
         "__file__": true,
-        "__name__": "39-SHT20_读取温湿度传感器数字串口打印.mix"
+        "__name__": "n8ytHXHNA-mc.mix"
     },
-    "y2_D7XhgRxO-.mix": {
+    "MoRdXD3S6MVD.mix": {
         "__file__": true,
-        "__name__": "40-AIOnenet_中国移动云端网络平台API调用.mix"
+        "__name__": "nHdNRO2GJkBA.mix"
     },
-    "2DgbO5BWlPKt.mix": {
+    "rR3LOiLMx0rR.mix": {
         "__file__": true,
-        "__name__": "41-AIOnenet_按键按一下调用人体检测API并框出位置.mix"
+        "__name__": "p1UyHWUACext.mix"
     },
-    "Je7lKmHs_j51.mix": {
+    "ekdQzrh2uee9.mix": {
         "__file__": true,
-        "__name__": "42-AILocal_本地模型训练后保存并调用模型.mix"
+        "__name__": "PC7mdcg6Il3q.mix"
     },
-    "GIbMhfg1Um4z.mix": {
+    "KkeF30q2rHxE.mix": {
         "__file__": true,
-        "__name__": "43-AILocal_调用训练好的模型并运行模型.mix"
+        "__name__": "qBfsmxHuyLxY.mix"
     },
-    "Ry5OCHH9bIys.mix": {
+    "4RTba0Pol8oK.mix": {
         "__file__": true,
-        "__name__": "44-AI 口罩识别-加载SD中模型并识别出带没有带口罩.mix"
+        "__name__": "rtIsztQ7mzQu.mix"
     },
-    "JCu40fMqKuxe.mix": {
+    "8q3qF8AndRKY.mix": {
         "__file__": true,
-        "__name__": "45-WiFi_扫描附近WiFi热点信息.mix"
+        "__name__": "Ry5OCHH9bIys.mix"
     },
-    "5Y59VemRb48u.mix": {
+    "RDHedjqzTYJr.mix": {
         "__file__": true,
-        "__name__": "46-WiFi-连接网络_配置WiFi上网.mix"
+        "__name__": "sR-ga8LrXAz8.mix"
     },
-    "F7J1UDlRPrM1.mix": {
+    "PSc2X0RIxQ8W.mix": {
         "__file__": true,
-        "__name__": "47-WiFi-打开热点_分享热点AP模式.mix"
+        "__name__": "tFL9JZAM83kE.mix"
     },
-    "8GhMYgi0HUFf.mix": {
+    "4W4SMQGDfsy2.mix": {
         "__file__": true,
-        "__name__": "48-Socket-_套接字发送接收数据.mix"
+        "__name__": "tMyHWtgDyIW4.mix"
     },
-    "92bwD0XoQd_L.mix": {
+    "OemZNycP3Z1M.mix": {
         "__file__": true,
-        "__name__": "49-Socket-_套接字发送摄像头拍照图形值服务器.mix"
+        "__name__": "Tzqv3DsL0FQD.mix"
     },
-    "mF5PdNfcro01.mix": {
+    "UEjMDAK58ynf.mix": {
         "__file__": true,
-        "__name__": "50-IOT_Onenet_上传数据值物联网平台.mix"
+        "__name__": "UVN-HmxlKuUZ.mix"
     },
-    "maspDCBL9A7Q.mix": {
+    "5tS6MZDFC4xd.mix": {
         "__file__": true,
-        "__name__": "51-IOT_mixiot_接收物联网平台数据.mix"
+        "__name__": "whH2FRXKqmvW.mix"
     },
-    "n8ytHXHNA-mc.mix": {
+    "n8OzfoYKiwfH.mix": {
         "__file__": true,
-        "__name__": "52-IOT_mixiot_上传数据到物联网平台.mix"
+        "__name__": "x5hjcWsko_GJ.mix"
     },
-    "x5vvADjNBh2x.mix": {
+    "lCrNGUVAiWa2.mix": {
         "__file__": true,
-        "__name__": "53-Imge 中文显示_加载字库显示更多类型文字.mix"
+        "__name__": "x5vvADjNBh2x.mix"
     },
-    "CtKOboD3djtd.mix": {
+    "9xXUdbtByruZ.mix": {
         "__file__": true,
-        "__name__": "55-(Mixly2.0下无法打开)APDS9960 手势识别_识别识别控制灯亮度.mix"
+        "__name__": "xXWYds-FRqcy.mix"
     },
-    "LucMhnreSdri.mix": {
+    "msKRWlwSA_IM.mix": {
         "__file__": true,
-        "__name__": "57-ASR 语音识别_根据识别语音点亮屏幕颜色.mix"
+        "__name__": "y2_D7XhgRxO-.mix"
     }
 }

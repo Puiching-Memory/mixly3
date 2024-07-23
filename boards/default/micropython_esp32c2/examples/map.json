@@ -1,358 +1,358 @@
 {
-    "HrN4G6qet1P4": {
-        "ZTNZ4uT6KXQo.mix": {
+    "-FxsJyL8OSfB": {
+        "v5xvbx0_7d8E.mix": {
             "__file__": true,
             "__name__": "01-1-快速入门-你好世界.mix"
         },
-        "HVremQaL-yoE.mix": {
+        "BNH2ldHY7iqn.mix": {
             "__file__": true,
             "__name__": "01-2-快速入门-你好世界2.mix"
         },
-        "riNujVD11ZB-.mix": {
+        "Ml5oibxE6oQn.mix": {
             "__file__": true,
             "__name__": "02-1-快速入门-跳动的心.mix"
         },
-        "aU_0Q4w6UpHY.mix": {
+        "Bg_jX1muJsL-.mix": {
             "__file__": true,
             "__name__": "02-2-快速入门-为你心动.mix"
         },
-        "Rbf48wjnBMJU.mix": {
+        "BMh3Na7bR930.mix": {
             "__file__": true,
             "__name__": "03-1-快速入门-心随我动.mix"
         },
-        "5vbamZZVJQ0X.mix": {
+        "kQ_-UGIApAkQ.mix": {
             "__file__": true,
             "__name__": "03-2-快速入门-心随我动2.mix"
         },
-        "DbdlMqQX_lKX.mix": {
+        "S11X1zJHzSUE.mix": {
             "__file__": true,
             "__name__": "04-1-快速入门-流动的灯.mix"
         },
-        "IDW4fJHcuql7.mix": {
+        "o7IUGaHP_2m-.mix": {
             "__file__": true,
             "__name__": "04-2-快速入门-流动的灯2.mix"
         },
-        "9MDcDN1UYLHG.mix": {
+        "kcPg88lLLMaf.mix": {
             "__file__": true,
             "__name__": "05-1-过程控制-双键开关.mix"
         },
-        "C8s5rlITFU13.mix": {
+        "Kr4aE0YXj4Ta.mix": {
             "__file__": true,
             "__name__": "05-2-过程控制-单键开关.mix"
         },
-        "E_mJ3o1S_tNo.mix": {
+        "5Ff-WL15x-zr.mix": {
             "__file__": true,
             "__name__": "05-3-过程控制-IPO概念.mix"
         },
-        "EvK6PJb1roYl.mix": {
+        "Snul41ZJu3ZF.mix": {
             "__file__": true,
             "__name__": "06-1-过程控制-声音采集.mix"
         },
-        "KclS_9_bSHHL.mix": {
+        "pIL7b5UyioYi.mix": {
             "__file__": true,
             "__name__": "06-2-过程控制-看见声音.mix"
         },
-        "jnTyBKmtlwd4.mix": {
+        "Gkrj8tilp1cw.mix": {
             "__file__": true,
             "__name__": "07-1-过程控制-光强采集.mix"
         },
-        "L2kLismjpEV5.mix": {
+        "14ksjIrtCI3x.mix": {
             "__file__": true,
             "__name__": "07-2-过程控制-自动补光.mix"
         },
-        "nhWNVmadR_Cp.mix": {
+        "R2sW6Uf_pfzs.mix": {
             "__file__": true,
             "__name__": "08-1-过程控制-接近检测.mix"
         },
-        "AjTZX0yodMVy.mix": {
+        "rlrpbxINNllD.mix": {
             "__file__": true,
             "__name__": "08-2-过程控制-入侵报警.mix"
         },
-        "8JWTgI6q0zv3.mix": {
+        "HoPx1IXk7y_5.mix": {
             "__file__": true,
             "__name__": "09-1-输入输出-加速度.mix"
         },
-        "J9mq4J_OaVGQ.mix": {
+        "WovoVKt5Xjz9.mix": {
             "__file__": true,
             "__name__": "09-2-输入输出-平衡仪.mix"
         },
-        "iZ6nZ9wUpJ9O.mix": {
+        "4x50SGHLg9XY.mix": {
             "__file__": true,
             "__name__": "10-1-输入输出-地磁强度.mix"
         },
-        "KmRa_wOMmgU3.mix": {
+        "QbljH4De2wH0.mix": {
             "__file__": true,
             "__name__": "10-2-输入输出-金属探测.mix"
         },
-        "tQYEDKj4DgfD.mix": {
+        "BD0rIs0go2B9.mix": {
             "__file__": true,
             "__name__": "11-1-输入输出-点阵控制.mix"
         },
-        "7j47ez-N2Uvg.mix": {
+        "_I78W4dqP8eb.mix": {
             "__file__": true,
             "__name__": "11-2-输入输出-光标控制.mix"
         },
-        "6tmg_CvsBUyD.mix": {
+        "os2hauIx3ft4.mix": {
             "__file__": true,
             "__name__": "12-1-输入输出-实时时钟.mix"
         },
-        "p89ZptzWE-5u.mix": {
+        "oOZixEdanzVD.mix": {
             "__file__": true,
             "__name__": "12-2-输入输出-实时时钟2.mix"
         },
-        "z_KnrKomo38P.mix": {
+        "zaRQJyjS471A.mix": {
             "__file__": true,
             "__name__": "13-1-逻辑计算-手速测试.mix"
         },
-        "q0sVxBqCDSkk.mix": {
+        "Bngmx4Zuf9yC.mix": {
             "__file__": true,
             "__name__": "13-2-逻辑计算-手速测试2.mix"
         },
-        "DPILurYXMsaR.mix": {
+        "axRkYNjiF_-M.mix": {
             "__file__": true,
             "__name__": "14-1-逻辑计算-反应测试.mix"
         },
-        "JlK0D6aLJgj0.mix": {
+        "o_DN1lTF9g1k.mix": {
             "__file__": true,
             "__name__": "14-2-逻辑计算-反应测试2.mix"
         },
-        "h0pNNzKzwkFY.mix": {
+        "epskwfXM98hX.mix": {
             "__file__": true,
             "__name__": "15-1-逻辑计算-简单打地鼠.mix"
         },
-        "uDqu6by8K2I-.mix": {
+        "FY9RhD-Ad7za.mix": {
             "__file__": true,
             "__name__": "15-2-逻辑计算-计时打地鼠.mix"
         },
-        "8cSXiznaW2nR.mix": {
+        "2lW1lsocM3t4.mix": {
             "__file__": true,
             "__name__": "16-1-逻辑计算-开始打地鼠.mix"
         },
-        "O-UktQyEOWC3.mix": {
+        "glryKf4mqxkC.mix": {
             "__file__": true,
             "__name__": "16-2-逻辑计算-循环打地鼠.mix"
         },
-        "BpMeSxhl7Ovi.mix": {
+        "DGpAXB9S5clc.mix": {
             "__file__": true,
             "__name__": "17-0-复杂控制-非中断效果.mix"
         },
-        "72thKMWrYbto.mix": {
+        "_U-__vWNOH4O.mix": {
             "__file__": true,
             "__name__": "17-2-复杂控制-单键中断.mix"
         },
-        "qI8ZU9xY_XSZ.mix": {
+        "kesRtD_78pi3.mix": {
             "__file__": true,
             "__name__": "18-1-复杂控制-定时计时.mix"
         },
-        "3hSiiT4JiMFs.mix": {
+        "QFhv56741Cv4.mix": {
             "__file__": true,
             "__name__": "18-2-复杂控制-循环计时.mix"
         },
-        "d4ZAigi2YZQw.mix": {
+        "imuyq1__8070.mix": {
             "__file__": true,
             "__name__": "19-1-复杂控制-多线程.mix"
         },
-        "vFpbGkmDrtdu.mix": {
+        "VOhMnYsLKkaY.mix": {
             "__file__": true,
             "__name__": "19-2-复杂控制-多线程与中断.mix"
         },
-        "7dPE4zMueyaD.mix": {
+        "rYlYB4f8iThF.mix": {
             "__file__": true,
             "__name__": "20-1-复杂控制-异常.mix"
         },
-        "a4y-AoSHGQ1o.mix": {
+        "uIroR2GkfeHK.mix": {
             "__file__": true,
             "__name__": "20-2-复杂控制-异常处理.mix"
         },
-        "SWt_ATu3dNxn.mix": {
+        "8esCzp8Wx0dF.mix": {
             "__file__": true,
             "__name__": "21-1-射频识别-读取测试(MEG1).mix"
         },
-        "L6tYWbveHZqq.mix": {
+        "MsZzCbSOopr1.mix": {
             "__file__": true,
             "__name__": "21-2-射频识别-读取卡号(MEG1).mix"
         },
-        "VMYsKVXzxaU6.mix": {
+        "Y85kA46EL7TE.mix": {
             "__file__": true,
             "__name__": "22-1-射频识别-写卡测试(MEG1).mix"
         },
-        "CWolnBdxG-0v.mix": {
+        "fOTGHqC6FoAl.mix": {
             "__file__": true,
             "__name__": "22-2-射频识别-持续写卡(MEG1).mix"
         },
-        "PdTlxspa5Crp.mix": {
+        "xqAlnAbXFkKR.mix": {
             "__file__": true,
             "__name__": "23-1-蓝牙通讯-主机模式.mix"
         },
-        "VJmzsmn-6Fry.mix": {
+        "h6IjYVQzj5nE.mix": {
             "__file__": true,
             "__name__": "23-1-蓝牙通讯-从机模式.mix"
         },
-        "Bdc5xx21VtGc.mix": {
+        "77KuDaXIwnY9.mix": {
             "__file__": true,
             "__name__": "24-1-无线广播-通讯测试.mix"
         },
-        "oNgvf5dxNM79.mix": {
+        "0ki7HNWvmdvM.mix": {
             "__file__": true,
             "__name__": "24-2-无线广播-防丢检测.mix"
         },
-        "hnwFkKHg1wUS.mix": {
+        "8Rs6yYffazNM.mix": {
             "__file__": true,
             "__name__": "25-1-飞机游戏-显示飞机.mix"
         },
-        "bAhVWeKwWkwV.mix": {
+        "dYccuxCcJIN_.mix": {
             "__file__": true,
             "__name__": "25-2-飞机游戏-移动飞机.mix"
         },
-        "sez35qUx0uzy.mix": {
+        "1vdw4Ccf4KD3.mix": {
             "__file__": true,
             "__name__": "26-1-飞机游戏-发射子弹.mix"
         },
-        "mUCEcEAx673t.mix": {
+        "WVvUwNsaOVIv.mix": {
             "__file__": true,
             "__name__": "26-2-飞机游戏-移动音效.mix"
         },
-        "dpUoSpoa8QPa.mix": {
+        "EuXNN4sCJMwp.mix": {
             "__file__": true,
             "__name__": "27-1-飞机游戏-显示敌机.mix"
         },
-        "7HVlK_gtsUcW.mix": {
+        "-xJn-5ONX3DN.mix": {
             "__file__": true,
             "__name__": "27-2-飞机游戏-消灭敌机.mix"
         },
-        "qZ1JMudgiiHN.mix": {
+        "yV-rOwT8RHF1.mix": {
             "__file__": true,
             "__name__": "28-1-飞机游戏-显示得分.mix"
         },
-        "nLXP27r0YzAA.mix": {
+        "LZR-vku3JjdO.mix": {
             "__file__": true,
             "__name__": "28-2-飞机游戏-结束游戏.mix"
         },
-        "f6o18jPAJAj3.mix": {
+        "yCYWEKyzY0LC.mix": {
             "__file__": true,
             "__name__": "29-1-物联网-简单数据定时上报.mix"
         },
-        "0aODFxUNlm6G.mix": {
+        "lywJZLOHFjxN.mix": {
             "__file__": true,
             "__name__": "29-2-物联网-复杂数据定时上报.mix"
         },
-        "TLO2tJpU9Yxx.mix": {
+        "G0e5UjR0ZACo.mix": {
             "__file__": true,
             "__name__": "30-1-物联网-简单数据按需上报.mix"
         },
-        "-OYR_yq3FC-h.mix": {
+        "M0c-DIaA1187.mix": {
             "__file__": true,
             "__name__": "30-2-物联网-高级数据按需上报.mix"
         },
-        "FO-micyuU-Qc.mix": {
+        "aT0CzIUBaNMG.mix": {
             "__file__": true,
             "__name__": "31-1-物联网-单主题数据订阅.mix"
         },
-        "y8hqr1cvHl2J.mix": {
+        "vTBqhn3GAMXF.mix": {
             "__file__": true,
             "__name__": "31-1-物联网-单主题数据订阅2.mix"
         },
-        "t01mZeVSpcQT.mix": {
+        "IDOpl8aXg6JZ.mix": {
             "__file__": true,
             "__name__": "32-1-物联网-多主题数据订.mix"
         },
-        "-ioznd81x22h.mix": {
+        "mfJCsiOgEuO4.mix": {
             "__file__": true,
             "__name__": "32-2-物联网-多主题数据订2.mix"
         },
-        "uJrUlBdNydRw.mix": {
+        "0fM8RZ4TFGYi.mix": {
             "__file__": true,
             "__name__": "33-1-课堂互动-自由签到.mix"
         },
-        "lqr8KGOX7mFK.mix": {
+        "CPXvIi7vr6Dh.mix": {
             "__file__": true,
             "__name__": "33-2-课堂互动-按需签到.mix"
         },
-        "viwEBhCf1kij.mix": {
+        "97mpvd_UBUs3.mix": {
             "__file__": true,
             "__name__": "34-1-课堂互动-一人抢答.mix"
         },
-        "sHnYHaUpWHF4.mix": {
+        "KRDY3BaMVwGd.mix": {
             "__file__": true,
             "__name__": "34-2-课堂互动-多人抢答.mix"
         },
-        "eSqPBLp0Afgp.mix": {
+        "UEJbqbuF1bei.mix": {
             "__file__": true,
             "__name__": "35-1-课堂互动-单选答题.mix"
         },
-        "KTio9rLRHssi.mix": {
+        "vc7gAwdcmd5Y.mix": {
             "__file__": true,
             "__name__": "35-2-课堂互动-多选答题.mix"
         },
-        "PiMD7_zX2vMw.mix": {
+        "EYcB2laI3Eja.mix": {
             "__file__": true,
             "__name__": "36-1-课堂互动-点名答题.mix"
         },
-        "YhN5BPaAZW64.mix": {
+        "96CcVmmg3sK5.mix": {
             "__file__": true,
             "__name__": "36-2-课堂互动-多人点答.mix"
         },
-        "-KfNltQ34jrm.mix": {
+        "Gv7hKJp2pxKS.mix": {
             "__file__": true,
             "__name__": "37-1-文件操作-列出文件.mix"
         },
-        "pUfnJ7I7Pds0.mix": {
+        "SWuLqHpHgbAC.mix": {
             "__file__": true,
             "__name__": "37-2-文件操作-列出文件2.mix"
         },
-        "bflsCZWChYT0.mix": {
+        "Ycb6LSHp9PmC.mix": {
             "__file__": true,
             "__name__": "38-1-文件操作-文件读写.mix"
         },
-        "3CTmOeALKLby.mix": {
+        "oY1oLiFzQ5nL.mix": {
             "__file__": true,
             "__name__": "38-2-文件操作-文件读写2.mix"
         },
-        "20Hi1GSDUTJD.mix": {
+        "BtkzuLE4ZYUS.mix": {
             "__file__": true,
             "__name__": "39-1-文件操作-录音采集.mix"
         },
-        "C1PFGeE0Rn7A.mix": {
+        "x0BWAoFUZSZX.mix": {
             "__file__": true,
             "__name__": "39-2-文件操作-录音重现.mix"
         },
-        "jUDw2T2_xpUg.mix": {
+        "iCvTfaqrqgZT.mix": {
             "__file__": true,
             "__name__": "40-1-文件操作-震动采集.mix"
         },
-        "z8i7PS8Flbl7.mix": {
+        "x3i1R-n5AlWE.mix": {
             "__file__": true,
             "__name__": "40-2-文件操作-震动重现.mix"
         },
-        "otcnyNWBvSSO.mix": {
+        "E243OGrdrBjV.mix": {
             "__file__": true,
             "__name__": "41-1-智能小车-前进转弯(MEGO).mix"
         },
-        "iK66EaDqVcAF.mix": {
+        "HWwIr4ywBI8J.mix": {
             "__file__": true,
             "__name__": "41-2-智能小车-圆圈转弯(MEGO).mix"
         },
-        "AlKiyRNU_cJ_.mix": {
+        "mYGJDtxCqsq8.mix": {
             "__file__": true,
             "__name__": "42-1-智能小车-智能避障(MEGO).mix"
         },
-        "nAZwF_uoSkNs.mix": {
+        "s_4eEyKVTp3A.mix": {
             "__file__": true,
             "__name__": "42-2-智能小车-智能避障2(MEGO).mix"
         },
-        "tk6QfZHkku9B.mix": {
+        "uoemzausHEpK.mix": {
             "__file__": true,
             "__name__": "43-1-智能小车-遥控小车(MEGO).mix"
         },
-        "faNLD2JbYerH.mix": {
+        "_MH0Jh-WoGFx.mix": {
             "__file__": true,
             "__name__": "43-2-智能小车-体感遥控(MEGO).mix"
         },
-        "EnUjUU1pirWJ.mix": {
+        "bzQhVR-ziY27.mix": {
             "__file__": true,
             "__name__": "44-1-智能小车-P单巡线(MEGO).mix"
         },
-        "swQyjyjObkrL.mix": {
+        "ywDTIgZw5zz_.mix": {
             "__file__": true,
             "__name__": "44-2-智能小车-P双巡线(MEGO).mix"
         },
