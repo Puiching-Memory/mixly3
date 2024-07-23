@@ -1,8 +1,32 @@
 const fs_extra = require('fs-extra');
 const fs_plus = require('fs-plus');
 const fs = require('fs');
+const crypto = require('crypto');
 const path = require('path');
-const shortid = require('shortid');
+const { Command, Option } = require('commander');
+
+const program = new Command();
+
+program
+    .addOption(new Option('-t, --type <string>', 'boards type', 'all').choices([
+        'all', 'special'
+    ]));
+
+program.parse();
+
+const options = program.opts();
+
+options.type = options.type ?? 'all';
+
+if (options.type === 'special') {
+    options.type = path.basename(process.cwd());
+}
+
+const generateHash = (inputString) => {
+  const hash = crypto.createHash('sha256');
+  hash.update(inputString);
+  return hash.digest('hex');
+}
 
 const getExamples = (dirPath, convertExample = false) => {
     let examples = {};
@@ -15,7 +39,7 @@ const getExamples = (dirPath, convertExample = false) => {
         if (fs_plus.isDirectorySync(dataPath)) {
             let id = data;
             if (convertExample) {
-                id = shortid.generate();
+                id = generateHash(data);
                 const newDataPath = path.resolve(dirPath, id);
                 fs.renameSync(dataPath, newDataPath);
                 dataPath = newDataPath;
@@ -36,7 +60,7 @@ const getExamples = (dirPath, convertExample = false) => {
             }
             let id = data;
             if (convertExample) {
-                id = shortid.generate() + extname;
+                id = generateHash(data) + extname;
                 const newDataPath = path.resolve(dirPath, id);
                 fs.renameSync(dataPath, newDataPath);
                 dataPath = newDataPath;
@@ -50,12 +74,15 @@ const getExamples = (dirPath, convertExample = false) => {
     return examples;
 }
 
-const ORIGIN_DIR = process.cwd();
+const ORIGIN_DIR = path.resolve(__dirname, '../');
 const DEFAULT_SRC_DIR = path.resolve(ORIGIN_DIR, 'boards/default_src');
 
 if (fs_plus.isDirectorySync(DEFAULT_SRC_DIR)) {
     const names = fs.readdirSync(DEFAULT_SRC_DIR);
     for (let name of names) {
+        if (!['all', name].includes(options.type)) {
+            continue;
+        }
         const now = path.resolve(DEFAULT_SRC_DIR, name);
         if (!fs_plus.isDirectorySync(now)) {
             continue;
@@ -77,6 +104,9 @@ const DEFAULT_DIR = path.resolve(ORIGIN_DIR, 'boards/default');
 if (fs_plus.isDirectorySync(DEFAULT_DIR)) {
     const names = fs.readdirSync(DEFAULT_DIR);
     for (let name of names) {
+        if (!['all', name].includes(options.type)) {
+            continue;
+        }
         const now = path.resolve(DEFAULT_DIR, name);
         if (!fs_plus.isDirectorySync(now)) {
             continue;

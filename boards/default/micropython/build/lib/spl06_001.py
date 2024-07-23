@@ -3,8 +3,6 @@ _SPL06-001
 
 MicroPython library for the _SPL06-001(Air pressure sensor)
 =======================================================
-#Preliminary composition            20240108
-
 @dahanzimin From the Mixly Team 
 """
 import time
@@ -99,7 +97,10 @@ class SPL06:
 			buf = self._rreg(_SPL06_REG_PSR, 6)
 			praw = self._u2s(buf[0] << 16 | buf[1] << 8 | buf[2], 24) / self._rate[2]
 			traw = self._u2s(buf[3] << 16 | buf[4] << 8 | buf[5], 24) / self._rate[2]
-			self._psr = self._c00 + praw * (self._c10 + praw *(self._c20 + praw * self._c30)) + traw * self._c01 + traw * praw * (self._c11 + praw * self._c21)
+			try:
+				self._psr = self._c00 + praw * (self._c10 + praw *(self._c20 + praw * self._c30)) + traw * self._c01 + traw * praw * (self._c11 + praw * self._c21)
+			except:
+				self._psr = 0
 			self._tmp =  self._c0 * 0.5 + self._c1 * traw 
 			self._alt = (1 - (self._psr / 101325) ** (1/5.255)) * 44330
 		return round(self._psr/100, 2), round(self._tmp, 2), round(self._alt,2)

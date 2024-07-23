@@ -6,7 +6,7 @@
         "static": "node ./static-server/server.js",
         "test": "npm run deps && npm run static",
         "deps": "node scripts/deps-gen.js",
-        "build:boards:all": "node scripts/build-boards.js --type all && npm run build:examples",
+        "build:boards:all": "node scripts/build-boards.js --type all",
         "build:boards:arduino": "node scripts/build-boards.js --type arduino",
         "build:boards:micropython": "node scripts/build-boards.js --type micropython",
         "build:boards:python": "node scripts/build-boards.js --type python",
@@ -14,7 +14,7 @@
         "publish:boards:arduino": "node scripts/publish-boards.js --type arduino",
         "publish:boards:micropython": "node scripts/publish-boards.js --type micropython",
         "publish:boards:python": "node scripts/publish-boards.js --type python",
-        "build:examples": "node scripts/build-examples.js"
+        "build:examples": "node scripts/build-examples.js -t all"
     },
     "author": "Mixly",
     "license": "MIT",

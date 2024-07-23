@@ -1,182 +1,182 @@
 {
-    "xLXJkGIjZG": {
-        "-CXLJ1YmeB.mix": {
+    "AipImage.mix": {
+        "__file__": true,
+        "__name__": "AipImage.mix"
+    },
+    "AipNlp.mix": {
+        "__file__": true,
+        "__name__": "AipNlp.mix"
+    },
+    "AipNlp_simnet.mix": {
+        "__file__": true,
+        "__name__": "AipNlp_simnet.mix"
+    },
+    "AipOcr.mix": {
+        "__file__": true,
+        "__name__": "AipOcr.mix"
+    },
+    "AipSpeech.mix": {
+        "__file__": true,
+        "__name__": "AipSpeech.mix"
+    },
+    "guoqi.mix": {
+        "__file__": true,
+        "__name__": "guoqi.mix"
+    },
+    "sin.mix": {
+        "__file__": true,
+        "__name__": "sin.mix"
+    },
+    "人工智能mix": {
+        "02语音合成-1.mix": {
             "__file__": true,
-            "__name__": "e1FvHKK6mm0-.mix"
+            "__name__": "02语音合成-1.mix"
         },
-        "IZkqRawoFx.mix": {
+        "03语音识别-1.mix": {
             "__file__": true,
-            "__name__": "H8r8zTxWO-G9.mix"
+            "__name__": "03语音识别-1.mix"
         },
-        "E0fWmiGKFP.mix": {
+        "03语音识别-2.mix": {
             "__file__": true,
-            "__name__": "Hxk5CmXVoOI5.mix"
+            "__name__": "03语音识别-2.mix"
         },
-        "w4h80h8f52.mix": {
+        "04图片识别-1.mix": {
             "__file__": true,
-            "__name__": "KW6-9siSeahy.mix"
+            "__name__": "04图片识别-1.mix"
         },
-        "7ylel8SmF2.mix": {
+        "04图片识别-2.mix": {
             "__file__": true,
-            "__name__": "msy6yoOup7Cl.mix"
+            "__name__": "04图片识别-2.mix"
         },
-        "x2ZHUuMgtZ.mix": {
+        "05人脸识别-1.mix": {
             "__file__": true,
-            "__name__": "ohM1sXOs5ucR.mix"
+            "__name__": "05人脸识别-1.mix"
         },
-        "OwwRhSjA-G.mix": {
+        "05人脸识别-2.mix": {
             "__file__": true,
-            "__name__": "OTEsQyYB3y3V.mix"
+            "__name__": "05人脸识别-2.mix"
         },
-        "Phfo2m0HoF.mix": {
+        "06文字识别-1.mix": {
             "__file__": true,
-            "__name__": "pf-5Gn5ZjW5T.mix"
+            "__name__": "06文字识别-1.mix"
         },
-        "OdwPbsdVM5.mix": {
+        "06文字识别-2.mix": {
             "__file__": true,
-            "__name__": "qpFALGBRhJ7V.mix"
+            "__name__": "06文字识别-2.mix"
         },
-        "TfX4Y1crsX.mix": {
+        "07拓展发现-1.mix": {
             "__file__": true,
-            "__name__": "RU8UP8tLmYZK.mix"
+            "__name__": "07拓展发现-1.mix"
         },
-        "kQp-cpQToz.mix": {
+        "07拓展发现-2.mix": {
             "__file__": true,
-            "__name__": "r_McN2nAUYoA.mix"
+            "__name__": "07拓展发现-2.mix"
         },
-        "bIBO6zZeHs.mix": {
+        "08文本纠错-1.mix": {
             "__file__": true,
-            "__name__": "sbR3lOLZSrGF.mix"
+            "__name__": "08文本纠错-1.mix"
         },
-        "SgfW8m_m9q.mix": {
+        "08文本纠错-2.mix": {
             "__file__": true,
-            "__name__": "WXFcFGev8saM.mix"
+            "__name__": "08文本纠错-2.mix"
         },
-        "0iYWy_skv7.mix": {
+        "09词法分析-2.mix": {
             "__file__": true,
-            "__name__": "XlLl38Xkcey2.mix"
+            "__name__": "09词法分析-2.mix"
         },
-        "rK5SW3TcCes.mix": {
+        "09词法分析.mix": {
             "__file__": true,
-            "__name__": "YbfEiXYA1L75.mix"
+            "__name__": "09词法分析.mix"
         },
         "__file__": false,
-        "__name__": "b3nOKxYrNCQR"
+        "__name__": "人工智能mix"
     },
-    "raFYx_jctQl.mix": {
-        "__file__": true,
-        "__name__": "dgDnWh-rc3YJ.mix"
-    },
-    "Mdsk7jAZBjm.mix": {
-        "__file__": true,
-        "__name__": "fiJiUJ6C0pOK.mix"
-    },
-    "vcTp80aR9Fd.mix": {
-        "__file__": true,
-        "__name__": "p4vLzL6gw8VI.mix"
-    },
-    "YVEdC03EKZf.mix": {
-        "__file__": true,
-        "__name__": "PDtIpORYNRbi.mix"
-    },
-    "r-kPuWQ_WC_": {
-        "talrIyHDJCK": {
-            "Mp6asHUh3KW.mix": {
+    "海龟画图": {
+        "mix": {
+            "海龟画图01小房子_01小房子.mix": {
                 "__file__": true,
-                "__name__": "21Qt30U5PUOD.mix"
+                "__name__": "海龟画图01小房子_01小房子.mix"
             },
-            "6VzdHQea_8p.mix": {
+            "海龟画图02小汽车_01正五边形.mix": {
                 "__file__": true,
-                "__name__": "65jBiwqymjWV.mix"
+                "__name__": "海龟画图02小汽车_01正五边形.mix"
             },
-            "acPfdoPv1Pf.mix": {
+            "海龟画图02小汽车_02小汽车.mix": {
                 "__file__": true,
-                "__name__": "6I_yXcbZG2tm.mix"
+                "__name__": "海龟画图02小汽车_02小汽车.mix"
             },
-            "q1aiOaiEdFr.mix": {
+            "海龟画图03小橙子_01完整橙子.mix": {
                 "__file__": true,
-                "__name__": "6q9SmcpHGg6E.mix"
+                "__name__": "海龟画图03小橙子_01完整橙子.mix"
             },
-            "mz26Cgs-WJJ.mix": {
+            "海龟画图03小橙子_02切开的橙子.mix": {
                 "__file__": true,
-                "__name__": "7LqrIE3Y5WgL.mix"
+                "__name__": "海龟画图03小橙子_02切开的橙子.mix"
             },
-            "yEIwo21tqgZ.mix": {
+            "海龟画图04盛开的向日葵_01太阳公公.mix": {
                 "__file__": true,
-                "__name__": "dX5jBS6t5FX6.mix"
+                "__name__": "海龟画图04盛开的向日葵_01太阳公公.mix"
             },
-            "_JngRO1aXNP.mix": {
+            "海龟画图04盛开的向日葵_02向日葵.mix": {
                 "__file__": true,
-                "__name__": "g0B5xQBFnrDs.mix"
+                "__name__": "海龟画图04盛开的向日葵_02向日葵.mix"
             },
-            "JBVOPqmi2ia.mix": {
+            "海龟画图05炫彩螺旋线_01螺旋四边形.mix": {
                 "__file__": true,
-                "__name__": "IV88rhcSwRE3.mix"
+                "__name__": "海龟画图05炫彩螺旋线_01螺旋四边形.mix"
             },
-            "h1RgHVv2rzZ.mix": {
+            "海龟画图05炫彩螺旋线_02彩色螺旋线.mix": {
                 "__file__": true,
-                "__name__": "jRsUiHZMeXL8.mix"
+                "__name__": "海龟画图05炫彩螺旋线_02彩色螺旋线.mix"
             },
-            "6Dau8G9MxqN.mix": {
+            "海龟画图06米思齐Logo_01米思齐Logo.mix": {
                 "__file__": true,
-                "__name__": "JuhETL_YLg2O.mix"
+                "__name__": "海龟画图06米思齐Logo_01米思齐Logo.mix"
             },
-            "4R1mW9U0LQD.mix": {
+            "海龟画图07闪烁星星_01正五角星.mix": {
                 "__file__": true,
-                "__name__": "LgkIqeKDAf95.mix"
+                "__name__": "海龟画图07闪烁星星_01正五角星.mix"
             },
-            "-wiw-clT4NO.mix": {
+            "海龟画图07闪烁星星_02正n角星.mix": {
                 "__file__": true,
-                "__name__": "Lp_JO0YCGE12.mix"
+                "__name__": "海龟画图07闪烁星星_02正n角星.mix"
             },
-            "7DemSDbXdjz.mix": {
+            "海龟画图08猜一猜_01猜性别.mix": {
                 "__file__": true,
-                "__name__": "OCu-28eKqM_U.mix"
+                "__name__": "海龟画图08猜一猜_01猜性别.mix"
             },
-            "a6UD2CPrWIq.mix": {
+            "海龟画图08猜一猜_02猜年龄.mix": {
                 "__file__": true,
-                "__name__": "p3PlIDdC_vt-.mix"
+                "__name__": "海龟画图08猜一猜_02猜年龄.mix"
             },
-            "tlKOdEef5YX.mix": {
+            "海龟画图09大树的年龄_01年轮.mix": {
                 "__file__": true,
-                "__name__": "ppdrET_SATod.mix"
+                "__name__": "海龟画图09大树的年龄_01年轮.mix"
             },
-            "HuWZOhuChBE.mix": {
+            "海龟画图09大树的年龄_02树年龄.mix": {
                 "__file__": true,
-                "__name__": "QW4Eixpa-aO7.mix"
+                "__name__": "海龟画图09大树的年龄_02树年龄.mix"
             },
-            "rRP-DIv90Br.mix": {
+            "海龟画图10公共汽车_01公共汽车.mix": {
                 "__file__": true,
-                "__name__": "sNirHvTXJnVU.mix"
+                "__name__": "海龟画图10公共汽车_01公共汽车.mix"
             },
-            "j27npVInBgM.mix": {
+            "海龟画图11美丽星空_01星空.mix": {
                 "__file__": true,
-                "__name__": "U-KAaEwp2JlT.mix"
+                "__name__": "海龟画图11美丽星空_01星空.mix"
             },
-            "D8sktkU4L1b.mix": {
+            "海龟画图12斐波那契数列_01输出斐波那契额数列.mix": {
                 "__file__": true,
-                "__name__": "XaHlKkrKbrI4.mix"
+                "__name__": "海龟画图12斐波那契数列_01输出斐波那契额数列.mix"
             },
-            "_n_2ndQOFpc.mix": {
+            "海龟画图12斐波那契数列_02斐波那契额螺旋线.mix": {
                 "__file__": true,
-                "__name__": "YZ-tdcZokU-e.mix"
+                "__name__": "海龟画图12斐波那契数列_02斐波那契额螺旋线.mix"
             },
             "__file__": false,
-            "__name__": "hct-tkCqiq01"
+            "__name__": "mix"
         },
         "__file__": false,
-        "__name__": "qH8U_24k3XYf"
-    },
-    "T47hqJc8J_q.mix": {
-        "__file__": true,
-        "__name__": "uE7vH_oLl359.mix"
-    },
-    "10cJbNokP4k.mix": {
-        "__file__": true,
-        "__name__": "wQjnjbFpJi-D.mix"
-    },
-    "1WIUKv0gjMo.mix": {
-        "__file__": true,
-        "__name__": "YpbMgkp75-0w.mix"
+        "__name__": "海龟画图"
     }
 }

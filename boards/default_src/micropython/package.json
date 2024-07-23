@@ -5,6 +5,7 @@
     "scripts": {
         "build:dev": "webpack --config=webpack.dev.js",
         "build:prod": "webpack --config=webpack.prod.js",
+        "build:examples": "node ../../../scripts/build-examples.js -t special",
         "publish:board": "npm publish --registry https://registry.npmjs.org/"
     },
     "main": "./export.js",

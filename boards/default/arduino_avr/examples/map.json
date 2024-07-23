@@ -1,851 +1,851 @@
 {
-    "VmCIa9vFu": {
-        "pMT2pAHsfY.mix": {
+    "01-输入输出": {
+        "01-LED闪烁.mix": {
             "__file__": true,
             "__name__": "01-LED闪烁.mix"
         },
-        "zUZ4c9ijbl.mix": {
+        "02-开关灯.mix": {
             "__file__": true,
             "__name__": "02-开关灯.mix"
         },
-        "uYS2aVJafq.mix": {
+        "03-调光灯.mix": {
             "__file__": true,
             "__name__": "03-调光灯.mix"
         },
-        "sRTn0RaK28.mix": {
+        "04-多功能按键.mix": {
             "__file__": true,
             "__name__": "04-多功能按键.mix"
         },
-        "7E5zww0kJ0.mix": {
+        "05-硬件中断.mix": {
             "__file__": true,
             "__name__": "05-硬件中断.mix"
         },
-        "_M4NzmxMKA.mix": {
+        "06-软件中断.mix": {
             "__file__": true,
             "__name__": "06-软件中断.mix"
         },
-        "SbQeizosCF.mix": {
+        "07-声控灯.mix": {
             "__file__": true,
             "__name__": "07-声控灯.mix"
         },
-        "tUHS4KiX4u.mix": {
+        "08-脉冲.mix": {
             "__file__": true,
             "__name__": "08-脉冲.mix"
         },
-        "ChyvF1aKj-.mix": {
+        "09-软件模拟PWM.mix": {
             "__file__": true,
             "__name__": "09-软件模拟PWM.mix"
         },
-        "vLT4OExD9t.mix": {
+        "10-ShiftOut数字骰子.mix": {
             "__file__": true,
             "__name__": "10-ShiftOut数字骰子.mix"
         },
-        "77LMTUiV3Z.mix": {
+        "11-ShiftOut流水灯.mix": {
             "__file__": true,
             "__name__": "11-ShiftOut流水灯.mix"
         },
         "__file__": false,
         "__name__": "01-输入输出"
     },
-    "W7bfVPXbhz": {
-        "8qdA_km51x.mix": {
+    "02-控制": {
+        "01-初始化.mix": {
             "__file__": true,
             "__name__": "01-初始化.mix"
         },
-        "8rn4OF-7L3.mix": {
+        "02-LED流水灯.mix": {
             "__file__": true,
             "__name__": "02-LED流水灯.mix"
         },
-        "dlJKD3xLxr.mix": {
+        "03-While循环.mix": {
             "__file__": true,
             "__name__": "03-While循环.mix"
         },
-        "eG_83pHrwau.mix": {
+        "04-延时灯.mix": {
             "__file__": true,
             "__name__": "04-延时灯.mix"
         },
-        "0ZUXb2NJ-iH.mix": {
+        "05-定时器控制灯亮灭.mix": {
             "__file__": true,
             "__name__": "05-定时器控制灯亮灭.mix"
         },
-        "W9GJM7CkOTs.mix": {
+        "06-简单定时器.mix": {
             "__file__": true,
             "__name__": "06-简单定时器.mix"
         },
-        "0umD1uEew6g.mix": {
+        "07-随机亮灯.mix": {
             "__file__": true,
             "__name__": "07-随机亮灯.mix"
         },
-        "4rwdgoZ_SIl.mix": {
+        "08-Scoop多线程.mix": {
             "__file__": true,
             "__name__": "08-Scoop多线程.mix"
         },
-        "Z0Z_7jp4ar0.mix": {
+        "09-硬件中断-秒表.mix": {
             "__file__": true,
             "__name__": "09-硬件中断-秒表.mix"
         },
         "__file__": false,
         "__name__": "02-控制"
     },
-    "9exFAce4ay4": {
-        "YfyYgzXzUdc.mix": {
+    "03-数学": {
+        "01-模拟输入和模拟输出.mix": {
             "__file__": true,
             "__name__": "01-模拟输入和模拟输出.mix"
         },
-        "9SoJjKPxcd9.mix": {
+        "02-绘制三角函数曲线.mix": {
             "__file__": true,
             "__name__": "02-绘制三角函数曲线.mix"
         },
-        "Gs_c0omRYb0.mix": {
+        "03-映射.mix": {
             "__file__": true,
             "__name__": "03-映射.mix"
         },
-        "4U0BswEHkaV.mix": {
+        "04-随机数.mix": {
             "__file__": true,
             "__name__": "04-随机数.mix"
         },
-        "bgTD9nSjoSc.mix": {
+        "05-约束运算.mix": {
             "__file__": true,
             "__name__": "05-约束运算.mix"
         },
-        "95AWt09AHI6.mix": {
+        "06-移位计算.mix": {
             "__file__": true,
             "__name__": "06-移位计算.mix"
         },
         "__file__": false,
         "__name__": "03-数学"
     },
-    "M-nipJ0aU2i": {
-        "3YRW0N5vCuz.mix": {
+    "04-文本": {
+        "01-serial_string-1.mix": {
             "__file__": true,
             "__name__": "01-serial_string-1.mix"
         },
-        "_6RAsFOP56o.mix": {
+        "02-serial_string-2.mix": {
             "__file__": true,
             "__name__": "02-serial_string-2.mix"
         },
-        "KTYxBgMSxn0.mix": {
+        "03-serial_string-3.mix": {
             "__file__": true,
             "__name__": "03-serial_string-3.mix"
         },
-        "f7x_VUvx21h.mix": {
+        "04-serial_string-4.mix": {
             "__file__": true,
             "__name__": "04-serial_string-4.mix"
         },
-        "P1JdCLGmX-B.mix": {
+        "URL和Base64编解码.mix": {
             "__file__": true,
             "__name__": "URL和Base64编解码.mix"
         },
         "__file__": false,
         "__name__": "04-文本"
     },
-    "iCEBVcyclSR": {
-        "egilfftJQYl.mix": {
+    "05-数组": {
+        "01-一维数组输出.mix": {
             "__file__": true,
             "__name__": "01-一维数组输出.mix"
         },
-        "LIqnlgTdyYm.mix": {
+        "02-二维数组输出.mix": {
             "__file__": true,
             "__name__": "02-二维数组输出.mix"
         },
         "__file__": false,
         "__name__": "05-数组"
     },
-    "tdb7h3NzC8y": {
-        "7ss9laal9hL.mix": {
+    "06-逻辑": {
+        "01-比较运算符.mix": {
             "__file__": true,
             "__name__": "01-比较运算符.mix"
         },
-        "mqJSnRZPS5U.mix": {
+        "02-逻辑运算符.mix": {
             "__file__": true,
             "__name__": "02-逻辑运算符.mix"
         },
-        "v9IU0WTE--n.mix": {
+        "03-？语句.mix": {
             "__file__": true,
             "__name__": "03-？语句.mix"
         },
         "__file__": false,
         "__name__": "06-逻辑"
     },
-    "n5-2G5wMeIV": {
-        "q9nUBvNJBGz.mix": {
+    "07-串口": {
+        "01-串口交互.mix": {
             "__file__": true,
             "__name__": "01-串口交互.mix"
         },
-        "xcwlZp_4RNm.mix": {
+        "02-串口控制开关灯.mix": {
             "__file__": true,
             "__name__": "02-串口控制开关灯.mix"
         },
-        "YGMLkJSiHHL.mix": {
+        "03-打印ASCII值.mix": {
             "__file__": true,
             "__name__": "03-打印ASCII值.mix"
         },
         "__file__": false,
         "__name__": "07-串口"
     },
-    "XKStl2DT2st": {
-        "Hx8us0x7lx5.mix": {
+    "08-通信": {
+        "01-IRremote红外控制灯.mix": {
             "__file__": true,
             "__name__": "01-IRremote红外控制灯.mix"
         },
-        "2_SDuRhZLOk.mix": {
+        "02-IICMaster_字符.mix": {
             "__file__": true,
             "__name__": "02-IICMaster_字符.mix"
         },
-        "iRgvFHOw_8k.mix": {
+        "02-IICMaster_字符串.mix": {
             "__file__": true,
             "__name__": "02-IICMaster_字符串.mix"
         },
-        "HJMDCgeUrKk.mix": {
+        "02-IICMaster_请求数据.mix": {
             "__file__": true,
             "__name__": "02-IICMaster_请求数据.mix"
         },
-        "Hg0Ijn2Vq5s.mix": {
+        "02-IICSlave_字符.mix": {
             "__file__": true,
             "__name__": "02-IICSlave_字符.mix"
         },
-        "WofI2vrF_4N.mix": {
+        "02-IICSlave_字符串.mix": {
             "__file__": true,
             "__name__": "02-IICSlave_字符串.mix"
         },
-        "Kx1z4ByiMdV.mix": {
+        "03-SPI_Master.mix": {
             "__file__": true,
             "__name__": "03-SPI_Master.mix"
         },
-        "zPDgwDsF135.mix": {
+        "03-SPI_Master_1.mix": {
             "__file__": true,
             "__name__": "03-SPI_Master_1.mix"
         },
-        "zsYpiEg9GJp.mix": {
+        "03-SPI_Master_2.mix": {
             "__file__": true,
             "__name__": "03-SPI_Master_2.mix"
         },
-        "IKGeHdkTMiZ.mix": {
+        "03-SPI_Master_字符串.mix": {
             "__file__": true,
             "__name__": "03-SPI_Master_字符串.mix"
         },
-        "DjEv3KlTXeF.mix": {
+        "03-SPI_Slave.mix": {
             "__file__": true,
             "__name__": "03-SPI_Slave.mix"
         },
-        "CC4nii5o-di.mix": {
+        "03-SPI_Slave_1.mix": {
             "__file__": true,
             "__name__": "03-SPI_Slave_1.mix"
         },
-        "jFc3eJUyjij.mix": {
+        "03-SPI_Slave_2.mix": {
             "__file__": true,
             "__name__": "03-SPI_Slave_2.mix"
         },
-        "Upe5bWmLmMq.mix": {
+        "03-SPI_Slave_字符串.mix": {
             "__file__": true,
             "__name__": "03-SPI_Slave_字符串.mix"
         },
-        "6LHcNGYkHoK.mix": {
+        "04-RFID_写卡&读卡.mix": {
             "__file__": true,
             "__name__": "04-RFID_写卡&读卡.mix"
         },
-        "V7eTxbD2wmL.mix": {
+        "04-RFID_写卡.mix": {
             "__file__": true,
             "__name__": "04-RFID_写卡.mix"
         },
-        "KSusAOZ-uqv.mix": {
+        "04-RFID_读卡.mix": {
             "__file__": true,
             "__name__": "04-RFID_读卡.mix"
         },
-        "-jC-ICp3gwt.mix": {
+        "04-RFID_读取RFID卡号.mix": {
             "__file__": true,
             "__name__": "04-RFID_读取RFID卡号.mix"
         },
         "__file__": false,
         "__name__": "08-通信"
     },
-    "U7GeddKNqYn": {
-        "Fvf71QL6WS5.mix": {
+    "09-存储": {
+        "02-EEPROM.mix": {
             "__file__": true,
             "__name__": "02-EEPROM.mix"
         },
-        "kmu74p0zI1i.mix": {
+        "02-EEPROM_写入和读取字符数组.mix": {
             "__file__": true,
             "__name__": "02-EEPROM_写入和读取字符数组.mix"
         },
-        "7zXgHRWQ6D_.mix": {
+        "02-EEPROM_写入和读取字节数组.mix": {
             "__file__": true,
             "__name__": "02-EEPROM_写入和读取字节数组.mix"
         },
-        "O2VC1CXoNkO.mix": {
+        "02-EEPROM_写入和读取小数.mix": {
             "__file__": true,
             "__name__": "02-EEPROM_写入和读取小数.mix"
         },
-        "WhuyVSZmhVD.mix": {
+        "02-EEPROM_写入和读取长整数.mix": {
             "__file__": true,
             "__name__": "02-EEPROM_写入和读取长整数.mix"
         },
         "__file__": false,
         "__name__": "09-存储"
     },
-    "KAu0EuYckzj": {
-        "Xwfs32jT1sK.mix": {
+    "10-传感器": {
+        "01-超声波测距.mix": {
             "__file__": true,
             "__name__": "01-超声波测距.mix"
         },
-        "OoW6xX6hKKd.mix": {
+        "02-LCD1602显示温湿度.mix": {
             "__file__": true,
             "__name__": "02-LCD1602显示温湿度.mix"
         },
-        "RUu2p7XY821.mix": {
+        "04-DS18B20温度传感器.mix": {
             "__file__": true,
             "__name__": "04-DS18B20温度传感器.mix"
         },
-        "to1VV_62lsv.mix": {
+        "05-MLX90614测温.mix": {
             "__file__": true,
             "__name__": "05-MLX90614测温.mix"
         },
-        "588KT_itA4J.mix": {
+        "06-TCS34725颜色识别传感器.mix": {
             "__file__": true,
             "__name__": "06-TCS34725颜色识别传感器.mix"
         },
-        "m-t_swQIBAT.mix": {
+        "07-TCS230颜色识别传感器.mix": {
             "__file__": true,
             "__name__": "07-TCS230颜色识别传感器.mix"
         },
-        "x-17bPGlHlk.mix": {
+        "11-旋转编码器读取数据.mix": {
             "__file__": true,
             "__name__": "11-旋转编码器读取数据.mix"
         },
-        "tn819yT0Eab.mix": {
+        "12-DS1302液晶时钟.mix": {
             "__file__": true,
             "__name__": "12-DS1302液晶时钟.mix"
         },
-        "AAn6BQVImia.mix": {
+        "12-DS1302输出日期.mix": {
             "__file__": true,
             "__name__": "12-DS1302输出日期.mix"
         },
-        "a_x79oPPmMm.mix": {
+        "13-矩阵键盘密码灯.mix": {
             "__file__": true,
             "__name__": "13-矩阵键盘密码灯.mix"
         },
-        "nAA-8wOZWx7.mix": {
+        "13-矩阵键盘打印按键值.mix": {
             "__file__": true,
             "__name__": "13-矩阵键盘打印按键值.mix"
         },
-        "xGGu--tGH7x.mix": {
+        "13-矩阵键盘简易密码锁.mix": {
             "__file__": true,
             "__name__": "13-矩阵键盘简易密码锁.mix"
         },
-        "PL-KpP8pTTA.mix": {
+        "15-MPU6050打印数值.mix": {
             "__file__": true,
             "__name__": "15-MPU6050打印数值.mix"
         },
-        "UrnokGjSyQ6.mix": {
+        "16-BME280打印温度值.mix": {
             "__file__": true,
             "__name__": "16-BME280打印温度值.mix"
         },
-        "tTHeCIAHuGE.mix": {
+        "16-BME280气象站.mix": {
             "__file__": true,
             "__name__": "16-BME280气象站.mix"
         },
-        "fugAoyTvQRz.mix": {
+        "17-PS2手柄_打印摇杆值.mix": {
             "__file__": true,
             "__name__": "17-PS2手柄_打印摇杆值.mix"
         },
-        "oCJ5rUm6ZZZ.mix": {
+        "B01-声控舵机.mix": {
             "__file__": true,
             "__name__": "B01-声控舵机.mix"
         },
         "__file__": false,
         "__name__": "10-传感器"
     },
-    "d0xJgjVqzEr": {
-        "3EoT50pAjWE.mix": {
+    "11-执行器": {
+        "01-门铃.mix": {
             "__file__": true,
             "__name__": "01-门铃.mix"
         },
-        "-FoDI8qh7XI.mix": {
+        "02-蜂鸣器播放简单声音.mix": {
             "__file__": true,
             "__name__": "02-蜂鸣器播放简单声音.mix"
         },
-        "txGnArLFqSf.mix": {
+        "03-按键钢琴.mix": {
             "__file__": true,
             "__name__": "03-按键钢琴.mix"
         },
-        "O9-fa_XFk75.mix": {
+        "04-两只老虎.mix": {
             "__file__": true,
             "__name__": "04-两只老虎.mix"
         },
-        "QGFM74k2idZ.mix": {
+        "05-Alarm.mix": {
             "__file__": true,
             "__name__": "05-Alarm.mix"
         },
-        "h2Fg3GrBKhU.mix": {
+        "06-WS2812.mix": {
             "__file__": true,
             "__name__": "06-WS2812.mix"
         },
-        "tj6KTWMUrC7.mix": {
+        "07-mini MP3_播放音乐.mix": {
             "__file__": true,
             "__name__": "07-mini MP3_播放音乐.mix"
         },
-        "xSIqI48njEw.mix": {
+        "09-七彩流水灯.mix": {
             "__file__": true,
             "__name__": "09-七彩流水灯.mix"
         },
         "__file__": false,
         "__name__": "11-执行器"
     },
-    "O6PPIPjRtY9": {
-        "V4jtrDKO7Qy.mix": {
+    "12-显示器": {
+        "01-TM1650_显示变化的数字.mix": {
             "__file__": true,
             "__name__": "01-TM1650_显示变化的数字.mix"
         },
-        "Cb778mrOBEM.mix": {
+        "03-LCD1602_显示Hello Mixly.mix": {
             "__file__": true,
             "__name__": "03-LCD1602_显示Hello Mixly.mix"
         },
-        "UbDalhz26o4.mix": {
+        "04-OLED_多页切换.mix": {
             "__file__": true,
             "__name__": "04-OLED_多页切换.mix"
         },
-        "h2d_5S5t1L2.mix": {
+        "04-OLED_显示Mixly Logo.mix": {
             "__file__": true,
             "__name__": "04-OLED_显示Mixly Logo.mix"
         },
-        "EjaMDt0whe8.mix": {
+        "04-OLED_显示奥运五环图案.mix": {
             "__file__": true,
             "__name__": "04-OLED_显示奥运五环图案.mix"
         },
-        "BaNc_vAvy-3.mix": {
+        "04-OLED_显示文本.mix": {
             "__file__": true,
             "__name__": "04-OLED_显示文本.mix"
         },
-        "23Z2-qhqL1x.mix": {
+        "04-OLED_显示汉字(取模).mix": {
             "__file__": true,
             "__name__": "04-OLED_显示汉字(取模).mix"
         },
-        "BzN9qfkyefI.mix": {
+        "04-OLED_显示汉字.mix": {
             "__file__": true,
             "__name__": "04-OLED_显示汉字.mix"
         },
-        "Tg6HtM3wFzO.mix": {
+        "04-OLED_显示表情图片.mix": {
             "__file__": true,
             "__name__": "04-OLED_显示表情图片.mix"
         },
-        "YEPjq6XYYSU.mix": {
+        "04-OLED_显示表情图片1.mix": {
             "__file__": true,
             "__name__": "04-OLED_显示表情图片1.mix"
         },
-        "2f_GDf83N_z.mix": {
+        "05-NOKIA5110_显示汉字(取模).mix": {
             "__file__": true,
             "__name__": "05-NOKIA5110_显示汉字(取模).mix"
         },
-        "YXu_ysGFBA9.mix": {
+        "06-LCD12864 8080_显示汉字(取模).mix": {
             "__file__": true,
             "__name__": "06-LCD12864 8080_显示汉字(取模).mix"
         },
-        "lfR78n3Xlxd.mix": {
+        "06-LCD12864 SPI_显示汉字(取模).mix": {
             "__file__": true,
             "__name__": "06-LCD12864 SPI_显示汉字(取模).mix"
         },
-        "UknLidU3S1j.mix": {
+        "07-MAX7219_显示笑脸和哭脸.mix": {
             "__file__": true,
             "__name__": "07-MAX7219_显示笑脸和哭脸.mix"
         },
-        "Z_FWnzp5VOQ.mix": {
+        "07-MAX7219_水平方向四块级联滚动显示Mixly.mix": {
             "__file__": true,
             "__name__": "07-MAX7219_水平方向四块级联滚动显示Mixly.mix"
         },
         "__file__": false,
         "__name__": "12-显示器"
     },
-    "bjb4mxSZcFZ": {
-        "-PJ2XH0qz-r.mix": {
+    "15-函数": {
+        "01-函数法SOS.mix": {
             "__file__": true,
             "__name__": "01-函数法SOS.mix"
         },
-        "bE1ner5NHqs.mix": {
+        "02-含参数无返回值呼吸灯.mix": {
             "__file__": true,
             "__name__": "02-含参数无返回值呼吸灯.mix"
         },
         "__file__": false,
         "__name__": "15-函数"
     },
-    "hQUiFgtRPaB": {
-        "upV-7XFNmsa.mix": {
+    "16-自定义模块": {
+        "(在2.0下编译报错)01-Factory.mix": {
             "__file__": true,
             "__name__": "(在2.0下编译报错)01-Factory.mix"
         },
         "__file__": false,
         "__name__": "16-自定义模块"
     },
-    "kyUNPkQOBM7": {
-        "9uFWiRbsVGD": {
-            "KVpVqz8ndQr.mix": {
+    "Mixly2.0_simple_tutorial": {
+        "01_input_and_Output": {
+            "01_Light_up_the_on_board_indicator.mix": {
                 "__file__": true,
                 "__name__": "01_Light_up_the_on_board_indicator.mix"
             },
-            "7K1XcVJmg3R.mix": {
+            "02_On_board_indicator_flashes.mix": {
                 "__file__": true,
                 "__name__": "02_On_board_indicator_flashes.mix"
             },
-            "2-4OBHyy14O.mix": {
+            "03_Digital_Inputs.mix": {
                 "__file__": true,
                 "__name__": "03_Digital_Inputs.mix"
             },
-            "gNxGGQRjjQd.mix": {
+            "04_Pin_output_state_switching.mix": {
                 "__file__": true,
                 "__name__": "04_Pin_output_state_switching.mix"
             },
-            "kAI9JzXDEYN.mix": {
+            "05_PWMAnalog_Output.mix": {
                 "__file__": true,
                 "__name__": "05_PWMAnalog_Output.mix"
             },
-            "XgXEfST6-fl.mix": {
+            "06_Analog_Inputs.mix": {
                 "__file__": true,
                 "__name__": "06_Analog_Inputs.mix"
             },
-            "UjCwhwMkYsC.mix": {
+            "07_Software_analog_output.mix": {
                 "__file__": true,
                 "__name__": "07_Software_analog_output.mix"
             },
-            "qhmJJQDZuli.mix": {
+            "08_Multi_functional_keys.mix": {
                 "__file__": true,
                 "__name__": "08_Multi_functional_keys.mix"
             },
-            "zbLpnvbBxqQ.mix": {
+            "09_Hardware_Interrupts.mix": {
                 "__file__": true,
                 "__name__": "09_Hardware_Interrupts.mix"
             },
-            "hyQMpND2Omj.mix": {
+            "10_Software_Interruptions.mix": {
                 "__file__": true,
                 "__name__": "10_Software_Interruptions.mix"
             },
-            "STHibFzQH-D.mix": {
+            "11_Pulse_measurement.mix": {
                 "__file__": true,
                 "__name__": "11_Pulse_measurement.mix"
             },
-            "YjhOYmHq1LE.mix": {
+            "12_Pin_up_mode.mix": {
                 "__file__": true,
                 "__name__": "12_Pin_up_mode.mix"
             },
-            "9xGMFoHnKqr.mix": {
+            "13_Serial_Data_Output.mix": {
                 "__file__": true,
                 "__name__": "13_Serial_Data_Output.mix"
             },
             "__file__": false,
             "__name__": "01_input_and_Output"
         },
-        "4mSC9fi3yUP": {
-            "J1BCdtb9iLA.mix": {
+        "02_Control": {
+            "01_Stop_the_program.mix": {
                 "__file__": true,
                 "__name__": "01_Stop_the_program.mix"
             },
-            "8Mei53U0v5B.mix": {
+            "02_Difference_between_while_and_do_while.mix": {
                 "__file__": true,
                 "__name__": "02_Difference_between_while_and_do_while.mix"
             },
-            "0VXVBz6MIhK.mix": {
+            "03_if_elseConditional_Judgment.mix": {
                 "__file__": true,
                 "__name__": "03_if_elseConditional_Judgment.mix"
             },
-            "gGao0z9V369.mix": {
+            "04_switch_Multi_branching_condition_control.mix": {
                 "__file__": true,
                 "__name__": "04_switch_Multi_branching_condition_control.mix"
             },
-            "uJrNyaR92Dv.mix": {
+            "05_for_Circular_breathing_light.mix": {
                 "__file__": true,
                 "__name__": "05_for_Circular_breathing_light.mix"
             },
-            "YV0F8tffYfm.mix": {
+            "06_Jump_out_of_the_loop.mix": {
                 "__file__": true,
                 "__name__": "06_Jump_out_of_the_loop.mix"
             },
-            "rUTYwXWOHLy.mix": {
+            "07_System_runtime.mix": {
                 "__file__": true,
                 "__name__": "07_System_runtime.mix"
             },
-            "LsJO6HHngcM.mix": {
+            "08_Hardware_Timer.mix": {
                 "__file__": true,
                 "__name__": "08_Hardware_Timer.mix"
             },
-            "VZ0_o4Cwo_7.mix": {
+            "09_Simple_Timer.mix": {
                 "__file__": true,
                 "__name__": "09_Simple_Timer.mix"
             },
-            "PtQFj6oWt4g.mix": {
+            "10_Register_delay_function.mix": {
                 "__file__": true,
                 "__name__": "10_Register_delay_function.mix"
             },
-            "O6Wi8Z0-DxD.mix": {
+            "11_SCoop_Multi-threaded.mix": {
                 "__file__": true,
                 "__name__": "11_SCoop_Multi-threaded.mix"
             },
             "__file__": false,
             "__name__": "02_Control"
         },
-        "WsqDZULt-kV": {
-            "vyr6hojn8Ht.mix": {
+        "03_Mathematics": {
+            "01_Algebraic_operations.mix": {
                 "__file__": true,
                 "__name__": "01_Algebraic_operations.mix"
             },
-            "AhuaIjCNrtB.mix": {
+            "02_Bit_Operations.mix": {
                 "__file__": true,
                 "__name__": "02_Bit_Operations.mix"
             },
-            "TMYCacGk8bC.mix": {
+            "03_Trigonometric_functions.mix": {
                 "__file__": true,
                 "__name__": "03_Trigonometric_functions.mix"
             },
-            "RKV6hRgu6oZ.mix": {
+            "04_Variable_self-adding.mix": {
                 "__file__": true,
                 "__name__": "04_Variable_self-adding.mix"
             },
-            "PF-uEF3paA3.mix": {
+            "05_Common_mathematical_operations(Rounding_etc.).mix": {
                 "__file__": true,
                 "__name__": "05_Common_mathematical_operations(Rounding_etc.).mix"
             },
-            "c2FMV3TffQo.mix": {
+            "06_Get_the_number_of_bytes_occupied_by_different_types_of_data.mix": {
                 "__file__": true,
                 "__name__": "06_Get_the_number_of_bytes_occupied_by_different_types_of_data.mix"
             },
-            "G5A5RbLsSIo.mix": {
+            "07_Maximum_and_minimum_values.mix": {
                 "__file__": true,
                 "__name__": "07_Maximum_and_minimum_values.mix"
             },
-            "AQsKnbBnkv5.mix": {
+            "08_Get_random_number.mix": {
                 "__file__": true,
                 "__name__": "08_Get_random_number.mix"
             },
-            "Km9Q8uGcvOu.mix": {
+            "09_Mathematical_constraints.mix": {
                 "__file__": true,
                 "__name__": "09_Mathematical_constraints.mix"
             },
-            "WVKtgBltFLC.mix": {
+            "10_Mathematical_mapping.mix": {
                 "__file__": true,
                 "__name__": "10_Mathematical_mapping.mix"
             },
             "__file__": false,
             "__name__": "03_Mathematics"
         },
-        "AEMprih0sQ0": {
-            "mQxoYfW5UXo.mix": {
+        "04_Logic": {
+            "01_Logical_relationships.mix": {
                 "__file__": true,
                 "__name__": "01_Logical_relationships.mix"
             },
-            "I2gngWKO4SF.mix": {
+            "02_Logical_operations.mix": {
                 "__file__": true,
                 "__name__": "02_Logical_operations.mix"
             },
-            "5WU6MRDvIrQ.mix": {
+            "03_Logical_non-operations.mix": {
                 "__file__": true,
                 "__name__": "03_Logical_non-operations.mix"
             },
-            "74-At-xbJHL.mix": {
+            "04_Conditional_return_value.mix": {
                 "__file__": true,
                 "__name__": "04_Conditional_return_value.mix"
             },
             "__file__": false,
             "__name__": "04_Logic"
         },
-        "2WIPqJl5DxI": {
-            "BleZ2ejL-Tq.mix": {
+        "05_Text": {
+            "01_String_Splicing.mix": {
                 "__file__": true,
                 "__name__": "01_String_Splicing.mix"
             },
-            "YYc96lgYgLc.mix": {
+            "02_String_to_integer_or_decimal.mix": {
                 "__file__": true,
                 "__name__": "02_String_to_integer_or_decimal.mix"
             },
-            "n450KNSxy6u.mix": {
+            "03_String_Index.mix": {
                 "__file__": true,
                 "__name__": "03_String_Index.mix"
             },
-            "nUFL_McLt60.mix": {
+            "04_Intercepting_strings.mix": {
                 "__file__": true,
                 "__name__": "04_Intercepting_strings.mix"
             },
-            "ZtdmaAiY_mQ.mix": {
+            "05_String_conversion_and_replacement.mix": {
                 "__file__": true,
                 "__name__": "05_String_conversion_and_replacement.mix"
             },
-            "4MD4-mvfY2J.mix": {
+            "06_String_First_Determination_and_Data_Type_Conversion.mix": {
                 "__file__": true,
                 "__name__": "06_String_First_Determination_and_Data_Type_Conversion.mix"
             },
-            "WdKR0gqEH-N.mix": {
+            "07_Character_to_ascii_conversion.mix": {
                 "__file__": true,
                 "__name__": "07_Character_to_ascii_conversion.mix"
             },
-            "C8Db9d1xjAn.mix": {
+            "08_Incremental_conversion.mix": {
                 "__file__": true,
                 "__name__": "08_Incremental_conversion.mix"
             },
-            "YEBO4r5Of0r.mix": {
+            "09_String_length_and_getting_the_specified_position_character.mix": {
                 "__file__": true,
                 "__name__": "09_String_length_and_getting_the_specified_position_character.mix"
             },
-            "6q_eN9MiUXW.mix": {
+            "10_String_relations _and_comparisons.mix": {
                 "__file__": true,
                 "__name__": "10_String_relations _and_comparisons.mix"
             },
             "__file__": false,
             "__name__": "05_Text"
         },
-        "11dZjM8XY_z": {
-            "4rZjfa8hT1Q.mix": {
+        "06_Arrays": {
+            "01_One-dimensional_array_declaration.mix": {
                 "__file__": true,
                 "__name__": "01_One-dimensional_array_declaration.mix"
             },
-            "LPC4Ossk_Xu.mix": {
+            "02_Array_reading_and_writing.mix": {
                 "__file__": true,
                 "__name__": "02_Array_reading_and_writing.mix"
             },
-            "CERTgzaOD8O.mix": {
+            "03_Array_circular_shift.mix": {
                 "__file__": true,
                 "__name__": "03_Array_circular_shift.mix"
             },
-            "K-v4JlzpsZ5.mix": {
+            "04_Two-dimensional_array_declaration.mix": {
                 "__file__": true,
                 "__name__": "04_Two-dimensional_array_declaration.mix"
             },
-            "1lQrty29k2g.mix": {
+            "05_Two-dimensional_array_reading_and_writing.mix": {
                 "__file__": true,
                 "__name__": "05_Two-dimensional_array_reading_and_writing.mix"
             },
             "__file__": false,
             "__name__": "06_Arrays"
         },
-        "inypGWSdWPH": {
-            "9Y68GjDi_zI.mix": {
+        "07_Variables": {
+            "01_Difference_between_variable_declaration_and_use.mix": {
                 "__file__": true,
                 "__name__": "01_Difference_between_variable_declaration_and_use.mix"
             },
             "__file__": false,
             "__name__": "07_Variables"
         },
-        "6EhGG8v_DwF": {
-            "_HTmqkWOMZD.mix": {
+        "08_Function": {
+            "01_no-return-value-no-parameter_function.mix": {
                 "__file__": true,
                 "__name__": "01_no-return-value-no-parameter_function.mix"
             },
-            "aQwwUs06c7L.mix": {
+            "02_no-return-value_function_with_parameters.mix": {
                 "__file__": true,
                 "__name__": "02_no-return-value_function_with_parameters.mix"
             },
-            "o3GuXJTiGMg.mix": {
+            "03_Function_declaration_with_return_value_and_parameters.mix": {
                 "__file__": true,
                 "__name__": "03_Function_declaration_with_return_value_and_parameters.mix"
             },
-            "8vrAJInTIRZ.mix": {
+            "04_Multiple_return_value_function_declaration_with_parameters.mix": {
                 "__file__": true,
                 "__name__": "04_Multiple_return_value_function_declaration_with_parameters.mix"
             },
             "__file__": false,
             "__name__": "08_Function"
         },
-        "kU15criu7CK": {
-            "D4L-0Yu37uz.mix": {
+        "09_Serial_port": {
+            "01_Serial_printout.mix": {
                 "__file__": true,
                 "__name__": "01_Serial_printout.mix"
             },
-            "KZFlrooind7.mix": {
+            "02_Serial_input_1.mix": {
                 "__file__": true,
                 "__name__": "02_Serial_input_1.mix"
             },
-            "Wc1wzso2KCT.mix": {
+            "02_Serial_input_2.mix": {
                 "__file__": true,
                 "__name__": "02_Serial_input_2.mix"
             },
-            "mBC0KBZUpCi.mix": {
+            "02_Serial_input_3.mix": {
                 "__file__": true,
                 "__name__": "02_Serial_input_3.mix"
             },
-            "9JCRtUCBuN8.mix": {
+            "02_Serial_input_4.mix": {
                 "__file__": true,
                 "__name__": "02_Serial_input_4.mix"
             },
-            "mVVInJLot_g.mix": {
+            "03_Serial_port_send_wait.mix": {
                 "__file__": true,
                 "__name__": "03_Serial_port_send_wait.mix"
             },
-            "XscElcU5MHM.mix": {
+            "04_Serial_Interrupt.mix": {
                 "__file__": true,
                 "__name__": "04_Serial_Interrupt.mix"
             },
-            "oh5xen7XwZD.mix": {
+            "05_Use_of_soft_serial_port.mix": {
                 "__file__": true,
                 "__name__": "05_Use_of_soft_serial_port.mix"
             },
             "__file__": false,
             "__name__": "09_Serial_port"
         },
-        "9VLH0RUfLsM": {
-            "AQ_2_hczu2G.mix": {
+        "10_Sensors": {
+            "01_Ultrasonic_distance_measurement.mix": {
                 "__file__": true,
                 "__name__": "01_Ultrasonic_distance_measurement.mix"
             },
-            "9nos11M8lTT.mix": {
+            "02_Get_DHT11_temperature_and_humidity.mix": {
                 "__file__": true,
                 "__name__": "02_Get_DHT11_temperature_and_humidity.mix"
             },
-            "-WSPaBJ4MH8.mix": {
+            "03_get_LM35_temperature.mix": {
                 "__file__": true,
                 "__name__": "03_get_LM35_temperature.mix"
             },
-            "eU8HiPsi2br.mix": {
+            "04_Get_DS18B20_temperature.mix": {
                 "__file__": true,
                 "__name__": "04_Get_DS18B20_temperature.mix"
             },
-            "dk2L9-VfsqG.mix": {
+            "05_Get_BME280_parameters.mix": {
                 "__file__": true,
                 "__name__": "05_Get_BME280_parameters.mix"
             },
-            "xSkPXEtQHud.mix": {
+            "06_get_SHT20_temperature_and_humidity.mix": {
                 "__file__": true,
                 "__name__": "06_get_SHT20_temperature_and_humidity.mix"
             },
-            "yb2ecCne2Aw.mix": {
+            "07_BMLX90614_Infrared_temperature_measurement.mix": {
                 "__file__": true,
                 "__name__": "07_BMLX90614_Infrared_temperature_measurement.mix"
             },
-            "pbfd8OYvTxQ.mix": {
+            "08_tcs34725_color_extraction.mix": {
                 "__file__": true,
                 "__name__": "08_tcs34725_color_extraction.mix"
             },
-            "nUAQyLzPiX-.mix": {
+            "09_tcs230_color_extraction.mix": {
                 "__file__": true,
                 "__name__": "09_tcs230_color_extraction.mix"
             },
-            "jZnpeeeJTl3.mix": {
+            "10_MPU6050_Gyroscope.mix": {
                 "__file__": true,
                 "__name__": "10_MPU6050_Gyroscope.mix"
             },
-            "3lIpx13r7Si.mix": {
+            "11_MPU9250_acceleration_sensor.mix": {
                 "__file__": true,
                 "__name__": "11_MPU9250_acceleration_sensor.mix"
             },
             "__file__": false,
             "__name__": "10_Sensors"
         },
-        "IUagh-JkHHT": {
-            "dewnQW-bD7F.mix": {
+        "13_Communication": {
+            "01_Infrared_data_reception.mix": {
                 "__file__": true,
                 "__name__": "01_Infrared_data_reception.mix"
             },
-            "2doyYS6DA3f.mix": {
+            "02_Infrared_data_transmission.mix": {
                 "__file__": true,
                 "__name__": "02_Infrared_data_transmission.mix"
             },
-            "S5_VC47ltHo.mix": {
+            "03_Infrared_data_simulation_transceiver.mix": {
                 "__file__": true,
                 "__name__": "03_Infrared_data_simulation_transceiver.mix"
             },
             "__file__": false,
             "__name__": "13_Communication"
         },
-        "Npd91izpaxd": {
-            "ennCdfZgqie.mix": {
+        "14_Storage": {
+            "01_SD_card_read_test.mix": {
                 "__file__": true,
                 "__name__": "01_SD_card_read_test.mix"
             },
-            "-x8aqCLjqEl.mix": {
+            "02_EEPROM_power_down_storage.mix": {
                 "__file__": true,
                 "__name__": "02_EEPROM_power_down_storage.mix"
             },
@@ -855,377 +855,377 @@
         "__file__": false,
         "__name__": "Mixly2.0_simple_tutorial"
     },
-    "sG_W03pyJzQ": {
-        "zyLXcW3DAPd": {
-            "9IVpTZJAS92.mix": {
+    "Mixly2.0简明教程": {
+        "01-输入输出": {
+            "01-点亮板载指示灯13.mix": {
                 "__file__": true,
                 "__name__": "01-点亮板载指示灯13.mix"
             },
-            "JRI99t2oYVC.mix": {
+            "02-板载指示灯13闪烁.mix": {
                 "__file__": true,
                 "__name__": "02-板载指示灯13闪烁.mix"
             },
-            "4rJpEo3QxA_.mix": {
+            "03-数字输入.mix": {
                 "__file__": true,
                 "__name__": "03-数字输入.mix"
             },
-            "EtyAP1gR35L.mix": {
+            "04-管脚输出状态切换.mix": {
                 "__file__": true,
                 "__name__": "04-管脚输出状态切换.mix"
             },
-            "f1W7Qy1G9Uw.mix": {
+            "05-PWM模拟输出.mix": {
                 "__file__": true,
                 "__name__": "05-PWM模拟输出.mix"
             },
-            "eDGovRRpRq9.mix": {
+            "06-模拟输入.mix": {
                 "__file__": true,
                 "__name__": "06-模拟输入.mix"
             },
-            "dj4vOUhcI98.mix": {
+            "07-软件模拟输出.mix": {
                 "__file__": true,
                 "__name__": "07-软件模拟输出.mix"
             },
-            "PfqkE7I5dxw.mix": {
+            "08-多功能按键.mix": {
                 "__file__": true,
                 "__name__": "08-多功能按键.mix"
             },
-            "-VJ15cIzAzS.mix": {
+            "09-硬件中断.mix": {
                 "__file__": true,
                 "__name__": "09-硬件中断.mix"
             },
-            "C6tRMhMqpZm.mix": {
+            "10-软件中断.mix": {
                 "__file__": true,
                 "__name__": "10-软件中断.mix"
             },
-            "76C-zKdAMjb.mix": {
+            "11-脉冲测量.mix": {
                 "__file__": true,
                 "__name__": "11-脉冲测量.mix"
             },
-            "5DXwj6xnxlb.mix": {
+            "12-管脚上拉模式.mix": {
                 "__file__": true,
                 "__name__": "12-管脚上拉模式.mix"
             },
-            "0p7-ZmwX0z6.mix": {
+            "13-串行数据输出.mix": {
                 "__file__": true,
                 "__name__": "13-串行数据输出.mix"
             },
             "__file__": false,
             "__name__": "01-输入输出"
         },
-        "9M4j6Kk0ifi": {
-            "L9-40juTN8a.mix": {
+        "02-控制": {
+            "01-停止程序.mix": {
                 "__file__": true,
                 "__name__": "01-停止程序.mix"
             },
-            "SY0lqWStx4F.mix": {
+            "02-while与do while区别.mix": {
                 "__file__": true,
                 "__name__": "02-while与do while区别.mix"
             },
-            "4htlbr2cyp6.mix": {
+            "03-if else条件判断.mix": {
                 "__file__": true,
                 "__name__": "03-if else条件判断.mix"
             },
-            "OsJyKlMgnB_.mix": {
+            "04-switch多分枝条件控制.mix": {
                 "__file__": true,
                 "__name__": "04-switch多分枝条件控制.mix"
             },
-            "IghpMVqTIh-.mix": {
+            "05-for循环呼吸灯.mix": {
                 "__file__": true,
                 "__name__": "05-for循环呼吸灯.mix"
             },
-            "_cAjY5kKXkl.mix": {
+            "06-跳出循环.mix": {
                 "__file__": true,
                 "__name__": "06-跳出循环.mix"
             },
-            "Iih5hy7w834.mix": {
+            "07-系统运行时间.mix": {
                 "__file__": true,
                 "__name__": "07-系统运行时间.mix"
             },
-            "QghyQu4TbHL.mix": {
+            "08-硬件定时器.mix": {
                 "__file__": true,
                 "__name__": "08-硬件定时器.mix"
             },
-            "w1W0noPqHKB.mix": {
+            "09-简单定时器.mix": {
                 "__file__": true,
                 "__name__": "09-简单定时器.mix"
             },
-            "3irgJ1X_LDq.mix": {
+            "10-注册延时函数.mix": {
                 "__file__": true,
                 "__name__": "10-注册延时函数.mix"
             },
-            "jtRBDN-KIBk.mix": {
+            "11-SCoop多线程.mix": {
                 "__file__": true,
                 "__name__": "11-SCoop多线程.mix"
             },
             "__file__": false,
             "__name__": "02-控制"
         },
-        "EQRznV_EdoC": {
-            "94QvwqAykHH.mix": {
+        "03-数学": {
+            "01-代数运算.mix": {
                 "__file__": true,
                 "__name__": "01-代数运算.mix"
             },
-            "1QqTou5XTIb.mix": {
+            "02-位运算.mix": {
                 "__file__": true,
                 "__name__": "02-位运算.mix"
             },
-            "41Ji3K1emnD.mix": {
+            "03-三角函数.mix": {
                 "__file__": true,
                 "__name__": "03-三角函数.mix"
             },
-            "dvV0fozR2qy.mix": {
+            "04-变量自加.mix": {
                 "__file__": true,
                 "__name__": "04-变量自加.mix"
             },
-            "pKdG_01YXCR.mix": {
+            "05-常见数学运算（四舍五入等）.mix": {
                 "__file__": true,
                 "__name__": "05-常见数学运算（四舍五入等）.mix"
             },
-            "tYcWxNcC4yu.mix": {
+            "06-获取不同类型数据占用的字节数.mix": {
                 "__file__": true,
                 "__name__": "06-获取不同类型数据占用的字节数.mix"
             },
-            "i8GNfghhchF.mix": {
+            "07-最大值与最小值.mix": {
                 "__file__": true,
                 "__name__": "07-最大值与最小值.mix"
             },
-            "CSlrW-WkBhE.mix": {
+            "08-获取随机数.mix": {
                 "__file__": true,
                 "__name__": "08-获取随机数.mix"
             },
-            "yjErwxvy_PL.mix": {
+            "09-数学约束.mix": {
                 "__file__": true,
                 "__name__": "09-数学约束.mix"
             },
-            "5gMSrbsl_IA.mix": {
+            "10-数学映射.mix": {
                 "__file__": true,
                 "__name__": "10-数学映射.mix"
             },
             "__file__": false,
             "__name__": "03-数学"
         },
-        "6QrokY_Ea8R": {
-            "g5SQTzQvaEs.mix": {
+        "04-逻辑": {
+            "01-逻辑关系.mix": {
                 "__file__": true,
                 "__name__": "01-逻辑关系.mix"
             },
-            "XqmVPjvJhbI.mix": {
+            "02-逻辑运算.mix": {
                 "__file__": true,
                 "__name__": "02-逻辑运算.mix"
             },
-            "6VUve83biSS.mix": {
+            "03-逻辑非运算.mix": {
                 "__file__": true,
                 "__name__": "03-逻辑非运算.mix"
             },
-            "tWWIZyjcTlKp.mix": {
+            "04-条件返回值.mix": {
                 "__file__": true,
                 "__name__": "04-条件返回值.mix"
             },
             "__file__": false,
             "__name__": "04-逻辑"
         },
-        "uHKMG6FYAqx2": {
-            "rCcGlL82TIpj.mix": {
+        "05-文本": {
+            "01-字符串拼接.mix": {
                 "__file__": true,
                 "__name__": "01-字符串拼接.mix"
             },
-            "bpvFk1ZS9-6b.mix": {
+            "02-字符串转整数或小数.mix": {
                 "__file__": true,
                 "__name__": "02-字符串转整数或小数.mix"
             },
-            "ARbon0fYPERQ.mix": {
+            "03-字符串索引.mix": {
                 "__file__": true,
                 "__name__": "03-字符串索引.mix"
             },
-            "iaPqDixnIaEa.mix": {
+            "04-截取字符串.mix": {
                 "__file__": true,
                 "__name__": "04-截取字符串.mix"
             },
-            "IwqZOOL9LFVQ.mix": {
+            "05-字符串转换与替换.mix": {
                 "__file__": true,
                 "__name__": "05-字符串转换与替换.mix"
             },
-            "qGWUNel7s6lv.mix": {
+            "06-字符串首位判断与数据类型转换.mix": {
                 "__file__": true,
                 "__name__": "06-字符串首位判断与数据类型转换.mix"
             },
-            "fYHcE7owacre.mix": {
+            "07-字符与ascii码互相转换.mix": {
                 "__file__": true,
                 "__name__": "07-字符与ascii码互相转换.mix"
             },
-            "b14bii9q0QMs.mix": {
+            "08-进制转换.mix": {
                 "__file__": true,
                 "__name__": "08-进制转换.mix"
             },
-            "8gv6_lvRsqc3.mix": {
+            "09-字符串长度与获取指定位置字符.mix": {
                 "__file__": true,
                 "__name__": "09-字符串长度与获取指定位置字符.mix"
             },
-            "GPmcKn8nKcAm.mix": {
+            "10-字符串关系与比较.mix": {
                 "__file__": true,
                 "__name__": "10-字符串关系与比较.mix"
             },
             "__file__": false,
             "__name__": "05-文本"
         },
-        "ChlHi83NbG6b": {
-            "rj_yRzWK1Wkr.mix": {
+        "06-数组": {
+            "01-一维数组声明.mix": {
                 "__file__": true,
                 "__name__": "01-一维数组声明.mix"
             },
-            "uTcE0mPFbAkH.mix": {
+            "02-数组读写.mix": {
                 "__file__": true,
                 "__name__": "02-数组读写.mix"
             },
-            "aBhedmx3o8Af.mix": {
+            "03-数组循环移位.mix": {
                 "__file__": true,
                 "__name__": "03-数组循环移位.mix"
             },
-            "MGYmVL6xEfos.mix": {
+            "04-二维数组声明.mix": {
                 "__file__": true,
                 "__name__": "04-二维数组声明.mix"
             },
-            "6rhRD_n5octd.mix": {
+            "05-二维数组读写.mix": {
                 "__file__": true,
                 "__name__": "05-二维数组读写.mix"
             },
             "__file__": false,
             "__name__": "06-数组"
         },
-        "YseLD0bZGW8M": {
-            "bETVWal4c1dz.mix": {
+        "07-变量": {
+            "01-变量声明与使用区别.mix": {
                 "__file__": true,
                 "__name__": "01-变量声明与使用区别.mix"
             },
             "__file__": false,
             "__name__": "07-变量"
         },
-        "t4IeYWAx6kA1": {
-            "PIXEGI8nEp30.mix": {
+        "08-函数": {
+            "01-无返回值无参数函数.mix": {
                 "__file__": true,
                 "__name__": "01-无返回值无参数函数.mix"
             },
-            "31A3tJkubjTx.mix": {
+            "02-无返回值带参数函数.mix": {
                 "__file__": true,
                 "__name__": "02-无返回值带参数函数.mix"
             },
-            "Pp62dBvj4G0Z.mix": {
+            "03-带返回值带参数函数声明.mix": {
                 "__file__": true,
                 "__name__": "03-带返回值带参数函数声明.mix"
             },
-            "yycMkPzIyqdx.mix": {
+            "04-多返回值带参数函数声明.mix": {
                 "__file__": true,
                 "__name__": "04-多返回值带参数函数声明.mix"
             },
             "__file__": false,
             "__name__": "08-函数"
         },
-        "S4inhf5Bh54Q": {
-            "t_HARRsNZwf1.mix": {
+        "09-串口": {
+            "01-串口打印输出.mix": {
                 "__file__": true,
                 "__name__": "01-串口打印输出.mix"
             },
-            "S9HKiBHR6jS5.mix": {
+            "02-串口输入1.mix": {
                 "__file__": true,
                 "__name__": "02-串口输入1.mix"
             },
-            "TSWLx1_1NRmP.mix": {
+            "02-串口输入2.mix": {
                 "__file__": true,
                 "__name__": "02-串口输入2.mix"
             },
-            "pW7Xz-3vrbyO.mix": {
+            "02-串口输入3.mix": {
                 "__file__": true,
                 "__name__": "02-串口输入3.mix"
             },
-            "43wOPIF2LY1V.mix": {
+            "02-串口输入4.mix": {
                 "__file__": true,
                 "__name__": "02-串口输入4.mix"
             },
-            "Em2gHJq_A_LA.mix": {
+            "03-串口发送等待.mix": {
                 "__file__": true,
                 "__name__": "03-串口发送等待.mix"
             },
-            "qlnUVGa5j78T.mix": {
+            "04-串口中断.mix": {
                 "__file__": true,
                 "__name__": "04-串口中断.mix"
             },
-            "Szuqv_2oeSnu.mix": {
+            "05-软串口的使用.mix": {
                 "__file__": true,
                 "__name__": "05-软串口的使用.mix"
             },
             "__file__": false,
             "__name__": "09-串口"
         },
-        "6AGw1yXgLprT": {
-            "gVoZfsWHjzCC.mix": {
+        "10-传感器": {
+            "01-超声波测距.mix": {
                 "__file__": true,
                 "__name__": "01-超声波测距.mix"
             },
-            "r8aKeuYueZBE.mix": {
+            "02-获取DHT11温湿度.mix": {
                 "__file__": true,
                 "__name__": "02-获取DHT11温湿度.mix"
             },
-            "uWuikaYG5EFb.mix": {
+            "03-获取LM35温度.mix": {
                 "__file__": true,
                 "__name__": "03-获取LM35温度.mix"
             },
-            "uJJlma8h9D9q.mix": {
+            "04-获取DS18B20温度.mix": {
                 "__file__": true,
                 "__name__": "04-获取DS18B20温度.mix"
             },
-            "MivLnGE7wu5B.mix": {
+            "05-获取BME280参数.mix": {
                 "__file__": true,
                 "__name__": "05-获取BME280参数.mix"
             },
-            "Nc5rHxFUNdH6.mix": {
+            "06-获取SHT20温湿度.mix": {
                 "__file__": true,
                 "__name__": "06-获取SHT20温湿度.mix"
             },
-            "46iQe4E-DOhi.mix": {
+            "07-BMLX90614红外温度测量.mix": {
                 "__file__": true,
                 "__name__": "07-BMLX90614红外温度测量.mix"
             },
-            "zv03hJZhMxHO.mix": {
+            "08-tcs34725颜色提取.mix": {
                 "__file__": true,
                 "__name__": "08-tcs34725颜色提取.mix"
             },
-            "QA8fnXR5_ndx.mix": {
+            "09-tcs230颜色提取.mix": {
                 "__file__": true,
                 "__name__": "09-tcs230颜色提取.mix"
             },
-            "gymEPeibkRzn.mix": {
+            "10-MPU6050陀螺仪.mix": {
                 "__file__": true,
                 "__name__": "10-MPU6050陀螺仪.mix"
             },
-            "ikRd_Z4OPkBN.mix": {
+            "11-MPU9250加速度传感器.mix": {
                 "__file__": true,
                 "__name__": "11-MPU9250加速度传感器.mix"
             },
             "__file__": false,
             "__name__": "10-传感器"
         },
-        "r0LXb-VZvIEO": {
-            "GsEhMzFO_q9c.mix": {
+        "13-通信": {
+            "01-红外数据接收.mix": {
                 "__file__": true,
                 "__name__": "01-红外数据接收.mix"
             },
-            "qlbRrTgiyu3W.mix": {
+            "02-红外数据发送.mix": {
                 "__file__": true,
                 "__name__": "02-红外数据发送.mix"
             },
-            "vJT_gXYcZgHT.mix": {
+            "03-红外数据模拟收发.mix": {
                 "__file__": true,
                 "__name__": "03-红外数据模拟收发.mix"
             },
             "__file__": false,
             "__name__": "13-通信"
         },
-        "Vg3zj7Pk-gkc": {
-            "feckGQcBVn-A.mix": {
+        "14-存储": {
+            "01-SD卡读写测试.mix": {
                 "__file__": true,
                 "__name__": "01-SD卡读写测试.mix"
             },
-            "gRmiLcS3fwr-.mix": {
+            "02-EEPROM掉电存储.mix": {
                 "__file__": true,
                 "__name__": "02-EEPROM掉电存储.mix"
             },
@@ -1235,149 +1235,149 @@
         "__file__": false,
         "__name__": "Mixly2.0简明教程"
     },
-    "oKteXz3xeIWa": {
-        "ddza7_FJbQse": {
-            "VbERBlAzQVKa.mix": {
+    "教材范例": {
+        "创意电子": {
+            "03按钮指示灯_buttonindator_2.mix": {
                 "__file__": true,
                 "__name__": "03按钮指示灯_buttonindator_2.mix"
             },
-            "xfGPZPUEQ35A.mix": {
+            "03按钮指示灯_flashinglight_2.mix": {
                 "__file__": true,
                 "__name__": "03按钮指示灯_flashinglight_2.mix"
             },
-            "sdHrRixG66Ks.mix": {
+            "04渐变灯_buttonindator_3.mix": {
                 "__file__": true,
                 "__name__": "04渐变灯_buttonindator_3.mix"
             },
-            "3Yh0PaVvBoql.mix": {
+            "04渐变灯_gradientlamp_1.mix": {
                 "__file__": true,
                 "__name__": "04渐变灯_gradientlamp_1.mix"
             },
-            "nIYmSMgvHYLh.mix": {
+            "05反应测试_gradientlamp_2.mix": {
                 "__file__": true,
                 "__name__": "05反应测试_gradientlamp_2.mix"
             },
-            "3WJagauftNaN.mix": {
+            "05反应测试_reactiontest_2.mix": {
                 "__file__": true,
                 "__name__": "05反应测试_reactiontest_2.mix"
             },
-            "51Tfm_6rpMR_.mix": {
+            "06遥控灯_remotecontrollight_2.mix": {
                 "__file__": true,
                 "__name__": "06遥控灯_remotecontrollight_2.mix"
             },
-            "8EVJikjkMqca.mix": {
+            "07遥控门锁_keylessentry_1.mix": {
                 "__file__": true,
                 "__name__": "07遥控门锁_keylessentry_1.mix"
             },
-            "Q4QM3qiNFwoA.mix": {
+            "07遥控门锁_keylessentry_2.mix": {
                 "__file__": true,
                 "__name__": "07遥控门锁_keylessentry_2.mix"
             },
-            "0j5Rbk_U04um.mix": {
+            "08温度指示器_temperatureindator_1.mix": {
                 "__file__": true,
                 "__name__": "08温度指示器_temperatureindator_1.mix"
             },
-            "bTJwaTnIRdkG.mix": {
+            "08温度指示器_temperatureindator_2.mix": {
                 "__file__": true,
                 "__name__": "08温度指示器_temperatureindator_2.mix"
             },
-            "amNANW1Otrks.mix": {
+            "09报警器_alarm_1.mix": {
                 "__file__": true,
                 "__name__": "09报警器_alarm_1.mix"
             },
-            "NhgmfpPqLudS.mix": {
+            "09报警器_alarm_2.mix": {
                 "__file__": true,
                 "__name__": "09报警器_alarm_2.mix"
             },
-            "Isgfk7bQWakx.mix": {
+            "09报警器_lib_alarm_lib2.mix": {
                 "__file__": true,
                 "__name__": "09报警器_lib_alarm_lib2.mix"
             },
-            "nh4BDjFC7NVJ.mix": {
+            "10可调报警器_adjustablealarm_1.mix": {
                 "__file__": true,
                 "__name__": "10可调报警器_adjustablealarm_1.mix"
             },
-            "K64dwVPj8ANF.mix": {
+            "10可调报警器_adjustablealarm_2.mix": {
                 "__file__": true,
                 "__name__": "10可调报警器_adjustablealarm_2.mix"
             },
-            "UUney3DMWLzK.mix": {
+            "10可调报警器_lib_adjustablealarm_lib2.mix": {
                 "__file__": true,
                 "__name__": "10可调报警器_lib_adjustablealarm_lib2.mix"
             },
-            "UNinMG38cdZz.mix": {
+            "11倒车雷达_reversingradar_1.mix": {
                 "__file__": true,
                 "__name__": "11倒车雷达_reversingradar_1.mix"
             },
-            "rtbEJnT1mE1J.mix": {
+            "11倒车雷达_reversingradar_2.mix": {
                 "__file__": true,
                 "__name__": "11倒车雷达_reversingradar_2.mix"
             },
-            "5M7j9mhJ4PvT.mix": {
+            "12计时器_timer_1.mix": {
                 "__file__": true,
                 "__name__": "12计时器_timer_1.mix"
             },
-            "vM3m-CD5UQi9.mix": {
+            "12计时器_timer_2.mix": {
                 "__file__": true,
                 "__name__": "12计时器_timer_2.mix"
             },
-            "xFDLH7q5Hr95.mix": {
+            "1闪烁灯_1 flashing light.mix": {
                 "__file__": true,
                 "__name__": "1闪烁灯_1 flashing light.mix"
             },
-            "jlQJIviOk1g-.mix": {
+            "2闪烁灯_2 flashing lights.mix": {
                 "__file__": true,
                 "__name__": "2闪烁灯_2 flashing lights.mix"
             },
             "__file__": false,
             "__name__": "创意电子"
         },
-        "iL9vTAmPQNDs": {
-            "8EbfGN6MjrDY.mix": {
+        "智能机器": {
+            "“保卫”消防通道_Secure Fire Passage.mix": {
                 "__file__": true,
                 "__name__": "“保卫”消防通道_Secure Fire Passage.mix"
             },
-            "7zRjVGW73NUA.mix": {
+            "你抢我答_You rob me to answer.mix": {
                 "__file__": true,
                 "__name__": "你抢我答_You rob me to answer.mix"
             },
-            "CgZAS9tpEN6M.mix": {
+            "噪声监控_Noise monitoring.mix": {
                 "__file__": true,
                 "__name__": "噪声监控_Noise monitoring.mix"
             },
-            "oOjE8d-FBBWj.mix": {
+            "图书消毒柜_Book disinfection cabinet.mix": {
                 "__file__": true,
                 "__name__": "图书消毒柜_Book disinfection cabinet.mix"
             },
-            "yLXF1UPVdqQd.mix": {
+            "太阳能发电机_Solar generator.mix": {
                 "__file__": true,
                 "__name__": "太阳能发电机_Solar generator.mix"
             },
-            "4pi7CZhDTKtl.mix": {
+            "彩色手电筒_Color flashlight.mix": {
                 "__file__": true,
                 "__name__": "彩色手电筒_Color flashlight.mix"
             },
-            "Ko3F4ypU9PF4.mix": {
+            "无人驾驶_unmanned.mix": {
                 "__file__": true,
                 "__name__": "无人驾驶_unmanned.mix"
             },
-            "6bYviIZmOjDv.mix": {
+            "智能停车场_Smart parking.mix": {
                 "__file__": true,
                 "__name__": "智能停车场_Smart parking.mix"
             },
-            "vr-cyHfPjgMj.mix": {
+            "眼疾手快_Eye disease hand fast.mix": {
                 "__file__": true,
                 "__name__": "眼疾手快_Eye disease hand fast.mix"
             },
-            "lIgMY8sAKf0P.mix": {
+            "瞄准狐狸_Aiming at the fox.mix": {
                 "__file__": true,
                 "__name__": "瞄准狐狸_Aiming at the fox.mix"
             },
-            "P8lK2at5LSIg.mix": {
+            "节电风扇_Power-saving fan.mix": {
                 "__file__": true,
                 "__name__": "节电风扇_Power-saving fan.mix"
             },
-            "1iJji3BCSKN6.mix": {
+            "超市储物箱_Supermarket storage box.mix": {
                 "__file__": true,
                 "__name__": "超市储物箱_Supermarket storage box.mix"
             },
