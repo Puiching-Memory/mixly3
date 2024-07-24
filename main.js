@@ -244,7 +244,7 @@ function createWindow(filePath = null, indexUrl = null) {
 
     win.on('unresponsive', async () => {
         const { response } = await dialog.showMessageBox({
-            message: 'Mixly2.0无响应',
+            message: 'Mixly3.0无响应',
             title: '您想尝试强制重新加载应用程序吗？',
             buttons: ['确定', '取消'],
             cancelId: 1
