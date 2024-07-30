@@ -23,12 +23,12 @@ let cloudSoftwareJson = null;
 const usbDetection = require('usb-detection');
 
 usbDetection.startMonitoring();
-usbDetection.on('change', (device) => {
+usbDetection.on('add', (device) => {
     setTimeout(() => {
         sendCommand({
             obj: 'Mixly.Electron.Serial',
             func: 'refreshPorts',
-            args: []
+            args: [device]
         });
     }, 1000);
 });
@@ -38,7 +38,7 @@ usbDetection.on('remove', (device) => {
         sendCommand({
             obj: 'Mixly.Electron.Serial',
             func: 'refreshPorts',
-            args: []
+            args: [device]
         });
     }, 1000);
 });
