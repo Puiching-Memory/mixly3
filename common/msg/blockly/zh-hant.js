@@ -3138,6 +3138,7 @@ ZhHant.MIXGO_CAR_KEEP_FORWARD = '持續向前';
 ZhHant.MIXGO_CAR_KEEP_BACK = '持續後退';
 ZhHant.MIXGO_CAR_KEEP_LEFT = '持續左轉';
 ZhHant.MIXGO_CAR_KEEP_RIGHT = '持續右轉';
+ZhHant.MIXLY_DewPoint = '結露點';
 ZhHant.MIXLY_LIVE_WEATHER = '天氣實況';
 ZhHant.MIXLY_3_DAY_WEATHER_FORECAST = '3天天氣預報';
 ZhHant.MIXLY_6_LIFE_INDEXES = '6項生活指數';
