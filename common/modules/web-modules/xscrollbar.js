@@ -9,8 +9,8 @@
 class XScrollbar {
   constructor(dom, options) {
     // 移动端检测
-    this.isMobile = window.navigator.userAgent.toLowerCase().indexOf('mobile') != -1;
-    if (this.isMobile) return;
+    // this.isMobile = window.navigator.userAgent.toLowerCase().indexOf('mobile') != -1;
+    // if (this.isMobile) return;
 
     this.$dom = dom;
     if (this.$dom.classList.contains('x-scrollbar')) return;
