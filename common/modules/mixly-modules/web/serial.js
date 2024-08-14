@@ -87,17 +87,17 @@ class WebSerial extends Serial {
         }
 
         this.addEventsListener = function () {
-            navigator.serial.addEventListener('connect', (event) => {
+            navigator?.serial?.addEventListener('connect', (event) => {
                 this.addPort(event.target);
                 this.refreshPorts();
             });
 
-            navigator.serial.addEventListener('disconnect', (event) => {
+            navigator?.serial?.addEventListener('disconnect', (event) => {
                 this.removePort(event.target);
                 this.refreshPorts();
             });
         }
-        navigator.serial.getPorts().then((serialports) => {
+        navigator?.serial?.getPorts().then((serialports) => {
             for (let serialport of serialports) {
                 this.addPort(serialport);
             }
