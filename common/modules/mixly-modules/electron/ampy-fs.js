@@ -130,7 +130,7 @@ class AmpyFS extends FS {
         let stdout = [], error = null;
         try {
             const output = await this.#ampy_.ls(this.#port_, this.#baud_, folderPath);
-            const dirs = Array.from(output.stdout.split('\r\n'));
+            const dirs = Array.from(new Set(output.stdout.split('\r\n')));
             for (let i in dirs) {
                 if (!dirs[i]) {
                     continue;

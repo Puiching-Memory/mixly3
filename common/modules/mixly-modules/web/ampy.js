@@ -4,13 +4,19 @@ goog.require('path');
 goog.require('Mustache');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
+goog.require('Mixly.Ampy');
 goog.require('Mixly.Web');
 goog.provide('Mixly.Web.Ampy');
 
-const { Env, Msg, Web } = Mixly;
+const {
+    Env,
+    Msg,
+    Ampy,
+    Web
+} = Mixly;
 
 
-class Ampy {
+class AmpyExt extends Ampy {
     static {
         this.LS = goog.get(path.join(Env.templatePath, 'python/ls.py'));
         this.LS_RECURSIVE = goog.get(path.join(Env.templatePath, 'python/ls-recursive.py'));
@@ -28,6 +34,7 @@ class Ampy {
     #writeBuffer_ = false;
     #active_ = false;
     constructor(device) {
+        super();
         this.#device_ = device;
         this.#addEventsListener_();
     }
@@ -41,17 +48,6 @@ class Ampy {
                 this.#receiveTemp_.push(line + char);
             }
         });
-    }
-
-    #unhexlify_(hexString) {
-        if (hexString.length % 2 !== 0) {
-            hexString = hexString + '0';
-        }
-        let bytes = [];
-        for (let c = 0; c < hexString.length; c += 2) {
-            bytes.push(parseInt(hexString.substr(c, 2), 16));
-        }
-        return new Uint8Array(bytes);
     }
 
     isActive() {
@@ -186,7 +182,7 @@ class Ampy {
         if (!this.isActive()) {
             throw new Error('串口未打开');
         }
-        const code = Mustache.render(Ampy.GET, {
+        const code = Mustache.render(AmpyExt.GET, {
             path: filename
         });
         await this.exec(code);
@@ -197,7 +193,7 @@ class Ampy {
         let str = await this.readUntil('>', false, timeout);
         str = str.replace('\x04\x04', '');
         if (str.indexOf('OSError') === -1) {
-            str = this.#device_.decode(this.#unhexlify_(str));
+            str = this.#device_.decode(this.unhexlify(str));
             return str;
         }
         return false;
@@ -232,15 +228,15 @@ class Ampy {
         }
         let code = '';
         if (longFormat) {
-            code = Mustache.render(Ampy.LS_LONG_FORMAT, {
+            code = Mustache.render(AmpyExt.LS_LONG_FORMAT, {
                 path: directory
             });
         } else if (recursive) {
-            code = Mustache.render(Ampy.LS_RECURSIVE, {
+            code = Mustache.render(AmpyExt.LS_RECURSIVE, {
                 path: directory
             });
         } else {
-            code = Mustache.render(Ampy.LS, {
+            code = Mustache.render(AmpyExt.LS, {
                 path: directory
             });
         }
@@ -262,7 +258,7 @@ class Ampy {
         if (!this.isActive()) {
             throw new Error('串口未打开');
         }
-        const code = Mustache.render(Ampy.MKDIR, {
+        const code = Mustache.render(AmpyExt.MKDIR, {
             path: directory
         });
         await this.exec(code);
@@ -281,7 +277,7 @@ class Ampy {
         if (!this.isActive()) {
             throw new Error('串口未打开');
         }
-        const code = Mustache.render(Ampy.MKFILE, {
+        const code = Mustache.render(AmpyExt.MKFILE, {
             path: file
         });
         await this.exec(code);
@@ -300,7 +296,7 @@ class Ampy {
         if (!this.isActive()) {
             throw new Error('串口未打开');
         }
-        const code = Mustache.render(Ampy.RENAME, {
+        const code = Mustache.render(AmpyExt.RENAME, {
             oldPath: oldname,
             newPath: newname
         });
@@ -320,7 +316,7 @@ class Ampy {
         if (!this.isActive()) {
             throw new Error('串口未打开');
         }
-        const code = Mustache.render(Ampy.RM, {
+        const code = Mustache.render(AmpyExt.RM, {
             path: filename
         });
         await this.exec(code);
@@ -339,7 +335,7 @@ class Ampy {
         if (!this.isActive()) {
             throw new Error('串口未打开');
         }
-        const code = Mustache.render(Ampy.RMDIR, {
+        const code = Mustache.render(AmpyExt.RMDIR, {
             path: directory
         });
         await this.exec(code);
@@ -365,6 +361,6 @@ class Ampy {
     }
 }
 
-Web.Ampy = Ampy;
+Web.Ampy = AmpyExt;
 
 });

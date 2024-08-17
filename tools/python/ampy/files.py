@@ -170,7 +170,10 @@ class Files(object):
                         dirs = sorted([directory + '/' + f for f in os.listdir(directory)])
 
                     for dir in dirs:
-                        output.append([dir, check_path(dir)])
+                        info = check_path(dir)
+                        if info == 'none':
+                            continue
+                        output.append([dir, info])
                     return output\n"""
 
         # Execute os.listdir() command on the board.

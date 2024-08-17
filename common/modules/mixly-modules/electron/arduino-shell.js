@@ -329,12 +329,10 @@ ArduShell.upload = (boardType, port) => {
     }
     ArduShell.runCmd(layerNum, 'upload', cmdStr,
         function () {
-            setTimeout(() => {
-                mainStatusBarTabs.add('serial', port);
-                mainStatusBarTabs.changeTo(port);
-                const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
-                statusBarSerial.open();
-            }, 1000);
+            mainStatusBarTabs.add('serial', port);
+            mainStatusBarTabs.changeTo(port);
+            const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
+            statusBarSerial.open();
         }
     );
 }

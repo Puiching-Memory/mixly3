@@ -1529,6 +1529,7 @@
             "Mustache",
             "Mixly.Env",
             "Mixly.Msg",
+            "Mixly.Ampy",
             "Mixly.Web"
         ],
         "provide": [

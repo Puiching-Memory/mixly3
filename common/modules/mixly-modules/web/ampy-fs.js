@@ -170,7 +170,7 @@ class AmpyFS extends FS {
     }
 
     async readDirectory(folderPath) {
-        let stdout = '', error = null, ampy = null;
+        let stdout = [], error = null, ampy = null;
         try {
             ampy = await this.getAmpy();
             await ampy.enter();
