@@ -23,6 +23,7 @@ class AmpyFS extends FS {
     #ampy_ = null;
     #port_ = '';
     #baud_ = 115200;
+    #decoder_ = new TextDecoder('utf8');
 
     constructor() {
         super();
@@ -58,7 +59,7 @@ class AmpyFS extends FS {
         try {
             const output = await this.#ampy_.get(this.#port_, this.#baud_, filePath);
             stdout = output.stdout;
-            stdout = stdout.replaceAll('\r\r', '\r');
+            stdout = this.#decoder_.decode(this.#ampy_.unhexlify(stdout));
         } catch (e) {
             error = e;
             Debug.error(error);

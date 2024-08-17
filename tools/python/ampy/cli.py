@@ -25,7 +25,7 @@ import platform
 import posixpath
 import re
 import serial.serialutil
-
+import binascii
 import click
 import dotenv
 
@@ -157,9 +157,11 @@ def get(remote_file, local_file):
     contents = board_files.get(remote_file)
     # Print the file out if no local file was provided, otherwise save it.
     if local_file is None:
-        print(contents.decode("utf-8"))
+        contents = str(contents)[2:-1]
+        print(contents, end='')
     else:
-        local_file.write(contents)
+        value = binascii.unhexlify(contents)
+        local_file.write(value.decode("utf-8"))
 
 
 @cli.command()

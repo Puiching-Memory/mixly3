@@ -21,7 +21,6 @@
 # SOFTWARE.
 import ast
 import textwrap
-import binascii
 import sys
 
 from pyboard import PyboardError
@@ -84,7 +83,7 @@ class Files(object):
             except UnicodeDecodeError:
                 raise ex
         self._pyboard.exit_raw_repl()
-        return binascii.unhexlify(out)
+        return out
 
     def ls(self, directory="/", long_format=True, recursive=False, exit_repl=True):
         """List the contents of the specified directory (or root if none is

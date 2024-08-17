@@ -41,6 +41,7 @@ class AmpyExt extends Ampy {
             ampy: this.AMPY_PATH
         });
     }
+
     #exec_ = util.promisify(child_process.exec);
 
     constructor() {
