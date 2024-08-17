@@ -244,6 +244,7 @@
     "statusbar.ampy.loadBoardFS": "载入板卡文件夹",
     "statusbar.ampy.refresh": "刷新",
     "statusbar.ampy.exit": "退出",
+    "statusbar.ampy.cannotEdit": "该文件类型不支持编辑",
     "statusbar.dropdownMenu.noOptions": "无选项",
     "statusbar.fs.newMapFolder": "新建映射目录",
     "statusbar.fs.localFolderNotExist": "本地映射目录不存在",

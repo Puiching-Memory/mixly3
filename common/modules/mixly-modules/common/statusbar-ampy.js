@@ -89,9 +89,20 @@ class StatusBarAmpy extends PageBase {
             this.openFS();
         });
 
-        this.#fileTree_.bind('selectLeaf', async (selected) => {
-            this.#fileTree_.showProgress();
+        this.#fileTree_.bind('beforeSelectLeaf', (selected) => {
             const filePath = selected[0].id;
+            const mode = this.#editor_.getFileMode(path.extname(filePath));
+            if (!mode) {
+                layer.msg(Msg.Lang['statusbar.ampy.cannotEdit'], { time: 1000 });
+                return false;
+            }
+            this.#editor_.setMode(mode);
+            return true;
+        });
+
+        this.#fileTree_.bind('afterSelectLeaf', async (selected) => {
+            const filePath = selected[0].id;
+            this.#fileTree_.showProgress();
             const fs = this.#fileTree_.getFS();
             const [error, result] = await fs.readFile(filePath);
             if (error) {
@@ -103,9 +114,6 @@ class StatusBarAmpy extends PageBase {
                 this.#editor_.scrollToTop();
                 this.#editor_.focus();
                 this.setStatus(false);
-                this.#editor_.getEditor().session.setMode(
-                    `ace/mode/${this.getLanguageByExt(path.extname(filePath))}`
-                );
             }
             this.#fileTree_.hideProgress();
         });
@@ -173,7 +181,7 @@ class StatusBarAmpy extends PageBase {
                         this.#fileTree_.refreshFolder(id);
                     } else {
                         const nodes = this.#fileTree_.getSelectedNodes();
-                        this.#fileTree_.runEvent('selectLeaf', nodes);
+                        this.#fileTree_.runEvent('afterSelectLeaf', nodes);
                     }
                 }
             }
@@ -437,38 +445,6 @@ class StatusBarAmpy extends PageBase {
             this.#$close_.removeClass('layui-bg-orange');
             this.#$close_.addClass('layui-bg-blue');
         }
-    }
-
-    getLanguageByExt(ext) {
-        let language = 'text';
-        switch(ext) {
-        case '.json':
-            language = 'json';
-            break;
-        case '.c':
-        case '.cpp':
-        case '.h':
-        case '.hpp':
-        case '.ino':
-            language = 'c_cpp';
-            break;
-        case '.js':
-            language = 'javascript';
-            break;
-        case '.py':
-            language = 'python';
-            break;
-        case '.lua':
-            language = 'lua';
-            break;
-        case '.md':
-        case '.mdx':
-            language = 'markdown';
-            break;
-        default:
-            language = 'text';
-        }
-        return language;
     }
 
     dispose() {

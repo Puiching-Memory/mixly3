@@ -130,7 +130,7 @@ class FileTree extends Component {
         });
         this.#jstree_ = this.#$fileTree_.jstree(true);
         this.addEventsType([
-            'selectLeaf', 'afterOpenNode', 'afterCloseNode', 'afterRefreshNode',
+            'beforeSelectLeaf', 'afterSelectLeaf', 'afterOpenNode', 'afterCloseNode', 'afterRefreshNode',
             'afterCreateNode', 'afterDeleteNode', 'afterRenameNode'
         ]);
         this.#addEventsListener_();
@@ -202,8 +202,14 @@ class FileTree extends Component {
             if (selected[0].id === this.#selected_) {
                 return;
             }
-            this.#selected_ = selected[0].id;
-            this.runEvent('selectLeaf', selected);
+            const result = this.runEvent('beforeSelectLeaf', selected);
+            if ((result.length && result[0]) || !result.length) {
+                this.#selected_ = selected[0].id;
+                this.runEvent('afterSelectLeaf', selected);
+            } else {
+                this.deselect(selected[0].id);
+                this.reselect();
+            }
         })
         .on('refresh.jstree', (e, data) => {
             this.runEvent('afterRefreshNode', data.node);

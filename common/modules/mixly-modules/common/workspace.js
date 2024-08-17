@@ -103,7 +103,7 @@ class Workspace extends Component {
     #addEventsListenerForFileTree_() {
         const leftSideBarLocalStorage = this.getLeftSideBarsManager().get('local_storage');
         const fileTree = leftSideBarLocalStorage.getFileTree();
-        fileTree.bind('selectLeaf', (selected) => {
+        fileTree.bind('afterSelectLeaf', (selected) => {
             const tabs = this.#editorsManager_.getTabs();
             tabs.addTab({
                 name: selected[0].text,

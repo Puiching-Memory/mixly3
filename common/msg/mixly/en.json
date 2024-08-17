@@ -244,6 +244,7 @@
     "statusbar.ampy.loadBoardFS": "Load board FS",
     "statusbar.ampy.refresh": "Refresh",
     "statusbar.ampy.exit": "Exit",
+    "statusbar.ampy.cannotEdit": "This file type does not support editing",
     "statusbar.dropdownMenu.noOptions": "No options",
     "statusbar.fs.newMapFolder": "Create a new mapping directory",
     "statusbar.fs.localFolderNotExist": "Local mapping directory does not exist",

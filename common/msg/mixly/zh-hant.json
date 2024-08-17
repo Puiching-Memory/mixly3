@@ -244,6 +244,7 @@
     "statusbar.ampy.loadBoardFS": "載入卡卡資料夾",
     "statusbar.ampy.refresh": "刷新",
     "statusbar.ampy.exit": "退出",
+    "statusbar.ampy.cannotEdit": "該文件類型不支援編輯",
     "statusbar.dropdownMenu.noOptions": "無選項",
     "statusbar.fs.newMapFolder": "新映射目錄",
     "statusbar.fs.localFolderNotExist": "本機映射目錄不存在",

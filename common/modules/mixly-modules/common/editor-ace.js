@@ -23,7 +23,8 @@ class EditorAce extends EditorBase {
     static {
         this.CTRL_BTNS = ['resetFontSize', 'increaseFontSize', 'decreaseFontSize'];
         this.CTRL_BTN_TEMPLATE = '<div m-id="{{d.mId}}" class="code-editor-btn setFontSize"></div>';
-        
+        this.MODE_MAP = goog.getJSON(path.join(Env.templatePath, 'json/ace-mode-map.json'));
+
         HTMLTemplate.add(
             'html/editor/editor-code.html',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/editor/editor-code.html')))
@@ -277,6 +278,24 @@ class EditorAce extends EditorBase {
 
     setReadOnly(status) {
         this.#editor_.setReadOnly(status);
+    }
+
+    setMode(type) {
+        this.#editor_.session.setMode(`ace/mode/${type}`);
+    }
+
+    setFileMode(extname) {
+        const mode = this.getFileMode(extname) ?? 'text';
+        this.setMode(mode);
+    }
+
+    getFileMode(extname) {
+        for (const [mode, extensions] of Object.entries(EditorAce.MODE_MAP)) {
+            if (extensions.includes(extname)) {
+                return mode;
+            }
+        }
+        return null;
     }
 
     cut() {

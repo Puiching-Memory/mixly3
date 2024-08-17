@@ -137,7 +137,7 @@ BU.burnByUSB = () => {
         const hex2Blob = new Blob([ hexStr ], { type: 'text/plain' });
         const buffer = await hex2Blob.arrayBuffer();
         if (!buffer) {
-            layer.msg(Msg.Lang['固件读取出错'], { time: 1000 });
+            layer.msg(Msg.Lang['shell.bin.readFailed'], { time: 1000 });
             return;
         }
         BU.burning = true;
