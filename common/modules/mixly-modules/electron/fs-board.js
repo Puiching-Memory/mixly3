@@ -65,9 +65,9 @@ class FSBoardExt extends FSBoard {
                     this.#shell_.exec(command)
                     .then((info) => {
                         if (info.code) {
-                            statusBarTerminal.addValue(`\n==${Msg.Lang['dushell.downloadFailed']}==\n`);
+                            statusBarTerminal.addValue(`\n==${Msg.Lang['shell.downloadFailed']}==\n`);
                         } else {
-                            statusBarTerminal.addValue(`\n==${Msg.Lang['shell.burdownloadSucc']}(${Msg.Lang['shell.timeCost']} ${info.time})==\n`);
+                            statusBarTerminal.addValue(`\n==${Msg.Lang['shell.downloadSucc']}(${Msg.Lang['shell.timeCost']} ${info.time})==\n`);
                         }
                     })
                     .catch(Debug.error)

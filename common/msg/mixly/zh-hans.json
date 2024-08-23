@@ -299,7 +299,7 @@
     "shell.burnCanceled": "已取消烧录",
     "shell.downloading": "下载中",
     "shell.downloadFailed": "下载失败",
-    "shell.burdownloadSucc": "下载成功",
+    "shell.downloadSucc": "下载成功",
     "shell.downloadCanceled": "已取消下载",
     "shell.aborting": "终止中",
     "shell.timeCost": "用时",

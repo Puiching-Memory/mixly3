@@ -299,7 +299,7 @@
     "shell.burnCanceled": "Burn canceled",
     "shell.downloading": "Download in progress",
     "shell.downloadFailed": "Download failed",
-    "shell.burdownloadSucc": "Download successful",
+    "shell.downloadSucc": "Download successful",
     "shell.downloadCanceled": "Download canceled",
     "shell.aborting": "Aborting",
     "shell.timeCost": "Time",
