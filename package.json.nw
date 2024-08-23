@@ -13,7 +13,7 @@
     "build:nw:mac:x64": "build --tasks mac-x64 --mirror https://npmmirror.com/mirrors/nwjs/ ."
   },
   "window": {
-    "icon": "files/mixly_uncompressed.ico",
+    "icon": "common/media/mixly.png",
     "position": "center"
   },
   "keywords": [
@@ -23,10 +23,10 @@
   "author": "Mixly TEAM",
   "license": "other",
   "build": {
-    "nwVersion": "0.60.0"
+    "nwVersion": "0.91.0"
   },
   "devDependencies": {
-    "nw": "0.60.0-sdk",
+    "nw": "0.91.0-sdk",
     "nwjs-builder-phoenix": "^1.15.0"
   },
   "dependencies": {
