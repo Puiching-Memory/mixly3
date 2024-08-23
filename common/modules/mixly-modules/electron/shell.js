@@ -21,6 +21,7 @@ class Shell {
     }
 
     #shell_ = null;
+    #killed_ = false;
     constructor() {}
 
     #addEventsListener_() {
@@ -60,6 +61,10 @@ class Shell {
             });
             this.#addEventsListener_();
             this.#shell_.on('close', (code) => {
+                this.#killed_ = true;
+                if (code === null) {
+                    code = 1;
+                }
                 const endTime = Number(new Date());
                 const duration = dayjs.duration(endTime - startTime).format('HH:mm:ss.SSS');
                 const info = { code, time: duration };
@@ -69,6 +74,9 @@ class Shell {
     }
 
     kill() {
+        if (this.#killed_) {
+            return;
+        }
         this.#shell_.stdin.end();
         this.#shell_.stdout.end();
         if (Env.currentPlatform === 'win32') {
