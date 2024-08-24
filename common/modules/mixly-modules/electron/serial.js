@@ -5,6 +5,7 @@ goog.require('Mixly.Serial');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Debug');
+goog.require('Mixly.MArray');
 goog.require('Mixly.Electron');
 goog.provide('Mixly.Electron.Serial');
 
@@ -22,6 +23,7 @@ const {
     Env,
     Msg,
     Debug,
+    MArray,
     Electron
 } = Mixly;
 
@@ -45,8 +47,8 @@ class ElectronSerial extends Serial {
         this.getPorts = async function () {
             return new Promise((resolve, reject) => {
                 if (Env.currentPlatform === 'linux') {
-                    child_process.exec('ls /dev/ttyACM* /dev/ttyUSB* /dev/tty*USB*', (err, stdout, stderr) => {
-                        let portsName = stdout.split('\n');
+                    child_process.exec('ls /dev/ttyACM* /dev/tty*USB*', (err, stdout, stderr) => {
+                        let portsName = MArray.unique(stdout.split('\n'));
                         let newPorts = [];
                         for (let i = 0; i < portsName.length; i++) {
                             if (!portsName[i]) {
