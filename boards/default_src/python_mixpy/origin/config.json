@@ -14,7 +14,7 @@
     "lib": {
         "mixly": {
             "url": [
-                "http://download.mixlylibs.cloud/mixly-packages/cloud-libs/python/libs.json"
+                "http://download.mixlylibs.cloud/mixly3-packages/cloud-libs/python/libs.json"
             ]
         }
     },

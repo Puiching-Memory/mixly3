@@ -49,7 +49,7 @@
     "lib": {
         "mixly": {
             "url": [
-                "http://download.mixlylibs.cloud/mixly-packages/cloud-libs/micropython_esp32c3/libs.json"
+                "http://download.mixlylibs.cloud/mixly3-packages/cloud-libs/micropython_esp32c3/libs.json"
             ]
         }
     },

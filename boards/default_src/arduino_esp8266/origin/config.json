@@ -1071,7 +1071,7 @@
     "lib": {
         "mixly": {
             "url": [
-                "http://download.mixlylibs.cloud/mixly-packages/cloud-libs/arduino_esp8266/libs.json"
+                "http://download.mixlylibs.cloud/mixly3-packages/cloud-libs/arduino_esp8266/libs.json"
             ]
         }
     },
