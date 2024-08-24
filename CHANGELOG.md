@@ -1,5 +1,61 @@
 ### 更新日志
 
+#### 3.0 rc0 2024-08-25
+
+- 修复 Arduino UNO和NANO的软件中断均无效，程序下载后测试无中断响应. [\#I8CLTQ](https://gitee.com/mixly2/mixly2.0_src/issues/I8CLTQ)
+- 修复 Arduino UNO中调用红外发射功能，管脚号不正确. [\#I8EBUM](https://gitee.com/mixly2/mixly2.0_src/issues/I8EBUM)
+- 修复 Python Robot中，超霸大师RFID错误. [\#I8JIUB](https://gitee.com/mixly2/mixly2.0_src/issues/I8JIUB)
+- 修复 Python中的算法库有加载问题. [\#I8L6Z9](https://gitee.com/mixly2/mixly2.0_src/issues/I8L6Z9)
+- 修复 Arduino ESP32C3中SD和SPIFFS说明相反. [\#I8MCAJ](https://gitee.com/mixly2/mixly2.0_src/issues/I8MCAJ)
+- 修复 英文语言下Control-Delay模块时间单位缩写混沌. [\#I8MSB3](https://gitee.com/mixly2/mixly2.0_src/issues/I8MSB3)
+- 修复 Arduino板卡下TFT屏-ST7796构建时出错. [\#I8QWPK](https://gitee.com/mixly2/mixly2.0_src/issues/I8QWPK)
+- 修复 Arduino板卡下TFT屏中的显示文本有Bug. [\#I8ZQ24](https://gitee.com/mixly2/mixly2.0_src/issues/I8ZQ24)
+- 修复 Python3程序运行错误，无错误提示. [\#IACRJ7](https://gitee.com/mixly2/mixly2.0_src/issues/IACRJ7)
+- 更新 Arduino ESP32S3添加原理图. [\#I7X9LD](https://gitee.com/mixly2/mixly2.0_src/issues/I7X9LD)
+- 更新 修改Arduino板卡中 `Serial.available() > 0` 为 `Serial.available()`. [\#I8BSZX](https://gitee.com/mixly2/mixly2.0_src/issues/I8BSZX)
+- 更新 Arduino ESP32板卡中添加擦除flash功能. [\#IAE7AY](https://gitee.com/mixly2/mixly2.0_src/issues/IAE7AY)
+- 更新 Electron更新到 `v31.2.1`，Blockly更新到 `v11.1.1`，Ace更新到 `v1.36.0`.
+- 更新 Arduino和XPython板卡添加板卡文件管理功能.
+- 重构 串口监视器和绘图器.
+- 重构 使用ES6模块化重构所有默认板卡，扩展板卡构建时可通过 `npm install [板卡名]` 来安装默认板卡，以使用已有图形化模块.
+  - `@mixly/arduino`：[**v1.6.0**](https://www.npmjs.com/package/@mixly/arduino)
+  - `@mixly/arduino-avr`: [**v1.6.0**](https://www.npmjs.com/package/@mixly/arduino-avr)
+  - `@mixly/arduino-esp8266`: [**v1.3.0**](https://www.npmjs.com/package/@mixly/arduino-esp8266)
+  - `@mixly/arduino-esp32`: [**v1.3.0**](https://www.npmjs.com/package/@mixly/arduino-esp32)
+  - `@mixly/micropython`: [**v1.3.0**](https://www.npmjs.com/package/@mixly/micropython)
+  - `@mixly/micropython-esp32`: [**v1.3.0**](https://www.npmjs.com/package/@mixly/micropython-esp32)
+  - `@mixly/micropython-esp32c2`: [**v1.4.0**](https://www.npmjs.com/package/@mixly/micropython-esp32c2)
+  - `@mixly/micropython-esp32c3`: [**v1.3.0**](https://www.npmjs.com/package/@mixly/micropython-esp32c3)
+  - `@mixly/micropython-esp32s2`: [**v1.5.0**](https://www.npmjs.com/package/@mixly/micropython-esp32s2)
+  - `@mixly/micropython-esp32s3`: [**v1.3.0**](https://www.npmjs.com/package/@mixly/micropython-esp32s3)
+  - `@mixly/micropython-robot`: [**v1.2.0**](https://www.npmjs.com/package/@mixly/micropython-robot)
+  - `@mixly/micropython-k210-mixgoai`: [**v1.3.0**](https://www.npmjs.com/package/@mixly/micropython-k210-mixgoai)
+  - `@mixly/micropython-nrf51822-microbit`: [**v1.3.0**](https://www.npmjs.com/package/@mixly/micropython-nrf51822-microbit)
+  - `@mixly/micropython-nrf51822-mithoncc`: [**v1.2.0**](https://www.npmjs.com/package/@mixly/micropython-nrf51822-mithoncc)
+  - `@mixly/python`: [**v1.1.0**](https://www.npmjs.com/package/@mixly/python)
+  - `@mixly/python-mixpy`: [**v1.2.0**](https://www.npmjs.com/package/@mixly/python-mixpy)
+  - `@mixly/python-skulpt`: [**v1.2.0**](https://www.npmjs.com/package/@mixly/python-skulpt)
+  - `@mixly/python-skulpt-car`: [**v1.1.0**](https://www.npmjs.com/package/@mixly/python-skulpt-car)
+  - `@mixly/python-skulpt-mixtoy`: [**v1.1.0**](https://www.npmjs.com/package/@mixly/python-skulpt-mixtoy)
+- 重构 使用第三板卡和第三方库模板重构云端板卡和云端库 (部分)，持续进行中...
+  - `QDPK210 AIstart`：[**mixly-board-micropython-k210-aistart**](https://gitee.com/mixly2-package/mixly-board-micropython-k210-aistart)
+  - `Teaile AIBIT`：[**mixly-board-micropython-k210-aibit**](https://gitee.com/mixly2-package/mixly-board-micropython-k210-aibit)
+  - `Teaile ESP32`：[**mixly-board-micropython-esp32-acbit**](https://gitee.com/mixly2-package/mixly-board-micropython-esp32-acbit)
+  - `TCTM KZB01`：[**mixly-board-micropython-esp32-tctm**](https://gitee.com/mixly2-package/mixly-board-micropython-esp32-tctm)
+  - `Arduino UNO R4`：[**mixly-board-arduino-unor4**](https://gitee.com/mixly2-package/mixly-board-arduino-unor4)
+  - `Arduino RP2040`：[**mixly-board-arduino-rp2040**](https://gitee.com/mixly2-package/mixly-board-arduino-rp2040)
+  - `Nulllab LGT328P`：[**mixly-board-nulllab-avr**](https://gitee.com/mixly2-package/mixly-board-nulllab-avr)
+  - `Arduino STM32`：[**mixly-board-arduino-stm32**](https://gitee.com/mixly2-package/mixly-board-arduino-stm32)
+  - `Bemfa`：[**mixly-lib-bemfa**](https://gitee.com/mixly2-package/mixly-lib-bemfa)
+  - `YFRobot`：[**mixly-lib-yfrobot**](https://gitee.com/mixly2-package/mixly-lib-yfrobot)
+  - `FileSystem`：[**mixly-lib-arduino-fs**](https://gitee.com/mixly2-package/mixly-lib-arduino-fs)
+  - `BlockBuildTool`：[**mixly-lib-block-build-tool**](https://gitee.com/mixly2-package/mixly-lib-block-build-tool)
+- 开发 一些新的扩展板卡正在开发中...
+  - `Arduino CH55X`：[**mixly-board-arduino-ch55x**](https://gitee.com/mixly2-package/mixly-board-arduino-ch55x)
+  - `C STC`：[**mixly-board-c-stcxx**](https://gitee.com/mixly2-package/mixly-board-c-stcxx)
+  - `Lua xt804`：[**mixly-board-lua-xt804**](https://gitee.com/mixly2-package/mixly-board-lua-xt804)
+  - `Web Python3`：[**mixly-board-web-python3**](https://gitee.com/mixly2-package/mixly-board-web-python3)
+
 #### 2.0 rc4 2023-08-06
 
 - 修复 Arduino ESP32C3 板载 WS2812 RGB灯编译出错. [\#I5P20N](https://gitee.com/mixly2/mixly2.0_src/issues/I5P20N)
