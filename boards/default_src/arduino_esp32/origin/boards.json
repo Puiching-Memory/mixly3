@@ -5,25 +5,6 @@
         "key": "esp32:esp32:esp32",
         "config": [
             {
-                "key": "JTAGAdapter",
-                "label": "JTAG Adapter",
-                "messageId": "ESP32_CONFIG_MESSAGE_JTAG_ADAPTER",
-                "options": [
-                    {
-                        "key": "default",
-                        "label": "Disabled"
-                    },
-                    {
-                        "key": "external",
-                        "label": "FTDI Adapter"
-                    },
-                    {
-                        "key": "bridge",
-                        "label": "ESP USB Bridge"
-                    }
-                ]
-            },
-            {
                 "key": "PSRAM",
                 "label": "PSRAM",
                 "messageId": "ESP32_CONFIG_MESSAGE_PSRAM",
@@ -1277,29 +1258,6 @@
         "key": "esp32:esp32:esp32c3",
         "config": [
             {
-                "key": "JTAGAdapter",
-                "label": "JTAG Adapter",
-                "messageId": "ESP32_CONFIG_MESSAGE_JTAG_ADAPTER",
-                "options": [
-                    {
-                        "key": "default",
-                        "label": "Disabled"
-                    },
-                    {
-                        "key": "builtin",
-                        "label": "Integrated USB JTAG"
-                    },
-                    {
-                        "key": "external",
-                        "label": "FTDI Adapter"
-                    },
-                    {
-                        "key": "bridge",
-                        "label": "ESP USB Bridge"
-                    }
-                ]
-            },
-            {
                 "key": "CDCOnBoot",
                 "label": "USB CDC On Boot",
                 "messageId": "ESP32_CONFIG_MESSAGE_USB_CDC_ON_BOOT",
@@ -1876,25 +1834,6 @@
         "key": "esp32:esp32:esp32s2",
         "config": [
             {
-                "key": "JTAGAdapter",
-                "label": "JTAG Adapter",
-                "messageId": "ESP32_CONFIG_MESSAGE_JTAG_ADAPTER",
-                "options": [
-                    {
-                        "key": "default",
-                        "label": "Disabled"
-                    },
-                    {
-                        "key": "external",
-                        "label": "FTDI Adapter"
-                    },
-                    {
-                        "key": "bridge",
-                        "label": "ESP USB Bridge"
-                    }
-                ]
-            },
-            {
                 "key": "CDCOnBoot",
                 "label": "USB CDC On Boot",
                 "messageId": "ESP32_CONFIG_MESSAGE_USB_CDC_ON_BOOT",
@@ -2202,29 +2141,6 @@
         "xmlPath": "./xml/esp32.xml",
         "key": "esp32:esp32:esp32s3",
         "config": [
-            {
-                "key": "JTAGAdapter",
-                "label": "JTAG Adapter",
-                "messageId": "ESP32_CONFIG_MESSAGE_JTAG_ADAPTER",
-                "options": [
-                    {
-                        "key": "default",
-                        "label": "Disabled"
-                    },
-                    {
-                        "key": "builtin",
-                        "label": "Integrated USB JTAG"
-                    },
-                    {
-                        "key": "external",
-                        "label": "FTDI Adapter"
-                    },
-                    {
-                        "key": "bridge",
-                        "label": "ESP USB Bridge"
-                    }
-                ]
-            },
             {
                 "key": "PSRAM",
                 "label": "PSRAM",
