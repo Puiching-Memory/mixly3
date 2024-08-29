@@ -139,9 +139,9 @@ export const mini_g2_rfid_status = {
             .appendField("RFID");
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_RFID_SCAN_OK, "0"],
-                [Blockly.Msg.MIXLY_RFID_SCAN_NOTAGERR, "1"],
-                [Blockly.Msg.MIXLY_RFID_SCAN_ERROR, "2"]
+                [Blockly.Msg.MIXLY_RFID_SCAN_OK, "True"],
+                [Blockly.Msg.MIXLY_RFID_SCAN_NOTAGERR, "None"],
+                [Blockly.Msg.MIXLY_RFID_SCAN_ERROR, "False"]
             ]), "key");
         this.setOutput(true, Number);
         this.setInputsInline(true);
