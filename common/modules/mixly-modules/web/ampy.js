@@ -5,6 +5,7 @@ goog.require('Mustache');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Ampy');
+goog.require('Mixly.Config');
 goog.require('Mixly.Web');
 goog.provide('Mixly.Web.Ampy');
 
@@ -12,6 +13,7 @@ const {
     Env,
     Msg,
     Ampy,
+    Config,
     Web
 } = Mixly;
 
@@ -54,7 +56,7 @@ class AmpyExt extends Ampy {
         return this.#active_;
     }
 
-    async readUntil(ending, withEnding = true, timeout = 1000) {
+    async readUntil(ending, withEnding = true, timeout = 5000) {
         const startTime = Number(new Date());
         let nowTime = startTime;
         let readStr = '';
@@ -152,8 +154,17 @@ class AmpyExt extends Ampy {
         if (this.isActive()) {
             return;
         }
+        this.#active_ = true;
         await this.#device_.open(115200);
-        await this.#device_.sleep(1000);
+        await this.#device_.sleep(500);
+        const { SELECTED_BOARD } = Config;
+        if (SELECTED_BOARD?.serial
+            && SELECTED_BOARD.serial?.dtr !== undefined
+            && SELECTED_BOARD.serial?.rts !== undefined) {
+            const { dtr, rts } = SELECTED_BOARD.serial;
+            await this.#device_.setDTRAndRTS(dtr, rts);
+        }
+        await this.#device_.sleep(500);
         await this.#device_.sendBuffer([2]);
         if (!await this.interrupt()) {
             throw new Error(Msg.Lang['ampy.interruptFailed']);
@@ -161,7 +172,6 @@ class AmpyExt extends Ampy {
         if (!await this.enterRawREPL()) {
             throw new Error(Msg.Lang['ampy.enterRawREPLFailed']);
         }
-        this.#active_ = true;
     }
 
     async exit() {

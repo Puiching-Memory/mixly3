@@ -1531,6 +1531,7 @@
             "Mixly.Env",
             "Mixly.Msg",
             "Mixly.Ampy",
+            "Mixly.Config",
             "Mixly.Web"
         ],
         "provide": [
