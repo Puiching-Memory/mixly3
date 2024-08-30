@@ -302,6 +302,7 @@ BU.burnWithEsptool = async () => {
                 }
             });
             try {
+                await esploader.eraseFlash();
                 await esploader.writeFlash(flashOptions);
                 layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
                 statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
