@@ -123,6 +123,59 @@ export const network_wifi_connect = {
     }
 };
 
+export const urequests_wifi_connect = {
+    init: function () {
+        this.setColour(NETWORK_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_ESP32_UREQUESTS_CONNECT_WIFI);
+        this.appendValueInput('WIFINAME')
+            .setCheck(String)
+            .appendField(Blockly.Msg.HTML_NAME);
+        this.appendValueInput('PASSWORD')
+            .setCheck(String)
+            .appendField(Blockly.Msg.HTML_PASSWORD);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_IOT_WIFI_CONNECT_TOOLTIP);
+    }
+};
+
+export const urequests_wifi_url = {
+    init: function () {
+        this.setColour(NETWORK_HUE);
+        this.appendValueInput('URL')
+            .setCheck(String)
+            .appendField('URL');
+        this.setInputsInline(true);
+        this.setOutput(true);
+        this.setTooltip(Blockly.Msg.MIXLY_UREQUESTS_URL_TOOLTIP);
+    }
+};
+
+export const urequests_connect_url = {
+    init: function () {
+        this.setColour(NETWORK_HUE);
+        this.appendValueInput('url')
+            .appendField(Blockly.Msg.MIXLY_ESP32_CONNECT_URL_TOOLTIP);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_UREQUESTS_URL_TOOLTIP);
+    }
+};
+
+export const urequests_response = {
+    init: function () {
+        this.setColour(NETWORK_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_ESP32_URL_REPONSE);
+        this.setInputsInline(true);
+        this.setOutput(true);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_URL_REPONSE_TOOLTIP);
+    }
+};
+
 export const network_get_connect = {
     init: function () {
         this.setColour(NETWORK_HUE);

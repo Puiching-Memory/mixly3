@@ -229,3 +229,30 @@ export const ntptime_address = function (_, generator) {
     var code = "'" + this.getFieldValue('op') + "'";
     return [code, generator.ORDER_ATOMIC];
 }
+
+export const urequests_wifi_connect = function (_, generator) {
+    generator.definitions_['import_urequests'] = "import urequests";
+    var username = generator.valueToCode(this, 'WIFINAME', generator.ORDER_ATOMIC);
+    var password = generator.valueToCode(this, 'PASSWORD', generator.ORDER_ATOMIC);
+    var code = 'wifi.connect(' + username + ',' + password + ')\n';
+    return code;
+}
+
+export const urequests_wifi_url = function (_, generator) {
+    generator.definitions_['import_urequests'] = "import urequests";
+    var url = generator.valueToCode(this, 'URL', generator.ORDER_ATOMIC);
+    var code = url;
+    return [code,generator.ORDER_ATOMIC];
+}
+
+export const urequests_connect_url = function (_, generator) {
+    generator.definitions_['import_urequests'] = "import urequests";
+    var url = generator.valueToCode(this, 'url', generator.ORDER_ATOMIC);
+    return 'response=urequests.get('+url+')\n';
+}
+
+export const urequests_response = function (_, generator) {
+    generator.definitions_['import_urequests'] = "import urequests";
+    var code = 'res=response.text';
+    return [code,generator.ORDER_ATOMIC];
+}
