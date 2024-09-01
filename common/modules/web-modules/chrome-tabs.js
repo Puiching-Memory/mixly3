@@ -68,8 +68,18 @@
       instanceId += 1
 
       this.setupCustomProperties()
-      // this.setupStyleEl()
-      this.setupEvents()
+      $(this.el).on('click', '.chrome-tab', (event) => {
+        this.setCurrentTab(event.currentTarget)
+      })
+
+      $(this.el).on('click', '.chrome-tab-close', (event) => {
+        event.stopPropagation()
+        const $tab = $(event.currentTarget).closest('.chrome-tab')
+        if (!this.checkDestroy({ detail: { tabEl: $tab[0] } })) {
+          return
+        }
+        this.removeTab($tab[0])
+      })
     }
 
     emit(eventName, data) {
@@ -83,18 +93,6 @@
     setupStyleEl() {
       this.styleEl = document.createElement('style')
       this.el.appendChild(this.styleEl)
-    }
-
-    setupEvents() {
-      /*this.el.addEventListener('dblclick', event => {
-        if ([this.el, this.tabContentEl].includes(event.target)) this.addTab()
-      })*/
-
-      this.tabEls.forEach((tabEl) => this.setTabCloseEventListener(tabEl))
-    }
-
-    get tabEls() {
-      return Array.prototype.slice.call(this.el.querySelectorAll('.chrome-tab'))
     }
 
     get tabContentEl() {
@@ -117,28 +115,10 @@
 
       tabProperties = Object.assign({}, defaultTapProperties, tabProperties)
       this.tabContentEl.appendChild(tabEl)
-      this.setTabClickEventListener(tabEl)
-      this.setTabCloseEventListener(tabEl)
       this.updateTab(tabEl, tabProperties)
       this.emit('created', { tabEl })
       if (!background) this.setCurrentTab(tabEl)
       return tabEl;
-    }
-
-    setTabClickEventListener(tabEl) {
-      tabEl.addEventListener('click', event => {
-        this.setCurrentTab(tabEl)
-      });
-    }
-
-    setTabCloseEventListener(tabEl) {
-      tabEl.querySelector('.chrome-tab-close').addEventListener('click', event => {
-        event.stopPropagation()
-        if (!this.checkDestroy({ detail: { tabEl } })) {
-          return
-        }
-        this.removeTab(tabEl)
-      })
     }
 
     get activeTabEl() {
