@@ -463,7 +463,7 @@ class StatusBarSerial extends PageBase {
         if (SELECTED_BOARD?.serial?.ctrlCBtn) {
             await this.#serial_.sleep(500);
             await this.#serial_.interrupt();
-            await this.#serial_.sleep(500);
+            await this.#serial_.sleep(200);
             this.#valueTemp_ = '';
             this.empty();
             this.startRead();
