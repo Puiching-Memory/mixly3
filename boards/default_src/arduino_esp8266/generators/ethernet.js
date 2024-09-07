@@ -16,7 +16,7 @@ export const esp_now_send = function (_, generator) {
     const macName = macList.join('');
     generator.definitions_['var_declare_PEER_' + macName] = 'uint8_t PEER_' + macName + '[] = {' + mac + '};\n';
     generator.definitions_['function_sendMessage'] = 'bool sendMessage(uint8_t *macAddress, String _data) {\n'
-        + '  bool ok = WifiEspNow.addPeer(macAddress, 0, nullptr, WIFI_IF_STA);\n'
+        + '  bool ok = WifiEspNow.addPeer(macAddress);\n'
         + '  if (!ok) return false;\n'
         + '  uint16_t length = _data.length();\n'
         + '  char _msg[length];\n'
