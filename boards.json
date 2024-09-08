@@ -96,6 +96,18 @@
         "language": "Python"
     },
     {
+        "boardImg": "./boards/default/python_pyodide/media/webpy.png",
+        "boardType": "Python 3 Online",
+        "boardIndex": "./boards/default/python_pyodide/index.xml",
+        "env": {
+            "electron": true,
+            "web": true,
+            "webCompiler": true,
+            "webSocket": true
+        },
+        "language": "Python"
+    },
+    {
         "boardImg": "./boards/default/python_skulpt/media/webpy.png",
         "boardType": "Python 3 Lite",
         "boardIndex": "./boards/default/python_skulpt/index.xml",
