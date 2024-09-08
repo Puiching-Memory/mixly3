@@ -17,8 +17,7 @@ class PythonShell {
             StatusBarImage.init();
             const projectPath = path.relative(Env.indexDirPath, Env.boardDirPath);
             const loader = new KernelLoader({
-                pyodideURLs: [path.join(projectPath, 'deps/0.62.21/python3/pyodide/pyodide.js')],
-                rootPath: 'http://download.mixlylibs.cloud/web-python3-deps',
+                rootPath: path.join(projectPath, 'deps'),
                 language: 'python3',
             });
 
