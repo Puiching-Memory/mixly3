@@ -100,7 +100,7 @@
         "boardType": "Python 3 Online",
         "boardIndex": "./boards/default/python_pyodide/index.xml",
         "env": {
-            "electron": false,
+            "electron": true,
             "web": true,
             "webCompiler": false,
             "webSocket": false

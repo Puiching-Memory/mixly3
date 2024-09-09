@@ -172,6 +172,9 @@ class PythonShell {
     run(code) {
         this.stop()
             .then(() => {
+                if (code.indexOf('import turtle') !== -1) {
+                    code += '\nturtle.done()\n';
+                }
                 this.#statusBarsManager_.changeTo('output');
                 this.#statusBarsManager_.show();
                 this.#statusBarTerminal_.setValue(`${Msg.Lang['shell.running']}...\n`);
