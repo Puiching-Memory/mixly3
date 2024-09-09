@@ -133,6 +133,18 @@ class StatusBarsManager extends PagesManager {
         return this.#shown_;
     }
 
+    openSelectedPort() {
+        const port = Serial.getSelectedPortName();
+        if (port) {
+            this.show();
+            this.#onSelectMenu_(port);
+        } else {
+            layer.msg(Msg.Lang['statusbar.serial.noDevice'], {
+                time: 1000
+            });
+        }
+    }
+
     #addDropdownMenu_() {
         const selector = `div[m-id="${this.tabId}"] > .statusbar-dropdown-menu > .layui-btn`;
         let menu = new Menu();
@@ -147,14 +159,7 @@ class StatusBarsManager extends PagesManager {
                 isHtmlName: true,
                 name: ContextMenu.getItem(Msg.Lang['statusbar.openSelectedPort'], ''),
                 callback: (key, opt) => {
-                    const port = Serial.getSelectedPortName();
-                    if (port) {
-                        this.runEvent('onSelectMenu', port);
-                    } else {
-                        layer.msg(Msg.Lang['statusbar.serial.noDevice'], {
-                            time: 1000
-                        });
-                    }
+                    this.openSelectedPort();
                 }
             }
         });
@@ -233,8 +238,8 @@ class StatusBarsManager extends PagesManager {
         this.#dropdownMenu_.bind('getMenu', () => 'menu');
     }
 
-    #onSelectMenu_(event) {
-        this.runEvent('onSelectMenu', event);
+    #onSelectMenu_(port) {
+        this.runEvent('onSelectMenu', port);
     }
 
     #getMenu_() {
@@ -254,7 +259,7 @@ class StatusBarsManager extends PagesManager {
             this.add('serial', port);
             this.changeTo(port);
             const statusBarSerial = this.getStatusBarById(port);
-            if (statusBarSerial.isInited()) {
+            if (statusBarSerial.isInited() && !statusBarSerial.isOpened()) {
                 statusBarSerial.open().catch(Debug.error);
             }
         });

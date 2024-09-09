@@ -261,6 +261,22 @@ class App extends Component {
             weight: 5
         });
 
+        this.#nav_.register({
+            icon: 'icon-usb',
+            title: '',
+            id: 'serial-open-btn',
+            displayText: Msg.Lang['statusbar.serial.port'],
+            preconditionFn: () => {
+                return true;
+            },
+            callback: () => {
+                const statusBarsManager = this.#workspace_.getStatusBarsManager();
+                statusBarsManager.openSelectedPort();
+            },
+            scopeType: Nav.Scope.LEFT,
+            weight: 10
+        });
+
         /*const leftSideBarOption = this.#nav_.register({
             icon: 'codicon-layout-sidebar-left-off',
             title: '操作左侧边栏',
