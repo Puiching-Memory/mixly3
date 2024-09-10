@@ -349,6 +349,7 @@ export const sensor_use_i2c_init = {
                 ["ADXL345", "ADXL345"],
                 ["LTR308", "LTR308"],
                 ["LTR381RGB", "LTR381RGB"],
+                ["LTR390UV","LTR390UV"],
                 ["HP203X", "HP203X"],
                 ["SHTC3", "SHTC3"],
                 ["AHT21", "AHT21"],

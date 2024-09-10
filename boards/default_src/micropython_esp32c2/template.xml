@@ -281,6 +281,7 @@
     <block type="garbage_collection"></block>
     <block type="get_mem_alloc"></block>
     <block type="get_mem_free"></block>
+    <block type="get_unique_identifier"></block>
   </category>
   <category id="catMath" colour="230">
     <block type="math_number"></block>
@@ -1697,6 +1698,45 @@
       <value name="duty">
         <shadow type="math_number">
           <field name="NUM">20000</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="analog_keyboard_input" m-show="micropython:esp32c2:mixgo_mini">
+      <value name="special">
+        <shadow type="special_key">
+        </shadow>
+      </value>
+      <value name="general">
+        <shadow type="general_key">
+        </shadow>
+      </value>
+    </block>
+    <block type="analog_mouse_input" m-show="micropython:esp32c2:mixgo_mini">
+      <value name="key">
+        <shadow type="mouse_key">
+        </shadow>
+      </value>
+      <value name="x">
+        <shadow type="math_number">
+        </shadow>
+      </value>
+      <value name="y">
+        <shadow type="math_number">
+        </shadow>
+      </value>
+      <value name="wheel">
+        <shadow type="math_number">
+        </shadow>
+      </value>
+    </block>
+    <block type="analog_keyboard_str" m-show="micropython:esp32c2:mixgo_mini">;
+      <value name="str">
+        <shadow type="text">
+         <field name="TEXT">Hello, Mixly!</field>
+        </shadow>
+     </value>
+      <value name="time">
+        <shadow type="math_number">
         </shadow>
       </value>
     </block>

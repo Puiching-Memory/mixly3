@@ -271,5 +271,11 @@ export const get_mem_free = function (_, generator) {
     return [code, generator.ORDER_ATOMIC]
 }
 
+export const get_unique_identifier = function (_, generator) {
+    generator.definitions_['import_machine'] = 'import machine';
+    var code = 'machine.unique_id()';
+    return [code, generator.ORDER_ATOMIC];
+}
+
 // ok
 export const controls_repeat = controls_repeat_ext;

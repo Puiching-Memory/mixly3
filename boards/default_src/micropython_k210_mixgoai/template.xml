@@ -272,7 +272,7 @@
     <block type="garbage_collection"></block>
     <block type="get_mem_alloc"></block>
     <block type="get_mem_free"></block>
-
+    <block type="get_unique_identifier"></block>
   </category>
 
   <category id="catMath" colour="230">
@@ -1981,6 +1981,18 @@
         </shadow>
       </value>
     </block>
+    <block type="urequests_connect_url">
+      <value name="url">
+        <block type="urequests_wifi_url">
+          <value name="URL">
+            <shadow type="text">
+              <field name="TEXT">url</field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="urequests_response"></block>
 
   </category>
 

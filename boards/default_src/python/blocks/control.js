@@ -1018,5 +1018,16 @@ export const get_mem_free = {
     }
 };
 
+export const get_unique_identifier = {
+    init: function () {
+        this.setColour(LOOPS_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_DEVICE +'ID');
+        this.setInputsInline(true);
+        this.setOutput(true);
+        this.setTooltip(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN + Blockly.Msg.MIXLY_GET_UNIQUE_IDEN);
+    }
+};
+
 // export const base_type = controls_type;
 // export const controls_TypeLists = controls_typeLists;

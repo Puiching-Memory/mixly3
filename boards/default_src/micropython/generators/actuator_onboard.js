@@ -443,3 +443,49 @@ export const set_all_power_output = function (_, generator) {
     var code = 'onboard_bot.usben(freq = ' + duty + ')\n';
     return code;
 }
+
+export const analog_keyboard_input = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    var sp = generator.valueToCode(this, 'special', generator.ORDER_ATOMIC);
+    var ge = generator.valueToCode(this, 'general', generator.ORDER_ATOMIC);
+    var re = this.getFieldValue('release');
+    generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
+    var code = "hid_keyboard(special="+sp+",general="+ge+",release="+re+")\n";
+    return code;
+}
+
+export const special_key = function (_, generator) {
+    var code = this.getFieldValue('op');
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const general_key = function (_, generator) {
+    var code = this.getFieldValue('op');
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const analog_mouse_input = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    var key = generator.valueToCode(this, 'key', generator.ORDER_ATOMIC);
+    var x = generator.valueToCode(this, 'x', generator.ORDER_ATOMIC);
+    var y = generator.valueToCode(this, 'y', generator.ORDER_ATOMIC);
+    var wheel = generator.valueToCode(this, 'wheel', generator.ORDER_ATOMIC);
+    var re = this.getFieldValue('release');
+    generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
+    var code = "hid_mouse(keys="+key+",move=("+x+","+y+"),wheel="+wheel+",release="+re+")\n";
+    return code;
+}
+
+export const mouse_key = function (_, generator) {
+    var code = this.getFieldValue('op');
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const analog_keyboard_str = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    var str = generator.valueToCode(this, 'str', generator.ORDER_ATOMIC);
+    var t = generator.valueToCode(this, 'time', generator.ORDER_ATOMIC);
+    generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
+    var code = "onboard_bot.hid_keyboard_str("+str+",delay="+t+")\n";
+    return code;
+}

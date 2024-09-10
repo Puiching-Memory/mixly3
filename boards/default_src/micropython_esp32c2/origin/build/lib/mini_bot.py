@@ -18,6 +18,9 @@ _BOT035_PWM			= const(0x0B)
 _BOT035_FLAG		= const(0x0F)
 _BOT035_LEDS		= const(0x10)
 _BOT035_PGA			= const(0x20)
+_BOT035_KB			= const(0x1C)
+_BOT035_MS			= const(0x20)
+_BOT035_STR			= const(0x24)
 _FONT_W				= const(5)
 _FONT_H				= const(8)
 _LEDS_W				= const(12)
@@ -135,7 +138,7 @@ class BOT035(FrameBuffer):
 			self._buffer[i] = self._buffer[i] | buffer[i]
 
 	def _ascall_bitmap(self, buffer, x=0):
-		if -_FONT_W <= x <= _LEDS_W:		
+		if -_FONT_W <= x <= _LEDS_W and buffer is not None:		
 			for _x in range(_FONT_W):
 				for _y in range(_FONT_H):
 					if (buffer[_x] >> _y) & 0x1:
@@ -143,7 +146,7 @@ class BOT035(FrameBuffer):
 
 	def _uincode_bitmap(self, buffer, x=0):
 		_buffer, width = buffer 
-		if -width < x < _LEDS_H:
+		if -width < x < _LEDS_H and _buffer is not None:
 			for _y in range(12):
 				for _x in range(width):
 					if _buffer[_y * ((width + 7) // 8) + _x // 8] & (0x80 >> (_x & 7)):
@@ -221,6 +224,7 @@ class BOT035(FrameBuffer):
 	def reset(self):
 		"""Reset SPK, PWM registers to default state"""
 		self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_SPK, b'\x0A\x00\x00\x00\x20\x4E\x64\x64')
+		self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_KB, bytes(9))
 		
 	def get_brightness(self):
 		return self._brightness
@@ -277,6 +281,36 @@ class BOT035(FrameBuffer):
 			values.append(self._rreg(_BOT035_MIC) | self._rreg(_BOT035_MIC + 1) << 8)
 		values = sorted(values)
 		return values[-10] - values[10]
+
+	def hid_keyboard(self, special=0, general=0, release=True):
+		self._buf = bytearray(4)
+		self._buf[0] = special
+		if type(general) is int:
+			self._buf[1] = general
+		elif type(general) is tuple:
+			for i in range(len(general)):
+				self._buf[i + 1] = general[i]
+		self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_KB, self._buf)
+		if release:
+			time.sleep_ms(10)
+			self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_KB, bytes(4))
+
+	def hid_keyboard_str(self, string, delay=0):
+		for char in str(string):
+			self._wreg(_BOT035_STR, ord(char))
+			time.sleep_ms(20 + delay)
+
+	def hid_mouse(self, keys=0, move=(0, 0), wheel=0, release=True):
+		self._buf = bytearray(4)
+		self._buf[0] = keys
+		self._buf[1] = move[0]
+		self._buf[2] = move[1]
+		self._buf[3] = wheel
+		self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_MS, self._buf)
+		if release:
+			time.sleep_ms(10)
+			self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_MS, bytes(4))
+
 
 	"""Graph module"""
 	HEART=b'\x00\x0c\x1e?~\xfc~?\x1e\x0c\x00\x00'
