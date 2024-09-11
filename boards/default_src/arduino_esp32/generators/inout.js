@@ -30,7 +30,7 @@ export const ledcDetachPin = function (_, generator) {
 export const ledcWrite = function (_, generator) {
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var value_num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
-    generator.definitions_['include_Arduino'] = '#include <generator.h>';
+    generator.definitions_['include_Arduino'] = '#include <Arduino.h>';
     const { analog } = Profile.default;
     if (typeof analog === 'object') {
         for (let i of analog)
@@ -58,7 +58,7 @@ export const inout_pwm_analog_write = function (_, generator) {
 export const controls_attachInterrupt = function (_, generator) {
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
-    // generator.definitions_['pin_interrupt'] = '#include <generator.h>';
+    // generator.definitions_['pin_interrupt'] = '#include <Arduino.h>';
     generator.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT_PULLUP);';
     var code = 'attachInterrupt' + '(' + dropdown_pin + ',' + 'attachInterrupt_fun_' + dropdown_pin + ',' + dropdown_mode + ');\n'
     var funcName = 'attachInterrupt_fun_' + dropdown_pin;

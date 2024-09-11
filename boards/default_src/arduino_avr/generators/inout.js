@@ -255,7 +255,7 @@ export const ADS1015_Get_Value = function (_, generator) {
 
 // PCF8591T模数转换模块 采集数值
 export const PCF8591T = function (_, generator) {
-    //generator.definitions_['include_Wire'] = '#include "generator.h"';
+    //generator.definitions_['include_Wire'] = '#include <Arduino.h>';
     generator.definitions_['include_PCF8591_h'] = '#include <PCF8591.h>';
     generator.definitions_['var_declare_PCF8591'] = 'PCF8591 pcf8591(0x48);';
     generator.setups_['setup_pcf8591.begin()'] = 'pcf8591.begin(); \n';
