@@ -36,10 +36,10 @@ class NeoPixel:
 				j += self.bpp
 
 	def write(self):
-		self.pin.init(self.pin.OUT)
-		for _ in range(2):
-			bitstream(self.pin, 0, self.timing, self.rgb_buf)
-			sleep_us(50)
+		self.pin.init(self.pin.OUT, value=0)
+		sleep_us(40)
+		bitstream(self.pin, 0, self.timing, bytes(3)+self.rgb_buf)
+		sleep_us(40)
 		self.pin.init(self.pin.IN)
 
 	def color_chase(self,R, G, B, wait):
