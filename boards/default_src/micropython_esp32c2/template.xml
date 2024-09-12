@@ -1703,18 +1703,25 @@
     </block>
     <block type="analog_keyboard_input" m-show="micropython:esp32c2:mixgo_mini">
       <value name="special">
-        <shadow type="special_key">
-        </shadow>
+        <block type="special_key">
+        </block>
       </value>
       <value name="general">
-        <shadow type="general_key">
-        </shadow>
+        <block type="general_key">
+        </block>
       </value>
     </block>
+    <block type="general_key_tuple" m-show="micropython:esp32c2:mixgo_mini">
+      <value name="general">
+        <block type="general_key">
+        </block>
+      </value>
+    </block>
+
     <block type="analog_mouse_input" m-show="micropython:esp32c2:mixgo_mini">
       <value name="key">
-        <shadow type="mouse_key">
-        </shadow>
+        <block type="mouse_key">
+        </block>
       </value>
       <value name="x">
         <shadow type="math_number">
@@ -1737,6 +1744,7 @@
      </value>
       <value name="time">
         <shadow type="math_number">
+          <field name="NUM">10</field>
         </shadow>
       </value>
     </block>
