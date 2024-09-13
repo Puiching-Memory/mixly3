@@ -228,6 +228,7 @@ class BOT035(FrameBuffer):
 		"""Reset SPK, PWM, HID registers to default state"""
 		self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_SPK, b'\x0A\x00\x00\x00\x20\x4E\x64\x64')
 		if self._version: self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_KB, bytes(9))
+
 	def get_brightness(self):
 		return self._brightness
 

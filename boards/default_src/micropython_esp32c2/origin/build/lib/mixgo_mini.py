@@ -164,6 +164,7 @@ class LED:
 
     def setcolor(self, index, color):
         self._col[index-1] = color
+        self.setbrightness(index, 100)
 
     def getcolor(self, index):
         return self._col[index-1]
