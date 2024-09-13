@@ -1,7 +1,7 @@
 """
 MINI_WCH
 
-Micropython	library for the MINI_WCH(TOUCH*2, MIC*1, Buzzer*1, PWM*2, Matrix8x12)
+Micropython	library for the MINI_WCH(TOUCH*2, MIC*1, Buzzer*1, PWM*2, Matrix8x12, HID)
 =======================================================
 @dahanzimin From the Mixly Team
 """
@@ -34,6 +34,7 @@ class BOT035(FrameBuffer):
 		self._buffer = bytearray(12)
 		self._brightness = brightness
 		self._touchs = [self.touch(0), self.touch(1)]
+		self._version = True if self._rreg(0x00) == 0x27 else False
 		super().__init__(self._buffer, _LEDS_W, _LEDS_H, MONO_VLSB)
 		self.reset()
 		self.show()
@@ -43,6 +44,8 @@ class BOT035(FrameBuffer):
 		if  0x20 <= ord(ch) <= 0x7f:
 			char_index = 2 + (ord(ch)-32) * _FONT_W 
 			return _FONT5x8_CODE[char_index : char_index + _FONT_W]
+		else:
+			raise ValueError("Cannot display characters other than ASCLL code")
 
 	def _uincode(self, ch):
 		'''uincode code font reading data'''
@@ -54,7 +57,7 @@ class BOT035(FrameBuffer):
 		elif 0xff01 <= uni <= 0xffe5 :
 			_address = 0x25734 + (uni - 0xff01) * 4
 		else:
-			return None, 0
+			raise ValueError("Cannot display characters other than GB2312 code")
 		buffer = bytearray(4)
 		flash_read(_Uincode_ADDR + _address, buffer) 
 		font_info = buffer[3] << 24 | buffer[2] << 16 | buffer[1] << 8 | buffer[0]
@@ -138,7 +141,7 @@ class BOT035(FrameBuffer):
 			self._buffer[i] = self._buffer[i] | buffer[i]
 
 	def _ascall_bitmap(self, buffer, x=0):
-		if -_FONT_W <= x <= _LEDS_W and buffer is not None:		
+		if -_FONT_W <= x <= _LEDS_W:		
 			for _x in range(_FONT_W):
 				for _y in range(_FONT_H):
 					if (buffer[_x] >> _y) & 0x1:
@@ -146,7 +149,7 @@ class BOT035(FrameBuffer):
 
 	def _uincode_bitmap(self, buffer, x=0):
 		_buffer, width = buffer 
-		if -width < x < _LEDS_H and _buffer is not None:
+		if -width < x < _LEDS_H:
 			for _y in range(12):
 				for _x in range(width):
 					if _buffer[_y * ((width + 7) // 8) + _x // 8] & (0x80 >> (_x & 7)):
@@ -222,10 +225,9 @@ class BOT035(FrameBuffer):
 		return  self._i2c.readfrom(_BOT035_ADDRESS, nbytes)[0]
 
 	def reset(self):
-		"""Reset SPK, PWM registers to default state"""
+		"""Reset SPK, PWM, HID registers to default state"""
 		self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_SPK, b'\x0A\x00\x00\x00\x20\x4E\x64\x64')
-		self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_KB, bytes(9))
-		
+		if self._version: self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_KB, bytes(9))
 	def get_brightness(self):
 		return self._brightness
 
@@ -283,34 +285,38 @@ class BOT035(FrameBuffer):
 		return values[-10] - values[10]
 
 	def hid_keyboard(self, special=0, general=0, release=True):
-		self._buf = bytearray(4)
-		self._buf[0] = special
-		if type(general) is int:
-			self._buf[1] = general
-		elif type(general) is tuple:
-			for i in range(len(general)):
-				self._buf[i + 1] = general[i]
-		self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_KB, self._buf)
-		if release:
-			time.sleep_ms(10)
-			self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_KB, bytes(4))
+		if self._version:
+			self._buf = bytearray(4)
+			self._buf[0] = special
+			if type(general) in (tuple, list):
+				for i in range(len(general)):
+					if i > 2: break
+					self._buf[i + 1] = general[i]
+			else:
+				self._buf[1] = general
+			self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_KB, self._buf)
+			if release:
+				time.sleep_ms(10)
+				self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_KB, bytes(4))
+		else:
+			print("Warning: Please upgrade the coprocessor firmware to use this feature")
 
 	def hid_keyboard_str(self, string, delay=0):
-		for char in str(string):
-			self._wreg(_BOT035_STR, ord(char))
-			time.sleep_ms(20 + delay)
+		if self._version:
+			for char in str(string):
+				self._wreg(_BOT035_STR, ord(char) & 0xFF)
+				time.sleep_ms(20 + delay)
+		else:
+			print("Warning: Please upgrade the coprocessor firmware to use this feature")
 
 	def hid_mouse(self, keys=0, move=(0, 0), wheel=0, release=True):
-		self._buf = bytearray(4)
-		self._buf[0] = keys
-		self._buf[1] = move[0]
-		self._buf[2] = move[1]
-		self._buf[3] = wheel
-		self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_MS, self._buf)
-		if release:
-			time.sleep_ms(10)
-			self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_MS, bytes(4))
-
+		if self._version:
+			self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_MS, bytes([keys & 0x0F, move[0] & 0xFF, move[1] & 0xFF, wheel & 0xFF]))
+			if release:
+				time.sleep_ms(10)
+				self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_MS, bytes(4))
+		else:
+			print("Warning: Please upgrade the coprocessor firmware to use this feature")
 
 	"""Graph module"""
 	HEART=b'\x00\x0c\x1e?~\xfc~?\x1e\x0c\x00\x00'
@@ -321,3 +327,6 @@ class BOT035(FrameBuffer):
 	ANGRY=b'\x01\x02\x84B!\x10\x10!B\x84\x02\x01'
 	NO=b'\x00\x00\x00B$\x18\x18$B\x00\x00\x00'
 	YES=b'\x00\x00\x10 @@ \x10\x08\x04\x02\x00'
+	DOOR_OPEN=b'\x00\x00\xfe\x03\x03\x03\x13\x13\xff\xfe\x00\x00'
+	DOOR_OPENING=b'\x00\x00\xfe\x03\x03\x15\xf9\x01\x01\xfe\x00\x00'
+	DOOR_CLOSE=b'\x00\x00\xfe\xfd\x01\x01\x01\x01\x01\xfe\x00\x00'
