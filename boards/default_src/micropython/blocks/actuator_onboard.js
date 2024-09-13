@@ -104,7 +104,6 @@ export const actuator_mixgo_zero_led_color = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_LCD_SETCOLOR)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_LIGHT_OFF, "0"],
                 [Blockly.Msg.MIXLY_LIGHT_RED, "1"],
                 [Blockly.Msg.MIXLY_LIGHT_GREEN, "2"],
                 [Blockly.Msg.MIXLY_LIGHT_BLUE, "3"],
@@ -1005,10 +1004,8 @@ export const analog_keyboard_input = {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_KEYBOARD_INPUT);
-        this.appendValueInput('special')
-            .appendField(Blockly.Msg.MIXLY_SPECIAL_KEY);
-        this.appendValueInput('general')
-            .appendField(Blockly.Msg.MIXLY_GENERAL_KEY);
+        this.appendValueInput('special');
+        this.appendValueInput('general');
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_RELEASE)
             .appendField(new Blockly.FieldDropdown([
@@ -1026,6 +1023,7 @@ export const special_key = {
     init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_SPECIAL_KEY)
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.MIXLY_SPECIAL_KEY0,"0"],
                 [Blockly.Msg.MIXLY_SPECIAL_KEY1, "1"],
@@ -1045,6 +1043,7 @@ export const general_key = {
     init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_GENERAL_KEY)
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.MIXLY_SPECIAL_KEY0,"0"],
                 ['A', "0x04"],
@@ -1073,32 +1072,32 @@ export const general_key = {
                 ['X', "0x1B"],
                 ['Y', "0x1C"],
                 ['Z', "0x1D"],
-                ['ONE', "0x1E"],
-                ['TWO', "0x1F"],
-                ['THREE', "0x20"],
-                ['FOUR', "0x21"],
-                ['FIVE', "0x22"],
-                ['SIX', "0x23"],
-                ['SEVEN', "0x24"],
-                ['EIGHT', "0x25"],
-                ['NINE', "0x26"],
-                ['ZERO', "0x27"],
+                ['1', "0x1E"],
+                ['2', "0x1F"],
+                ['3', "0x20"],
+                ['4', "0x21"],
+                ['5', "0x22"],
+                ['6', "0x23"],
+                ['7', "0x24"],
+                ['8', "0x25"],
+                ['9', "0x26"],
+                ['0', "0x27"],
                 ['ENTER', "0x28"],
                 ['ESC', "0x29"],
                 ['BACKSPACE', "0x2A"],
                 ['TAB', "0x2B"],
                 ['SPACE', "0x2C"],
-                ['MINUS', "0x2D"],
-                ['EQUAL', "0x2E"],
-                ['LEFT_BRACE', "0x2F"],
-                ['RIGHT_BRACE', "0x30"],
-                ['BACKSLASH', "0x31"],
-                ['SEMICOLON', "0x33"],
-                ['QUOTE', "0x34"],
-                ['TILDE', "0x35"],
-                ['COMMA', "0x36"],
-                ['PERIOD', "0x37"],
-                ['SLASH', "0x38"],
+                ['-', "0x2D"],
+                ['=', "0x2E"],
+                ['{', "0x2F"],
+                ['}', "0x30"],
+                ['\\', "0x31"],
+                [';', "0x33"],
+                ['"', "0x34"],
+                ['`', "0x35"],
+                [',', "0x36"],
+                ['.', "0x37"],
+                ['/', "0x38"],
                 ['CAPS_LOCK', "0x39"],
                 ['F1', "0x3A"],
                 ['F2', "0x3B"],
@@ -1126,39 +1125,192 @@ export const general_key = {
                 ['DOWN', "0x51"],
                 ['UP', "0x52"],
                 ['NUM_LOCK', "0x53"],
-                ['NUMPAD_SLASH', "0x54"],
-                ['NUMPAD_ASTERISK', "0x55"],
-                ['NUMPAD_MINUS', "0x56"],
-                ['NUMPAD_PLUS', "0x57"],
-                ['NUMPAD_ENTER', "0x58"],
-                ['NUMPAD_1', "0x59"],
-                ['NUMPAD_2', "0x5A"],
-                ['NUMPAD_3', "0x5B"],
-                ['NUMPAD_4', "0x5C"],
-                ['NUMPAD_5', "0x5D"],
-                ['NUMPAD_6', "0x5E"],
-                ['NUMPAD_7', "0x5F"],
-                ['NUMPAD_8', "0x60"],
-                ['NUMPAD_9', "0x61"],
-                ['NUMPAD_0', "0x62"],
-                ['NUMPAD_PERIOD', "0x63"]
+                ['/', "0x54"],
+                ['*', "0x55"],
+                ['-', "0x56"],
+                ['+', "0x57"],
+                ['ENTER', "0x58"],
+                ['1', "0x59"],
+                ['2', "0x5A"],
+                ['3', "0x5B"],
+                ['4', "0x5C"],
+                ['5', "0x5D"],
+                ['6', "0x5E"],
+                ['7', "0x5F"],
+                ['8', "0x60"],
+                ['9', "0x61"],
+                ['0', "0x62"],
+                ['.', "0x63"]
             ]), 'op')
         this.setOutput(true);
     }
 };
 
 
+export const general_key_tuple = {
+    init: function () {
+        this.setColour(ACTUATOR_ONBOARD_HUE);
+        this.itemCount_ = 2;
+        this.updateShape_();
+        this.setOutput(true);
+        this.setMutator(new Blockly.icons.MutatorIcon(['generalkey_create_with_item'], this));
+        this.setTooltip(Blockly.Msg.GENERALKEY_TUPLE_CREATE_TOOLTIP);
+    },
+
+    mutationToDom: function() {
+        var container = document.createElement('mutation');
+        container.setAttribute('items', this.itemCount_);
+        return container;
+    },
+      /**
+       * Parse XML to restore the list inputs.
+       * @param {!Element} xmlElement XML storage element.
+       * @this Blockly.Block
+       */
+    domToMutation: function(xmlElement) {
+        this.itemCount_ = parseInt(xmlElement.getAttribute('items'), 10);
+        this.updateShape_();
+    },
+      /**
+       * Populate the mutator's dialog with this block's components.
+       * @param {!Blockly.Workspace} workspace Mutator's workspace.
+       * @return {!Blockly.Block} Root block in mutator.
+       * @this Blockly.Block
+       */
+    decompose: function(workspace) {
+        var containerBlock =
+            workspace.newBlock('generalkey_container');
+        containerBlock.initSvg();
+        var connection = containerBlock.getInput('STACK').connection;
+        for (var i = 0; i < this.itemCount_; i++) {
+          var itemBlock = workspace.newBlock('generalkey_create_with_item');
+          itemBlock.initSvg();
+          connection.connect(itemBlock.previousConnection);
+          connection = itemBlock.nextConnection;
+        }
+        return containerBlock;
+    },
+      /**
+       * Reconfigure this block based on the mutator dialog's components.
+       * @param {!Blockly.Block} containerBlock Root block in mutator.
+       * @this Blockly.Block
+       */
+    compose: function(containerBlock) {
+        var itemBlock = containerBlock.getInputTargetBlock('STACK');
+        // Count number of inputs.
+        var connections = [];
+        var i = 0;
+        while (itemBlock) {
+          connections[i] = itemBlock.valueConnection_;
+          itemBlock = itemBlock.nextConnection &&
+              itemBlock.nextConnection.targetBlock();
+          i++;
+        }
+        this.itemCount_ = i;
+        this.updateShape_();
+        // Reconnect any child blocks.
+        for (var i = 0; i < this.itemCount_; i++) {
+          if (connections[i]) {
+            this.getInput('ADD' + i).connection.connect(connections[i]);
+          }
+        }
+    },
+      /**
+       * Store pointers to any connected child blocks.
+       * @param {!Blockly.Block} containerBlock Root block in mutator.
+       * @this Blockly.Block
+       */
+    saveConnections: function(containerBlock) {
+        var itemBlock = containerBlock.getInputTargetBlock('STACK');
+        var i = 0;
+        while (itemBlock) {
+          var input = this.getInput('ADD' + i);
+          itemBlock.valueConnection_ = input && input.connection.targetConnection;
+          i++;
+          itemBlock = itemBlock.nextConnection &&
+              itemBlock.nextConnection.targetBlock();
+        }
+    },
+      /**
+       * Modify this block to have the correct number of inputs.
+       * @private
+       * @this Blockly.Block
+       */
+    updateShape_: function() {
+        // Delete everything.
+        if (this.getInput('EMPTY')) {
+          this.removeInput('EMPTY');
+        } else {
+          var i = 0;
+          while (this.getInput('ADD' + i)) {
+            this.removeInput('ADD' + i);
+            i++;
+          }
+        }
+        // Rebuild block.
+        if (this.itemCount_ == 0) {
+          this.appendDummyInput('EMPTY')
+              .appendField(Blockly.Msg.GENERALKEY_CREATE_EMPTY_TITLE);
+        } else {
+          for (var i = 0; i < this.itemCount_; i++) {
+            var input = this.appendValueInput('ADD' + i);
+            if (i == 0) {
+              input.appendField(Blockly.Msg.GENERALKEY_CREATE_WITH_INPUT_WITH);
+            }
+          }
+        }
+    },
+      getVars: function() {
+        return [this.getFieldValue('VAR')];
+    },
+      renameVar: function(oldName, newName) {
+        if (Blockly.Names.equals(oldName, this.getFieldValue('VAR'))) {
+          this.setTitleValue(newName, 'VAR');
+        }
+    }
+};
+
+export const generalkey_container = {
+  /**
+   * Mutator block for list container.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setColour(ACTUATOR_EXTERN_HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MIXLY_GENERAL_KEY);
+    this.appendStatementInput('STACK');
+    this.setTooltip(Blockly.Msg.GENERALKEY_CONTAINER_TOOLTIP);
+    this.contextMenu = false;
+  }
+};
+
+ export const generalkey_create_with_item = {
+  /**
+   * Mutator bolck for adding items.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setColour(ACTUATOR_EXTERN_HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.blockpy_SET_VARIABLES_NAME);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(Blockly.Msg.TUPLE_CREATE_WITH_ITEM_TOOLTIP);
+    this.contextMenu = false;
+  }
+};
+
 export const analog_mouse_input = {
     init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_MOUSE_INPUT);
-        this.appendValueInput('key')
-            .appendField(Blockly.Msg.MIXLY_MOUSE_KEYS);
+        this.appendValueInput('key');
         this.appendValueInput('x')
-            .appendField(Blockly.Msg.MIXLY_X_Y_CHANGES+'x:');
+            .appendField(Blockly.Msg.MIXLY_X_CHANGES);
         this.appendValueInput('y')
-            .appendField('y:');
+            .appendField(Blockly.Msg.MIXLY_Y_CHANGES);
         this.appendValueInput('wheel')
             .appendField(Blockly.Msg.MIXLY_WHEEL_CHANGES);
         this.appendDummyInput()
@@ -1178,6 +1330,7 @@ export const mouse_key = {
     init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_MOUSE_KEYS)
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.MIXLY_SPECIAL_KEY0,"0"],
                 [Blockly.Msg.MIXLY_MOUSE_LEFT_KEY, "1"],
