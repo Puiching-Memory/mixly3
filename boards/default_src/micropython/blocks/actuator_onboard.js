@@ -1025,15 +1025,15 @@ export const special_key = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SPECIAL_KEY)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_SPECIAL_KEY0,"0"],
-                [Blockly.Msg.MIXLY_SPECIAL_KEY1, "1"],
-                [Blockly.Msg.MIXLY_SPECIAL_KEY2, "2"],
-                [Blockly.Msg.MIXLY_SPECIAL_KEY1, "4"],
-                [Blockly.Msg.MIXLY_SPECIAL_KEY8, "8"],
-                [Blockly.Msg.MIXLY_SPECIAL_KEY16, "16"],
-                [Blockly.Msg.MIXLY_SPECIAL_KEY32, "32"],
-                [Blockly.Msg.MIXLY_SPECIAL_KEY64, "64"],
-                [Blockly.Msg.MIXLY_SPECIAL_KEY128, "128"]
+                [Blockly.Msg.MIXLY_SPECIAL_KEY0,"0x00"],
+                [Blockly.Msg.MIXLY_SPECIAL_KEY1, "0x01"],
+                [Blockly.Msg.MIXLY_SPECIAL_KEY2, "0x02"],
+                [Blockly.Msg.MIXLY_SPECIAL_KEY1, "0x04"],
+                [Blockly.Msg.MIXLY_SPECIAL_KEY8, "0x08"],
+                [Blockly.Msg.MIXLY_SPECIAL_KEY16, "0x10"],
+                [Blockly.Msg.MIXLY_SPECIAL_KEY32, "0x20"],
+                [Blockly.Msg.MIXLY_SPECIAL_KEY64, "0x40"],
+                [Blockly.Msg.MIXLY_SPECIAL_KEY128, "0x80"]
             ]), 'op')
         this.setOutput(true);
     }
@@ -1045,7 +1045,7 @@ export const general_key = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_GENERAL_KEY)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_SPECIAL_KEY0,"0"],
+                [Blockly.Msg.MIXLY_SPECIAL_KEY0,"0x00"],
                 ['A', "0x04"],
                 ['B', "0x05"],
                 ['C', "0x06"],
@@ -1072,32 +1072,32 @@ export const general_key = {
                 ['X', "0x1B"],
                 ['Y', "0x1C"],
                 ['Z', "0x1D"],
-                ['1', "0x1E"],
-                ['2', "0x1F"],
-                ['3', "0x20"],
-                ['4', "0x21"],
-                ['5', "0x22"],
-                ['6', "0x23"],
-                ['7', "0x24"],
-                ['8', "0x25"],
-                ['9', "0x26"],
-                ['0', "0x27"],
+                ['1  ！', "0x1E"],
+                ['2  @', "0x1F"],
+                ['3  #', "0x20"],
+                ['4  $', "0x21"],
+                ['5  %', "0x22"],
+                ['6  ^', "0x23"],
+                ['7  &', "0x24"],
+                ['8  *', "0x25"],
+                ['9  (', "0x26"],
+                ['0  )', "0x27"],
                 ['ENTER', "0x28"],
                 ['ESC', "0x29"],
                 ['BACKSPACE', "0x2A"],
                 ['TAB', "0x2B"],
                 ['SPACE', "0x2C"],
-                ['-', "0x2D"],
-                ['=', "0x2E"],
-                ['{', "0x2F"],
-                ['}', "0x30"],
-                ['\\', "0x31"],
-                [';', "0x33"],
-                ['"', "0x34"],
-                ['`', "0x35"],
-                [',', "0x36"],
-                ['.', "0x37"],
-                ['/', "0x38"],
+                ['-  _', "0x2D"],
+                ['=  +', "0x2E"],
+                ['[  {', "0x2F"],
+                [']  }', "0x30"],
+                ['\\  |', "0x31"],
+                [';  :', "0x33"],
+                ["' "+' "', "0x34"],
+                ['`  ~', "0x35"],
+                [',  <', "0x36"],
+                ['.  >', "0x37"],
+                ['/  ?', "0x38"],
                 ['CAPS_LOCK', "0x39"],
                 ['F1', "0x3A"],
                 ['F2', "0x3B"],
@@ -1332,10 +1332,10 @@ export const mouse_key = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MOUSE_KEYS)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_SPECIAL_KEY0,"0"],
-                [Blockly.Msg.MIXLY_MOUSE_LEFT_KEY, "1"],
-                [Blockly.Msg.MIXLY_MOUSE_RIGHT_KEY, "2"],
-                [Blockly.Msg.MIXLY_MOUSE_MID_KEY, "4"]
+                [Blockly.Msg.MIXLY_SPECIAL_KEY0,"0x00"],
+                [Blockly.Msg.MIXLY_MOUSE_LEFT_KEY, "0x01"],
+                [Blockly.Msg.MIXLY_MOUSE_RIGHT_KEY, "0x02"],
+                [Blockly.Msg.MIXLY_MOUSE_MID_KEY, "0x04"]
             ]), 'op')
         this.setOutput(true);
     }

@@ -125,15 +125,15 @@ class Button(KEYSensor):
 		return not self.key.value()
 
 B1key = Button(9)
-B2key = KEYSensor(0,0)
-A1key = KEYSensor(0,2100)
-A2key = KEYSensor(0,1500)
-A3key = KEYSensor(0,800)
-A4key = KEYSensor(0,2700)
+B2key = KEYSensor(0, 0)
+A1key = KEYSensor(0, 2100)
+A2key = KEYSensor(0, 1500)
+A3key = KEYSensor(0, 800)
+A4key = KEYSensor(0, 2700)
 
 '''2LED-Multiplex RGB'''
 class LED:
-    def __init__(self, rgb, num=2, color=3):
+    def __init__(self, rgb, num=2, color=7):
         self._rgb = rgb
         self._col = [color] * num
         self._color = ((0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 0), (0, 1, 1), (1, 0, 1), (1, 1, 1))
