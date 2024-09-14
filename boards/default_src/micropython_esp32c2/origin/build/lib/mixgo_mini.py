@@ -160,14 +160,11 @@ class LED:
             self.setbrightness(index, 0)
 
     def getonoff(self, index):
-        return True if self.getbrightness(index) > 50 else False
+        return True if self.getbrightness(index) >= 50 else False
 
-    def setcolor(self, index, color):
+    def setcolor(self, index, color, value=50):
         self._col[index-1] = color
-        self.setbrightness(index, 100)
-
-    def getcolor(self, index):
-        return self._col[index-1]
+        self.setbrightness(index, value)
 
 onboard_led = LED(onboard_rgb)
 
