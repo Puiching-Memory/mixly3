@@ -2578,6 +2578,95 @@
         </shadow>
       </value>
     </block>
+    <block type="dataframe_sort_values">
+      <value name="DICT">
+        <shadow type="variables_get">
+          <field name="VAR">df1</field>
+        </shadow>
+      </value>
+      <value name="KEY">
+        <shadow type="text">
+          <field name="TEXT">tag</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="dataframe_head_tail">
+      <value name="DICT">
+        <shadow type="variables_get">
+          <field name="VAR">df1</field>
+        </shadow>
+      </value>
+      <value name="LINES">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="dataframe_select">
+      <value name="DICT">
+        <shadow type="variables_get">
+          <field name="VAR">df1</field>
+        </shadow>
+      </value>
+      <value name="KEY">
+        <block type="logic_compare">
+          <field name="OP">GT</field>
+          <value name="A">
+            <block type="dataframe_get">
+              <field name="MODE">column</field>
+              <value name="DICT">
+                <shadow type="variables_get">
+                  <field name="VAR">df1</field>
+                </shadow>
+              </value>
+              <value name="KEY">
+                <shadow type="text">
+                  <field name="TEXT">tag</field>
+                </shadow>
+              </value>
+            </block>
+          </value>
+          <value name="B">
+            <block type="math_number">
+              <field name="NUM">1</field>
+            </block>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="dataframe_groupby">
+      <value name="DICT">
+        <shadow type="variables_get">
+          <field name="VAR">df1</field>
+        </shadow>
+      </value>
+      <value name="KEY">
+        <shadow type="text">
+          <field name="TEXT">tag</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="dataframe_aggregate_func">
+      <field name="TYPE">min</field>
+      <value name="DICT">
+        <shadow type="variables_get">
+          <field name="VAR">df1</field>
+        </shadow>
+        <block type="dataframe_get">
+          <field name="MODE">column</field>
+          <value name="DICT">
+            <shadow type="variables_get">
+              <field name="VAR">df1</field>
+            </shadow>
+          </value>
+          <value name="KEY">
+            <shadow type="text">
+              <field name="TEXT">tag</field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
     <block type="pl_plot_easy">
       <value name="SER">
         <shadow type="variables_get">

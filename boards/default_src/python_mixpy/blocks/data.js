@@ -1456,3 +1456,108 @@ export const py_sum = {
         this.setTooltip('Returns the sum of the iterable.');
     }
 };
+
+export const dataframe_sort_values = {
+    init: function () {
+        this.setColour(DATA_HUE);
+        this.appendValueInput('DICT')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .setCheck('Dict');
+        this.appendDummyInput()
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('值排序');
+        this.appendValueInput('KEY')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('标签');
+        this.appendDummyInput()
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('排序方式')
+            .appendField(new Blockly.FieldDropdown([
+                ['升序', 'True'],
+                ['降序', 'False']
+            ]), 'AS_CENDING');
+        this.setOutput(true);
+        this.setInputsInline(true);
+        this.setTooltip('');
+    }
+}
+
+export const dataframe_head_tail = {
+    init: function () {
+        this.setColour(DATA_HUE);
+        this.appendValueInput('DICT')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .setCheck('Dict');
+        this.appendDummyInput()
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('获取')
+            .appendField(new Blockly.FieldDropdown([
+                ['前几行', 'head'],
+                ['最后几行', 'tail']
+            ]), 'TYPE');
+        this.appendValueInput('LINES')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('行数');
+        this.setOutput(true);
+        this.setInputsInline(true);
+        this.setTooltip('');
+    }
+}
+
+export const dataframe_select = {
+    init: function () {
+        this.setColour(DATA_HUE);
+        this.appendValueInput('DICT')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .setCheck('Dict');
+        this.appendDummyInput()
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('筛选数据');
+        this.appendValueInput('KEY')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('满足条件');
+        this.setOutput(true);
+        this.setInputsInline(true);
+        this.setTooltip('');
+    }
+}
+
+export const dataframe_groupby = {
+    init: function () {
+        this.setColour(DATA_HUE);
+        this.appendValueInput('DICT')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .setCheck('Dict');
+        this.appendValueInput('KEY')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('通过标签');
+        this.appendDummyInput()
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('分组');
+        this.setOutput(true);
+        this.setInputsInline(true);
+        this.setTooltip('');
+    }
+}
+
+export const dataframe_aggregate_func = {
+    init: function () {
+        this.setColour(DATA_HUE);
+        this.appendDummyInput()
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(new Blockly.FieldDropdown([
+                ['求最小值', 'min'],
+                ['求最大值', 'max'],
+                ['求和', 'sum'],
+                ['求平均值', 'mean'],
+                ['求中位数', 'median'],
+                ['求标准差', 'std']
+            ]), 'TYPE');
+        this.appendValueInput('DICT')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .setCheck('Dict');
+        this.setOutput(true);
+        this.setInputsInline(true);
+        this.setTooltip('');
+    }
+}

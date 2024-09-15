@@ -645,3 +645,40 @@ export const py_sum = function (block, generator) {
     var code = 'sum(' + array + ')';
     return [code, generator.ORDER_ATOMIC];
 }
+
+export const dataframe_sort_values = function (block, generator) {
+    const dict = generator.valueToCode(block, 'DICT', generator.ORDER_ATOMIC) || 'df';
+    const key = generator.valueToCode(block, 'KEY', generator.ORDER_ATOMIC) || '\'tag\'';
+    const ascending = block.getFieldValue('AS_CENDING');
+    const code = `${dict}.sort_values(by=${key}, ascending=${ascending})`;
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const dataframe_head_tail = function (block, generator) {
+    const dict = generator.valueToCode(block, 'DICT', generator.ORDER_ATOMIC) || 'df';
+    const lines = generator.valueToCode(block, 'LINES', generator.ORDER_ATOMIC) || '1';
+    const type = block.getFieldValue('TYPE');
+    const code = `${dict}.${type}(${lines})`;
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const dataframe_select = function (block, generator) {
+    const dict = generator.valueToCode(block, 'DICT', generator.ORDER_ATOMIC) || 'df';
+    const key = generator.valueToCode(block, 'KEY', generator.ORDER_ATOMIC) || 'df[\'tag\'] > 1';
+    const code = `${dict}[${key}]`;
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const dataframe_groupby = function (block, generator) {
+    const dict = generator.valueToCode(block, 'DICT', generator.ORDER_ATOMIC) || 'df';
+    const key = generator.valueToCode(block, 'KEY', generator.ORDER_ATOMIC) || '\'tag\'';
+    const code = `${dict}.groupby(by=${key})`;
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const dataframe_aggregate_func = function (block, generator) {
+    const dict = generator.valueToCode(block, 'DICT', generator.ORDER_ATOMIC) || 'df';
+    const type = block.getFieldValue('TYPE');
+    const code = `${dict}.${type}()`;
+    return [code, generator.ORDER_ATOMIC];
+}
