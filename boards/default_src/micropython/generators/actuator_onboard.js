@@ -450,7 +450,7 @@ export const analog_keyboard_input = function (_, generator) {
     var ge = generator.valueToCode(this, 'general', generator.ORDER_ATOMIC);
     var re = this.getFieldValue('release');
     generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
-    var code = "hid_keyboard("+sp+","+ge+","+re+")\n";
+    var code = "onboard_bot.hid_keyboard("+sp+","+ge+","+re+")\n";
     return code;
 }
 
