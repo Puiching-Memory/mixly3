@@ -280,156 +280,156 @@ export const array_toarray = function (_, generator) {
 }
 
 export const plot_show = function (_, generator) {
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
-    var code = 'matplotlib.pyplot.show()\n';
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
+    var code = 'plt.show()\n';
     return code;
 }
 
 export const plot_axes = function (_, generator) {
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
-    var code = 'matplotlib.pyplot.axes(aspect=1)\n';
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
+    var code = 'plt.axes(aspect=1)\n';
     return code;
 }
 
 export const plot_plot_easy = function (_, generator) {
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
     var varName = generator.valueToCode(this, 'SER', generator.ORDER_ASSIGNMENT) || '0';
-    var code = 'matplotlib.pyplot.plot(' + varName + ")\n";
+    var code = 'plt.plot(' + varName + ")\n";
     return code;
 }
 
 export const plot_plot = function (_, generator) {
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
     var line = this.getFieldValue('LINE');
     var color = this.getFieldValue('COLOR');
     var dot = this.getFieldValue('DOT');
     var varName = generator.valueToCode(this, 'SER', generator.ORDER_ASSIGNMENT) || '0';
-    var code = 'matplotlib.pyplot.plot(' + varName + ",'" + dot + line + color + "')\n";
+    var code = 'plt.plot(' + varName + ", '" + dot + line + color + "')\n";
     return code;
 }
 
 export const plot_legend = function (_, generator) {
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
     generator.definitions_.import_matplotlib_font_manager = "import matplotlib.font_manager";
-    var code = 'matplotlib.pyplot.legend(' + 'prop=matplotlib.font_manager.FontProperties("' + "STSong" + '")' + ')\n';
+    var code = 'plt.legend(' + 'prop=matplotlib.font_manager.FontProperties("' + "STSong" + '")' + ')\n';
     return code;
 }
 
 export const plot_title = function (_, generator) {
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
     var a = generator.valueToCode(this, 'TITLE', generator.ORDER_ATOMIC);
-    var code = 'matplotlib.pyplot.title(' + a + ', fontproperties = "' + "STSong" + '")\n';
+    var code = 'plt.title(' + a + ', fontproperties="' + "STSong" + '")\n';
     return code;
 }
 
 export const plot_label = function (_, generator) {
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
     var direction = this.getFieldValue('DIR');
     var a = generator.valueToCode(this, 'LABEL', generator.ORDER_ATOMIC);
-    var code = 'matplotlib.pyplot.' + direction + 'label(' + a + ', fontproperties = "' + "STSong" + '")\n';
+    var code = 'plt.' + direction + 'label(' + a + ', fontproperties="' + "STSong" + '")\n';
     return code;
 }
 
 export const plot_plot_bar = function (_, generator) {
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
     var direction = this.getFieldValue('DIR');
     var a = generator.valueToCode(this, 'A', generator.ORDER_ATOMIC) || '\'\'';
     var b = generator.valueToCode(this, 'B', generator.ORDER_ATOMIC) || '\'\'';
-    var code = 'matplotlib.pyplot.' + direction + '(' + a + ',' + b + ")\n";
+    var code = 'plt.' + direction + '(' + a + ', ' + b + ")\n";
     return code;
 }
 
 export const plot_plot_scatter = function (_, generator) {
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
     var a = generator.valueToCode(this, 'A', generator.ORDER_ATOMIC) || '\'\'';
     var b = generator.valueToCode(this, 'B', generator.ORDER_ATOMIC) || '\'\'';
     var s = generator.valueToCode(this, 'S', generator.ORDER_ATOMIC) || '\'\'';
     var color = this.getFieldValue('COLOR');
     var dot = this.getFieldValue('DOT');
     var tag = generator.valueToCode(this, 'TAG', generator.ORDER_ATOMIC) || '\'\'';
-    var code = 'matplotlib.pyplot.scatter(' + a + ',' + b + ",s=" + s + ",c='" + color + "',marker='" + dot + "',label=" + tag + ")\n";
+    var code = 'plt.scatter(' + a + ', ' + b + ", s=" + s + ", c='" + color + "', marker='" + dot + "', label=" + tag + ")\n";
     return code;
 }
 
 export const plot_plot_xy = function (_, generator) {
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
     var a = generator.valueToCode(this, 'A', generator.ORDER_ATOMIC) || '\'\'';
     var b = generator.valueToCode(this, 'B', generator.ORDER_ATOMIC) || '\'\'';
     var line = this.getFieldValue('LINE');
     var color = this.getFieldValue('COLOR');
     var dot = this.getFieldValue('DOT');
     var tag = generator.valueToCode(this, 'TAG', generator.ORDER_ATOMIC) || '\'\'';
-    var code = 'matplotlib.pyplot.plot(' + a + ',' + b + ",'" + dot + line + color + "'" + ',label=' + tag + ")\n";
+    var code = 'plt.plot(' + a + ', ' + b + ", '" + dot + line + color + "'" + ', label=' + tag + ")\n";
     return code;
 }
 
 export const plot_bar = function (_, generator) {
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
     var a = generator.valueToCode(this, 'A', generator.ORDER_ATOMIC) || '\'\'';
     var b = generator.valueToCode(this, 'B', generator.ORDER_ATOMIC) || '\'\'';
     var tag = generator.valueToCode(this, 'TAG', generator.ORDER_ATOMIC) || '\'\'';
     var width = generator.valueToCode(this, 'WIDTH', generator.ORDER_RELATIONAL) || '0';
     var color = this.getFieldValue('COLOR')
     var align = this.getFieldValue('ALIGN');
-    var code = 'matplotlib.pyplot.bar(' + a + ',' + b + ',align="' + align + '",color="' + color + '",width=' + width + ',label=' + tag + ")\n";
+    var code = 'plt.bar(' + a + ', ' + b + ', align="' + align + '", color="' + color + '", width=' + width + ', label=' + tag + ")\n";
     return code;
 }
 
 export const plot_pie = function (_, generator) {
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
     var a = generator.valueToCode(this, 'A', generator.ORDER_ATOMIC) || '\'\'';
     var b = generator.valueToCode(this, 'B', generator.ORDER_ATOMIC) || '\'\'';
     var explode = generator.valueToCode(this, 'EXPLODE', generator.ORDER_ATOMIC) || '\'\'';
     var shadow = this.getFieldValue('SHADOW');
     var autopct = this.getFieldValue('autopct');
     if (autopct != 'None') { autopct = "'" + autopct + "'" }
-    var code = 'matplotlib.pyplot.pie(' + a + ',explode=' + explode + ',labels=' + b + ',autopct=' + autopct + ',shadow=' + shadow + ")\n";
+    var code = 'plt.pie(' + a + ', explode=' + explode + ', labels=' + b + ', autopct=' + autopct + ', shadow=' + shadow + ")\n";
     return code;
 }
 
 export const plot_hist = function (_, generator) {
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
     var a = generator.valueToCode(this, 'A', generator.ORDER_ATOMIC) || '\'\'';
     var b = generator.valueToCode(this, 'B', generator.ORDER_ATOMIC) || '\'\'';
-    var code = 'matplotlib.pyplot.hist(' + a + ',' + b + ")\n";
+    var code = 'plt.hist(' + a + ', ' + b + ")\n";
     return code;
 }
 
 export const plot_ticks = function (_, generator) {
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
     var direction = this.getFieldValue('DIR');
     var a = generator.valueToCode(this, 'A', generator.ORDER_ATOMIC) || '\'\'';
     var b = generator.valueToCode(this, 'B', generator.ORDER_ATOMIC) || '\'\'';
-    var code = 'matplotlib.pyplot.' + direction + 'ticks(' + a + ',' + b + ",fontproperties = '" + "STSong" + "')\n";
+    var code = 'plt.' + direction + 'ticks(' + a + ', ' + b + ", fontproperties = '" + "STSong" + "')\n";
     return code;
 }
 
 export const plot_subplot = function (_, generator) {
     generator.definitions_.import_numpy = "import numpy";
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
     var from = generator.valueToCode(this, "VET", generator.ORDER_NONE) || "0";
     var end = generator.valueToCode(this, "HOR", generator.ORDER_NONE) || "0";
     var step = generator.valueToCode(this, "NUM", generator.ORDER_NONE) || "0";
-    var code = "matplotlib.pyplot.subplot(" + from + ", " + end + ", " + step + ")\n";
+    var code = "plt.subplot(" + from + ", " + end + ", " + step + ")\n";
     return code
 }
 
 export const plot_savefig = function (_, generator) {
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
-    var code = "matplotlib.pyplot.savefig('1.png')\n";
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
+    var code = "plt.savefig('1.png')\n";
     return code;
 }
 
 export const plot_text = function (_, generator) {
     generator.definitions_.import_numpy = "import numpy";
-    generator.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
     var from = generator.valueToCode(this, "VET", generator.ORDER_NONE) || "0";
     var end = generator.valueToCode(this, "HOR", generator.ORDER_NONE) || "0";
     var step = generator.valueToCode(this, "NUM", generator.ORDER_NONE) || "0";
     var halign = this.getFieldValue('HALIGN');
     var valign = this.getFieldValue('VALIGN');
     var fontnum = generator.valueToCode(this, 'FONTNUM', generator.ORDER_ASSIGNMENT) || '0';
-    var code = "matplotlib.pyplot.text(" + from + ", " + end + ", " + step + ", ha='" + halign + "', va='" + valign + "', fontsize=" + fontnum + ")\n";
+    var code = "plt.text(" + from + ", " + end + ", " + step + ", ha='" + halign + "', va='" + valign + "', fontsize=" + fontnum + ")\n";
     return code
 }
 
@@ -681,4 +681,10 @@ export const dataframe_aggregate_func = function (block, generator) {
     const type = block.getFieldValue('TYPE');
     const code = `${dict}.${type}()`;
     return [code, generator.ORDER_ATOMIC];
+}
+
+export const plot_cla = function (_, generator) {
+    generator.definitions_.import_matplotlib_pyplot = 'import matplotlib.pyplot as plt';
+    var code = 'plt.cla()\n';
+    return code;
 }

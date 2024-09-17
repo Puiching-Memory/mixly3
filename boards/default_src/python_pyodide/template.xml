@@ -214,6 +214,9 @@
     </block>
     <block type="controls_millis"></block>
     <block type="time_localtime"></block>
+    <block type="garbage_collection"></block>
+    <block type="get_mem_alloc"></block>
+    <block type="get_mem_free"></block>
 
     <!-- 
     <block type="Panic_with_status_code">
@@ -2453,7 +2456,97 @@
         </block>
       </value>
     </block>
-
+    <block type="dataframe_info">
+      <value name="DATAFRAME">
+        <shadow type="variables_get">
+          <field name="VAR">df</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="dataframe_median">
+      <value name="DATAFRAME">
+        <shadow type="variables_get">
+          <field name="VAR">df</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="numpy_min">
+      <value name="ARRAY">
+        <shadow type="variables_get">
+          <field name="VAR">array</field>
+        </shadow>
+      </value>
+      <dummy>
+        <field name="AXIS">None</field>
+      </dummy>
+    </block>
+    <block type="numpy_max">
+      <value name="ARRAY">
+        <shadow type="variables_get">
+          <field name="VAR">array</field>
+        </shadow>
+      </value>
+      <dummy>
+        <field name="AXIS">None</field>
+      </dummy>
+    </block>
+    <block type="numpy_sum">
+      <value name="ARRAY">
+        <shadow type="variables_get">
+          <field name="VAR">array</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="py_sum">
+      <value name="ARRAY">
+        <shadow type="variables_get">
+          <field name="VAR">array</field>
+        </shadow>
+      </value>
+    </block>
+    </block>
+    <block type="numpy_size">
+      <value name="ARRAY">
+        <shadow type="variables_get">
+          <field name="VAR">array</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="dataframe_fillna">
+      <value name="DATAFRAME">
+        <shadow type="variables_get">
+          <field name="VAR">df</field>
+        </shadow>
+      </value>
+      <value name="VALUE">
+        <shadow type="variables_get">
+          <field name="VAR">value</field>
+        </shadow>
+      </value>
+      <dummy>
+        <field name="INPLACE">False</field>
+      </dummy>
+    </block>
+    <block type="pandas_dropna">
+      <value name="DF">
+        <shadow type="variables_get">
+          <field name="VAR">df</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="pandas_drop_columns">
+      <value name="DATAFRAME">
+        <shadow type="variables_get">
+          <field name="VAR">df</field>
+        </shadow>
+      </value>
+      <value name="COLUMNS">
+        <shadow type="variables_get">
+          <field name="VAR">columns</field>
+        </shadow>
+      </value>
+      <field name="AXIS">0</field>
+    </block>
     <block type="variables_set">
       <field name="VAR">x</field>
       <value name="VALUE">
@@ -2476,6 +2569,84 @@
         </block>
       </value>
     </block>
+    <block type="numpy_ones">
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="numpy_random_random">
+      <value name="SIZE">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="numpy_c_">
+      <value name="ARRAY1">
+        <shadow type="variables_get">
+          <field name="VAR">array1</field>
+        </shadow>
+      </value>
+      <value name="ARRAY2">
+        <shadow type="variables_get">
+          <field name="VAR">array2</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="numpy_linalg_det">
+      <value name="ARRAY">
+        <shadow type="variables_get">
+          <field name="VAR">myMatrix</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="matrix_transpose">
+      <value name="MATRIX">
+        <shadow type="variables_get">
+          <field name="VAR">myMatrix</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="numpy_linalg_inv">
+      <value name="ARRAY">
+        <shadow type="variables_get">
+          <field name="VAR">myMatrix</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="numpy_square">
+      <value name="ARRAY">
+        <shadow type="variables_get">
+          <field name="VAR">array</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="matrix_multiplication">
+      <value name="MATRIX1">
+        <shadow type="variables_get">
+          <field name="VAR">matrix1</field>
+        </shadow>
+      </value>
+      <value name="MATRIX2">
+        <shadow type="variables_get">
+          <field name="VAR">matrix2</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="numpy_dot">
+      <value name="ARRAY1">
+        <shadow type="variables_get">
+          <field name="VAR">array1</field>
+        </shadow>
+      </value>
+      <value name="ARRAY2">
+        <shadow type="variables_get">
+          <field name="VAR">array2</field>
+        </shadow>
+      </value>
+    </block>
     <block type="array_toarray">
       <value name="VAR">
         <shadow type="list_many_input">
@@ -2487,6 +2658,85 @@
       <value name="NUM">
         <shadow type="variables_get">
           <field name="VAR">x</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="numpy_shape">
+      <value name="ARRAY">
+        <shadow type="variables_get">
+          <field name="VAR">myArray</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="numpy_reshape">
+      <value name="ARRAY">
+        <shadow type="variables_get">
+          <field name="VAR">myArray</field>
+        </shadow>
+      </value>
+      <value name="DIMENSIONS">
+        <shadow type="variables_get">
+          <field name="VAR">myDimensions</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="numpy_astype">
+      <value name="ARRAY">
+        <shadow type="variables_get">
+          <field name="VAR">myArray</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="numpy_mean_digit">
+      <value name="X">
+        <shadow type="variables_get">
+          <field name="VAR">myArray</field>
+        </shadow>
+      </value>
+      <value name="Y">
+        <shadow type="variables_get">
+          <field name="VAR">myFeatures</field>
+        </shadow>
+      </value>
+      <value name="DIGIT">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="numpy_argmin_template_match">
+      <value name="IMAGE">
+        <shadow type="variables_get">
+          <field name="VAR">image</field>
+        </shadow>
+      </value>
+      <value name="TEMPLATES">
+        <shadow type="variables_get">
+          <field name="VAR">templates</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="numpy_mean">
+      <value name="ARRAY">
+        <shadow type="variables_get">
+          <field name="VAR">myArray</field>
+        </shadow>
+      </value>
+      <value name="AXIS">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="numpy_std">
+      <value name="ARRAY">
+        <shadow type="variables_get">
+          <field name="VAR">myArray</field>
+        </shadow>
+      </value>
+      <value name="AXIS">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
         </shadow>
       </value>
     </block>
@@ -2667,21 +2917,21 @@
         </block>
       </value>
     </block>
-    <block type="pl_plot_easy">
+    <block type="plot_plot_easy">
       <value name="SER">
         <shadow type="variables_get">
           <field name="VAR">ser1</field>
         </shadow>
       </value>
     </block>
-    <block type="pl_plot">
+    <block type="plot_plot">
       <value name="SER">
         <shadow type="variables_get">
           <field name="VAR">ser1</field>
         </shadow>
       </value>
     </block>
-    <block type="pl_plot_bar">
+    <block type="plot_plot_bar">
       <value name="A">
         <shadow type="list_many_input">
           <field name="CONTENT">1,2,3,4</field>
@@ -2693,7 +2943,7 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_plot_scatter">
+    <block type="plot_plot_scatter">
       <value name="A">
         <shadow type="list_many_input">
           <field name="CONTENT">1,2,3,4</field>
@@ -2715,7 +2965,7 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_plot_xy">
+    <block type="plot_plot_xy">
       <value name="A">
         <shadow type="list_many_input">
           <field name="CONTENT">1,2,3,4</field>
@@ -2732,7 +2982,7 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_bar">
+    <block type="plot_bar">
       <value name="A">
         <shadow type="list_many_input">
           <field name="CONTENT">1,2,3,4</field>
@@ -2754,7 +3004,7 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_pie">
+    <block type="plot_pie">
       <value name="A">
         <shadow type="list_many_input">
           <field name="CONTENT">0.25,0.35,0.1,0.3</field>
@@ -2771,7 +3021,7 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_hist">
+    <block type="plot_hist">
       <value name="A">
         <shadow type="list_many_input">
           <field name="CONTENT">11,21,31,41,51,61,71,81,91</field>
@@ -2783,8 +3033,9 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_show"></block>
-    <block type="pl_subplot">
+    <block type="plot_show"></block>
+    <block type="plot_cla"></block>
+    <block type="plot_subplot">
       <value name="VET">
         <shadow type="math_number">
           <field name="NUM">2</field>
@@ -2801,23 +3052,23 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_axes"></block>
-    <block type="pl_legend"></block>
-    <block type="pl_title">
+    <block type="plot_axes"></block>
+    <block type="plot_legend"></block>
+    <block type="plot_title">
       <value name="TITLE">
         <shadow type="text">
           <field name="TEXT">Title</field>
         </shadow>
       </value>
     </block>
-    <block type="pl_label">
+    <block type="plot_label">
       <value name="LABEL">
         <shadow type="text">
           <field name="TEXT">axis</field>
         </shadow>
       </value>
     </block>
-    <block type="pl_ticks">
+    <block type="plot_ticks">
       <value name="A">
         <shadow type="list_many_input">
           <field name="CONTENT">1,2,3,4</field>
@@ -2829,7 +3080,7 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_text">
+    <block type="plot_text">
       <value name="VET">
         <shadow type="math_number">
           <field name="NUM">1</field>
@@ -2851,7 +3102,7 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_savefig">
+    <block type="plot_savefig">
       <value name="FILE">
         <shadow type="text">
           <field name="TEXT">1.png</field>
@@ -3051,6 +3302,346 @@
       <value name="thick">
         <shadow type="math_number">
           <field name="NUM">3</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
+  <category id="catsklearn" colour="80">
+    <block type="sklearn_make_classification">
+      <value name="n_samples">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+      <value name="n_features">
+        <shadow type="math_number">
+          <field name="NUM">20</field>
+        </shadow>
+      </value>
+      <value name="n_informative">
+        <shadow type="math_number">
+          <field name="NUM">2</field>
+        </shadow>
+      </value>
+      <value name="n_redundant">
+        <shadow type="math_number">
+          <field name="NUM">2</field>
+        </shadow>
+      </value>
+      <value name="n_repeated">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="n_classes">
+        <shadow type="math_number">
+          <field name="NUM">2</field>
+        </shadow>
+      </value>
+      <value name="n_clusters_per_class">
+        <shadow type="math_number">
+          <field name="NUM">2</field>
+        </shadow>
+      </value>
+      <value name="random_state">
+        <shadow type="logic_null"></shadow>
+      </value>
+    </block>
+    <block type="sklearn_make_regression">
+      <value name="n_samples">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+      <value name="n_features">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+      <value name="n_informative">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+      <value name="n_targets">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="bias">
+        <shadow type="math_number">
+          <field name="NUM">0.0</field>
+        </shadow>
+      </value>
+      <value name="noise">
+        <shadow type="math_number">
+          <field name="NUM">0.0</field>
+        </shadow>
+      </value>
+      <value name="random_state">
+        <shadow type="logic_null"></shadow>
+      </value>
+    </block>
+    <block type="sklearn_make_blobs">
+      <value name="n_samples">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+      <value name="n_features">
+        <shadow type="math_number">
+          <field name="NUM">2</field>
+        </shadow>
+      </value>
+      <value name="centers">
+        <shadow type="logic_null"></shadow>
+      </value>
+      <value name="cluster_std">
+        <shadow type="math_number">
+          <field name="NUM">1.0</field>
+        </shadow>
+      </value>
+      <value name="center_box">
+        <block type="tuple_create_with_text_return">
+          <field name="TEXT">-10.0,10.0</field>
+        </block>
+      </value>
+      <value name="shuffle">
+        <shadow type="logic_boolean">
+          <field name="BOOL">TRUE</field>
+        </shadow>
+      </value>
+      <value name="random_state">
+        <shadow type="logic_null"></shadow>
+      </value>
+    </block>
+    <block type="sklearn_load">
+    </block>
+    <block type="sklearn_data_target">
+      <value name="name">
+        <shadow type="variables_get">
+          <field name="VAR">iris</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sklearn_train_test_split">
+      <value name="train_data">
+        <shadow type="variables_get">
+          <field name="VAR">iris_X</field>
+        </shadow>
+      </value>
+      <value name="train_target">
+        <shadow type="variables_get">
+          <field name="VAR">iris_y</field>
+        </shadow>
+      </value>
+      <value name="test_size">
+        <shadow type="math_number">
+          <field name="NUM">0.3</field>
+        </shadow>
+      </value>
+      <value name="rondom_state">
+        <shadow type="logic_null"></shadow>
+      </value>
+    </block>
+    <block type="sklearn_LinearRegression">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">model</field>
+        </shadow>
+      </value>
+      <value name="fit_intercept">
+        <shadow type="logic_boolean">
+          <field name="BOOL">TRUE</field>
+        </shadow>
+      </value>
+      <value name="normalize">
+        <shadow type="logic_boolean">
+          <field name="BOOL">FALSE</field>
+        </shadow>
+      </value>
+      <value name="n_jobs">
+        <shadow type="logic_null"></shadow>
+      </value>
+    </block>
+    <block type="sklearn_Ridge">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">model</field>
+        </shadow>
+      </value>
+      <value name="alpha">
+        <shadow type="math_number">
+          <field name="NUM">1.0</field>
+        </shadow>
+      </value>
+      <value name="fit_intercept">
+        <shadow type="logic_boolean">
+          <field name="BOOL">TRUE</field>
+        </shadow>
+      </value>
+      <value name="normalize">
+        <shadow type="logic_boolean">
+          <field name="BOOL">FALSE</field>
+        </shadow>
+      </value>
+      <value name="max_iter">
+        <shadow type="math_number">
+          <field name="NUM">300</field>
+        </shadow>
+      </value>
+      <value name="random_state">
+        <shadow type="logic_null"></shadow>
+      </value>
+    </block>
+    <block type="sklearn_DecisionTreeClassifier_Regressor">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">model</field>
+        </shadow>
+      </value>
+      <value name="max_depth">
+        <shadow type="logic_null"></shadow>
+      </value>
+      <value name="random_state">
+        <shadow type="logic_null"></shadow>
+      </value>
+    </block>
+    <block type="sklearn_RandomForestClassifier_Regressor">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">model</field>
+        </shadow>
+      </value>
+      <value name="n_estimators">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+      <value name="max_depth">
+        <shadow type="logic_null"></shadow>
+      </value>
+      <value name="n_jobs">
+        <shadow type="logic_null"></shadow>
+      </value>
+      <value name="random_state">
+        <shadow type="logic_null"></shadow>
+      </value>
+    </block>
+    <block type="sklearn_KNeighborsClassifier_Regressor">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">model</field>
+        </shadow>
+      </value>
+      <value name="K">
+        <shadow type="math_number">
+          <field name="NUM">5</field>
+        </shadow>
+      </value>
+      <value name="n_jobs">
+        <shadow type="logic_null"></shadow>
+      </value>
+    </block>
+    <block type="sklearn_GaussianNB">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">model</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sklearn_KMeans">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">model</field>
+        </shadow>
+      </value>
+      <value name="n_clusters">
+        <shadow type="math_number">
+          <field name="NUM">8</field>
+        </shadow>
+      </value>
+      <value name="max_iter">
+        <shadow type="math_number">
+          <field name="NUM">300</field>
+        </shadow>
+      </value>
+      <value name="random_state">
+        <shadow type="logic_null"></shadow>
+      </value>
+      <value name="n_jobs">
+        <shadow type="logic_null"></shadow>
+      </value>
+    </block>
+    <block type="sklearn_fit">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">model</field>
+        </shadow>
+      </value>
+      <value name="train_data">
+        <shadow type="variables_get">
+          <field name="VAR">X_train</field>
+        </shadow>
+      </value>
+      <value name="train_target">
+        <shadow type="variables_get">
+          <field name="VAR">y_train</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sklearn_score">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">model</field>
+        </shadow>
+      </value>
+      <value name="train_data">
+        <shadow type="variables_get">
+          <field name="VAR">X_test</field>
+        </shadow>
+      </value>
+      <value name="train_target">
+        <shadow type="variables_get">
+          <field name="VAR">y_test</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sklearn_predict">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">model</field>
+        </shadow>
+      </value>
+      <value name="train_data">
+        <shadow type="variables_get">
+          <field name="VAR">X_test</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sklearn_coef_intercept">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">model</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sklearn_cluster_centers_labels_inertia">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">model</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sklearn_save_load_model">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">model</field>
+        </shadow>
+      </value>
+      <value name="address">
+        <shadow type="text">
+          <field name="TEXT">D:/mixly/test.pkl</field>
         </shadow>
       </value>
     </block>

@@ -2740,13 +2740,6 @@
         </shadow>
       </value>
     </block>
-    <block type="pylab_imshow">
-      <value name="ARRAY">
-        <shadow type="variables_get">
-          <field name="VAR">myArray</field>
-        </shadow>
-      </value>
-    </block>
     <block type="series_create">
       <value name="SER">
         <shadow type="variables_get">
@@ -2924,21 +2917,21 @@
         </block>
       </value>
     </block>
-    <block type="pl_plot_easy">
+    <block type="plot_plot_easy">
       <value name="SER">
         <shadow type="variables_get">
           <field name="VAR">ser1</field>
         </shadow>
       </value>
     </block>
-    <block type="pl_plot">
+    <block type="plot_plot">
       <value name="SER">
         <shadow type="variables_get">
           <field name="VAR">ser1</field>
         </shadow>
       </value>
     </block>
-    <block type="pl_plot_bar">
+    <block type="plot_plot_bar">
       <value name="A">
         <shadow type="list_many_input">
           <field name="CONTENT">1,2,3,4</field>
@@ -2950,7 +2943,7 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_plot_scatter">
+    <block type="plot_plot_scatter">
       <value name="A">
         <shadow type="list_many_input">
           <field name="CONTENT">1,2,3,4</field>
@@ -2972,7 +2965,7 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_plot_xy">
+    <block type="plot_plot_xy">
       <value name="A">
         <shadow type="list_many_input">
           <field name="CONTENT">1,2,3,4</field>
@@ -2989,7 +2982,7 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_bar">
+    <block type="plot_bar">
       <value name="A">
         <shadow type="list_many_input">
           <field name="CONTENT">1,2,3,4</field>
@@ -3011,7 +3004,7 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_pie">
+    <block type="plot_pie">
       <value name="A">
         <shadow type="list_many_input">
           <field name="CONTENT">0.25,0.35,0.1,0.3</field>
@@ -3028,7 +3021,7 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_hist">
+    <block type="plot_hist">
       <value name="A">
         <shadow type="list_many_input">
           <field name="CONTENT">11,21,31,41,51,61,71,81,91</field>
@@ -3040,8 +3033,9 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_show"></block>
-    <block type="pl_subplot">
+    <block type="plot_show"></block>
+    <block type="plot_cla"></block>
+    <block type="plot_subplot">
       <value name="VET">
         <shadow type="math_number">
           <field name="NUM">2</field>
@@ -3058,23 +3052,23 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_axes"></block>
-    <block type="pl_legend"></block>
-    <block type="pl_title">
+    <block type="plot_axes"></block>
+    <block type="plot_legend"></block>
+    <block type="plot_title">
       <value name="TITLE">
         <shadow type="text">
           <field name="TEXT">Title</field>
         </shadow>
       </value>
     </block>
-    <block type="pl_label">
+    <block type="plot_label">
       <value name="LABEL">
         <shadow type="text">
           <field name="TEXT">axis</field>
         </shadow>
       </value>
     </block>
-    <block type="pl_ticks">
+    <block type="plot_ticks">
       <value name="A">
         <shadow type="list_many_input">
           <field name="CONTENT">1,2,3,4</field>
@@ -3086,7 +3080,7 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_text">
+    <block type="plot_text">
       <value name="VET">
         <shadow type="math_number">
           <field name="NUM">1</field>
@@ -3108,7 +3102,7 @@
         </shadow>
       </value>
     </block>
-    <block type="pl_savefig">
+    <block type="plot_savefig">
       <value name="FILE">
         <shadow type="text">
           <field name="TEXT">1.png</field>

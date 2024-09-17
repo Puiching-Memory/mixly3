@@ -1561,3 +1561,14 @@ export const dataframe_aggregate_func = {
         this.setTooltip('');
     }
 }
+
+export const plot_cla = {
+    init: function () {
+        this.setColour(DATA_HUE);
+        this.appendDummyInput()
+            .appendField('清除已有图像');
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};

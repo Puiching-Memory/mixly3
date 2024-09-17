@@ -175,6 +175,9 @@ class PythonShell {
                 if (code.indexOf('import turtle') !== -1) {
                     code += '\nturtle.done()\n';
                 }
+                if (code.indexOf('import matplotlib.pyplot') !== -1) {
+                    code += '\nplt.clf()\n';
+                }
                 this.#statusBarsManager_.changeTo('output');
                 this.#statusBarsManager_.show();
                 this.#statusBarTerminal_.setValue(`${Msg.Lang['shell.running']}...\n`);
