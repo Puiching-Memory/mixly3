@@ -47,6 +47,8 @@ const {
 BU.uploading = false;
 BU.burning = false;
 
+const BAUD = goog.platform() === 'darwin' ? 460800 : 921600;
+
 BU.requestPort = () => {
     if (SELECTED_BOARD.web.com === 'usb') {
         USB.requestPort();
@@ -226,7 +228,7 @@ BU.burnWithEsptool = async () => {
         transport = new Transport(port, false);
         esploader = new ESPLoader({
             transport,
-            baudrate: 921600,
+            baudrate: BAUD,
             terminal: {
                 clean() {
                     statusBarTerminal.setValue('');
