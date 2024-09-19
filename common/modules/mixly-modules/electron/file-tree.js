@@ -21,7 +21,7 @@ const chokidar = Mixly.require('chokidar');
 
 class FileTreeExt extends FileTree {
     static {
-        this.worker = new Worker('../common/modules/mixly-modules/workers/nodejs/node-file-watcher.js', {
+        /*this.worker = new Worker('../common/modules/mixly-modules/workers/nodejs/node-file-watcher.js', {
             name: 'nodeFileWatcher'
         });
         this.watcherEventsRegistry = new Registry();
@@ -35,7 +35,7 @@ class FileTreeExt extends FileTree {
         });
         this.worker.addEventListener('error', (event) => {
             Debug.error(event);
-        });
+        });*/
 
         this.addEventListener = function(folderPath, func) {
             FileTreeExt.watch(folderPath);

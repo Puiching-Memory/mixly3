@@ -81,7 +81,7 @@ function createWindow(filePath = null, indexUrl = null) {
         allowRunningInsecureContent: true,
         webPreferences: {
             nodeIntegration: true,
-            nodeIntegrationInWorker: true,
+            nodeIntegrationInWorker: false,
             allowRunningInsecureContent: true,
             enableRemoteModule: true,
             contextIsolation: false,
