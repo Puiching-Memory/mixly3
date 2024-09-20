@@ -1454,3 +1454,19 @@ export const onboard_tft_display_shape_circle = {
         });
     }
 };
+
+export const draw_pointer = {
+    init: function() {
+       this.setColour(DISPLAY_ONBOARD_HUE);
+       this.appendDummyInput()
+           .appendField(Blockly.Msg.DRAW_POINTER)
+           .appendField(Blockly.Msg.DRAW_POINTER_ANGLE);
+       this.appendValueInput('angle');
+       this.appendDummyInput()
+           .appendField('°');
+       this.setPreviousStatement(true, null);
+       this.setNextStatement(true, null);
+       this.setInputsInline(true);
+       this.setTooltip(Blockly.Msg.DRAW_POINTER_TOOLTIP);
+    }
+  };

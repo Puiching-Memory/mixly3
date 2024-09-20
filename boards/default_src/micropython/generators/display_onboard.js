@@ -914,3 +914,11 @@ export const onboard_tft_display_shape_circle = function (block, generator) {
     }
     return code;
 }
+
+export const draw_pointer = function(_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
+    var angle = generator.valueToCode(this, 'angle', generator.ORDER_ASSIGNMENT);
+    var code = "onboard_matrix.pointern(angle=" + angle + ")\n";
+    return code;
+}

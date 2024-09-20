@@ -230,29 +230,30 @@ export const ntptime_address = function (_, generator) {
     return [code, generator.ORDER_ATOMIC];
 }
 
-export const urequests_wifi_connect = function (_, generator) {
+export const requests_get2  = function(_, generator) {
     generator.definitions_['import_urequests'] = "import urequests";
-    var username = generator.valueToCode(this, 'WIFINAME', generator.ORDER_ATOMIC);
-    var password = generator.valueToCode(this, 'PASSWORD', generator.ORDER_ATOMIC);
-    var code = 'wifi.connect(' + username + ',' + password + ')\n';
-    return code;
-}
-
-export const urequests_wifi_url = function (_, generator) {
-    generator.definitions_['import_urequests'] = "import urequests";
-    var url = generator.valueToCode(this, 'URL', generator.ORDER_ATOMIC);
-    var code = url;
+    var dropdown_type = this.getFieldValue('TYPE');
+    var str =generator.valueToCode(this, 'URL', generator.ORDER_ATOMIC) ;
+    var code= 'urequests.'+dropdown_type+'(' + str + ')';
     return [code,generator.ORDER_ATOMIC];
-}
-
-export const urequests_connect_url = function (_, generator) {
+   
+  };
+  
+export const requests_attribute2 = function(_, generator) {
     generator.definitions_['import_urequests'] = "import urequests";
-    var url = generator.valueToCode(this, 'url', generator.ORDER_ATOMIC);
-    return 'response=urequests.get('+url+')\n';
-}
-
-export const urequests_response = function (_, generator) {
-    generator.definitions_['import_urequests'] = "import urequests";
-    var code = 'res=response.text';
+    var varName = generator.valueToCode(this, 'VAL', generator.ORDER_ASSIGNMENT) || '0';
+    var attr = this.getFieldValue('ATTR');
+    var code=varName+"." + attr;
     return [code,generator.ORDER_ATOMIC];
-}
+  };
+  
+export const requests_post = function(_, generator) {
+    generator.definitions_['import_urequests'] = "import urequests";
+      var dropdown_type = this.getFieldValue('TYPE'); 
+      var str = generator.valueToCode(this, 'URL', generator.ORDER_ATOMIC) ;
+      var data = generator.valueToCode(this, 'data', generator.ORDER_ATOMIC) ;
+      var code= 'urequests.'+dropdown_type+'(' + str +',data='+data+ ')';
+      return [code,generator.ORDER_ATOMIC];
+   
+  };
+  

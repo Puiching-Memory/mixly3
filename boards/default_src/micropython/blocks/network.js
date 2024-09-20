@@ -123,59 +123,6 @@ export const network_wifi_connect = {
     }
 };
 
-export const urequests_wifi_connect = {
-    init: function () {
-        this.setColour(NETWORK_HUE);
-        this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_ESP32_UREQUESTS_CONNECT_WIFI);
-        this.appendValueInput('WIFINAME')
-            .setCheck(String)
-            .appendField(Blockly.Msg.HTML_NAME);
-        this.appendValueInput('PASSWORD')
-            .setCheck(String)
-            .appendField(Blockly.Msg.HTML_PASSWORD);
-        this.setInputsInline(true);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setTooltip(Blockly.Msg.MIXLY_ESP32_IOT_WIFI_CONNECT_TOOLTIP);
-    }
-};
-
-export const urequests_wifi_url = {
-    init: function () {
-        this.setColour(NETWORK_HUE);
-        this.appendValueInput('URL')
-            .setCheck(String)
-            .appendField('URL');
-        this.setInputsInline(true);
-        this.setOutput(true);
-        this.setTooltip(Blockly.Msg.MIXLY_UREQUESTS_URL_TOOLTIP);
-    }
-};
-
-export const urequests_connect_url = {
-    init: function () {
-        this.setColour(NETWORK_HUE);
-        this.appendValueInput('url')
-            .appendField(Blockly.Msg.MIXLY_ESP32_CONNECT_URL_TOOLTIP);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.MIXLY_ESP32_UREQUESTS_URL_TOOLTIP);
-    }
-};
-
-export const urequests_response = {
-    init: function () {
-        this.setColour(NETWORK_HUE);
-        this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_ESP32_URL_REPONSE);
-        this.setInputsInline(true);
-        this.setOutput(true);
-        this.setTooltip(Blockly.Msg.MIXLY_ESP32_URL_REPONSE_TOOLTIP);
-    }
-};
-
 export const network_get_connect = {
     init: function () {
         this.setColour(NETWORK_HUE);
@@ -564,4 +511,63 @@ export const ntptime_address = {
             ]), 'op')
         this.setOutput(true);
     }
+};
+
+const COMMUNICATE_HUE = '#3288dd';
+
+export const requests_get2 = {
+  init: function() {
+    this.setColour(COMMUNICATE_HUE);
+    this.appendValueInput("URL")
+      .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
+      .setCheck(String);
+  this.appendDummyInput("")  
+      .appendField(Blockly.Msg.blockpy_CONDUCT)
+      .appendField(new Blockly.FieldDropdown([["get", "get"], ["head", "head"], ["delete", "delete"]]), 'TYPE')
+      .appendField(Blockly.Msg.blockpy_REQUESTS)      
+      .appendField(Blockly.Msg.MIXPY_REQUESTS_GET_RESULT)                 
+  this.setInputsInline(true);
+   this.setOutput(true);
+  this.setTooltip("");
+  }, 
+};
+
+export const requests_post = {
+  init: function() {
+    this.setColour(COMMUNICATE_HUE);
+    this.appendValueInput("URL")
+      .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
+      .setCheck(String);
+  this.appendDummyInput("")  
+      .appendField(Blockly.Msg.blockpy_CONDUCT)
+      .appendField(new Blockly.FieldDropdown([["post", "post"], ["put", "put"], ["patch", "patch"]]), 'TYPE')
+      .appendField(Blockly.Msg.blockpy_REQUESTS)     
+  this.appendValueInput("data")
+      .appendField(Blockly.Msg.blockpy_REQUESTS+Blockly.Msg.OLED_STRING)    
+  this.appendDummyInput("")     
+      .appendField(Blockly.Msg.MIXPY_REQUESTS_GET_RESULT)                 
+  this.setInputsInline(true);
+   this.setOutput(true);
+  this.setTooltip("");
+  }, 
+};
+
+export const requests_attribute2 = {
+  init: function() {
+     this.appendValueInput('VAL')
+
+  var attr =
+        [[Blockly.Msg.blockpy_REQUESTS_GET_ATTR_TEXT, 'text'],
+          [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_JSON,'json()'],
+        [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_STATUS_CODE, 'status_code'],
+        [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_CONTENT, 'content']
+        ,[Blockly.Msg.MIXPY_TEXT_ENCODE, 'encoding']];
+    this.setColour(COMMUNICATE_HUE);
+    this.appendDummyInput("")
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET)
+        .appendField(new Blockly.FieldDropdown(attr), 'ATTR')        
+
+  this.setInputsInline(true);
+   this.setOutput(true, String);  
+  }
 };
