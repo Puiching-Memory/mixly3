@@ -17,11 +17,6 @@ export const SCoopTask = {
         this.setColour(SCOOP_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SCOOP);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#scoop-task");
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '控制', 'SCoop Task']
-            }
-        };
     }
 };
 
@@ -34,11 +29,6 @@ export const SCoop_yield = {
         this.setNextStatement(false, null);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SCOOP_YIELD);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#scoop-task");
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '控制', 'SCoop Task']
-            }
-        };
     }
 };
 export const SCoop_sleep = {
@@ -53,11 +43,5 @@ export const SCoop_sleep = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SCOOP_SLEEP);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#scoop-task");
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '控制', 'SCoop Task']
-            }
-        };
     }
 };

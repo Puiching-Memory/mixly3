@@ -16,7 +16,7 @@ module.exports = {
         "no-else-return": 2, // 如果if语句里面有return,后面不能跟else语句
         "no-empty": 2, // 块语句中的内容不能为空
         "no-var": 0, // 不能使用 var 定义变量
-        "indent": [2, 4], // 缩进风格
+        "indent": [2, 4, { SwitchCase: 1 }], // 缩进风格
         "strict": 2,
         "use-isnan": 2,
         "no-redeclare": 0, // 禁止重复声明变量

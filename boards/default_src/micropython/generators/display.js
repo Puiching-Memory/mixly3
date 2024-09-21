@@ -284,12 +284,12 @@ export const display_rect = function (_, generator) {
     var size = this.getFieldValue('OP');
     var code = '';
     switch (checkbox_fill) {
-    case "True":
-        code = varName + '.show_fill_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
-        break;
-    case "False":
-        code = varName + '.show_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
-        break;
+        case "True":
+            code = varName + '.show_fill_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
+            break;
+        case "False":
+            code = varName + '.show_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
+            break;
     }
     return code;
 }
@@ -407,12 +407,12 @@ export const display_circle = function (_, generator) {
     var size = this.getFieldValue('OP');
     var code = '';
     switch (checkbox_fill) {
-    case "True":
-        code = varName + '.show_fill_circle(' + location_x + ', ' + location_y + ', ' + value_r + ', ' + size + ')\n';
-        break;
-    case "False":
-        code = varName + '.show_circle(' + location_x + ', ' + location_y + ', ' + value_r + ', ' + size + ')\n';
-        break;
+        case "True":
+            code = varName + '.show_fill_circle(' + location_x + ', ' + location_y + ', ' + value_r + ', ' + size + ')\n';
+            break;
+        case "False":
+            code = varName + '.show_circle(' + location_x + ', ' + location_y + ', ' + value_r + ', ' + size + ')\n';
+            break;
     }
     return code;
 }
@@ -431,12 +431,12 @@ export const display_triangle = function (_, generator) {
     var size = this.getFieldValue('OP');
     var code = '';
     switch (checkbox_fill) {
-    case "True":
-        code = varName + '.show_fill_triangle(' + location_x0 + ', ' + location_y0 + ', ' + location_x1 + ', ' + location_y1 + ', ' + location_x2 + ', ' + location_y2 + ', ' + size + ')\n';
-        break;
-    case "False":
-        code = varName + '.show_triangle(' + location_x0 + ', ' + location_y0 + ', ' + location_x1 + ', ' + location_y1 + ', ' + location_x2 + ', ' + location_y2 + ', ' + size + ')\n';
-        break;
+        case "True":
+            code = varName + '.show_fill_triangle(' + location_x0 + ', ' + location_y0 + ', ' + location_x1 + ', ' + location_y1 + ', ' + location_x2 + ', ' + location_y2 + ', ' + size + ')\n';
+            break;
+        case "False":
+            code = varName + '.show_triangle(' + location_x0 + ', ' + location_y0 + ', ' + location_x1 + ', ' + location_y1 + ', ' + location_x2 + ', ' + location_y2 + ', ' + size + ')\n';
+            break;
     }
     return code;
 }

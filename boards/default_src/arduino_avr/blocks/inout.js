@@ -26,11 +26,6 @@ export const inout_pinMode = {
         this.setNextStatement(true, null);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_pinMode);
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '输入输出', '管脚模式']
-            }
-        };
     }
 };
 
@@ -49,11 +44,6 @@ export const inout_digital_write2 = {
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.LANG_INOUT_DIGITAL_WRITE_TOOLTIP);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id2");
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '输入输出', '数字输出']
-            }
-        };
     }
 };
 
@@ -66,11 +56,6 @@ export const inout_digital_read = {
         this.setOutput(true, [Boolean, Number]);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_DIGITAL_READ);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id7");
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '输入输出', '数字输入']
-            }
-        };
     }
 };
 
@@ -84,11 +69,6 @@ export const inout_digital_read2 = {
         this.setOutput(true, [Boolean, Number]);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_DIGITAL_READ);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id19");
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '输入输出', '数字输入']
-            }
-        };
     }
 };
 
@@ -106,11 +86,6 @@ export const inout_analog_write = {
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_ANALOG_WRITE);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id13");
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '输入输出', '模拟输出']
-            }
-        };
     }
 };
 
@@ -124,11 +99,6 @@ export const inout_analog_read = {
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_ANALOG_READ);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id13");
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '输入输出', '模拟输入']
-            }
-        };
     }
 };
 
@@ -160,11 +130,6 @@ export const OneButton_interrupt = {
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_ATTACHINTERRUPT);
         this.setHelpUrl();
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '输入输出', '多功能按键']
-            }
-        };
     }
 };
 
@@ -183,12 +148,6 @@ export const controls_attachInterrupt = {
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_ATTACHINTERRUPT);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id25");
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '输入输出', '硬件中断'],
-                scrollPos: '硬件中断'
-            }
-        };
     }
 };
 
@@ -203,12 +162,6 @@ export const controls_detachInterrupt = {
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_DETACHINTERRUPT);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id30");
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '输入输出', '硬件中断'],
-                scrollPos: '取消硬件中断'
-            }
-        };
     }
 };
 
@@ -226,12 +179,6 @@ export const controls_attachPinInterrupt = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_ATTACHINTERRUPT);
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '输入输出', '软件中断'],
-                scrollPos: '软件中断'
-            }
-        };
     }
 };
 
@@ -244,12 +191,6 @@ export const controls_detachPinInterrupt = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_DETACHINTERRUPT);
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '输入输出', '软件中断'],
-                scrollPos: '取消软件中断'
-            }
-        };
     }
 };
 
@@ -265,11 +206,6 @@ export const inout_pulseIn = {
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_pulseIn);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id33");
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '输入输出', '脉冲长度']
-            }
-        };
     }
 };
 
@@ -289,11 +225,6 @@ export const inout_pulseIn2 = {
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_pulseIn2);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id33");
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '输入输出', '脉冲长度']
-            }
-        };
     }
 };
 
@@ -319,11 +250,6 @@ export const inout_shiftout = {
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_shiftout);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#shiftout");
-        this.wiki = {
-            'zh-hans': {
-                page: ['Arduino AVR', '输入输出', 'ShiftOut']
-            }
-        };
     }
 };
 

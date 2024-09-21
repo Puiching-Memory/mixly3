@@ -185,12 +185,12 @@ export const display_rect = function (_, generator) {
     var checkbox_fill = this.getFieldValue("fill") == 'TRUE' ? 'True' : 'False';
     var size = this.getFieldValue('OP');
     switch (checkbox_fill) {
-    case "True":
-        var code = varName + '.show_fill_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
-        return code;
-    case "False":
-        var code = varName + '.show_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
-        return code;
+        case "True":
+            var code = varName + '.show_fill_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
+            return code;
+        case "False":
+            var code = varName + '.show_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
+            return code;
     }
 }
 
@@ -252,12 +252,12 @@ export const display_circle = function (_, generator) {
     var checkbox_fill = this.getFieldValue("fill") == 'TRUE' ? 'True' : 'False';
     var size = this.getFieldValue('OP');
     switch (checkbox_fill) {
-    case "True":
-        var code = varName + '.show_fill_circle(' + location_x + ', ' + location_y + ', ' + value_r + ', ' + size + ')\n';
-        return code;
-    case "False":
-        var code = varName + '.show_circle(' + location_x + ', ' + location_y + ', ' + value_r + ', ' + size + ')\n';
-        return code;
+        case "True":
+            var code = varName + '.show_fill_circle(' + location_x + ', ' + location_y + ', ' + value_r + ', ' + size + ')\n';
+            return code;
+        case "False":
+            var code = varName + '.show_circle(' + location_x + ', ' + location_y + ', ' + value_r + ', ' + size + ')\n';
+            return code;
     }
 }
 
@@ -274,12 +274,12 @@ export const display_triangle = function (_, generator) {
     var checkbox_fill = this.getFieldValue("fill") == 'TRUE' ? 'True' : 'False';
     var size = this.getFieldValue('OP');
     switch (checkbox_fill) {
-    case "True":
-        var code = varName + '.show_fill_triangle(' + location_x0 + ', ' + location_y0 + ', ' + location_x1 + ', ' + location_y1 + ', ' + location_x2 + ', ' + location_y2 + ', ' + size + ')\n';
-        return code;
-    case "False":
-        var code = varName + '.show_triangle(' + location_x0 + ', ' + location_y0 + ', ' + location_x1 + ', ' + location_y1 + ', ' + location_x2 + ', ' + location_y2 + ', ' + size + ')\n';
-        return code;
+        case "True":
+            var code = varName + '.show_fill_triangle(' + location_x0 + ', ' + location_y0 + ', ' + location_x1 + ', ' + location_y1 + ', ' + location_x2 + ', ' + location_y2 + ', ' + size + ')\n';
+            return code;
+        case "False":
+            var code = varName + '.show_triangle(' + location_x0 + ', ' + location_y0 + ', ' + location_x1 + ', ' + location_y1 + ', ' + location_x2 + ', ' + location_y2 + ', ' + size + ')\n';
+            return code;
     }
 }
 

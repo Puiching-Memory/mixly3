@@ -13,10 +13,10 @@ export const time_localtime = function (_, generator) {
     var op = this.getFieldValue('op');
     var code = "time.localtime()[" + op + "]";
     switch (op) {
-    case "all":
-        var code1 = "time.localtime()";
-        return [code1, generator.ORDER_ASSIGNMENT];
-    default:
-        return [code, generator.ORDER_ASSIGNMENT];
+        case "all":
+            var code1 = "time.localtime()";
+            return [code1, generator.ORDER_ASSIGNMENT];
+        default:
+            return [code, generator.ORDER_ASSIGNMENT];
     }
 }

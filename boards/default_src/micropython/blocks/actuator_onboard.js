@@ -234,20 +234,20 @@ export const actuator_onboard_neopixel_rgb = {
         this.setNextStatement(true, null);
         const boardKey = Boards.getSelectedBoardKey();
         switch (boardKey) {
-        case 'micropython:esp32c3:mixgo_cc':
-            this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOCC);
-            break;
-        case 'micropython:esp32s2:mixgo_ce':
-            this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOCC);
-            break;
-        case 'micropython:esp32c3:mixgo_me':
-            this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOME);
-            break;
-        case 'micropython:esp32:mPython':
-            this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MPYTHON);
-            break;
-        default:
-            this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOME);
+            case 'micropython:esp32c3:mixgo_cc':
+                this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOCC);
+                break;
+            case 'micropython:esp32s2:mixgo_ce':
+                this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOCC);
+                break;
+            case 'micropython:esp32c3:mixgo_me':
+                this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOME);
+                break;
+            case 'micropython:esp32:mPython':
+                this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MPYTHON);
+                break;
+            default:
+                this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOME);
         }
     }
 };
@@ -368,17 +368,17 @@ export const actuator_rm_onboard_neopixel_rgb = {
         this.setNextStatement(true, null);
         const boardKey = Boards.getSelectedBoardKey();
         switch (boardKey) {
-        case 'micropython:esp32c3:mixgocc':
-            this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOCC);
-            break;
-        case 'micropython:esp32c3:mixgome':
-            this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOME);
-            break;
-        case 'micropython:esp32:mPython':
-            this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MPYTHON);
-            break;
-        default:
-            this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOME);
+            case 'micropython:esp32c3:mixgocc':
+                this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOCC);
+                break;
+            case 'micropython:esp32c3:mixgome':
+                this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOME);
+                break;
+            case 'micropython:esp32:mPython':
+                this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MPYTHON);
+                break;
+            default:
+                this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOME);
         }
     }
 };
@@ -1003,7 +1003,7 @@ export const analog_keyboard_input = {
     init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_KEYBOARD_INPUT);
+            .appendField(Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_KEYBOARD_INPUT);
         this.appendValueInput('special');
         this.appendValueInput('general');
         this.appendDummyInput()
@@ -1011,7 +1011,7 @@ export const analog_keyboard_input = {
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.MICROPYTHON_DISPLAY_YES, "True"],
                 [Blockly.Msg.MICROPYTHON_DISPLAY_NO, "False"]
-            ]),'release');
+            ]), 'release');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
@@ -1025,7 +1025,7 @@ export const special_key = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SPECIAL_KEY)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_SPECIAL_KEY0,"0x00"],
+                [Blockly.Msg.MIXLY_SPECIAL_KEY0, "0x00"],
                 [Blockly.Msg.MIXLY_SPECIAL_KEY1, "0x01"],
                 [Blockly.Msg.MIXLY_SPECIAL_KEY2, "0x02"],
                 [Blockly.Msg.MIXLY_SPECIAL_KEY1, "0x04"],
@@ -1045,7 +1045,7 @@ export const general_key = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_GENERAL_KEY)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_SPECIAL_KEY0,"0x00"],
+                [Blockly.Msg.MIXLY_SPECIAL_KEY0, "0x00"],
                 ['A', "0x04"],
                 ['B', "0x05"],
                 ['C', "0x06"],
@@ -1093,7 +1093,7 @@ export const general_key = {
                 [']  }', "0x30"],
                 ['\\  |', "0x31"],
                 [';  :', "0x33"],
-                ["' "+' "', "0x34"],
+                ["' " + ' "', "0x34"],
                 ['`  ~', "0x35"],
                 [',  <', "0x36"],
                 ['.  >', "0x37"],
@@ -1157,155 +1157,155 @@ export const general_key_tuple = {
         this.setTooltip(Blockly.Msg.GENERALKEY_TUPLE_CREATE_TOOLTIP);
     },
 
-    mutationToDom: function() {
+    mutationToDom: function () {
         var container = document.createElement('mutation');
         container.setAttribute('items', this.itemCount_);
         return container;
     },
-      /**
-       * Parse XML to restore the list inputs.
-       * @param {!Element} xmlElement XML storage element.
-       * @this Blockly.Block
-       */
-    domToMutation: function(xmlElement) {
+    /**
+     * Parse XML to restore the list inputs.
+     * @param {!Element} xmlElement XML storage element.
+     * @this Blockly.Block
+     */
+    domToMutation: function (xmlElement) {
         this.itemCount_ = parseInt(xmlElement.getAttribute('items'), 10);
         this.updateShape_();
     },
-      /**
-       * Populate the mutator's dialog with this block's components.
-       * @param {!Blockly.Workspace} workspace Mutator's workspace.
-       * @return {!Blockly.Block} Root block in mutator.
-       * @this Blockly.Block
-       */
-    decompose: function(workspace) {
+    /**
+     * Populate the mutator's dialog with this block's components.
+     * @param {!Blockly.Workspace} workspace Mutator's workspace.
+     * @return {!Blockly.Block} Root block in mutator.
+     * @this Blockly.Block
+     */
+    decompose: function (workspace) {
         var containerBlock =
             workspace.newBlock('generalkey_container');
         containerBlock.initSvg();
         var connection = containerBlock.getInput('STACK').connection;
         for (var i = 0; i < this.itemCount_; i++) {
-          var itemBlock = workspace.newBlock('generalkey_create_with_item');
-          itemBlock.initSvg();
-          connection.connect(itemBlock.previousConnection);
-          connection = itemBlock.nextConnection;
+            var itemBlock = workspace.newBlock('generalkey_create_with_item');
+            itemBlock.initSvg();
+            connection.connect(itemBlock.previousConnection);
+            connection = itemBlock.nextConnection;
         }
         return containerBlock;
     },
-      /**
-       * Reconfigure this block based on the mutator dialog's components.
-       * @param {!Blockly.Block} containerBlock Root block in mutator.
-       * @this Blockly.Block
-       */
-    compose: function(containerBlock) {
+    /**
+     * Reconfigure this block based on the mutator dialog's components.
+     * @param {!Blockly.Block} containerBlock Root block in mutator.
+     * @this Blockly.Block
+     */
+    compose: function (containerBlock) {
         var itemBlock = containerBlock.getInputTargetBlock('STACK');
         // Count number of inputs.
         var connections = [];
         var i = 0;
         while (itemBlock) {
-          connections[i] = itemBlock.valueConnection_;
-          itemBlock = itemBlock.nextConnection &&
-              itemBlock.nextConnection.targetBlock();
-          i++;
+            connections[i] = itemBlock.valueConnection_;
+            itemBlock = itemBlock.nextConnection &&
+                itemBlock.nextConnection.targetBlock();
+            i++;
         }
         this.itemCount_ = i;
         this.updateShape_();
         // Reconnect any child blocks.
         for (var i = 0; i < this.itemCount_; i++) {
-          if (connections[i]) {
-            this.getInput('ADD' + i).connection.connect(connections[i]);
-          }
+            if (connections[i]) {
+                this.getInput('ADD' + i).connection.connect(connections[i]);
+            }
         }
     },
-      /**
-       * Store pointers to any connected child blocks.
-       * @param {!Blockly.Block} containerBlock Root block in mutator.
-       * @this Blockly.Block
-       */
-    saveConnections: function(containerBlock) {
+    /**
+     * Store pointers to any connected child blocks.
+     * @param {!Blockly.Block} containerBlock Root block in mutator.
+     * @this Blockly.Block
+     */
+    saveConnections: function (containerBlock) {
         var itemBlock = containerBlock.getInputTargetBlock('STACK');
         var i = 0;
         while (itemBlock) {
-          var input = this.getInput('ADD' + i);
-          itemBlock.valueConnection_ = input && input.connection.targetConnection;
-          i++;
-          itemBlock = itemBlock.nextConnection &&
-              itemBlock.nextConnection.targetBlock();
+            var input = this.getInput('ADD' + i);
+            itemBlock.valueConnection_ = input && input.connection.targetConnection;
+            i++;
+            itemBlock = itemBlock.nextConnection &&
+                itemBlock.nextConnection.targetBlock();
         }
     },
-      /**
-       * Modify this block to have the correct number of inputs.
-       * @private
-       * @this Blockly.Block
-       */
-    updateShape_: function() {
+    /**
+     * Modify this block to have the correct number of inputs.
+     * @private
+     * @this Blockly.Block
+     */
+    updateShape_: function () {
         // Delete everything.
         if (this.getInput('EMPTY')) {
-          this.removeInput('EMPTY');
+            this.removeInput('EMPTY');
         } else {
-          var i = 0;
-          while (this.getInput('ADD' + i)) {
-            this.removeInput('ADD' + i);
-            i++;
-          }
+            var i = 0;
+            while (this.getInput('ADD' + i)) {
+                this.removeInput('ADD' + i);
+                i++;
+            }
         }
         // Rebuild block.
         if (this.itemCount_ == 0) {
-          this.appendDummyInput('EMPTY')
-              .appendField(Blockly.Msg.GENERALKEY_CREATE_EMPTY_TITLE);
+            this.appendDummyInput('EMPTY')
+                .appendField(Blockly.Msg.GENERALKEY_CREATE_EMPTY_TITLE);
         } else {
-          for (var i = 0; i < this.itemCount_; i++) {
-            var input = this.appendValueInput('ADD' + i);
-            if (i == 0) {
-              input.appendField(Blockly.Msg.GENERALKEY_CREATE_WITH_INPUT_WITH);
+            for (var i = 0; i < this.itemCount_; i++) {
+                var input = this.appendValueInput('ADD' + i);
+                if (i == 0) {
+                    input.appendField(Blockly.Msg.GENERALKEY_CREATE_WITH_INPUT_WITH);
+                }
             }
-          }
         }
     },
-      getVars: function() {
+    getVars: function () {
         return [this.getFieldValue('VAR')];
     },
-      renameVar: function(oldName, newName) {
+    renameVar: function (oldName, newName) {
         if (Blockly.Names.equals(oldName, this.getFieldValue('VAR'))) {
-          this.setTitleValue(newName, 'VAR');
+            this.setTitleValue(newName, 'VAR');
         }
     }
 };
 
 export const generalkey_container = {
-  /**
-   * Mutator block for list container.
-   * @this Blockly.Block
-   */
-  init: function() {
-    this.setColour(ACTUATOR_EXTERN_HUE);
-    this.appendDummyInput()
-        .appendField(Blockly.Msg.MIXLY_GENERAL_KEY);
-    this.appendStatementInput('STACK');
-    this.setTooltip(Blockly.Msg.GENERALKEY_CONTAINER_TOOLTIP);
-    this.contextMenu = false;
-  }
+    /**
+     * Mutator block for list container.
+     * @this Blockly.Block
+     */
+    init: function () {
+        this.setColour(ACTUATOR_ONBOARD_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_GENERAL_KEY);
+        this.appendStatementInput('STACK');
+        this.setTooltip(Blockly.Msg.GENERALKEY_CONTAINER_TOOLTIP);
+        this.contextMenu = false;
+    }
 };
 
- export const generalkey_create_with_item = {
-  /**
-   * Mutator bolck for adding items.
-   * @this Blockly.Block
-   */
-  init: function() {
-    this.setColour(ACTUATOR_EXTERN_HUE);
-    this.appendDummyInput()
-        .appendField(Blockly.Msg.blockpy_SET_VARIABLES_NAME);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip(Blockly.Msg.TUPLE_CREATE_WITH_ITEM_TOOLTIP);
-    this.contextMenu = false;
-  }
+export const generalkey_create_with_item = {
+    /**
+     * Mutator bolck for adding items.
+     * @this Blockly.Block
+     */
+    init: function () {
+        this.setColour(ACTUATOR_ONBOARD_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.blockpy_SET_VARIABLES_NAME);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip(Blockly.Msg.TUPLE_CREATE_WITH_ITEM_TOOLTIP);
+        this.contextMenu = false;
+    }
 };
 
 export const analog_mouse_input = {
     init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_MOUSE_INPUT);
+            .appendField(Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_MOUSE_INPUT);
         this.appendValueInput('key');
         this.appendValueInput('x')
             .appendField(Blockly.Msg.MIXLY_X_CHANGES);
@@ -1318,7 +1318,7 @@ export const analog_mouse_input = {
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.MICROPYTHON_DISPLAY_YES, "True"],
                 [Blockly.Msg.MICROPYTHON_DISPLAY_NO, "False"]
-            ]),'release');
+            ]), 'release');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
@@ -1332,7 +1332,7 @@ export const mouse_key = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MOUSE_KEYS)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_SPECIAL_KEY0,"0x00"],
+                [Blockly.Msg.MIXLY_SPECIAL_KEY0, "0x00"],
                 [Blockly.Msg.MIXLY_MOUSE_LEFT_KEY, "0x01"],
                 [Blockly.Msg.MIXLY_MOUSE_RIGHT_KEY, "0x02"],
                 [Blockly.Msg.MIXLY_MOUSE_MID_KEY, "0x04"]
@@ -1342,10 +1342,10 @@ export const mouse_key = {
 };
 
 export const analog_keyboard_str = {
-    init:function(){
+    init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_KEYBOARD_INPUT);
+            .appendField(Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_KEYBOARD_INPUT);
         this.appendValueInput('str')
             .appendField(Blockly.Msg.MIXLY_STR_PRINT);
         this.appendValueInput('time')
@@ -1356,4 +1356,4 @@ export const analog_keyboard_str = {
         this.setNextStatement(true);
         this.setInputsInline(true);
     }
-}
+};

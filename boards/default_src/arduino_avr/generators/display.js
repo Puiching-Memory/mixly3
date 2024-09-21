@@ -972,84 +972,84 @@ export const TFT_st7735_show_hz = function (_, generator) {
 
     var hz_sharp = "";
     switch (dropdown_st7735_hz_sharp) {
-    case "STHeiti":
-        hz_sharp = "华文黑体";
-        break;
-    case "STKaiti":
-        hz_sharp = "华文楷体";
-        break;
-    case "STXihei":
-        hz_sharp = "华文细黑";
-        break;
-    case "STSong":
-        hz_sharp = "华文宋体";
-        break;
-    case "STZhongsong":
-        hz_sharp = "华文中宋";
-        break;
-    case "STFangsong":
-        hz_sharp = "华文仿宋";
-        break;
-    case "STCaiyun":
-        hz_sharp = "华文彩云";
-        break;
-    case "STHupo":
-        hz_sharp = "华文琥珀";
-        break;
-    case "STLiti":
-        hz_sharp = "华文隶书";
-        break;
-    case "STXingkai":
-        hz_sharp = "华文行楷";
-        break;
-    case "STXinwei":
-        hz_sharp = "华文新魏";
-        break;
-    case "simHei":
-        hz_sharp = "黑体";
-        break;
-    case "simSun":
-        hz_sharp = "宋体";
-        break;
-    case "NSimSun":
-        hz_sharp = "新宋体";
-        break;
-    case "FangSong":
-        hz_sharp = "仿宋";
-        break;
-    case "KaiTi":
-        hz_sharp = "楷体";
-        break;
-    case "FangSong_GB2312":
-        hz_sharp = "仿宋_GB2312";
-        break;
-    case "KaiTi_GB2312":
-        hz_sharp = "楷体_GB2312";
-        break;
-    case "LiSu":
-        hz_sharp = "隶书";
-        break;
-    case "YouYuan":
-        hz_sharp = "幼圆";
-        break;
-    case "PMingLiU":
-        hz_sharp = "新细明体";
-        break;
-    case "MingLiU":
-        hz_sharp = "细明体";
-        break;
-    case "DFKai-SB":
-        hz_sharp = "标楷体";
-        break;
-    case "Microsoft JhengHei":
-        hz_sharp = "微软正黑体";
-        break;
-    case "Microsoft YaHei":
-        hz_sharp = "微软雅黑体";
-        break;
-    default:
-        hz_sharp = dropdown_st7735_hz_sharp;
-        break;
+        case "STHeiti":
+            hz_sharp = "华文黑体";
+            break;
+        case "STKaiti":
+            hz_sharp = "华文楷体";
+            break;
+        case "STXihei":
+            hz_sharp = "华文细黑";
+            break;
+        case "STSong":
+            hz_sharp = "华文宋体";
+            break;
+        case "STZhongsong":
+            hz_sharp = "华文中宋";
+            break;
+        case "STFangsong":
+            hz_sharp = "华文仿宋";
+            break;
+        case "STCaiyun":
+            hz_sharp = "华文彩云";
+            break;
+        case "STHupo":
+            hz_sharp = "华文琥珀";
+            break;
+        case "STLiti":
+            hz_sharp = "华文隶书";
+            break;
+        case "STXingkai":
+            hz_sharp = "华文行楷";
+            break;
+        case "STXinwei":
+            hz_sharp = "华文新魏";
+            break;
+        case "simHei":
+            hz_sharp = "黑体";
+            break;
+        case "simSun":
+            hz_sharp = "宋体";
+            break;
+        case "NSimSun":
+            hz_sharp = "新宋体";
+            break;
+        case "FangSong":
+            hz_sharp = "仿宋";
+            break;
+        case "KaiTi":
+            hz_sharp = "楷体";
+            break;
+        case "FangSong_GB2312":
+            hz_sharp = "仿宋_GB2312";
+            break;
+        case "KaiTi_GB2312":
+            hz_sharp = "楷体_GB2312";
+            break;
+        case "LiSu":
+            hz_sharp = "隶书";
+            break;
+        case "YouYuan":
+            hz_sharp = "幼圆";
+            break;
+        case "PMingLiU":
+            hz_sharp = "新细明体";
+            break;
+        case "MingLiU":
+            hz_sharp = "细明体";
+            break;
+        case "DFKai-SB":
+            hz_sharp = "标楷体";
+            break;
+        case "Microsoft JhengHei":
+            hz_sharp = "微软正黑体";
+            break;
+        case "Microsoft YaHei":
+            hz_sharp = "微软雅黑体";
+            break;
+        default:
+            hz_sharp = dropdown_st7735_hz_sharp;
+            break;
     }
     hz_sharp = "字体：" + hz_sharp + "  字号：" + text_st7735_hz_line_height + "px" + "  显示文字：" + value_st7735_hz_data;
 

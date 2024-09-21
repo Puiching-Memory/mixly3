@@ -129,17 +129,16 @@ export const dicts_add_change_del = function (block, generator) {
     // var text=this.getFieldValue('KEY');
 
     switch (mode) {
-    case 'INSERT':
-        //var at2 = block.getFieldValue('AT2');
-        var at2 = generator.valueToCode(this, 'AT2', generator.ORDER_ASSIGNMENT) || '0';
-        var code = dict + "[" + KEY + "] = " + at2 + '\n'
-        break;
-
-    case 'DELETE':
-        var code = 'del ' + dict + "[" + KEY + "]\n"
-        break;
-    default:
-        throw 'Unhandled option (lists_setIndex2)';
+        case 'INSERT':
+            //var at2 = block.getFieldValue('AT2');
+            var at2 = generator.valueToCode(this, 'AT2', generator.ORDER_ASSIGNMENT) || '0';
+            var code = dict + "[" + KEY + "] = " + at2 + '\n'
+            break;
+        case 'DELETE':
+            var code = 'del ' + dict + "[" + KEY + "]\n"
+            break;
+        default:
+            throw 'Unhandled option (lists_setIndex2)';
     }
     return code;
 }

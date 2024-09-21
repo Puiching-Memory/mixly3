@@ -50,15 +50,15 @@ export const text_char_at2 = function (a, generator) {
     var c = a.getFieldValue("WHERE") || "FROM_START",
         str = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC) || '""';
     switch (c) {
-    case "FROM_START":
-        a = generator.getAdjustedInt(a, "AT");
-        return [str + "[" + a + "]", generator.ORDER_ATOMIC];
-    case "FROM_END":
-        a = generator.getAdjustedInt(a, "AT", 1, !0);
-        return [str + "[" + a + "]", generator.ORDER_ATOMIC];
-    case "RANDOM":
-        generator.definitions_.import_random = "import random";
-        return ["random.choice(" + str + ")", generator.ORDER_FUNCTION_CALL];
+        case "FROM_START":
+            a = generator.getAdjustedInt(a, "AT");
+            return [str + "[" + a + "]", generator.ORDER_ATOMIC];
+        case "FROM_END":
+            a = generator.getAdjustedInt(a, "AT", 1, !0);
+            return [str + "[" + a + "]", generator.ORDER_ATOMIC];
+        case "RANDOM":
+            generator.definitions_.import_random = "import random";
+            return ["random.choice(" + str + ")", generator.ORDER_FUNCTION_CALL];
     }
     throw "Unhandled combination (lists_getIndex).";
 }
@@ -96,41 +96,41 @@ export const text_substring2 = function (block, generator) {
     var where1 = block.getFieldValue('WHERE1');
     var where2 = block.getFieldValue('WHERE2');
     switch (where1) {
-    case 'FROM_START':
-        var at1 = generator.getAdjustedInt(block, 'AT1');
-        if (at1 == '0') {
-            at1 = '';
-        }
-        break;
-    case 'FROM_END':
-        var at1 = generator.getAdjustedInt(block, 'AT1', 0, true);
-        break;
-    case 'FIRST':
-        var at1 = '0';
-        break;
-    default:
-        throw 'Unhandled option (lists_getSublist)';
+        case 'FROM_START':
+            var at1 = generator.getAdjustedInt(block, 'AT1');
+            if (at1 == '0') {
+                at1 = '';
+            }
+            break;
+        case 'FROM_END':
+            var at1 = generator.getAdjustedInt(block, 'AT1', 0, true);
+            break;
+        case 'FIRST':
+            var at1 = '0';
+            break;
+        default:
+            throw 'Unhandled option (lists_getSublist)';
     }
     switch (where2) {
-    case 'FROM_START':
-        var at2 = generator.getAdjustedInt(block, 'AT2');
-        break;
-    case 'FROM_END':
-        var at2 = generator.getAdjustedInt(block, 'AT2', 0, true);
-        // Ensure that if the result calculated is 0 that sub-sequence will
-        // include all elements as expected.
-        if (!Blockly.isNumber(String(at2))) {
-            generator.definitions_['import_sys'] = 'import sys';
-            at2 += ' or sys.maxsize';
-        } else if (at2 == '0') {
-            at2 = '';
-        }
-        break;
-    case 'LAST':
-        var at2 = '-1';
-        break;
-    default:
-        throw 'Unhandled option (lists_getSublist)';
+        case 'FROM_START':
+            var at2 = generator.getAdjustedInt(block, 'AT2');
+            break;
+        case 'FROM_END':
+            var at2 = generator.getAdjustedInt(block, 'AT2', 0, true);
+            // Ensure that if the result calculated is 0 that sub-sequence will
+            // include all elements as expected.
+            if (!Blockly.isNumber(String(at2))) {
+                generator.definitions_['import_sys'] = 'import sys';
+                at2 += ' or sys.maxsize';
+            } else if (at2 == '0') {
+                at2 = '';
+            }
+            break;
+        case 'LAST':
+            var at2 = '-1';
+            break;
+        default:
+            throw 'Unhandled option (lists_getSublist)';
     }
     var code = str + '[' + at1 + ' : ' + at2 + ']';
     return [code, generator.ORDER_ATOMIC];

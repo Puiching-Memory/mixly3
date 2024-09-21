@@ -2,7 +2,7 @@ import * as Blockly from 'blockly/core';
 import * as Mixly from 'mixly';
 
 /**
- * @name 模块名 Http GET请求 
+ * @name 模块名 Http GET请求
  * @support 支持板卡 {ESP8266, ESP32, ESP32C3, ESP32S2, ESP32S3}
  */
 export const http_get = function () {
@@ -1323,18 +1323,18 @@ export const weather_seniverse_city_weather = function () {
     Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
 
     switch (api) {
-    case 'weather/now':
-        Blockly.Arduino.definitions_['var_declare_weatherNow'] = 'WeatherNow weatherNow;';
-        Blockly.Arduino.setups_['setup_seniverse_weatherNow'] = 'weatherNow.config(' + private_key + ', ' + location + ', "' + unit + '", "' + language + '");';
-        break;
-    case 'weather/daily':
-        Blockly.Arduino.definitions_['var_declare_forecast'] = 'Forecast forecast;';
-        Blockly.Arduino.setups_['setup_seniverse_forecast'] = 'forecast.config(' + private_key + ', ' + location + ', "' + unit + '", "' + language + '");';
-        break;
-    case 'life/suggestion':
-    default:
-        Blockly.Arduino.definitions_['var_declare_lifeInfo'] = 'LifeInfo lifeInfo;';
-        Blockly.Arduino.setups_['setup_seniverse_lifeInfo'] = 'lifeInfo.config(' + private_key + ', ' + location + ', "' + unit + '", "' + language + '");';
+        case 'weather/now':
+            Blockly.Arduino.definitions_['var_declare_weatherNow'] = 'WeatherNow weatherNow;';
+            Blockly.Arduino.setups_['setup_seniverse_weatherNow'] = 'weatherNow.config(' + private_key + ', ' + location + ', "' + unit + '", "' + language + '");';
+            break;
+        case 'weather/daily':
+            Blockly.Arduino.definitions_['var_declare_forecast'] = 'Forecast forecast;';
+            Blockly.Arduino.setups_['setup_seniverse_forecast'] = 'forecast.config(' + private_key + ', ' + location + ', "' + unit + '", "' + language + '");';
+            break;
+        case 'life/suggestion':
+        default:
+            Blockly.Arduino.definitions_['var_declare_lifeInfo'] = 'LifeInfo lifeInfo;';
+            Blockly.Arduino.setups_['setup_seniverse_lifeInfo'] = 'lifeInfo.config(' + private_key + ', ' + location + ', "' + unit + '", "' + language + '");';
     }
     var code = '';
 
@@ -1346,15 +1346,15 @@ export const weather_get_seniverse_weather_info = function () {
     var type = this.getFieldValue("type");
     var code = '';
     switch (api) {
-    case 'weather/now':
-        code = 'weatherNow.' + type + '()';
-        break;
-    case 'weather/daily':
-        code = 'forecast.' + type + '()';
-        break;
-    case 'life/suggestion':
-    default:
-        code = 'lifeInfo.' + type + '()';
+        case 'weather/now':
+            code = 'weatherNow.' + type + '()';
+            break;
+        case 'weather/daily':
+            code = 'forecast.' + type + '()';
+            break;
+        case 'life/suggestion':
+        default:
+            code = 'lifeInfo.' + type + '()';
     }
 
     return [code, Blockly.Arduino.ORDER_ATOMIC];

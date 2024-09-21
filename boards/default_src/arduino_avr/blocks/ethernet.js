@@ -477,12 +477,12 @@ export const MQTT_subscribe = {
         var statementConnections = [null];
         while (clauseBlock) {
             switch (clauseBlock.type) {
-            case 'MQTT_add_subscribe_topic':
-                this.elseifCount_++;
-                statementConnections.push(clauseBlock.statementConnection_);
-                break;
-            default:
-                throw Error('Unknown block type: ' + clauseBlock.type);
+                case 'MQTT_add_subscribe_topic':
+                    this.elseifCount_++;
+                    statementConnections.push(clauseBlock.statementConnection_);
+                    break;
+                default:
+                    throw Error('Unknown block type: ' + clauseBlock.type);
             }
             clauseBlock = clauseBlock.nextConnection &&
                 clauseBlock.nextConnection.targetBlock();
@@ -503,14 +503,14 @@ export const MQTT_subscribe = {
         var i = 1;
         while (clauseBlock) {
             switch (clauseBlock.type) {
-            case 'MQTT_add_subscribe_topic':
-                var inputDo = this.getInput('DO' + i);
-                clauseBlock.statementConnection_ =
+                case 'MQTT_add_subscribe_topic':
+                    var inputDo = this.getInput('DO' + i);
+                    clauseBlock.statementConnection_ =
                         inputDo && inputDo.connection.targetConnection;
-                i++;
-                break;
-            default:
-                throw 'Unknown block type.';
+                    i++;
+                    break;
+                default:
+                    throw 'Unknown block type.';
             }
             clauseBlock = clauseBlock.nextConnection &&
                 clauseBlock.nextConnection.targetBlock();

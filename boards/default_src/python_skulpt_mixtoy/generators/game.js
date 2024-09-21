@@ -85,18 +85,18 @@ export const is_Related_Path = function (block, generator) {
     generator.definitions_.import_blocklygame = "import blocklygame";
     var dropdown_Direction = this.getFieldValue('Direction');
     switch (dropdown_Direction) {
-    case 'f':
-        dropdown_Direction = 0;
-        break;
-    case "b":
-        dropdown_Direction = 2;
-        break;
-    case "r":
-        dropdown_Direction = 1;
-        break;
-    case "l":
-        dropdown_Direction = 3;
-        break;
+        case 'f':
+            dropdown_Direction = 0;
+            break;
+        case "b":
+            dropdown_Direction = 2;
+            break;
+        case "r":
+            dropdown_Direction = 1;
+            break;
+        case "l":
+            dropdown_Direction = 3;
+            break;
     }
     var code = 'actor.isPath(' + "(actor.direction+" + dropdown_Direction + ")%4" + ",'block_id=" + block.id + '\')';
     return [code, generator.ORDER_ATOMIC];
@@ -183,18 +183,18 @@ export const is_Related_Barrier = function (block, generator) {
     generator.definitions_.import_blocklygame = "import blocklygame";
     var dropdown_Direction = this.getFieldValue('direction');
     switch (dropdown_Direction) {
-    case 'f':
-        dropdown_Direction = 0;
-        break;
-    case "b":
-        dropdown_Direction = 2;
-        break;
-    case "r":
-        dropdown_Direction = 1;
-        break;
-    case "l":
-        dropdown_Direction = 3;
-        break;
+        case 'f':
+            dropdown_Direction = 0;
+            break;
+        case "b":
+            dropdown_Direction = 2;
+            break;
+        case "r":
+            dropdown_Direction = 1;
+            break;
+        case "l":
+            dropdown_Direction = 3;
+            break;
     }
 
     var code = 'actor.isBarrier(' + "(actor.direction+" + dropdown_Direction + ")%4" + ",'block_id=" + block.id + '\')';

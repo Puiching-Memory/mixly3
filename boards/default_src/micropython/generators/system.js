@@ -63,12 +63,12 @@ export const controls_millis = function (_, generator) {
     generator.definitions_['import_time'] = 'import time';
     var dropdown_time = this.getFieldValue('Time');
     switch (dropdown_time) {
-    case "ms":
-        var code = 'time.ticks_ms()';
-        return [code, generator.ORDER_ATOMIC];
-    case "us":
-        var code = 'time.ticks_us()';
-        return [code, generator.ORDER_ATOMIC];
+        case "ms":
+            var code = 'time.ticks_ms()';
+            return [code, generator.ORDER_ATOMIC];
+        case "us":
+            var code = 'time.ticks_us()';
+            return [code, generator.ORDER_ATOMIC];
     }
 }
 
@@ -94,15 +94,15 @@ export const controls_delay = function (_, generator) {
     var delay_time = generator.valueToCode(this, 'DELAY_TIME', generator.ORDER_ATOMIC) || '1000'
     var dropdown_time = this.getFieldValue('Time');
     switch (dropdown_time) {
-    case "s":
-        var code = 'time.sleep(' + delay_time + ')\n';
-        return code;
-    case "ms":
-        var code = 'time.sleep_ms(' + delay_time + ')\n';
-        return code;
-    case "us":
-        var code = 'time.sleep_us(' + delay_time + ')\n';
-        return code;
+        case "s":
+            var code = 'time.sleep(' + delay_time + ')\n';
+            return code;
+        case "ms":
+            var code = 'time.sleep_ms(' + delay_time + ')\n';
+            return code;
+        case "us":
+            var code = 'time.sleep_us(' + delay_time + ')\n';
+            return code;
     }
 }
 
@@ -112,15 +112,15 @@ export const controls_delay_new = function (_, generator) {
     var delay_time = generator.valueToCode(this, 'DELAY_TIME', generator.ORDER_ATOMIC) || '1000'
     var dropdown_time = this.getFieldValue('Time');
     switch (dropdown_time) {
-    case "s":
-        var code = 'time.sleep(' + delay_time + ')\n';
-        return code;
-    case "ms":
-        var code = 'time.sleep_ms(' + delay_time + ')\n';
-        return code;
-    case "us":
-        var code = 'time.sleep_us(' + delay_time + ')\n';
-        return code;
+        case "s":
+            var code = 'time.sleep(' + delay_time + ')\n';
+            return code;
+        case "ms":
+            var code = 'time.sleep_ms(' + delay_time + ')\n';
+            return code;
+        case "us":
+            var code = 'time.sleep_us(' + delay_time + ')\n';
+            return code;
     }
 }
 

@@ -230,30 +230,30 @@ export const ntptime_address = function (_, generator) {
     return [code, generator.ORDER_ATOMIC];
 }
 
-export const requests_get2  = function(_, generator) {
+export const requests_get2 = function (_, generator) {
     generator.definitions_['import_urequests'] = "import urequests";
     var dropdown_type = this.getFieldValue('TYPE');
-    var str =generator.valueToCode(this, 'URL', generator.ORDER_ATOMIC) ;
-    var code= 'urequests.'+dropdown_type+'(' + str + ')';
-    return [code,generator.ORDER_ATOMIC];
-   
-  };
-  
-export const requests_attribute2 = function(_, generator) {
+    var str = generator.valueToCode(this, 'URL', generator.ORDER_ATOMIC);
+    var code = 'urequests.' + dropdown_type + '(' + str + ')';
+    return [code, generator.ORDER_ATOMIC];
+
+};
+
+export const requests_attribute2 = function (_, generator) {
     generator.definitions_['import_urequests'] = "import urequests";
     var varName = generator.valueToCode(this, 'VAL', generator.ORDER_ASSIGNMENT) || '0';
     var attr = this.getFieldValue('ATTR');
-    var code=varName+"." + attr;
-    return [code,generator.ORDER_ATOMIC];
-  };
-  
-export const requests_post = function(_, generator) {
+    var code = varName + "." + attr;
+    return [code, generator.ORDER_ATOMIC];
+};
+
+export const requests_post = function (_, generator) {
     generator.definitions_['import_urequests'] = "import urequests";
-      var dropdown_type = this.getFieldValue('TYPE'); 
-      var str = generator.valueToCode(this, 'URL', generator.ORDER_ATOMIC) ;
-      var data = generator.valueToCode(this, 'data', generator.ORDER_ATOMIC) ;
-      var code= 'urequests.'+dropdown_type+'(' + str +',data='+data+ ')';
-      return [code,generator.ORDER_ATOMIC];
-   
-  };
-  
+    var dropdown_type = this.getFieldValue('TYPE');
+    var str = generator.valueToCode(this, 'URL', generator.ORDER_ATOMIC);
+    var data = generator.valueToCode(this, 'data', generator.ORDER_ATOMIC);
+    var code = 'urequests.' + dropdown_type + '(' + str + ',data=' + data + ')';
+    return [code, generator.ORDER_ATOMIC];
+
+};
+

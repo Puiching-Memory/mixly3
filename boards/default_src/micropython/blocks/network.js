@@ -516,58 +516,58 @@ export const ntptime_address = {
 const COMMUNICATE_HUE = '#3288dd';
 
 export const requests_get2 = {
-  init: function() {
-    this.setColour(COMMUNICATE_HUE);
-    this.appendValueInput("URL")
-      .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
-      .setCheck(String);
-  this.appendDummyInput("")  
-      .appendField(Blockly.Msg.blockpy_CONDUCT)
-      .appendField(new Blockly.FieldDropdown([["get", "get"], ["head", "head"], ["delete", "delete"]]), 'TYPE')
-      .appendField(Blockly.Msg.blockpy_REQUESTS)      
-      .appendField(Blockly.Msg.MIXPY_REQUESTS_GET_RESULT)                 
-  this.setInputsInline(true);
-   this.setOutput(true);
-  this.setTooltip("");
-  }, 
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
+        this.appendValueInput("URL")
+            .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
+            .setCheck(String);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.blockpy_CONDUCT)
+            .appendField(new Blockly.FieldDropdown([["get", "get"], ["head", "head"], ["delete", "delete"]]), 'TYPE')
+            .appendField(Blockly.Msg.blockpy_REQUESTS)
+            .appendField(Blockly.Msg.MIXPY_REQUESTS_GET_RESULT)
+        this.setInputsInline(true);
+        this.setOutput(true);
+        this.setTooltip("");
+    },
 };
 
 export const requests_post = {
-  init: function() {
-    this.setColour(COMMUNICATE_HUE);
-    this.appendValueInput("URL")
-      .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
-      .setCheck(String);
-  this.appendDummyInput("")  
-      .appendField(Blockly.Msg.blockpy_CONDUCT)
-      .appendField(new Blockly.FieldDropdown([["post", "post"], ["put", "put"], ["patch", "patch"]]), 'TYPE')
-      .appendField(Blockly.Msg.blockpy_REQUESTS)     
-  this.appendValueInput("data")
-      .appendField(Blockly.Msg.blockpy_REQUESTS+Blockly.Msg.OLED_STRING)    
-  this.appendDummyInput("")     
-      .appendField(Blockly.Msg.MIXPY_REQUESTS_GET_RESULT)                 
-  this.setInputsInline(true);
-   this.setOutput(true);
-  this.setTooltip("");
-  }, 
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
+        this.appendValueInput("URL")
+            .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
+            .setCheck(String);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.blockpy_CONDUCT)
+            .appendField(new Blockly.FieldDropdown([["post", "post"], ["put", "put"], ["patch", "patch"]]), 'TYPE')
+            .appendField(Blockly.Msg.blockpy_REQUESTS)
+        this.appendValueInput("data")
+            .appendField(Blockly.Msg.blockpy_REQUESTS + Blockly.Msg.OLED_STRING)
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXPY_REQUESTS_GET_RESULT)
+        this.setInputsInline(true);
+        this.setOutput(true);
+        this.setTooltip("");
+    },
 };
 
 export const requests_attribute2 = {
-  init: function() {
-     this.appendValueInput('VAL')
+    init: function () {
+        this.appendValueInput('VAL')
 
-  var attr =
-        [[Blockly.Msg.blockpy_REQUESTS_GET_ATTR_TEXT, 'text'],
-          [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_JSON,'json()'],
-        [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_STATUS_CODE, 'status_code'],
-        [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_CONTENT, 'content']
-        ,[Blockly.Msg.MIXPY_TEXT_ENCODE, 'encoding']];
-    this.setColour(COMMUNICATE_HUE);
-    this.appendDummyInput("")
-        .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET)
-        .appendField(new Blockly.FieldDropdown(attr), 'ATTR')        
-
-  this.setInputsInline(true);
-   this.setOutput(true, String);  
-  }
+        var attr = [
+            [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_TEXT, 'text'],
+            [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_JSON, 'json()'],
+            [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_STATUS_CODE, 'status_code'],
+            [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_CONTENT, 'content'],
+            [Blockly.Msg.MIXPY_TEXT_ENCODE, 'encoding']
+        ];
+        this.setColour(COMMUNICATE_HUE);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET)
+            .appendField(new Blockly.FieldDropdown(attr), 'ATTR')
+        this.setInputsInline(true);
+        this.setOutput(true, String);
+    }
 };

@@ -2105,12 +2105,12 @@ export const tft_generate_bitmap_data = {
         layero.find('button').click((event) => {
             const mId = $(event.currentTarget).attr('m-id');
             switch (mId) {
-            case '0':
-                this.loadImg(layero);
-                break;
-            case '1':
-                this.writeJson();
-                break;
+                case '0':
+                    this.loadImg(layero);
+                    break;
+                case '1':
+                    this.writeJson();
+                    break;
             }
         });
     },
@@ -2176,25 +2176,25 @@ export const tft_generate_bitmap_data = {
             const mark = (i + 1) % 4;
             let hexData, addition = '';
             switch (mark) {
-            case 1:
-                pixelData = (data[i] >> 3) & 0x001F;
-                break;
-            case 2:
-                pixelData = (pixelData & 0x001F) << 6;
-                pixelData = pixelData | ((data[i] >> 2) & 0x003F);
-                break;
-            case 3:
-                pixelData = (pixelData & 0x07FF) << 5;
-                pixelData = pixelData | ((data[i] >> 3) & 0x001F);
-                break;
-            default:
-                hexData = pixelData.toString(16);
-                for (let j = 4; j > hexData.length; j--) {
-                    addition += '0';
-                }
-                hexData = addition + hexData;
-                bitmapStr += '0x' + hexData + (i === data.length - 1 ? '' : ',');
-                pixelData = 0;
+                case 1:
+                    pixelData = (data[i] >> 3) & 0x001F;
+                    break;
+                case 2:
+                    pixelData = (pixelData & 0x001F) << 6;
+                    pixelData = pixelData | ((data[i] >> 2) & 0x003F);
+                    break;
+                case 3:
+                    pixelData = (pixelData & 0x07FF) << 5;
+                    pixelData = pixelData | ((data[i] >> 3) & 0x001F);
+                    break;
+                default:
+                    hexData = pixelData.toString(16);
+                    for (let j = 4; j > hexData.length; j--) {
+                        addition += '0';
+                    }
+                    hexData = addition + hexData;
+                    bitmapStr += '0x' + hexData + (i === data.length - 1 ? '' : ',');
+                    pixelData = 0;
             }
             if ((i + 1) % 400 === 0 && i !== data.length - 1)
                 bitmapStr += '\n  ';
@@ -2213,12 +2213,12 @@ export const tft_generate_bitmap_data = {
             const inputDom = $(inputsDom[i]);
             const mId = inputDom.attr('m-id');
             switch (mId) {
-            case '0':
-                imgSize.width = parseInt(inputDom.val()) ?? 100;
-                break;
-            case '1':
-                imgSize.height = parseInt(inputDom.val()) ?? 100;
-                break;
+                case '0':
+                    imgSize.width = parseInt(inputDom.val()) ?? 100;
+                    break;
+                case '1':
+                    imgSize.height = parseInt(inputDom.val()) ?? 100;
+                    break;
             }
         }
         if (imgSize.width > 300)

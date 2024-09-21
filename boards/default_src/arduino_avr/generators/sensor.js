@@ -176,44 +176,44 @@ export const RTC_date = function (_, generator) {
     var day = generator.valueToCode(this, "day", generator.ORDER_ATOMIC);
 
     switch (month) {
-    case '1':
-        month = 'Jan';
-        break;
-    case '2':
-        month = 'Feb';
-        break;
-    case '3':
-        month = 'Mar';
-        break;
-    case '4':
-        month = 'Apr';
-        break;
-    case '5':
-        month = 'May';
-        break;
-    case '6':
-        month = 'Jun';
-        break;
-    case '7':
-        month = 'Jul';
-        break;
-    case '8':
-        month = 'Aug';
-        break;
-    case '9':
-        month = 'Sep';
-        break;
-    case '10':
-        month = 'Oct';
-        break;
-    case '11':
-        month = 'Nov';
-        break;
-    case '12':
-        month = 'Dec';
-        break;
-    default:
-        month = 'Jan';
+        case '1':
+            month = 'Jan';
+            break;
+        case '2':
+            month = 'Feb';
+            break;
+        case '3':
+            month = 'Mar';
+            break;
+        case '4':
+            month = 'Apr';
+            break;
+        case '5':
+            month = 'May';
+            break;
+        case '6':
+            month = 'Jun';
+            break;
+        case '7':
+            month = 'Jul';
+            break;
+        case '8':
+            month = 'Aug';
+            break;
+        case '9':
+            month = 'Sep';
+            break;
+        case '10':
+            month = 'Oct';
+            break;
+        case '11':
+            month = 'Nov';
+            break;
+        case '12':
+            month = 'Dec';
+            break;
+        default:
+            month = 'Jan';
     }
     if (day.length == 1)
         day = '0' + day;
@@ -444,21 +444,21 @@ export const sensor_encoder_handle = function (_, generator) {
     var statementsDo = generator.statementToCode(this, 'DO');
     var cbFuncName = 'encoder' + dropdownType;
     switch (dropdownOperateType) {
-    case 'setChangedHandler':
-        cbFuncName += 'OnChanged';
-        break;
-    case 'setRightRotationHandler':
-        cbFuncName += 'OnRightRotation';
-        break;
-    case 'setLeftRotationHandler':
-        cbFuncName += 'OnLeftRotation';
-        break;
-    case 'setUpperOverflowHandler':
-        cbFuncName += 'OnUpperOverflow';
-        break;
-    case 'setLowerOverflowHandler':
-    default:
-        cbFuncName += 'OnLowerOverflow';
+        case 'setChangedHandler':
+            cbFuncName += 'OnChanged';
+            break;
+        case 'setRightRotationHandler':
+            cbFuncName += 'OnRightRotation';
+            break;
+        case 'setLeftRotationHandler':
+            cbFuncName += 'OnLeftRotation';
+            break;
+        case 'setUpperOverflowHandler':
+            cbFuncName += 'OnUpperOverflow';
+            break;
+        case 'setLowerOverflowHandler':
+        default:
+            cbFuncName += 'OnLowerOverflow';
     }
     generator.definitions_['function_' + cbFuncName] = `void ${cbFuncName}(ESPRotary& encoder${dropdownType}) {\n`
         + `  ${statementsDo}`

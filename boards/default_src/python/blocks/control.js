@@ -208,17 +208,17 @@ export const controls_if = {
         var elseStatementConnection = null;
         while (clauseBlock) {
             switch (clauseBlock.type) {
-            case 'controls_if_elseif':
-                this.elseifCount_++;
-                valueConnections.push(clauseBlock.valueConnection_);
-                statementConnections.push(clauseBlock.statementConnection_);
-                break;
-            case 'controls_if_else':
-                this.elseCount_++;
-                elseStatementConnection = clauseBlock.statementConnection_;
-                break;
-            default:
-                throw Error('Unknown block type: ' + clauseBlock.type);
+                case 'controls_if_elseif':
+                    this.elseifCount_++;
+                    valueConnections.push(clauseBlock.valueConnection_);
+                    statementConnections.push(clauseBlock.statementConnection_);
+                    break;
+                case 'controls_if_else':
+                    this.elseCount_++;
+                    elseStatementConnection = clauseBlock.statementConnection_;
+                    break;
+                default:
+                    throw Error('Unknown block type: ' + clauseBlock.type);
             }
             clauseBlock = clauseBlock.nextConnection &&
                 clauseBlock.nextConnection.targetBlock();
@@ -239,22 +239,22 @@ export const controls_if = {
         var i = 1;
         while (clauseBlock) {
             switch (clauseBlock.type) {
-            case 'controls_if_elseif':
-                var inputIf = this.getInput('IF' + i);
-                var inputDo = this.getInput('DO' + i);
-                clauseBlock.valueConnection_ =
+                case 'controls_if_elseif':
+                    var inputIf = this.getInput('IF' + i);
+                    var inputDo = this.getInput('DO' + i);
+                    clauseBlock.valueConnection_ =
                         inputIf && inputIf.connection.targetConnection;
-                clauseBlock.statementConnection_ =
+                    clauseBlock.statementConnection_ =
                         inputDo && inputDo.connection.targetConnection;
-                i++;
-                break;
-            case 'controls_if_else':
-                var inputDo = this.getInput('ELSE');
-                clauseBlock.statementConnection_ =
+                    i++;
+                    break;
+                case 'controls_if_else':
+                    var inputDo = this.getInput('ELSE');
+                    clauseBlock.statementConnection_ =
                         inputDo && inputDo.connection.targetConnection;
-                break;
-            default:
-                throw 'Unknown block type.';
+                    break;
+                default:
+                    throw 'Unknown block type.';
             }
             clauseBlock = clauseBlock.nextConnection &&
                 clauseBlock.nextConnection.targetBlock();
@@ -544,17 +544,17 @@ export const controls_try_finally = {
         var elseStatementConnection = null;
         while (clauseBlock) {
             switch (clauseBlock.type) {
-            case 'controls_except':
-                this.elseifCount_++;
-                valueConnections.push(clauseBlock.valueConnection_);
-                statementConnections.push(clauseBlock.statementConnection_);
-                break;
-            case 'controls_finally':
-                this.elseCount_++;
-                elseStatementConnection = clauseBlock.statementConnection_;
-                break;
-            default:
-                throw Error('Unknown block type: ' + clauseBlock.type);
+                case 'controls_except':
+                    this.elseifCount_++;
+                    valueConnections.push(clauseBlock.valueConnection_);
+                    statementConnections.push(clauseBlock.statementConnection_);
+                    break;
+                case 'controls_finally':
+                    this.elseCount_++;
+                    elseStatementConnection = clauseBlock.statementConnection_;
+                    break;
+                default:
+                    throw Error('Unknown block type: ' + clauseBlock.type);
             }
             clauseBlock = clauseBlock.nextConnection &&
                 clauseBlock.nextConnection.targetBlock();
@@ -575,22 +575,22 @@ export const controls_try_finally = {
         var i = 1;
         while (clauseBlock) {
             switch (clauseBlock.type) {
-            case 'controls_except':
-                var inputIf = this.getInput('IF' + i);
-                var inputDo = this.getInput('DO' + i);
-                clauseBlock.valueConnection_ =
+                case 'controls_except':
+                    var inputIf = this.getInput('IF' + i);
+                    var inputDo = this.getInput('DO' + i);
+                    clauseBlock.valueConnection_ =
                         inputIf && inputIf.connection.targetConnection;
-                clauseBlock.statementConnection_ =
+                    clauseBlock.statementConnection_ =
                         inputDo && inputDo.connection.targetConnection;
-                i++;
-                break;
-            case 'controls_finally':
-                var inputDo = this.getInput('ELSE');
-                clauseBlock.statementConnection_ =
+                    i++;
+                    break;
+                case 'controls_finally':
+                    var inputDo = this.getInput('ELSE');
+                    clauseBlock.statementConnection_ =
                         inputDo && inputDo.connection.targetConnection;
-                break;
-            default:
-                throw 'Unknown block type.';
+                    break;
+                default:
+                    throw 'Unknown block type.';
             }
             clauseBlock = clauseBlock.nextConnection &&
                 clauseBlock.nextConnection.targetBlock();
@@ -794,15 +794,17 @@ export const controls_for_range = {
 };
 
 
-controls_whileUntil.OPERATORS =
-    [[Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE, 'WHILE'],
-        [Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL, 'UNTIL']];
+controls_whileUntil.OPERATORS = [
+    [Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE, 'WHILE'],
+    [Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL, 'UNTIL']
+];
 
 
 
-controls_flow_statements.OPERATORS =
-    [[Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, 'BREAK'],
-        [Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, 'CONTINUE']];
+controls_flow_statements.OPERATORS = [
+    [Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, 'BREAK'],
+    [Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, 'CONTINUE']
+];
 
 
 
@@ -1022,7 +1024,7 @@ export const get_unique_identifier = {
     init: function () {
         this.setColour(LOOPS_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_DEVICE +'ID');
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_DEVICE + 'ID');
         this.setInputsInline(true);
         this.setOutput(true);
         this.setTooltip(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN + Blockly.Msg.MIXLY_GET_UNIQUE_IDEN);

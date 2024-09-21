@@ -132,10 +132,10 @@ export const controls_whileUntil = function (a, generator) {
 //ok
 export const controls_flow_statements = function (a) {
     switch (a.getFieldValue("FLOW")) {
-    case "BREAK":
-        return "break\n";
-    case "CONTINUE":
-        return "continue\n"
+        case "BREAK":
+            return "break\n";
+        case "CONTINUE":
+            return "continue\n"
     }
     throw "Unknown flow statement.";
 }

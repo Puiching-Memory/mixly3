@@ -150,36 +150,36 @@ export const list_trig = function (a, generator) {
     generator.definitions_['import_math'] = "import math";
     a = generator.valueToCode(a, 'data', generator.ORDER_NONE)
     switch (b) {
-    case "LEN":
-        c = "len(" + a + ")";
-        break;
-    case "SUM":
-        c = "sum(" + a + ")";
-        break;
-    case "MIN":
-        c = "min(" + a + ")";
-        break;
-    case "MAX":
-        c = "max(" + a + ")";
-        break;
-    case 'AVERAGE':
-        generator.definitions_['import_mixpy_math_mean'] = "from mixpy import math_mean";
-        c = 'math_mean(' + a + ')';
-        break;
-    case 'MEDIAN':
-        generator.definitions_['import_mixpy_math_median'] = "from mixpy import math_median";
-        c = 'math_median(' + a + ')';
-        break;
-    case 'MODE':
-        generator.definitions_['import_mixpy_math_modes'] = "from mixpy import math_modes";
-        c = 'math_modes(' + a + ')';
-        break;
-    case 'STD_DEV':
-        generator.definitions_['import_mixpy_math_standard_deviation'] = "from mixpy import math_standard_deviation";
-        c = 'math_standard_deviation(' + a + ')';
-        break;
-    default:
-        throw 'Unknown operator: ' + b;
+        case "LEN":
+            c = "len(" + a + ")";
+            break;
+        case "SUM":
+            c = "sum(" + a + ")";
+            break;
+        case "MIN":
+            c = "min(" + a + ")";
+            break;
+        case "MAX":
+            c = "max(" + a + ")";
+            break;
+        case 'AVERAGE':
+            generator.definitions_['import_mixpy_math_mean'] = "from mixpy import math_mean";
+            c = 'math_mean(' + a + ')';
+            break;
+        case 'MEDIAN':
+            generator.definitions_['import_mixpy_math_median'] = "from mixpy import math_median";
+            c = 'math_median(' + a + ')';
+            break;
+        case 'MODE':
+            generator.definitions_['import_mixpy_math_modes'] = "from mixpy import math_modes";
+            c = 'math_modes(' + a + ')';
+            break;
+        case 'STD_DEV':
+            generator.definitions_['import_mixpy_math_standard_deviation'] = "from mixpy import math_standard_deviation";
+            c = 'math_standard_deviation(' + a + ')';
+            break;
+        default:
+            throw 'Unknown operator: ' + b;
     }
     if (c)
         return [c, generator.ORDER_ATOMIC];

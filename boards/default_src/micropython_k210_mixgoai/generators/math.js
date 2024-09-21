@@ -64,13 +64,13 @@ export const math_selfcalcu = function (_, generator) {
     var argument1 = generator.valueToCode(this, 'B', generator.ORDER_RELATIONAL) || '0';
     var operator = this.getFieldValue('OP');
     switch (operator) {
-    case 'ADD': var op = '+='; break;
-    case 'MINUS': var op = '-='; break;
-    case 'MULTIPLY': var op = '*='; break;
-    case 'DIVIDE': var op = '/='; break;
-    case 'QUYU': var op = '%='; break;
-    case 'ZHENGCHU': var op = '//='; break;
-    case 'POWER': var op = '**='; break;
+        case 'ADD': var op = '+='; break;
+        case 'MINUS': var op = '-='; break;
+        case 'MULTIPLY': var op = '*='; break;
+        case 'DIVIDE': var op = '/='; break;
+        case 'QUYU': var op = '%='; break;
+        case 'ZHENGCHU': var op = '//='; break;
+        case 'POWER': var op = '**='; break;
     }
     var code = argument0 + ' ' + op + ' ' + argument1 + '\n';
     return code;
@@ -84,66 +84,66 @@ export const math_single = function (a, generator) {
     generator.definitions_['import_math'] = "import math";
     a = "SIN" == b || "COS" == b || "TAN" == b ? generator.valueToCode(a, "NUM", generator.ORDER_MULTIPLICATIVE) || "0" : generator.valueToCode(a, "NUM", generator.ORDER_NONE) || "0";
     switch (b) {
-    case "ABS":
-        c = "math.fabs(" + a + ")";
-        break;
-    case "ROOT":
-        c = "math.sqrt(" +
+        case "ABS":
+            c = "math.fabs(" + a + ")";
+            break;
+        case "ROOT":
+            c = "math.sqrt(" +
                 a + ")";
-        break;
-    case "LN":
-        c = "math.log(" + a + ")";
-        break;
-    case "LOG10":
-        c = "math.log10(" + a + ")";
-        break;
-    case "EXP":
-        c = "math.exp(" + a + ")";
-        break;
-    case "POW10":
-        c = "math.pow(10," + a + ")";
-        break;
-    case "ROUND":
-        c = "round(" + a + ")";
-        break;
-    case "ROUNDUP":
-        c = "math.ceil(" + a + ")";
-        break;
-    case "ROUNDDOWN":
-        c = "math.floor(" + a + ")";
-        break;
-    case "SIN":
-        c = "math.sin(" + a + ")";
-        break;
-    case "COS":
-        c = "math.cos(" + a + ")";
-        break;
-    case "TAN":
-        c = "math.tan(" + a + ")";
-        break;
-    case "++":
-        c = "++(" + a + ")";
-        break;
-    case "--":
-        c = "--(" + a + ")";
-        break;
-    case "-":
-        c = "-(" + a + ")";
-        break;
-    default:
+            break;
+        case "LN":
+            c = "math.log(" + a + ")";
+            break;
+        case "LOG10":
+            c = "math.log10(" + a + ")";
+            break;
+        case "EXP":
+            c = "math.exp(" + a + ")";
+            break;
+        case "POW10":
+            c = "math.pow(10," + a + ")";
+            break;
+        case "ROUND":
+            c = "round(" + a + ")";
+            break;
+        case "ROUNDUP":
+            c = "math.ceil(" + a + ")";
+            break;
+        case "ROUNDDOWN":
+            c = "math.floor(" + a + ")";
+            break;
+        case "SIN":
+            c = "math.sin(" + a + ")";
+            break;
+        case "COS":
+            c = "math.cos(" + a + ")";
+            break;
+        case "TAN":
+            c = "math.tan(" + a + ")";
+            break;
+        case "++":
+            c = "++(" + a + ")";
+            break;
+        case "--":
+            c = "--(" + a + ")";
+            break;
+        case "-":
+            c = "-(" + a + ")";
+            break;
+        default:
     }
     if (c)
         return [c, generator.ORDER_FUNCTION_CALL];
     switch (b) {
-    case "ASIN":
-        c = "math.degrees(math.asin(" + a + "))";
-        break;
-    case "ACOS":
-        c = "math.degrees(math.acos(" + a + "))";
-        break;
-    case "ATAN":
-        c = "math.degrees(math.atan(" + a + "))";
-        break;
+        case "ASIN":
+            c = "math.degrees(math.asin(" + a + "))";
+            break;
+        case "ACOS":
+            c = "math.degrees(math.acos(" + a + "))";
+            break;
+        case "ATAN":
+            c = "math.degrees(math.atan(" + a + "))";
+            break;
     }
     return [c, generator.ORDER_MULTIPLICATIVE]
 }

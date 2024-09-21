@@ -208,34 +208,34 @@ export const RTC_get_time = function (_, generator) {
     //generator.setups_['class_DS1307'] = generator.CLASS_DS1307_INIT;
 
     switch (timeType) {
-    //
-    case "Year":
-        var code = 'ds.' + timeType + '()';
-        return [code, generator.ORDER_ASSIGNMENT];
-    case "Month":
-        var code = 'ds.' + timeType + '()';
-        return [code, generator.ORDER_ASSIGNMENT];
-    case "Day":
-        var code = 'ds.' + timeType + '()';
-        return [code, generator.ORDER_ASSIGNMENT];
-    case "Hour":
-        var code = 'ds.' + timeType + '()';
-        return [code, generator.ORDER_ASSIGNMENT];
-    case "Minute":
-        var code = 'ds.' + timeType + '()';
-        return [code, generator.ORDER_ASSIGNMENT];
-    case "Second":
-        var code = 'ds.' + timeType + '()';
-        return [code, generator.ORDER_ASSIGNMENT];
-    case "Week":
-        var code = 'ds.' + timeType + '()';
-        return [code, generator.ORDER_ASSIGNMENT];
-    case "Mix1":
-        var code = 'ds.get_date()';
-        return [code, generator.ORDER_ASSIGNMENT];
-    case "Mix2":
-        var code = 'ds.get_time()';
-        return [code, generator.ORDER_ASSIGNMENT];
+        //
+        case "Year":
+            var code = 'ds.' + timeType + '()';
+            return [code, generator.ORDER_ASSIGNMENT];
+        case "Month":
+            var code = 'ds.' + timeType + '()';
+            return [code, generator.ORDER_ASSIGNMENT];
+        case "Day":
+            var code = 'ds.' + timeType + '()';
+            return [code, generator.ORDER_ASSIGNMENT];
+        case "Hour":
+            var code = 'ds.' + timeType + '()';
+            return [code, generator.ORDER_ASSIGNMENT];
+        case "Minute":
+            var code = 'ds.' + timeType + '()';
+            return [code, generator.ORDER_ASSIGNMENT];
+        case "Second":
+            var code = 'ds.' + timeType + '()';
+            return [code, generator.ORDER_ASSIGNMENT];
+        case "Week":
+            var code = 'ds.' + timeType + '()';
+            return [code, generator.ORDER_ASSIGNMENT];
+        case "Mix1":
+            var code = 'ds.get_date()';
+            return [code, generator.ORDER_ASSIGNMENT];
+        case "Mix2":
+            var code = 'ds.get_time()';
+            return [code, generator.ORDER_ASSIGNMENT];
     }
 
 }

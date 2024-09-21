@@ -14,7 +14,8 @@
         "publish:boards:arduino": "node scripts/publish-boards.js --type arduino",
         "publish:boards:micropython": "node scripts/publish-boards.js --type micropython",
         "publish:boards:python": "node scripts/publish-boards.js --type python",
-        "build:examples": "node scripts/build-examples.js -t all"
+        "build:examples": "node scripts/build-examples.js -t all",
+        "boards:lint": "eslint ./boards/default_src/ --ext .js --format stylish"
     },
     "author": "Mixly",
     "license": "MIT",

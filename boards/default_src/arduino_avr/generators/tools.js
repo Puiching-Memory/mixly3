@@ -62,86 +62,54 @@ export const IICSCAN = function (_, generator) {
 
 function string_Bin_to_Hex(outstr_select) {
     switch (outstr_select) {
-    case '0000':
-    {
-        outstr_select = '0';
-        break;
-    }
-    case '0001':
-    {
-        outstr_select = '1';
-        break;
-    }
-    case '0010':
-    {
-        outstr_select = '2';
-        break;
-    }
-    case '0011':
-    {
-        outstr_select = '3';
-        break;
-    }
-    case '0100':
-    {
-        outstr_select = '4';
-        break;
-    }
-    case '0101':
-    {
-        outstr_select = '5';
-        break;
-    }
-    case '0110':
-    {
-        outstr_select = '6';
-        break;
-    }
-    case '0111':
-    {
-        outstr_select = '7';
-        break;
-    }
-    case '1000':
-    {
-        outstr_select = '8';
-        break;
-    }
-    case '1001':
-    {
-        outstr_select = '9';
-        break;
-    }
-    case '1010':
-    {
-        outstr_select = 'A';
-        break;
-    }
-    case '1011':
-    {
-        outstr_select = 'B';
-        break;
-    }
-    case '1100':
-    {
-        outstr_select = 'C';
-        break;
-    }
-    case '1101':
-    {
-        outstr_select = 'D';
-        break;
-    }
-    case '1110':
-    {
-        outstr_select = 'E';
-        break;
-    }
-    case '1111':
-    {
-        outstr_select = 'F';
-        break;
-    }
+        case '0000':
+            outstr_select = '0';
+            break;
+        case '0001':
+            outstr_select = '1';
+            break;
+        case '0010':
+            outstr_select = '2';
+            break;
+        case '0011':
+            outstr_select = '3';
+            break;
+        case '0100':
+            outstr_select = '4';
+            break;
+        case '0101':
+            outstr_select = '5';
+            break;
+        case '0110':
+            outstr_select = '6';
+            break;
+        case '0111':
+            outstr_select = '7';
+            break;
+        case '1000':
+            outstr_select = '8';
+            break;
+        case '1001':
+            outstr_select = '9';
+            break;
+        case '1010':
+            outstr_select = 'A';
+            break;
+        case '1011':
+            outstr_select = 'B';
+            break;
+        case '1100':
+            outstr_select = 'C';
+            break;
+        case '1101':
+            outstr_select = 'D';
+            break;
+        case '1110':
+            outstr_select = 'E';
+            break;
+        case '1111':
+            outstr_select = 'F';
+            break;
     }
     return outstr_select;
 }
@@ -307,84 +275,84 @@ export const tool_modulus = function (_, generator) {
 
     var hz_sharp = "";
     switch (dropdown_hz_sharp) {
-    case "STHeiti":
-        hz_sharp = "华文黑体";
-        break;
-    case "STKaiti":
-        hz_sharp = "华文楷体";
-        break;
-    case "STXihei":
-        hz_sharp = "华文细黑";
-        break;
-    case "STSong":
-        hz_sharp = "华文宋体";
-        break;
-    case "STZhongsong":
-        hz_sharp = "华文中宋";
-        break;
-    case "STFangsong":
-        hz_sharp = "华文仿宋";
-        break;
-    case "STCaiyun":
-        hz_sharp = "华文彩云";
-        break;
-    case "STHupo":
-        hz_sharp = "华文琥珀";
-        break;
-    case "STLiti":
-        hz_sharp = "华文隶书";
-        break;
-    case "STXingkai":
-        hz_sharp = "华文行楷";
-        break;
-    case "STXinwei":
-        hz_sharp = "华文新魏";
-        break;
-    case "simHei":
-        hz_sharp = "黑体";
-        break;
-    case "simSun":
-        hz_sharp = "宋体";
-        break;
-    case "NSimSun":
-        hz_sharp = "新宋体";
-        break;
-    case "FangSong":
-        hz_sharp = "仿宋";
-        break;
-    case "KaiTi":
-        hz_sharp = "楷体";
-        break;
-    case "FangSong_GB2312":
-        hz_sharp = "仿宋_GB2312";
-        break;
-    case "KaiTi_GB2312":
-        hz_sharp = "楷体_GB2312";
-        break;
-    case "LiSu":
-        hz_sharp = "隶书";
-        break;
-    case "YouYuan":
-        hz_sharp = "幼圆";
-        break;
-    case "PMingLiU":
-        hz_sharp = "新细明体";
-        break;
-    case "MingLiU":
-        hz_sharp = "细明体";
-        break;
-    case "DFKai-SB":
-        hz_sharp = "标楷体";
-        break;
-    case "Microsoft JhengHei":
-        hz_sharp = "微软正黑体";
-        break;
-    case "Microsoft YaHei":
-        hz_sharp = "微软雅黑体";
-        break;
-    default:
-        hz_sharp = dropdown_hz_sharp;
-        break;
+        case "STHeiti":
+            hz_sharp = "华文黑体";
+            break;
+        case "STKaiti":
+            hz_sharp = "华文楷体";
+            break;
+        case "STXihei":
+            hz_sharp = "华文细黑";
+            break;
+        case "STSong":
+            hz_sharp = "华文宋体";
+            break;
+        case "STZhongsong":
+            hz_sharp = "华文中宋";
+            break;
+        case "STFangsong":
+            hz_sharp = "华文仿宋";
+            break;
+        case "STCaiyun":
+            hz_sharp = "华文彩云";
+            break;
+        case "STHupo":
+            hz_sharp = "华文琥珀";
+            break;
+        case "STLiti":
+            hz_sharp = "华文隶书";
+            break;
+        case "STXingkai":
+            hz_sharp = "华文行楷";
+            break;
+        case "STXinwei":
+            hz_sharp = "华文新魏";
+            break;
+        case "simHei":
+            hz_sharp = "黑体";
+            break;
+        case "simSun":
+            hz_sharp = "宋体";
+            break;
+        case "NSimSun":
+            hz_sharp = "新宋体";
+            break;
+        case "FangSong":
+            hz_sharp = "仿宋";
+            break;
+        case "KaiTi":
+            hz_sharp = "楷体";
+            break;
+        case "FangSong_GB2312":
+            hz_sharp = "仿宋_GB2312";
+            break;
+        case "KaiTi_GB2312":
+            hz_sharp = "楷体_GB2312";
+            break;
+        case "LiSu":
+            hz_sharp = "隶书";
+            break;
+        case "YouYuan":
+            hz_sharp = "幼圆";
+            break;
+        case "PMingLiU":
+            hz_sharp = "新细明体";
+            break;
+        case "MingLiU":
+            hz_sharp = "细明体";
+            break;
+        case "DFKai-SB":
+            hz_sharp = "标楷体";
+            break;
+        case "Microsoft JhengHei":
+            hz_sharp = "微软正黑体";
+            break;
+        case "Microsoft YaHei":
+            hz_sharp = "微软雅黑体";
+            break;
+        default:
+            hz_sharp = dropdown_hz_sharp;
+            break;
     }
     hz_sharp = "字体：" + hz_sharp + "  字号：" + text_hz_line_height + "px" + "  显示文字：" + text_input_data + '\n' + HZ_image;
 

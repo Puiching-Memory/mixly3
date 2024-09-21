@@ -7,8 +7,7 @@ export const base_setup = function (_, generator) {
     if (branch) {
         if (branch.endsWith('\n')) {
             generator.setups_['setup_setup'] = branch;
-        }
-        else {
+        } else {
             generator.setups_['setup_setup'] = branch + '\n';
         }
     }
@@ -83,10 +82,10 @@ export const controls_whileUntil = function (a, generator) {
 // ok
 export const controls_flow_statements = function (a) {
     switch (a.getFieldValue("FLOW")) {
-    case "BREAK":
-        return "break\n";
-    case "CONTINUE":
-        return "continue\n"
+        case "BREAK":
+            return "break\n";
+        case "CONTINUE":
+            return "continue\n"
     }
     throw "Unknown flow statement.";
 }

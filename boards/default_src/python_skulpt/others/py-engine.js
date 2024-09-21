@@ -382,103 +382,103 @@ export default class PyEngine {
             };
         }
         switch (value.constructor) {
-        case Sk.builtin.func:
-            return {
-                'name': property,
-                'type': "Function",
-                "value": (value.func_code.co_varnames !== undefined ?
-                    " Arguments: " + value.func_code.co_varnames.join(", ") :
-                    ' No arguments')
-            };
-        case Sk.builtin.module: return null;
-        case Sk.builtin.str:
-            return {
-                'name': property,
-                'type': "String",
-                "value": value.$r().v
-            };
-        case Sk.builtin.none:
-            return {
-                'name': property,
-                'type': "None",
-                "value": "None"
-            };
-        case Sk.builtin.bool:
-            return {
-                'name': property,
-                'type': "Boolean",
-                "value": value.$r().v
-            };
-        case Sk.builtin.nmber:
-            return {
-                'name': property,
-                'type': "int" == value.skType ? "Integer" : "Float",
-                "value": value.$r().v
-            };
-        case Sk.builtin.int_:
-            return {
-                'name': property,
-                'type': "Integer",
-                "value": value.$r().v
-            };
-        case Sk.builtin.float_:
-            return {
-                'name': property,
-                'type': "Float",
-                "value": value.$r().v
-            };
-        case Sk.builtin.tuple:
-            return {
-                'name': property,
-                'type': "Tuple",
-                "value": value.$r().v
-            };
-        case Sk.builtin.list:
-            if (value.v.length <= 20) {
+            case Sk.builtin.func:
+                return {
+                    'name': property,
+                    'type': "Function",
+                    "value": (value.func_code.co_varnames !== undefined ?
+                        " Arguments: " + value.func_code.co_varnames.join(", ") :
+                        ' No arguments')
+                };
+            case Sk.builtin.module: return null;
+            case Sk.builtin.str:
+                return {
+                    'name': property,
+                    'type': "String",
+                    "value": value.$r().v
+                };
+            case Sk.builtin.none:
+                return {
+                    'name': property,
+                    'type': "None",
+                    "value": "None"
+                };
+            case Sk.builtin.bool:
+                return {
+                    'name': property,
+                    'type': "Boolean",
+                    "value": value.$r().v
+                };
+            case Sk.builtin.nmber:
+                return {
+                    'name': property,
+                    'type': "int" == value.skType ? "Integer" : "Float",
+                    "value": value.$r().v
+                };
+            case Sk.builtin.int_:
+                return {
+                    'name': property,
+                    'type': "Integer",
+                    "value": value.$r().v
+                };
+            case Sk.builtin.float_:
+                return {
+                    'name': property,
+                    'type': "Float",
+                    "value": value.$r().v
+                };
+            case Sk.builtin.tuple:
+                return {
+                    'name': property,
+                    'type': "Tuple",
+                    "value": value.$r().v
+                };
+            case Sk.builtin.list:
+                if (value.v.length <= 20) {
+                    return {
+                        'name': property,
+                        'type': "List",
+                        "value": value.$r().v,
+                        'exact_value': value
+                    };
+                }
                 return {
                     'name': property,
                     'type': "List",
-                    "value": value.$r().v,
-                    'exact_value': value
+                    "value": "[... " + value.v.length + " elements ...]",
+                    "exact_value": value
                 };
-            }
-            return {
-                'name': property,
-                'type': "List",
-                "value": "[... " + value.v.length + " elements ...]",
-                "exact_value": value
-            };
 
-        case Sk.builtin.dict:
-            return {
-                'name': property,
-                'type': "Dictionary",
-                "value": value.$r().v
-            };
-        case Number:
-            return {
-                'name': property,
-                'type': value % 1 === 0 ? "Integer" : "Float",
-                "value": value
-            };
-        case String:
-            return {
-                'name': property,
-                'type': "String",
-                "value": value
-            };
-        case Boolean:
-            return {
-                'name': property,
-                'type': "Boolean",
-                "value": (value ? "True" : "False")
-            };
-        default:
-            return {
-                'name': property,
-                'type': value.tp$name == undefined ? value : value.tp$name,
-                "value": value.$r == undefined ? value : value.$r().v
-            };
+            case Sk.builtin.dict:
+                return {
+                    'name': property,
+                    'type': "Dictionary",
+                    "value": value.$r().v
+                };
+            case Number:
+                return {
+                    'name': property,
+                    'type': value % 1 === 0 ? "Integer" : "Float",
+                    "value": value
+                };
+            case String:
+                return {
+                    'name': property,
+                    'type': "String",
+                    "value": value
+                };
+            case Boolean:
+                return {
+                    'name': property,
+                    'type': "Boolean",
+                    "value": (value ? "True" : "False")
+                };
+            default:
+                return {
+                    'name': property,
+                    'type': value.tp$name == undefined ? value : value.tp$name,
+                    "value": value.$r == undefined ? value : value.$r().v
+                };
         }
     }
 }

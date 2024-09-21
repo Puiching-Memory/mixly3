@@ -4,8 +4,7 @@ export const ce_go_light_number = function (_, generator) {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     if (version == "mixgo_me" || version == "mixgo_cc") {
         generator.definitions_['import_me_go_car'] = 'from me_go import car';
-    }
-    else if (version == "mixgo_ce") {
+    } else if (version == "mixgo_ce") {
         generator.definitions_['import_ce_go_car'] = 'from ce_go import car';
     }
     var code = 'car.' + this.getFieldValue('op');

@@ -450,7 +450,7 @@ export const analog_keyboard_input = function (_, generator) {
     var ge = generator.valueToCode(this, 'general', generator.ORDER_ATOMIC);
     var re = this.getFieldValue('release');
     generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
-    var code = "onboard_bot.hid_keyboard("+sp+","+ge+","+re+")\n";
+    var code = "onboard_bot.hid_keyboard(" + sp + "," + ge + "," + re + ")\n";
     return code;
 }
 
@@ -472,7 +472,7 @@ export const analog_mouse_input = function (_, generator) {
     var wheel = generator.valueToCode(this, 'wheel', generator.ORDER_ATOMIC);
     var re = this.getFieldValue('release');
     generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
-    var code = "hid_mouse(keys="+key+",move=("+x+","+y+"),wheel="+wheel+",release="+re+")\n";
+    var code = "hid_mouse(keys=" + key + ",move=(" + x + "," + y + "),wheel=" + wheel + ",release=" + re + ")\n";
     return code;
 }
 
@@ -486,24 +486,23 @@ export const analog_keyboard_str = function (_, generator) {
     var str = generator.valueToCode(this, 'str', generator.ORDER_ATOMIC);
     var t = generator.valueToCode(this, 'time', generator.ORDER_ATOMIC);
     generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
-    var code = "onboard_bot.hid_keyboard_str("+str+",delay="+t+")\n";
+    var code = "onboard_bot.hid_keyboard_str(" + str + ",delay=" + t + ")\n";
     return code;
 }
 
-export const general_key_tuple = function(_, generator) {
+export const general_key_tuple = function (_, generator) {
     // Create a list with any number of elements of any type.
-    var dropdown_type = this.getFieldValue('TYPE');
     var code = new Array(this.itemCount_);
     var default_value = '0';
     for (var n = 0; n < this.itemCount_; n++) {
-  
-    code[n] = generator.valueToCode(this, 'ADD' + n,
-      generator.ORDER_NONE) || default_value;
+        code[n] = generator.valueToCode(this, 'ADD' + n,
+            generator.ORDER_NONE) || default_value;
     }
-   if (this.itemCount_!=1){
-    var code = '(' + code.join(', ') + ')';}
-   else {
-    var code = '(' + code.join(', ') + ',)';}
-  
+    if (this.itemCount_ != 1) {
+        var code = '(' + code.join(', ') + ')';
+    } else {
+        var code = '(' + code.join(', ') + ',)';
+    }
+
     return [code, generator.ORDER_ATOMIC];
-  };
+};

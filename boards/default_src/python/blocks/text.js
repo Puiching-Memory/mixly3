@@ -194,20 +194,20 @@ export const text_char_at2 = {
                 e = b.getFieldValue("WHERE"),
                 d = "";
             switch (a + " " + e) {
-            case "GET FROM_START":
-            case "GET FROM_END":
-                d = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FROM;
-                break;
-            case "GET RANDOM":
-                d = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_RANDOM;
-                break;
-            case "GET_REMOVE FROM_START":
-            case "GET_REMOVE FROM_END":
-                d = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM;
-                break;
-            case "GET_REMOVE RANDOM":
-                d = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_RANDOM;
-                break;
+                case "GET FROM_START":
+                case "GET FROM_END":
+                    d = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FROM;
+                    break;
+                case "GET RANDOM":
+                    d = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_RANDOM;
+                    break;
+                case "GET_REMOVE FROM_START":
+                case "GET_REMOVE FROM_END":
+                    d = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM;
+                    break;
+                case "GET_REMOVE RANDOM":
+                    d = Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_RANDOM;
+                    break;
             }
             if ("FROM_START" == e || "FROM_END" == e) d += "  " + Blockly.Msg.LISTS_INDEX_FROM_START_TOOLTIP.replace("%1", Blockly.Msg.ONE_BASED_INDEXING ? "#1" : "#0");
             return d
@@ -296,14 +296,16 @@ export const text_substring2 = {
      * @this Blockly.Block
      */
     init: function () {
-        this['WHERE_OPTIONS_1'] =
-            [[Blockly.Msg.LISTS_GET_INDEX_FROM_START, 'FROM_START'],
-                [Blockly.Msg.LISTS_GET_INDEX_FROM_END, 'FROM_END'],
-                [Blockly.Msg.LISTS_GET_SUBLIST_START_FIRST, 'FIRST']];
-        this['WHERE_OPTIONS_2'] =
-            [[Blockly.Msg.LISTS_GET_SUBLIST_END_FROM_START, 'FROM_START'],
-                [Blockly.Msg.LISTS_GET_SUBLIST_END_FROM_END, 'FROM_END'],
-                [Blockly.Msg.LISTS_GET_SUBLIST_END_LAST, 'LAST']];
+        this['WHERE_OPTIONS_1'] = [
+            [Blockly.Msg.LISTS_GET_INDEX_FROM_START, 'FROM_START'],
+            [Blockly.Msg.LISTS_GET_INDEX_FROM_END, 'FROM_END'],
+            [Blockly.Msg.LISTS_GET_SUBLIST_START_FIRST, 'FIRST']
+        ];
+        this['WHERE_OPTIONS_2'] = [
+            [Blockly.Msg.LISTS_GET_SUBLIST_END_FROM_START, 'FROM_START'],
+            [Blockly.Msg.LISTS_GET_SUBLIST_END_FROM_END, 'FROM_END'],
+            [Blockly.Msg.LISTS_GET_SUBLIST_END_LAST, 'LAST']
+        ];
         this.setHelpUrl(Blockly.Msg.LISTS_GET_SUBLIST_HELPURL);
         this.setColour(TEXTS_HUE);
         this.appendValueInput("VAR")
@@ -423,10 +425,11 @@ export const text_substring = {
 
 export const text_equals_starts_ends = {
     init: function () {
-        var TEXT_DOWHAT =
-            [[Blockly.Msg.MIXLY_EQUALS, '==='],
-                [Blockly.Msg.MIXLY_STARTSWITH, 'startswith'],
-                [Blockly.Msg.MIXLY_ENDSWITH, 'endswith']];
+        var TEXT_DOWHAT = [
+            [Blockly.Msg.MIXLY_EQUALS, '==='],
+            [Blockly.Msg.MIXLY_STARTSWITH, 'startswith'],
+            [Blockly.Msg.MIXLY_ENDSWITH, 'endswith']
+        ];
         this.setColour(TEXTS_HUE);
         this.appendValueInput("STR1")
             .setCheck(String);
@@ -454,9 +457,13 @@ export const text_compare_to = {
 
 export const text_capital = {
     init: function () {
-        var TEXT_CAPITAL =
-            [[Blockly.Msg.TEXT_UPPER, 'upper'], [Blockly.Msg.TEXT_TITLE, 'title'], [Blockly.Msg.TEXT_CAPITALIZE, 'capitalize'], [Blockly.Msg.TEXT_SWAPCASE, 'swapcase'],
-                [Blockly.Msg.TEXT_LOWER, 'lower']];
+        var TEXT_CAPITAL = [
+            [Blockly.Msg.TEXT_UPPER, 'upper'],
+            [Blockly.Msg.TEXT_TITLE, 'title'],
+            [Blockly.Msg.TEXT_CAPITALIZE, 'capitalize'],
+            [Blockly.Msg.TEXT_SWAPCASE, 'swapcase'],
+            [Blockly.Msg.TEXT_LOWER, 'lower']
+        ];
         this.setColour(TEXTS_HUE);
         this.appendValueInput("VAR")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
@@ -480,10 +487,11 @@ export const text_capital = {
 
 export const text_center = {
     init: function () {
-        var TEXT_CENTER =
-            [[Blockly.Msg.TEXT_LJUST, 'ljust'],
-                [Blockly.Msg.TEXT_CENTER, 'center'],
-                [Blockly.Msg.TEXT_RJUST, 'rjust']];
+        var TEXT_CENTER = [
+            [Blockly.Msg.TEXT_LJUST, 'ljust'],
+            [Blockly.Msg.TEXT_CENTER, 'center'],
+            [Blockly.Msg.TEXT_RJUST, 'rjust']
+        ];
         this.setColour(TEXTS_HUE);
         this.appendValueInput("VAR")
             .appendField(new Blockly.FieldDropdown(TEXT_CENTER), 'CENTER')

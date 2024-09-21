@@ -107,90 +107,90 @@ export const tuple_trig = function (a, generator) {
     generator.definitions_['import_math'] = "import math";
     a = generator.valueToCode(a, 'data', generator.ORDER_NONE)
     switch (b) {
-    case "LEN":
-        c = "len(" + a + ")";
-        break;
-    case "SUM":
-        c = "sum(" + a + ")";
-        break;
-    case "MIN":
-        c = "min(" + a + ")";
-        break;
-    case "MAX":
-        c = "max(" + a + ")";
-        break;
-    case 'AVERAGE':
-        // generator.definitions_['from_numbers_import_Number'] =
-        //   'from numbers import Number';
-        var functionName = generator.provideFunction_(
-            'math_mean',
-            // This operation excludes null and values that aren't int or float:',
-            // math_mean([null, null, "aString", 1, 9]) == 5.0.',
-            ['def ' + generator.FUNCTION_NAME_PLACEHOLDER_ + '(myList):',
-                '  localList = [e for e in myList if type(e) == int or type(e) == float]',
-                '  if not localList: return',
-                '  return float(sum(localList)) / len(localList)']);
-        c = functionName + '(' + a + ')';
-        break;
-    case 'MEDIAN':
-        // generator.definitions_['from_numbers_import_Number'] =
-        //   'from numbers import Numberd';
-        var functionName = generator.provideFunction_(
-            'math_median',
-            // This operation excludes null values:
-            // math_median([null, null, 1, 3]) == 2.0.
-            ['def ' + generator.FUNCTION_NAME_PLACEHOLDER_ + '(myList):',
-                '  localList = sorted([e for e in myList if type(e) == int or type(e) == float])',
-                '  if not localList: return',
-                '  if len(localList) % 2 == 0:',
-                '    return (localList[len(localList) // 2 - 1] + ' +
+        case "LEN":
+            c = "len(" + a + ")";
+            break;
+        case "SUM":
+            c = "sum(" + a + ")";
+            break;
+        case "MIN":
+            c = "min(" + a + ")";
+            break;
+        case "MAX":
+            c = "max(" + a + ")";
+            break;
+        case 'AVERAGE':
+            // generator.definitions_['from_numbers_import_Number'] =
+            //   'from numbers import Number';
+            var functionName = generator.provideFunction_(
+                'math_mean',
+                // This operation excludes null and values that aren't int or float:',
+                // math_mean([null, null, "aString", 1, 9]) == 5.0.',
+                ['def ' + generator.FUNCTION_NAME_PLACEHOLDER_ + '(myList):',
+                    '  localList = [e for e in myList if type(e) == int or type(e) == float]',
+                    '  if not localList: return',
+                    '  return float(sum(localList)) / len(localList)']);
+            c = functionName + '(' + a + ')';
+            break;
+        case 'MEDIAN':
+            // generator.definitions_['from_numbers_import_Number'] =
+            //   'from numbers import Numberd';
+            var functionName = generator.provideFunction_(
+                'math_median',
+                // This operation excludes null values:
+                // math_median([null, null, 1, 3]) == 2.0.
+                ['def ' + generator.FUNCTION_NAME_PLACEHOLDER_ + '(myList):',
+                    '  localList = sorted([e for e in myList if type(e) == int or type(e) == float])',
+                    '  if not localList: return',
+                    '  if len(localList) % 2 == 0:',
+                    '    return (localList[len(localList) // 2 - 1] + ' +
                 'localList[len(localList) // 2]) / 2.0',
-                '  else:',
-                '    return localList[(len(localList) - 1) // 2]']);
-        c = functionName + '(' + a + ')';
-        break;
-    case 'MODE':
-        var functionName = generator.provideFunction_(
-            'math_modes',
-            // As a list of numbers can contain more than one mode,
-            // the returned result is provided as an array.
-            // Mode of [3, 'x', 'x', 1, 1, 2, '3'] -> ['x', 1].
-            ['def ' + generator.FUNCTION_NAME_PLACEHOLDER_ + '(some_list):',
-                '  modes = []',
-                '  # Using a lists of [item, count] to keep count rather than dict',
-                '  # to avoid "unhashable" errors when the counted item is ' +
+                    '  else:',
+                    '    return localList[(len(localList) - 1) // 2]']);
+            c = functionName + '(' + a + ')';
+            break;
+        case 'MODE':
+            var functionName = generator.provideFunction_(
+                'math_modes',
+                // As a list of numbers can contain more than one mode,
+                // the returned result is provided as an array.
+                // Mode of [3, 'x', 'x', 1, 1, 2, '3'] -> ['x', 1].
+                ['def ' + generator.FUNCTION_NAME_PLACEHOLDER_ + '(some_list):',
+                    '  modes = []',
+                    '  # Using a lists of [item, count] to keep count rather than dict',
+                    '  # to avoid "unhashable" errors when the counted item is ' +
                 'itself a list or dict.',
-                '  counts = []',
-                '  maxCount = 1',
-                '  for item in some_list:',
-                '    found = False',
-                '    for count in counts:',
-                '      if count[0] == item:',
-                '        count[1] += 1',
-                '        maxCount = max(maxCount, count[1])',
-                '        found = True',
-                '    if not found:',
-                '      counts.append([item, 1])',
-                '  for counted_item, item_count in counts:',
-                '    if item_count == maxCount:',
-                '      modes.append(counted_item)',
-                '  return modes']);
-        c = functionName + '(' + a + ')';
-        break;
-    case 'STD_DEV':
-        generator.definitions_['import_math'] = 'import math';
-        var functionName = generator.provideFunction_(
-            'math_standard_deviation',
-            ['def ' + generator.FUNCTION_NAME_PLACEHOLDER_ + '(numbers):',
-                '  n = len(numbers)',
-                '  if n == 0: return',
-                '  mean = float(sum(numbers)) / n',
-                '  variance = sum((x - mean) ** 2 for x in numbers) / n',
-                '  return math.sqrt(variance)']);
-        c = functionName + '(' + a + ')';
-        break;
-    default:
-        throw 'Unknown operator: ' + b;
+                    '  counts = []',
+                    '  maxCount = 1',
+                    '  for item in some_list:',
+                    '    found = False',
+                    '    for count in counts:',
+                    '      if count[0] == item:',
+                    '        count[1] += 1',
+                    '        maxCount = max(maxCount, count[1])',
+                    '        found = True',
+                    '    if not found:',
+                    '      counts.append([item, 1])',
+                    '  for counted_item, item_count in counts:',
+                    '    if item_count == maxCount:',
+                    '      modes.append(counted_item)',
+                    '  return modes']);
+            c = functionName + '(' + a + ')';
+            break;
+        case 'STD_DEV':
+            generator.definitions_['import_math'] = 'import math';
+            var functionName = generator.provideFunction_(
+                'math_standard_deviation',
+                ['def ' + generator.FUNCTION_NAME_PLACEHOLDER_ + '(numbers):',
+                    '  n = len(numbers)',
+                    '  if n == 0: return',
+                    '  mean = float(sum(numbers)) / n',
+                    '  variance = sum((x - mean) ** 2 for x in numbers) / n',
+                    '  return math.sqrt(variance)']);
+            c = functionName + '(' + a + ')';
+            break;
+        default:
+            throw 'Unknown operator: ' + b;
     }
     if (c)
         return [c, generator.ORDER_FUNCTION_CALL];
@@ -204,42 +204,42 @@ export const tuple_getSublist = function (block, generator) {
     var where1 = block.getFieldValue('WHERE1');
     var where2 = block.getFieldValue('WHERE2');
     switch (where1) {
-    case 'FROM_START':
-        var at1 = generator.getAdjustedInt(block, 'AT1');
-        if (at1 == '0') {
-            at1 = '';
-        }
-        break;
-    case 'FROM_END':
-        var at1 = generator.getAdjustedInt(block, 'AT1', 1, true);
-        break;
-    case 'FIRST':
-        var at1 = '0';
-        break;
-    default:
-        throw 'Unhandled option (lists_getSublist)';
+        case 'FROM_START':
+            var at1 = generator.getAdjustedInt(block, 'AT1');
+            if (at1 == '0') {
+                at1 = '';
+            }
+            break;
+        case 'FROM_END':
+            var at1 = generator.getAdjustedInt(block, 'AT1', 1, true);
+            break;
+        case 'FIRST':
+            var at1 = '0';
+            break;
+        default:
+            throw 'Unhandled option (lists_getSublist)';
     }
     switch (where2) {
-    case 'FROM_START':
-        var at2 = generator.getAdjustedInt(block, 'AT2', 1);
-        at2 = at2 - 1;
-        break;
-    case 'FROM_END':
-        var at2 = generator.getAdjustedInt(block, 'AT2', 1, true);
-        // Ensure that if the result calculated is 0 that sub-sequence will
-        // include all elements as expected.
-        if (!Blockly.isNumber(String(at2))) {
-            generator.definitions_['import_sys'] = 'import sys';
-            at2 += ' or sys.maxsize';
-        } else if (at2 == '0') {
-            at2 = '';
-        }
-        break;
-    case 'LAST':
-        var at2 = '-1';
-        break;
-    default:
-        throw 'Unhandled option (lists_getSublist)';
+        case 'FROM_START':
+            var at2 = generator.getAdjustedInt(block, 'AT2', 1);
+            at2 = at2 - 1;
+            break;
+        case 'FROM_END':
+            var at2 = generator.getAdjustedInt(block, 'AT2', 1, true);
+            // Ensure that if the result calculated is 0 that sub-sequence will
+            // include all elements as expected.
+            if (!Blockly.isNumber(String(at2))) {
+                generator.definitions_['import_sys'] = 'import sys';
+                at2 += ' or sys.maxsize';
+            } else if (at2 == '0') {
+                at2 = '';
+            }
+            break;
+        case 'LAST':
+            var at2 = '-1';
+            break;
+        default:
+            throw 'Unhandled option (lists_getSublist)';
     }
     var code = list + '[' + at1 + ' : ' + at2 + ']';
     return [code, generator.ORDER_MEMBER];

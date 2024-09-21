@@ -442,12 +442,12 @@ export const dicts_add_change_del = {
             var e = b.getFieldValue("WHERE"),
                 d = "";
             switch (e) {
-            case "INSERT":
-                d = Blockly.Msg.DICTS_ADD_TOOLTIP;
-                break;
-            case "DELETE":
-                d = Blockly.Msg.DICTS_DELETE_TOOLTIP;
-                break;
+                case "INSERT":
+                    d = Blockly.Msg.DICTS_ADD_TOOLTIP;
+                    break;
+                case "DELETE":
+                    d = Blockly.Msg.DICTS_DELETE_TOOLTIP;
+                    break;
             }
             //if ("FROM_START" == e || "FROM_END" == e) d += "  " + Blockly.Msg.LISTS_INDEX_FROM_START_TOOLTIP.replace("%1", ONE_BASED_INDEXING ? "#1": "#0");
             return d

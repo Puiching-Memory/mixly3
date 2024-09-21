@@ -11,11 +11,6 @@ export const base_setup = {
         this.setHelpUrl(
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id2"
         );
-        this.wiki = {
-            "zh-hans": {
-                page: ["Arduino AVR", "控制", "初始化"],
-            },
-        };
     },
 };
 
@@ -37,11 +32,6 @@ export const controls_delay = {
         this.setHelpUrl(
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id9"
         );
-        this.wiki = {
-            "zh-hans": {
-                page: ["Arduino AVR", "控制", "延时"],
-            },
-        };
     },
 };
 
@@ -70,11 +60,6 @@ export const controls_for = {
         this.setHelpUrl(
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id2"
         );
-        this.wiki = {
-            "zh-hans": {
-                page: ["Arduino AVR", "控制", "for 循环"],
-            },
-        };
         var thisBlock = this;
         this.setTooltip(function () {
             return Blockly.Msg.CONTROLS_FOR_TOOLTIP.replace(
@@ -106,11 +91,6 @@ export const controls_whileUntil = {
         this.setHelpUrl(
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#while"
         );
-        this.wiki = {
-            "zh-hans": {
-                page: ["Arduino AVR", "控制", "while 循环"],
-            },
-        };
         var thisBlock = this;
         this.setTooltip(function () {
             var op = thisBlock.getFieldValue("MODE");
@@ -148,11 +128,6 @@ export const controls_flow_statements = {
             };
             return TOOLTIPS[op];
         });
-        this.wiki = {
-            "zh-hans": {
-                page: ["Arduino AVR", "控制", "跳出循环"],
-            },
-        };
     },
     onchange: function () {
         if (!this.workspace) {
@@ -199,11 +174,6 @@ export const controls_millis = {
             .appendField(new Blockly.FieldDropdown(UNIT), "UNIT");
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_MILLIS);
-        this.wiki = {
-            "zh-hans": {
-                page: ["Arduino AVR", "控制", "系统运行时间"],
-            },
-        };
     },
 };
 
@@ -226,11 +196,6 @@ export const controls_if = {
         this.setHelpUrl(
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#if"
         );
-        this.wiki = {
-            "zh-hans": {
-                page: ["Arduino AVR", "控制", "if 选择"],
-            },
-        };
         this.setMutator(
             new Blockly.icons.MutatorIcon(
                 ["controls_if_elseif", "controls_if_else"],
@@ -378,17 +343,17 @@ export const controls_if = {
         var elseStatementConnection = null;
         while (clauseBlock) {
             switch (clauseBlock.type) {
-            case "controls_if_elseif":
-                this.elseifCount_++;
-                valueConnections.push(clauseBlock.valueConnection_);
-                statementConnections.push(clauseBlock.statementConnection_);
-                break;
-            case "controls_if_else":
-                this.elseCount_++;
-                elseStatementConnection = clauseBlock.statementConnection_;
-                break;
-            default:
-                throw Error("Unknown block type: " + clauseBlock.type);
+                case "controls_if_elseif":
+                    this.elseifCount_++;
+                    valueConnections.push(clauseBlock.valueConnection_);
+                    statementConnections.push(clauseBlock.statementConnection_);
+                    break;
+                case "controls_if_else":
+                    this.elseCount_++;
+                    elseStatementConnection = clauseBlock.statementConnection_;
+                    break;
+                default:
+                    throw Error("Unknown block type: " + clauseBlock.type);
             }
             clauseBlock =
                 clauseBlock.nextConnection && clauseBlock.nextConnection.targetBlock();
@@ -412,22 +377,22 @@ export const controls_if = {
         var i = 1;
         while (clauseBlock) {
             switch (clauseBlock.type) {
-            case "controls_if_elseif":
-                var inputIf = this.getInput("IF" + i);
-                var inputDo = this.getInput("DO" + i);
-                clauseBlock.valueConnection_ =
+                case "controls_if_elseif":
+                    var inputIf = this.getInput("IF" + i);
+                    var inputDo = this.getInput("DO" + i);
+                    clauseBlock.valueConnection_ =
                         inputIf && inputIf.connection.targetConnection;
-                clauseBlock.statementConnection_ =
+                    clauseBlock.statementConnection_ =
                         inputDo && inputDo.connection.targetConnection;
-                i++;
-                break;
-            case "controls_if_else":
-                var inputDo = this.getInput("ELSE");
-                clauseBlock.statementConnection_ =
+                    i++;
+                    break;
+                case "controls_if_else":
+                    var inputDo = this.getInput("ELSE");
+                    clauseBlock.statementConnection_ =
                         inputDo && inputDo.connection.targetConnection;
-                break;
-            default:
-                throw "Unknown block type.";
+                    break;
+                default:
+                    throw "Unknown block type.";
             }
             clauseBlock =
                 clauseBlock.nextConnection && clauseBlock.nextConnection.targetBlock();
@@ -573,11 +538,6 @@ export const controls_switch_case = {
         this.setHelpUrl(
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#switch"
         );
-        this.wiki = {
-            "zh-hans": {
-                page: ["Arduino AVR", "控制", "switch 选择"],
-            },
-        };
         this.setMutator(
             new Blockly.icons.MutatorIcon(["controls_case", "controls_default"], this)
         );
@@ -666,32 +626,32 @@ export const controls_switch_case = {
         var clauseBlock = containerBlock.getInputTargetBlock("STACK");
         while (clauseBlock) {
             switch (clauseBlock.type) {
-            case "controls_case":
-                this.elseifCount_++;
-                var ifInput = this.appendValueInput("IF" + this.elseifCount_)
-                    .setCheck([Number, Boolean])
-                    .appendField("case");
-                var doInput = this.appendStatementInput("DO" + this.elseifCount_);
-                doInput.appendField("");
-                // Reconnect any child blocks.
-                if (clauseBlock.valueConnection_) {
-                    ifInput.connection.connect(clauseBlock.valueConnection_);
-                }
-                if (clauseBlock.statementConnection_) {
-                    doInput.connection.connect(clauseBlock.statementConnection_);
-                }
-                break;
-            case "controls_default":
-                this.elseCount_++;
-                var elseInput = this.appendStatementInput("ELSE");
-                elseInput.appendField("default");
-                // Reconnect any child blocks.
-                if (clauseBlock.statementConnection_) {
-                    elseInput.connection.connect(clauseBlock.statementConnection_);
-                }
-                break;
-            default:
-                throw "Unknown block type.";
+                case "controls_case":
+                    this.elseifCount_++;
+                    var ifInput = this.appendValueInput("IF" + this.elseifCount_)
+                        .setCheck([Number, Boolean])
+                        .appendField("case");
+                    var doInput = this.appendStatementInput("DO" + this.elseifCount_);
+                    doInput.appendField("");
+                    // Reconnect any child blocks.
+                    if (clauseBlock.valueConnection_) {
+                        ifInput.connection.connect(clauseBlock.valueConnection_);
+                    }
+                    if (clauseBlock.statementConnection_) {
+                        doInput.connection.connect(clauseBlock.statementConnection_);
+                    }
+                    break;
+                case "controls_default":
+                    this.elseCount_++;
+                    var elseInput = this.appendStatementInput("ELSE");
+                    elseInput.appendField("default");
+                    // Reconnect any child blocks.
+                    if (clauseBlock.statementConnection_) {
+                        elseInput.connection.connect(clauseBlock.statementConnection_);
+                    }
+                    break;
+                default:
+                    throw "Unknown block type.";
             }
             clauseBlock =
                 clauseBlock.nextConnection && clauseBlock.nextConnection.targetBlock();
@@ -707,22 +667,22 @@ export const controls_switch_case = {
         var i = 1;
         while (clauseBlock) {
             switch (clauseBlock.type) {
-            case "controls_case":
-                var inputIf = this.getInput("IF" + i);
-                var inputDo = this.getInput("DO" + i);
-                clauseBlock.valueConnection_ =
+                case "controls_case":
+                    var inputIf = this.getInput("IF" + i);
+                    var inputDo = this.getInput("DO" + i);
+                    clauseBlock.valueConnection_ =
                         inputIf && inputIf.connection.targetConnection;
-                clauseBlock.statementConnection_ =
+                    clauseBlock.statementConnection_ =
                         inputDo && inputDo.connection.targetConnection;
-                i++;
-                break;
-            case "controls_default":
-                var inputDo = this.getInput("ELSE");
-                clauseBlock.statementConnection_ =
+                    i++;
+                    break;
+                case "controls_default":
+                    var inputDo = this.getInput("ELSE");
+                    clauseBlock.statementConnection_ =
                         inputDo && inputDo.connection.targetConnection;
-                break;
-            default:
-                throw "Unknown block type.";
+                    break;
+                default:
+                    throw "Unknown block type.";
             }
             clauseBlock =
                 clauseBlock.nextConnection && clauseBlock.nextConnection.targetBlock();
@@ -785,11 +745,6 @@ export const controls_mstimer2 = {
         this.setHelpUrl(
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#MsTimer2"
         );
-        this.wiki = {
-            "zh-hans": {
-                page: ["Arduino AVR", "控制", "MsTimer2 定时器"],
-            },
-        };
     },
 };
 
@@ -805,12 +760,6 @@ export const controls_mstimer2_start = {
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id45"
         );
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_MSTIMER2_START);
-        this.wiki = {
-            "zh-hans": {
-                page: ["Arduino AVR", "控制", "MsTimer2 定时器"],
-                scrollPos: "MsTimer2 定时器启动",
-            },
-        };
     },
 };
 
@@ -826,12 +775,6 @@ export const controls_mstimer2_stop = {
         this.setHelpUrl(
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id48"
         );
-        this.wiki = {
-            "zh-hans": {
-                page: ["Arduino AVR", "控制", "MsTimer2 定时器"],
-                scrollPos: "MsTimer2 定时器停止",
-            },
-        };
     },
 };
 
@@ -864,12 +807,6 @@ export const controls_interrupts = {
         this.setHelpUrl(
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id51"
         );
-        this.wiki = {
-            "zh-hans": {
-                page: ["Arduino AVR", "控制", "中断"],
-                scrollPos: "允许中断",
-            },
-        };
     },
 };
 
@@ -883,12 +820,6 @@ export const controls_nointerrupts = {
         this.setHelpUrl(
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id55"
         );
-        this.wiki = {
-            "zh-hans": {
-                page: ["Arduino AVR", "控制", "中断"],
-                scrollPos: "禁止中断",
-            },
-        };
     },
 };
 export const base_delay = controls_delay;
@@ -928,11 +859,6 @@ export const simple_timer = {
         this.setColour(120);
         this.setTooltip();
         this.setHelpUrl("");
-        this.wiki = {
-            "zh-hans": {
-                page: ["Arduino AVR", "控制", "简单定时器"],
-            },
-        };
     },
 };
 //do-while循环

@@ -75,68 +75,68 @@ export const math_single = function (_, generator) {
     }
     // First, handle cases which generate values that don't need parentheses.
     switch (operator) {
-    case 'ABS':
-        code = arg + '.abs()';
-        break;
-    case 'ROOT':
-        code = 'sqrt(' + arg + ')';
-        break;
-    case 'LN':
-        code = 'log(' + arg + ')';
-        break;
-    case 'EXP':
-        code = 'exp(' + arg + ')';
-        break;
-    case 'POW10':
-        code = 'pow(10,' + arg + ')';
-        break;
-    case '++':
-        code = '(++' + arg + ')';
-        break;
-    case '--':
-        code = '(--' + arg + ')';
-        break;
-    case '~':
-        code = '~(' + arg + ')';
-        break;
-    case 'ROUND':
-        code = arg + '.round()';
-        break;
-    case 'ROUNDUP':
-        code = arg + '.ceil()';
-        break;
-    case 'ROUNDDOWN':
-        code = arg + '.floor()';
-        break;
-    case 'SIN':
-        code = 'sin(' + arg + ' / 180.0 * 3.14159)';
-        break;
-    case 'COS':
-        code = 'cos(' + arg + ' / 180.0 * 3.14159)';
-        break;
-    case 'TAN':
-        code = 'tan(' + arg + ' / 180.0 * 3.14159)';
-        break;
+        case 'ABS':
+            code = arg + '.abs()';
+            break;
+        case 'ROOT':
+            code = 'sqrt(' + arg + ')';
+            break;
+        case 'LN':
+            code = 'log(' + arg + ')';
+            break;
+        case 'EXP':
+            code = 'exp(' + arg + ')';
+            break;
+        case 'POW10':
+            code = 'pow(10,' + arg + ')';
+            break;
+        case '++':
+            code = '(++' + arg + ')';
+            break;
+        case '--':
+            code = '(--' + arg + ')';
+            break;
+        case '~':
+            code = '~(' + arg + ')';
+            break;
+        case 'ROUND':
+            code = arg + '.round()';
+            break;
+        case 'ROUNDUP':
+            code = arg + '.ceil()';
+            break;
+        case 'ROUNDDOWN':
+            code = arg + '.floor()';
+            break;
+        case 'SIN':
+            code = 'sin(' + arg + ' / 180.0 * 3.14159)';
+            break;
+        case 'COS':
+            code = 'cos(' + arg + ' / 180.0 * 3.14159)';
+            break;
+        case 'TAN':
+            code = 'tan(' + arg + ' / 180.0 * 3.14159)';
+            break;
     }
     if (code) {
         return [code, generator.ORDER_UNARY_POSTFIX];
     }
     // Second, handle cases which generate values that may need parentheses.
     switch (operator) {
-    case 'LOG10':
-        code = 'log(' + arg + ') / log(10)';
-        break;
-    case 'ASIN':
-        code = 'asin(' + arg + ') / 3.14159 * 180';
-        break;
-    case 'ACOS':
-        code = 'acos(' + arg + ') / 3.14159 * 180';
-        break;
-    case 'ATAN':
-        code = 'atan(' + arg + ') / 3.14159 * 180';
-        break;
-    default:
-        throw 'Unknown math operator: ' + operator;
+        case 'LOG10':
+            code = 'log(' + arg + ') / log(10)';
+            break;
+        case 'ASIN':
+            code = 'asin(' + arg + ') / 3.14159 * 180';
+            break;
+        case 'ACOS':
+            code = 'acos(' + arg + ') / 3.14159 * 180';
+            break;
+        case 'ATAN':
+            code = 'atan(' + arg + ') / 3.14159 * 180';
+            break;
+        default:
+            throw 'Unknown math operator: ' + operator;
     }
     return [code, generator.ORDER_MULTIPLICATIVE];
 }
