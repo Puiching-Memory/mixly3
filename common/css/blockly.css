@@ -22,7 +22,40 @@
 
 .blocklyTreeLabel {
     font-size: 17px;
-} 
+}
+
+.blocklyScrollbarHandle {
+    rx: 2;
+    ry: 2;
+}
+
+.classic-theme .blocklyScrollbarHandle {
+    fill: #C3C1C1;
+}
+
+.classic-theme .blocklyScrollbarBackground:hover+.blocklyScrollbarHandle,
+.classic-theme .blocklyScrollbarHandle:hover {
+    fill: #AEB2AF;
+}
+
+.classic-theme .blocklyScrollbarBackground:active+.blocklyScrollbarHandle,
+.classic-theme .blocklyScrollbarHandle:active {
+    fill: #989998 !important;
+}
+
+.dark-theme .blocklyScrollbarHandle {
+    fill: #989998;
+}
+
+.dark-theme .blocklyScrollbarBackground:hover+.blocklyScrollbarHandle,
+.dark-theme .blocklyScrollbarHandle:hover {
+    fill: #AEB2AF;
+}
+
+.dark-theme .blocklyScrollbarBackground:active+.blocklyScrollbarHandle,
+.dark-theme .blocklyScrollbarHandle:active {
+    fill: #C3C1C1 !important;
+}
 
 .injectionDiv.classic-theme .blocklyTreeRow .blocklyTreeLabel,
 .injectionDiv.dark-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeLabel {

@@ -11,14 +11,14 @@ body ::-webkit-scrollbar {
 ::-webkit-scrollbar-track,
 body ::-webkit-scrollbar-track {
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
+    border-radius: 1px;
 }
 
 /* 设置滚动条滑块 */
 ::-webkit-scrollbar-thumb,
 body ::-webkit-scrollbar-thumb {
     background-color: #C3C1C1;
-    border-radius: 2px;
+    border-radius: 1px;
 }
 
 ::-webkit-scrollbar-thumb:hover,
@@ -35,7 +35,7 @@ body ::-webkit-scrollbar-thumb:active {
 html[data-bs-theme=light] ::-webkit-scrollbar-thumb,
 html[data-bs-theme=light] body ::-webkit-scrollbar-thumb {
     background-color: #C3C1C1;
-    border-radius: 2px;
+    border-radius: 1px;
 }
 
 html[data-bs-theme=light] ::-webkit-scrollbar-thumb:hover,
@@ -50,18 +50,18 @@ html[data-bs-theme=light] body ::-webkit-scrollbar-thumb:active {
 
 html[data-bs-theme=dark] ::-webkit-scrollbar-thumb,
 html[data-bs-theme=dark] body ::-webkit-scrollbar-thumb {
-    background-color: #989998;
-    border-radius: 2px;
+    background-color: #5F5F5F;
+    border-radius: 1px;
 }
 
 html[data-bs-theme=dark] ::-webkit-scrollbar-thumb:hover,
 html[data-bs-theme=dark] body ::-webkit-scrollbar-thumb:hover {
-    background-color: #AEB2AF;
+    background-color: #787878;
 }
 
 html[data-bs-theme=dark] ::-webkit-scrollbar-thumb:active,
 html[data-bs-theme=dark] body ::-webkit-scrollbar-thumb:active {
-    background-color: #C3C1C1;
+    background-color: #989998;
 }
 
 /* 设置滚动条宽高 */
@@ -97,18 +97,18 @@ html[data-bs-theme=light] .mixly-scrollbar::-webkit-scrollbar-thumb:active {
 
 html[data-bs-theme=dark] .mixly-scrollbar ::-webkit-scrollbar-thumb,
 html[data-bs-theme=dark] .mixly-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #989998;
+    background-color: #5F5F5F;
     border-radius: 1px;
 }
 
 html[data-bs-theme=dark] .mixly-scrollbar ::-webkit-scrollbar-thumb:hover,
 html[data-bs-theme=dark] .mixly-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: #AEB2AF;
+    background-color: #787878;
 }
 
 html[data-bs-theme=dark] .mixly-scrollbar ::-webkit-scrollbar-thumb:active,
 html[data-bs-theme=dark] .mixly-scrollbar::-webkit-scrollbar-thumb:active {
-    background-color: #C3C1C1;
+    background-color: #989998;
 }
 
 html[data-bs-theme=light] ::-webkit-resizer {
@@ -150,7 +150,7 @@ html[data-bs-theme=dark] ::-webkit-scrollbar-corner {
 html[data-bs-theme=light] .blocklyDropDownDiv ::-webkit-scrollbar-thumb,
 html[data-bs-theme=light] .blocklyWidgetDiv ::-webkit-scrollbar-thumb {
     background-color: #C3C1C1;
-    border-radius: 4px;
+    border-radius: 1px;
 }
 
 html[data-bs-theme=light] .blocklyDropDownDiv ::-webkit-scrollbar-thumb:hover,
@@ -165,16 +165,16 @@ html[data-bs-theme=light] .blocklyWidgetDiv ::-webkit-scrollbar-thumb:active {
 
 html[data-bs-theme=dark] .blocklyDropDownDiv ::-webkit-scrollbar-thumb,
 html[data-bs-theme=dark] .blocklyWidgetDiv ::-webkit-scrollbar-thumb {
-    background-color: #989998;
-    border-radius: 4px;
+    background-color: #5F5F5F;
+    border-radius: 1px;
 }
 
 html[data-bs-theme=dark] .blocklyDropDownDiv ::-webkit-scrollbar-thumb:hover,
 html[data-bs-theme=dark] .blocklyWidgetDiv ::-webkit-scrollbar-thumb:hover {
-    background-color: #AEB2AF;
+    background-color: #787878;
 }
 
 html[data-bs-theme=dark] .blocklyDropDownDiv ::-webkit-scrollbar-thumb:active,
 html[data-bs-theme=dark] .blocklyWidgetDiv ::-webkit-scrollbar-thumb:active {
-    background-color: #C3C1C1;
+    background-color: #989998;
 }
