@@ -208,9 +208,10 @@ BU.burnWithEsptool = async () => {
     const { mainStatusBarTabs } = Mixly;
     const portName = Serial.getSelectedPortName();
     if (!portName) {
-        layer.msg(Msg.Lang['statusbar.serial.noDevice'], {
+        /*layer.msg(Msg.Lang['statusbar.serial.noDevice'], {
             time: 1000
-        });
+        });*/
+        BU.requestPort();
         return;
     }
     const statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
@@ -327,9 +328,10 @@ BU.burnWithAdafruitEsptool = async () => {
     const { mainStatusBarTabs } = Mixly;
     const portName = Serial.getSelectedPortName();
     if (!portName) {
-        layer.msg(Msg.Lang['statusbar.serial.noDevice'], {
+        /*layer.msg(Msg.Lang['statusbar.serial.noDevice'], {
             time: 1000
-        });
+        });*/
+        BU.requestPort();
         return;
     }
     const statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
@@ -501,9 +503,10 @@ BU.searchLibs = (moduleList, libList = []) => {
 BU.initUpload = () => {
     const portName = Serial.getSelectedPortName();
     if (!portName) {
-        layer.msg(Msg.Lang['statusbar.serial.noDevice'], {
+        /*layer.msg(Msg.Lang['statusbar.serial.noDevice'], {
             time: 1000
-        });
+        });*/
+        BU.requestPort();
         return;
     }
     BU.uploadWithAmpy(portName);
