@@ -5,7 +5,7 @@ Micropython	library for the MINI_WCH(TOUCH*2, MIC*1, Buzzer*1, PWM*2, Matrix8x12
 =======================================================
 @dahanzimin From the Mixly Team
 """
-import time
+import time, math
 from esp import flash_read
 from micropython import const
 from framebuf import FrameBuffer, MONO_VLSB
@@ -214,6 +214,12 @@ class BOT035(FrameBuffer):
 						x = _FONT_W + x + space
 					self.show()
 					time.sleep_ms(speed)
+
+	def pointern(self, x=_LEDS_W // 2, y=_LEDS_H // 2, l=_LEDS_H // 2, angle=0):
+		radian = math.radians(angle)
+		self.fill(0)
+		self.line(x, y, round(x + l * math.sin(radian)), round(y - l * math.cos(radian)), 1)
+		self.show()
 
 	def _wreg(self, reg, val):
 		'''Write memory address'''
