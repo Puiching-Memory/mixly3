@@ -281,7 +281,11 @@
     <block type="garbage_collection"></block>
     <block type="get_mem_alloc"></block>
     <block type="get_mem_free"></block>
-    <block type="get_unique_identifier"></block>
+    <block type="turn_to_int">
+      <value name="VAR">
+        <block type="get_unique_identifier"></block>
+      </value>
+    </block>
   </category>
   <category id="catMath" colour="230">
     <block type="math_number"></block>
@@ -2481,7 +2485,7 @@
           </shadow>
         </value>
       </block>
-      <block type="WEATHER_NOW">
+      <!-- <block type="WEATHER_NOW">
         <value name="key">
           <shadow type="text">
             <field name="TEXT">SVa3S0UKHIy9dDArs</field>
@@ -2526,6 +2530,70 @@
             <field name="NUM">24</field>
           </shadow>
         </value>
+      </block> -->
+      <block type="Weather_now">
+        <value name="key">
+          <shadow type="text">
+            <field name="TEXT">SVa3S0UKHIy9dDArs</field>
+          </shadow>
+        </value>
+        <value name="addr">
+          <shadow type="text">
+            <field name="TEXT">北京</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="Weather_now_content"></block>
+      <block type="Weather_alarm_content"></block>
+      <block type="Air_now_content"></block>
+      <block type="Tide_daily_content"></block>
+      <block type="Location_search_content"></block>      
+      <block type="Life_suggestion_content"></block>
+
+      <block type="Weather_daily">
+        <value name="key">
+          <shadow type="text">
+            <field name="TEXT">SVa3S0UKHIy9dDArs</field>
+          </shadow>
+        </value>
+        <value name="addr">
+          <shadow type="text">
+            <field name="TEXT">北京</field>
+          </shadow>
+        </value>
+        <value name="day">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="Weather_daily_content">
+        <value name="day">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>        
+      </block>
+      <block type="Air_daily_content">
+        <value name="day">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>        
+      </block>
+      <block type="Geo_sun_content">
+        <value name="day">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>        
+      </block>
+      <block type="Geo_moon_content">
+        <value name="day">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>        
       </block>
     </category>
   </category>
@@ -3632,6 +3700,11 @@
       <value name="PIN">
         <shadow type="pins_digital_pin"></shadow>
       </value>
+    </block>
+    <block type="sensor_DS18X20">
+        <value name="PIN">
+          <shadow type="pins_digital_pin"></shadow>
+        </value>
     </block>
     <block type="HCSR04" m-hide='micropython:esp32c3:mixgocar_c3'>
       <value name="PIN1">
@@ -6463,7 +6536,44 @@
     </block>
     <block type="urequests_response"></block>
   </category>
-
+<category id="catCommunicate" colour="#3288dd">
+    <block type="variables_set">
+      <field name="VAR">response</field>
+      <value name="VALUE">
+         <block type="requests_get2">
+          <value name="URL">
+            <shadow type="text">
+              <field name="TEXT">http://mixio.mixly.cn</field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+        <block type="variables_set">
+      <field name="VAR">response</field>
+      <value name="VALUE">
+         <block type="requests_post">
+          <value name="URL">
+            <shadow type="text">
+              <field name="TEXT">http://mixio.mixly.cn</field>
+            </shadow>
+          </value>
+          <value name="data">
+            <shadow type="text">
+              <field name="TEXT"></field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="requests_attribute2">
+      <value name="VAL">
+        <shadow type="variables_get">
+          <field name="VAR">response</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
   <category id="catFactory" name="Factory" colour="#777777">
     <block type="factory_import"></block>
     <block type="factory_from_import"></block>

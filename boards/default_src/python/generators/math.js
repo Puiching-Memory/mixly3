@@ -290,6 +290,7 @@ export const text_to_number = function (_, generator) {
     var towhat = this.getFieldValue('TOWHAT');
     var str = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     if (towhat == 'b') return ['' + str + '.encode("utf-8")', generator.ORDER_ATOMIC];
+    else if(towhat == 'bti') return['int.from_bytes('+str+',"big")',Blockly.Python.ORDER_ATOMIC];
     return [towhat + "(" + str + ')', generator.ORDER_ATOMIC];
 }
 
@@ -301,3 +302,8 @@ export const text_to_number_skulpt = function (_, generator) {
 }
 
 export const base_map = math_map;
+
+export const turn_to_int = function (_, generator) {
+    var str = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    return ["int(" + str + ')', generator.ORDER_ATOMIC];
+}

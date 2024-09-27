@@ -846,3 +846,11 @@ export const sensor_weather_solo_rain = function (_, generator) {
     var code = sub + '.rain_count(' + time + ')' + key + '';
     return [code, generator.ORDER_ATOMIC];
 }
+
+
+export const sensor_DS18X20 = function(_, generator){
+    generator.definitions_['import_DS18X20'] = 'from ds18b20 import DS18X20';
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    var code ='DS18X20('+dropdown_pin+').temperature()';
+    return [code, generator.ORDER_ATOMIC];
+};
