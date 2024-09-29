@@ -2983,7 +2983,7 @@
       <block type="Weather_alarm_content"></block>
       <block type="Air_now_content"></block>
       <block type="Tide_daily_content"></block>
-      <block type="Location_search_content"></block>      
+      <block type="Location_search_content"></block>
       <block type="Life_suggestion_content"></block>
 
       <block type="Weather_daily">
@@ -3008,28 +3008,28 @@
           <shadow type="math_number">
             <field name="NUM">1</field>
           </shadow>
-        </value>        
+        </value>
       </block>
       <block type="Air_daily_content">
         <value name="day">
           <shadow type="math_number">
             <field name="NUM">1</field>
           </shadow>
-        </value>        
+        </value>
       </block>
       <block type="Geo_sun_content">
         <value name="day">
           <shadow type="math_number">
             <field name="NUM">1</field>
           </shadow>
-        </value>        
+        </value>
       </block>
       <block type="Geo_moon_content">
         <value name="day">
           <shadow type="math_number">
             <field name="NUM">1</field>
           </shadow>
-        </value>        
+        </value>
       </block>
     </category>
   </category>
@@ -4136,9 +4136,9 @@
       </value>
     </block>
     <block type="sensor_DS18X20">
-        <value name="PIN">
-          <shadow type="pins_digital_pin"></shadow>
-        </value>
+      <value name="PIN">
+        <shadow type="pins_digital_pin"></shadow>
+      </value>
     </block>
     <block type="HCSR04">
       <value name="PIN1">
@@ -7004,7 +7004,7 @@
         </shadow>
       </value>
     </block>
-    <block type="urequests_connect_url">
+    <!-- <block type="urequests_connect_url">
       <value name="url">
         <block type="urequests_wifi_url">
           <value name="URL">
@@ -7015,13 +7015,13 @@
         </block>
       </value>
     </block>
-    <block type="urequests_response"></block>
+    <block type="urequests_response"></block> -->
   </category>
-<category id="catCommunicate" colour="#3288dd">
+  <category id="catCommunicate" colour="#3288dd">
     <block type="variables_set">
       <field name="VAR">response</field>
       <value name="VALUE">
-         <block type="requests_get2">
+        <block type="requests_get2">
           <value name="URL">
             <shadow type="text">
               <field name="TEXT">http://mixio.mixly.cn</field>
@@ -7030,10 +7030,10 @@
         </block>
       </value>
     </block>
-        <block type="variables_set">
+    <block type="variables_set">
       <field name="VAR">response</field>
       <value name="VALUE">
-         <block type="requests_post">
+        <block type="requests_post">
           <value name="URL">
             <shadow type="text">
               <field name="TEXT">http://mixio.mixly.cn</field>

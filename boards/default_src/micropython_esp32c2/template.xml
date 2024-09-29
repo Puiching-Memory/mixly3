@@ -280,7 +280,7 @@
     </block>
     <block type="garbage_collection"></block>
     <block type="get_mem_alloc"></block>
-    <block type="get_mem_free"></block>  
+    <block type="get_mem_free"></block>
     <block type="turn_to_int">
       <value name="VAR">
         <block type="get_unique_identifier"></block>
@@ -1740,12 +1740,11 @@
         </shadow>
       </value>
     </block>
-    <block type="analog_keyboard_str" m-show="micropython:esp32c2:mixgo_mini">;
-      <value name="str">
+    <block type="analog_keyboard_str" m-show="micropython:esp32c2:mixgo_mini">; <value name="str">
         <shadow type="text">
-         <field name="TEXT">Hello, Mixly!</field>
+          <field name="TEXT">Hello, Mixly!</field>
         </shadow>
-     </value>
+      </value>
       <value name="time">
         <shadow type="math_number">
           <field name="NUM">10</field>
@@ -2008,7 +2007,7 @@
         </shadow>
       </value>
     </block>
-    <block type="mini_g2_rfid_status"></block> 
+    <block type="mini_g2_rfid_status"></block>
   </category>
   <category id="catIot" colour="#2FAD7A">
     <category id="catBlynk" colour="#2FAD7A">
@@ -2595,7 +2594,7 @@
       <block type="Weather_alarm_content"></block>
       <block type="Air_now_content"></block>
       <block type="Tide_daily_content"></block>
-      <block type="Location_search_content"></block>      
+      <block type="Location_search_content"></block>
       <block type="Life_suggestion_content"></block>
 
       <block type="Weather_daily">
@@ -2620,28 +2619,28 @@
           <shadow type="math_number">
             <field name="NUM">1</field>
           </shadow>
-        </value>        
+        </value>
       </block>
       <block type="Air_daily_content">
         <value name="day">
           <shadow type="math_number">
             <field name="NUM">1</field>
           </shadow>
-        </value>        
+        </value>
       </block>
       <block type="Geo_sun_content">
         <value name="day">
           <shadow type="math_number">
             <field name="NUM">1</field>
           </shadow>
-        </value>        
+        </value>
       </block>
       <block type="Geo_moon_content">
         <value name="day">
           <shadow type="math_number">
             <field name="NUM">1</field>
           </shadow>
-        </value>        
+        </value>
       </block>
     </category>
   </category>
@@ -3750,9 +3749,9 @@
       </value>
     </block>
     <block type="sensor_DS18X20">
-        <value name="PIN">
-          <shadow type="pins_digital_pin"></shadow>
-        </value>
+      <value name="PIN">
+        <shadow type="pins_digital_pin"></shadow>
+      </value>
     </block>
     <block type="HCSR04" m-hide='micropython:esp32c3:mixgocar_c3'>
       <value name="PIN1">
@@ -6576,7 +6575,7 @@
     <block type="variables_set">
       <field name="VAR">response</field>
       <value name="VALUE">
-         <block type="requests_get2">
+        <block type="requests_get2">
           <value name="URL">
             <shadow type="text">
               <field name="TEXT">http://mixio.mixly.cn</field>
@@ -6585,10 +6584,10 @@
         </block>
       </value>
     </block>
-        <block type="variables_set">
+    <block type="variables_set">
       <field name="VAR">response</field>
       <value name="VALUE">
-         <block type="requests_post">
+        <block type="requests_post">
           <value name="URL">
             <shadow type="text">
               <field name="TEXT">http://mixio.mixly.cn</field>
