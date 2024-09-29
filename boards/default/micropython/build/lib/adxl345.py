@@ -15,12 +15,8 @@ class ADXL345:
     def __init__(self, i2c, address=0X53):
         self._device = i2c
         self._address = address
-        for addr in self._device.scan():
-            if self._device.readfrom_mem(addr, 0, 1)[0] == 0xe5:
-                self._address = addr
-                break
-            else:
-                raise AttributeError("Cannot find a ADXL345")
+        if self._rreg(0x0) != 0xe5:
+            raise AttributeError("Cannot find a ADXL345")
                 
         self._wreg(DATA_FORMAT,0x2B)    #16g量程
         self._wreg(BW_RATE,0x0A)        #数据输出速度为100Hz
