@@ -261,13 +261,13 @@ export const garbage_collection = function (_, generator) {
 
 export const get_mem_alloc = function (_, generator) {
     generator.definitions_['import_gc'] = 'import gc';
-    var code = 'gc.mem_alloc()\n';
+    var code = 'gc.mem_alloc()';
     return [code, generator.ORDER_ATOMIC];
 }
 
 export const get_mem_free = function (_, generator) {
     generator.definitions_['import_gc'] = 'import gc';
-    var code = 'gc.mem_free()\n';
+    var code = 'gc.mem_free()';
     return [code, generator.ORDER_ATOMIC]
 }
 

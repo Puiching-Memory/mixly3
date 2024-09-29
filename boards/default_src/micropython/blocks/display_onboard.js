@@ -1463,7 +1463,7 @@ export const draw_pointer = {
             .appendField(Blockly.Msg.DRAW_POINTER_ANGLE);
         this.appendValueInput('angle');
         this.appendDummyInput()
-            .appendField('°');
+            .appendField(Blockly.Msg.MIXLY_DRAW_POINTER_DU);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);

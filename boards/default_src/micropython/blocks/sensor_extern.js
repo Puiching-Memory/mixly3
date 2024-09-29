@@ -297,11 +297,11 @@ export const sensor_sht = {
     }
 };
 
-export const sensor_ds18x20 = {
+export const sensor_DS18X20 = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput("PIN", Number)
-            .appendField("DS18x20 " + Blockly.Msg.MIXLY_PIN)
+            .appendField("DS18X20 " + Blockly.Msg.MIXLY_PIN)
             .setCheck(Number);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_GETTEMPERATUE);
@@ -310,8 +310,6 @@ export const sensor_ds18x20 = {
         this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_SENSOR_DS18X20_TOOLTIP);
     }
 };
-
-
 
 export const sensor_lm35 = {
     init: function () {

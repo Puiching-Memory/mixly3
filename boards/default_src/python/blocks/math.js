@@ -489,7 +489,7 @@ export const math_round = {
 export const text_to_number = {
     init: function () {
         var TO_INT_FLOAT =
-            [[Blockly.Msg.MIXLY_TO_INT, 'int'], [Blockly.Msg.MIXLY_TO_FLOAT, 'float'], [Blockly.Msg.MIXLY_TO_BITES, 'b']];
+            [[Blockly.Msg.MIXLY_TO_INT, 'int'], [Blockly.Msg.MIXLY_TO_FLOAT, 'float'], [Blockly.Msg.MIXLY_TO_BITES, 'b'],[Blockly.Msg.LANG_MATH_BYTE+Blockly.Msg.MIXLY_TO_INT,'bti']];
         this.setColour(MATH_HUE);
         this.appendValueInput('VAR')
             .appendField(new Blockly.FieldDropdown(TO_INT_FLOAT), 'TOWHAT');
@@ -528,3 +528,13 @@ export const text_to_number_skulpt = {
 };
 
 export const base_map = math_map
+
+export const turn_to_int = {
+    init: function () {
+        this.setColour(MATH_HUE);
+        this.appendValueInput('VAR')
+            .appendField(Blockly.Msg.LANG_MATH_BYTE+Blockly.Msg.MIXLY_TO_INT);
+        this.setOutput(true, Number);
+        this.setTooltip(Blockly.Msg.MIXLY_PYTHON_TOOLTIP_TOINT)
+    }
+};

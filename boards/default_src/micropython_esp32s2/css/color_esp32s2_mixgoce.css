@@ -342,3 +342,11 @@ div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(12) > div.blo
     background:url('../../../../common/media/mark/factory4.png') no-repeat;
     background-size: 100% auto;
 }
+#catCommunicate.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+    background:url('../../../../common/media/mark/requests.png') no-repeat;
+    background-size: 100% auto; 
+}
+#catCommunicate.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+    background:url('../../../../common/media/mark/requests2.png') no-repeat;
+    background-size: 100% auto; 
+}

@@ -4400,9 +4400,46 @@
 
 
     </category>
--->
+    -->
   </category>
-
+<category id="catCommunicate" colour="#3288dd">
+    <block type="variables_set">
+      <field name="VAR">response</field>
+      <value name="VALUE">
+         <block type="requests_get2">
+          <value name="URL">
+            <shadow type="text">
+              <field name="TEXT">http://mixio.mixly.cn</field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+        <block type="variables_set">
+      <field name="VAR">response</field>
+      <value name="VALUE">
+         <block type="requests_post">
+          <value name="URL">
+            <shadow type="text">
+              <field name="TEXT">http://mixio.mixly.cn</field>
+            </shadow>
+          </value>
+          <value name="data">
+            <shadow type="text">
+              <field name="TEXT"></field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="requests_attribute2">
+      <value name="VAL">
+        <shadow type="variables_get">
+          <field name="VAR">response</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
   <sep></sep>
   <category id="catFactory" name="Factory" colour="#777777">
     <block type="factory_block_notes"></block>
