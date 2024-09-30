@@ -506,3 +506,83 @@ export const general_key_tuple = function (_, generator) {
 
     return [code, generator.ORDER_ATOMIC];
 };
+
+export const  analog_ble_keyboard_init = function(_, generator){
+    generator.definitions_['import_ble_keyboard'] = 'from ble_hid_keyboard import Keyboard';
+    var kname =  generator.valueToCode(this, 'kname',  generator.ORDER_ATOMIC)
+    var code = 'ble_keyboard=Keyboard('+kname+')\n';
+    return code;
+}
+
+export const ble_keyboard_get_mac = function(_, generator){
+     generator.definitions_['import_ble_keyboard'] = 'from ble_hid_keyboard import Keyboard';
+    var code = 'ble_keyboard.mac';
+    return[code, generator.ORDER_ATOMIC];
+}
+
+export const ble_keyboard_connect = function(_, generator){
+    generator.definitions_['import_ble_keyboard'] = 'from ble_hid_keyboard import Keyboard';
+    var code = 'ble_keyboard.is_connected()';
+    return[code, generator.ORDER_ATOMIC]; 
+}
+
+export const analog_ble_keyboard_input = function (_, generator) {
+    var sp =  generator.valueToCode(this, 'special',  generator.ORDER_ATOMIC);
+    var ge =  generator.valueToCode(this, 'general',  generator.ORDER_ATOMIC);
+    var re = this.getFieldValue('release');
+    generator.definitions_['import_ble_keyboard'] = 'from ble_hid_keyboard import Keyboard';
+    var code = "ble_keyboard.notify_hid("+sp+","+ge+","+re+")\n";
+    return code;
+}
+
+export const analog_ble_keyboard_str = function (_, generator) {
+    var str =  generator.valueToCode(this, 'str',  generator.ORDER_ATOMIC);
+    var t =  generator.valueToCode(this, 'time',  generator.ORDER_ATOMIC);
+    generator.definitions_['import_ble_keyboard'] = 'from ble_hid_keyboard import Keyboard';
+    var code = "ble_keyboard.notify_str("+str+",delay="+t+")\n";
+    return code;
+}
+
+export const analog_ble_keyboard_send_battery = function (_, generator) {
+    var b =  generator.valueToCode(this, 'battery',  generator.ORDER_ATOMIC);
+     generator.definitions_['import_ble_keyboard'] = 'from ble_hid_keyboard import Keyboard';
+    var code = "ble_keyboard.notify_battery("+b+")\n";
+    return code;
+}
+
+export const analog_ble_mouse_init = function(_, generator){
+    generator.definitions_['import_ble_mouse'] = 'from ble_hid_mouse import Mouse';
+    var name =  generator.valueToCode(this, 'name',  generator.ORDER_ATOMIC)
+    var code = 'ble_mouse=Mouse('+name+')\n';
+    return code;
+}
+
+export const ble_mouse_get_mac = function(_, generator){
+    generator.definitions_['import_ble_mouse'] = 'from ble_hid_mouse import Mouse';
+    var code = 'ble_mouse.mac';
+    return[code, generator.ORDER_ATOMIC];
+}
+
+export const ble_mouse_connect = function(_, generator){
+    generator.definitions_['import_ble_mouse'] = 'from ble_hid_mouse import Mouse';
+    var code = 'ble_mouse.is_connected()';
+    return[code, generator.ORDER_ATOMIC]; 
+}
+
+export const analog_ble_mouse_input = function (_, generator) {
+    var key =  generator.valueToCode(this, 'key',  generator.ORDER_ATOMIC);
+    var x =  generator.valueToCode(this, 'x',  generator.ORDER_ATOMIC);
+    var y =  generator.valueToCode(this, 'y',  generator.ORDER_ATOMIC);
+    var wheel =  generator.valueToCode(this, 'wheel',  generator.ORDER_ATOMIC);
+    var re = this.getFieldValue('release');
+    generator.definitions_['import_ble_mouse'] = 'from ble_hid_mouse import Mouse';
+    var code = "ble_mouse.notify_hid("+key+",("+x+","+y+"),"+wheel+","+re+")\n";
+    return code;
+}
+
+export const analog_ble_mouse_send_battery = function (_, generator) {
+    var b =  generator.valueToCode(this, 'battery',  generator.ORDER_ATOMIC);
+    generator.definitions_['import_ble_mouse'] = 'from ble_hid_mouse import Mouse';
+    var code = "ble_mouse.notify_battery("+b+")\n";
+    return code;
+}
