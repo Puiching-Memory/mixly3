@@ -45,15 +45,19 @@ Env.python3Path = null;
   */
 Env.pyFilePath = null;
 
+let htmlPath = decodeURIComponent((new URL($('html')[0].baseURI)).pathname);
+let baseJsPath = decodeURIComponent((new URL(goog.basePath)).pathname);
+
+if (goog.isElectron && Env.currentPlatform === 'win32') {
+    htmlPath = htmlPath.substring(1);
+    baseJsPath = baseJsPath.substring(1);
+}
+
 /**
   * 获取板卡index或主页面index的路径
   * @type {String} 
   */
-Env.indexDirPath = path.join((new URL($('html')[0].baseURI)).href, '../').replace(/file:\/+/g, '');
-Env.indexDirPath = decodeURIComponent(Env.indexDirPath);
-if (goog.isElectron && ['darwin', 'linux'].includes(Env.currentPlatform)) {
-    Env.indexDirPath = '/' + Env.indexDirPath;
-}
+Env.indexDirPath = path.join(htmlPath, '../');
 
 /**
   * 资源文件夹所在路径
@@ -89,20 +93,20 @@ Env.thirdPartyJS = [];
   * 默认模板路径
   * @type {String}
   */
-Env.templatePath = path.join(goog.basePath, '../templates/');
+Env.templatePath = path.join(baseJsPath, '../templates/');
 
 /**
   * 语言文件路径
   * @type {String}
   */
-Env.msgPath = path.join(goog.basePath, '../msg/');
+Env.msgPath = path.join(baseJsPath, '../msg/');
 
 /**
   * 模板index所在路径
   * @type {String}
   */
 const urlConfig = Url.getConfig() ?? {};
-Env.boardIndexPath = path.join(Env.indexDirPath, '../', urlConfig.boardIndex ?? '');
+Env.boardIndexPath = path.join(Env.indexDirPath, '../', urlConfig.boardIndex ?? 'index.xml');
 
 /**
   * 模板index所在目录路径
