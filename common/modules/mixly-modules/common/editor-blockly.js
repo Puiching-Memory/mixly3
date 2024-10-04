@@ -182,7 +182,7 @@ class EditorBlockly extends EditorBase {
         }
 
         this.getCode = (workspace, generator) => {
-            let code = generator.workspaceToCode(workspace) || '';
+            let code = generator?.workspaceToCode(workspace) || '';
             code = code.replace(/(_E[0-9A-F]{1}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) {
                 try {
                     return decodeURIComponent(s.replace(/_/g, '%'));
