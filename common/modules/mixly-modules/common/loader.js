@@ -66,29 +66,34 @@ window.addEventListener('load', () => {
             break;
         }
     }
-    if (!$categories.children('category').length) {
-        $categories.html('<category></category>');
+    $categories && $('#toolbox').html($categories.html());
+    cssPaths.length && LazyLoad.css(cssPaths);
+    if (scrpitPaths.length) {
+        LazyLoad.js(scrpitPaths, () => {
+            Loader.start();
+        });
+    } else {
+        Loader.start();
     }
-    $('#toolbox').html($categories.html());
-    LazyLoad.css(cssPaths);
-    LazyLoad.js(scrpitPaths, () => {
-        if (window.frames.length !== parent.frames.length) {
-            window.userEvents = new UserEvents(Editor.blockEditor);
-        }
-        if (!goog.isElectron && window.location.host.indexOf('mixly.cn')) {
-            window.userOpEvents = new UserOPEvents();
-        }
-        if (Env.hasSocketServer) {
-            Socket.init();
-        }
-        if (goog.isElectron && typeof LibManager === 'object') {
-            LibManager.init(() => Loader.init());
-        } else {
-            Env.defaultXML = $('#toolbox').html();
-            Loader.init();
-        }
-    });
 });
+
+Loader.start = () => {
+    if (window.frames.length !== parent.frames.length) {
+        window.userEvents = new UserEvents(Editor.blockEditor);
+    }
+    if (!goog.isElectron && window.location.host.indexOf('mixly.cn')) {
+        window.userOpEvents = new UserOPEvents();
+    }
+    if (Env.hasSocketServer) {
+        Socket.init();
+    }
+    if (goog.isElectron && typeof LibManager === 'object') {
+        LibManager.init(() => Loader.init());
+    } else {
+        Env.defaultXML = $('#toolbox').html();
+        Loader.init();
+    }
+}
 
 Loader.init = () => {
     const selectedBoardName = Boards.getSelectedBoardName();
