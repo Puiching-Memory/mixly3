@@ -1359,10 +1359,10 @@ export const analog_keyboard_str = {
 };
 
 export const analog_ble_keyboard_init = {
-    init:function(){
+    init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET+ Blockly.Msg.MIXLY_BLUETOOTH +Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_KEYBOARD);
+            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_KEYBOARD);
         this.appendValueInput('kname')
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_SYSTEM_DEVICE_NAME);
         this.setPreviousStatement(true);
@@ -1372,20 +1372,20 @@ export const analog_ble_keyboard_init = {
 }
 
 export const ble_keyboard_get_mac = {
-    init:function(){
+    init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_GET+Blockly.Msg.MIXLY_BLUETOOTH +Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_KEYBOARD+Blockly.Msg.MIXLY_BELONG+Blockly.Msg.MIXLY_ETHERNET_MAC_ADDRESS);
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_KEYBOARD + Blockly.Msg.MIXLY_BELONG + Blockly.Msg.MIXLY_ETHERNET_MAC_ADDRESS);
         this.setOutput(true);
         this.setInputsInline(true);
     }
 }
 
 export const ble_keyboard_connect = {
-    init:function(){
+    init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_BLUETOOTH +Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_KEYBOARD+Blockly.Msg.MIXLY_IS_CONNECT);
+            .appendField(Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_KEYBOARD + Blockly.Msg.MIXLY_IS_CONNECT);
         this.setOutput(true);
         this.setInputsInline(true);
     }
@@ -1395,30 +1395,30 @@ export const analog_ble_keyboard_input = {
     init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_BLUETOOTH+Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_KEYBOARD)
+            .appendField(Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_KEYBOARD)
             .appendField(Blockly.Msg.MIXLY_SEND_KEYBOARD);
         this.appendValueInput('special');
         this.appendValueInput('general');
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_RELEASE)
             .appendField(new Blockly.FieldDropdown([
-            [Blockly.Msg.MICROPYTHON_DISPLAY_YES, "True"],
-            [Blockly.Msg.MICROPYTHON_DISPLAY_NO, "False"]
-            ]),'release');
+                [Blockly.Msg.MICROPYTHON_DISPLAY_YES, "True"],
+                [Blockly.Msg.MICROPYTHON_DISPLAY_NO, "False"]
+            ]), 'release');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.MIXLY_BLUETOOTH+Blockly.Msg.ANALOG+ Blockly.Msg.MIXLY_KEYBOARD_INPUT);
+        this.setTooltip(Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_KEYBOARD_INPUT);
     }
 };
 
 export const analog_ble_keyboard_str = {
-    init:function(){
+    init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_BLUETOOTH+Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_KEYBOARD);
+            .appendField(Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_KEYBOARD);
         this.appendValueInput('str')
-            .appendField(Blockly.Msg.MIXLY_SEND_KEYBOARD +Blockly.Msg.MIXLY_STR_PRINT);
+            .appendField(Blockly.Msg.MIXLY_SEND_KEYBOARD + Blockly.Msg.MIXLY_STR_PRINT);
         this.appendValueInput('time')
             .appendField(Blockly.Msg.MIXLY_STR_PRINT_TIME_DELAY);
         this.appendDummyInput()
@@ -1430,12 +1430,12 @@ export const analog_ble_keyboard_str = {
 }
 
 export const analog_ble_keyboard_send_battery = {
-    init:function(){
+    init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_BLUETOOTH+Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_KEYBOARD);
+            .appendField(Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_KEYBOARD);
         this.appendValueInput('battery')
-            .appendField(Blockly.Msg.MIXLY_SEND_KEYBOARD+Blockly.Msg.MIXLY_BELONG+Blockly.Msg.MIXLY_BATTERY+Blockly.Msg.LISTS_SET_INDEX_INPUT_TO);
+            .appendField(Blockly.Msg.MIXLY_SEND_KEYBOARD + Blockly.Msg.MIXLY_BELONG + Blockly.Msg.MIXLY_BATTERY + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO);
         this.appendDummyInput()
             .appendField('%');
         this.setPreviousStatement(true);
@@ -1445,10 +1445,10 @@ export const analog_ble_keyboard_send_battery = {
 }
 
 export const analog_ble_mouse_init = {
-    init:function(){
+    init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET+ Blockly.Msg.MIXLY_BLUETOOTH +Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_MOUSE);
+            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_MOUSE);
         this.appendValueInput('name')
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_SYSTEM_DEVICE_NAME);
         this.setPreviousStatement(true);
@@ -1458,20 +1458,20 @@ export const analog_ble_mouse_init = {
 }
 
 export const ble_mouse_get_mac = {
-    init:function(){
+    init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_GET+Blockly.Msg.MIXLY_BLUETOOTH +Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_MOUSE+Blockly.Msg.MIXLY_BELONG+Blockly.Msg.MIXLY_ETHERNET_MAC_ADDRESS);
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_MOUSE + Blockly.Msg.MIXLY_BELONG + Blockly.Msg.MIXLY_ETHERNET_MAC_ADDRESS);
         this.setOutput(true);
         this.setInputsInline(true);
     }
 }
 
 export const ble_mouse_connect = {
-    init:function(){
+    init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_BLUETOOTH +Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_MOUSE+Blockly.Msg.MIXLY_IS_CONNECT);
+            .appendField(Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_MOUSE + Blockly.Msg.MIXLY_IS_CONNECT);
         this.setOutput(true);
         this.setInputsInline(true);
     }
@@ -1481,8 +1481,8 @@ export const analog_ble_mouse_input = {
     init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_BLUETOOTH+Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_MOUSE)
-            .appendField(Blockly.Msg.MIXLY_SEND +Blockly.Msg.MIXLY_MOUSE_INPUT);
+            .appendField(Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_MOUSE)
+            .appendField(Blockly.Msg.MIXLY_SEND + Blockly.Msg.MIXLY_MOUSE_INPUT);
         this.appendValueInput('key');
         this.appendValueInput('x')
             .appendField(Blockly.Msg.MIXLY_X_CHANGES);
@@ -1493,23 +1493,23 @@ export const analog_ble_mouse_input = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_RELEASE)
             .appendField(new Blockly.FieldDropdown([
-            [Blockly.Msg.MICROPYTHON_DISPLAY_YES, "True"],
-            [Blockly.Msg.MICROPYTHON_DISPLAY_NO, "False"]
-            ]),'release');
+                [Blockly.Msg.MICROPYTHON_DISPLAY_YES, "True"],
+                [Blockly.Msg.MICROPYTHON_DISPLAY_NO, "False"]
+            ]), 'release');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.MIXLY_BLUETOOTH+Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_KEYBOARD_INPUT);
+        this.setTooltip(Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_KEYBOARD_INPUT);
     }
 };
 
 export const analog_ble_mouse_send_battery = {
-    init:function(){
+    init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_BLUETOOTH+Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_MOUSE);
+            .appendField(Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_MOUSE);
         this.appendValueInput('battery')
-            .appendField(Blockly.Msg.MIXLY_SEND+Blockly.Msg.MIXLY_MOUSE+Blockly.Msg.MIXLY_BELONG+Blockly.Msg.MIXLY_BATTERY+Blockly.Msg.LISTS_SET_INDEX_INPUT_TO);
+            .appendField(Blockly.Msg.MIXLY_SEND + Blockly.Msg.MIXLY_MOUSE + Blockly.Msg.MIXLY_BELONG + Blockly.Msg.MIXLY_BATTERY + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO);
         this.appendDummyInput()
             .appendField('%');
         this.setPreviousStatement(true);
