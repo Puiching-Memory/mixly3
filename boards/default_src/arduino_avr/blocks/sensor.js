@@ -709,19 +709,34 @@ export const sensor_encoder_handle = {
     }
 };
 
+const BMX280_VALUE_TYPE = {
+    bme: [
+        [Blockly.Msg.blynk_IOT_IR_TEMP, "readTemperature()"],
+        [Blockly.Msg.MIXLY_Humidity, "readHumidity()"],
+        [Blockly.Msg.MIXLY_Altitude, "readPressure()"],
+        [Blockly.Msg.MIXLY_HEIGHT, "readAltitude(SEALEVELPRESSURE_HPA)"]
+    ],
+    bmp: [
+        [Blockly.Msg.blynk_IOT_IR_TEMP, "readTemperature()"],
+        [Blockly.Msg.MIXLY_Altitude, "readPressure()"],
+        [Blockly.Msg.MIXLY_HEIGHT, "readAltitude(SEALEVELPRESSURE_HPA)"]
+    ]
+};
+
 //BME280读取
 export const BME280_READ = {
     init: function () {
         this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SERIAL_READ)
-            .appendField(new Blockly.FieldDropdown([["BME280", "bme"], ["BMP280", "bmp"]]), "TYPE");
+            .appendField(new Blockly.FieldDropdown([["BME280", "bme"], ["BMP280", "bmp"]]), 'TYPE');
         this.appendValueInput("address")
             .appendField(Blockly.Msg.MIXLY_LCD_ADDRESS);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GET)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.blynk_IOT_IR_TEMP, "readTemperature()"], [Blockly.Msg.MIXLY_Humidity, "readHumidity()"], [Blockly.Msg.MIXLY_Altitude, "readPressure()"], [Blockly.Msg.MIXLY_HEIGHT, "readAltitude(SEALEVELPRESSURE_HPA)"]]), "BME_TYPE")
+            .appendField(new Blockly.FieldDependentDropdown("TYPE", BMX280_VALUE_TYPE, BMX280_VALUE_TYPE['bme']), 'BME_TYPE');
         this.setOutput(true, null);
+        this.setInputsInline(true);
         this.setTooltip("");
         this.setHelpUrl("");
     }
