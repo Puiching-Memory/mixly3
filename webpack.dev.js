@@ -17,5 +17,20 @@ module.exports = merge(common, {
             filename: 'index.xml',
             minify: false
         }),
-    ]
+    ],
+    devServer: {
+        https: true,
+        port: 8080,
+        host: '0.0.0.0',
+        hot: true,
+        static: {
+            directory: path.join(process.cwd(), '../../../'),
+            watch: false
+        },
+        devMiddleware: {
+            index: false,
+            publicPath: `/boards/default/${path.basename(process.cwd())}`,
+            writeToDisk: false
+        }
+    }
 });

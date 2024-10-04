@@ -16,6 +16,6 @@ module.exports = merge(common, {
             template: path.resolve(process.cwd(), 'template.xml'),
             filename: 'index.xml',
             minify: false
-        }),
+        })
     ]
 });
