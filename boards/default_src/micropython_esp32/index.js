@@ -75,10 +75,7 @@ import {
 import {
     MicropythonESP32Pins,
     MicropythonESP32PinsBlocks,
-    MicropythonESP32PinsGenerators,
-    MicropythonESP32ZhHans,
-    MicropythonESP32ZhHant,
-    MicropythonESP32En
+    MicropythonESP32PinsGenerators
 } from './';
 
 import './css/color_esp32_mixgo.css';
@@ -91,10 +88,6 @@ Blockly.generator = Python;
 Profile.default = {};
 Object.assign(Profile, MicropythonESP32Pins);
 Object.assign(Profile.default, MicropythonESP32Pins['ESP32 Generic']);
-
-Object.assign(Blockly.Lang.ZhHans, MicropythonESP32ZhHans);
-Object.assign(Blockly.Lang.ZhHant, MicropythonESP32ZhHant);
-Object.assign(Blockly.Lang.En, MicropythonESP32En);
 
 Object.assign(
     Blockly.Blocks,
