@@ -22,8 +22,7 @@ http://wiki.mixly.org
 
 ### 网盘下载地址
 
-- [百度网盘链接](https://pan.baidu.com/s/1BotIhmA6EGWVout-MoxBLg%C2%A0?pwd=ny1n)
-- [123网盘链接](https://www.123pan.com/s/uAxvTd-xdX9d.html)
+- [百度网盘链接](https://pan.baidu.com/s/1EdBmAlYFzJ_2rULhKm2g3g?pwd=ny1n)
 
 ### 图片预览
 
