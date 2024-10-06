@@ -727,7 +727,7 @@ export const dicts_to_json = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_TO_JSON);
         this.setTooltip(Blockly.Msg.MIXLY_TO_JSON_TOOLTIP);
-        this.setOutput(true, Number);
+        this.setOutput(true);
     }
 };
 
@@ -738,6 +738,6 @@ export const json_to_dicts = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_CONVERT_TO_JSON);
         this.setTooltip(Blockly.Msg.MIXLY_CONVERT_TO_JSON_TOOLTIP);
-        this.setOutput(true, Number);
+        this.setOutput(true);
     }
 };
