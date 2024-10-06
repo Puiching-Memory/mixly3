@@ -284,6 +284,7 @@
     "nav.btn.file.exportAs": "Export lib",
     "nav.btn.setting": "Settings",
     "nav.btn.setting.manageLibs": "Manage libs",
+    "nav.btn.setting.firmware": "Firmware",
     "nav.btn.setting.feedback": "Feedback",
     "shell.compiling": "Compiling",
     "shell.compileFailed": "Compile failed",

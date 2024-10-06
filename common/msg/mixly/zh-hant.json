@@ -284,6 +284,7 @@
     "nav.btn.file.exportAs": "匯出函式庫",
     "nav.btn.setting": "設定",
     "nav.btn.setting.manageLibs": "管理函式庫",
+    "nav.btn.setting.firmware": "韌體",
     "nav.btn.setting.feedback": "回饋",
     "shell.compiling": "編譯中",
     "shell.compileFailed": "編譯失敗",

@@ -1291,6 +1291,7 @@
             "Mixly.Msg",
             "Mixly.Workspace",
             "Mixly.Debug",
+            "Mixly.HTMLTemplate",
             "Mixly.Electron.Serial"
         ],
         "provide": [
@@ -1550,6 +1551,7 @@
     {
         "path": "/web/burn-upload.js",
         "require": [
+            "path",
             "ESPTool",
             "AdafruitESPTool",
             "CryptoJS",
@@ -1562,6 +1564,7 @@
             "Mixly.Msg",
             "Mixly.Workspace",
             "Mixly.Debug",
+            "Mixly.HTMLTemplate",
             "Mixly.Web.Serial",
             "Mixly.Web.USB",
             "Mixly.Web.Ampy"

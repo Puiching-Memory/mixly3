@@ -284,6 +284,7 @@
     "nav.btn.file.exportAs": "导出库",
     "nav.btn.setting": "设置",
     "nav.btn.setting.manageLibs": "管理库",
+    "nav.btn.setting.firmware": "固件",
     "nav.btn.setting.feedback": "反馈",
     "shell.compiling": "编译中",
     "shell.compileFailed": "编译失败",

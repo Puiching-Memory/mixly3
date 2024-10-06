@@ -1,5 +1,6 @@
 goog.loadJs('web', () => {
 
+goog.require('path');
 goog.require('ESPTool');
 goog.require('AdafruitESPTool');
 goog.require('CryptoJS');
@@ -12,6 +13,7 @@ goog.require('Mixly.Boards');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Workspace');
 goog.require('Mixly.Debug');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.Web.Serial');
 goog.require('Mixly.Web.USB');
 goog.require('Mixly.Web.Ampy');
@@ -26,7 +28,8 @@ const {
     Boards,
     Msg,
     Workspace,
-    Debug
+    Debug,
+    HTMLTemplate
 } = Mixly;
 
 const {
@@ -46,6 +49,13 @@ const {
 
 BU.uploading = false;
 BU.burning = false;
+
+BU.FILMWARE_LAYER = new HTMLTemplate(
+    goog.get(path.join(Env.templatePath, 'html/filmware-layer.html'))
+).render({
+    cancel: Msg.Lang['nav.btn.cancel'],
+    burn: Msg.Lang['nav.btn.burn']
+});
 
 const BAUD = goog.platform() === 'darwin' ? 460800 : 921600;
 
@@ -112,10 +122,17 @@ BU.initBurn = () => {
         BU.burnByUSB();
     } else {
         const boardKey = Boards.getSelectedBoardKey();
+        const { web } = SELECTED_BOARD;
+        if (!web?.burn?.binFile) {
+            return;
+        }
+        if (typeof web.burn.binFile !== 'object') {
+            return;
+        }
         if (boardKey.indexOf('micropython:esp32s2') !== -1) {
-            BU.burnWithAdafruitEsptool();
+            BU.burnWithAdafruitEsptool(web.burn.binFile);
         } else {
-            BU.burnWithEsptool();
+            BU.burnWithEsptool(web.burn.binFile);
         }
     }
 }
@@ -202,9 +219,7 @@ BU.burnByUSB = () => {
     });
 }
 
-BU.burnWithEsptool = async () => {
-    const { web } = SELECTED_BOARD;
-    const { burn } = web;
+BU.burnWithEsptool = async (binFile) => {
     const { mainStatusBarTabs } = Mixly;
     const portName = Serial.getSelectedPortName();
     if (!portName) {
@@ -251,12 +266,6 @@ BU.burnWithEsptool = async () => {
     }
 
     statusBarTerminal.addValue(Msg.Lang['shell.bin.reading'] + "...");
-    if (typeof burn.binFile !== 'object') {
-        statusBarTerminal.addValue(" Failed!\n" + Msg.Lang['shell.bin.readFailed'] + "！\n");
-        await transport.disconnect();
-        return;
-    }
-    const { binFile } = burn;
     let firmwarePromise = [];
     statusBarTerminal.addValue("\n");
     for (let i of binFile) {
@@ -322,9 +331,7 @@ BU.burnWithEsptool = async () => {
     });
 }
 
-BU.burnWithAdafruitEsptool = async () => {
-    const { web } = SELECTED_BOARD;
-    const { burn } = web;
+BU.burnWithAdafruitEsptool = async (binFile) => {
     const { mainStatusBarTabs } = Mixly;
     const portName = Serial.getSelectedPortName();
     if (!portName) {
@@ -369,13 +376,6 @@ BU.burnWithAdafruitEsptool = async () => {
     }
 
     statusBarTerminal.addValue(Msg.Lang['shell.bin.reading'] + "...");
-    if (typeof burn.binFile !== 'object') {
-        statusBarTerminal.addValue(" Failed!\n" + Msg.Lang['shell.bin.readFailed'] + "！\n");
-        await espStub.disconnect();
-        await espStub.port.close();
-        return;
-    }
-    const { binFile } = burn;
     let firmwarePromise = [];
     statusBarTerminal.addValue("\n");
     for (let i of binFile) {
@@ -683,6 +683,65 @@ BU.uploadWithAvrUploader = async (endType, obj, layerType) => {
     .catch((error) => {
         layer.close(layerType);
         statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadFailed']}==\n`);
+    });
+}
+
+/**
+ * @function 特殊固件的烧录
+ * @return {void}
+ **/
+BU.burnWithSpecialBin = () => {
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+    const firmwares = SELECTED_BOARD.web.burn.special;
+    let menu = [];
+    let firmwareMap = {};
+    for (let firmware of firmwares) {
+        if (!firmware?.name && !firmware?.binFile) return;
+        menu.push({
+            id: firmware.name,
+            text: firmware.name
+        });
+        firmwareMap[firmware.name] = firmware.binFile;
+    }
+    LayerExt.open({
+        title: [Msg.Lang['nav.btn.burn'], '36px'],
+        area: ['400px', '160px'],
+        max: false,
+        min: false,
+        content: BU.FILMWARE_LAYER,
+        shade: Mixly.LayerExt.SHADE_ALL,
+        resize: false,
+        success: function (layero, index) {
+            const $select = layero.find('select');
+            $select.select2({
+                data: menu,
+                minimumResultsForSearch: 50,
+                width: '360px',
+                dropdownCssClass: 'mixly-scrollbar'
+            });
+            layero.find('button').click((event) => {
+                const $target = $(event.currentTarget);
+                const type = $target.attr('data-id');
+                const binFile = firmwareMap[$select.val()];
+                layer.close(index, () => {
+                    if (type !== 'burn') {
+                        return;
+                    }
+                    const boardKey = Boards.getSelectedBoardKey();
+                    const { web } = SELECTED_BOARD;
+                    if (boardKey.indexOf('micropython:esp32s2') !== -1) {
+                        BU.burnWithAdafruitEsptool(binFile);
+                    } else {
+                        BU.burnWithEsptool(binFile);
+                    }
+                });
+            });
+        },
+        beforeEnd: function (layero) {
+            layero.find('select').select2('destroy');
+            layero.find('button').off();
+        }
     });
 }
 

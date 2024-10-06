@@ -31,6 +31,7 @@ LayerExt.DEFAULT_CONFIG = {
     resize: true,
     shade: LayerExt.SHADE_ALL,
     success: null,
+    beforeEnd: null,
     end: null,
     cancel: null,
     resizing: null,
@@ -121,6 +122,12 @@ LayerExt.open = (toolConfig) => {
             }
             if (typeof success === 'function')
                 success(layero, index);
+        },
+        beforeEnd: function (layero, index, that) {
+            const { beforeEnd } = toolConfig;
+            if (typeof beforeEnd === 'function') {
+                beforeEnd(layero, index, that);
+            }
         },
         end: function () {
             const { end } = toolConfig;

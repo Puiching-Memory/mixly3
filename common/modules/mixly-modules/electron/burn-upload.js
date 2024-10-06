@@ -9,6 +9,7 @@ goog.require('Mixly.MString');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Workspace');
 goog.require('Mixly.Debug');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.Electron.Serial');
 goog.provide('Mixly.Electron.BU');
 
@@ -22,7 +23,8 @@ const {
     Msg,
     Workspace,
     Serial,
-    Debug
+    Debug,
+    HTMLTemplate
 } = Mixly;
 
 const { BU } = Electron;
@@ -45,6 +47,13 @@ BU.uploading = false;
 BU.burning = false;
 
 BU.shell = null;
+
+BU.FILMWARE_LAYER = new HTMLTemplate(
+    goog.get(path.join(Env.templatePath, 'html/filmware-layer.html'))
+).render({
+    cancel: Msg.Lang['nav.btn.cancel'],
+    burn: Msg.Lang['nav.btn.burn']
+});
 
 /**
  * @function 根据传入的stdout判断磁盘数量并选择对应操作
@@ -595,62 +604,52 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
 BU.burnWithSpecialBin = () => {
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
-    const $selector = $('#mixly-selector-type');
-    let oldOption = $('#mixly-selector-type option:selected').val();
-    $selector.empty();
-    const firmwareList = SELECTED_BOARD.burn.special;
-    let firmwareObj = {};
-    for (let firmware of firmwareList) {
+    const firmwares = SELECTED_BOARD.burn.special;
+    let menu = [];
+    for (let firmware of firmwares) {
         if (!firmware?.name && !firmware?.command) return;
-        firmwareObj[firmware.name] = firmware.command;
-        if (`${firmware.name}` == oldOption) {
-            $selector.append($(`<option value="${firmware.name}" selected>${firmware.name}</option>`));
-        } else {
-            $selector.append($(`<option value="${firmware.name}">${firmware.name}</option>`));
-        }
+        menu.push({
+            id: firmware.command,
+            text: firmware.name
+        });
     }
-    form.render();
-
-    let initBtnClicked = false;
-
-    const layerNum = layer.open({
-        type: 1,
-        id: "serial-select",
-        title: "请选择固件：",
-        area: ['350px', '150px'],
-        content: $('#mixly-selector-div'),
+    LayerExt.open({
+        title: [Msg.Lang['nav.btn.burn'], '36px'],
+        area: ['400px', '160px'],
+        max: false,
+        min: false,
+        content: BU.FILMWARE_LAYER,
         shade: Mixly.LayerExt.SHADE_ALL,
         resize: false,
-        closeBtn: 0,
-        success: function (layero) {
-            $('#serial-select').css('height', '180px');
-            $('#serial-select').css('overflow', 'inherit');
-            $(".layui-layer-page").css("z-index", "198910151");
-            $("#mixly-selector-btn1").off("click").click(() => {
-                layer.close(layerNum);
+        success: function (layero, index) {
+            const $select = layero.find('select');
+            $select.select2({
+                data: menu,
+                minimumResultsForSearch: 50,
+                width: '360px',
+                dropdownCssClass: 'mixly-scrollbar'
             });
-            $("#mixly-selector-btn2").click(() => {
-                layer.close(layerNum);
-                initBtnClicked = true;
+            layero.find('button').click((event) => {
+                const $target = $(event.currentTarget);
+                const type = $target.attr('data-id');
+                const command = $select.val();
+                layer.close(index, () => {
+                    if (type !== 'burn') {
+                        return;
+                    }
+                    statusBarTerminal.setValue('');
+                    mainStatusBarTabs.changeTo('output');
+                    mainStatusBarTabs.show();
+                    BU.burning = true;
+                    BU.uploading = false;
+                    const port = Serial.getSelectedPortName();
+                    BU.burnWithPort(port, command);
+                });
             });
         },
-        end: function () {
-            $("#mixly-selector-btn1").off("click");
-            $("#mixly-selector-btn2").off("click");
-            $('#mixly-selector-div').css('display', 'none');
-            $(".layui-layer-shade").remove();
-            if (initBtnClicked) {
-                let selectedFirmwareName = $('#mixly-selector-type option:selected').val();
-                statusBarTerminal.setValue('');
-                mainStatusBarTabs.changeTo('output');
-                mainStatusBarTabs.show();
-                BU.burning = true;
-                BU.uploading = false;
-                const port = Serial.getSelectedPortName();
-                BU.burnWithPort(port, firmwareObj[selectedFirmwareName]);
-            } else {
-                layer.msg(Msg.Lang['shell.burnCanceled'], { time: 1000 });
-            }
+        beforeEnd: function (layero) {
+            layero.find('select').select2('destroy');
+            layero.find('button').off();
         }
     });
 }

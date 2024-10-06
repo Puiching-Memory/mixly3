@@ -508,6 +508,22 @@ class App extends Component {
         });
 
         this.#nav_.register({
+            icon: 'icon-upload-1',
+            id: ['setting', 'firmware'],
+            displayText: Msg.Lang['nav.btn.setting.firmware'],
+            preconditionFn: () => {
+                if (goog.isElectron) {
+                    return !!BOARD?.burn?.special;
+                } else {
+                    return !!BOARD?.web?.burn?.special;
+                }
+            },
+            callback: () => BU.burnWithSpecialBin(),
+            scopeType: Nav.Scope.RIGHT,
+            weight: 2
+        });
+
+        this.#nav_.register({
             icon: 'icon-comment-1',
             id: ['setting', 'feedback'],
             displayText: Msg.Lang['nav.btn.setting.feedback'],
@@ -519,7 +535,7 @@ class App extends Component {
                 Url.open(href);
             },
             scopeType: Nav.Scope.RIGHT,
-            weight: 2
+            weight: 3
         });
     }
 
