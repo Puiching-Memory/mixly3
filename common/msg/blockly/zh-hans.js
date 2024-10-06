@@ -3896,4 +3896,5 @@ ZhHans.MIXLY_BATTERY ="电池电量";
 ZhHans.MIXLY_RANGE_OF_BATTERY = "电池的电量范围为 0~100%";
 ZhHans.MIXLY_MOUSE = "鼠标";
 ZhHans.MIXLY_SEND = "发送";
+ZhHans.MIXLY_VARIABLE_UNPACK = "解包";
 })();

@@ -3751,4 +3751,5 @@ ZhHant.MIXLY_BATTERY ="電池電量";
 ZhHant.MIXLY_RANGE_OF_BATTERY = "電池的電量範圍為 0~100%";
 ZhHant.MIXLY_MOUSE = "鼠標";
 ZhHant.MIXLY_SEND = "發送";
+ZhHant.MIXLY_VARIABLE_UNPACK = "解包";
 })();

@@ -134,6 +134,33 @@ Variables.flyoutCategory = function (workspace) {
         block.setAttribute('type', 'controls_typeLists');
         xmlList.push(block);
     }
+    if (Blockly.Blocks['lists_zip']) {
+        var block = Blockly.utils.xml.createElement('block');
+        block.setAttribute('type', 'lists_zip');
+        block.setAttribute('inline', 'false');
+        var mutation = Blockly.utils.xml.createElement('mutation');
+        mutation.setAttribute('items', 2);
+        block.appendChild(mutation);
+        for (let i = 0; i < 2; i++) {
+            let add = Blockly.utils.xml.createElement('value');
+            add.setAttribute('name', `ADD${i}`);
+            // let childBlock = Blockly.utils.xml.createElement('block');
+            // childBlock.setAttribute('type', 'list_many_input');
+            // let field = Blockly.utils.xml.createElement('field');
+            // let value = Blockly.utils.xml.createTextNode('0,1,2,3');
+            // field.setAttribute('name', 'CONTENT');
+            // field.appendChild(value);
+            // childBlock.appendChild(field);
+            // add.appendChild(childBlock);
+            block.appendChild(add);
+        }
+        xmlList.push(block);
+    }
+    if (Blockly.Blocks['unpack_iterable_object']) {
+        var block = Blockly.utils.xml.createElement('block');
+        block.setAttribute('type', 'unpack_iterable_object');
+        xmlList.push(block);
+    }
     for (var i = 0; i < variableList.length; i++) {
         // alert(variableList)
         // if(i==0&& !(Blockly.Python.setups_['variables_set'+''])){

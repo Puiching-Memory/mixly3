@@ -245,17 +245,6 @@ export const lists_setIndex3 = lists_set_index
 export const lists_insert_value2 = lists_insert_value
 export const lists_remove_at2 = lists_remove_at
 
-export const lists_zip = function (_, generator) {
-    var code = new Array(this.itemCount_);
-    var default_value = '[]';
-    for (var n = 0; n < this.itemCount_; n++) {
-        code[n] = generator.valueToCode(this, 'ADD' + n,
-            generator.ORDER_NONE) || default_value;
-    }
-    var code = 'zip(' + code.join(', ') + ')';
-    return [code, generator.ORDER_ATOMIC];
-}
-
 export const list_tolist = function (_, generator) {
     var str = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC) || '0'
     return ['list(' + str + ')', generator.ORDER_ATOMIC];

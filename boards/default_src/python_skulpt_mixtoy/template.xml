@@ -804,19 +804,6 @@ type="application/javascript"></script> -->
         </shadow>
       </value>
     </block>
-    <block type="lists_zip">
-      <mutation items="2"></mutation>
-      <value name="ADD0">
-        <block type="list_many_input">
-          <field name="CONTENT">0,1,2,3</field>
-        </block>
-      </value>
-      <value name="ADD1">
-        <block type="list_many_input">
-          <field name="CONTENT">0,1,2,3</field>
-        </block>
-      </value>
-    </block>
   </category>
   <category id="catTuple" colour="195">
     <block type="tuple_create_with"></block>

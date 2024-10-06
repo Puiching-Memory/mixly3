@@ -70,3 +70,21 @@ export const controls_typeLists = function (_, generator) {
     // generator.definitions_['func_type' + type] = code;
     return [type, generator.ORDER_ATOMIC];
 }
+
+export const lists_zip = function (_, generator) {
+    var code = new Array(this.itemCount_);
+    var default_value = '[]';
+    for (var n = 0; n < this.itemCount_; n++) {
+        code[n] = generator.valueToCode(this, 'ADD' + n,
+            generator.ORDER_NONE) || default_value;
+    }
+    var code = 'zip(' + code.join(', ') + ')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const unpack_iterable_object = function (_, generator) {
+    const varName = generator.valueToCode(this, 'VAR', generator.ORDER_ASSIGNMENT) || '[]';
+    const type = this.getFieldValue('TYPE');
+    const code = `${type}(${varName})`;
+    return [code, generator.ORDER_ATOMIC];
+}
