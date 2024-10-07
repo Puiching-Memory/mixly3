@@ -121,12 +121,11 @@ export const Weather_daily_content = function (_, generator) {
     generator.definitions_['import_seniverse_api*'] = "from seniverse_api import *";
     var content = this.getFieldValue('content');
     var day = generator.valueToCode(this, 'day', generator.ORDER_ATOMIC);
-    var index = day - 1;
     if (content == 'none') {
-        var code = 'Weather_daily.analysis()';
+        var code = 'Weather_daily.analysis('+day+')';
     }
     else {
-        var code = 'Weather_daily.analysis(' + index + ',"' + content + '")';
+        var code = 'Weather_daily.analysis(' + day + ',"' + content + '")';
     }
     return [code, generator.ORDER_ATOMIC];
 };
@@ -135,12 +134,11 @@ export const Air_daily_content = function (_, generator) {
     generator.definitions_['import_seniverse_api*'] = "from seniverse_api import *";
     var content = this.getFieldValue('content');
     var day = generator.valueToCode(this, 'day', generator.ORDER_ATOMIC);
-    var index = day - 1;
     if (content == 'none') {
-        var code = 'Air_daily.analysis()';
+        var code = 'Air_daily.analysis('+day+')';
     }
     else {
-        var code = 'Air_daily.analysis(' + index + ',"' + content + '")';
+        var code = 'Air_daily.analysis(' + day + ',"' + content + '")';
     }
     return [code, generator.ORDER_ATOMIC];
 };
@@ -149,12 +147,11 @@ export const Geo_sun_content = function (_, generator) {
     generator.definitions_['import_seniverse_api*'] = "from seniverse_api import *";
     var content = this.getFieldValue('content');
     var day = generator.valueToCode(this, 'day', generator.ORDER_ATOMIC);
-    var index = day - 1;
     if (content == 'none') {
-        var code = 'Geo_sun.analysis()';
+        var code = 'Geo_sun.analysis('+day+')';
     }
     else {
-        var code = 'Geo_sun.analysis(' + index + ',"' + content + '")';
+        var code = 'Geo_sun.analysis(' + day + ',"' + content + '")';
     }
     return [code, generator.ORDER_ATOMIC];
 };
@@ -163,12 +160,11 @@ export const Geo_moon_content = function (_, generator) {
     generator.definitions_['import_seniverse_api*'] = "from seniverse_api import *";
     var content = this.getFieldValue('content');
     var day = generator.valueToCode(this, 'day', generator.ORDER_ATOMIC);
-    var index = day - 1;
     if (content == 'none') {
-        var code = 'Geo_moon.analysis()';
+        var code = 'Geo_moon.analysis('+day+')';
     }
     else {
-        var code = 'Geo_moon.analysis(' + index + ',"' + content + '")';
+        var code = 'Geo_moon.analysis(' + day + ',"' + content + '")';
     }
     return [code, generator.ORDER_ATOMIC];
 };

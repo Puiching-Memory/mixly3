@@ -304,6 +304,7 @@ export const text_to_number_skulpt = function (_, generator) {
 export const base_map = math_map;
 
 export const turn_to_int = function (_, generator) {
+    generator.definitions_.import_hexlify = "from ubinascii import hexlify";
     var str = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
-    return ["int(" + str + ')', generator.ORDER_ATOMIC];
+    return ["hexlify(" + str + ').decode()', generator.ORDER_ATOMIC];
 }

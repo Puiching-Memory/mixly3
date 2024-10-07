@@ -156,7 +156,9 @@ En.MSG = {
     catAudio: "Audio",
     catNeopixel: "RGB light",
     catOneWire: "OneWire Communicate",
-    catBLE: "Bluetooth",
+    catBLE: "Bluetooth transmission",
+    catBLEC:"Bluetooth remote control",
+    catBLEKM:"Bluetooth keyboard and mouse",
     catBLE_HID: "Peripheral Device (Slave)",
     catBLE_UART: "Central Device (Host)",
     catBLE_PERIPHERAL: "Serial port transparent transmission",
@@ -3749,4 +3751,6 @@ En.MIXLY_RANGE_OF_BATTERY = "the range of battery level is 0~100%";
 En.MIXLY_MOUSE = "mouse";
 En.MIXLY_SEND = "send";
 En.MIXLY_VARIABLE_UNPACK = "Unpack";
+En.MIXLY_TO_HEX = "Convert hexadecimal characters";
+En.MIXLY_PYTHON_TOOLTIP_TOHEX = "Converts a value to a hexadecimal character";
 })();

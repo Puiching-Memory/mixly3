@@ -533,8 +533,8 @@ export const turn_to_int = {
     init: function () {
         this.setColour(MATH_HUE);
         this.appendValueInput('VAR')
-            .appendField(Blockly.Msg.LANG_MATH_BYTE+Blockly.Msg.MIXLY_TO_INT);
+            .appendField(Blockly.Msg.LANG_MATH_BYTE+Blockly.Msg.MIXLY_TO_HEX);
         this.setOutput(true, Number);
-        this.setTooltip(Blockly.Msg.MIXLY_PYTHON_TOOLTIP_TOINT)
+        this.setTooltip(Blockly.Msg.MIXLY_PYTHON_TOOLTIP_TOHEX)
     }
 };

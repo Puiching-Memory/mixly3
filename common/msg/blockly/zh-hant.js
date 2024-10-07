@@ -155,7 +155,9 @@ ZhHant.MSG = {
     catAudio: "音頻",
     catNeopixel: "RGB燈",
     catOneWire: "OneWire通信",
-    catBLE: "藍牙",
+    catBLE: "藍牙透傳",
+    catBLEC:"藍牙遙控",
+    catBLEKM:"藍牙鍵鼠",
     catBLE_HID: "外圍設備(從機)",
     catBLE_UART: "中心設備(主機)",
     catBLE_PERIPHERAL: "串口透傳",
@@ -3752,4 +3754,6 @@ ZhHant.MIXLY_RANGE_OF_BATTERY = "電池的電量範圍為 0~100%";
 ZhHant.MIXLY_MOUSE = "鼠標";
 ZhHant.MIXLY_SEND = "發送";
 ZhHant.MIXLY_VARIABLE_UNPACK = "解包";
+ZhHant.MIXLY_TO_HEX = "轉16進制字符";
+ZhHant.MIXLY_PYTHON_TOOLTIP_TOHEX = "將一個值轉換為一個16進制字符";
 })();

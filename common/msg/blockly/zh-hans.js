@@ -167,7 +167,9 @@ ZhHans.MSG = {
     catAudio: "音频",
     catNeopixel: "RGB灯",
     catOneWire: "OneWire通信",
-    catBLE: "蓝牙",
+    catBLE: "蓝牙透传",
+    catBLEC:"蓝牙遥控",
+    catBLEKM:"蓝牙键鼠",
     catBLE_HID: "外围设备(从机)",
     catBLE_UART: "中心设备(主机)",
     catBLE_PERIPHERAL: "串口透传",
@@ -3897,4 +3899,6 @@ ZhHans.MIXLY_RANGE_OF_BATTERY = "电池的电量范围为 0~100%";
 ZhHans.MIXLY_MOUSE = "鼠标";
 ZhHans.MIXLY_SEND = "发送";
 ZhHans.MIXLY_VARIABLE_UNPACK = "解包";
+ZhHans.MIXLY_TO_HEX = "转16进制字符";
+ZhHans.MIXLY_PYTHON_TOOLTIP_TOHEX = "将一个值转换为一个16进制字符";
 })();
