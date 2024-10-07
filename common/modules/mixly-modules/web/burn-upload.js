@@ -129,10 +129,14 @@ BU.initBurn = () => {
         if (typeof web.burn.binFile !== 'object') {
             return;
         }
-        if (boardKey.indexOf('micropython:esp32s2') !== -1) {
-            BU.burnWithAdafruitEsptool(web.burn.binFile);
+        if (web.burn.special && web.burn.special instanceof Array) {
+            BU.burnWithSpecialBin();
         } else {
-            BU.burnWithEsptool(web.burn.binFile);
+            if (boardKey.indexOf('micropython:esp32s2') !== -1) {
+                BU.burnWithAdafruitEsptool(web.burn.binFile);
+            } else {
+                BU.burnWithEsptool(web.burn.binFile);
+            }
         }
     }
 }

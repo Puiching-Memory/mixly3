@@ -507,7 +507,7 @@ class App extends Component {
             weight: 1
         });
 
-        this.#nav_.register({
+        /*this.#nav_.register({
             icon: 'icon-upload-1',
             id: ['setting', 'firmware'],
             displayText: Msg.Lang['nav.btn.setting.firmware'],
@@ -521,7 +521,7 @@ class App extends Component {
             callback: () => BU.burnWithSpecialBin(),
             scopeType: Nav.Scope.RIGHT,
             weight: 2
-        });
+        });*/
 
         this.#nav_.register({
             icon: 'icon-comment-1',
@@ -535,7 +535,7 @@ class App extends Component {
                 Url.open(href);
             },
             scopeType: Nav.Scope.RIGHT,
-            weight: 3
+            weight: 2
         });
     }
 

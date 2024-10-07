@@ -361,7 +361,12 @@ BU.initBurn = function () {
         BU.getDisksWithVolumesName('burn', burn.volume, burn.filePath);
     } else {
         const port = Serial.getSelectedPortName();
-        BU.burnWithPort(port, burn.command);
+        if (burn.special && burn.special instanceof Array) {
+            BU.burning = false;
+            BU.burnWithSpecialBin();
+        } else {
+            BU.burnWithPort(port, burn.command);
+        }
     }
 }
 
