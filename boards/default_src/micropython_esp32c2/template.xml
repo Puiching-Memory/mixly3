@@ -2797,7 +2797,7 @@
         </statement>
       </block>
     </category>
-    <category id="catBLEKM" coclour="140">
+    <category id="catBLEKM" colour="140">
       <block type="analog_ble_keyboard_init">
       <value name="kname">
         <shadow type="text">
