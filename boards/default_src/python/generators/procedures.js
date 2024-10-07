@@ -4,7 +4,7 @@ export const procedures_defreturn = function (_, generator) {
     // Define a procedure with a return value.
     var funcName = generator.variableDB_.getName(this.getFieldValue('NAME'),
         Blockly.Procedures.NAME_TYPE);
-    var branch = generator.statementToCode(this, 'STACK') || '    pass\n';
+    var branch = (this.getInput('STACK') && generator.statementToCode(this, 'STACK')) ?? '    pass\n';
     if (generator.INFINITE_LOOP_TRAP) {
         branch = generator.INFINITE_LOOP_TRAP.replace(/%1/g,
             '\'' + this.id + '\'') + branch;
@@ -32,7 +32,7 @@ export const procedures_defnoreturn = function (_, generator) {
     // Define a procedure with a return value.
     var funcName = generator.variableDB_.getName(this.getFieldValue('NAME'),
         Blockly.Procedures.NAME_TYPE);
-    var branch = generator.statementToCode(this, 'STACK') || '    pass\n';
+    var branch = (this.getInput('STACK') && generator.statementToCode(this, 'STACK')) ?? '    pass\n';
     if (generator.INFINITE_LOOP_TRAP) {
         branch = generator.INFINITE_LOOP_TRAP.replace(/%1/g,
             '\'' + this.id + '\'') + branch;
