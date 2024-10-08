@@ -51,7 +51,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new MiniCssExtractPlugin({ filename: "styles/[name].[hash:8].css" }),
+        new MiniCssExtractPlugin({ filename: "styles/[name].[contenthash:8].css" }),
         new CopyPlugin({
             patterns: [
                 {
