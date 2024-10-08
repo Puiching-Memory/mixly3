@@ -63,13 +63,42 @@
                     {
                         "offset": "0x0000",
                         "path": "./build/Mixgo_Mini_lib-v1.23.0.bin"
-                    }, {
+                    },
+                    {
                         "offset": "0x3A0000",
                         "path": "../micropython/build/HZK12.bin"
                     }
+                ],
+                "special": [
+                    {
+                        "name": "Firmware No Ble With SSL",
+                        "binFile": [
+                            {
+                                "offset": "0x0000",
+                                "path": "./build/Mixgo_Mini_lib-v1.23.0.bin"
+                            },
+                            {
+                                "offset": "0x3A0000",
+                                "path": "../micropython/build/HZK12.bin"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Firmware With Ble No SSL",
+                        "binFile": [
+                            {
+                                "offset": "0x0000",
+                                "path": "./build/Mixgo_Mini_lib_ble-v1.23.0.bin"
+                            },
+                            {
+                                "offset": "0x3A0000",
+                                "path": "../micropython/build/HZK12.bin"
+                            }
+                        ]
+                    }
                 ]
             },
-           "micropython:esp32c2:generic_2M": {
+            "micropython:esp32c2:generic_2M": {
                 "binFile": [
                     {
                         "offset": "0x0000",
