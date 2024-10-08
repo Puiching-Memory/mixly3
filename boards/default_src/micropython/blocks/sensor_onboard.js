@@ -604,12 +604,22 @@ export const sensor_rtc_init = {
     }
 };
 
+export const onboard_RTC_get_time_str = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_RTC_GET_TIME_STR);
+        this.setOutput(true, String);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_RTC_GET_TIME_TOOLTIP);
+    }
+};
 
 export const sensor_LTR308 = {
     init: function () {
         this.setColour(SENSOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_ESP32_LIGHT);
+            .appendField(Blockly.Msg.MIXLY_RTC_GET_TIME_STR);
         this.setOutput(true, Number);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.ESP32_SENSOR_NIXGO_LIGHT_TOOLTIP);

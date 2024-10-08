@@ -1518,6 +1518,7 @@
         </shadow>
       </value>
     </block>
+    <block type="onboard_RTC_get_time_str"></block>
   </category>
   <category id="catOnBoardActuator" name="catOnBoardActuator" colour="#6C9858">
     <block type="mixbot_motor_status" m-show="micropython:esp32:mixbot"></block>

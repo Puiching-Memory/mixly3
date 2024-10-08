@@ -3753,4 +3753,5 @@ En.MIXLY_SEND = "send";
 En.MIXLY_VARIABLE_UNPACK = "Unpack";
 En.MIXLY_TO_HEX = "Convert hexadecimal characters";
 En.MIXLY_PYTHON_TOOLTIP_TOHEX = "Converts a value to a hexadecimal character";
+En.MIXLY_RTC_GET_TIME_STR = "RTC gets the time string";
 })();

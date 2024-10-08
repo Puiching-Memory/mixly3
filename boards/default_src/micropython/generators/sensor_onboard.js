@@ -562,6 +562,12 @@ export const onboard_RTC_timestamp_totuple = function (_, generator) {
     return [code, generator.ORDER_ATOMIC];
 }
 
+export const onboard_RTC_get_time_str = function(_,generator){
+    generator.definitions_['import_rtctime'] = 'import rtctime';
+    var code = 'rtctime.strtime()';
+    return [code, generator.ORDER_ATOMIC];
+}
+
 //mixgo_cc onboard_sensor generators:
 
 export const sensor_mixgo_cc_mmc5603_get_magnetic = function (_, generator) {

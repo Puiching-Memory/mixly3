@@ -3901,4 +3901,5 @@ ZhHans.MIXLY_SEND = "发送";
 ZhHans.MIXLY_VARIABLE_UNPACK = "解包";
 ZhHans.MIXLY_TO_HEX = "转16进制字符";
 ZhHans.MIXLY_PYTHON_TOOLTIP_TOHEX = "将一个值转换为一个16进制字符";
+ZhHans.MIXLY_RTC_GET_TIME_STR = "RTC 获取时间字符串";
 })();

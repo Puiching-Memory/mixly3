@@ -1521,7 +1521,7 @@
         </shadow>
       </value>
     </block>
-
+    <block type="onboard_RTC_get_time_str"></block>
 
   </category>
   <category id="catOnBoardActuator" name="catOnBoardActuator" colour="#6C9858"
@@ -1712,78 +1712,6 @@
       </value>
     </block>
     <block type="actuator_onboard_neopixel_write">
-    </block> 
-    <block type="analog_ble_keyboard_init">
-      <value name="kname">
-        <shadow type="text">
-          <field name="TEXT">ble_keyboard</field>
-        </shadow>  
-      </value>
-    </block>
-    <block type="ble_keyboard_get_mac"></block>
-    <block type="ble_keyboard_connect"></block>
-    <block type="analog_ble_keyboard_input" >
-      <value name="special">
-          <block type="special_key">
-          </block>
-      </value>
-      <value name="general">
-        <block type="general_key">
-        </block>
-      </value>
-    </block>
-    <block type="analog_ble_keyboard_str">
-      <value name="str">
-        <shadow type="text">
-          <field name="TEXT">Hello, Mixly!</field>
-        </shadow>
-      </value>
-      <value name="time">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="analog_ble_keyboard_send_battery">
-      <value name="battery">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="analog_ble_mouse_init">
-      <value name="name">
-        <shadow type="text">
-          <field name="TEXT">ble_Mouse</field>
-        </shadow>  
-      </value>
-    </block>
-    <block type="ble_mouse_get_mac"></block>
-    <block type="ble_mouse_connect"></block>
-    <block type="analog_ble_mouse_input" >
-      <value name="key">
-        <block type="mouse_key">
-        </block>
-      </value>
-      <value name="x">
-        <shadow type="math_number">
-        </shadow>
-      </value>
-      <value name="y">
-        <shadow type="math_number">
-        </shadow>
-      </value>
-      <value name="wheel">
-        <shadow type="math_number">
-        </shadow>
-      </value>
-    </block>
-    <block type="analog_ble_mouse_send_battery">
-      <value name="battery">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
     </block>
   </category>
   <category id="catOnBoardDisplay" colour='#78B5B4'>
@@ -3207,6 +3135,8 @@
           </block>
         </statement>
       </block>
+    </category>
+    <category id ="catBLEC" colour="140">
       <block type="communicate_bluetooth_handle">
         <value name="VAR">
           <shadow type="variables_get">
@@ -3252,6 +3182,80 @@
             </value>
           </block>
         </statement>
+      </block>
+    </category>
+    <category  id="catBLEKM" colour="140">
+      <block type="analog_ble_keyboard_init">
+        <value name="kname">
+          <shadow type="text">
+            <field name="TEXT">ble_keyboard</field>
+          </shadow>  
+        </value>
+      </block>
+      <block type="ble_keyboard_get_mac"></block>
+      <block type="ble_keyboard_connect"></block>
+      <block type="analog_ble_keyboard_input" >
+        <value name="special">
+            <block type="special_key">
+            </block>
+        </value>
+        <value name="general">
+          <block type="general_key">
+          </block>
+        </value>
+      </block>
+      <block type="analog_ble_keyboard_str">
+        <value name="str">
+          <shadow type="text">
+            <field name="TEXT">Hello, Mixly!</field>
+          </shadow>
+        </value>
+        <value name="time">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="analog_ble_keyboard_send_battery">
+        <value name="battery">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="analog_ble_mouse_init">
+        <value name="name">
+          <shadow type="text">
+            <field name="TEXT">ble_Mouse</field>
+          </shadow>  
+        </value>
+      </block>
+      <block type="ble_mouse_get_mac"></block>
+      <block type="ble_mouse_connect"></block>
+      <block type="analog_ble_mouse_input" >
+        <value name="key">
+          <block type="mouse_key">
+          </block>
+        </value>
+        <value name="x">
+          <shadow type="math_number">
+          </shadow>
+        </value>
+        <value name="y">
+          <shadow type="math_number">
+          </shadow>
+        </value>
+        <value name="wheel">
+          <shadow type="math_number">
+          </shadow>
+        </value>
+      </block>
+      <block type="analog_ble_mouse_send_battery">
+        <value name="battery">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
       </block>
     </category>
     <category id="catIR" colour="140">
