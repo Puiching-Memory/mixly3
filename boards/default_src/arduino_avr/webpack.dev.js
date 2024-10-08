@@ -22,7 +22,7 @@ module.exports = merge(common, {
         https: true,
         port: 8080,
         host: '0.0.0.0',
-        hot: true,
+        hot: false,
         static: {
             directory: path.join(process.cwd(), '../../../'),
             watch: false
