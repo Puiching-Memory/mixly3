@@ -1490,6 +1490,7 @@
       </value>
     </block>
     <block type="onboard_RTC_get_time" m-hide="micropython:esp32:mixgo_pe"></block>
+    <block type="onboard_RTC_get_time_str"></block>
     <block type="onboard_RTC_get_timestamp" m-hide="micropython:esp32:mixgo_pe">
       <value name="LIST">
         <block type="onboard_RTC_get_time"></block>
@@ -1502,7 +1503,6 @@
         </shadow>
       </value>
     </block>
-    <block type="onboard_RTC_get_time_str"></block>
   </category>
   <category id="catOnBoardActuator" name="catOnBoardActuator" colour="#6C9858"
     m-show="micropython:esp32:mixgo micropython:esp32:rm_e1 micropython:esp32:mpython">

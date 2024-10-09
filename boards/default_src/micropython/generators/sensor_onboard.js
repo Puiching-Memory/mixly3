@@ -524,21 +524,21 @@ export const sensor_onboard_compass_reset = function (block, generator) {
 }
 
 export const onboard_RTC_set_datetime = function (_, generator) {
-    generator.definitions_['import_ntptime'] = "import ntptime";
+    generator.definitions_['import_rtctime'] = "import rtctime";
     var year = generator.valueToCode(this, "year", generator.ORDER_ASSIGNMENT);
     var month = generator.valueToCode(this, "month", generator.ORDER_ASSIGNMENT);
     var day = generator.valueToCode(this, "day", generator.ORDER_ASSIGNMENT);
     var hour = generator.valueToCode(this, "hour", generator.ORDER_ASSIGNMENT);
     var minute = generator.valueToCode(this, "minute", generator.ORDER_ASSIGNMENT);
     var second = generator.valueToCode(this, "second", generator.ORDER_ASSIGNMENT);
-    var code = 'ntptime.settime((' + year + ',' + month + ',' + day + ',' + hour + ',' + minute + ',' + second + ',0,0))\n';
+    var code = 'rtctime.settime((' + year + ',' + month + ',' + day + ',' + hour + ',' + minute + ',' + second + ',0,0))\n';
     return code;
 }
 
 export const onboard_RTC_settime_string = function (_, generator) {
     var cnt = generator.valueToCode(this, 'CONTENT', generator.ORDER_ATOMIC);
-    generator.definitions_['import_ntptime'] = "import ntptime";
-    var code = 'ntptime.settime(' + cnt + ')\n';
+    generator.definitions_['import_rtctime'] = "import rtctime";
+    var code = 'rtctime.settime(' + cnt + ')\n';
     return code;
 }
 

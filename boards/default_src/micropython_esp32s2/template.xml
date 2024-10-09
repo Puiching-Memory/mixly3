@@ -1465,6 +1465,7 @@
       </value>
     </block>
     <block type="onboard_RTC_get_time"></block>
+    <block type="onboard_RTC_get_time_str"></block>
     <block type="onboard_RTC_get_timestamp">
       <value name="LIST">
         <block type="onboard_RTC_get_time"></block>
@@ -1477,7 +1478,7 @@
         </shadow>
       </value>
     </block>
-    <block type="onboard_RTC_get_time_str"></block>
+
 
   </category>
   <category id="catOnBoardActuator" name="catOnBoardActuator" colour="#6C9858"
