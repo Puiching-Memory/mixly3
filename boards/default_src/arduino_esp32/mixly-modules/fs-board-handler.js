@@ -73,16 +73,16 @@ export default class FSArduEsp32Handler extends FSBoardHandler {
         const fsType = this.getFSType();
         let arch = 'x64';
         switch (process.arch) {
-        case 'arm64':
-        case 'arm':
-            arch = 'arm';
-            break;
-        case 'ia32':
-            arch = 'x32';
-            break;
-        case 'x64':
-        default:
-            arch = 'x64';
+            case 'arm64':
+            case 'arm':
+                arch = 'arm';
+                break;
+            case 'ia32':
+                arch = 'x32';
+                break;
+            case 'x64':
+            default:
+                arch = 'x64';
         }
         const platform = Env.currentPlatform;
         const fsToolInfo = FS_INFO[`mk${fsType}`];

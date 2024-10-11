@@ -64,6 +64,11 @@ const BOARDS_PIN_DEF = {
         path: require("../media/ESP32s3.jpg"),
         height: 350,
         width: 500
+    },
+    esp32s2_pin: {
+        path: require("../media/ESP32s2.jpg"),
+        height: 350,
+        width: 500
     }
 }
 
