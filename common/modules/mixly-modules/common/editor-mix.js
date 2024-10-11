@@ -594,8 +594,7 @@ class EditorMix extends EditorBase {
             this.showParseMixErrorDialog(mixDom, undefinedBlocks, endFunc);
             return;
         }
-        blockPage.getEditor().clear();
-        Blockly.Xml.domToWorkspace(xmlDom[0], blockPage.getEditor());
+        Blockly.Xml.clearWorkspaceAndLoadFromXml(xmlDom[0], blockPage.getEditor());
         blockPage.getEditor().scrollCenter();
         Blockly.hideChaff();
         if (!useIncompleteBlocks && codeDom && xmlDom.attr('shown') === 'code') {
