@@ -243,19 +243,6 @@ export const MQTT_subscribe = function (_, generator) {
     return 'Adafruit_MQTT_Subscribe *subscription;\nwhile ((subscription = mqtt.readSubscription(5000))) {\n  ' + code + '\n}\n';
 }
 
-// ESP8266 GET请求
-export const http_get = function (_, generator) {
-    var api = generator.valueToCode(this, 'api', generator.ORDER_ATOMIC);
-    var branch = generator.statementToCode(this, 'success');
-    branch = branch.replace(/(^\s*)|(\s*$)/g, "");
-    var branch1 = generator.statementToCode(this, 'failure');
-    branch1 = branch1.replace(/(^\s*)|(\s*$)/g, "");
-    generator.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
-    generator.definitions_['include_ESP8266HTTPClient'] = '#include <ESP8266HTTPClient.h>';
-    var code = 'if (WiFi.status() == WL_CONNECTED) {\nHTTPClient http;\nhttp.begin(' + api + ');\nint httpCode = http.GET();\nif (httpCode > 0) {\nString Request_result = http.getString();\n' + branch + '\n}\nelse {\n' + branch1 + '\n} \nhttp.end();\n}\n';
-    return code;
-}
-
 export const WIFI_smartConfig = function (_, generator) {
     var MODE = this.getFieldValue('MODE');
     // var board_type = JSFuncs.getPlatform();
