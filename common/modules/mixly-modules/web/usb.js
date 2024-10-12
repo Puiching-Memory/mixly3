@@ -46,13 +46,14 @@ class USB extends Serial {
             Serial.renderSelectBox(portsName);
         }
 
-        this.requestPort = function () {
-            navigator.usb.requestDevice({ filters: [{ vendorId: 0xD28 }] })
-                .then((device) => {
-                    this.addPort(device);
-                    this.refreshPorts();
-                })
-                .catch(Debug.error);
+        this.requestPort = async function () {
+            const device = await navigator.usb.requestDevice({
+                filters: [{
+                    vendorId: 0xD28
+                }]
+            });
+            this.addPort(device);
+            this.refreshPorts();
         }
 
         this.getPort = function (name) {

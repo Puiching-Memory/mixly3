@@ -59,11 +59,11 @@ BU.FILMWARE_LAYER = new HTMLTemplate(
 
 const BAUD = goog.platform() === 'darwin' ? 460800 : 921600;
 
-BU.requestPort = () => {
+BU.requestPort = async () => {
     if (SELECTED_BOARD.web.com === 'usb') {
-        USB.requestPort();
+        await USB.requestPort();
     } else {
-        Serial.requestPort();
+        await Serial.requestPort();
     }
 }
 
@@ -225,13 +225,18 @@ BU.burnByUSB = () => {
 
 BU.burnWithEsptool = async (binFile) => {
     const { mainStatusBarTabs } = Mixly;
-    const portName = Serial.getSelectedPortName();
+    let portName = Serial.getSelectedPortName();
     if (!portName) {
-        /*layer.msg(Msg.Lang['statusbar.serial.noDevice'], {
-            time: 1000
-        });*/
-        BU.requestPort();
-        return;
+        try {
+            await BU.requestPort();
+            portName = Serial.getSelectedPortName();
+            if (!portName) {
+                return;
+            }
+        } catch (error) {
+            Debug.error(error);
+            return;
+        }
     }
     const statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
     if (statusBarSerial) {
@@ -337,13 +342,18 @@ BU.burnWithEsptool = async (binFile) => {
 
 BU.burnWithAdafruitEsptool = async (binFile) => {
     const { mainStatusBarTabs } = Mixly;
-    const portName = Serial.getSelectedPortName();
+    let portName = Serial.getSelectedPortName();
     if (!portName) {
-        /*layer.msg(Msg.Lang['statusbar.serial.noDevice'], {
-            time: 1000
-        });*/
-        BU.requestPort();
-        return;
+        try {
+            await BU.requestPort();
+            portName = Serial.getSelectedPortName();
+            if (!portName) {
+                return;
+            }
+        } catch (error) {
+            Debug.error(error);
+            return;
+        }
     }
     const statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
     if (statusBarSerial) {
@@ -504,14 +514,19 @@ BU.searchLibs = (moduleList, libList = []) => {
     return libList;
 }
 
-BU.initUpload = () => {
-    const portName = Serial.getSelectedPortName();
+BU.initUpload = async () => {
+    let portName = Serial.getSelectedPortName();
     if (!portName) {
-        /*layer.msg(Msg.Lang['statusbar.serial.noDevice'], {
-            time: 1000
-        });*/
-        BU.requestPort();
-        return;
+        try {
+            await BU.requestPort();
+            portName = Serial.getSelectedPortName();
+            if (!portName) {
+                return;
+            }
+        } catch (error) {
+            Debug.error(error);
+            return;
+        }
     }
     BU.uploadWithAmpy(portName);
 }

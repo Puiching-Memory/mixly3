@@ -45,13 +45,10 @@ class WebSerial extends Serial {
             Serial.renderSelectBox(portsName);
         }
 
-        this.requestPort = function () {
-            navigator.serial.requestPort()
-                .then((serialport) => {
-                    this.addPort(serialport);
-                    this.refreshPorts();
-                })
-                .catch(Debug.error);
+        this.requestPort = async function () {
+            const serialport = await navigator.serial.requestPort();
+            this.addPort(serialport);
+            this.refreshPorts();
         }
 
         this.getPort = function (name) {
