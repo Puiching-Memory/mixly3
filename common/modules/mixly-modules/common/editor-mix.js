@@ -458,8 +458,8 @@ class EditorMix extends EditorBase {
     getCode() {
         const blockPage = this.getPage('block');
         const codePage = this.getPage('code');
-        if (this.drag.shown === Drag.Extend.POSITIVE) {
-            return blockPage.getCode();
+        if (this.drag.shown !== Drag.Extend.NEGATIVE) {
+            return blockPage.getRawCode();
         } else {
             return codePage.getCode();
         }

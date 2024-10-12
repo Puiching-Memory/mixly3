@@ -181,6 +181,10 @@ class EditorBlockly extends EditorBase {
             return $xml[0].outerHTML;
         }
 
+        this.getRawCode = (workspace, generator) => {
+            return generator?.workspaceToCode(workspace) || '';
+        }
+
         this.getCode = (workspace, generator) => {
             let code = generator?.workspaceToCode(workspace) || '';
             code = code.replace(/(_E[0-9A-F]{1}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) {
@@ -325,6 +329,11 @@ class EditorBlockly extends EditorBase {
     getXML() {
         const workspace = this.#getTargetWorkspace_();
         return EditorBlockly.getXML(workspace);
+    }
+
+    getRawCode() {
+        const workspace = this.#getTargetWorkspace_();
+        return EditorBlockly.getRawCode(workspace, Blockly.generator);
     }
 
     getCode() {
