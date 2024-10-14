@@ -3754,4 +3754,8 @@ En.MIXLY_VARIABLE_UNPACK = "Unpack";
 En.MIXLY_TO_HEX = "Convert hexadecimal characters";
 En.MIXLY_PYTHON_TOOLTIP_TOHEX = "Converts a value to a hexadecimal character";
 En.MIXLY_RTC_GET_TIME_STR = "RTC gets the time string";
+En.MIXLY_TIMESTAMP_TO_DATA ="convert to data";
+En.MIXLY_TO_INDEX_SEQUENCE = "sequence number and content combine into an index sequence";
+En.MIXLY_INDEX = "index";
+En.MIXLY_TOTO_INDEX_SEQUENC_TOOLTIP = "Combine all the items and ordinals of the list into an index sequence, for example (0,'A') into one index sequence";
 })();

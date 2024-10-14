@@ -794,3 +794,33 @@ export const lists_insert_value2 = lists_insert_value
 export const lists_remove_at2 = lists_remove_at
 export const list_tolist2 = list_tolist;
 
+
+export const ENUMERATE ={
+    init: function () {
+        this.setColour(LISTS_HUE);
+        this.appendValueInput('VAR')
+            .appendField(Blockly.Msg.blockpy_USE_LIST);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_TO_INDEX_SEQUENCE);
+        // this.appendValueInput('VAR_N')
+        //     .appendField(Blockly.Msg.MIXLY_INDEX+Blockly.Msg.MIXLY_STARTSWITH);
+        this.setInputsInline(true);
+        this.setOutput(true, Number);
+        this.setTooltip(Blockly.Msg.MIXLY_TOTO_INDEX_SEQUENC_TOOLTIP);
+    }
+};
+
+export const enumerate = {
+    init: function () {
+        this.setColour(LISTS_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.blockpy_USE_LIST);
+        this.appendValueInput('LIST');
+        this.appendValueInput('VALUE')
+            .appendField(Blockly.Msg.MIXLY_TO_INDEX_SEQUENCE)
+            .appendField(Blockly.Msg.MIXLY_INDEX+Blockly.Msg.MIXLY_STARTSWITH);
+        this.setInputsInline(true);
+        this.setOutput(true);
+        this.setTooltip(Blockly.Msg.MIXLY_TOTO_INDEX_SEQUENC_TOOLTIP);
+    }
+};

@@ -213,6 +213,13 @@
       </statement>
     </block>
     <block type="controls_millis"></block>
+    <block type="datetime_fromtimestamp">
+      <value name="VAR">
+        <shadow type="math_number">
+          <field name="NUM">18029</field>
+        </shadow>
+      </value>
+    </block>
     <block type="time_localtime"></block>
     <block type="garbage_collection"></block>
     <block type="get_mem_alloc"></block>
@@ -891,6 +898,18 @@
       <value name="VAR">
         <shadow type="variables_get">
           <field name="VAR">x</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="enumerate">
+      <value name="LIST">
+        <shadow type="variables_get">
+          <field name="VAR">mylist</field>
+        </shadow>
+      </value>
+      <value name="VALUE">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
         </shadow>
       </value>
     </block>

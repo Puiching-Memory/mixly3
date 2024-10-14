@@ -1033,3 +1033,15 @@ export const get_unique_identifier = {
 
 // export const base_type = controls_type;
 // export const controls_TypeLists = controls_typeLists;
+
+export const datetime_fromtimestamp = {
+    init: function () {
+        this.setColour(LOOPS_HUE);
+        this.appendValueInput('VAR')
+            .appendField(Blockly.Msg.MIXLY_RTC_TIMESTAMP);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_TIMESTAMP_TO_DATA);
+        this.setInputsInline(true);
+        this.setOutput(true, Number);
+    }
+};

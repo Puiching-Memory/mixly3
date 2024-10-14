@@ -279,3 +279,10 @@ export const get_unique_identifier = function (_, generator) {
 
 // ok
 export const controls_repeat = controls_repeat_ext;
+
+export const datetime_fromtimestamp = function(_,generator){
+    generator.definitions_['import_datatime'] = 'import datatime';
+    var ts = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    var code = 'datatime.datatime.fromtimestamp(' + ts + ')';
+    return [code, generator.ORDER_ATOMIC];
+}

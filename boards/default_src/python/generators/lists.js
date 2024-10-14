@@ -254,3 +254,10 @@ export const list_tolist2 = function (_, generator) {
     var str = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC) || '0'
     return [str + '.tolist()', generator.ORDER_ATOMIC];
 }
+
+export const enumerate = function (_, generator) {
+    var varName = generator.valueToCode(this, 'LIST', generator.ORDER_ADDITIVE) || 'mylist';
+    var argument = generator.valueToCode(this, 'VALUE', generator.ORDER_ASSIGNMENT) || '0';
+    var code = 'enumerate(' +varName+',start='+ argument + ')';
+    return [code, generator.ORDER_ATOMIC];
+}

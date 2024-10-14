@@ -3757,4 +3757,8 @@ ZhHant.MIXLY_VARIABLE_UNPACK = "解包";
 ZhHant.MIXLY_TO_HEX = "轉16進制字符";
 ZhHant.MIXLY_PYTHON_TOOLTIP_TOHEX = "將一個值轉換為一個16進制字符";
 ZhHant.MIXLY_RTC_GET_TIME_STR = "RTC 獲取時間字符串";
+ZhHant.MIXLY_TIMESTAMP_TO_DATA ="轉化爲日期";
+ZhHant.MIXLY_TO_INDEX_SEQUENCE = "的序號和內容組合為索引序列";
+ZhHant.MIXLY_INDEX = "序號";
+ZhHant.MIXLY_TOTO_INDEX_SEQUENC_TOOLTIP = "將列表的所有項和序號組合為索引序列，例如(0,'A')為一個索引序列";
 })();
