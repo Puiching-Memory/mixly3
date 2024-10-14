@@ -333,18 +333,7 @@ class StatusBarSerial extends PageBase {
             const { id } = event.currentTarget.dataset;
             const { data } = event.params;
             if (id === 'baud') {
-                const baud = data.id - 0;
-                if (!this.isOpened()) {
-                    this.#config_.baud = baud;
-                    return;
-                }
-                this.#serial_.setBaudRate(baud)
-                .then(() => {
-                    this.#config_.baud = baud;
-                })
-                .catch((error) => {
-                    this.#$settingMenu_.filter('[data-id="baud"]').val(data).trigger('change');
-                });
+                this.setBaudRate(data.id - 0).catch(Debug.error);
             } else if (id === 'send-with') {
                 if (data.id === 'no') {
                     this.#config_.sendWith = '';
@@ -519,6 +508,23 @@ class StatusBarSerial extends PageBase {
         }
         this.#output_.setStatus(isOpened);
         this.#chart_.setStatus(isOpened);
+    }
+
+    async setBaudRate(baud) {
+        if (!this.isOpened()) {
+            this.#config_.baud = baud;
+            return;
+        }
+        if (this.#serial_.baudRateIsLegal(baud)) {
+            try {
+                await this.#serial_.setBaudRate(baud);
+                this.#config_.baud = baud;
+            } catch (error) {
+                Debug.error(error);
+            }
+        }
+        this.#$settingMenu_.filter('[data-id="baud"]').val(this.#config_.baud).trigger('change');
+        this.startRead();
     }
 
     isOpened() {

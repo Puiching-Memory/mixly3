@@ -138,6 +138,9 @@ ArduShell.compile = (doFunc = () => {}) => {
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.setValue('');
     mainStatusBarTabs.changeTo("output");
+    const mainWorkspace = Workspace.getMain();
+    const editor = mainWorkspace.getEditorsManager().getActive();
+    const code = editor.getCode();
     ArduShell.compiling = true;
     ArduShell.uploading = false;
     const boardType = Boards.getSelectedBoardCommandParam();
@@ -164,44 +167,42 @@ ArduShell.compile = (doFunc = () => {}) => {
             $("#mixly-loader-btn").css('display', 'inline-block');
         }
     });
-    setTimeout(() => {
-        statusBarTerminal.setValue(Msg.Lang['shell.compiling'] + "...\n");
+    statusBarTerminal.setValue(Msg.Lang['shell.compiling'] + "...\n");
 
-        let myLibPath = path.join(Env.boardDirPath, "/libraries/myLib/");
-        if (fs_plus.isDirectorySync(myLibPath))
-            myLibPath += '\",\"';
-        else
-            myLibPath = '';
-        const thirdPartyPath = path.join(Env.boardDirPath, 'libraries/ThirdParty');
-        if (fs_plus.isDirectorySync(thirdPartyPath)) {
-            const libList = fs.readdirSync(thirdPartyPath);
-            for (let libName of libList) {
-                const libPath = path.join(thirdPartyPath, libName, 'libraries');
-                if (!fs_plus.isDirectorySync(libPath)) continue;
-                myLibPath += libPath + ',';
-            }
+    let myLibPath = path.join(Env.boardDirPath, "/libraries/myLib/");
+    if (fs_plus.isDirectorySync(myLibPath))
+        myLibPath += '\",\"';
+    else
+        myLibPath = '';
+    const thirdPartyPath = path.join(Env.boardDirPath, 'libraries/ThirdParty');
+    if (fs_plus.isDirectorySync(thirdPartyPath)) {
+        const libList = fs.readdirSync(thirdPartyPath);
+        for (let libName of libList) {
+            const libPath = path.join(thirdPartyPath, libName, 'libraries');
+            if (!fs_plus.isDirectorySync(libPath)) continue;
+            myLibPath += libPath + ',';
         }
-        const configPath = path.join(ArduShell.shellPath, '../arduino-cli.json'),
-        defaultLibPath = path.join(ArduShell.shellPath, '../libraries'),
-        buildPath = path.join(Env.clientPath, './mixlyBuild'),
-        buildCachePath = path.join(Env.clientPath, './mixlyBuildCache'),
-        codePath = path.join(Env.clientPath, './testArduino/testArduino.ino');
-        const cmdStr = '\"'
-                     + ArduShell.shellPath
-                     + '\" compile -b '
-                     + boardType
-                     + ' --config-file \"'
-                     + configPath
-                     + '\" --build-cache-path \"' + buildCachePath + '\" --verbose --libraries \"'
-                     + myLibPath
-                     + defaultLibPath
-                     + '\" --build-path \"'
-                     + buildPath
-                     + '\" \"'
-                     + codePath
-                     + '\" --no-color';
-        ArduShell.runCmd(layerNum, 'compile', cmdStr, doFunc);
-    }, 100);
+    }
+    const configPath = path.join(ArduShell.shellPath, '../arduino-cli.json'),
+    defaultLibPath = path.join(ArduShell.shellPath, '../libraries'),
+    buildPath = path.join(Env.clientPath, './mixlyBuild'),
+    buildCachePath = path.join(Env.clientPath, './mixlyBuildCache'),
+    codePath = path.join(Env.clientPath, './testArduino/testArduino.ino');
+    const cmdStr = '\"'
+                 + ArduShell.shellPath
+                 + '\" compile -b '
+                 + boardType
+                 + ' --config-file \"'
+                 + configPath
+                 + '\" --build-cache-path \"' + buildCachePath + '\" --verbose --libraries \"'
+                 + myLibPath
+                 + defaultLibPath
+                 + '\" --build-path \"'
+                 + buildPath
+                 + '\" \"'
+                 + codePath
+                 + '\" --no-color';
+    ArduShell.runCmd(layerNum, 'compile', cmdStr, code, doFunc);
 }
 
 /**
@@ -252,6 +253,9 @@ ArduShell.upload = (boardType, port) => {
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.setValue('');
     mainStatusBarTabs.changeTo('output');
+    const mainWorkspace = Workspace.getMain();
+    const editor = mainWorkspace.getEditorsManager().getActive();
+    const code = editor.getCode();
     const layerNum = layer.open({
         type: 1,
         title: Msg.Lang['shell.uploading'] + "...",
@@ -327,14 +331,24 @@ ArduShell.upload = (boardType, port) => {
             + codePath
             + '\" --no-color';
     }
-    ArduShell.runCmd(layerNum, 'upload', cmdStr,
-        function () {
-            mainStatusBarTabs.add('serial', port);
-            mainStatusBarTabs.changeTo(port);
-            const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
-            statusBarSerial.open();
+    ArduShell.runCmd(layerNum, 'upload', cmdStr, code, () => {
+        if (!Serial.portIsLegal(port)) {
+            return;
         }
-    );
+        mainStatusBarTabs.add('serial', port);
+        mainStatusBarTabs.changeTo(port);
+        const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
+        statusBarSerial.open()
+            .then(() => {
+                const baudRates = code.match(/(?<=Serial.begin[\s]*\([\s]*)[0-9]*(?=[\s]*\))/g);
+                if (!baudRates.length) {
+                    statusBarSerial.setBaudRate(9600);
+                } else {
+                    statusBarSerial.setBaudRate(baudRates[0] - 0);
+                }
+            });
+
+    });
 }
 
 /**
@@ -466,12 +480,9 @@ ArduShell.writeLibFiles = (inPath) => {
 * @param cmd {String} 输入的cmd命令
 * @return void
 */
-ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
+ArduShell.runCmd = (layerNum, type, cmd, code, sucFunc) => {
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
-    const mainWorkspace = Workspace.getMain();
-    const editor = mainWorkspace.getEditorsManager().getActive();
-    const code = editor.getCode();
     const testArduinoDirPath = path.join(Env.clientPath, 'testArduino');
     const codePath = path.join(testArduinoDirPath, 'testArduino.ino');
     const nowFilePath = Title.getFilePath();

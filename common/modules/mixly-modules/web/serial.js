@@ -191,7 +191,9 @@ class WebSerial extends Serial {
 
     async setBaudRate(baud) {
         return new Promise((resolve, reject) => {
-            if (!this.isOpened() || this.getBaudRate() === baud) {
+            if (!this.isOpened()
+                || this.getBaudRate() === baud
+                || !this.baudRateIsLegal(baud)) {
                 resolve();
                 return;
             }

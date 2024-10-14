@@ -177,17 +177,19 @@ class ElectronSerial extends Serial {
 
     async setBaudRate(baud) {
         return new Promise((resolve, reject) => {
-            if (!this.isOpened() || this.getBaudRate() === baud) {
+            if (!this.isOpened()
+                || this.getBaudRate() === baud
+                || !this.baudRateIsLegal(baud)) {
                 resolve();
                 return;
             }
-            this.#serialport_.update({ baudRate: baud - 0 }, (error) => {
+            this.#serialport_.update({ baudRate: baud }, (error) => {
                 if (error) {
                     reject(error);
-                } else {
-                    super.setBaudRate(baud);
-                    resolve();
+                    return;
                 }
+                super.setBaudRate(baud);
+                this.setDTRAndRTS(this.getDTR(), this.getRTS()).finally(resolve);
             });
         });
     }
