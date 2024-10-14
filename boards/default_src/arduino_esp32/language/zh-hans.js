@@ -118,6 +118,22 @@ ZhHans.ESP32_CONFIG_MESSAGE_USB_MODE = XML.render(ZhHans.ESP32_CONFIG_TEMPLATE, 
     name: '无'
 });
 
+ZhHans.ESP32_CONFIG_MESSAGE_CORE_DEBUG_LEVEL = XML.render(ZhHans.ESP32_CONFIG_TEMPLATE, {
+    title: '核心调试级别',
+    message: '此选项用于选择要打印到串行调试的Arduino核心调试级别。',
+    moreInfo: ZhHans.ESP32_CONFIG_INTRODUCE,
+    href: 'https://docs.espressif.com/projects/arduino-esp32/en/latest/guides/tools_menu.html#core-debug-level',
+    name: 'Core Debug Level'
+});
+
+ZhHans.ESP32_CONFIG_MESSAGE_ERASE_ALL_FLASH_BEFORE_SKETCH_UPLOAD = XML.render(ZhHans.ESP32_CONFIG_TEMPLATE, {
+    title: '草图上传前擦除所有闪存',
+    message: '此选项选择在上传新草图之前要擦除的闪存区域。',
+    moreInfo: ZhHans.ESP32_CONFIG_INTRODUCE,
+    href: 'https://docs.espressif.com/projects/arduino-esp32/en/latest/guides/tools_menu.html#erase-all-flash-before-sketch-upload',
+    name: 'Erase All Flash Before Sketch Upload'
+});
+
 ZhHans.BOARD_FS = '板卡文件管理';
 
 export default ZhHans;
