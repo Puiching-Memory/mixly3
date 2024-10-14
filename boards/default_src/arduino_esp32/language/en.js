@@ -118,6 +118,22 @@ En.ESP32_CONFIG_MESSAGE_USB_MODE = XML.render(En.ESP32_CONFIG_TEMPLATE, {
     name: 'None'
 });
 
+En.ESP32_CONFIG_MESSAGE_CORE_DEBUG_LEVEL = XML.render(En.ESP32_CONFIG_TEMPLATE, {
+    title: 'Core Debug Level',
+    message: 'This option is used to select the Arduino core debugging level to be printed to the serial debug.',
+    moreInfo: En.ESP32_CONFIG_INTRODUCE,
+    href: 'https://docs.espressif.com/projects/arduino-esp32/en/latest/guides/tools_menu.html#core-debug-level',
+    name: 'Core Debug Level'
+});
+
+En.ESP32_CONFIG_MESSAGE_ERASE_ALL_FLASH_BEFORE_SKETCH_UPLOAD = XML.render(En.ESP32_CONFIG_TEMPLATE, {
+    title: 'Erase All Flash Before Sketch Upload',
+    message: 'This option selects the flash memory region to be erased before uploading the new sketch.',
+    moreInfo: En.ESP32_CONFIG_INTRODUCE,
+    href: 'https://docs.espressif.com/projects/arduino-esp32/en/latest/guides/tools_menu.html#erase-all-flash-before-sketch-upload',
+    name: 'Erase All Flash Before Sketch Upload'
+});
+
 En.BOARD_FS = 'Board FS';
 
 export default En;
