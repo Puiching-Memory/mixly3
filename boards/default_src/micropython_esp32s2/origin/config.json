@@ -8,17 +8,31 @@
         "type": "command",
         "portSelect": "all",
         "micropython:esp32s2:mixgo_ce": {
-            "command": "\"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset write_flash 0x1000 \"{indexPath}/build/MixGo_CE-0x1000-V1.19.1.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
+            "command": "\"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset write_flash 0x1000 \"{indexPath}/build/MixGo_CE-0x1000-V1.19.1.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\"",
+            "special": [
+                {
+                    "name": "Default",
+                    "command": "\"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset write_flash 0x1000 \"{indexPath}/build/MixGo_CE-0x1000-V1.19.1.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
+                },
+                {
+                    "name": "ESP-AT-mode",
+                    "command": "\"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset write_flash 0x0000 \"{indexPath}/build/MixGo-CE_AT-T17_R18.bin\""
+                }
+            ]
         },
         "micropython:esp32s2:generic": {
-            "command": "\"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset write_flash 0x1000 \"{indexPath}/build/Generic_S2_0x1000-V1.19.1.bin\""
-        },
-        "special": [
-            {
-                "name": "ESP-AT-mode",
-                "command": "\"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset write_flash 0x0000 \"{indexPath}/build/MixGo-CE_AT-T17_R18.bin\""
-            }
-        ]
+            "command": "\"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset write_flash 0x1000 \"{indexPath}/build/Generic_S2_0x1000-V1.19.1.bin\"",
+            "special": [
+                {
+                    "name": "Default",
+                    "command": "\"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset write_flash 0x1000 \"{indexPath}/build/Generic_S2_0x1000-V1.19.1.bin\""
+                },
+                {
+                    "name": "ESP-AT-mode",
+                    "command": "\"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s2 --port {com} --baud 460800 --after=no_reset write_flash 0x0000 \"{indexPath}/build/MixGo-CE_AT-T17_R18.bin\""
+                }
+            ]
+        }
     },
     "upload": {
         "type": "command",

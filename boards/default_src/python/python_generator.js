@@ -139,7 +139,6 @@ Python.init = function () {
     }
 }
 
-
 Python.finish = function (code) {
     // Convert the definitions dictionary into a list.
     if (code !== "") {
@@ -177,7 +176,7 @@ Python.finish = function (code) {
     if (loops.length > 0)
         return definitions.join('\n') + '\n' + functions.join('\n') + '\n' + setups.join('') + '\n' + code + 'while True:\n' + loops.join('') + codeEnd.join('\n');
     return definitions.join('\n') + '\n' + functions.join('\n') + '\n' + setups.join('') + '\n' + code + codeEnd.join('\n');
-};
+}
 
 
 /**
@@ -188,7 +187,7 @@ Python.finish = function (code) {
  */
 Python.scrubNakedValue = function (line) {
     return line + '\n';
-};
+}
 
 /**
  * Encode a string as a properly escaped Python string, complete with quotes.
@@ -211,7 +210,7 @@ Python.quote_ = function (string) {
         }
     }
     return quote + string + quote;
-};
+}
 
 /**
  * Encode a string as a properly escaped multiline Python string, complete
@@ -224,7 +223,7 @@ Python.multiline_quote_ = function (string) {
     // Can't use goog.string.quote since % must also be escaped.
     string = string.replace(/'''/g, '\\\'\\\'\\\'');
     return '\'\'\'' + string + '\'\'\'';
-};
+}
 
 /**
  * Common tasks for generating Python from blocks.
@@ -264,7 +263,7 @@ Python.scrub_ = function (block, code, opt_thisOnly) {
     var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
     var nextCode = opt_thisOnly ? '' : Python.blockToCode(nextBlock);
     return commentCode + code + nextCode;
-};
+}
 
 /**
  * Gets a property and adjusts the value, taking into account indexing, and
@@ -305,4 +304,4 @@ Python.getAdjustedInt = function (block, atId, opt_delta, opt_negate) {
         }
     }
     return at;
-};
+}
