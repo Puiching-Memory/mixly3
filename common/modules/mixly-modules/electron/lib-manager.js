@@ -151,16 +151,16 @@ LibManager.loadLibsAndUpdateJsCssList = (doFunc = () => {}) => {
     Env.thirdPartyXML = xml;
     let loadPromise = [];
     if (js.length) {
-        loadPromise.push(new Promise((resove, reject) => {
+        loadPromise.push(new Promise((resolve, reject) => {
             LazyLoad.js(js, function () {
-                resove();
+                resolve();
             });
         }));
     }
     if (css.length) {
-        loadPromise.push(new Promise((resove, reject) => {
+        loadPromise.push(new Promise((resolve, reject) => {
             LazyLoad.css(css, function () {
-                resove();
+                resolve();
             });
         }));
     }
@@ -758,9 +758,9 @@ LibManager.importFromLocalWithZip = (type, filePath, endFunc) => {
 LibManager.delLibs = (type, libPathList, layerNum) => {
     let delPromiseList = [];
     for (let libPath of libPathList) {
-        delPromiseList.push(new Promise((resove, reject) => {
+        delPromiseList.push(new Promise((resolve, reject) => {
             fs_extra.remove(libPath, (error) => {
-                resove(error);
+                resolve(error);
             });
         }));
     }
@@ -819,7 +819,7 @@ LibManager.unZip = (inPath, desPath, delZip, endFunc = (errorMessage) => {}) => 
 }
 
 LibManager.copyDir = (startPath, endPath) => {
-    return new Promise((resove, reject) => {
+    return new Promise((resolve, reject) => {
         fs_extra.ensureDir(endPath)
         .then(() => {
             return fs_extra.emptyDir(endPath);
@@ -828,7 +828,7 @@ LibManager.copyDir = (startPath, endPath) => {
             return fs_extra.copy(startPath, endPath);
         })
         .then(() => {
-            resove({ error: null, endPath });
+            resolve({ error: null, endPath });
         })
         .catch((error) => {
             resolve({ error, endPath });
@@ -837,14 +837,14 @@ LibManager.copyDir = (startPath, endPath) => {
 }
 
 LibManager.copyFile = (startPath, endPath) => {
-    return new Promise((resove, reject) => {
+    return new Promise((resolve, reject) => {
         const endDirPath = path.dirname(endPath);
         fs_extra.ensureDir(endDirPath)
         .then(() => {
             return fs_extra.copy(startPath, endPath);
         })
         .then(() => {
-            resove({ error: null, endPath });
+            resolve({ error: null, endPath });
         })
         .catch((error) => {
             resolve({ error, endPath });
