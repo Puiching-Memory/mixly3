@@ -308,3 +308,17 @@ export const turn_to_int = function (_, generator) {
     var str = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     return ["hexlify(" + str + ').decode()', generator.ORDER_ATOMIC];
 }
+
+export const generate_cartesian_product = function (_, generator) {
+    generator.definitions_.import_itertools = "import itertools";
+    var re = generator.valueToCode(this, 'repeat', generator.ORDER_ATOMIC);
+    var code = new Array(this.itemCount_);
+    var default_value = '0';
+    for (var n = 0; n < this.itemCount_; n++) {
+        code[n] = generator.valueToCode(this, 'ADD' + n,
+            generator.ORDER_NONE) || default_value;
+    }
+    // var code = '[' + code.join(', ') + ']';
+    // var code = 'itertools.product('+'repeat='+re+')';
+    return [code, generator.ORDER_ATOMIC];
+}
