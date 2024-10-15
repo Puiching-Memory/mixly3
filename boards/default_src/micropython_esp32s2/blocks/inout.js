@@ -81,21 +81,6 @@ export const inout_analog_write_set = {
     }
 };
 
-export const inout_analog_read = {
-    init: function () {
-        this.setColour(BASE_HUE);
-        this.appendValueInput("PIN", Number)
-            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
-            .appendField(Blockly.Msg.MIXLY_Analog_PINMODEIN)
-            .setCheck(Number);
-        this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_ESP32_MACHINE_VALUE)
-        this.setInputsInline(true);
-        this.setOutput(true, Number);
-        this.setTooltip(Blockly.Msg.MIXLY_ESP32_INOUT_ANALOG_READ_TOOLTIP);
-    }
-};
-
 export const inout_analog_atten = {
     init: function () {
         this.setColour(BASE_HUE);
@@ -210,40 +195,6 @@ export const inout_analog_write_init = {
     },
     getVars: function () {
         return [this.getFieldValue('PIN_OBJ') == 'dac#' ? null : this.getFieldValue('PIN_OBJ')];
-    },
-    renameVar: function (oldName, newName) {
-        if (Blockly.Names.equals(oldName, this.getFieldValue('PIN_OBJ'))) {
-            this.setTitleValue(newName, 'PIN_OBJ');
-        }
-    }
-};
-
-export const inout_analog_read_init = {
-    init: function () {
-        this.setColour(BASE_HUE);
-        // this.appendValueInput("PIN", Number)
-        //     .appendField(Blockly.Msg.MIXLY_SETUP)
-        //     .appendField("PWM"+Blockly.Msg.MIXLY_Analog_PINMODEOUT)
-        //     .appendField('pwm')
-        //     .setCheck(Number);
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_SETUP)
-            .appendField(new Blockly.FieldTextInput('adc#'), 'PIN_OBJ')
-            .appendField(Blockly.Msg.MIXLY_MICROPYTHON_AS)
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_Analog_PINMODEIN)
-        // .appendField('adc')
-        // .appendField(new Blockly.FieldDropdown(profile.default.adc_pin),"PIN")
-        this.appendValueInput("PIN", Number)
-            .appendField(Blockly.Msg.MIXLY_PIN)
-            .setCheck(Number);
-        this.setInputsInline(true);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setTooltip(Blockly.Msg.MIXLY_ESP32_INOUT_ANALOG_READ_INIT_TOOLTIP);
-    },
-    getVars: function () {
-        return [this.getFieldValue('PIN_OBJ') == 'adc#' ? null : this.getFieldValue('PIN_OBJ')];
     },
     renameVar: function (oldName, newName) {
         if (Blockly.Names.equals(oldName, this.getFieldValue('PIN_OBJ'))) {

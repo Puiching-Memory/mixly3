@@ -49,15 +49,6 @@ export const inout_analog_write_set = function (_, generator) {
 }
 
 // ok
-export const inout_analog_read = function (_, generator) {
-    generator.definitions_['import_machine'] = 'import machine';
-    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
-    //generator.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
-    var code = dropdown_pin + '.read()';
-    return [code, generator.ORDER_ATOMIC];
-}
-
-// ok
 export const inout_pin_pressed = function (_, generator) {
     generator.definitions_['import_machine'] = 'import machine';
     var pin = generator.valueToCode(this, 'pin', generator.ORDER_ATOMIC);
@@ -95,15 +86,6 @@ export const inout_analog_write_init = function (_, generator) {
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var varName = (pin_obj == 'dac#') ? 'dac' + dropdown_pin : generator.variableDB_.getName(pin_obj, Blockly.Variables.NAME_TYPE);
     var code = varName + ' = machine.DAC(machine.Pin(' + dropdown_pin + '))\n';
-    return code;
-}
-
-export const inout_analog_read_init = function (_, generator) {
-    generator.definitions_['import_machine'] = 'import machine';
-    var pin_obj = this.getFieldValue('PIN_OBJ') || 'adc#';
-    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
-    var varName = (pin_obj == 'adc#') ? 'adc' + dropdown_pin : generator.variableDB_.getName(pin_obj, Blockly.Variables.NAME_TYPE);
-    var code = varName + ' = machine.ADC(machine.Pin(' + dropdown_pin + '))\n';
     return code;
 }
 
