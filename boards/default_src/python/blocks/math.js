@@ -489,7 +489,7 @@ export const math_round = {
 export const text_to_number = {
     init: function () {
         var TO_INT_FLOAT =
-            [[Blockly.Msg.MIXLY_TO_INT, 'int'], [Blockly.Msg.MIXLY_TO_FLOAT, 'float'], [Blockly.Msg.MIXLY_TO_BITES, 'b'],[Blockly.Msg.LANG_MATH_BYTE+Blockly.Msg.MIXLY_TO_INT,'bti']];
+            [[Blockly.Msg.MIXLY_TO_INT, 'int'], [Blockly.Msg.MIXLY_TO_FLOAT, 'float'], [Blockly.Msg.MIXLY_TO_BITES, 'b'], [Blockly.Msg.LANG_MATH_BYTE + Blockly.Msg.MIXLY_TO_INT, 'bti']];
         this.setColour(MATH_HUE);
         this.appendValueInput('VAR')
             .appendField(new Blockly.FieldDropdown(TO_INT_FLOAT), 'TOWHAT');
@@ -533,7 +533,7 @@ export const turn_to_int = {
     init: function () {
         this.setColour(MATH_HUE);
         this.appendValueInput('VAR')
-            .appendField(Blockly.Msg.LANG_MATH_BYTE+Blockly.Msg.MIXLY_TO_HEX);
+            .appendField(Blockly.Msg.LANG_MATH_BYTE + Blockly.Msg.MIXLY_TO_HEX);
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_PYTHON_TOOLTIP_TOHEX)
     }
@@ -547,16 +547,18 @@ export const generate_cartesian_product = {
     init: function () {
         this.setColour(MATH_HUE);
         this.itemCount_ = 1;
-        this.updateShape_();
         this.setMutator(new Blockly.icons.MutatorIcon(['lists_create_with_item'], this));
-        this.appendValueInput('repeat')
+        this.appendDummyInput('DUMMY')
+            .appendField(Blockly.Msg.MIXLY_PRODUCT + Blockly.Msg.MIXLY_GENERATE_CARTESIAN_PRODUCT);
+        this.appendValueInput('REPEAT')
             .appendField(Blockly.Msg.MIXLY_EVERY_PER_ELEPER_ELEMENT);
         this.appendDummyInput()
             .appendField(Blockly.Msg.CONTROLS_REPEAT_TITLE_TIMES);
-        this.setPreviousStatement(false)
-        this.setNextStatement(false)
-        this.setOutput(true)
+        this.setPreviousStatement(false);
+        this.setNextStatement(false);
+        this.setOutput(true);
         this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_PYTHON_TOOLTIP);
+        this.updateShape_();
     },
     /**
      * Create XML to represent list inputs.
@@ -617,7 +619,7 @@ export const generate_cartesian_product = {
         // Reconnect any child blocks.
         for (var i = 0; i < this.itemCount_; i++) {
             if (connections[i]) {
-                this.getInput('ADD' + i).connection.connect(connections[i]);
+                this.getInput(`ADD${i}`).connection.connect(connections[i]);
             }
         }
     },
@@ -630,7 +632,7 @@ export const generate_cartesian_product = {
         var itemBlock = containerBlock.getInputTargetBlock('STACK');
         var i = 0;
         while (itemBlock) {
-            var input = this.getInput('ADD' + i);
+            var input = this.getInput(`ADD${i}`);
             itemBlock.valueConnection_ = input && input.connection.targetConnection;
             i++;
             itemBlock = itemBlock.nextConnection &&
@@ -647,9 +649,9 @@ export const generate_cartesian_product = {
         if (this.getInput('EMPTY')) {
             this.removeInput('EMPTY');
         } else {
-            var i = 0;
-            while (this.getInput('ADD' + i)) {
-                this.removeInput('ADD' + i);
+            let i = 0;
+            while (this.getInput(`ADD${i}`)) {
+                this.removeInput(`ADD${i}`);
                 i++;
             }
         }
@@ -658,11 +660,9 @@ export const generate_cartesian_product = {
             this.appendDummyInput('EMPTY')
                 .appendField(Blockly.Msg.MIXLY_EMPTY_REMINDER);
         } else {
-            for (var i = 0; i < this.itemCount_; i++) {
-                var input = this.appendValueInput('ADD' + i);
-                if (i == 0) {
-                    input.appendField(Blockly.Msg.MIXLY_PRODUCT+Blockly.Msg.MIXLY_GENERATE_CARTESIAN_PRODUCT);
-                }
+            for (let i = 0; i < this.itemCount_; i++) {
+                this.appendValueInput(`ADD${i}`);
+                this.moveInputBefore(`ADD${i}`, 'REPEAT');
             }
         }
     },

@@ -50,15 +50,15 @@ export const math_bit = function (_, generator) {
 
 export const math_arithmetic = function (a, generator) {
     var b = {
-            ADD: [" + ", generator.ORDER_ADDITIVE],
-            MINUS: [" - ", generator.ORDER_ADDITIVE],
-            MULTIPLY: [" * ", generator.ORDER_MULTIPLICATIVE],
-            DIVIDE: [" / ", generator.ORDER_MULTIPLICATIVE],
-            QUYU: [' % ', generator.ORDER_MULTIPLICATIVE],//增加取余操作
-            ZHENGCHU: [' // ', generator.ORDER_MULTIPLICATIVE],//增加整除操作
-            POWER: [" ** ", generator.ORDER_EXPONENTIATION]
-        }[a.getFieldValue("OP")],
-        c = b[0],
+        ADD: [" + ", generator.ORDER_ADDITIVE],
+        MINUS: [" - ", generator.ORDER_ADDITIVE],
+        MULTIPLY: [" * ", generator.ORDER_MULTIPLICATIVE],
+        DIVIDE: [" / ", generator.ORDER_MULTIPLICATIVE],
+        QUYU: [' % ', generator.ORDER_MULTIPLICATIVE],//增加取余操作
+        ZHENGCHU: [' // ', generator.ORDER_MULTIPLICATIVE],//增加整除操作
+        POWER: [" ** ", generator.ORDER_EXPONENTIATION]
+    }[a.getFieldValue("OP")];
+    var c = b[0],
         b = b[1],
         d = generator.valueToCode(a, "A", b) || "0";
     a = generator.valueToCode(a, "B", b) || "0";
@@ -290,7 +290,7 @@ export const text_to_number = function (_, generator) {
     var towhat = this.getFieldValue('TOWHAT');
     var str = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     if (towhat == 'b') return ['' + str + '.encode("utf-8")', generator.ORDER_ATOMIC];
-    else if(towhat == 'bti') return['int.from_bytes('+str+',"big")',Blockly.Python.ORDER_ATOMIC];
+    else if (towhat == 'bti') return ['int.from_bytes(' + str + ',"big")', generator.ORDER_ATOMIC];
     return [towhat + "(" + str + ')', generator.ORDER_ATOMIC];
 }
 
@@ -310,15 +310,15 @@ export const turn_to_int = function (_, generator) {
 }
 
 export const generate_cartesian_product = function (_, generator) {
-    generator.definitions_.import_itertools = "import itertools";
-    var re = generator.valueToCode(this, 'repeat', generator.ORDER_ATOMIC);
-    var code = new Array(this.itemCount_);
-    var default_value = '0';
-    for (var n = 0; n < this.itemCount_; n++) {
-        code[n] = generator.valueToCode(this, 'ADD' + n,
-            generator.ORDER_NONE) || default_value;
+    generator.definitions_.import_itertools = 'import itertools';
+    let re = generator.valueToCode(this, 'REPEAT', generator.ORDER_ATOMIC);
+    let items = new Array(this.itemCount_);
+    for (let n = 0; n < this.itemCount_; n++) {
+        items[n] = generator.valueToCode(this, `ADD${n}`, generator.ORDER_NONE) || '0';
     }
-    // var code = '[' + code.join(', ') + ']';
-    // var code = 'itertools.product('+'repeat='+re+')';
+    let code = '';
+    if (this.itemCount_) {
+        code = `itertools.product(${items.join(', ')}, repeat=${re})`;
+    }
     return [code, generator.ORDER_ATOMIC];
 }
