@@ -241,11 +241,38 @@ export const sensor_hp203_extern = function (_, generator) {
     return [code, generator.ORDER_ATOMIC];
 }
 
+export const sensor_spl06_001_extern = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    generator.definitions_['import_spl06_001'] = 'import spl06_001';
+    var code = sub + '.' + key;
+    return [code, generator.ORDER_ATOMIC];
+}
+
 export const sensor_ltr381_extern = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
     generator.definitions_['import_ltr381rgb'] = 'import ltr381rgb';
     var code = sub + '.getdata()' + key;
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const sensor_ucs12071_extern = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    generator.definitions_['import_ucs12071'] = 'import ucs12071';
+    if (key == '0'){
+        var code = sub + '.color()';
+    }
+    else if(key == '1'){
+        var code = sub + '.color_raw()';
+    }
+    else if(key == '2'){
+        var code = sub + '.als()';
+    }
+    else{
+        var code = sub + '.ir()';
+    }
     return [code, generator.ORDER_ATOMIC];
 }
 

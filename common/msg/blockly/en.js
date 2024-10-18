@@ -3758,4 +3758,6 @@ En.MIXLY_TIMESTAMP_TO_DATA ="convert to data";
 En.MIXLY_TO_INDEX_SEQUENCE = "sequence number and content combine into an index sequence";
 En.MIXLY_INDEX = "index";
 En.MIXLY_TOTO_INDEX_SEQUENC_TOOLTIP = "Combine all the items and ordinals of the list into an index sequence, for example (0,'A') into one index sequence";
+En.MIXLY_RGB_RAW = 'RGB color primitive value';
+En.GET_IR_STRENGTH = 'get Infrared light';
 })();

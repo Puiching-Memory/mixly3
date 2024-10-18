@@ -3911,4 +3911,6 @@ ZhHans.MIXLY_PRODUCT = "生成";
 ZhHans.MIXLY_GENERATE_CARTESIAN_PRODUCT = "笛卡尔积";
 ZhHans.MIXLY_EVERY_PER_ELEPER_ELEMENT = "每个元素重复";
 ZhHans.MIXLY_EMPTY_REMINDER = "至少需要一个可迭代对象";
+ZhHans.MIXLY_RGB_RAW = 'RGB颜色原始值';
+ZhHans.GET_IR_STRENGTH = '获取红外光';
 })();

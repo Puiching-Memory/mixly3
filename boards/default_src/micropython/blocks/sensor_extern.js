@@ -436,6 +436,24 @@ export const sensor_ltr381_extern = {
     }
 };
 
+export const sensor_ucs12071_extern = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.HTML_COLOUR + Blockly.Msg.MSG.catSensor + " UCS12071")
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_GET +'RGB'+ Blockly.Msg.HTML_COLOUR, "0"],
+                [Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_RGB_RAW, "1"],
+                [Blockly.Msg.MIXLY_GET_ENV_LIGHT + Blockly.Msg.MIXLY_BRIGHTNESS, "2"],
+                [Blockly.Msg.GET_IR_STRENGTH+Blockly.Msg.MIXLY_BRIGHTNESS,"3"]
+            ]), "key");
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};
+
 export const sensor_LTR390UV_extern = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
@@ -522,6 +540,23 @@ export const sensor_hp203_extern = {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.Msg.MIXLY_Altitude + Blockly.Msg.MSG.catSensor + " HP203X")
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_GETPRESSURE, "pressure()"],
+                [Blockly.Msg.MIXLY_GETTEMPERATUE, "temperature()"],
+                [Blockly.Msg.MIXLY_GET_ALTITUDE, "altitude()"],
+            ]), "key");
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};
+
+export const sensor_spl06_001_extern = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_Altitude + Blockly.Msg.MSG.catSensor + " SPL06_001")
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([

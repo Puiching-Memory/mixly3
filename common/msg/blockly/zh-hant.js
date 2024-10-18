@@ -3761,4 +3761,6 @@ ZhHant.MIXLY_TIMESTAMP_TO_DATA ="轉化爲日期";
 ZhHant.MIXLY_TO_INDEX_SEQUENCE = "的序號和內容組合為索引序列";
 ZhHant.MIXLY_INDEX = "序號";
 ZhHant.MIXLY_TOTO_INDEX_SEQUENC_TOOLTIP = "將列表的所有項和序號組合為索引序列，例如(0,'A')為一個索引序列";
+ZhHant.MIXLY_RGB_RAW = 'RGB顏色原始值';
+ZhHant.GET_IR_STRENGTH = '獲取紅外光';
 })();
