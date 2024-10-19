@@ -619,7 +619,7 @@ export const sensor_LTR308 = {
     init: function () {
         this.setColour(SENSOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_RTC_GET_TIME_STR);
+            .appendField(Blockly.Msg.MIXLY_ESP32_LIGHT);
         this.setOutput(true, Number);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.ESP32_SENSOR_NIXGO_LIGHT_TOOLTIP);
