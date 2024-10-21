@@ -175,7 +175,7 @@ export const sensor_use_i2c_init = function (_, generator) {
         code = v + ' = adxl345.' + key + "(" + iv + ')\n';
     } else if (key == 'LTR308') {
         generator.definitions_['import_ltr308al'] = 'import ltr308al';
-        code = v + ' = ltr308al.LTR308ALS(' + iv + ')\n';
+        code = v + ' = ltr308al.LTR308_ALS(' + iv + ')\n';
     } else if (key == 'LTR381RGB') {
         generator.definitions_['import_ltr381rgb'] = 'import ltr381rgb';
         code = v + ' = ltr381rgb.LTR_381RGB(' + iv + ')\n';
