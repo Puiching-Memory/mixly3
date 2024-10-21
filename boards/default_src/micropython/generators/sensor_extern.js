@@ -179,12 +179,18 @@ export const sensor_use_i2c_init = function (_, generator) {
     } else if (key == 'LTR381RGB') {
         generator.definitions_['import_ltr381rgb'] = 'import ltr381rgb';
         code = v + ' = ltr381rgb.LTR_381RGB(' + iv + ')\n';
-    }else if (key == 'LTR390UV'){
+    } else if(key == 'UCS12071'){
+        generator.definitions_['import_ucs12071'] = 'import ucs12071';
+        ode = v + ' = ucs12071.UCS1207(' + iv + ')\n';
+    } else if (key == 'LTR390UV'){
         generator.definitions_['import_ltr390uv'] = 'import ltr390uv';
         code = v + ' = ltr390uv.ALS_UVS(' + iv +')\n';
     } else if (key == 'HP203X') {
         generator.definitions_['import_hp203x'] = 'import hp203x';
         code = v + ' = hp203x.HP203X(' + iv + ')\n';
+    } else if(key == "SPL06_001"){
+        generator.definitions_['import_spl06_001'] = 'import spl06_001';
+        code = v + ' = spl06_001.SPL06(' + iv + ')\n';
     } else if (key == 'SHTC3') {
         generator.definitions_['import_shtc3'] = 'import shtc3';
         code = v + ' = shtc3.' + key + "(" + iv + ')\n';
