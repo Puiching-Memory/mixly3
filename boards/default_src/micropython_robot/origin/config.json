@@ -9,13 +9,13 @@
         "type": "command",
         "portSelect": "all",        
         "micropython:esp32c3:feiyi": {
-            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/Feiyi-0x0-V1.19.1.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
+            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/Mixgo_FeiYi-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
         },
         "micropython:esp32:rm_e1": {
-            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/RM_E1-0x1000-V1.19.1.bin\""
+            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/RM_E1-v1.23.0.bin\""
         },
         "micropython:esp32:mixbot": {
-            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixBot-0x1000-V1.19.1.bin\""
+            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixBot-v1.23.0.bin\""
         }
     },
     "upload": {
@@ -90,7 +90,7 @@
                 "binFile": [
                     {
                         "offset": "0x0000",
-                        "path": "./build/Feiyi-0x0-V1.19.1-lib.bin"
+                        "path": "./build/Mixgo_FeiYi_lib-v1.23.0.bin"
                     },
                     {
                         "offset": "0X3A0000",
@@ -102,7 +102,7 @@
                 "binFile": [
                     {
                         "offset": "0x1000",
-                        "path": "./build/RM_E1-0x1000-V1.19.1-Slib.bin"
+                        "path": "./build/RM_E1_lib-v1.23.0.bin"
                     }
                 ]
             },
@@ -110,7 +110,7 @@
                 "binFile": [
                     {
                         "offset": "0x1000",
-                        "path": "./build/MixBot-0x1000-V1.19.1-lib.bin"
+                        "path": "./build/MixBot_lib-v1.23.0.bin"
                     }
                 ]
             }
