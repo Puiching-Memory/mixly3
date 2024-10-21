@@ -16,7 +16,7 @@ rtc_clock=RTC()
 
 '''2RGB_WS2812'''
 from ws2812 import NeoPixel
-onboard_rgb = NeoPixel(Pin(12), 2, default=1)
+onboard_rgb = NeoPixel(Pin(12), 2, default=1, timing=(450, 900, 850, 500))
 
 '''1Buzzer-Music'''
 from music import MIDI

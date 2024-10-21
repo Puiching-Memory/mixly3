@@ -69,10 +69,10 @@ class LTR_381RGB:
 		return round(self._als, 2), self._ir, self._color 
 
 	def color(self):	
-		return self.getdata[2]
+		return self.getdata()[2]
 
 	def ir(self):	
-		return self.getdata[1]
+		return self.getdata()[1]
 
 	def als(self):	
-		return self.getdata[0]
+		return self.getdata()[0]

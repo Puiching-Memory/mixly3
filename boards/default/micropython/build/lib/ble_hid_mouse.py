@@ -18,6 +18,8 @@ _IRQ_CENTRAL_CONNECT    = const(1)
 _IRQ_CENTRAL_DISCONNECT = const(2)
 _IRQ_MTU_EXCHANGED      = const(21)
 _IRQ_CONNECTION_UPDATE  = const(27)
+_IRQ_GET_SECRET         = const(29)
+_IRQ_SET_SECRET         = const(30)
 _IRQ_PASSKEY_ACTION     = const(31)
 _PASSKEY_ACTION_INPUT   = const(2)
 _PASSKEY_ACTION_DISP    = const(3)
@@ -60,6 +62,11 @@ class Mouse:
         self.conn_handle = None
         self.passkey = passkey
         self.battery_level = battery_level
+        try:
+            import ble_hid_key
+            self.keys = ble_hid_key.keys
+        except:
+            self.keys = {} 
 
         handles = self._ble.gatts_register_services((_DIS, _BAS, _HIDS))
         self._service_characteristics(handles)
@@ -98,8 +105,42 @@ class Mouse:
                 self._ble.gap_passkey(conn_handle, action, None)
             else:
                 print("unknown action")
+        elif event == _IRQ_SET_SECRET:
+            sec_type, key, value = data
+            key = sec_type, bytes(key)
+            value = bytes(value) if value else None
+            #print("Set secret: ", key, value)
+            if value is None:
+                if key in self.keys:
+                    del self.keys[key]
+                    self.key_secrets(self.keys)
+                    return True
+                else:
+                    return False
+            else:
+                self.keys[key] = value
+                self.key_secrets(self.keys)
+            return True
+        elif event == _IRQ_GET_SECRET:
+            sec_type, index, key = data
+            #print("Get secret: ", sec_type, index, bytes(key) if key else None)
+            if key is None:
+                i = 0
+                for (t, _key), value in self.keys.items():
+                    if t == sec_type:
+                        if i == index:
+                            return value
+                        i += 1
+                return None
+            else:
+                key = sec_type, bytes(key)
+                return self.keys.get(key, None)
         #else:
             #print("Unhandled IRQ event: ", event, data)
+
+    def key_secrets(self, keys={}):
+        with open("ble_hid_key.py", "w+") as s_f:
+            s_f.write("keys=" + str(keys) + "\n")
 
     def _service_characteristics(self, handles):
         (h_mod, h_ser, h_fwr, h_hwr, h_swr, h_man, h_pnp) = handles[0]
