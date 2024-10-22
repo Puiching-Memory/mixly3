@@ -136,7 +136,7 @@ export const ce_go_hall_attachInterrupt = function (_, generator) {
     else if (version == "mixgo_ce") {
         generator.definitions_['import_ce_go_hall_' + dropdown_mode] = 'from ce_go import hall_' + dropdown_mode;
     }else if (version == "mixgo_mini"){
-        generator.definitions_['import_mini_go_car'] = 'from mini_go import car';
+        generator.definitions_['import_mini_go_hall' + dropdown_mod] = 'from mini_go import hall_'+ dropdown_mode;
     }
     var atta = generator.valueToCode(this, 'DO', generator.ORDER_ATOMIC);
     var code = 'hall_' + dropdown_mode + '.irq_cb(' + atta + ')\n'
@@ -153,7 +153,7 @@ export const ce_go_hall_initialize = function (_, generator) {
     else if (version == "mixgo_ce") {
         generator.definitions_['import_ce_go_hall_' + dropdown_mode] = 'from ce_go import hall_' + dropdown_mode;
     }else if (version == "mixgo_mini"){
-        generator.definitions_['import_mini_go_car'] = 'from mini_go import car';
+        generator.definitions_['import_mini_go_hall' + dropdown_mod] = 'from mini_go import hall_'+ dropdown_mode;
     }
     var num = generator.valueToCode(this, 'num', generator.ORDER_ATOMIC);
     if (args == 'all') {
@@ -174,7 +174,7 @@ export const ce_go_hall_data = function (_, generator) {
     else if (version == "mixgo_ce") {
         generator.definitions_['import_ce_go_hall_' + dropdown_mode] = 'from ce_go import hall_' + dropdown_mode;
     }else if (version == "mixgo_mini"){
-        generator.definitions_['import_mini_go_car'] = 'from mini_go import car';
+        generator.definitions_['import_mini_go_hall' + dropdown_mod] = 'from mini_go import hall_'+ dropdown_mode;
     }
     var code = 'hall_' + dropdown_mode + '.' + args + '';
     return [code, generator.ORDER_ATOMIC];
@@ -189,7 +189,7 @@ export const ce_go_pin_near_line = function (_, generator) {
     else if (version == "mixgo_ce") {
         generator.definitions_['import_ce_go_hall'] = 'from ce_go import car';
     }else if (version == "mixgo_mini"){
-        generator.definitions_['import_mini_go_car'] = 'from mini_go import car';
+        generator.definitions_['import_mini_go_hall'] = 'from mini_go import car';
     }
     var code = 'car.patrol()' + key + '';
     return [code, generator.ORDER_ATOMIC];
@@ -204,7 +204,7 @@ export const ce_go_pin_near = function (_, generator) {
     else if (version == "mixgo_ce") {
         generator.definitions_['import_ce_go_hall'] = 'from ce_go import car';
     }else if (version == "mixgo_mini"){
-        generator.definitions_['import_mini_go_car'] = 'from mini_go import car';
+        generator.definitions_['import_mini_go_hall'] = 'from mini_go import car';
     }
     var code = 'car.obstacle()' + key + '';
     return [code, generator.ORDER_ATOMIC];
@@ -219,7 +219,7 @@ export const ce_go_pin_near_state_change = function (_, generator) {
     else if (version == "mixgo_ce") {
         generator.definitions_['import_ce_go_hall'] = 'from ce_go import car';
     }else if (version == "mixgo_mini"){
-        generator.definitions_['import_mini_go_car'] = 'from mini_go import car';
+        generator.definitions_['import_mini_go_hall'] = 'from mini_go import car';
     }
     var code = 'car.ir_mode(car.' + key + ')\n';
     return code;
@@ -233,7 +233,7 @@ export const sensor_mixgome_eulerangles = function (_, generator) {
     else if (version == "mixgo_ce") {
         generator.definitions_['import_mixgo_ce_onboard_mxc6655xa'] = "from mixgo_ce import onboard_mxc6655xa";
     }else if (version == "mixgo_mini"){
-        generator.definitions_['import_mini_go_car'] = 'from mini_go import car';
+        generator.definitions_['import_mini_onboard_mxc6655xa'] = 'from mini_go import onboard_mxc6655xa';
     }
     var angle = this.getFieldValue('angle');
     var code = 'onboard_mxc6655xa.eulerangles(upright=True)' + angle;
@@ -249,7 +249,7 @@ export const ce_go_pin_light = function (_, generator) {
     else if (version == "mixgo_ce") {
         generator.definitions_['import_ce_go_hall'] = 'from ce_go import car';
     }else if (version == "mixgo_mini"){
-        generator.definitions_['import_mini_go_car'] = 'from mini_go import car';
+        generator.definitions_['import_mini_go_hall'] = 'from mini_go import car';
     }
     var code = 'car.light()' + key + '';
     return [code, generator.ORDER_ATOMIC];
