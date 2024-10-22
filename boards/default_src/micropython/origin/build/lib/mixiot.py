@@ -8,17 +8,26 @@ from matcher import MQTTMatcher
 ADDITIONAL_TOPIC = 'b640a0ce465fa2a4150c36b305c1c11b'
 WILL_TOPIC = '9d634e1a156dc0c1611eb4c3cff57276'
 
-
-def wlan_connect(ssid='MYSSID', password='MYPASS'):
+def wlan_connect(ssid='MYSSID', password='MYPASS', timeout=10):
     import network
     wlan = network.WLAN(network.STA_IF)
     if not wlan.active() or not wlan.isconnected():
         wlan.active(True)
-        print('connecting to:', ssid)
-        wlan.connect(ssid, password)
-        while not wlan.isconnected():
+        print('connecting to:', ssid, end ="")
+        try:
+            wlan.connect(ssid, password)
+        except:
             pass
-    print('network config:', wlan.ifconfig())
+        _num = 0
+        while not wlan.isconnected():
+            _num += 1
+            time.sleep(1)
+            print('.',end ="")
+            if _num > timeout:
+                wlan.active(False)
+                print('')
+                raise RuntimeError("WiFi connection timeout, Please check only 2.4G supported name and password") 
+    print('\nnetwork config:', wlan.ifconfig())
     return wlan
 
 def ntp(url='mixio.mixly.cn'):
