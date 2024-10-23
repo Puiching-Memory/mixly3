@@ -1,5 +1,5 @@
 [
-   {
+    {
         "boardImg": "./boards/default/micropython_esp32s2/media/mixgoce_compressed.png",
         "boardType": "MixGo CE",
         "boardIndex": "./boards/default/micropython_esp32s2/index.xml",
@@ -10,7 +10,7 @@
             "webSocket": true
         },
         "language": "MicroPython"
-    }, 
+    },
     {
         "boardImg": "./boards/default/micropython_esp32s3/media/mixgo_nova.png",
         "boardType": "Python ESP32-S3",
@@ -36,6 +36,18 @@
         "language": "MicroPython"
     },
     {
+        "boardImg": "./boards/default/micropython_esp32c2/media/esp32c2_compressed.png",
+        "boardType": "Python ESP32-C2",
+        "boardIndex": "./boards/default/micropython_esp32c2/index.xml",
+        "env": {
+            "electron": true,
+            "web": true,
+            "webCompiler": true,
+            "webSocket": true
+        },
+        "language": "MicroPython"
+    },
+    {
         "boardImg": "./boards/default/micropython_robot/media/mixbot.png",
         "boardType": "Python Robot",
         "boardIndex": "./boards/default/micropython_robot/index.xml",
@@ -46,23 +58,11 @@
             "webSocket": true
         },
         "language": "MicroPython"
-    }, 
+    },
     {
         "boardImg": "./boards/default/micropython_esp32/media/esp32_compressed.png",
         "boardType": "Python ESP32",
         "boardIndex": "./boards/default/micropython_esp32/index.xml",
-        "env": {
-            "electron": true,
-            "web": true,
-            "webCompiler": true,
-            "webSocket": true
-        },
-        "language": "MicroPython"
-    },
-	{
-        "boardImg": "./boards/default/micropython_esp32c2/media/esp32c2_compressed.png",
-        "boardType": "Python ESP32-C2",
-        "boardIndex": "./boards/default/micropython_esp32c2/index.xml",
         "env": {
             "electron": true,
             "web": true,
