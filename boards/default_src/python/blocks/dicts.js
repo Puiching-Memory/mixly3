@@ -748,13 +748,13 @@ export const dicts_to_to ={
         this.appendValueInput('DICT')
             .setCheck('Dict');
         this.appendValueInput('VAR1')
-            .appendField('r');
+            .appendField('key1');
         this.appendValueInput('VAR2')
             .appendField('index');
         this.appendValueInput('VAR3')
-            .appendField('l');
+            .appendField('key2');
         this.appendValueInput('VAR4')
-            .appendField('n');
+            .appendField('key3');
         this.setInputsInline(true)
         this.setTooltip(Blockly.Msg.MIXLY_CONVERT_TO_JSON_TOOLTIP);
         this.setOutput(true);
