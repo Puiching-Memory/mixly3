@@ -741,3 +741,22 @@ export const json_to_dicts = {
         this.setOutput(true);
     }
 };
+
+export const dicts_to_to ={
+    init:function(){
+        this.setColour(DICTS_HUE);
+        this.appendValueInput('DICT')
+            .setCheck('Dict');
+        this.appendValueInput('VAR1')
+            .appendField('r');
+        this.appendValueInput('VAR2')
+            .appendField('index');
+        this.appendValueInput('VAR3')
+            .appendField('l');
+        this.appendValueInput('VAR4')
+            .appendField('n');
+        this.setInputsInline(true)
+        this.setTooltip(Blockly.Msg.MIXLY_CONVERT_TO_JSON_TOOLTIP);
+        this.setOutput(true);
+    }
+}
