@@ -204,3 +204,13 @@ export const json_to_dicts = function (_, generator) {
     var code = 'json.loads(' + varName + ')';
     return [code, generator.ORDER_ATOMIC];
 }
+
+export const dicts_to_to = function (_, generator) {
+    var varName = generator.valueToCode(this, 'DICT', generator.ORDER_ASSIGNMENT) || '0';
+    var R = generator.valueToCode(this, 'VAR1', generator.ORDER_ASSIGNMENT) || 'null';
+    var I = generator.valueToCode(this, 'VAR2', generator.ORDER_ASSIGNMENT) || 'null';
+    var L = generator.valueToCode(this, 'VAR3', generator.ORDER_ASSIGNMENT) || 'null';
+    var N = generator.valueToCode(this, 'VAR4', generator.ORDER_ASSIGNMENT) || 'null';
+    var code = varName + '['+R+']'+'['+I+']'+'['+L+']'+'['+N+']';
+    return [code, generator.ORDER_ATOMIC];
+}
