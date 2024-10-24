@@ -24,6 +24,8 @@ class DS18X20:
             self._ow = onewire.OneWire(Pin(pin, pull=Pin.PULL_UP))
             self._buf = bytearray(9)
             self._roms =  self.scan()
+            if len(self._roms) == 0:
+                raise AttributeError("Cannot find a DS18X20")
 
     def scan(self):
         return [rom for rom in self._ow.scan() if rom[0] in (0x10, 0x22, 0x28)]

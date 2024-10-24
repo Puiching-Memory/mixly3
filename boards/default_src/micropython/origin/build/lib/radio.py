@@ -3,34 +3,38 @@ Radio-ESP-NOW
 
 Micropython library for the Radio-ESP-NOW 
 =======================================================
-#Preliminary composition            20220228
-
-dahanzimin From the Mixly Team 
+@dahanzimin From the Mixly Team 
 """
-
 try:
     from esp import espnow
     version = 0
 except:
     import espnow
     version = 1
-from ubinascii import hexlify,unhexlify
+from ubinascii import hexlify, unhexlify
 import network
 
 class ESPNow(espnow.ESPNow):
-    def __init__(self,channel=1,txpower=20):
+    def __init__(self, channel=1, txpower=20):
         super().__init__()
         self.active(True)
         self._channel = channel
         self._txpower = txpower
-        self._nic = network.WLAN(network.AP_IF)
+        self._nic = network.WLAN(network.STA_IF) #if version else network.WLAN(network.AP_IF)
         self._nic.active(True)
-        self._nic.config(hidden=True,channel=self._channel,txpower=self._txpower)
+        self._nic.config(channel=self._channel, txpower=self._txpower)
 
-    def send(self,peer,msg):
+    def encrypt(self, peer, pmk, add_peer=True):
+        super().set_pmk((pmk + "0" *16)[:16].encode())
+        if add_peer:
+            super().add_peer(unhexlify(peer), encrypt=True)
+        else:
+            super().del_peer(unhexlify(peer))
+
+    def send(self, peer='ffffffffffff', msg=''):
         '''Send data after error reporting and effective processing'''    
         try:
-            _peer=unhexlify(peer)
+            _peer = unhexlify(peer)
             return super().send(_peer, str(msg))
         except OSError as err:
             if len(err.args) < 2:
@@ -40,7 +44,7 @@ class ESPNow(espnow.ESPNow):
             elif err.args[1] == 'ESP_ERR_ESPNOW_IF':
                 self._nic.active(True)
             elif err.args[1] == 'ESP_ERR_ESPNOW_NOT_FOUND':
-                self.add_peer(_peer,channel=self._channel,ifidx=network.AP_IF)
+                super().add_peer(_peer)
                 return super().send(_peer, str(msg))
             elif err.args[1] == 'ESP_ERR_ESPNOW_NO_MEM':
                 raise OSError("internal ESP-NOW buffers are full")  
@@ -61,7 +65,7 @@ class ESPNow(espnow.ESPNow):
         self._channel = self._channel if channel is None else channel
         self._nic.config(hidden=True, channel=self._channel, txpower=self._txpower if txpower is None else txpower)        
 
-    def _cb_handle0(self, event_code,data):
+    def _cb_handle0(self, event_code, data):
         '''Callback processing conversion'''
         if self._on_handle:
             if isinstance(self._on_handle, list):
@@ -107,9 +111,13 @@ class ESPNow(espnow.ESPNow):
         for i in self.peers_table:
             _info.append((hexlify(i).decode(),self.peers_table[i][0]))
         return _info
-            
+
     @property
     def mac(self):
         '''Get mac address'''
         return hexlify(self._nic.config('mac')).decode()
-    
+
+    @property
+    def channel(self):
+        '''Get channel address'''
+        return self._nic.config('channel')
