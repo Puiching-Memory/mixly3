@@ -16,6 +16,5 @@ boards/default_src/**/build/lib/libs.json
 boards/default_src/**/build/upload/
 boards/extend/
 node_modules
-package-lock.json
 .idea
 yarn.lock
