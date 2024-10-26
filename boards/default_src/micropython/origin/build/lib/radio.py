@@ -32,7 +32,7 @@ class ESPNow(espnow.ESPNow):
             super().del_peer(unhexlify(peer))
 
     def send(self, peer='ffffffffffff', msg=''):
-        '''Send data after error reporting and effective processing'''    
+        '''Send data after error reporting and effective processing'''
         try:
             _peer = unhexlify(peer)
             return super().send(_peer, str(msg))
@@ -40,30 +40,30 @@ class ESPNow(espnow.ESPNow):
             if len(err.args) < 2:
                 raise err
             if err.args[1] == 'ESP_ERR_ESPNOW_NOT_INIT':
-                raise OSError("Radio(ESPNOW) is not activated, unable to transmit data") 
+                raise OSError("Radio(ESPNOW) is not activated, unable to transmit data")
             elif err.args[1] == 'ESP_ERR_ESPNOW_IF':
                 self._nic.active(True)
             elif err.args[1] == 'ESP_ERR_ESPNOW_NOT_FOUND':
                 super().add_peer(_peer)
                 return super().send(_peer, str(msg))
             elif err.args[1] == 'ESP_ERR_ESPNOW_NO_MEM':
-                raise OSError("internal ESP-NOW buffers are full")  
+                raise OSError("internal ESP-NOW buffers are full")
             elif err.args[1] == 'ESP_ERR_ESPNOW_ARG':
-                raise OSError("invalid argument")                 
+                raise OSError("invalid argument")
             else:
-                raise err  
+                raise err
 
     def recv(self):
         '''Receive data'''
         if self.any():
-            host, msg = super().recv()  
+            host, msg = super().recv()
             return hexlify(host).decode(),msg.decode()
         else :
             return None,None
 
-    def set_channel(self,channel=None,txpower=None):
+    def set_channel(self, channel=None, txpower=None):
         self._channel = self._channel if channel is None else channel
-        self._nic.config(hidden=True, channel=self._channel, txpower=self._txpower if txpower is None else txpower)        
+        self._nic.config(channel=self._channel, txpower=self._txpower if txpower is None else txpower)
 
     def _cb_handle0(self, event_code, data):
         '''Callback processing conversion'''
@@ -74,11 +74,11 @@ class ESPNow(espnow.ESPNow):
                     if cmd != -1:
                         cmd=func.__name__[cmd+2:]
                         if cmd == str(data[1].decode()):
-                            func(hexlify(data[0]).decode(),data[1].decode())
+                            func(hexlify(data[0]).decode(), data[1].decode())
                     else:
-                        func(hexlify(data[0]).decode(),data[1].decode())
+                        func(hexlify(data[0]).decode(), data[1].decode())
             else:
-                self._on_handle(hexlify(data[0]).decode(),data[1].decode())
+                self._on_handle(hexlify(data[0]).decode(), data[1].decode())
 
     def _cb_handle1(self, ee):
         '''Callback processing conversion'''
@@ -109,7 +109,7 @@ class ESPNow(espnow.ESPNow):
         '''Get the paired Mac and rssi'''
         _info=[]
         for i in self.peers_table:
-            _info.append((hexlify(i).decode(),self.peers_table[i][0]))
+            _info.append((hexlify(i).decode(), self.peers_table[i][0]))
         return _info
 
     @property
