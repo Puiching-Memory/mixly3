@@ -92,7 +92,8 @@ html[data-bs-theme=light] .select2-dropdown > .select2-search > input {
 }
 
 html[data-bs-theme=dark] .select2-dropdown > .select2-search > input {
-    border-color: var(--lay-color-border-1);
+    border-color: #999;
+    background-color: #2a2a2b;
 }
 
 html[data-bs-theme=light] .select2-dropdown > .select2-search > input:focus {
