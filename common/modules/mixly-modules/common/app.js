@@ -154,7 +154,7 @@ class App extends Component {
                 }
                 return true;
             },
-            callback: () => BU.requestPort(),
+            callback: () => BU.requestPort().catch(Debug.error),
             scopeType: Nav.Scope.LEFT,
             weight: 3
         });
