@@ -136,7 +136,7 @@ export const ce_go_hall_attachInterrupt = function (_, generator) {
     else if (version == "mixgo_ce") {
         generator.definitions_['import_ce_go_hall_' + dropdown_mode] = 'from ce_go import hall_' + dropdown_mode;
     }else if (version == "mixgo_mini"){
-        generator.definitions_['import_mini_go_hall' + dropdown_mod] = 'from mini_go import hall_'+ dropdown_mode;
+        generator.definitions_['import_mini_go_hall' + dropdown_mode] = 'from mini_go import hall_'+ dropdown_mode;
     }
     var atta = generator.valueToCode(this, 'DO', generator.ORDER_ATOMIC);
     var code = 'hall_' + dropdown_mode + '.irq_cb(' + atta + ')\n'
@@ -153,7 +153,7 @@ export const ce_go_hall_initialize = function (_, generator) {
     else if (version == "mixgo_ce") {
         generator.definitions_['import_ce_go_hall_' + dropdown_mode] = 'from ce_go import hall_' + dropdown_mode;
     }else if (version == "mixgo_mini"){
-        generator.definitions_['import_mini_go_hall' + dropdown_mod] = 'from mini_go import hall_'+ dropdown_mode;
+        generator.definitions_['import_mini_go_hall' + dropdown_mode] = 'from mini_go import hall_'+ dropdown_mode;
     }
     var num = generator.valueToCode(this, 'num', generator.ORDER_ATOMIC);
     if (args == 'all') {
@@ -174,7 +174,7 @@ export const ce_go_hall_data = function (_, generator) {
     else if (version == "mixgo_ce") {
         generator.definitions_['import_ce_go_hall_' + dropdown_mode] = 'from ce_go import hall_' + dropdown_mode;
     }else if (version == "mixgo_mini"){
-        generator.definitions_['import_mini_go_hall' + dropdown_mod] = 'from mini_go import hall_'+ dropdown_mode;
+        generator.definitions_['import_mini_go_hall' + dropdown_mode] = 'from mini_go import hall_'+ dropdown_mode;
     }
     var code = 'hall_' + dropdown_mode + '.' + args + '';
     return [code, generator.ORDER_ATOMIC];
