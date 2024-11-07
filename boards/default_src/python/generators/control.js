@@ -32,7 +32,7 @@ export const controls_if = function (a, generator) {
 }
 
 export const controls_try_finally = function (_, generator) {
-    var n = 0;
+    var n = 1;
     var argument = generator.valueToCode(this, 'IF' + n,
         generator.ORDER_NONE) || 'null';
     var branch = '';
