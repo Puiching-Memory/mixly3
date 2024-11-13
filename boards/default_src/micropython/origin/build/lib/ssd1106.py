@@ -3,9 +3,6 @@ SSD1106
 
 library for the SSD1x06 OLED128x64
 =======================================================
-
-#Preliminary composition                    20230412
-
 @dahanzimin From the Mixly Team
 """
 import uframebuf
@@ -34,8 +31,10 @@ SET_PAGE_ADDR1      = const(0xb0)
 SET_CONTRACT_CTRL   = const(0x81)
 
 class SSD1106(uframebuf.FrameBuffer_Uincode):
-    def __init__(self, width, height, external_vcc):
+    def __init__(self, width, height, external_vcc, l_offset=0, h_offset=0):
         self._external = external_vcc
+        self._l_offset = l_offset
+        self._h_offset = h_offset
         self._buffer = bytearray((width + 7) // 8 * height)
         super().__init__(self._buffer, width, height, uframebuf.MONO_VLSB)
         self.init_display()
@@ -78,16 +77,16 @@ class SSD1106(uframebuf.FrameBuffer_Uincode):
     def show(self):
         for i in range(0, 8):
             self.write_cmd(SET_PAGE_ADDR1 + i)
-            self.write_cmd(SET_COL_ADDR_L + 0)     # offset 2 pixels for 128x64 panel
-            self.write_cmd(SET_COL_ADDR_H + 0)
-            self.write_data(self._buffer[i*128:(i+1)*128])   # send one page display data
+            self.write_cmd(SET_COL_ADDR_L + self._l_offset)
+            self.write_cmd(SET_COL_ADDR_H + self._h_offset)
+            self.write_data(self._buffer[i * 128:(i + 1) * 128])   #send one page display data
 
 class SSD1106_I2C(SSD1106):
-    def __init__(self, width, height, i2c, addr=0x3c, external_vcc=False):
+    def __init__(self, width, height, i2c, addr=0x3c, external_vcc=False, l_offset=0, h_offset=0):
         self.i2c = i2c
         self.addr = addr
         self.temp = bytearray(2)
-        super().__init__(width, height, external_vcc)
+        super().__init__(width, height, external_vcc, l_offset, h_offset)
 
     def write_cmd(self, cmd):
         self.temp[0] = 0x80
@@ -99,14 +98,14 @@ class SSD1106_I2C(SSD1106):
         self.i2c.writeto(self.addr, tmp+buf)
 
 class SSD1106_SPI(SSD1106):
-    def __init__(self, width, height, spi, dc, cs, external_vcc=False):
+    def __init__(self, width, height, spi, dc, cs, external_vcc=False, l_offset=0, h_offset=0):
         self.rate = 10 * 1024 * 1024
         dc.init(dc.OUT, value=0)
         cs.init(cs.OUT, value=1)
         self.spi = spi
         self.dc = dc
         self.cs = cs
-        super().__init__(width, height, external_vcc)
+        super().__init__(width, height, external_vcc, l_offset, h_offset)
 
     def write_cmd(self, cmd):
         self.spi.init(baudrate=self.rate, polarity=0, phase=0)
