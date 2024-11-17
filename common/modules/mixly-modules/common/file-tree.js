@@ -573,7 +573,12 @@ class FileTree extends Component {
         if (!this.#selected_) {
             return;
         }
-        this.select(this.#selected_);
+        let elem = document.getElementById(this.#selected_);
+        if (!elem) {
+            return;
+        }
+        this.#jstree_.select_node(this.#selected_, true, true);
+        $(elem).children('.jstree-wholerow').addClass('jstree-wholerow-clicked');
     }
 
     deselect(inPath) {
