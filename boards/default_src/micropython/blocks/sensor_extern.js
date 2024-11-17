@@ -366,6 +366,68 @@ export const sensor_use_i2c_init = {
     }
 };
 
+export const radar_use_i2c_init = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput('I2CSUB')
+            .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH + "I2C")
+            .setCheck("var");
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_MAKE + Blockly.Msg.MIXLY_RADAR)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
+            .appendField(new Blockly.FieldDropdown([
+                ["CBR817", "CBR817"]
+            ]), "key");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+    }
+};
+
+export const radar_set_DELAY_TIME = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_RADAR)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXlY_INTERACTION+Blockly.Msg.MIXLY_DELAY_TIME);
+        this.appendValueInput('VAR');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_THRESHOLD_TOOLTIP);
+    }
+};
+
+export const radar_set_DETECTION_THRESHOLD = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_RADAR)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXlY_INTERACTION+Blockly.Msg.MIXLY_DETECTION_THRESHOLD)
+        this.appendValueInput('VAR');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_DELAY_TIME_RANGE);
+    }
+};
+
+export const interaction_whether_to_interaction = {
+    init:function(){
+        this.setColour(SENSOR_EXTERN_HUE); 
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_RADAR + Blockly.Msg.MIXLY_GET_TO_INTERACTION)
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
 export const sensor_MAX30102_extern = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);

@@ -224,6 +224,50 @@ export const actuator_use_uart_init = function (_, generator) {
     return code;
 }
 
+export const actuator_use_uart_init_player = function (_, generator) {
+    generator.definitions_['import_ns9300'] = 'import ns9300';
+    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = v + '=ns9300.NS9300(' + key + ')\n';
+    return code;
+}
+
+export const player_whether_stop = function(_,generator){
+    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = v+'.status('+key+')';
+    return [code,generator.ORDER_ATOMIC];
+}
+
+export const player_set_play = function(_,generator){
+    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = v+'.control('+key+')\n';
+    return code;
+}
+
+export const player_set_volume = function(_,generator){
+    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var vol = generator.valueToCode(this, 'volume', generator.ORDER_ATOMIC);
+    var code = v+'.volume('+vol+')\n';
+    return code;
+}
+
+export const player_set_mode = function(_,generator){
+    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = v +'.mode('+key+')';
+    return code;
+}
+
+export const player_play_music = function(_,generator){
+    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var s = generator.valueToCode(this, 'song', generator.ORDER_ATOMIC);
+    var code = v +'.'+key+'('+s+')';
+    return code;
+}
+
 export const syn6288_set_voice = function (_, generator) {
     generator.definitions_['import_music'] = 'import music';
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
