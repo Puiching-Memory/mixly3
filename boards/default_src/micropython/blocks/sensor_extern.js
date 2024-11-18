@@ -341,64 +341,29 @@ export const sensor_use_i2c_init = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
             .appendField(new Blockly.FieldDropdown([
-                ["MPU9250", "MPU9250"],
-                ["BMP280", "BMP280"],
-                ["SHT20", "SHT20"],
-                ["ADXL345", "ADXL345"],
-                ["LTR308", "LTR308"],
-                ["LTR381RGB", "LTR381RGB"],
-                ["UCS12071","UCS12071"],
-                ["LTR390UV","LTR390UV"],
-                ["HP203X", "HP203X"],
-                ["SPL06_001","SPL06_001"],
-                ["SHTC3", "SHTC3"],
-                ["AHT21", "AHT21"],
-                ["VL53L0X", "VL53L0X"],
-                ["QMC5883L", "QMC5883L"],
-                ["MAX30102", "MAX30102"],
-                ["APDS9960", "APDS9960"],
-                ["RFID", "RFID"]
+                [Blockly.Msg.MIXLY_ESP32_EXTERN_LIGHT+"LTR-308-ALS", "LTR308"],
+                [Blockly.Msg.MIXLY_COLOR_SENSOR+"LTR-381-RGB", "LTR381RGB"],
+                [Blockly.Msg.MIXLY_COLOR_SENSOR+"UCS12071","UCS12071"],
+                [Blockly.Msg.MIXLY_EXTERN_LIGHTUV +"LTR390UV","LTR390UV"],
+                [Blockly.Msg.MIXLY_ALTITUDE_SENSOR+"HP203X", "HP203X"],
+                [Blockly.Msg.MIXLY_ALTITUDE_SENSOR+"SPL06_001","SPL06_001"],
+                [Blockly.Msg.MIXLY_ALTITUDE_SENSOR+"BMP280", "BMP280"],
+                [Blockly.Msg.MIXLY_TEMP_AND_HUMIDITY_SENSOR + "SHTC3", "SHTC3"],
+                [Blockly.Msg.MIXLY_TEMP_AND_HUMIDITY_SENSOR + "AHT21", "AHT21"],
+                [Blockly.Msg.MIXLY_TEMP_AND_HUMIDITY_SENSOR + "SHT20", "SHT20"],
+                [Blockly.Msg.MIXLY_LASER_RANGE_SENSOR + "VL53L0X", "VL53L0X"],
+                [Blockly.Msg.MIXLY_GEOMAGNETIC_SENSOR + "QMC5883L", "QMC5883L"],
+                [Blockly.Msg.MIXLY_ESP32_MAX30102+"MAX30102", "MAX30102"],
+                [Blockly.Msg.HTML_COLOUR +"、"+ Blockly.Msg.MIXLY_ENVIRONMENT_LIGHT+"、"+Blockly.Msg.MIXLY_NEXT+"、"+Blockly.Msg.MIXLY_ESP32_APDS9960+"APDS9960", "APDS9960"],
+                [Blockly.Msg.MIXLY_NINE_AXIS_SENSOR+"MPU9250", "MPU9250"],
+                [Blockly.Msg.MixGo_MPU9250+"ADXL345", "ADXL345"],
+                ["RFID", "RFID"],
+                [Blockly.Msg.MIXLY_RADAR_SENSOR+"CBR817", "CBR817"]
             ]), "key");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setFieldValue("LTR308", "key");
-    }
-};
-
-export const radar_use_i2c_init = {
-    init: function () {
-        this.setColour(SENSOR_EXTERN_HUE);
-        this.appendValueInput('I2CSUB')
-            .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH + "I2C")
-            .setCheck("var");
-        this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_MAKE + Blockly.Msg.MIXLY_RADAR)
-            .setCheck("var");
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
-            .appendField(new Blockly.FieldDropdown([
-                ["CBR817", "CBR817"]
-            ]), "key");
-        this.setInputsInline(true);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-    }
-};
-
-export const radar_set_DELAY_TIME = {
-    init: function () {
-        this.setColour(SENSOR_EXTERN_HUE);
-        this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.MIXLY_RADAR)
-            .setCheck("var");
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXlY_INTERACTION+Blockly.Msg.MIXLY_DELAY_TIME);
-        this.appendValueInput('VAR');
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.MIXLY_THRESHOLD_TOOLTIP);
     }
 };
 
@@ -409,12 +374,25 @@ export const radar_set_DETECTION_THRESHOLD = {
             .appendField(Blockly.Msg.MIXLY_RADAR)
             .setCheck("var");
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXlY_INTERACTION+Blockly.Msg.MIXLY_DETECTION_THRESHOLD)
+            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXlY_INTERACTION)
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_DETECTION_THRESHOLD,'threshold'],
+                [Blockly.Msg.MIXLY_DELAY_TIME+' ms','delay_ms']
+            ]),"key")
         this.appendValueInput('VAR');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.MIXLY_DELAY_TIME_RANGE);
+        var thisBlock = this;
+        this.setTooltip(function () {
+            var mode = thisBlock.getFieldValue('key');
+            var TOOLTIPS = {
+                "threshold": Blockly.Msg.MIXLY_THRESHOLD_TOOLTIP,
+                "delay_ms": Blockly.Msg.MIXLY_DELAY_TIME_RANGE
+            };
+            return TOOLTIPS[mode]
+        });
     }
 };
 

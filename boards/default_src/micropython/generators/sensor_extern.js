@@ -181,7 +181,7 @@ export const sensor_use_i2c_init = function (_, generator) {
         code = v + ' = ltr381rgb.LTR_381RGB(' + iv + ')\n';
     } else if(key == 'UCS12071'){
         generator.definitions_['import_ucs12071'] = 'import ucs12071';
-        ode = v + ' = ucs12071.UCS1207(' + iv + ')\n';
+        ode = v + ' = ucs12071.UCS12071(' + iv + ')\n';
     } else if (key == 'LTR390UV'){
         generator.definitions_['import_ltr390uv'] = 'import ltr390uv';
         code = v + ' = ltr390uv.ALS_UVS(' + iv +')\n';
@@ -212,35 +212,25 @@ export const sensor_use_i2c_init = function (_, generator) {
     } else if (key == 'RFID') {
         generator.definitions_['import_rc522'] = 'import rc522';
         code = v + ' = rc522.RC522(' + iv + ')\n';
-    }
-    return code;
-}
-
-export const radar_use_i2c_init = function (_, generator) {
-    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var iv = generator.valueToCode(this, 'I2CSUB', generator.ORDER_ATOMIC);
-    generator.definitions_['import_machine'] = 'import machine';
-    var key = this.getFieldValue('key');
-    var code;
-    if (key == 'CBR817') {
+    }else if (key == 'CBR817') {
         generator.definitions_['import_cbr817'] = 'import cbr817';
         code = v + ' = cbr817.' + key + "(" + iv + ')\n';
     }
     return code;
 }
 
-export const radar_set_DELAY_TIME = function (_, generator) {
-    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var value = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
-    var code = sub + '.delay_ms(' + value +')\n';
-    return code;
-}
-
 export const radar_set_DETECTION_THRESHOLD = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var value = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
-    var code = sub + '.threshold(' + value +')\n';
-    return code;
+    var key = this.getFieldValue('key');
+    if(key=='threshold'){
+        var code = sub + '.threshold(' + value +')\n';
+        return code;
+    }else if(key=='delay_ms'){
+        var code = sub + '.delay_ms(' + value +')\n';
+        return code;
+    }
+    
 }
 
 export const interaction_whether_to_interaction = function(_,generator){

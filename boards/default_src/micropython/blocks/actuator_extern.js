@@ -510,29 +510,11 @@ export const actuator_use_uart_init = {
             .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_MAKE)
             .setCheck("var");
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO + 'SYN6288' + Blockly.Msg.MIXLY_AipSpeech_synthesis)
-
-        this.setInputsInline(true);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setFieldValue("LTR308", "key");
-    }
-};
-
-export const actuator_use_uart_init_player = {
-    init: function () {
-        this.setColour(ACTUATOR_EXTERN_HUE);
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH + "uart")
+            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
             .appendField(new Blockly.FieldDropdown([
-                ["uart1", "uart1"],
-                ["uart2", "uart2"]
-            ]), "key");
-        this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_MAKE)
-            .setCheck("var");
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO + 'NS9300' + Blockly.Msg.MIXLY_MUSIC_PLAYER);
+                ['SYN6288' + Blockly.Msg.MIXLY_AipSpeech_synthesis,'SYN6288'],
+                ['NS9300' + Blockly.Msg.MIXLY_MUSIC_PLAYER,'NS9300']
+            ]),'key2');
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -630,6 +612,7 @@ export const player_play_music = {
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
+        this.setTooltip(Blockly.Msg.MIXLY_PLAYER_PLAY_MUSIC_TOOTIP)
     }
 }
 
