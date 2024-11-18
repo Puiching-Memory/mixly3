@@ -519,6 +519,124 @@ export const actuator_use_uart_init = {
     }
 };
 
+export const actuator_use_uart_init_player = {
+    init: function () {
+        this.setColour(ACTUATOR_EXTERN_HUE);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH + "uart")
+            .appendField(new Blockly.FieldDropdown([
+                ["uart1", "uart1"],
+                ["uart2", "uart2"]
+            ]), "key");
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_MAKE)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO + 'NS9300' + Blockly.Msg.MIXLY_MUSIC_PLAYER);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+    }
+};
+
+export const player_whether_stop ={
+    init:function(){
+        this.setColour(ACTUATOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_MUSIC_PLAYER)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_WHETHER)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_STOPPED, "0"],
+                [Blockly.Msg.MIXLY_PLAYING, "1"],
+                [Blockly.Msg.MIXLY_PAUSED, "2"]
+            ]), "key");
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
+export const player_set_play = {
+    init:function(){
+        this.setColour(ACTUATOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_MUSIC_PLAYER)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_STAT)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_MP3_PLAY, "1"],
+                [Blockly.Msg.MIXLY_MP3_PAUSE, "2"],
+                [Blockly.Msg.MIXLY_STOP, "3"],
+                [Blockly.Msg.MIXLY_MP3_PREV, "4"],
+                [Blockly.Msg.MIXLY_MP3_NEXT, "5"]
+            ]), "key");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+export const player_set_volume = {
+    init:function(){
+        this.setColour(ACTUATOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_MUSIC_PLAYER)
+            .setCheck("var");
+        this.appendValueInput('volume')
+            .appendField(Blockly.Msg.MIXLY_MP3_VOL +Blockly.Msg.MIXLY_STAT);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip(Blockly.Msg.MIXLY_PLAYER_SET_VOLUME_TOOLTIP);
+    }
+}
+
+export const player_set_mode = {
+    init:function(){
+        this.setColour(ACTUATOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_MUSIC_PLAYER)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_MODE+Blockly.Msg.MIXLY_STAT)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_MP3_LOOP_ALL, "0"],
+                [Blockly.Msg.MIXLY_MP3_LOOP_ONE, "1"],
+                [Blockly.Msg.MIXLY_PLAYER_DIRECTORY_LOOP, "2"],
+                [Blockly.Msg.MIXLY_MP3_LOOP_RAM, "3"],
+                [Blockly.Msg.MIXLY_PLAYER_SINGLE_STOP, "4"],
+                [Blockly.Msg.MIXLY_PLAYER_SEQUENTIAL_PLAY, "5"]
+            ]), "key");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+export const player_play_music = {
+    init:function(){
+        this.setColour(ACTUATOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_MUSIC_PLAYER)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_MICROBIT_JS_START_MELODY,"play"],
+                [Blockly.Msg.MIXLY_PLAYER_INSERT_MUSIC, "insert"]
+            ]), "key");
+        this.appendValueInput('song');
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+}
+
+export const player_insert_music ={
+
+}
+
 export const syn6288_set_voice = {
     init: function () {
         this.setColour(ACTUATOR_EXTERN_HUE);

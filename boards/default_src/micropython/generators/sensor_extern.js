@@ -216,6 +216,38 @@ export const sensor_use_i2c_init = function (_, generator) {
     return code;
 }
 
+export const radar_use_i2c_init = function (_, generator) {
+    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var iv = generator.valueToCode(this, 'I2CSUB', generator.ORDER_ATOMIC);
+    generator.definitions_['import_machine'] = 'import machine';
+    var key = this.getFieldValue('key');
+    var code;
+    if (key == 'CBR817') {
+        generator.definitions_['import_cbr817'] = 'import cbr817';
+        code = v + ' = cbr817.' + key + "(" + iv + ')\n';
+    }
+    return code;
+}
+
+export const radar_set_DELAY_TIME = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var value = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    var code = sub + '.delay_ms(' + value +')\n';
+    return code;
+}
+
+export const radar_set_DETECTION_THRESHOLD = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var value = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    var code = sub + '.threshold(' + value +')\n';
+    return code;
+}
+
+export const interaction_whether_to_interaction = function(_,generator){
+    var code = 'radar.result()';
+    return [code,generator.ORDER_ATOMIC];
+}
+
 export const sensor_MAX30102_extern = function (_, generator) {
     generator.definitions_['import_max30102'] = 'import max30102';
     var key = this.getFieldValue('key');
