@@ -14,7 +14,7 @@ class NMEA0183:
 		self._uart.init(baudrate=baudrate, timeout=timeout, rxbuf=1024)
 		self.time=[None, None, None, None, None, None]
 		self.locate=['', None, '', None, None, None, None]	#0'1经度,2'3纬度,4海拔m,5速度m/s,6航向°
-		self.status=[False, ' ', 0]							#有效标注,定位模式,卫星量
+		self.status=[False, ' ', 0]	#有效标注,定位模式,卫星量
 		if not self._chip_id():
 			raise AttributeError("Cannot find a GNSS device")
 
@@ -29,11 +29,11 @@ class NMEA0183:
 		for _ in range(10):
 			sleep_ms(300)
 			if self.any():
-				self._uart.write(("$PCAS02,1000*2E\r\n").encode())						#更新频率1HZ
+				self._uart.write(("$PCAS02,1000*2E\r\n").encode())	#更新频率1HZ
 				self._uart.write("$PCAS03,1,0,0,0,1,0,0,0,0,0,,,0,0*02\r\n".encode())	#只加载GNGGA和GNRMC
 				return True
 
-	def	_judge(self, buffer, dlen):
+	def _judge(self, buffer, dlen):
 		try:
 			data=buffer.strip().decode().split(',')
 			if len(data) == dlen:
