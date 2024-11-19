@@ -3941,4 +3941,5 @@ ZhHans.MIXLY_RADIO_FREQUENCY_READER = "无线射频读写器";
 ZhHans.MIXLY_NINE_AXIS_SENSOR ='九轴传感器';
 ZhHans.MIXLY_RADAR_SENSOR = '微波雷达传感器';
 ZhHans.MIXLY_PLAYER_PLAY_MUSIC_TOOTIP = '曲目输入参数:int类型用来表示歌曲曲目(曲目顺序为放进去U盘的先后), str类型用来表示歌曲短文件名(默认mixly*.mp3,不支持中文,可用*省略)';
+ZhHans.MIXLY_MOTOR_M = '驱动';
 })();

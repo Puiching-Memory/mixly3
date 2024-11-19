@@ -509,9 +509,10 @@ export const display_lcd_use_i2c_init = function (_, generator) {
     var iv = generator.valueToCode(this, 'I2CSUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue("key");
     var addr = generator.valueToCode(this, 'ADDR', generator.ORDER_ATOMIC);
+    var m =this.getFieldValue("motor");
     var code;
     generator.definitions_['import_i2clcd'] = 'import i2clcd';
-    code = v + ' = i2clcd.LCD' + "(" + iv + ',lcd_width=' + key + ',i2c_addr=' + addr + ')\n';
+    code = v + ' = i2clcd.LCD' + "(" + iv + ',lcd_width=' + key + ',i2c_addr=' + addr + ',types=' + m +')\n';
     return code;
 }
 
