@@ -3730,18 +3730,6 @@
         </shadow>
       </value>
     </block>
-    <block type="radar_set_DELAY_TIME">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">radar</field>
-        </shadow>
-      </value>
-      <value name="VAR">
-        <shadow type="math_number">
-          <field name="NUM">500</field>
-        </shadow>
-      </value>
-    </block>
     <block type="interaction_whether_to_interaction">
     </block>
   </category>
