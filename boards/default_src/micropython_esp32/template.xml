@@ -4128,7 +4128,7 @@
     <block type="radar_set_DETECTION_THRESHOLD">
       <value name="SUB">
         <shadow type="variables_get">
-          <field name="VAR">radar</field>
+          <field name="VAR">xsensor</field>
         </shadow>
       </value>
       <value name="VAR">

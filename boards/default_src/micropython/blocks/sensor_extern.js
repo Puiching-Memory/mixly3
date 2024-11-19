@@ -251,7 +251,7 @@ export const sensor_bmp = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
-            .appendField("BMP280")
+            .appendField(Blockly.Msg.MIXLY_ALTITUDE_SENSOR+" BMP280")
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
@@ -276,7 +276,7 @@ export const sensor_sht = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
-            .appendField("SHT20")
+            .appendField(Blockly.Msg.MIXLY_TEMP_AND_HUMIDITY_SENSOR +" SHT20")
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
@@ -341,24 +341,24 @@ export const sensor_use_i2c_init = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_ESP32_EXTERN_LIGHT+"LTR-308-ALS", "LTR308"],
-                [Blockly.Msg.MIXLY_COLOR_SENSOR+"LTR-381-RGB", "LTR381RGB"],
-                [Blockly.Msg.MIXLY_COLOR_SENSOR+"UCS12071","UCS12071"],
-                [Blockly.Msg.MIXLY_EXTERN_LIGHTUV +"LTR390UV","LTR390UV"],
-                [Blockly.Msg.MIXLY_ALTITUDE_SENSOR+"HP203X", "HP203X"],
-                [Blockly.Msg.MIXLY_ALTITUDE_SENSOR+"SPL06_001","SPL06_001"],
-                [Blockly.Msg.MIXLY_ALTITUDE_SENSOR+"BMP280", "BMP280"],
-                [Blockly.Msg.MIXLY_TEMP_AND_HUMIDITY_SENSOR + "SHTC3", "SHTC3"],
-                [Blockly.Msg.MIXLY_TEMP_AND_HUMIDITY_SENSOR + "AHT21", "AHT21"],
-                [Blockly.Msg.MIXLY_TEMP_AND_HUMIDITY_SENSOR + "SHT20", "SHT20"],
-                [Blockly.Msg.MIXLY_LASER_RANGE_SENSOR + "VL53L0X", "VL53L0X"],
-                [Blockly.Msg.MIXLY_GEOMAGNETIC_SENSOR + "QMC5883L", "QMC5883L"],
-                [Blockly.Msg.MIXLY_ESP32_MAX30102+"MAX30102", "MAX30102"],
-                [Blockly.Msg.HTML_COLOUR +"、"+ Blockly.Msg.MIXLY_ENVIRONMENT_LIGHT+"、"+Blockly.Msg.MIXLY_NEXT+"、"+Blockly.Msg.MIXLY_ESP32_APDS9960+"APDS9960", "APDS9960"],
-                [Blockly.Msg.MIXLY_NINE_AXIS_SENSOR+"MPU9250", "MPU9250"],
-                [Blockly.Msg.MixGo_MPU9250+"ADXL345", "ADXL345"],
+                [Blockly.Msg.MIXLY_ESP32_EXTERN_LIGHT+"(LTR-308-ALS)", "LTR308"],
+                [Blockly.Msg.MIXLY_COLOR_SENSOR+"(LTR-381-RGB)", "LTR381RGB"],
+                [Blockly.Msg.MIXLY_COLOR_SENSOR+"(UCS12071)","UCS12071"],
+                [Blockly.Msg.MIXLY_EXTERN_LIGHTUV +"(LTR390UV)","LTR390UV"],
+                [Blockly.Msg.MIXLY_ALTITUDE_SENSOR+"(HP203X)", "HP203X"],
+                [Blockly.Msg.MIXLY_ALTITUDE_SENSOR+"(SPL06_001)","SPL06_001"],
+                [Blockly.Msg.MIXLY_ALTITUDE_SENSOR+"(BMP280)", "BMP280"],
+                [Blockly.Msg.MIXLY_TEMP_AND_HUMIDITY_SENSOR + "(SHTC3)", "SHTC3"],
+                [Blockly.Msg.MIXLY_TEMP_AND_HUMIDITY_SENSOR + "(AHT21)", "AHT21"],
+                [Blockly.Msg.MIXLY_TEMP_AND_HUMIDITY_SENSOR + "(SHT20)", "SHT20"],
+                [Blockly.Msg.MIXLY_LASER_RANGE_SENSOR + "(VL53L0X)", "VL53L0X"],
+                [Blockly.Msg.MIXLY_GEOMAGNETIC_SENSOR + "(QMC5883L)", "QMC5883L"],
+                [Blockly.Msg.MIXLY_ESP32_MAX30102+"(MAX30102)", "MAX30102"],
+                [Blockly.Msg.HTML_COLOUR +"、"+ Blockly.Msg.MIXLY_ENVIRONMENT_LIGHT+"、"+Blockly.Msg.MIXLY_NEXT+"、"+Blockly.Msg.MIXLY_ESP32_APDS9960+"(APDS9960)", "APDS9960"],
+                [Blockly.Msg.MIXLY_NINE_AXIS_SENSOR+"(MPU9250)", "MPU9250"],
+                [Blockly.Msg.MixGo_MPU9250+"(ADXL345)", "ADXL345"],
                 ["RFID", "RFID"],
-                [Blockly.Msg.MIXLY_RADAR_SENSOR+"CBR817", "CBR817"]
+                [Blockly.Msg.MIXLY_RADAR_SENSOR+"(CBR817)", "CBR817"]
             ]), "key");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
@@ -667,7 +667,7 @@ export const sensor_mpu9250_get_acceleration = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
-            .appendField("MPU9250")
+            .appendField(Blockly.Msg.MIXLY_NINE_AXIS_SENSOR+" MPU9250")
             .setCheck("var");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_ACCELERATION)
@@ -701,7 +701,7 @@ export const sensor_mpu9250_get_magnetic = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
-            .appendField("MPU9250")
+            .appendField(Blockly.Msg.MIXLY_NINE_AXIS_SENSOR+" MPU9250")
             .setCheck("var");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET + Blockly.Msg.MIXLY_MICROBIT_JS_FIELD_STRENGTH)
@@ -734,7 +734,7 @@ export const sensor_mpu9250_get_gyro = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
-            .appendField("MPU9250")
+            .appendField(Blockly.Msg.MIXLY_NINE_AXIS_SENSOR+" MPU9250")
             .setCheck("var");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET + Blockly.Msg.MIXLY_ESP32_SENOR_GYRO)
@@ -767,7 +767,7 @@ export const sensor_mpu9250_calibrate_compass = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
-            .appendField("MPU9250")
+            .appendField(Blockly.Msg.MIXLY_NINE_AXIS_SENSOR+" MPU9250")
             .setCheck("var");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_CALIBRATE_COMPASS)
@@ -783,7 +783,7 @@ export const sensor_mpu9250_temperature = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
-            .appendField("MPU9250")
+            .appendField(Blockly.Msg.MIXLY_NINE_AXIS_SENSOR+" MPU9250")
             .setCheck("var");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GETTEMPERATUE)

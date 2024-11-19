@@ -181,7 +181,7 @@ export const sensor_use_i2c_init = function (_, generator) {
         code = v + ' = ltr381rgb.LTR_381RGB(' + iv + ')\n';
     } else if(key == 'UCS12071'){
         generator.definitions_['import_ucs12071'] = 'import ucs12071';
-        ode = v + ' = ucs12071.UCS12071(' + iv + ')\n';
+        code = v + ' = ucs12071.UCS12071(' + iv + ')\n';
     } else if (key == 'LTR390UV'){
         generator.definitions_['import_ltr390uv'] = 'import ltr390uv';
         code = v + ' = ltr390uv.ALS_UVS(' + iv +')\n';
