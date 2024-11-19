@@ -375,24 +375,16 @@ export const radar_set_DETECTION_THRESHOLD = {
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXlY_INTERACTION)
+        this.appendValueInput('VAR')
+            .appendField(Blockly.Msg.MIXLY_DETECTION_THRESHOLD);
+        this.appendValueInput('VAR2')
+            .appendField(Blockly.Msg.MIXLY_DELAY_TIME);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_DETECTION_THRESHOLD,'threshold'],
-                [Blockly.Msg.MIXLY_DELAY_TIME+' ms','delay_ms']
-            ]),"key")
-        this.appendValueInput('VAR');
+            .appendField('ms');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
-        var thisBlock = this;
-        this.setTooltip(function () {
-            var mode = thisBlock.getFieldValue('key');
-            var TOOLTIPS = {
-                "threshold": Blockly.Msg.MIXLY_THRESHOLD_TOOLTIP,
-                "delay_ms": Blockly.Msg.MIXLY_DELAY_TIME_RANGE
-            };
-            return TOOLTIPS[mode]
-        });
+        this.setTooltip(Blockly.Msg.MIXLY_THRESHOLD_TOOLTIP+' ; '+Blockly.Msg.MIXLY_DELAY_TIME_RANGE)
     }
 };
 

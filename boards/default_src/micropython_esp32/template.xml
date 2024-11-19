@@ -3808,6 +3808,24 @@
         </shadow>
       </value>
     </block>
+    <block type="radar_set_DETECTION_THRESHOLD">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">xsensor</field>
+        </shadow>
+      </value>
+      <value name="VAR">
+        <shadow type="math_number">
+          <field name="NUM">5000</field>
+        </shadow>
+      </value>
+      <value name="VAR2">
+        <shadow type="math_number">
+          <field name="NUM">500</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="interaction_whether_to_interaction"></block>
     <block type="communicate_spi_init">
       <value name="VAR">
         <shadow type="variables_get">
@@ -4124,20 +4142,6 @@
           <field name="VAR">zsensor</field>
         </shadow>
       </value>
-    </block>
-    <block type="radar_set_DETECTION_THRESHOLD">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">xsensor</field>
-        </shadow>
-      </value>
-      <value name="VAR">
-        <shadow type="math_number">
-          <field name="NUM">5000</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="interaction_whether_to_interaction">
     </block>
   </category>
 
