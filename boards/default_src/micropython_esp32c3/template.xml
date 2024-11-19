@@ -3556,6 +3556,13 @@
         </shadow>
       </value>
     </block>
+    <block type="sensor_spl06_001_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">xsensor</field>
+        </shadow>
+      </value>
+    </block>
     <block type="sensor_shtc3_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
       <value name="SUB">
         <shadow type="variables_get">
@@ -3571,6 +3578,13 @@
       </value>
     </block>
     <block type="sensor_ltr381_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">xsensor</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sensor_ucs12071_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
@@ -3622,7 +3636,13 @@
         </shadow>
       </value>
     </block>
-    <block type="interaction_whether_to_interaction"></block>
+    <block type="interaction_whether_to_interaction">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">xsensor</field>
+        </shadow>
+      </value>
+    </block>
     <block type="communicate_spi_init" m-hide='micropython:esp32c3:mixgocar_c3'>
       <value name="VAR">
         <shadow type="variables_get">

@@ -222,19 +222,14 @@ export const sensor_use_i2c_init = function (_, generator) {
 export const radar_set_DETECTION_THRESHOLD = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var value = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
-    var key = this.getFieldValue('key');
-    if(key=='threshold'){
-        var code = sub + '.threshold(' + value +')\n';
-        return code;
-    }else if(key=='delay_ms'){
-        var code = sub + '.delay_ms(' + value +')\n';
-        return code;
-    }
-    
+    var value2 = generator.valueToCode(this, 'VAR2', generator.ORDER_ATOMIC);
+    var code = sub + '.threshold(' + value +')\n'+sub + '.delay_ms(' + value2 +')\n';
+    return code;
 }
 
 export const interaction_whether_to_interaction = function(_,generator){
-    var code = 'radar.result()';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var code = sub+'.result()';
     return [code,generator.ORDER_ATOMIC];
 }
 

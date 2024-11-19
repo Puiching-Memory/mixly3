@@ -341,8 +341,8 @@ export const sensor_use_i2c_init = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_ESP32_EXTERN_LIGHT+"(LTR-308-ALS)", "LTR308"],
-                [Blockly.Msg.MIXLY_COLOR_SENSOR+"(LTR-381-RGB)", "LTR381RGB"],
+                [Blockly.Msg.MIXLY_ESP32_EXTERN_LIGHT+"(LTR308ALS)", "LTR308"],
+                [Blockly.Msg.MIXLY_COLOR_SENSOR+"(LTR381RGB)", "LTR381RGB"],
                 [Blockly.Msg.MIXLY_COLOR_SENSOR+"(UCS12071)","UCS12071"],
                 [Blockly.Msg.MIXLY_EXTERN_LIGHTUV +"(LTR390UV)","LTR390UV"],
                 [Blockly.Msg.MIXLY_ALTITUDE_SENSOR+"(HP203X)", "HP203X"],
@@ -391,8 +391,11 @@ export const radar_set_DETECTION_THRESHOLD = {
 export const interaction_whether_to_interaction = {
     init:function(){
         this.setColour(SENSOR_EXTERN_HUE); 
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_RADAR)
+            .setCheck("var");
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_RADAR + Blockly.Msg.MIXLY_GET_TO_INTERACTION)
+            .appendField(Blockly.Msg.MIXLY_GET_TO_INTERACTION)
         this.setOutput(true);
         this.setInputsInline(true);
     }
@@ -442,7 +445,7 @@ export const sensor_LTR308_extern = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_ESP32_EXTERN_LIGHT + " LTR308");
+            .appendField(Blockly.Msg.MIXLY_ESP32_EXTERN_LIGHT + " LTR308ALS");
         this.appendValueInput('SUB')
             //.appendField("BMP280")
             .setCheck("var");
