@@ -17,7 +17,7 @@ UCS_CLS_DATA			= const(0x1C)
 
 _GAINS_X = (1, 4, 8, 32, 96, 192)
 
-class UCS1207:
+class UCS12071:
 	def __init__(self, i2c_bus, addr=0x38, gain=2):
 		self._device  =  i2c_bus
 		self._address = addr
