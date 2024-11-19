@@ -3788,5 +3788,5 @@ En.MIXLY_RADIO_FREQUENCY_READER = "radio frequency reader";
 En.MIXLY_NINE_AXIS_SENSOR ='nine-axis sensor';
 En.MIXLY_RADAR_SENSOR = 'microwave radar sensor';
 En.MIXLY_PLAYER_PLAY_MUSIC_TOOTIP = 'Track input parameter:int type used to denote a song track(The sequence of tracks is the first to be placed on the USB flash drive.); str type used to represent the short file name of the song(Default mixly*.mp3, does not support Chinese, can be * omitted)';
-En.MIXLY_MOTOR_M = 'motor';
+En.MIXLY_DRIVER = 'driver';
 })();

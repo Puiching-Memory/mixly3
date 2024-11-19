@@ -3791,5 +3791,5 @@ ZhHant.MIXLY_RADIO_FREQUENCY_READER = "無線頻射讀寫器";
 ZhHant.MIXLY_NINE_AXIS_SENSOR ='九軸傳感器';
 ZhHant.MIXLY_RADAR_SENSOR = '微波雷達傳感器';
 ZhHant.MIXLY_PLAYER_PLAY_MUSIC_TOOTIP = '曲目輸入參數:int類型用來表示歌曲曲目(曲目順序為放進去U盤的先後), str類型用來表示歌曲短文件名(默認mixly*.mp3,不支持中文,可用*省略)';
-ZhHant.MIXLY_MOTOR_M = '驅動';
+ZhHant.MIXLY_DRIVER = '驅動';
 })();

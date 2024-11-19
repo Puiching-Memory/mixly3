@@ -509,10 +509,9 @@ export const display_lcd_use_i2c_init = function (_, generator) {
     var iv = generator.valueToCode(this, 'I2CSUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue("key");
     var addr = generator.valueToCode(this, 'ADDR', generator.ORDER_ATOMIC);
-    var m =this.getFieldValue("motor");
     var code;
     generator.definitions_['import_i2clcd'] = 'import i2clcd';
-    code = v + ' = i2clcd.LCD' + "(" + iv + ',lcd_width=' + key + ',i2c_addr=' + addr + ',types=' + m +')\n';
+    code = v + ' = i2clcd.LCD' + "(" + iv + ',lcd_width=' + key + ',i2c_addr=' + addr +')\n';
     return code;
 }
 
@@ -557,6 +556,7 @@ export const display_oled_use_i2c_init = function (_, generator) {
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var iv = generator.valueToCode(this, 'I2CSUB', generator.ORDER_ATOMIC);
     var addr = generator.valueToCode(this, 'ADDR', generator.ORDER_ATOMIC);
+    var m =this.getFieldValue("driver");
     var version = Boards.getSelectedBoardKey().split(':')[2]
     var font = '';
     if (['mpython', 'mixgo_pe', 'mixgo_nova'].indexOf(version) >= 0) {
@@ -568,7 +568,7 @@ export const display_oled_use_i2c_init = function (_, generator) {
     }
     var code;
     generator.definitions_['import_oled128x64'] = 'import oled128x64';
-    code = v + ' = oled128x64.OLED' + "(" + iv + ',address=' + addr + ',font_address=' + font + ')\n';
+    code = v + ' = oled128x64.OLED' + "(" + iv + ',address=' + addr + ',font_address=' + font + ',types='+m+')\n';
 
     return code;
 }

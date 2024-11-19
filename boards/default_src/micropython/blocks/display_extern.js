@@ -1175,12 +1175,6 @@ export const display_lcd_use_i2c_init = {
         this.appendValueInput("ADDR")
             .setCheck(Number)
             .appendField(Blockly.Msg.MQTT_SERVER_ADD);
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_MOTOR_M)
-            .appendField(new Blockly.FieldDropdown([
-                ['SSD1306','0'],
-                ['SSD1315','1']
-            ]),'motor');
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -1301,10 +1295,15 @@ export const display_oled_use_i2c_init = {
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO + 'oled128x64')
-
         this.appendValueInput("ADDR")
             .setCheck(Number)
             .appendField(Blockly.Msg.MQTT_SERVER_ADD);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_DRIVER)
+            .appendField(new Blockly.FieldDropdown([
+                ['SSD1306','0'],
+                ['SSD1315','1']
+            ]),'driver');
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
