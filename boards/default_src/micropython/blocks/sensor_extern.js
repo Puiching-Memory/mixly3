@@ -371,7 +371,7 @@ export const radar_set_DETECTION_THRESHOLD = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.MIXLY_RADAR)
+            .appendField(Blockly.Msg.MIXLY_RADAR+'CBR817')
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXlY_INTERACTION)
@@ -392,7 +392,7 @@ export const interaction_whether_to_interaction = {
     init:function(){
         this.setColour(SENSOR_EXTERN_HUE); 
         this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.MIXLY_RADAR)
+            .appendField(Blockly.Msg.MIXLY_RADAR+'CBR817')
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_GET_TO_INTERACTION)

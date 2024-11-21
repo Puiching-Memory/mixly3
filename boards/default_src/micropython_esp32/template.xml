@@ -4439,7 +4439,7 @@
         <block type="actuator_use_uart_init">
           <value name="SUB">
             <shadow type="variables_get">
-              <field name="VAR">tts</field>
+              <field name="VAR">actuator</field>
             </shadow>
           </value>
         </block>
@@ -4448,7 +4448,7 @@
     <block type="syn6288_set_voice">
       <value name="SUB">
         <shadow type="variables_get">
-          <field name="VAR">tts</field>
+          <field name="VAR">actuator</field>
         </shadow>
       </value>
       <value name="VOICE">
@@ -4458,14 +4458,14 @@
     <block type="syn6288_get_voice">
       <value name="SUB">
         <shadow type="variables_get">
-          <field name="VAR">tts</field>
+          <field name="VAR">actuator</field>
         </shadow>
       </value>
     </block>
     <block type="syn6288_builtin_voice">
       <value name="SUB">
         <shadow type="variables_get">
-          <field name="VAR">tts</field>
+          <field name="VAR">actuator</field>
         </shadow>
       </value>
       <value name="VOICE">
@@ -4475,7 +4475,7 @@
     <block type="syn6288_tts_play">
       <value name="SUB">
         <shadow type="variables_get">
-          <field name="VAR">tts</field>
+          <field name="VAR">actuator</field>
         </shadow>
       </value>
       <value name="data">
@@ -4490,21 +4490,21 @@
     <block type="player_whether_stop">
       <value name="SUB">
         <shadow type="variables_get">
-          <field name="VAR">player</field>
+          <field name="VAR">actuator</field>
         </shadow>
       </value>
     </block>
     <block type="player_set_play">
       <value name="SUB">
         <shadow type="variables_get">
-          <field name="VAR">player</field>
+          <field name="VAR">actuator</field>
         </shadow>
       </value>
     </block>
     <block type="player_set_volume">
       <value name="SUB">
         <shadow type="variables_get">
-          <field name="VAR">player</field>
+          <field name="VAR">actuator</field>
         </shadow>
       </value>
       <value name="volume">
@@ -4516,14 +4516,14 @@
     <block type="player_set_mode">
       <value name="SUB">
         <shadow type="variables_get">
-          <field name="VAR">player</field>
+          <field name="VAR">actuator</field>
         </shadow>
       </value>
     </block>
     <block type="player_play_music">
       <value name="SUB">
         <shadow type="variables_get">
-          <field name="VAR">player</field>
+          <field name="VAR">actuator</field>
         </shadow>
       </value>
       <value name="song">
