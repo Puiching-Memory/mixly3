@@ -1,19 +1,38 @@
+import * as Blockly from 'blockly/core';
 import * as path from 'path';
-// import * as dayjs from 'dayjs';
+import $ from 'jquery';
 import {
     Workspace,
     Debug,
     Env,
-    Msg
+    Msg,
+    HTMLTemplate,
+    app
 } from 'mixly';
 import { KernelLoader } from '@basthon/kernel-loader';
 import StatusBarImage from './statusbar-image';
+import LOADER_TEMPLATE from '../templates/html/loader.html';
 
 class PythonShell {
     static {
+        HTMLTemplate.add(
+            'html/statusbar/loader.html',
+            new HTMLTemplate(LOADER_TEMPLATE)
+        );
+
         this.pythonShell = null;
+        this.kernelLoaded = false;
+        this.$loader = $(HTMLTemplate.get('html/statusbar/loader.html').render({
+            msg: {
+                loading: Blockly.Msg.PYTHON_PYODIDE_LOADING
+            }
+        }));
 
         this.init = async function () {
+            const footerBar = app.getFooterBar();
+            const $content = footerBar.getContent();
+            $content.after(this.$loader);
+
             StatusBarImage.init();
             const projectPath = path.relative(Env.indexDirPath, Env.boardDirPath);
             const loader = new KernelLoader({
@@ -34,6 +53,9 @@ class PythonShell {
             this.pyodide = window.pyodide;
             this.interruptBuffer = new Uint8Array(new ArrayBuffer(1));
             this.pyodide.setInterruptBuffer(this.interruptBuffer);
+            this.kernelLoaded = true;
+            this.$loader.remove();
+            this.$loader = null;
         }
 
         this.run = function () {
@@ -94,6 +116,7 @@ class PythonShell {
             }
         }
     ];
+
     constructor() {
         const mainWorkspace = Workspace.getMain();
         this.#statusBarsManager_ = mainWorkspace.getStatusBarsManager();
@@ -170,6 +193,9 @@ class PythonShell {
     }
 
     run(code) {
+        if (!PythonShell.kernelLoaded) {
+            return;
+        }
         this.stop()
             .then(() => {
                 if (code.indexOf('import turtle') !== -1) {
@@ -191,6 +217,9 @@ class PythonShell {
     }
 
     async stop() {
+        if (!PythonShell.kernelLoaded) {
+            return;
+        }
         if (this.#waittingForInput_) {
             this.#exitInput_();
         }
