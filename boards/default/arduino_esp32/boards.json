@@ -84,36 +84,36 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_CPU_FREQUENCY",
                 "options": [
                     {
-                        "key": "10",
-                        "label": "10MHz (40MHz XTAL)"
-                    },
-                    {
-                        "key": "13",
-                        "label": "13MHz (26MHz XTAL)"
-                    },
-                    {
-                        "key": "20",
-                        "label": "20MHz (40MHz XTAL)"
-                    },
-                    {
-                        "key": "26",
-                        "label": "26MHz (26MHz XTAL)"
-                    },
-                    {
-                        "key": "40",
-                        "label": "40MHz (40MHz XTAL)"
-                    },
-                    {
-                        "key": "80",
-                        "label": "80MHz (WiFi/BT)"
+                        "key": "240",
+                        "label": "240MHz (WiFi/BT)"
                     },
                     {
                         "key": "160",
                         "label": "160MHz (WiFi/BT)"
                     },
                     {
-                        "key": "240",
-                        "label": "240MHz (WiFi/BT)"
+                        "key": "80",
+                        "label": "80MHz (WiFi/BT)"
+                    },
+                    {
+                        "key": "40",
+                        "label": "40MHz (40MHz XTAL)"
+                    },
+                    {
+                        "key": "26",
+                        "label": "26MHz (26MHz XTAL)"
+                    },
+                    {
+                        "key": "20",
+                        "label": "20MHz (40MHz XTAL)"
+                    },
+                    {
+                        "key": "13",
+                        "label": "13MHz (26MHz XTAL)"
+                    },
+                    {
+                        "key": "10",
+                        "label": "10MHz (40MHz XTAL)"
                     }
                 ]
             },
@@ -146,12 +146,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQUENCY",
                 "options": [
                     {
-                        "key": "40",
-                        "label": "40MHz"
-                    },
-                    {
                         "key": "80",
                         "label": "80MHz"
+                    },
+                    {
+                        "key": "40",
+                        "label": "40MHz"
                     }
                 ]
             },
@@ -184,16 +184,16 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                 "options": [
                     {
+                        "key": "921600",
+                        "label": "921600"
+                    },
+                    {
                         "key": "115200",
                         "label": "115200"
                     },
                     {
                         "key": "230400",
                         "label": "230400"
-                    },
-                    {
-                        "key": "921600",
-                        "label": "921600"
                     }
                 ]
             },
@@ -203,12 +203,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_ARDUINO_RUNS_ON",
                 "options": [
                     {
-                        "key": "0",
-                        "label": "Core 0"
-                    },
-                    {
                         "key": "1",
                         "label": "Core 1"
+                    },
+                    {
+                        "key": "0",
+                        "label": "Core 0"
                     }
                 ]
             },
@@ -218,12 +218,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_EVENTS_RUN_ON",
                 "options": [
                     {
-                        "key": "0",
-                        "label": "Core 0"
-                    },
-                    {
                         "key": "1",
                         "label": "Core 1"
+                    },
+                    {
+                        "key": "0",
+                        "label": "Core 0"
                     }
                 ]
             },
@@ -305,12 +305,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQUENCY",
                 "options": [
                     {
-                        "key": "40",
-                        "label": "40MHz"
-                    },
-                    {
                         "key": "80",
                         "label": "80MHz"
+                    },
+                    {
+                        "key": "40",
+                        "label": "40MHz"
                     }
                 ]
             },
@@ -320,16 +320,16 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                 "options": [
                     {
+                        "key": "921600",
+                        "label": "921600"
+                    },
+                    {
                         "key": "115200",
                         "label": "115200"
                     },
                     {
                         "key": "230400",
                         "label": "230400"
-                    },
-                    {
-                        "key": "921600",
-                        "label": "921600"
                     }
                 ]
             },
@@ -392,12 +392,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQUENCY",
                 "options": [
                     {
-                        "key": "40",
-                        "label": "40MHz"
-                    },
-                    {
                         "key": "80",
                         "label": "80MHz"
+                    },
+                    {
+                        "key": "40",
+                        "label": "40MHz"
                     }
                 ]
             },
@@ -407,16 +407,16 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                 "options": [
                     {
+                        "key": "921600",
+                        "label": "921600"
+                    },
+                    {
                         "key": "115200",
                         "label": "115200"
                     },
                     {
                         "key": "230400",
                         "label": "230400"
-                    },
-                    {
-                        "key": "921600",
-                        "label": "921600"
                     }
                 ]
             },
@@ -498,24 +498,24 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                 "options": [
                     {
-                        "key": "115200",
-                        "label": "115200"
-                    },
-                    {
-                        "key": "250000",
-                        "label": "250000"
-                    },
-                    {
-                        "key": "500000",
-                        "label": "500000"
+                        "key": "1500000",
+                        "label": "1500000"
                     },
                     {
                         "key": "750000",
                         "label": "750000"
                     },
                     {
-                        "key": "1500000",
-                        "label": "1500000"
+                        "key": "500000",
+                        "label": "500000"
+                    },
+                    {
+                        "key": "250000",
+                        "label": "250000"
+                    },
+                    {
+                        "key": "115200",
+                        "label": "115200"
                     }
                 ]
             },
@@ -601,12 +601,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQUENCY",
                 "options": [
                     {
-                        "key": "40",
-                        "label": "40MHz"
-                    },
-                    {
                         "key": "80",
                         "label": "80MHz"
+                    },
+                    {
+                        "key": "40",
+                        "label": "40MHz"
                     }
                 ]
             },
@@ -635,16 +635,16 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                 "options": [
                     {
+                        "key": "921600",
+                        "label": "921600"
+                    },
+                    {
                         "key": "115200",
                         "label": "115200"
                     },
                     {
                         "key": "230400",
                         "label": "230400"
-                    },
-                    {
-                        "key": "921600",
-                        "label": "921600"
                     }
                 ]
             },
@@ -737,16 +737,16 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                 "options": [
                     {
+                        "key": "921600",
+                        "label": "921600"
+                    },
+                    {
                         "key": "115200",
                         "label": "115200"
                     },
                     {
                         "key": "230400",
                         "label": "230400"
-                    },
-                    {
-                        "key": "921600",
-                        "label": "921600"
                     }
                 ]
             },
@@ -809,12 +809,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQUENCY",
                 "options": [
                     {
-                        "key": "40",
-                        "label": "40MHz"
-                    },
-                    {
                         "key": "80",
                         "label": "80MHz"
+                    },
+                    {
+                        "key": "40",
+                        "label": "40MHz"
                     }
                 ]
             },
@@ -824,16 +824,16 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                 "options": [
                     {
+                        "key": "921600",
+                        "label": "921600"
+                    },
+                    {
                         "key": "115200",
                         "label": "115200"
                     },
                     {
                         "key": "230400",
                         "label": "230400"
-                    },
-                    {
-                        "key": "921600",
-                        "label": "921600"
                     }
                 ]
             },
@@ -896,36 +896,36 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_CPU_FREQUENCY",
                 "options": [
                     {
-                        "key": "10",
-                        "label": "10MHz (40MHz XTAL)"
-                    },
-                    {
-                        "key": "13",
-                        "label": "13MHz (26MHz XTAL)"
-                    },
-                    {
-                        "key": "20",
-                        "label": "20MHz (40MHz XTAL)"
-                    },
-                    {
-                        "key": "26",
-                        "label": "26MHz (26MHz XTAL)"
-                    },
-                    {
-                        "key": "40",
-                        "label": "40MHz (40MHz XTAL)"
-                    },
-                    {
-                        "key": "80",
-                        "label": "80MHz (WiFi/BT)"
+                        "key": "240",
+                        "label": "240MHz (WiFi/BT)"
                     },
                     {
                         "key": "160",
                         "label": "160MHz (WiFi/BT)"
                     },
                     {
-                        "key": "240",
-                        "label": "240MHz (WiFi/BT)"
+                        "key": "80",
+                        "label": "80MHz (WiFi/BT)"
+                    },
+                    {
+                        "key": "40",
+                        "label": "40MHz (40MHz XTAL)"
+                    },
+                    {
+                        "key": "26",
+                        "label": "26MHz (26MHz XTAL)"
+                    },
+                    {
+                        "key": "20",
+                        "label": "20MHz (40MHz XTAL)"
+                    },
+                    {
+                        "key": "13",
+                        "label": "13MHz (26MHz XTAL)"
+                    },
+                    {
+                        "key": "10",
+                        "label": "10MHz (40MHz XTAL)"
                     }
                 ]
             },
@@ -1001,12 +1001,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQUENCY",
                 "options": [
                     {
-                        "key": "40",
-                        "label": "40MHz"
-                    },
-                    {
                         "key": "80",
                         "label": "80MHz"
+                    },
+                    {
+                        "key": "40",
+                        "label": "40MHz"
                     }
                 ]
             },
@@ -1165,12 +1165,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQUENCY",
                 "options": [
                     {
-                        "key": "40",
-                        "label": "40MHz"
-                    },
-                    {
                         "key": "80",
                         "label": "80MHz"
+                    },
+                    {
+                        "key": "40",
+                        "label": "40MHz"
                     }
                 ]
             },
@@ -1191,16 +1191,16 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                 "options": [
                     {
+                        "key": "921600",
+                        "label": "921600"
+                    },
+                    {
                         "key": "115200",
                         "label": "115200"
                     },
                     {
                         "key": "230400",
                         "label": "230400"
-                    },
-                    {
-                        "key": "921600",
-                        "label": "921600"
                     }
                 ]
             },
@@ -1337,24 +1337,24 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_CPU_FREQUENCY",
                 "options": [
                     {
-                        "key": "10",
-                        "label": "10MHz"
-                    },
-                    {
-                        "key": "20",
-                        "label": "20MHz"
-                    },
-                    {
-                        "key": "40",
-                        "label": "40MHz"
+                        "key": "160",
+                        "label": "160MHz (WiFi)"
                     },
                     {
                         "key": "80",
                         "label": "80MHz (WiFi)"
                     },
                     {
-                        "key": "160",
-                        "label": "160MHz (WiFi)"
+                        "key": "40",
+                        "label": "40MHz"
+                    },
+                    {
+                        "key": "20",
+                        "label": "20MHz"
+                    },
+                    {
+                        "key": "10",
+                        "label": "10MHz"
                     }
                 ]
             },
@@ -1387,12 +1387,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQUENCY",
                 "options": [
                     {
-                        "key": "40",
-                        "label": "40MHz"
-                    },
-                    {
                         "key": "80",
                         "label": "80MHz"
+                    },
+                    {
+                        "key": "40",
+                        "label": "40MHz"
                     }
                 ]
             },
@@ -1425,16 +1425,16 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                 "options": [
                     {
+                        "key": "921600",
+                        "label": "921600"
+                    },
+                    {
                         "key": "115200",
                         "label": "115200"
                     },
                     {
                         "key": "230400",
                         "label": "230400"
-                    },
-                    {
-                        "key": "921600",
-                        "label": "921600"
                     }
                 ]
             },
@@ -1492,59 +1492,77 @@
         "key": "esp32:esp32:esp32c3@core",
         "config": [
             {
-                "label": "USB CDC On Boot",
                 "key": "CDCOnBoot",
-                "messageId": "ESP32_CONFIG_MESSAGE_CDC_ON_BOOT",
+                "label": "USB CDC On Boot",
+                "messageId": "ESP32_CONFIG_MESSAGE_USB_CDC_ON_BOOT",
                 "options": [
                     {
                         "key": "default",
                         "label": "Disabled"
-                    }, {
+                    },
+                    {
                         "key": "cdc",
                         "label": "Enabled"
                     }
                 ]
-            }, {
-                "label": "Partition Scheme",
+            },
+            {
                 "key": "PartitionScheme",
+                "label": "Partition Scheme",
                 "messageId": "ESP32_CONFIG_MESSAGE_PARTITION_SCHEME",
                 "options": [
                     {
                         "key": "default",
                         "label": "Default 4MB with spiffs (1.2MB APP/1.5MB SPIFFS)"
-                    }, {
+                    },
+                    {
                         "key": "defaultffat",
                         "label": "Default 4MB with ffat (1.2MB APP/1.5MB FATFS)"
-                    }, {
+                    },
+                    {
+                        "key": "minimal",
+                        "label": "Minimal (1.3MB APP/700KB SPIFFS)"
+                    },
+                    {
                         "key": "no_ota",
                         "label": "No OTA (2MB APP/2MB SPIFFS)"
-                    }, {
+                    },
+                    {
                         "key": "noota_3g",
                         "label": "No OTA (1MB APP/3MB SPIFFS)"
-                    }, {
+                    },
+                    {
                         "key": "noota_ffat",
                         "label": "No OTA (2MB APP/2MB FATFS)"
-                    }, {
+                    },
+                    {
                         "key": "noota_3gffat",
                         "label": "No OTA (1MB APP/3MB FATFS)"
-                    }, {
+                    },
+                    {
                         "key": "huge_app",
                         "label": "Huge APP (3MB No OTA/1MB SPIFFS)"
+                    },
+                    {
+                        "key": "min_spiffs",
+                        "label": "Minimal SPIFFS (1.9MB APP with OTA/190KB SPIFFS)"
                     }
                 ]
-            }, {
-                "label": "CPU Frequency",
+            },
+            {
                 "key": "CPUFreq",
-                "messageId": "ESP32_CONFIG_MESSAGE_CPU_FREQ",
+                "label": "CPU Frequency",
+                "messageId": "ESP32_CONFIG_MESSAGE_CPU_FREQUENCY",
                 "options": [
                     {
                         "key": "160",
                         "label": "160MHz (WiFi)"
                     }
                 ]
-            }, {
-                "label": "Flash Mode",
+            },
+            {
                 "key": "FlashMode",
+                "label": "Flash Mode",
                 "messageId": "ESP32_CONFIG_MESSAGE_FLASH_MODE",
                 "options": [
                     {
@@ -1552,22 +1570,25 @@
                         "label": "DIO"
                     }
                 ]
-            }, {
-                "label": "Flash Frequency",
+            },
+            {
                 "key": "FlashFreq",
-                "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQ",
+                "label": "Flash Frequency",
+                "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQUENCY",
                 "options": [
                     {
                         "key": "80",
                         "label": "80MHz"
-                    }, {
+                    },
+                    {
                         "key": "40",
                         "label": "40MHz"
                     }
                 ]
-            }, {
-                "label": "Flash Size",
+            },
+            {
                 "key": "FlashSize",
+                "label": "Flash Size",
                 "messageId": "ESP32_CONFIG_MESSAGE_FLASH_SIZE",
                 "options": [
                     {
@@ -1575,20 +1596,69 @@
                         "label": "4MB (32Mb)"
                     }
                 ]
-            }, {
-                "label": "Upload Speed",
+            },
+            {
                 "key": "UploadSpeed",
+                "label": "Upload Speed",
                 "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                 "options": [
                     {
                         "key": "921600",
                         "label": "921600"
-                    }, {
+                    },
+                    {
                         "key": "115200",
                         "label": "115200"
-                    }, {
+                    },
+                    {
                         "key": "230400",
                         "label": "230400"
+                    }
+                ]
+            },
+            {
+                "key": "DebugLevel",
+                "label": "Core Debug Level",
+                "messageId": "ESP32_CONFIG_MESSAGE_CORE_DEBUG_LEVEL",
+                "options": [
+                    {
+                        "key": "none",
+                        "label": "None"
+                    },
+                    {
+                        "key": "error",
+                        "label": "Error"
+                    },
+                    {
+                        "key": "warn",
+                        "label": "Warn"
+                    },
+                    {
+                        "key": "info",
+                        "label": "Info"
+                    },
+                    {
+                        "key": "debug",
+                        "label": "Debug"
+                    },
+                    {
+                        "key": "verbose",
+                        "label": "Verbose"
+                    }
+                ]
+            },
+            {
+                "key": "EraseFlash",
+                "label": "Erase All Flash",
+                "messageId": "ESP32_CONFIG_MESSAGE_ERASE_ALL_FLASH_BEFORE_SKETCH_UPLOAD",
+                "options": [
+                    {
+                        "key": "none",
+                        "label": "Disabled"
+                    },
+                    {
+                        "key": "all",
+                        "label": "Enabled"
                     }
                 ]
             }
@@ -1679,24 +1749,24 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_CPU_FREQUENCY",
                 "options": [
                     {
-                        "key": "10",
-                        "label": "10MHz"
-                    },
-                    {
-                        "key": "20",
-                        "label": "20MHz"
-                    },
-                    {
-                        "key": "40",
-                        "label": "40MHz"
+                        "key": "160",
+                        "label": "160MHz (WiFi)"
                     },
                     {
                         "key": "80",
                         "label": "80MHz (WiFi)"
                     },
                     {
-                        "key": "160",
-                        "label": "160MHz (WiFi)"
+                        "key": "40",
+                        "label": "40MHz"
+                    },
+                    {
+                        "key": "20",
+                        "label": "20MHz"
+                    },
+                    {
+                        "key": "10",
+                        "label": "10MHz"
                     }
                 ]
             },
@@ -1729,12 +1799,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQUENCY",
                 "options": [
                     {
-                        "key": "40",
-                        "label": "40MHz"
-                    },
-                    {
                         "key": "80",
                         "label": "80MHz"
+                    },
+                    {
+                        "key": "40",
+                        "label": "40MHz"
                     }
                 ]
             },
@@ -1767,16 +1837,16 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                 "options": [
                     {
+                        "key": "921600",
+                        "label": "921600"
+                    },
+                    {
                         "key": "115200",
                         "label": "115200"
                     },
                     {
                         "key": "230400",
                         "label": "230400"
-                    },
-                    {
-                        "key": "921600",
-                        "label": "921600"
                     }
                 ]
             },
@@ -1973,28 +2043,28 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_CPU_FREQUENCY",
                 "options": [
                     {
-                        "key": "10",
-                        "label": "10MHz"
-                    },
-                    {
-                        "key": "20",
-                        "label": "20MHz"
-                    },
-                    {
-                        "key": "40",
-                        "label": "40MHz"
-                    },
-                    {
-                        "key": "80",
-                        "label": "80MHz (WiFi)"
+                        "key": "240",
+                        "label": "240MHz (WiFi)"
                     },
                     {
                         "key": "160",
                         "label": "160MHz (WiFi)"
                     },
                     {
-                        "key": "240",
-                        "label": "240MHz (WiFi)"
+                        "key": "80",
+                        "label": "80MHz (WiFi)"
+                    },
+                    {
+                        "key": "40",
+                        "label": "40MHz"
+                    },
+                    {
+                        "key": "20",
+                        "label": "20MHz"
+                    },
+                    {
+                        "key": "10",
+                        "label": "10MHz"
                     }
                 ]
             },
@@ -2027,12 +2097,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQUENCY",
                 "options": [
                     {
-                        "key": "40",
-                        "label": "40MHz"
-                    },
-                    {
                         "key": "80",
                         "label": "80MHz"
+                    },
+                    {
+                        "key": "40",
+                        "label": "40MHz"
                     }
                 ]
             },
@@ -2065,16 +2135,16 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                 "options": [
                     {
+                        "key": "921600",
+                        "label": "921600"
+                    },
+                    {
                         "key": "115200",
                         "label": "115200"
                     },
                     {
                         "key": "230400",
                         "label": "230400"
-                    },
-                    {
-                        "key": "921600",
-                        "label": "921600"
                     }
                 ]
             },
@@ -2212,12 +2282,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_ARDUINO_RUNS_ON",
                 "options": [
                     {
-                        "key": "0",
-                        "label": "Core 0"
-                    },
-                    {
                         "key": "1",
                         "label": "Core 1"
+                    },
+                    {
+                        "key": "0",
+                        "label": "Core 0"
                     }
                 ]
             },
@@ -2227,12 +2297,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_EVENTS_RUN_ON",
                 "options": [
                     {
-                        "key": "0",
-                        "label": "Core 0"
-                    },
-                    {
                         "key": "1",
                         "label": "Core 1"
+                    },
+                    {
+                        "key": "0",
+                        "label": "Core 0"
                     }
                 ]
             },
@@ -2376,28 +2446,28 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_CPU_FREQUENCY",
                 "options": [
                     {
-                        "key": "10",
-                        "label": "10MHz"
-                    },
-                    {
-                        "key": "20",
-                        "label": "20MHz"
-                    },
-                    {
-                        "key": "40",
-                        "label": "40MHz"
-                    },
-                    {
-                        "key": "80",
-                        "label": "80MHz (WiFi)"
+                        "key": "240",
+                        "label": "240MHz (WiFi)"
                     },
                     {
                         "key": "160",
                         "label": "160MHz (WiFi)"
                     },
                     {
-                        "key": "240",
-                        "label": "240MHz (WiFi)"
+                        "key": "80",
+                        "label": "80MHz (WiFi)"
+                    },
+                    {
+                        "key": "40",
+                        "label": "40MHz"
+                    },
+                    {
+                        "key": "20",
+                        "label": "20MHz"
+                    },
+                    {
+                        "key": "10",
+                        "label": "10MHz"
                     }
                 ]
             },
@@ -2407,16 +2477,16 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                 "options": [
                     {
+                        "key": "921600",
+                        "label": "921600"
+                    },
+                    {
                         "key": "115200",
                         "label": "115200"
                     },
                     {
                         "key": "230400",
                         "label": "230400"
-                    },
-                    {
-                        "key": "921600",
-                        "label": "921600"
                     }
                 ]
             },
@@ -2540,12 +2610,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_ARDUINO_RUNS_ON",
                 "options": [
                     {
-                        "key": "0",
-                        "label": "Core 0"
-                    },
-                    {
                         "key": "1",
                         "label": "Core 1"
+                    },
+                    {
+                        "key": "0",
+                        "label": "Core 0"
                     }
                 ]
             },
@@ -2555,12 +2625,12 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_EVENTS_RUN_ON",
                 "options": [
                     {
-                        "key": "0",
-                        "label": "Core 0"
-                    },
-                    {
                         "key": "1",
                         "label": "Core 1"
+                    },
+                    {
+                        "key": "0",
+                        "label": "Core 0"
                     }
                 ]
             },
@@ -2704,28 +2774,28 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_CPU_FREQUENCY",
                 "options": [
                     {
-                        "key": "10",
-                        "label": "10MHz"
-                    },
-                    {
-                        "key": "20",
-                        "label": "20MHz"
-                    },
-                    {
-                        "key": "40",
-                        "label": "40MHz"
-                    },
-                    {
-                        "key": "80",
-                        "label": "80MHz (WiFi)"
+                        "key": "240",
+                        "label": "240MHz (WiFi)"
                     },
                     {
                         "key": "160",
                         "label": "160MHz (WiFi)"
                     },
                     {
-                        "key": "240",
-                        "label": "240MHz (WiFi)"
+                        "key": "80",
+                        "label": "80MHz (WiFi)"
+                    },
+                    {
+                        "key": "40",
+                        "label": "40MHz"
+                    },
+                    {
+                        "key": "20",
+                        "label": "20MHz"
+                    },
+                    {
+                        "key": "10",
+                        "label": "10MHz"
                     }
                 ]
             },
@@ -2735,16 +2805,16 @@
                 "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                 "options": [
                     {
+                        "key": "921600",
+                        "label": "921600"
+                    },
+                    {
                         "key": "115200",
                         "label": "115200"
                     },
                     {
                         "key": "230400",
                         "label": "230400"
-                    },
-                    {
-                        "key": "921600",
-                        "label": "921600"
                     }
                 ]
             },
