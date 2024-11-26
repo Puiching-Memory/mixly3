@@ -1,4 +1,4 @@
-import { app, Nav } from 'mixly';
+import { app, Nav, Debug } from 'mixly';
 import * as Blockly from 'blockly/core';
 import PythonShell from './python-shell';
 
@@ -16,7 +16,7 @@ NavExt.init = async function () {
             return true;
         },
         callback: () => {
-            PythonShell.run();
+            PythonShell.run().catch(Debug.error);
         },
         scopeType: Nav.Scope.LEFT,
         weight: 4
@@ -31,7 +31,7 @@ NavExt.init = async function () {
             return true;
         },
         callback: () => {
-            PythonShell.stop();
+            PythonShell.stop().catch(Debug.error);
         },
         scopeType: Nav.Scope.LEFT,
         weight: 5

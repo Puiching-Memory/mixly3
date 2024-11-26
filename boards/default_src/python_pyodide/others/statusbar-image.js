@@ -10,7 +10,7 @@ import '../language/loader';
 import STATUS_BAR_IMAGE_TEMPLATE from '../templates/html/statusbar-image.html';
 
 
-class StatusBarImage extends PageBase {
+export default class StatusBarImage extends PageBase {
     static {
         HTMLTemplate.add(
             'html/statusbar/statusbar-image.html',
@@ -23,6 +23,7 @@ class StatusBarImage extends PageBase {
             const statusBarsManager = mainWorkspace.getStatusBarsManager();
             statusBarsManager.add('images', 'images', Blockly.Msg.PYTHON_PYODIDE_IMAGE);
             statusBarsManager.changeTo('output');
+            return statusBarsManager.get('images');
         }
     }
 
@@ -165,5 +166,3 @@ class StatusBarImage extends PageBase {
         }
     }
 }
-
-export default StatusBarImage;

@@ -3,17 +3,19 @@ import * as path from 'path';
 import $ from 'jquery';
 import {
     Workspace,
-    Debug,
     Env,
     Msg,
     HTMLTemplate,
+    Debug,
     app
 } from 'mixly';
 import { KernelLoader } from '@basthon/kernel-loader';
 import StatusBarImage from './statusbar-image';
+import StatusBarFileSystem from './statusbar-filesystem';
 import LOADER_TEMPLATE from '../templates/html/loader.html';
 
-class PythonShell {
+
+export default class PythonShell {
     static {
         HTMLTemplate.add(
             'html/statusbar/loader.html',
@@ -27,13 +29,16 @@ class PythonShell {
                 loading: Blockly.Msg.PYTHON_PYODIDE_LOADING
             }
         }));
+        this.statusBarImage = null;
+        this.statusBarFileSystem = null;
 
         this.init = async function () {
             const footerBar = app.getFooterBar();
             const $content = footerBar.getContent();
             $content.after(this.$loader);
 
-            StatusBarImage.init();
+            this.statusBarImage = StatusBarImage.init();
+            this.statusBarFileSystem = StatusBarFileSystem.init();
             const projectPath = path.relative(Env.indexDirPath, Env.boardDirPath);
             const loader = new KernelLoader({
                 rootPath: path.join(projectPath, 'deps'),
@@ -58,14 +63,20 @@ class PythonShell {
             this.$loader = null;
         }
 
-        this.run = function () {
+        this.run = async function () {
+            if (!this.kernelLoaded) {
+                return;
+            }
             const mainWorkspace = Workspace.getMain();
             const editor = mainWorkspace.getEditorsManager().getActive();
             const code = editor.getCode();
             return this.pythonShell.run(code);
         }
 
-        this.stop = function () {
+        this.stop = async function () {
+            if (!this.kernelLoaded) {
+                return;
+            }
             return this.pythonShell.stop();
         }
     }
@@ -130,6 +141,7 @@ class PythonShell {
         this.#kernel_.addEventListener('eval.finished', () => {
             this.#running_ = false;
             this.#statusBarTerminal_.addValue(`\n==${Msg.Lang['shell.finish']}==`);
+            this.syncfs(false).catch(Debug.error);
         });
 
         this.#kernel_.addEventListener('eval.output', (data) => {
@@ -192,34 +204,26 @@ class PythonShell {
         editor.setReadOnly(true);
     }
 
-    run(code) {
-        if (!PythonShell.kernelLoaded) {
-            return;
+    async run(code) {
+        await this.stop();
+        await this.syncfs(true);
+        if (code.indexOf('import turtle') !== -1) {
+            code += '\nturtle.done()\n';
         }
-        this.stop()
-            .then(() => {
-                if (code.indexOf('import turtle') !== -1) {
-                    code += '\nturtle.done()\n';
-                }
-                if (code.indexOf('import matplotlib.pyplot') !== -1) {
-                    code += '\nplt.clf()\n';
-                }
-                this.#statusBarsManager_.changeTo('output');
-                this.#statusBarsManager_.show();
-                this.#statusBarTerminal_.setValue(`${Msg.Lang['shell.running']}...\n`);
-                this.#running_ = true;
-                this.#kernel_.dispatchEvent('eval.request', {
-                    code,
-                    interactive: false,
-                });
-            })
-            .catch(Debug.error);
+        if (code.indexOf('import matplotlib.pyplot') !== -1) {
+            code += '\nplt.clf()\n';
+        }
+        this.#statusBarsManager_.changeTo('output');
+        this.#statusBarsManager_.show();
+        this.#statusBarTerminal_.setValue(`${Msg.Lang['shell.running']}...\n`);
+        this.#running_ = true;
+        this.#kernel_.dispatchEvent('eval.request', {
+            code,
+            interactive: false,
+        });
     }
 
     async stop() {
-        if (!PythonShell.kernelLoaded) {
-            return;
-        }
         if (this.#waittingForInput_) {
             this.#exitInput_();
         }
@@ -239,9 +243,13 @@ class PythonShell {
         }
     }
 
+    async syncfs(populate = false) {
+        return new Promise((resolve) => {
+            window.pyodide.FS.syncfs(populate, resolve);
+        });
+    }
+
     sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
-
-export default PythonShell;

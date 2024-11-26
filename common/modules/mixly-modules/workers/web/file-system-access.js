@@ -22,7 +22,7 @@ const addFileSystemHandler = function(filesystem) {
                 return;
             }
             fs = BrowserFS.fs;
-            resolve('/' + filesystem.name);
+            resolve();
         });
     });
 }

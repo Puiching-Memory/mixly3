@@ -56,6 +56,7 @@ class FileTree extends Component {
     #mprogress_ = null;
     #rootFolderOpened_ = false;
     #rootPath_ = '';
+    #rootName_ = '';
     #fs_ = null;
     #contextMenu_ = null;
     #selected_ = null;
@@ -483,7 +484,12 @@ class FileTree extends Component {
     }
 
     setRootFolderName(name) {
+        this.#rootName_ = name;
         this.#$name_.text(name);
+    }
+
+    getRootFolderName() {
+        return this.#rootName_;
     }
 
     refreshFolder(folderPath) {

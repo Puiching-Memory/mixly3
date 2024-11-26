@@ -9,8 +9,8 @@ const { FileTree, Web } = Mixly;
 const { FS } = Web;
 
 class FileTreeExt extends FileTree {
-    constructor(element, mprogress) {
-        super(element, mprogress, FS);
+    constructor() {
+        super(FS);
     }
 
     async readFolder(inPath) {

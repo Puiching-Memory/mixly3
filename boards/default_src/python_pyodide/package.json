@@ -17,7 +17,8 @@
         "vm-browserify": "^1.1.2"
     },
     "dependencies": {
-        "@basthon/kernel-loader": "^0.62.21"
+        "@basthon/kernel-loader": "^0.62.21",
+        "idb-keyval": "^6.2.1"
     },
     "main": "./export.js",
     "author": "Mixly Team",
