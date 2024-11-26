@@ -37,8 +37,6 @@ export default class PythonShell {
             const $content = footerBar.getContent();
             $content.after(this.$loader);
 
-            this.statusBarImage = StatusBarImage.init();
-            this.statusBarFileSystem = StatusBarFileSystem.init();
             const projectPath = path.relative(Env.indexDirPath, Env.boardDirPath);
             const loader = new KernelLoader({
                 rootPath: path.join(projectPath, 'deps'),
@@ -61,6 +59,8 @@ export default class PythonShell {
             this.kernelLoaded = true;
             this.$loader.remove();
             this.$loader = null;
+            this.statusBarImage = StatusBarImage.init();
+            this.statusBarFileSystem = StatusBarFileSystem.init();
         }
 
         this.run = async function () {

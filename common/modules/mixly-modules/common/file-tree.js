@@ -57,6 +57,7 @@ class FileTree extends Component {
     #rootFolderOpened_ = false;
     #rootPath_ = '';
     #rootName_ = '';
+    #rootTitle_ = '';
     #fs_ = null;
     #contextMenu_ = null;
     #selected_ = null;
@@ -474,7 +475,7 @@ class FileTree extends Component {
         this.nodeAliveRegistry.reset();
         this.#jstree_.refresh();
         this.watchFolder(this.#rootPath_);
-        this.#$rootFolder_.attr('title', this.#rootPath_);
+        this.setRootFolderTitle(this.#rootPath_);
         const rootNodeName = path.basename(folderPath).toUpperCase();
         this.setRootFolderName(rootNodeName);
     }
@@ -492,6 +493,15 @@ class FileTree extends Component {
         return this.#rootName_;
     }
 
+    setRootFolderTitle(name) {
+        this.#rootTitle_ = name;
+        this.#$rootFolder_.attr('title', name);
+    }
+
+    getRootFolderTitle() {
+        return this.#rootTitle_;
+    }
+
     refreshFolder(folderPath) {
         // 延迟刷新节点，防止过于频繁的IO操作
         let eventId = this.delayRefreshRegistry.getItem(folderPath);
@@ -507,10 +517,9 @@ class FileTree extends Component {
             const node = this.#jstree_.get_node(folderPath);
             const nodeIsOpened = node && !this.isClosed(folderPath);
             if (nodeIsOpened) {
-                if (this.isWatched(folderPath)) {
-                    this.clearFolderTemp(folderPath);
-                    this.#jstree_.refresh_node(folderPath);
-                }
+                this.watchFolder(folderPath);
+                this.clearFolderTemp(folderPath);
+                this.#jstree_.refresh_node(folderPath);
             } else {
                 this.unwatchFolder(folderPath);
             }
@@ -620,7 +629,7 @@ class FileTree extends Component {
         let output = [];
         const content = await this.readFolder(inPath);
         for (let item of content) {
-            const { type, id, children } = item;
+            const { type, id, title, children } = item;
             const text = path.basename(id);
             let icon = 'icon-doc';
             if (type === 'folder') {
@@ -635,7 +644,7 @@ class FileTree extends Component {
                 li_attr: {
                     type,
                     name: text,
-                    title: id
+                    title: title ?? id
                 },
                 icon
             });

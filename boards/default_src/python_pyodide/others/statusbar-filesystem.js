@@ -11,14 +11,13 @@ import {
     ContextMenu,
     Debug,
     StatusBarsManager,
-    Workspace,
-    Web
+    Workspace
 } from 'mixly';
+import FileSystemFileTree from './filesystem-file-tree';
 import FILE_SYSTEM_TEMPLATE from '../templates/html/statusbar-filesystem.html';
 import FILE_SYSTEM_OPEN_FS_TEMPLATE from '../templates/html/statusbar-filesystem-open-fs.html';
 import FILE_SYSTEM_EDITOR_EMPTY_TEMPLATE from '../templates/html/statusbar-filesystem-editor-empty.html';
 
-const { FileTree } = Web;
 
 
 export default class StatusBarFileSystem extends PageBase {
@@ -65,7 +64,7 @@ export default class StatusBarFileSystem extends PageBase {
         super();
         const $content = $(HTMLTemplate.get('html/statusbar/statusbar-filesystem.html').render());
         this.setContent($content);
-        this.#fileTree_ = new FileTree();
+        this.#fileTree_ = new FileSystemFileTree();
         this.#$fileTree_ = $content.children('.file-tree');
         this.#$openFS_ = $(HTMLTemplate.get('html/statusbar/statusbar-filesystem-open-fs.html').render({
             msg: {
@@ -109,12 +108,17 @@ export default class StatusBarFileSystem extends PageBase {
             const filePath = selected[0].id;
             this.#fileTree_.showProgress();
             const fs = this.#fileTree_.getFS();
-            const result = await fs.readFile(filePath);
-            this.showEditor();
-            this.#editor_.setValue(result);
-            this.#editor_.scrollToTop();
-            this.#editor_.focus();
-            this.setStatus(false);
+            const [error, result] = await fs.readFile(filePath);
+            if (error) {
+                this.hideEditor();
+                this.#fileTree_.deselectAll();
+            } else {
+                this.showEditor();
+                this.#editor_.setValue(result);
+                this.#editor_.scrollToTop();
+                this.#editor_.focus();
+                this.setStatus(false);
+            }
             this.#fileTree_.hideProgress();
         });
 
@@ -139,6 +143,25 @@ export default class StatusBarFileSystem extends PageBase {
 
         const fileTreeContextMenu = this.#fileTree_.getContextMenu();
         const fileTreeMenu = fileTreeContextMenu.getItem('menu');
+
+        fileTreeMenu.add({
+            weight: 7,
+            type: 'copy_path',
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['fileTree.copyPath'], ''),
+                callback: (_, { $trigger }) => {
+                    let outPath = null;
+                    let type = $trigger.attr('type');
+                    if (type === 'root') {
+                        outPath = this.#fileTree_.getRootFolderTitle();
+                    } else {
+                        outPath = $trigger.attr('title');
+                    }
+                    navigator.clipboard.writeText(outPath).catch(Debug.error);
+                }
+            }
+        });
 
         fileTreeMenu.add({
             weight: 14,
@@ -384,25 +407,26 @@ export default class StatusBarFileSystem extends PageBase {
                 if (!directoryHandle.name) {
                     return;
                 }
+                const rootPath = '/' + directoryHandle.name;
                 this.#fileTree_.setFolderPath('/');
+                this.#fileTree_.setRootFolderTitle(rootPath);
                 this.#fileTree_.setRootFolderName(directoryHandle.name);
                 this.#fileTree_.openRootFolder();
                 this.showFileTree();
-                return window.pyodide.mountNativeFS('/' + directoryHandle.name, directoryHandle);
+                return window.pyodide.mountNativeFS(rootPath, directoryHandle);
             })
             .then((nativefs) => {
-                console.log(nativefs)
                 this.#nativefs_ = nativefs;
             })
             .catch(Debug.error);
     }
 
     closeFS() {
-        const rootPath = this.#fileTree_.getFolderPath();
+        const rootPath = '/' + this.#fileTree_.getRootFolderTitle();
         const lookup = window.pyodide.FS.lookupPath(rootPath, {
             follow_mount: false
         });
-        if (window.pyodide.isMountpoint(lookup.node)) {
+        if (window.pyodide.FS.isMountpoint(lookup.node)) {
             window.pyodide.FS.unmount(rootPath);
         }
         this.#fileTree_.deselectAll();
@@ -433,7 +457,7 @@ export default class StatusBarFileSystem extends PageBase {
     }
 
     setStatus(isChanged) {
-        if (this.#changed_ === isChanged || !this.#$close_) {
+        if (this.#changed_ === isChanged) {
             return;
         }
         this.#changed_ = isChanged;

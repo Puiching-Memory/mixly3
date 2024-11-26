@@ -71,12 +71,12 @@ const readFile = function(fname, encoding, flag) {
     return createPromise(fs.readFile, fname, encoding);
 }
 
-const writeFile = function(fname, data, encoding, flag, mode) {
-    return createPromise(fs.writeFile, fname, data, encoding, flag, mode);
+const writeFile = function(fname, data, encoding) {
+    return createPromise(fs.writeFile, fname, data, encoding);
 }
 
-const appendFile = function(fname, data, encoding, flag, mode) {
-    return createPromise(fs.appendFile, fname, data, encoding, flag, mode);
+const appendFile = function(fname, data, encoding) {
+    return createPromise(fs.appendFile, fname, data, encoding);
 }
 
 const chmod = function(p, mode) {
