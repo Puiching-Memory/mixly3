@@ -18,6 +18,8 @@
     },
     "dependencies": {
         "@basthon/kernel-loader": "^0.62.21",
+        "@zenfs/core": "^1.4.0",
+        "@zenfs/dom": "^1.0.6",
         "idb-keyval": "^6.2.1"
     },
     "main": "./export.js",

@@ -108,16 +108,17 @@ export default class StatusBarFileSystem extends PageBase {
             const filePath = selected[0].id;
             this.#fileTree_.showProgress();
             const fs = this.#fileTree_.getFS();
-            const [error, result] = await fs.readFile(filePath);
-            if (error) {
-                this.hideEditor();
-                this.#fileTree_.deselectAll();
-            } else {
+            try {
+                const result = await fs.readFile(filePath);
                 this.showEditor();
                 this.#editor_.setValue(result);
                 this.#editor_.scrollToTop();
                 this.#editor_.focus();
                 this.setStatus(false);
+            } catch (error) {
+                Debug.error(error);
+                this.hideEditor();
+                this.#fileTree_.deselectAll();
             }
             this.#fileTree_.hideProgress();
         });
