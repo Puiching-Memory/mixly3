@@ -1,4 +1,5 @@
 import { WebAccessFS } from '@zenfs/dom';
+import { get, set } from 'idb-keyval';
 import { FS } from 'mixly';
 
 
@@ -28,6 +29,20 @@ export default class FileSystemFS extends FS {
 
     async showDirectoryPicker() {
         const directoryHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
+        const permissionStatus = await directoryHandle.requestPermission({ mode: 'readwrite' });
+        if (permissionStatus !== 'granted') {
+            throw new Error('readwrite access to directory not granted');
+        }
+        await set('mixly-pyodide-fs', directoryHandle);
+        this.#fs_ = new WebAccessFSExt(directoryHandle);
+        return directoryHandle;
+    }
+
+    async loadFS() {
+        let directoryHandle = await get('mixly-pyodide-fs');
+        if (!directoryHandle) {
+            return null;
+        }
         const permissionStatus = await directoryHandle.requestPermission({ mode: 'readwrite' });
         if (permissionStatus !== 'granted') {
             throw new Error('readwrite access to directory not granted');

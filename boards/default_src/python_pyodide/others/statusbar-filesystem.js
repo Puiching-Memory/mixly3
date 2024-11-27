@@ -90,7 +90,7 @@ export default class StatusBarFileSystem extends PageBase {
         });
 
         this.#$openFS_.children('button').click(() => {
-            this.openFS();
+            this.selectFS().catch(Debug.error);
         });
 
         this.#fileTree_.bind('beforeSelectLeaf', (selected) => {
@@ -399,27 +399,32 @@ export default class StatusBarFileSystem extends PageBase {
         editor.on('change', () => {
             this.setStatus(true);
         });
+        this.loadFS().catch(Debug.error);
     }
 
-    openFS() {
+    async loadFS() {
         const fs = this.#fileTree_.getFS();
-        fs.showDirectoryPicker()
-            .then((directoryHandle) => {
-                if (!directoryHandle.name) {
-                    return;
-                }
-                const rootPath = '/' + directoryHandle.name;
-                this.#fileTree_.setFolderPath('/');
-                this.#fileTree_.setRootFolderTitle(rootPath);
-                this.#fileTree_.setRootFolderName(directoryHandle.name);
-                this.#fileTree_.openRootFolder();
-                this.showFileTree();
-                return window.pyodide.mountNativeFS(rootPath, directoryHandle);
-            })
-            .then((nativefs) => {
-                this.#nativefs_ = nativefs;
-            })
-            .catch(Debug.error);
+        const directoryHandle = await fs.loadFS();
+        await this.openFS(directoryHandle);
+    }
+
+    async selectFS() {
+        const fs = this.#fileTree_.getFS();
+        const directoryHandle = await fs.showDirectoryPicker();
+        await this.openFS(directoryHandle);
+    }
+
+    async openFS(directoryHandle) {
+        if (!directoryHandle?.name) {
+            return;
+        }
+        const rootPath = '/' + directoryHandle.name;
+        this.#fileTree_.setFolderPath('/');
+        this.#fileTree_.setRootFolderTitle(rootPath);
+        this.#fileTree_.setRootFolderName(directoryHandle.name);
+        this.#fileTree_.openRootFolder();
+        this.showFileTree();
+        this.#nativefs_ = await window.pyodide.mountNativeFS(rootPath, directoryHandle);
     }
 
     closeFS() {
