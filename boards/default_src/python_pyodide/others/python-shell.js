@@ -52,6 +52,8 @@ export default class PythonShell {
 
             this.loader = loader;
             this.kernel = kernel;
+            this.statusBarImage = StatusBarImage.init();
+            this.statusBarFileSystem = StatusBarFileSystem.init();
             this.pythonShell = new PythonShell();
             this.pyodide = window.pyodide;
             this.interruptBuffer = new Uint8Array(new ArrayBuffer(1));
@@ -59,8 +61,6 @@ export default class PythonShell {
             this.kernelLoaded = true;
             this.$loader.remove();
             this.$loader = null;
-            this.statusBarImage = StatusBarImage.init();
-            this.statusBarFileSystem = StatusBarFileSystem.init();
         }
 
         this.run = async function () {
