@@ -2780,6 +2780,13 @@
         </shadow>
       </value>
     </block>
+    <block type="pylab_imshow">
+      <value name="ARRAY">
+        <shadow type="variables_get">
+          <field name="VAR">myArray</field>
+        </shadow>
+      </value>
+    </block>
     <block type="series_create">
       <value name="SER">
         <shadow type="variables_get">

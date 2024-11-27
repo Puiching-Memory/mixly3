@@ -1146,7 +1146,7 @@ export const pylab_imshow = {
     init: function () {
         this.setColour(DATA_HUE);
         this.appendValueInput('ARRAY')
-            .appendField('展示图像');
+            .appendField('创建二维图');
         this.appendDummyInput()
             .appendField('颜色')
             .appendField(new Blockly.FieldDropdown([
