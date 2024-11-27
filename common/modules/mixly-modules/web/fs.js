@@ -20,20 +20,13 @@ FS.showOpenFilePicker = async () => {
 }
 
 FS.showDirectoryPicker = async () => {
-    return new Promise((resolve, reject) => {
-        window.showDirectoryPicker({
-            mode: 'readwrite'
-        })
-        .then((filesystem) => {
-            return FS.pool.exec('addFileSystemHandler', [filesystem]);
-        })
-        .then((folderPath) => {
-            resolve(folderPath);
-        })
-        .catch((error) => {
-            reject(error);
-        });
-    });
+    const directoryHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
+    const permissionStatus = await directoryHandle.requestPermission({ mode: 'readwrite' });
+    if (permissionStatus !== 'granted') {
+        throw new Error('readwrite access to directory not granted');
+    }
+    await FS.pool.exec('addFileSystemHandler', [directoryHandle]);
+    return directoryHandle;
 }
 
 FS.showSaveFilePicker = async () => {
@@ -71,6 +64,43 @@ FS.isFile = (path) => {
             resolve(true);
         } else {
             resolve(false);
+        }
+    });
+}
+
+FS.renameFile = (oldFilePath, newFilePath) => {
+    return new Promise(async (resolve, reject) => {
+        const [error] = await FS.pool.exec('rename', [oldFilePath, newFilePath]);
+        if (error) {
+            reject(error);
+        } else {
+            resolve();
+        }
+    });
+}
+
+FS.moveFile = (oldFilePath, newFilePath) => {
+    return FS.renameFile(oldFilePath, newFilePath);
+}
+
+FS.deleteFile = (filePath) => {
+    return new Promise(async (resolve, reject) => {
+        const [error] = await FS.pool.exec('unlink', [filePath]);
+        if (error) {
+            reject(error);
+        } else {
+            resolve();
+        }
+    });
+}
+
+FS.createDirectory = (folderPath) => {
+    return new Promise(async (resolve, reject) => {
+        const [error] = await FS.pool.exec('mkdir', [folderPath, 0o777]);
+        if (error) {
+            reject(error);
+        } else {
+            resolve();
         }
     });
 }

@@ -1,20 +1,42 @@
+import * as Blockly from 'blockly/core';
 import * as path from 'path';
-// import * as dayjs from 'dayjs';
+import $ from 'jquery';
 import {
     Workspace,
-    Debug,
     Env,
-    Msg
+    Msg,
+    HTMLTemplate,
+    Debug,
+    app
 } from 'mixly';
 import { KernelLoader } from '@basthon/kernel-loader';
 import StatusBarImage from './statusbar-image';
+import StatusBarFileSystem from './statusbar-filesystem';
+import LOADER_TEMPLATE from '../templates/html/loader.html';
 
-class PythonShell {
+
+export default class PythonShell {
     static {
+        HTMLTemplate.add(
+            'html/statusbar/loader.html',
+            new HTMLTemplate(LOADER_TEMPLATE)
+        );
+
         this.pythonShell = null;
+        this.kernelLoaded = false;
+        this.$loader = $(HTMLTemplate.get('html/statusbar/loader.html').render({
+            msg: {
+                loading: Blockly.Msg.PYTHON_PYODIDE_LOADING
+            }
+        }));
+        this.statusBarImage = null;
+        this.statusBarFileSystem = null;
 
         this.init = async function () {
-            StatusBarImage.init();
+            const footerBar = app.getFooterBar();
+            const $content = footerBar.getContent();
+            $content.after(this.$loader);
+
             const projectPath = path.relative(Env.indexDirPath, Env.boardDirPath);
             const loader = new KernelLoader({
                 rootPath: path.join(projectPath, 'deps'),
@@ -34,16 +56,27 @@ class PythonShell {
             this.pyodide = window.pyodide;
             this.interruptBuffer = new Uint8Array(new ArrayBuffer(1));
             this.pyodide.setInterruptBuffer(this.interruptBuffer);
+            this.kernelLoaded = true;
+            this.$loader.remove();
+            this.$loader = null;
+            this.statusBarImage = StatusBarImage.init();
+            this.statusBarFileSystem = StatusBarFileSystem.init();
         }
 
-        this.run = function () {
+        this.run = async function () {
+            if (!this.kernelLoaded) {
+                return;
+            }
             const mainWorkspace = Workspace.getMain();
             const editor = mainWorkspace.getEditorsManager().getActive();
             const code = editor.getCode();
             return this.pythonShell.run(code);
         }
 
-        this.stop = function () {
+        this.stop = async function () {
+            if (!this.kernelLoaded) {
+                return;
+            }
             return this.pythonShell.stop();
         }
     }
@@ -94,6 +127,7 @@ class PythonShell {
             }
         }
     ];
+
     constructor() {
         const mainWorkspace = Workspace.getMain();
         this.#statusBarsManager_ = mainWorkspace.getStatusBarsManager();
@@ -107,6 +141,7 @@ class PythonShell {
         this.#kernel_.addEventListener('eval.finished', () => {
             this.#running_ = false;
             this.#statusBarTerminal_.addValue(`\n==${Msg.Lang['shell.finish']}==`);
+            this.syncfs(false).catch(Debug.error);
         });
 
         this.#kernel_.addEventListener('eval.output', (data) => {
@@ -169,25 +204,23 @@ class PythonShell {
         editor.setReadOnly(true);
     }
 
-    run(code) {
-        this.stop()
-            .then(() => {
-                if (code.indexOf('import turtle') !== -1) {
-                    code += '\nturtle.done()\n';
-                }
-                if (code.indexOf('import matplotlib.pyplot') !== -1) {
-                    code += '\nplt.clf()\n';
-                }
-                this.#statusBarsManager_.changeTo('output');
-                this.#statusBarsManager_.show();
-                this.#statusBarTerminal_.setValue(`${Msg.Lang['shell.running']}...\n`);
-                this.#running_ = true;
-                this.#kernel_.dispatchEvent('eval.request', {
-                    code,
-                    interactive: false,
-                });
-            })
-            .catch(Debug.error);
+    async run(code) {
+        await this.stop();
+        await this.syncfs(true);
+        if (code.indexOf('import turtle') !== -1) {
+            code += '\nturtle.done()\n';
+        }
+        if (code.indexOf('import matplotlib.pyplot') !== -1) {
+            code += '\nplt.clf()\n';
+        }
+        this.#statusBarsManager_.changeTo('output');
+        this.#statusBarsManager_.show();
+        this.#statusBarTerminal_.setValue(`${Msg.Lang['shell.running']}...\n`);
+        this.#running_ = true;
+        this.#kernel_.dispatchEvent('eval.request', {
+            code,
+            interactive: false,
+        });
     }
 
     async stop() {
@@ -210,9 +243,13 @@ class PythonShell {
         }
     }
 
+    async syncfs(populate = false) {
+        return new Promise((resolve) => {
+            window.pyodide.FS.syncfs(populate, resolve);
+        });
+    }
+
     sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
-
-export default PythonShell;

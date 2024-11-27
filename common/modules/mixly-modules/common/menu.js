@@ -35,7 +35,7 @@ class Menu {
         }
         const { id, weight } = item;
         if (this.#ids_[id]) {
-            this.unregister(id);
+            delete this.#ids_[id];
         }
         let i = 0;
         for (; i < this.#menuItems_.length; i++) {
