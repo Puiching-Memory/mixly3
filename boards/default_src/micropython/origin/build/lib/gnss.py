@@ -80,3 +80,12 @@ class NMEA0183:
 					self.status[0]= False if 'V' in data[2] else True
 					self.status[1]= data[12]
 		return flag_rmc | flag_gga
+
+	def time(self):
+		return tuple(self.time)
+
+	def locate(self):
+		return tuple(self.locate)
+
+	def status(self):
+		return tuple(self.status)
