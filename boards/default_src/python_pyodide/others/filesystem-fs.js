@@ -33,13 +33,13 @@ export default class FileSystemFS extends FS {
         if (permissionStatus !== 'granted') {
             throw new Error('readwrite access to directory not granted');
         }
-        await set('mixly-pyodide-fs', directoryHandle);
+        await this.setFSCache(directoryHandle);
         this.#fs_ = new WebAccessFSExt(directoryHandle);
         return directoryHandle;
     }
 
     async loadFS() {
-        let directoryHandle = await get('mixly-pyodide-fs');
+        let directoryHandle = await this.getFSCache();
         if (!directoryHandle) {
             return null;
         }
@@ -49,6 +49,14 @@ export default class FileSystemFS extends FS {
         }
         this.#fs_ = new WebAccessFSExt(directoryHandle);
         return directoryHandle;
+    }
+
+    async getFSCache() {
+        return get('mixly-pyodide-fs');
+    }
+
+    async setFSCache(data) {
+        await set('mixly-pyodide-fs', data);
     }
 
     async createFile(filePath) {

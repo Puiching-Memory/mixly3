@@ -428,13 +428,18 @@ export default class StatusBarFileSystem extends PageBase {
     }
 
     closeFS() {
-        const rootPath = '/' + this.#fileTree_.getRootFolderTitle();
-        const lookup = window.pyodide.FS.lookupPath(rootPath, {
-            follow_mount: false
-        });
-        if (window.pyodide.FS.isMountpoint(lookup.node)) {
-            window.pyodide.FS.unmount(rootPath);
+        const rootPath = this.#fileTree_.getRootFolderTitle();
+        const rootContents = Object.keys(window.pyodide.FS.root.contents);
+        if (rootContents.includes(path.basename(rootPath))) {
+            const lookup = window.pyodide.FS.lookupPath(rootPath, {
+                follow_mount: false
+            });
+            if (window.pyodide.FS.isMountpoint(lookup.node)) {
+                window.pyodide.FS.unmount(rootPath);
+            }
         }
+        const fs = this.#fileTree_.getFS();
+        fs.setFSCache(null);
         this.#fileTree_.deselectAll();
         this.hideFileTree();
         this.hideEditor();
