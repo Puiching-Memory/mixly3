@@ -51,20 +51,23 @@ class CI230X:
 		"""获取比较结果 或者输出结果"""
 		return self._cmd_id if ext_id is None else  bool(self._cmd_id == ext_id)
 
+	def sys_cmd(self, value, blocking=True):
+		"""系统命令，1,2唤醒 202~205音量调整 206,207回复播报开关 208退出唤醒"""
+		self.play_id(value, blocking)
+
 	def play_id(self, value, blocking=True):
 		"""播放命令词对应ID语音"""
 		self._wreg(bytes([_CI_ID_SET, value, 0, _CI_ID_END]))
 		while blocking:
-			time.sleep_ms(5)
+			time.sleep_ms(10)
 			if not self.status()[1]:
 				break
 
 	def play_num(self, value, blocking=True):
 		"""播放浮点数据的合成语音"""
-		value = pack('d', float(value))
-		self._wreg(bytes([_CI_ID_NUM]) + value + bytes([0, _CI_ID_END]))
+		self._wreg(bytes([_CI_ID_NUM]) + pack('d', float(value)) + bytes([0, _CI_ID_END]))
 		while blocking:
-			time.sleep_ms(5)
+			time.sleep_ms(10)
 			if not self.status()[1]:
 				break
 
