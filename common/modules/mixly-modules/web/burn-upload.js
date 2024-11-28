@@ -34,7 +34,6 @@ const {
 
 const {
     Serial,
-    Esptool,
     BU,
     USB,
     Ampy
