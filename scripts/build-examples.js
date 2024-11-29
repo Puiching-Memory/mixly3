@@ -10,7 +10,8 @@ const program = new Command();
 program
     .addOption(new Option('-t, --type <string>', 'boards type', 'all').choices([
         'all', 'special'
-    ]));
+    ]))
+    .addOption(new Option('--obfuscate', 'obfuscate file names'));
 
 program.parse();
 
@@ -116,7 +117,7 @@ if (fs_plus.isDirectorySync(DEFAULT_DIR)) {
             continue;
         }
         let outputPath = path.resolve(examplesPath, 'map.json');
-        let output = getExamples(examplesPath, true);
+        let output = getExamples(examplesPath, !!options.obfuscate);
         fs_extra.outputJsonSync(outputPath, output, {
             spaces: '    '
         });

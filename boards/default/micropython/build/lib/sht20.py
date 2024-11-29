@@ -29,3 +29,9 @@ class SHT20(object):
         origin_value = unp('>H', origin_data)[0]
         value = -6 + 125 * (origin_value / 65536)
         return value
+
+    def humidity(self):
+        return self.get_SHT_relative_humidity()
+
+    def temperature(self):
+        return self.get_SHT_temperature()
