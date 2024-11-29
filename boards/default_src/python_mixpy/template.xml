@@ -213,6 +213,13 @@
       </statement>
     </block>
     <block type="controls_millis"></block>
+    <block type="datetime_fromtimestamp">
+      <value name="VAR">
+        <shadow type="math_number">
+          <field name="NUM">18029</field>
+        </shadow>
+      </value>
+    </block>
     <block type="time_localtime"></block>
     <block type="garbage_collection"></block>
     <block type="get_mem_alloc"></block>
@@ -379,6 +386,13 @@
       <value name="toHigh">
         <shadow type="math_number">
           <field name="NUM">1000</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="generate_cartesian_product">
+      <value name="REPEAT">
+        <shadow type="math_number">
+          <field name="NUM">2</field>
         </shadow>
       </value>
     </block>
@@ -894,6 +908,18 @@
         </shadow>
       </value>
     </block>
+    <block type="enumerate">
+      <value name="LIST">
+        <shadow type="variables_get">
+          <field name="VAR">mylist</field>
+        </shadow>
+      </value>
+      <value name="VALUE">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
   </category>
   <category id="catTuple" colour="195">
     <block type="tuple_create_with"></block>
@@ -1156,6 +1182,33 @@
       <value name="VAR">
         <shadow type="text">
           <field name="TEXT">{"name":"Mixly","color":"green"}</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="dicts_to_to">
+      <value name="DICT">
+        <shadow type="variables_get">
+          <field name="VAR">mydict</field>
+        </shadow>
+      </value>
+      <value name=VAR1>
+        <shadow type="text">
+          <field name="TEXT">results</field>
+        </shadow>
+      </value>
+      <value name=VAR2>
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name=VAR3>
+        <shadow type="text">
+          <field name="TEXT">location</field>
+        </shadow>
+      </value>
+      <value name=VAR4>
+        <shadow type="text">
+          <field name="TEXT">name</field>
         </shadow>
       </value>
     </block>
@@ -2527,6 +2580,11 @@
           <field name="VAR">df</field>
         </shadow>
       </value>
+      <value name="COLUMNS">
+        <shadow type="list_many_input">
+          <field name="CONTENT">'a','b','c','d'</field>
+        </shadow>
+      </value>
     </block>
     <block type="variables_set">
       <field name="VAR">x</field>
@@ -3516,6 +3574,30 @@
         <shadow type="logic_null"></shadow>
       </value>
     </block>
+    <block type="sklearn_pca">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">pca</field>
+        </shadow>
+      </value>
+      <value name="n_components">
+        <shadow type="math_number">
+          <field name="NUM">2</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sklearn_pca_fit_transform">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">pca</field>
+        </shadow>
+      </value>
+      <value name="train_data">
+        <shadow type="variables_get">
+          <field name="VAR">X</field>
+        </shadow>
+      </value>
+    </block>
     <block type="sklearn_KNeighborsClassifier_Regressor">
       <value name="model_name">
         <shadow type="variables_get">
@@ -3559,6 +3641,18 @@
       </value>
       <value name="n_jobs">
         <shadow type="logic_null"></shadow>
+      </value>
+    </block>
+    <block type="sklearn_KMeans_fit">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">model</field>
+        </shadow>
+      </value>
+      <value name="train_data">
+        <shadow type="variables_get">
+          <field name="VAR">X</field>
+        </shadow>
       </value>
     </block>
     <block type="sklearn_fit">

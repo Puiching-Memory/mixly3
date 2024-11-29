@@ -2263,7 +2263,7 @@
       </value>
     </block>
   </category>
-  <!-- <category id="catAI" colour="205">
+  <category id="catAI" colour="205">
     <block type="AI_ChooseAndGet">
     </block>
     <block type="AI_audio">
@@ -2482,7 +2482,7 @@
         </block>
       </value>
     </block>
-  </category> -->
+  </category>
   <category id="catData" colour="170">
     <block type="variables_set">
       <field name="VAR">df1</field>
@@ -2581,8 +2581,8 @@
         </shadow>
       </value>
       <value name="COLUMNS">
-        <shadow type="text">
-          <field name="TEXT">列名</field>
+        <shadow type="list_many_input">
+          <field name="CONTENT">'a','b','c','d'</field>
         </shadow>
       </value>
     </block>
@@ -3156,7 +3156,7 @@
       </value>
     </block>
   </category>
-  <!-- <category id="catCv" colour="f0a559">
+  <category id="catCv" colour="f0a559">
     <block type="variables_set">
       <field name="VAR">img</field>
       <value name="VALUE">
@@ -3351,7 +3351,7 @@
         </shadow>
       </value>
     </block>
-  </category> -->
+  </category>
   <category id="catsklearn" colour="80">
     <block type="sklearn_make_classification">
       <value name="n_samples">
