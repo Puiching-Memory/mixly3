@@ -2581,11 +2581,10 @@
         </shadow>
       </value>
       <value name="COLUMNS">
-        <shadow type="variables_get">
-          <field name="VAR">columns</field>
+        <shadow type="text">
+          <field name="TEXT">列名</field>
         </shadow>
       </value>
-      <field name="AXIS">0</field>
     </block>
     <block type="variables_set">
       <field name="VAR">x</field>
@@ -3575,6 +3574,30 @@
         <shadow type="logic_null"></shadow>
       </value>
     </block>
+    <block type="sklearn_pca">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">pca</field>
+        </shadow>
+      </value>
+      <value name="n_components">
+        <shadow type="math_number">
+          <field name="NUM">2</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sklearn_pca_fit_transform">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">pca</field>
+        </shadow>
+      </value>
+      <value name="train_data">
+        <shadow type="variables_get">
+          <field name="VAR">X</field>
+        </shadow>
+      </value>
+    </block>
     <block type="sklearn_KNeighborsClassifier_Regressor">
       <value name="model_name">
         <shadow type="variables_get">
@@ -3585,9 +3608,6 @@
         <shadow type="math_number">
           <field name="NUM">5</field>
         </shadow>
-      </value>
-      <value name="n_jobs">
-        <shadow type="logic_null"></shadow>
       </value>
     </block>
     <block type="sklearn_GaussianNB">
@@ -3618,6 +3638,18 @@
       </value>
       <value name="n_jobs">
         <shadow type="logic_null"></shadow>
+      </value>
+    </block>
+    <block type="sklearn_KMeans_fit">
+      <value name="model_name">
+        <shadow type="variables_get">
+          <field name="VAR">model</field>
+        </shadow>
+      </value>
+      <value name="train_data">
+        <shadow type="variables_get">
+          <field name="VAR">X</field>
+        </shadow>
       </value>
     </block>
     <block type="sklearn_fit">

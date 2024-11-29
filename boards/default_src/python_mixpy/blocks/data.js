@@ -1247,16 +1247,12 @@ export const pandas_drop_columns = {
         this.appendValueInput('DATAFRAME')
             .appendField('从数据集');
         this.appendValueInput('COLUMNS')
-            .appendField('中删除列');
-        this.appendDummyInput()
-            .appendField('沿着axis')
-            .appendField(new Blockly.FieldDropdown([
-                ['行', '0'],
-                ['列', '1']
-            ]), 'AXIS');
+            .appendField('中删除列')
+            .setCheck(String);
+        this.setInputsInline(true);
         this.setOutput(true);
-        this.setTooltip('Drops columns from dataframe.');
-    }
+        this.setTooltip('从数据框中删除指定的列。用逗号分隔多个列名。');
+    },
 };
 
 export const numpy_ones = {

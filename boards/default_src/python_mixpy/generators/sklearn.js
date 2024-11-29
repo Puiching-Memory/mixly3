@@ -147,17 +147,39 @@ export const sklearn_GaussianNB = function (_, generator) {
     return code;
 }
 
+// sklearn 初始化PCA降维
+export const sklearn_pca = function (_, generator) {
+    var value_model_name = generator.valueToCode(this, 'model_name', generator.ORDER_ATOMIC) || 'pca';
+    var value_n_components = generator.valueToCode(this, 'n_components', generator.ORDER_ATOMIC) || '2';
+    generator.definitions_['import_sklearn_pca'] = 'from sklearn.decomposition import PCA';
+    var code = value_model_name + ' = PCA(n_components=' + value_n_components + ')\n';
+    return code;
+}
+
+export const sklearn_pca_fit_transform = function(block, generator) {
+    var value_model_name = generator.valueToCode(block, 'model_name', generator.ORDER_ATOMIC);
+    var value_train_data = generator.valueToCode(block, 'train_data', generator.ORDER_ATOMIC);
+    var code = value_model_name + '.fit_transform(' + value_train_data + ')';
+    return [code, generator.ORDER_ATOMIC];
+};
+
 // sklearn 初始K-均值聚类
 export const sklearn_KMeans = function (_, generator) {
     var value_model_name = generator.valueToCode(this, 'model_name', generator.ORDER_ATOMIC) || 'model';
     var value_n_clusters = generator.valueToCode(this, 'n_clusters', generator.ORDER_ATOMIC) || '8';
     var value_max_iter = generator.valueToCode(this, 'max_iter', generator.ORDER_ATOMIC) || '300';
     var value_random_state = generator.valueToCode(this, 'random_state', generator.ORDER_ATOMIC) || 'None';
-    var value_n_jobs = generator.valueToCode(this, 'n_jobs', generator.ORDER_ATOMIC) || 'None';
     generator.definitions_['import_sklearn_KMeans'] = 'from sklearn.cluster import KMeans';
-    var code = value_model_name + ' = KMeans(n_clusters = ' + value_n_clusters + ',max_iter = ' + value_max_iter + ',random_state = ' + value_random_state + ',n_jobs = ' + value_n_jobs + ')\n';
+    var code = value_model_name + ' = KMeans(n_clusters = ' + value_n_clusters + ',max_iter = ' + value_max_iter + ',random_state = ' + value_random_state + ')\n';
     return code;
 }
+
+export const sklearn_KMeans_fit = function(block, generator) {
+    var value_model_name = generator.valueToCode(block, 'model_name', generator.ORDER_ATOMIC);
+    var value_train_data = generator.valueToCode(block, 'train_data', generator.ORDER_ATOMIC);
+    var code = value_model_name + '.fit(' + value_train_data + ')\n';
+    return code;
+};
 
 // sklearn 训练模型
 export const sklearn_fit = function (_, generator) {

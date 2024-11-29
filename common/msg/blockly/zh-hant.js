@@ -2943,6 +2943,7 @@ ZhHant.SKLEARN_LABELS_AFTER_CLUSTERING = "聚類後標籤";
 ZhHant.SKLEARN_CLUSTERING_SUM_OF_SQUARED_DISTANCES = "所有點到對應簇中心的距離平方和";
 ZhHant.SKLEARN_SAVE_MODEL = "保存模型";
 ZhHant.SKLEARN_LOAD_MODEL = "加載模型";
+ZhHant.SKLEARN_PCA_N_COMPONENTS = "主成分个数";
 ZhHant.MATH_ROUND = '四捨五入';
 ZhHant.MATH_ROUND_NEW_TOOLTIP = '將數值四捨五入保留小數點後指定的位數';
 ZhHant.PY_STORAGE_FILE_OBJECT = ",並返回文件對象";
