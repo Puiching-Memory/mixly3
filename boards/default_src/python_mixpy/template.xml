@@ -2527,12 +2527,6 @@
           <field name="VAR">df</field>
         </shadow>
       </value>
-      <value name="COLUMNS">
-        <shadow type="variables_get">
-          <field name="VAR">columns</field>
-        </shadow>
-      </value>
-      <field name="AXIS">0</field>
     </block>
     <block type="variables_set">
       <field name="VAR">x</field>
@@ -2724,6 +2718,13 @@
       <value name="AXIS">
         <shadow type="math_number">
           <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="pylab_imshow">
+      <value name="ARRAY">
+        <shadow type="variables_get">
+          <field name="VAR">myArray</field>
         </shadow>
       </value>
     </block>

@@ -2964,6 +2964,7 @@ ZhHans.SKLEARN_LABELS_AFTER_CLUSTERING = "聚类后标签";
 ZhHans.SKLEARN_CLUSTERING_SUM_OF_SQUARED_DISTANCES = "所有点到对应簇中心的距离平方和";
 ZhHans.SKLEARN_SAVE_MODEL = "保存模型";
 ZhHans.SKLEARN_LOAD_MODEL = "加载模型";
+ZhHans.SKLEARN_PCA_N_COMPONENTS = "主成分个数";
 ZhHans.MATH_ROUND = '四舍五入';
 ZhHans.MATH_ROUND_NEW_TOOLTIP = '将数值四舍五入保留小数点后指定的位数';
 ZhHans.PY_STORAGE_FILE_OBJECT = "，并返回文件对象";

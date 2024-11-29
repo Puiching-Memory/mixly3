@@ -519,8 +519,7 @@ export const pandas_drop_columns = function (block, generator) {
     generator.definitions_.import_pandas = "import pandas";
     var dataframe = generator.valueToCode(block, 'DATAFRAME', generator.ORDER_ATOMIC) || 'df';
     var columns = generator.valueToCode(block, 'COLUMNS', generator.ORDER_ATOMIC) || '[]';
-    var axis = block.getFieldValue('AXIS') || '0';
-    var code = dataframe + '.drop(columns=' + columns + ', axis=' + axis + ')';
+    var code = dataframe + '.drop(columns=' + columns + ', axis=1)';
     return [code, generator.ORDER_ATOMIC];
 }
 

@@ -405,6 +405,49 @@ export const sklearn_GaussianNB = {
     }
 };
 
+//sklearn 初始化PCA降维
+export const sklearn_pca = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("sklearn 初始化 PCA 算法");
+        this.appendValueInput("model_name")
+            .setCheck(null)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.MODEL_NAME);
+        this.appendValueInput("n_components")
+            .setCheck(null)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.SKLEARN_PCA_N_COMPONENTS);
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(SKLEARN_HUE);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+//sklearn PCA拟合并转换数据
+export const sklearn_pca_fit_transform = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("sklearn PCA 降维");
+        this.appendValueInput("model_name")
+            .setCheck(null)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.MODEL_NAME);
+        this.appendValueInput("train_data")
+            .setCheck(null)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.EIGENVALUES);
+        this.setInputsInline(true);
+        this.setOutput(true, null);
+        this.setColour(SKLEARN_HUE);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
 //sklearn 初始化K-均值聚类
 export const sklearn_KMeans = {
     init: function () {
@@ -426,11 +469,29 @@ export const sklearn_KMeans = {
             .setCheck(null)
             .setAlign(Blockly.inputs.Align.RIGHT)
             .appendField(Blockly.Msg.RANDOM_SEED);
-        this.appendValueInput("n_jobs")
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(SKLEARN_HUE);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+//sklearn KMeans拟合数据
+export const sklearn_KMeans_fit = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("sklearn K-均值聚类");
+        this.appendValueInput("model_name")
             .setCheck(null)
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(Blockly.Msg.SKLEARN_THREADS);
-        this.setInputsInline(false);
+            .appendField(Blockly.Msg.MODEL_NAME);
+        this.appendValueInput("train_data")
+            .setCheck(null)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.EIGENVALUES);
+        this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(SKLEARN_HUE);
