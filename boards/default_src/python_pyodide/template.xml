@@ -1521,7 +1521,7 @@
       </value>
     </block> -->
   </category>
-  <category id="catIot" colour="#2FAD7A">
+  <!-- <category id="catIot" colour="#2FAD7A">
     <category id="catMixIO" colour="#526FC3">
       <block type="IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE">
         <value name="SERVER">
@@ -1626,7 +1626,6 @@
         </statement>
       </block>
       <block type="iot_mixio_check"></block>
-      <!-- <block type="iot_client_onboard"></block> -->
       <block type="IOT_FORMATTING">
         <value name="VAR">
           <block type="dicts_create_with_noreturn" inline="true">
@@ -1681,32 +1680,8 @@
       </block>
       <block type="iot_mixio_connect_only"></block>
       <block type="iot_mixio_disconnect"></block>
-      <!-- <block type="IOT_EMQX_PING"></block> -->
-      <!-- <block type="IOT_MIXIO_NTP">
-        <value name="addr">
-          <shadow type="text">
-            <field name="TEXT">mixio.mixly.cn</field>
-          </shadow>
-        </value>
-      </block> -->
-      <!-- <block type="iot_mixio_format_topic">
-        <value name="VAR">
-          <shadow type="variables_get">
-            <field name="VAR">topic</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="iot_mixio_format_msg">
-        <value name="VAR">
-          <shadow type="variables_get">
-            <field name="VAR">msg</field>
-          </shadow>
-        </value>
-      </block> -->
-
-
     </category>
-  </category>
+  </category> -->
   <category id="catTurtle" colour="180">
     <block type="turtle_create"></block>
     <!--
@@ -2263,7 +2238,7 @@
       </value>
     </block>
   </category>
-  <category id="catAI" colour="205">
+  <!-- <category id="catAI" colour="205">
     <block type="AI_ChooseAndGet">
     </block>
     <block type="AI_audio">
@@ -2482,7 +2457,7 @@
         </block>
       </value>
     </block>
-  </category>
+  </category> -->
   <category id="catData" colour="170">
     <block type="variables_set">
       <field name="VAR">df1</field>
@@ -3608,6 +3583,9 @@
         <shadow type="math_number">
           <field name="NUM">5</field>
         </shadow>
+      </value>
+      <value name="n_jobs">
+        <shadow type="logic_null"></shadow>
       </value>
     </block>
     <block type="sklearn_GaussianNB">
