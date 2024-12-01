@@ -215,9 +215,9 @@ export const sensor_use_i2c_init = function (_, generator) {
     }else if (key == 'CBR817') {
         generator.definitions_['import_cbr817'] = 'import cbr817';
         code = v + ' = cbr817.' + key + "(" + iv + ')\n';
-    }else if (key == 'CI230X'){
-        generator.definitions_['import_ci230x'] = 'import ci230x';
-        code = v + ' = ci230x.' + key + "(" + iv + ')\n';
+    }else if (key == 'CI130X'){
+        generator.definitions_['import_ci130x'] = 'import ci130x';
+        code = v + ' = ci130x.' + key + "(" + iv + ')\n';
     }
     return code;
 }
@@ -238,42 +238,51 @@ export const interaction_whether_to_interaction = function(_,generator){
     return [code,generator.ORDER_ATOMIC];
 }
 
-export const CI230X_IDENTIFY_AND_SAVE = function(_,generator){
-    generator.definitions_['import_ci230x'] = 'import ci230x';
+export const CI130X_IDENTIFY_AND_SAVE = function(_,generator){
+    generator.definitions_['import_ci130x'] = 'import ci130x';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var code = sub+'.cmd_id()';
     return code;
 }
 
-export const CI230X_GET_WHETHER_IDENTIFY = function(_,generator){
-    generator.definitions_['import_ci230x'] = 'import ci230x';
+export const CI130X_GET_WHETHER_IDENTIFY = function(_,generator){
+    generator.definitions_['import_ci130x'] = 'import ci130x';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var cmd = this.getFieldValue('cmd');
     var code = sub+'.result('+cmd+')';
     return [code,generator.ORDER_ATOMIC];
 }
 
-export const MIXLY_GET_THE_RECOGNIZED_CMD = function(_,generator){
-    generator.definitions_['import_ci230x'] = 'import ci230x';
+export const CI130X_GET_THE_RECOGNIZED_CMD = function(_,generator){
+    generator.definitions_['import_ci130x'] = 'import ci130x';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var code = sub+'.result()';
+    var key = this.getFieldValue('key');
+    var code = sub+'.'+key +'()';
     return [code,generator.ORDER_ATOMIC];
 }
 
-export const CI230X_GET_THE_RECOGNIZED_STATE = function(_,generator){
-    generator.definitions_['import_ci230x'] = 'import ci230x';
+export const CI130X_GET_THE_RECOGNIZED_STATE = function(_,generator){
+    generator.definitions_['import_ci130x'] = 'import ci130x';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var code = sub+'.status()';
     return [code,generator.ORDER_ATOMIC];
 }
 
-export const CI230X_BROADCAST = function(_,generator){
-    generator.definitions_['import_ci230x'] = 'import ci230x';
+export const CI130X_BROADCAST = function(_,generator){
+    generator.definitions_['import_ci130x'] = 'import ci130x';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
     var star = this.getFieldValue('star');
     var end = this.getFieldValue('end');
     var code = sub+'.play('+star+','+num+','+end+')';
+    return code;
+}
+
+export const CI130X_SET_SYSTEM_CMD = function(_,generator){
+    generator.definitions_['import_ci130x'] = 'import ci130x';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var cmd = this.getFieldValue('cmd');
+    var code = sub+'.sys_cmd('+cmd+')';
     return code;
 }
 

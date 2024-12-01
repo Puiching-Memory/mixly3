@@ -359,7 +359,7 @@ export const sensor_use_i2c_init = {
                 [Blockly.Msg.MixGo_MPU9250+"(ADXL345)", "ADXL345"],
                 ["RFID", "RFID"],
                 [Blockly.Msg.MIXLY_RADAR_SENSOR+"(CBR817)", "CBR817"],
-                [Blockly.Msg.MIXLY_AipSpeech_asr+"(CI230X)","CI230X"]
+                [Blockly.Msg.MIXLY_AipSpeech_asr+"(CI130X)","CI130X"]
             ]), "key");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
@@ -402,11 +402,11 @@ export const interaction_whether_to_interaction = {
     }
 };
 
-export const CI230X_IDENTIFY_AND_SAVE = {
+export const CI130X_IDENTIFY_AND_SAVE = {
     init:function(){
         this.setColour(SENSOR_EXTERN_HUE); 
         this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.MIXLY_AipSpeech_asr+'CI230X')
+            .appendField(Blockly.Msg.MIXLY_AipSpeech_asr+'CI130X')
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_IDENTIFY_ONCE_AND_SAVE)
@@ -416,11 +416,11 @@ export const CI230X_IDENTIFY_AND_SAVE = {
     }
 };
 
-export const CI230X_GET_WHETHER_IDENTIFY = {
+export const CI130X_GET_WHETHER_IDENTIFY = {
     init:function(){
         this.setColour(SENSOR_EXTERN_HUE); 
         this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.MIXLY_AipSpeech_asr+'CI230X')
+            .appendField(Blockly.Msg.MIXLY_AipSpeech_asr+'CI130X')
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_GET)
@@ -497,42 +497,34 @@ export const CI230X_GET_WHETHER_IDENTIFY = {
     }
 };
 
-export const CI230X_GET_THE_RECOGNIZED_CMD = {
+export const CI130X_GET_THE_RECOGNIZED_CMD = {
     init:function(){
         this.setColour(SENSOR_EXTERN_HUE); 
         this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.MIXLY_AipSpeech_asr+'CI230X')
+            .appendField(Blockly.Msg.MIXLY_AipSpeech_asr+'CI130X')
             .setCheck("var");
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_GET+Blockly.Msg.MIXLY_THE_RECOGNIZED_CMD);
+            .appendField(Blockly.Msg.MIXLY_GET)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_THE_RECOGNIZED_CMD,"result"],
+                [Blockly.Msg.MIXLY_RECOGNIZED_STATE,"status"]
+            ]),"key")
         this.setOutput(true);
         this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_CI130X_GET_THE_RECOGNIZED_STATE_TOOLTIP);
     }
 };
 
-export const CI230X_GET_THE_RECOGNIZED_STATE = {
+export const CI130X_BROADCAST = {
     init:function(){
         this.setColour(SENSOR_EXTERN_HUE); 
         this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.MIXLY_AipSpeech_asr+'CI230X')
-            .setCheck("var");
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_RECOGNIZED_STATE);
-        this.setOutput(true);
-        this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.MIXLY_CI230X_GET_THE_RECOGNIZED_STATE_TOOLTIP)
-    }
-}
-
-export const CI230X_BROADCAST = {
-    init:function(){
-        this.setColour(SENSOR_EXTERN_HUE); 
-        this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.MIXLY_AipSpeech_asr+'CI230X')
+            .appendField(Blockly.Msg.MIXLY_AipSpeech_asr+'CI130X')
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MP3_PLAY)
             .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_MICROBIT_JS_INOUT_PULL_NONE,"None"],
                 [Blockly.Msg.MIXLY_WIND_SPEED,"154"],
                 [Blockly.Msg.MIXLY_HYETAL,"155"],
                 [Blockly.Msg.MIXLY_TEMPERATURE,"156"],
@@ -570,6 +562,7 @@ export const CI230X_BROADCAST = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_UNIT)
             .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_MICROBIT_JS_INOUT_PULL_NONE,"None"],
                 [Blockly.Msg.MIXLY_YEAR,"117"],
                 [Blockly.Msg.MIXLY_MONTH,"118"],
                 [Blockly.Msg.MIXLY_DAY,"119"],
@@ -613,6 +606,31 @@ export const CI230X_BROADCAST = {
         this.setInputsInline(true);
     }
 }
+
+export const CI130X_SET_SYSTEM_CMD = {
+    init:function(){
+        this.setColour(SENSOR_EXTERN_HUE); 
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_AipSpeech_asr+'CI130X')
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXLY_SYSTEM + Blockly.Msg.MIXLY_CMD)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_HELLO_XIAOZHI,"1"],
+                [Blockly.Msg.MIXLY_XIAOZHIXIAOZHI,"2"],
+                [Blockly.Msg.MIXLY_INCREASE_VOLUME,"202"],
+                [Blockly.Msg.MIXLY_REDUCE_VOLUME,"203"],
+                [Blockly.Msg.MIXLY_MAX_VOLUME,"204"],
+                [Blockly.Msg.MIXLY_MINIMUM,"205"],
+                [Blockly.Msg.MIXLY_OPEN_RESPONSE,"206"],
+                [Blockly.Msg.MIXLY_CLOSE_RESPONSE,"207"],
+                [Blockly.Msg.MIXLY_QUIT,"208"]
+            ]),"cmd")
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+    }
+};
 
 export const sensor_MAX30102_extern = {
     init: function () {

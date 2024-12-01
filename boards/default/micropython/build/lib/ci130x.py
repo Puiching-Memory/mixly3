@@ -1,7 +1,7 @@
 """
-CI230X
+CI130X
 
-MicroPython library for the CI230X (ASR-I2C)
+MicroPython library for the CI130X (ASR-I2C)
 =======================================================
 @dahanzimin From the Mixly Team
 """
@@ -16,7 +16,7 @@ _CI_ID_NUM			= const(0x06)
 _CI_ID_CLE			= const(0x07)
 _CI_ID_END			= const(0x5A)
 
-class CI230X:
+class CI130X:
 	def __init__(self, i2c_bus, addr=_CI_ADDRESS):
 		self._device  = i2c_bus
 		self._address = addr
@@ -24,7 +24,7 @@ class CI230X:
 		try:
 			self._rreg(_CI_ID_GET, 3)
 		except:
-			raise AttributeError("Cannot find a CI230X")
+			raise AttributeError("Cannot find a CI130X")
 
 	def _wreg(self, reg):
 		'''Write memory address'''
