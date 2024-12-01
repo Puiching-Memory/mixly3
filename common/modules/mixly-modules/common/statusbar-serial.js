@@ -16,6 +16,7 @@ goog.require('Mixly.StatusBarSerialOutput');
 goog.require('Mixly.StatusBarSerialChart');
 goog.require('Mixly.Electron.Serial');
 goog.require('Mixly.Web.Serial');
+goog.require('Mixly.WebSocket.Serial');
 goog.provide('Mixly.StatusBarSerial');
 
 const {
@@ -32,10 +33,23 @@ const {
     StatusBarSerialOutput,
     StatusBarSerialChart,
     Electron = {},
-    Web = {}
+    Web = {},
+    WebSocket = {}
 } = Mixly;
 
-const { Serial } = goog.isElectron ? Electron : Web;
+let currentObj = null;
+
+if (goog.isElectron) {
+    currentObj = Electron;
+} else {
+    if (Env.hasSocketServer) {
+        currentObj = WebSocket;
+    } else {
+        currentObj = Web;
+    }
+}
+
+const { Serial } = currentObj;
 
 const { SELECTED_BOARD } = Config;
 

@@ -1,6 +1,5 @@
 goog.loadJs('electron', () => {
 
-goog.require('layui');
 goog.require('Mixly.Serial');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
@@ -26,8 +25,6 @@ const {
     MArray,
     Electron
 } = Mixly;
-
-const { form } = layui;
 
 
 class ElectronSerial extends Serial {
@@ -106,7 +103,7 @@ class ElectronSerial extends Serial {
         });
 
         this.#serialport_.on('error', (error) => {
-            this.onError(error);
+            this.onError(String(error));
             this.onClose(1);
         });
 

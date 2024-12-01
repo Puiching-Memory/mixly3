@@ -46,7 +46,9 @@
             "Mixly.Web.BU",
             "Mixly.Web.FS",
             "Mixly.Web.File",
-            "Mixly.Web.Serial"
+            "Mixly.Web.Serial",
+            "Mixly.WebSocket.Serial",
+            "Mixly.WebSocket.ArduShell"
         ],
         "provide": [
             "Mixly.App"
@@ -1064,7 +1066,8 @@
             "Mixly.StatusBarSerialOutput",
             "Mixly.StatusBarSerialChart",
             "Mixly.Electron.Serial",
-            "Mixly.Web.Serial"
+            "Mixly.Web.Serial",
+            "Mixly.WebSocket.Serial"
         ],
         "provide": [
             "Mixly.StatusBarSerial"
@@ -1460,7 +1463,6 @@
     {
         "path": "/electron/serial.js",
         "require": [
-            "layui",
             "Mixly.Serial",
             "Mixly.Env",
             "Mixly.Msg",
@@ -1717,15 +1719,12 @@
         "path": "/web-socket/arduino-shell.js",
         "require": [
             "layui",
-            "Mixly.Env",
-            "Mixly.LayerExt",
-            "Mixly.Config",
-            "Mixly.Title",
+            "dayjs.duration",
             "Mixly.Boards",
-            "Mixly.MFile",
-            "Mixly.MArray",
+            "Mixly.Debug",
+            "Mixly.LayerExt",
             "Mixly.Msg",
-            "Mixly.WebSocket.Socket",
+            "Mixly.Workspace",
             "Mixly.WebSocket.Serial"
         ],
         "provide": [
@@ -1767,17 +1766,26 @@
         ]
     },
     {
+        "path": "/web-socket/serial.js",
+        "require": [
+            "Mixly.Serial",
+            "Mixly.Env",
+            "Mixly.Msg",
+            "Mixly.Debug",
+            "Mixly.Registry",
+            "Mixly.WebSocket"
+        ],
+        "provide": [
+            "Mixly.WebSocket.Serial"
+        ]
+    },
+    {
         "path": "/web-socket/socket.js",
         "require": [
-            "path",
-            "Mixly.Env",
-            "Mixly.Config",
-            "Mixly.Boards",
-            "Mixly.Command",
-            "Mixly.MJSON",
-            "Mixly.MArray",
-            "Mixly.LayerExt",
-            "Mixly.WebSocket"
+            "io",
+            "Mixly.WebSocket",
+            "Mixly.WebSocket.Serial",
+            "Mixly.WebSocket.ArduShell"
         ],
         "provide": [
             "Mixly.WebSocket.Socket"

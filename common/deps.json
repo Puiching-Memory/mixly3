@@ -232,6 +232,10 @@
         "provide": ["MixIO"],
         "require": ["mqtt"]
     }, {
+        "path": "modules/web-modules/socket.io.min.js",
+        "provide": ["io"],
+        "require": []
+    }, {
         "path": "modules/web-modules/dayjs/dayjs.min.js",
         "provide": ["dayjs"],
         "require": []

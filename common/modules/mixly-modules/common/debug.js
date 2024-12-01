@@ -11,10 +11,10 @@ for (let key in console) {
         continue;
     }
     Debug[key] = (...args) => {
-        if (!SOFTWARE.debug) {
-            console.log(`[${key.toUpperCase()}]`, ...args);
-        } else {
+        if (SOFTWARE.debug) {
             console[key](...args);
+        } else {
+            console.log(`[${key.toUpperCase()}]`, ...args);
         }
     }
 }

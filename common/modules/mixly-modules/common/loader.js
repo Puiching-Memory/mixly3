@@ -43,6 +43,9 @@ const { Socket } = WebSocket;
 
 
 window.addEventListener('load', () => {
+    if (!goog.isElectron && Env.hasSocketServer) {
+        Socket.init();
+    }
     const app = new App($('body')[0]);
     Mixly.app = app;
     const $xml = $(goog.get(Env.boardIndexPath));
@@ -83,9 +86,6 @@ Loader.start = () => {
     }
     if (!goog.isElectron && window.location.host.indexOf('mixly.cn')) {
         window.userOpEvents = new UserOPEvents();
-    }
-    if (Env.hasSocketServer) {
-        Socket.init();
     }
     if (goog.isElectron && typeof LibManager === 'object') {
         LibManager.init(() => Loader.init());

@@ -27,6 +27,8 @@ goog.require('Mixly.Web.BU');
 goog.require('Mixly.Web.FS');
 goog.require('Mixly.Web.File');
 goog.require('Mixly.Web.Serial');
+goog.require('Mixly.WebSocket.Serial');
+goog.require('Mixly.WebSocket.ArduShell');
 goog.provide('Mixly.App');
 
 const {
@@ -44,10 +46,23 @@ const {
     Component,
     EditorMix,
     Electron = {},
-    Web = {}
+    Web = {},
+    WebSocket = {}
 } = Mixly;
 
 const { Loader } = Electron;
+
+let currentObj = null;
+
+if (goog.isElectron) {
+    currentObj = Electron;
+} else {
+    if (Env.hasSocketServer) {
+        currentObj = WebSocket;
+    } else {
+        currentObj = Web;
+    }
+}
 
 const {
     FS,
@@ -57,7 +72,7 @@ const {
     BU,
     PythonShell,
     Serial
-} = goog.isElectron? Electron : Web;
+} = currentObj;
 
 const { BOARD, SELECTED_BOARD } = Config;
 
@@ -149,7 +164,7 @@ class App extends Component {
             id: 'port-add-btn',
             displayText: Msg.Lang['nav.btn.addDevice'],
             preconditionFn: () => {
-                if (goog.isElectron) {
+                if (goog.isElectron || Env.hasSocketServer) {
                     return false;
                 }
                 return true;
@@ -165,7 +180,10 @@ class App extends Component {
             id: 'arduino-compile-btn',
             displayText: Msg.Lang['nav.btn.compile'],
             preconditionFn: () => {
-                if (!goog.isElectron || !SELECTED_BOARD?.nav?.compile) {
+                if (!goog.isElectron && !Env.hasSocketServer && !env.hasCompiler) {
+                    return false;
+                }
+                if (!SELECTED_BOARD?.nav?.compile || !SELECTED_BOARD?.nav?.upload) {
                     return false;
                 }
                 const workspace = Workspace.getMain();
@@ -190,7 +208,10 @@ class App extends Component {
             id: 'arduino-upload-btn',
             displayText: Msg.Lang['nav.btn.upload'],
             preconditionFn: () => {
-                if (!goog.isElectron || !SELECTED_BOARD?.nav?.compile || !SELECTED_BOARD?.nav?.upload) {
+                if (!goog.isElectron && !Env.hasSocketServer && !env.hasCompiler) {
+                    return false;
+                }
+                if (!SELECTED_BOARD?.nav?.compile || !SELECTED_BOARD?.nav?.upload) {
                     return false;
                 }
                 const workspace = Workspace.getMain();

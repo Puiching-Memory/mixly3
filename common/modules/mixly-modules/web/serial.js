@@ -94,12 +94,15 @@ class WebSerial extends Serial {
                 this.refreshPorts();
             });
         }
-        navigator?.serial?.getPorts().then((serialports) => {
-            for (let serialport of serialports) {
-                this.addPort(serialport);
-            }
-        });
-        this.addEventsListener();
+
+        if (!Env.hasSocketServer) {
+            navigator?.serial?.getPorts().then((serialports) => {
+                for (let serialport of serialports) {
+                    this.addPort(serialport);
+                }
+            });
+            this.addEventsListener();
+        }
     }
 
     #serialport_ = null;
