@@ -69,6 +69,7 @@ module.exports = {
         'path': 'path',
         'xscrollbar': 'XScrollbar',
         'jquery': '$',
-        'ace': 'ace'
+        'ace': 'ace',
+        'goog': 'goog'
     }
 };

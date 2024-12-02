@@ -49,7 +49,8 @@
             "Mixly.Web.Serial",
             "Mixly.WebSocket.File",
             "Mixly.WebSocket.Serial",
-            "Mixly.WebSocket.ArduShell"
+            "Mixly.WebSocket.ArduShell",
+            "Mixly.WebSocket.BU"
         ],
         "provide": [
             "Mixly.App"
@@ -1736,15 +1737,13 @@
         "path": "/web-socket/burn-upload.js",
         "require": [
             "layui",
-            "Mixly.Config",
+            "dayjs.duration",
+            "Mixly.Debug",
             "Mixly.LayerExt",
-            "Mixly.Env",
-            "Mixly.Boards",
-            "Mixly.MFile",
-            "Mixly.MString",
             "Mixly.Msg",
-            "Mixly.WebSocket.Serial",
-            "Mixly.WebSocket.Socket"
+            "Mixly.Config",
+            "Mixly.Workspace",
+            "Mixly.WebSocket.Serial"
         ],
         "provide": [
             "Mixly.WebSocket.BU"
@@ -1780,7 +1779,8 @@
             "Mixly.StatusBarsManager",
             "Mixly.WebSocket",
             "Mixly.WebSocket.Serial",
-            "Mixly.WebSocket.ArduShell"
+            "Mixly.WebSocket.ArduShell",
+            "Mixly.WebSocket.BU"
         ],
         "provide": [
             "Mixly.WebSocket.Socket"

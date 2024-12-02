@@ -244,7 +244,9 @@ Boards.changeTo = (boardName) => {
                     outObj.volume = "CIRCUITPY";
                 }
             }
-            outObj.filePath = MString.tpl(outObj.filePath, pathObj);
+            if (!Env.hasSocketServer) {
+                outObj.filePath = MString.tpl(outObj.filePath, pathObj);
+            }
             break;
         case 'command':
             let pyToolsPath = "{srcPath}/tools/python/";
@@ -256,8 +258,10 @@ Boards.changeTo = (boardName) => {
                 'stm32bl': 'stm32bl.py',
                 'ampy': 'ampy/cli.py'
             };
-            for (let key in pyTools) {
-                obj[key] = Env.python3Path + "\" \"" + pyToolsPath + pyTools[key];
+            if (!Env.hasSocketServer) {
+                for (let key in pyTools) {
+                    obj[key] = Env.python3Path + "\" \"" + pyToolsPath + pyTools[key];
+                }
             }
             if (outObj.reset) {
                 let resetStr = '{}';
@@ -270,7 +274,9 @@ Boards.changeTo = (boardName) => {
                 }
             }
             outObj.command = MString.tpl(outObj.command, obj);
-            outObj.command = MString.tpl(outObj.command, pathObj);
+            if (!Env.hasSocketServer) {
+                outObj.command = MString.tpl(outObj.command, pathObj);
+            }
             if (outObj.special && outObj.special instanceof Array) {
                 for (let key in outObj.special) {
                     if (!outObj.special[key]?.name
@@ -278,23 +284,31 @@ Boards.changeTo = (boardName) => {
                         continue;
                     }
                     outObj.special[key].command = MString.tpl(outObj.special[key].command, obj);
-                    outObj.special[key].command = MString.tpl(outObj.special[key].command, pathObj);
+                    if (!Env.hasSocketServer) {
+                        outObj.special[key].command = MString.tpl(outObj.special[key].command, pathObj);
+                    }
                 }
             }
             break;
         }
         if (value.type === 'upload' && (goog.isElectron || Env.hasSocketServer) && outObj.copyLib) {
             if (outObj.libPath) {
-                let libPath = [];
-                for (let dirPath of outObj.libPath) {
-                    libPath.push(MString.tpl(dirPath, pathObj));
+                if (!Env.hasSocketServer) {
+                    let libPath = [];
+                    for (let dirPath of outObj.libPath) {
+                        libPath.push(MString.tpl(dirPath, pathObj));
+                    }
+                    outObj.libPath = libPath;
                 }
-                outObj.libPath = libPath;
             } else {
-                outObj.libPath = [ path.join(Env.boardDirPath, 'build/lib/') ];
+                if (Env.hasSocketServer) {
+                    outObj.libPath = [ 'build/lib/' ];
+                } else {
+                    outObj.libPath = [ path.join(Env.boardDirPath, 'build/lib/') ];
+                }
             }
         }
-        if (value.type === 'upload' && (goog.isElectron || Env.hasSocketServer)) {
+        if (value.type === 'upload' && (goog.isElectron && !Env.hasSocketServer)) {
             if (outObj.filePath) {
                 outObj.filePath = MString.tpl(outObj.filePath, pathObj);
             } else {

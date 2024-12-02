@@ -57,6 +57,10 @@ class WebSocketArduShell {
         }
 
         this.initCompile = function () {
+            if (!this.mixlySocket.isConnected()) {
+                layer.msg('服务端已离线', { time: 1000 });
+                return;
+            }
             const { mainStatusBarTabs } = Mixly;
             const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
             mainStatusBarTabs.changeTo('output');
@@ -71,17 +75,27 @@ class WebSocketArduShell {
                 })
                 .catch((error) => {
                     Debug.error(error);
-                    statusBarTerminal.addValue(`==${Msg.Lang['shell.compileFailed']}==\n`);
+                    statusBarTerminal.addValue(`\n==${Msg.Lang['shell.compileFailed']}==\n`);
                 });
         }
 
         this.initUpload = function () {
+            if (!this.mixlySocket.isConnected()) {
+                layer.msg('服务端已离线', { time: 1000 });
+                return;
+            }
+            const port = Serial.getSelectedPortName();
+            if (!port) {
+                layer.msg(Msg.Lang['statusbar.serial.noDevice'], {
+                    time: 1000
+                });
+                return;
+            }
             const { mainStatusBarTabs } = Mixly;
             const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
             mainStatusBarTabs.changeTo('output');
             mainStatusBarTabs.show();
             statusBarTerminal.setValue(`${Msg.Lang['shell.uploading']}...\n`);
-            const port = Serial.getSelectedPortName();
             const mainWorkspace = Workspace.getMain();
             const editor = mainWorkspace.getEditorsManager().getActive();
             const code = editor.getCode();
@@ -98,6 +112,7 @@ class WebSocketArduShell {
                     }
                     mainStatusBarTabs.add('serial', port);
                     mainStatusBarTabs.changeTo(port);
+                    const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
                     statusBarSerial.open()
                         .then(() => {
                             const baudRates = code.match(/(?<=Serial.begin[\s]*\([\s]*)[0-9]*(?=[\s]*\))/g);
@@ -111,7 +126,7 @@ class WebSocketArduShell {
                 })
                 .catch((error) => {
                     Debug.error(error);
-                    statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadFailed']}==\n`);
+                    statusBarTerminal.addValue(`\n==${Msg.Lang['shell.uploadFailed']}==\n`);
                 });
         }
 

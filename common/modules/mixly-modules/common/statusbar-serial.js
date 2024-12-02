@@ -264,7 +264,11 @@ class StatusBarSerial extends PageBase {
             this.stopRead();
             this.#timer_ && clearTimeout(this.#timer_);
             this.#timer_ = null;
-            if (this.isDisposed() || !this.isOpened()) {
+            if (this.isDisposed()) {
+                return;
+            }
+            if (!this.isOpened()) {
+                this.setValue(`${String(error)}\n`);
                 return;
             }
             this.setValue(`${this.getValue() + this.#valueTemp_}\n${String(error)}\n`);

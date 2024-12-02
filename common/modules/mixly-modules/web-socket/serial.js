@@ -157,7 +157,7 @@ class WebSocketSerial extends Serial {
             this.onString(str);
         });
         eventRegistry.register(`${port}-error`, (error) => {
-            this.onError(String(error));
+            this.onError(error);
             this.onClose(1);
         });
         eventRegistry.register(`${port}-open`, () => {
@@ -324,6 +324,24 @@ class WebSocketSerial extends Serial {
         }
     }
 
+    async #awaitDispose_() {
+        return new Promise((resolve, reject) => {
+            const mixlySocket = WebSocketSerial.getMixlySocket();
+            mixlySocket.emit('serial.dispose', this.getPortName(), (response) => {
+                if (response.error) {
+                    resolve();
+                    return;
+                }
+                const [error, result] = response;
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    }
+
     async dispose() {
         return new Promise((resolve, reject) => {
             const port = this.getPortName();
@@ -335,18 +353,7 @@ class WebSocketSerial extends Serial {
             eventRegistry.unregister(`${port}-close`);
             super.dispose()
                 .then(() => {
-                    const mixlySocket = WebSocketSerial.getMixlySocket();
-                    mixlySocket.emit('serial.dispose', port, ([error, result]) => {
-                        if (response.error) {
-                            resolve();
-                            return;
-                        }
-                        if (error) {
-                            reject(error);
-                        } else {
-                            resolve(result);
-                        }
-                    });
+                    return this.#awaitDispose_();
                 })
                 .catch(reject);
         })

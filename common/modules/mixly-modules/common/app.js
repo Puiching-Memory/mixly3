@@ -30,6 +30,7 @@ goog.require('Mixly.Web.Serial');
 goog.require('Mixly.WebSocket.File');
 goog.require('Mixly.WebSocket.Serial');
 goog.require('Mixly.WebSocket.ArduShell');
+goog.require('Mixly.WebSocket.BU');
 goog.provide('Mixly.App');
 
 const {
@@ -181,7 +182,7 @@ class App extends Component {
             id: 'arduino-compile-btn',
             displayText: Msg.Lang['nav.btn.compile'],
             preconditionFn: () => {
-                if (!goog.isElectron && !Env.hasSocketServer && !env.hasCompiler) {
+                if (!goog.isElectron && !Env.hasSocketServer && !Env.hasCompiler) {
                     return false;
                 }
                 if (!SELECTED_BOARD?.nav?.compile || !SELECTED_BOARD?.nav?.upload) {
@@ -209,7 +210,7 @@ class App extends Component {
             id: 'arduino-upload-btn',
             displayText: Msg.Lang['nav.btn.upload'],
             preconditionFn: () => {
-                if (!goog.isElectron && !Env.hasSocketServer && !env.hasCompiler) {
+                if (!goog.isElectron && !Env.hasSocketServer && !Env.hasCompiler) {
                     return false;
                 }
                 if (!SELECTED_BOARD?.nav?.compile || !SELECTED_BOARD?.nav?.upload) {

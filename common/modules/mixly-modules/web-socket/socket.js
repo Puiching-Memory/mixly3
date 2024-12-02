@@ -5,6 +5,7 @@ goog.require('Mixly.StatusBarsManager');
 goog.require('Mixly.WebSocket');
 goog.require('Mixly.WebSocket.Serial');
 goog.require('Mixly.WebSocket.ArduShell');
+goog.require('Mixly.WebSocket.BU');
 goog.provide('Mixly.WebSocket.Socket');
 
 const {
@@ -16,7 +17,8 @@ const {
 const {
     Socket,
     Serial,
-    ArduShell
+    ArduShell,
+    BU
 } = WebSocket;
 
 
@@ -32,6 +34,7 @@ Socket.init = function () {
     const socket = mixlySocket.getSocket();
 
     socket.on('connect', () => {
+
         Serial.getPorts()
             .then((ports) => {
                 let portsName = [];
@@ -72,6 +75,7 @@ Socket.init = function () {
 
     Serial.init(mixlySocket);
     ArduShell.init(mixlySocket);
+    BU.init(mixlySocket);
 }
 
 });

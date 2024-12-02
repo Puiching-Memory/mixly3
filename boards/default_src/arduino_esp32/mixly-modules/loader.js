@@ -10,11 +10,17 @@ export default function addBoardFSItem () {
     menu.add({
         weight: 2,
         type: 'sep1',
+        preconditionFn: () => {
+            return goog.isElectron;
+        },
         data: '---------'
     });
     menu.add({
         weight: 3,
         type: 'filesystem-tool',
+        preconditionFn: () => {
+            return goog.isElectron;
+        },
         data: {
             isHtmlName: true,
             name: ContextMenu.getItem(Msg.BOARD_FS, ''),
