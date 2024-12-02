@@ -22,6 +22,7 @@ const {
 class WebSocketSerial extends Serial {
     static {
         this.eventRegistry = new Registry();
+        this.mixlySocket = null;
         this.socket = null;
 
         this.getConfig = function () {
@@ -36,16 +37,24 @@ class WebSocketSerial extends Serial {
             return Serial.getCurrentPortsName();
         }
 
+        this.renderSelectBox = function (ports) {
+            return Serial.renderSelectBox(ports);
+        }
+
         this.getPorts = async function () {
             return new Promise((resolve, reject) => {
-                this.socket.emit('serial.getPorts', (response) => {
-                    const [error, result] = response;
-                    if (error) {
-                        reject(error);
-                    } else {
-                        resolve(result);
-                    }
-                });
+                if (this.socket.connected) {
+                    this.socket.emit('serial.getPorts', (response) => {
+                        const [error, result] = response;
+                        if (error) {
+                            reject(error);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+                } else {
+                    resolve([]);
+                }
             });
         }
 
@@ -57,8 +66,10 @@ class WebSocketSerial extends Serial {
             .catch(Debug.error);
         }
 
-        this.init = function (socket) {
-            this.socket = socket;
+        this.init = function (mixlySocket) {
+            this.mixlySocket = mixlySocket;
+            this.socket = mixlySocket.getSocket();
+            const socket = this.socket;
 
             socket.on('serial.attachEvent', () => {
                 this.refreshPorts();
@@ -118,6 +129,10 @@ class WebSocketSerial extends Serial {
             return this.socket;
         }
 
+        this.getMixlySocket = function () {
+            return this.mixlySocket;
+        }
+
         this.getEventRegistry = function () {
             return this.eventRegistry;
         }
@@ -127,7 +142,9 @@ class WebSocketSerial extends Serial {
         super(port);
         this.#addEventsListener_();
         const socket = WebSocketSerial.getSocket();
-        socket.emit('serial.create', port);
+        if (socket.connected) {
+            socket.emit('serial.create', port);
+        }
     }
 
     #addEventsListener_() {
@@ -164,8 +181,12 @@ class WebSocketSerial extends Serial {
                 return;
             }
             baud = baud ?? this.getBaudRate();
-            const socket = WebSocketSerial.getSocket();
-            socket.emit('serial.open', this.getPortName(), baud, (response) => {
+            const mixlySocket = WebSocketSerial.getMixlySocket();
+            mixlySocket.emit('serial.open', currentPort, baud, (response) => {
+                if (response.error) {
+                    reject(response.error);
+                    return;
+                }
                 const [error, result] = response;
                 if (error) {
                     this.onError(error);
@@ -186,8 +207,13 @@ class WebSocketSerial extends Serial {
                 return;
             }
             super.close();
-            const socket = WebSocketSerial.getSocket();
-            socket.emit('serial.close', this.getPortName(), (response) => {
+            const mixlySocket = WebSocketSerial.getMixlySocket();
+            mixlySocket.emit('serial.close', this.getPortName(), (response) => {
+                if (response.error) {
+                    this.onClose(1);
+                    resolve(response.error);
+                    return;
+                }
                 const [error, result] = response;
                 if (error) {
                     reject(error);
@@ -206,8 +232,12 @@ class WebSocketSerial extends Serial {
                 resolve();
                 return;
             }
-            const socket = WebSocketSerial.getSocket();
-            socket.emit('serial.setBaudRate', this.getPortName(), baud, (response) => {
+            const mixlySocket = WebSocketSerial.getMixlySocket();
+            mixlySocket.emit('serial.setBaudRate', this.getPortName(), baud, (response) => {
+                if (response.error) {
+                    reject(response.error);
+                    return;
+                }
                 const [error,] = response;
                 if (error) {
                     reject(error);
@@ -225,8 +255,12 @@ class WebSocketSerial extends Serial {
                 resolve();
                 return;
             }
-            const socket = WebSocketSerial.getSocket();
-            socket.emit('serial.send', this.getPortName(), data, (response) => {
+            const mixlySocket = WebSocketSerial.getMixlySocket();
+            mixlySocket.emit('serial.send', this.getPortName(), data, (response) => {
+                if (response.error) {
+                    reject(response.error);
+                    return;
+                }
                 const [error, result] = response;
                 if (error) {
                     reject(error);
@@ -251,8 +285,12 @@ class WebSocketSerial extends Serial {
                 resolve();
                 return;
             }
-            const socket = WebSocketSerial.getSocket();
-            socket.emit('serial.setDTRAndRTS', this.getPortName(), dtr, rts, (response) => {
+            const mixlySocket = WebSocketSerial.getMixlySocket();
+            mixlySocket.emit('serial.setDTRAndRTS', this.getPortName(), dtr, rts, (response) => {
+                if (response.error) {
+                    reject(response.error);
+                    return;
+                }
                 const [error, result] = response;
                 if (error) {
                     reject(error);
@@ -297,8 +335,12 @@ class WebSocketSerial extends Serial {
             eventRegistry.unregister(`${port}-close`);
             super.dispose()
                 .then(() => {
-                    const socket = WebSocketSerial.getSocket();
-                    socket.emit('serial.dispose', port, ([error, result]) => {
+                    const mixlySocket = WebSocketSerial.getMixlySocket();
+                    mixlySocket.emit('serial.dispose', port, ([error, result]) => {
+                        if (response.error) {
+                            resolve();
+                            return;
+                        }
                         if (error) {
                             reject(error);
                         } else {

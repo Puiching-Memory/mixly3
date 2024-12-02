@@ -47,6 +47,7 @@
             "Mixly.Web.FS",
             "Mixly.Web.File",
             "Mixly.Web.Serial",
+            "Mixly.WebSocket.File",
             "Mixly.WebSocket.Serial",
             "Mixly.WebSocket.ArduShell"
         ],
@@ -1752,14 +1753,7 @@
     {
         "path": "/web-socket/file.js",
         "require": [
-            "layui",
-            "Blockly",
-            "Mixly.XML",
-            "Mixly.MFile",
-            "Mixly.Boards",
-            "Mixly.LayerExt",
-            "Mixly.Msg",
-            "Mixly.WebSocket.Socket"
+            "Mixly.Web.File"
         ],
         "provide": [
             "Mixly.WebSocket.File"
@@ -1782,7 +1776,8 @@
     {
         "path": "/web-socket/socket.js",
         "require": [
-            "io",
+            "Mixly.Debug",
+            "Mixly.StatusBarsManager",
             "Mixly.WebSocket",
             "Mixly.WebSocket.Serial",
             "Mixly.WebSocket.ArduShell"
@@ -1794,6 +1789,7 @@
     {
         "path": "/web-socket/web-socket.js",
         "require": [
+            "io",
             "Mixly"
         ],
         "provide": [

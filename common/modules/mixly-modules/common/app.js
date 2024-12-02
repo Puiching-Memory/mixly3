@@ -27,6 +27,7 @@ goog.require('Mixly.Web.BU');
 goog.require('Mixly.Web.FS');
 goog.require('Mixly.Web.File');
 goog.require('Mixly.Web.Serial');
+goog.require('Mixly.WebSocket.File');
 goog.require('Mixly.WebSocket.Serial');
 goog.require('Mixly.WebSocket.ArduShell');
 goog.provide('Mixly.App');

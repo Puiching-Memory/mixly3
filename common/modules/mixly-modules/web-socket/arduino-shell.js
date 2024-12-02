@@ -25,12 +25,24 @@ const { Serial } = WebSocket;
 
 class WebSocketArduShell {
     static {
+        this.mixlySocket = null;
         this.socket = null;
         this.shell = null;
 
-        this.init = function (socket) {
-            this.socket = socket;
+        this.getSocket = function () {
+            return this.socket;
+        }
+
+        this.getMixlySocket = function () {
+            return this.mixlySocket;
+        }
+
+        this.init = function (mixlySocket) {
+            this.mixlySocket = mixlySocket;
+            this.socket = mixlySocket.getSocket();
             this.shell = new WebSocketArduShell();
+            const socket = this.socket;
+
             socket.on('arduino.dataEvent', (data) => {
                 const { mainStatusBarTabs } = Mixly;
                 const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
@@ -57,7 +69,10 @@ class WebSocketArduShell {
                 .then((info) => {
                     this.endCallback(info.code, info.time);
                 })
-                .catch(Debug.error);
+                .catch((error) => {
+                    Debug.error(error);
+                    statusBarTerminal.addValue(`==${Msg.Lang['shell.compileFailed']}==\n`);
+                });
         }
 
         this.initUpload = function () {
@@ -83,7 +98,6 @@ class WebSocketArduShell {
                     }
                     mainStatusBarTabs.add('serial', port);
                     mainStatusBarTabs.changeTo(port);
-                    const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
                     statusBarSerial.open()
                         .then(() => {
                             const baudRates = code.match(/(?<=Serial.begin[\s]*\([\s]*)[0-9]*(?=[\s]*\))/g);
@@ -95,7 +109,10 @@ class WebSocketArduShell {
                         })
                         .catch(Debug.error);
                 })
-                .catch(Debug.error);
+                .catch((error) => {
+                    Debug.error(error);
+                    statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadFailed']}==\n`);
+                });
         }
 
         this.endCallback = function (code, time) {
@@ -105,10 +122,10 @@ class WebSocketArduShell {
             let message = '';
             if (code) {
                 message = (this.shell.isCompiling() ? Msg.Lang['shell.compileFailed'] : Msg.Lang['shell.uploadFailed']);
-                statusBarTerminal.addValue('==' + message + '==\n');
+                statusBarTerminal.addValue(`\n==${message}==\n`);
             } else {
                 message = (this.shell.isCompiling() ? Msg.Lang['shell.compileSucc'] : Msg.Lang['shell.uploadSucc']);
-                statusBarTerminal.addValue(`==${message}(${Msg.Lang['shell.timeCost']} ${
+                statusBarTerminal.addValue(`\n==${message}(${Msg.Lang['shell.timeCost']} ${
                     dayjs.duration(time).format('HH:mm:ss.SSS')
                 })==\n`);
             }
@@ -129,9 +146,14 @@ class WebSocketArduShell {
             await this.showProgress();
             const key = Boards.getSelectedBoardCommandParam();
             const config = { key, code };
-            WebSocketArduShell.socket.emit('arduino.compile', config, (response) => {
-                const [error, result] = response;
+            const mixlySocket = WebSocketArduShell.getMixlySocket();
+            mixlySocket.emit('arduino.compile', config, (response) => {
                 this.hideProgress();
+                if (response.error) {
+                    reject(response.error);
+                    return;
+                }
+                const [error, result] = response;
                 if (error) {
                     reject(error);
                 } else {
@@ -148,9 +170,14 @@ class WebSocketArduShell {
             await this.showProgress();
             const key = Boards.getSelectedBoardCommandParam();
             const config = { key, code, port };
-            WebSocketArduShell.socket.emit('arduino.upload', config, (response) => {
-                const [error, result] = response;
+            const mixlySocket = WebSocketArduShell.getMixlySocket();
+            mixlySocket.emit('arduino.upload', config, (response) => {
                 this.hideProgress();
+                if (response.error) {
+                    reject(response.error);
+                    return;
+                }
+                const [error, result] = response;
                 if (error) {
                     reject(error);
                 } else {
@@ -162,7 +189,12 @@ class WebSocketArduShell {
 
     async kill() {
         return new Promise(async (resolve, reject) => {
-            WebSocketArduShell.socket.emit('arduino.kill', (response) => {
+            const mixlySocket = WebSocketArduShell.getMixlySocket();
+            mixlySocket.emit('arduino.kill', (response) => {
+                if (response.error) {
+                    reject(response.error);
+                    return;
+                }
                 const [error, result] = response;
                 if (error) {
                     reject(error);

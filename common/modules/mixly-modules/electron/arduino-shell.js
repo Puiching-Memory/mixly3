@@ -504,10 +504,10 @@ ArduShell.runCmd = (layerNum, type, cmd, code, sucFunc) => {
         let message = '';
         if (info.code) {
             message = (type === 'compile' ? Msg.Lang['shell.compileFailed'] : Msg.Lang['shell.uploadFailed']);
-            statusBarTerminal.addValue("==" + message + "==\n");
+            statusBarTerminal.addValue("\n==" + message + "==\n");
         } else {
             message = (type === 'compile' ? Msg.Lang['shell.compileSucc'] : Msg.Lang['shell.uploadSucc']);
-            statusBarTerminal.addValue(`==${message}(${Msg.Lang['shell.timeCost']} ${info.time})==\n`);
+            statusBarTerminal.addValue(`\n==${message}(${Msg.Lang['shell.timeCost']} ${info.time})==\n`);
             sucFunc();
         }
         layer.msg(message, { time: 1000 });
