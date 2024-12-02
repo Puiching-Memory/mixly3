@@ -506,8 +506,9 @@ export const CI130X_GET_THE_RECOGNIZED_CMD = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_THE_RECOGNIZED_CMD,"result"],
-                [Blockly.Msg.MIXLY_RECOGNIZED_STATE,"status"]
+                [Blockly.Msg.MIXLY_RECOGNIZED_STATE,"status1"],
+                [Blockly.Msg.MIXLY_WHETHER_BROADCAST,"status2"],
+                [Blockly.Msg.MIXLY_THE_RECOGNIZED_CMD,"result"]
             ]),"key")
         this.setOutput(true);
         this.setInputsInline(true);

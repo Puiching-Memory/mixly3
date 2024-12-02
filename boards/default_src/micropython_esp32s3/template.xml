@@ -4099,13 +4099,6 @@
         </shadow>
       </value>
     </block>
-        <block type="CI130X_GET_THE_RECOGNIZED_CMD">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">xsensor</field>
-        </shadow>
-      </value>
-    </block>
     <block type="CI130X_BROADCAST">
       <value name="SUB">
         <shadow type="variables_get">

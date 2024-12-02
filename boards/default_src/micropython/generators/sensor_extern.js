@@ -241,7 +241,7 @@ export const interaction_whether_to_interaction = function(_,generator){
 export const CI130X_IDENTIFY_AND_SAVE = function(_,generator){
     generator.definitions_['import_ci130x'] = 'import ci130x';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var code = sub+'.cmd_id()';
+    var code = sub+'.cmd_id()\n';
     return code;
 }
 
@@ -257,14 +257,13 @@ export const CI130X_GET_THE_RECOGNIZED_CMD = function(_,generator){
     generator.definitions_['import_ci130x'] = 'import ci130x';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
-    var code = sub+'.'+key +'()';
-    return [code,generator.ORDER_ATOMIC];
-}
-
-export const CI130X_GET_THE_RECOGNIZED_STATE = function(_,generator){
-    generator.definitions_['import_ci130x'] = 'import ci130x';
-    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var code = sub+'.status()';
+    if(key == 'status1'){
+        var code = sub+'.status()[0]';
+    }else if(key == 'status2'){
+        var code = sub+'.status()[1]';
+    }else{
+        var code = sub+'.'+key +'()';
+    }
     return [code,generator.ORDER_ATOMIC];
 }
 
@@ -274,7 +273,7 @@ export const CI130X_BROADCAST = function(_,generator){
     var num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
     var star = this.getFieldValue('star');
     var end = this.getFieldValue('end');
-    var code = sub+'.play('+star+','+num+','+end+')';
+    var code = sub+'.play('+star+','+num+','+end+')\n';
     return code;
 }
 
@@ -282,7 +281,7 @@ export const CI130X_SET_SYSTEM_CMD = function(_,generator){
     generator.definitions_['import_ci130x'] = 'import ci130x';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var cmd = this.getFieldValue('cmd');
-    var code = sub+'.sys_cmd('+cmd+')';
+    var code = sub+'.sys_cmd('+cmd+')\n';
     return code;
 }
 
