@@ -44,6 +44,7 @@ class CI130X:
 		_buf = self._rreg(_CI_ID_GET, 3)
 		if not repeat:
 			self._wreg(bytes([_CI_ID_CLE, 0, 0, _CI_ID_END]))
+			time.sleep_ms(50)
 		self._cmd_id = _buf[0] if _buf[2] == _CI_ID_END else None
 		return self._cmd_id
 
