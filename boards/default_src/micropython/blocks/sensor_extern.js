@@ -624,7 +624,7 @@ export const CI130X_SET_SYSTEM_CMD = {
                 [Blockly.Msg.MIXLY_MINIMUM,"205"],
                 [Blockly.Msg.MIXLY_OPEN_RESPONSE,"206"],
                 [Blockly.Msg.MIXLY_CLOSE_RESPONSE,"207"],
-                [Blockly.Msg.MIXLY_QUIT,"208"]
+                [Blockly.Msg.MIXLY_QUIT_WAKE_UP,"208"]
             ]),"cmd")
         this.setPreviousStatement(true);
         this.setNextStatement(true);
