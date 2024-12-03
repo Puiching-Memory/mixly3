@@ -29,10 +29,9 @@ class CBR817:
 	def __init__(self, i2c_bus, addr=CBR_ADDRESS, tx_power=3, threshold=5000, noise=256, delay=500, lock=500):
 		self._device  = i2c_bus
 		self._address = addr
-		_str_i2c = str(self._device)
+		_str_i2c = str(self._device)	#唤醒需要SCL管脚给高脉冲
 		self._scl = Pin(int(_str_i2c[_str_i2c.find('=') + 1 : _str_i2c.find(",")]), Pin.OUT, Pin.OPEN_DRAIN)
 
-		self._wake()
 		self._configure()
 		self.tx_power(tx_power)
 		self.threshold(threshold)
@@ -54,6 +53,7 @@ class CBR817:
 		time.sleep_us(10)
 
 	def threshold(self, value=None):
+		self._wake()
 		if value is None:
 			return self._rreg(CBR_SENSOR_THR) | self._rreg(CBR_SENSOR_THR + 1) << 8 
 		else:
@@ -61,6 +61,7 @@ class CBR817:
 			self._wreg(CBR_SENSOR_THR + 1, (value >> 8) & 0xFF)
 
 	def noise(self, value=None):
+		self._wake()
 		if value is None:
 			return self._rreg(CBR_NOISE_THR) | self._rreg(CBR_NOISE_THR + 1) << 8 
 		else:
@@ -68,6 +69,7 @@ class CBR817:
 			self._wreg(CBR_NOISE_THR + 1, (value >> 8) & 0xFF)
 
 	def delay_ms(self, value=None):
+		self._wake()
 		if value is None:
 			return round((self._rreg(CBR_DELAY_TIM) | self._rreg(CBR_DELAY_TIM + 1) << 8  | self._rreg(CBR_DELAY_TIM + 2) << 16) / 32)
 		else:
@@ -77,6 +79,7 @@ class CBR817:
 			self._wreg(CBR_DELAY_TIM + 2, (value >> 16) & 0xFF)
 
 	def lock_ms(self, value=None):
+		self._wake()
 		if value is None:
 			return round((self._rreg(CBR_LOCK_TIM) | self._rreg(CBR_LOCK_TIM + 1) << 8  | self._rreg(CBR_LOCK_TIM + 2) << 16) // 32)
 		else:
@@ -86,12 +89,14 @@ class CBR817:
 			self._wreg(CBR_LOCK_TIM + 2, (value >> 16) & 0xFF)
 
 	def tx_power(self, value=None):
+		self._wake()
 		if value is None:
 			return self._rreg(CBR_TX_RF) & 0x07
 		else:
 			self._wreg(CBR_TX_RF, (value & 0x07) | 0x30)
 
 	def _configure(self):
+		self._wake()
 		self._wreg(CBR_SEL_REG, 0xC0)			#唤醒射频芯片
 		_star = time.ticks_ms()
 		while self._rreg(CBR_SEL_REG) != 0xC0:

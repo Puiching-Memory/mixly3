@@ -1,6 +1,7 @@
 from ustruct import unpack as unp
 import utime
 from machine import I2C
+
 # Author David Wahlund david@dafnet.se
 
 # Power Modes
@@ -49,21 +50,20 @@ class BMP280:
         self._bmp_i2c = i2c_bus
         self._i2c_addr = addr
 
-
         self.chip_id = self._read(BMP280_REGISTER_ID, 2)
 
-        self._T1 = unp('<H', self._read(BMP280_REGISTER_DIG_T1, 2))[0]
-        self._T2 = unp('<h', self._read(BMP280_REGISTER_DIG_T2, 2))[0]
-        self._T3 = unp('<h', self._read(BMP280_REGISTER_DIG_T3, 2))[0]
-        self._P1 = unp('<H', self._read(BMP280_REGISTER_DIG_P1, 2))[0]
-        self._P2 = unp('<h', self._read(BMP280_REGISTER_DIG_P2, 2))[0]
-        self._P3 = unp('<h', self._read(BMP280_REGISTER_DIG_P3, 2))[0]
-        self._P4 = unp('<h', self._read(BMP280_REGISTER_DIG_P4, 2))[0]
-        self._P5 = unp('<h', self._read(BMP280_REGISTER_DIG_P5, 2))[0]
-        self._P6 = unp('<h', self._read(BMP280_REGISTER_DIG_P6, 2))[0]
-        self._P7 = unp('<h', self._read(BMP280_REGISTER_DIG_P7, 2))[0]
-        self._P8 = unp('<h', self._read(BMP280_REGISTER_DIG_P8, 2))[0]
-        self._P9 = unp('<h', self._read(BMP280_REGISTER_DIG_P9, 2))[0]
+        self._T1 = unp("<H", self._read(BMP280_REGISTER_DIG_T1, 2))[0]
+        self._T2 = unp("<h", self._read(BMP280_REGISTER_DIG_T2, 2))[0]
+        self._T3 = unp("<h", self._read(BMP280_REGISTER_DIG_T3, 2))[0]
+        self._P1 = unp("<H", self._read(BMP280_REGISTER_DIG_P1, 2))[0]
+        self._P2 = unp("<h", self._read(BMP280_REGISTER_DIG_P2, 2))[0]
+        self._P3 = unp("<h", self._read(BMP280_REGISTER_DIG_P3, 2))[0]
+        self._P4 = unp("<h", self._read(BMP280_REGISTER_DIG_P4, 2))[0]
+        self._P5 = unp("<h", self._read(BMP280_REGISTER_DIG_P5, 2))[0]
+        self._P6 = unp("<h", self._read(BMP280_REGISTER_DIG_P6, 2))[0]
+        self._P7 = unp("<h", self._read(BMP280_REGISTER_DIG_P7, 2))[0]
+        self._P8 = unp("<h", self._read(BMP280_REGISTER_DIG_P8, 2))[0]
+        self._P9 = unp("<h", self._read(BMP280_REGISTER_DIG_P9, 2))[0]
 
         self._t_os = BMP280_TEMP_OS_2  # temperature oversampling
         self._p_os = BMP280_PRES_OS_16  # pressure oversampling
@@ -96,7 +96,9 @@ class BMP280:
             r = self._t_os + (self._p_os << 3) + (1 << 6)
             self._write(BMP280_REGISTER_CONTROL, r)
             utime.sleep_ms(100)  # TODO calc sleep
-            d = self._read(BMP280_REGISTER_DATA, 6)  # read all data at once (as by spec)
+            d = self._read(
+                BMP280_REGISTER_DATA, 6
+            )  # read all data at once (as by spec)
 
             self._p_raw = (d[0] << 12) + (d[1] << 4) + (d[2] >> 4)
             self._t_raw = (d[3] << 12) + (d[4] << 4) + (d[5] >> 4)
@@ -142,14 +144,20 @@ class BMP280:
         self._gauge()
         if self._t_fine == 0:
             var1 = (((self._t_raw >> 3) - (self._T1 << 1)) * self._T2) >> 11
-            var2 = (((((self._t_raw >> 4) - self._T1) * ((self._t_raw >> 4) - self._T1)) >> 12) * self._T3) >> 14
+            var2 = (
+                (
+                    (((self._t_raw >> 4) - self._T1) * ((self._t_raw >> 4) - self._T1))
+                    >> 12
+                )
+                * self._T3
+            ) >> 14
             self._t_fine = var1 + var2
 
     # @property
     def get_BMP_temperature(self):
         self._calc_t_fine()
         if self._t == 0:
-            self._t = ((self._t_fine * 5 + 128) >> 8) / 100.
+            self._t = ((self._t_fine * 5 + 128) >> 8) / 100.0
         return self._t
 
     # @property
@@ -175,4 +183,3 @@ class BMP280:
             p = ((p + var1 + var2) >> 8) + (self._P7 << 4)
             self._p = p / 256.0
         return self._p
-

@@ -1,20 +1,28 @@
 import math
 
+
 def math_map(v, al, ah, bl, bh):
-    return bl +  (bh - bl) * (v - al) / (ah - al)
+    return bl + (bh - bl) * (v - al) / (ah - al)
+
 
 def math_mean(myList):
     localList = [e for e in myList if type(e) == int or type(e) == float]
-    if not localList: return
+    if not localList:
+        return
     return float(sum(localList)) / len(localList)
+
 
 def math_median(myList):
     localList = sorted([e for e in myList if type(e) == int or type(e) == float])
-    if not localList: return
+    if not localList:
+        return
     if len(localList) % 2 == 0:
-        return (localList[len(localList) // 2 - 1] + localList[len(localList) // 2]) / 2.0
+        return (
+            localList[len(localList) // 2 - 1] + localList[len(localList) // 2]
+        ) / 2.0
     else:
         return localList[(len(localList) - 1) // 2]
+
 
 def math_modes(some_list):
     modes = []
@@ -36,12 +44,15 @@ def math_modes(some_list):
             modes.append(counted_item)
     return modes
 
+
 def math_standard_deviation(numbers):
     n = len(numbers)
-    if n == 0: return
+    if n == 0:
+        return
     mean = float(sum(numbers)) / n
     variance = sum((x - mean) ** 2 for x in numbers) / n
     return math.sqrt(variance)
+
 
 def lists_sort(my_list, type, reverse):
     def try_float(s):
@@ -49,10 +60,11 @@ def lists_sort(my_list, type, reverse):
             return float(s)
         except:
             return 0
+
     key_funcs = {
         "NUMERIC": try_float,
         "TEXT": str,
-        "IGNORE_CASE": lambda s: str(s).lower()
+        "IGNORE_CASE": lambda s: str(s).lower(),
     }
     key_func = key_funcs[type]
     list_cpy = list(my_list)

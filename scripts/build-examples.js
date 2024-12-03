@@ -100,26 +100,29 @@ if (fs_plus.isDirectorySync(DEFAULT_SRC_DIR)) {
     }
 }
 
-const DEFAULT_DIR = path.resolve(ORIGIN_DIR, 'boards/default');
 
-if (fs_plus.isDirectorySync(DEFAULT_DIR)) {
-    const names = fs.readdirSync(DEFAULT_DIR);
-    for (let name of names) {
-        if (!['all', name].includes(options.type)) {
-            continue;
+if (!!options.obfuscate) {
+    const DEFAULT_DIR = path.resolve(ORIGIN_DIR, 'boards/default');
+
+    if (fs_plus.isDirectorySync(DEFAULT_DIR)) {
+        const names = fs.readdirSync(DEFAULT_DIR);
+        for (let name of names) {
+            if (!['all', name].includes(options.type)) {
+                continue;
+            }
+            const now = path.resolve(DEFAULT_DIR, name);
+            if (!fs_plus.isDirectorySync(now)) {
+                continue;
+            }
+            const examplesPath = path.resolve(now, 'examples');
+            if (!fs_plus.isDirectorySync(examplesPath)) {
+                continue;
+            }
+            let outputPath = path.resolve(examplesPath, 'map.json');
+            let output = getExamples(examplesPath, !!options.obfuscate);
+            fs_extra.outputJsonSync(outputPath, output, {
+                spaces: '    '
+            });
         }
-        const now = path.resolve(DEFAULT_DIR, name);
-        if (!fs_plus.isDirectorySync(now)) {
-            continue;
-        }
-        const examplesPath = path.resolve(now, 'examples');
-        if (!fs_plus.isDirectorySync(examplesPath)) {
-            continue;
-        }
-        let outputPath = path.resolve(examplesPath, 'map.json');
-        let output = getExamples(examplesPath, !!options.obfuscate);
-        fs_extra.outputJsonSync(outputPath, output, {
-            spaces: '    '
-        });
     }
 }

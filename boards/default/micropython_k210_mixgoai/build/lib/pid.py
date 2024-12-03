@@ -1,16 +1,18 @@
 import time
 from math import pi, isnan
 
+
 class PID:
     _kp = _ki = _kd = _integrator = _imax = 0
     _last_error = _last_derivative = _last_t = 0
-    _RC = 1/(2 * pi * 20)
+    _RC = 1 / (2 * pi * 20)
+
     def __init__(self, p=0, i=0, d=0, imax=0):
         self._kp = float(p)
         self._ki = float(i)
         self._kd = float(d)
         self._imax = abs(imax)
-        self._last_derivative = float('nan')
+        self._last_derivative = float("nan")
 
     def get_pid(self, error, scaler):
         tnow = time.ticks_ms()
@@ -28,19 +30,23 @@ class PID:
                 self._last_derivative = 0
             else:
                 derivative = (error - self._last_error) / delta_time
-            derivative = self._last_derivative + \
-                                     ((delta_time / (self._RC + delta_time)) * \
-                                        (derivative - self._last_derivative))
+            derivative = self._last_derivative + (
+                (delta_time / (self._RC + delta_time))
+                * (derivative - self._last_derivative)
+            )
             self._last_error = error
             self._last_derivative = derivative
             output += self._kd * derivative
         output *= scaler
         if abs(self._ki) > 0 and dt > 0:
             self._integrator += (error * self._ki) * scaler * delta_time
-            if self._integrator < -self._imax: self._integrator = -self._imax
-            elif self._integrator > self._imax: self._integrator = self._imax
+            if self._integrator < -self._imax:
+                self._integrator = -self._imax
+            elif self._integrator > self._imax:
+                self._integrator = self._imax
             output += self._integrator
         return output
+
     def reset_I(self):
         self._integrator = 0
-        self._last_derivative = float('nan')
+        self._last_derivative = float("nan")
