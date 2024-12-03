@@ -556,7 +556,7 @@ BU.uploadWithAmpy = (portName) => {
                 closePromise = statusBarSerial.close();
             }
             try {
-                const importsMap = BU.getImportModules(code);
+                /*const importsMap = BU.getImportModules(code);
                 let libraries = {};
                 for (let key in importsMap) {
                     const filename = importsMap[key]['__name__'];
@@ -565,17 +565,17 @@ BU.uploadWithAmpy = (portName) => {
                         data,
                         size: importsMap[key]['__size__']
                     };
-                }
+                }*/
                 await closePromise;
                 await ampy.enter();
-                const rootInfo = await ampy.ls('/');
+                statusBarTerminal.addValue('Writing main.py ');
+                await ampy.put('main.py', code);
+                statusBarTerminal.addValue('Done!\n');
+                /*const rootInfo = await ampy.ls('/');
                 let rootMap = {};
                 for (let item of rootInfo) {
                     rootMap[item[0]] = item[1];
                 }
-                statusBarTerminal.addValue('Writing main.py ');
-                await ampy.put('main.py', code);
-                statusBarTerminal.addValue('Done!\n');
                 if (libraries && libraries instanceof Object) {
                     for (let key in libraries) {
                         if (rootMap[`/${key}`] !== undefined && rootMap[`/${key}`] === libraries[key].size) {
@@ -586,7 +586,7 @@ BU.uploadWithAmpy = (portName) => {
                         await ampy.put(key, libraries[key].data);
                         statusBarTerminal.addValue('Done!\n');
                     }
-                }
+                }*/
                 await ampy.exit();
                 await ampy.dispose();
                 layer.close(index);
