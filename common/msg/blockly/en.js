@@ -156,7 +156,7 @@ En.MSG = {
     catAudio: "Audio",
     catNeopixel: "RGB light",
     catOneWire: "OneWire Communicate",
-    catBLE: "Bluetooth",
+    catBLE: "Bluetooth transmission",
     catBLEC:"Bluetooth remote control",
     catBLEKM:"Bluetooth keyboard and mouse",
     catBLE_HID: "Peripheral Device (Slave)",
