@@ -1,16 +1,18 @@
 from microbit import *
 
-DS1307_I2C_ADDRESS  = (104)
-DS1307_REG_SECOND   = (0)
-DS1307_REG_MINUTE   = (1)
-DS1307_REG_HOUR     = (2)
-DS1307_REG_WEEKDAY  = (3)
-DS1307_REG_DAY      = (4)
-DS1307_REG_MONTH    = (5)
-DS1307_REG_YEAR     = (6)
-DS1307_REG_CTRL     = (7)
-DS1307_REG_RAM      = (8)
-class DS1307():
+DS1307_I2C_ADDRESS = 104
+DS1307_REG_SECOND = 0
+DS1307_REG_MINUTE = 1
+DS1307_REG_HOUR = 2
+DS1307_REG_WEEKDAY = 3
+DS1307_REG_DAY = 4
+DS1307_REG_MONTH = 5
+DS1307_REG_YEAR = 6
+DS1307_REG_CTRL = 7
+DS1307_REG_RAM = 8
+
+
+class DS1307:
     # set reg
     def setReg(self, reg, dat):
         i2c.write(DS1307_I2C_ADDRESS, bytearray([reg, dat]))
@@ -23,17 +25,17 @@ class DS1307():
 
     def start(self):
         t = self.getReg(DS1307_REG_SECOND)
-        self.setReg(DS1307_REG_SECOND, t&0x7F)
+        self.setReg(DS1307_REG_SECOND, t & 0x7F)
 
     def stop(self):
         t = self.getReg(DS1307_REG_SECOND)
-        self.setReg(DS1307_REG_SECOND, t|0x80)
+        self.setReg(DS1307_REG_SECOND, t | 0x80)
 
     def DecToHex(self, dat):
-        return (dat//10) * 16 + (dat%10)
+        return (dat // 10) * 16 + (dat % 10)
 
     def HexToDec(self, dat):
-        return (dat//16) * 10 + (dat%16)
+        return (dat // 16) * 10 + (dat % 16)
 
     def DateTime(self, DT=None):
         if DT == None:
@@ -52,62 +54,62 @@ class DS1307():
         else:
             buf = bytearray(8)
             buf[0] = 0
-            buf[1] = self.DecToHex(DT[6]%60)    # second
-            buf[2] = self.DecToHex(DT[5]%60)    # minute
-            buf[3] = self.DecToHex(DT[4]%24)    # hour
-            buf[4] = self.DecToHex(DT[3]%8)     # week day
-            buf[5] = self.DecToHex(DT[2]%32)    # date
-            buf[6] = self.DecToHex(DT[1]%13)    # month
-            buf[7] = self.DecToHex(DT[0]%100)   # year
+            buf[1] = self.DecToHex(DT[6] % 60)  # second
+            buf[2] = self.DecToHex(DT[5] % 60)  # minute
+            buf[3] = self.DecToHex(DT[4] % 24)  # hour
+            buf[4] = self.DecToHex(DT[3] % 8)  # week day
+            buf[5] = self.DecToHex(DT[2] % 32)  # date
+            buf[6] = self.DecToHex(DT[1] % 13)  # month
+            buf[7] = self.DecToHex(DT[0] % 100)  # year
             i2c.write(DS1307_I2C_ADDRESS, buf)
 
-    def Year(self, year = None):
+    def Year(self, year=None):
         if year == None:
             return self.HexToDec(self.getReg(DS1307_REG_YEAR)) + 2000
         else:
-            self.setReg(DS1307_REG_YEAR, self.DecToHex(year%100))
+            self.setReg(DS1307_REG_YEAR, self.DecToHex(year % 100))
 
-    def Month(self, month = None):
+    def Month(self, month=None):
         if month == None:
             return self.HexToDec(self.getReg(DS1307_REG_MONTH))
         else:
-            self.setReg(DS1307_REG_MONTH, self.DecToHex(month%13))
+            self.setReg(DS1307_REG_MONTH, self.DecToHex(month % 13))
 
-    def Day(self, day = None):
+    def Day(self, day=None):
         if day == None:
             return self.HexToDec(self.getReg(DS1307_REG_DAY))
         else:
-            self.setReg(DS1307_REG_DAY, self.DecToHex(day%32))
+            self.setReg(DS1307_REG_DAY, self.DecToHex(day % 32))
 
-    def Weekday(self, weekday = None):
+    def Weekday(self, weekday=None):
         if weekday == None:
             return self.HexToDec(self.getReg(DS1307_REG_WEEKDAY))
         else:
-            self.setReg(DS1307_REG_WEEKDAY, self.DecToHex(weekday%8))
+            self.setReg(DS1307_REG_WEEKDAY, self.DecToHex(weekday % 8))
 
-    def Hour(self, hour = None):
+    def Hour(self, hour=None):
         if hour == None:
             return self.HexToDec(self.getReg(DS1307_REG_HOUR))
         else:
-            self.setReg(DS1307_REG_HOUR, self.DecToHex(hour%24))
+            self.setReg(DS1307_REG_HOUR, self.DecToHex(hour % 24))
 
-    def Minute(self, minute = None):
+    def Minute(self, minute=None):
         if minute == None:
             return self.HexToDec(self.getReg(DS1307_REG_MINUTE))
         else:
-            self.setReg(DS1307_REG_MINUTE, self.DecToHex(minute%60))
+            self.setReg(DS1307_REG_MINUTE, self.DecToHex(minute % 60))
 
-    def Second(self, second = None):
+    def Second(self, second=None):
         if second == None:
             return self.HexToDec(self.getReg(DS1307_REG_SECOND))
         else:
-            self.setReg(DS1307_REG_SECOND, self.DecToHex(second%60))
+            self.setReg(DS1307_REG_SECOND, self.DecToHex(second % 60))
 
-    def ram(self, reg, dat = None):
+    def ram(self, reg, dat=None):
         if dat == None:
-            return self.getReg(DS1307_REG_RAM + (reg%56))
+            return self.getReg(DS1307_REG_RAM + (reg % 56))
         else:
-            self.setReg(DS1307_REG_RAM + (reg%56), dat)
+            self.setReg(DS1307_REG_RAM + (reg % 56), dat)
 
     def get_time(self):
         return self.Hour() + self.Minute() + self.Second()
@@ -124,5 +126,6 @@ class DS1307():
         self.Year(year)
         self.Month(month)
         self.Day(day)
+
 
 ds = DS1307()

@@ -19,22 +19,23 @@ import ustruct
 import utime
 import time
 import math
-#from machine import I2C, Pin
+
+# from machine import I2C, Pin
 # pylint: enable=import-error
 __version__ = "0.2.0"
 # pylint: disable=import-error
 # pylint: enable=import-error
 
-_GYRO_CONFIG = const(0x1b)
-_ACCEL_CONFIG = const(0x1c)
-_ACCEL_CONFIG2 = const(0x1d)
+_GYRO_CONFIG = const(0x1B)
+_ACCEL_CONFIG = const(0x1C)
+_ACCEL_CONFIG2 = const(0x1D)
 _INT_PIN_CFG = const(0x37)
-_ACCEL_XOUT_H = const(0x3b)
-_ACCEL_XOUT_L = const(0x3c)
-_ACCEL_YOUT_H = const(0x3d)
-_ACCEL_YOUT_L = const(0x3e)
-_ACCEL_ZOUT_H = const(0x3f)
-_ACCEL_ZOUT_L= const(0x40)
+_ACCEL_XOUT_H = const(0x3B)
+_ACCEL_XOUT_L = const(0x3C)
+_ACCEL_YOUT_H = const(0x3D)
+_ACCEL_YOUT_L = const(0x3E)
+_ACCEL_ZOUT_H = const(0x3F)
+_ACCEL_ZOUT_L = const(0x40)
 _TEMP_OUT_H = const(0x41)
 _TEMP_OUT_L = const(0x42)
 _GYRO_XOUT_H = const(0x43)
@@ -45,18 +46,18 @@ _GYRO_ZOUT_H = const(0x47)
 _GYRO_ZOUT_L = const(0x48)
 _WHO_AM_I = const(0x75)
 
-#_ACCEL_FS_MASK = const(0b00011000)
+# _ACCEL_FS_MASK = const(0b00011000)
 ACCEL_FS_SEL_2G = const(0b00000000)
 ACCEL_FS_SEL_4G = const(0b00001000)
 ACCEL_FS_SEL_8G = const(0b00010000)
 ACCEL_FS_SEL_16G = const(0b00011000)
 
-_ACCEL_SO_2G = 16384 # 1 / 16384 ie. 0.061 mg / digit
-_ACCEL_SO_4G = 8192 # 1 / 8192 ie. 0.122 mg / digit
-_ACCEL_SO_8G = 4096 # 1 / 4096 ie. 0.244 mg / digit
-_ACCEL_SO_16G = 2048 # 1 / 2048 ie. 0.488 mg / digit
+_ACCEL_SO_2G = 16384  # 1 / 16384 ie. 0.061 mg / digit
+_ACCEL_SO_4G = 8192  # 1 / 8192 ie. 0.122 mg / digit
+_ACCEL_SO_8G = 4096  # 1 / 4096 ie. 0.244 mg / digit
+_ACCEL_SO_16G = 2048  # 1 / 2048 ie. 0.488 mg / digit
 
-#_GYRO_FS_MASK = const(0b00011000)
+# _GYRO_FS_MASK = const(0b00011000)
 GYRO_FS_SEL_250DPS = const(0b00000000)
 GYRO_FS_SEL_500DPS = const(0b00001000)
 GYRO_FS_SEL_1000DPS = const(0b00010000)
@@ -73,9 +74,9 @@ _I2C_BYPASS_EN = const(0b00000010)
 _I2C_BYPASS_DIS = const(0b00000000)
 
 SF_G = 1
-SF_M_S2 = 9.80665 # 1 g = 9.80665 m/s2 ie. standard gravity
+SF_M_S2 = 9.80665  # 1 g = 9.80665 m/s2 ie. standard gravity
 SF_DEG_S = 1
-SF_RAD_S = 57.295779578552 # 1 rad/s is 57.295779578552 deg/s
+SF_RAD_S = 57.295779578552  # 1 rad/s is 57.295779578552 deg/s
 
 
 _WIA = const(0x00)
@@ -86,15 +87,15 @@ _HYH = const(0x06)
 _HZL = const(0x07)
 _HZH = const(0x08)
 _ST2 = const(0x09)
-_CNTL1 = const(0x0a)
+_CNTL1 = const(0x0A)
 _ASAX = const(0x10)
 _ASAY = const(0x11)
 _ASAZ = const(0x12)
 
 _MODE_POWER_DOWN = 0b00000000
 MODE_SINGLE_MEASURE = 0b00000001
-MODE_CONTINOUS_MEASURE_1 = 0b00000010 # 8Hz
-MODE_CONTINOUS_MEASURE_2 = 0b00000110 # 100Hz
+MODE_CONTINOUS_MEASURE_1 = 0b00000010  # 8Hz
+MODE_CONTINOUS_MEASURE_2 = 0b00000110  # 100Hz
 MODE_EXTERNAL_TRIGGER_MEASURE = 0b00000100
 _MODE_SELF_TEST = 0b00001000
 _MODE_FUSE_ROM_ACCESS = 0b00001111
@@ -102,15 +103,21 @@ _MODE_FUSE_ROM_ACCESS = 0b00001111
 OUTPUT_14_BIT = 0b00000000
 OUTPUT_16_BIT = 0b00010000
 
-_SO_14BIT = 0.6 # 渭T per digit when 14bit mode
-_SO_16BIT = 0.15 # 渭T per digit when 16bit mode
+_SO_14BIT = 0.6  # 渭T per digit when 14bit mode
+_SO_16BIT = 0.15  # 渭T per digit when 16bit mode
+
 
 class MPU6500:
     """Class which provides interface to MPU6500 6-axis motion tracking device."""
+
     def __init__(
-        self, i2c, address=0x68,
-        accel_fs=ACCEL_FS_SEL_2G, gyro_fs=GYRO_FS_SEL_250DPS,
-        accel_sf=SF_M_S2, gyro_sf=SF_RAD_S
+        self,
+        i2c,
+        address=0x68,
+        accel_fs=ACCEL_FS_SEL_2G,
+        gyro_fs=GYRO_FS_SEL_250DPS,
+        accel_sf=SF_M_S2,
+        gyro_sf=SF_RAD_S,
     ):
         self.i2c = i2c
         self.address = address
@@ -125,15 +132,15 @@ class MPU6500:
 
         # Enable I2C bypass to access for MPU9250 magnetometer access.
         char = self._register_char(_INT_PIN_CFG)
-        char &= ~_I2C_BYPASS_MASK # clear I2C bits
+        char &= ~_I2C_BYPASS_MASK  # clear I2C bits
         char |= _I2C_BYPASS_EN
         self._register_char(_INT_PIN_CFG, char)
-		
+
     @property
     def temperature(self):
-        tempbuf=self._register_short(0x41)
-        return tempbuf/333.87 + 21  # I think
-		
+        tempbuf = self._register_short(0x41)
+        return tempbuf / 333.87 + 21  # I think
+
     # @property
     def acceleration(self):
         """
@@ -161,7 +168,7 @@ class MPU6500:
 
     @property
     def whoami(self):
-        """ Value of the whoami register. """
+        """Value of the whoami register."""
         return self._register_char(_WHO_AM_I)
 
     def _register_short(self, register, value=None, buf=bytearray(2)):
@@ -216,12 +223,18 @@ class MPU6500:
     def __exit__(self, exception_type, exception_value, traceback):
         pass
 
+
 class AK8963:
     """Class which provides interface to AK8963 magnetometer."""
+
     def __init__(
-        self, i2c, address=0x0c,
-        mode=MODE_CONTINOUS_MEASURE_1, output=OUTPUT_16_BIT,
-        offset=(0, 0, 0), scale=(1, 1, 1)
+        self,
+        i2c,
+        address=0x0C,
+        mode=MODE_CONTINOUS_MEASURE_1,
+        output=OUTPUT_16_BIT,
+        offset=(0, 0, 0),
+        scale=(1, 1, 1),
     ):
         self.i2c = i2c
         self.address = address
@@ -242,7 +255,7 @@ class AK8963:
         self._adjustement = (
             (0.5 * (asax - 128)) / 128 + 1,
             (0.5 * (asay - 128)) / 128 + 1,
-            (0.5 * (asaz - 128)) / 128 + 1
+            (0.5 * (asaz - 128)) / 128 + 1,
         )
 
         # Power on
@@ -252,15 +265,14 @@ class AK8963:
             self._so = _SO_16BIT
         else:
             self._so = _SO_14BIT
-	
-   	
+
     @property
     def magnetic(self):
         """
         X, Y, Z axis micro-Tesla (uT) as floats.
         """
         xyz = list(self._register_three_shorts(_HXL))
-        self._register_char(_ST2) # Enable updating readings again
+        self._register_char(_ST2)  # Enable updating readings again
 
         # Apply factory axial sensitivy adjustements
         xyz[0] *= self._adjustement[0]
@@ -291,7 +303,7 @@ class AK8963:
 
     @property
     def whoami(self):
-        """ Value of the whoami register. """
+        """Value of the whoami register."""
         return self._register_char(_WIA)
 
     def calibrate(self, count=3, delay=200):
@@ -313,7 +325,6 @@ class AK8963:
             minz = min(minz, reading[2])
             maxz = max(maxz, reading[2])
             count -= 1
-
 
         # Hard iron correction
         offset_x = (maxx + minx) / 2
@@ -362,11 +373,12 @@ class AK8963:
 
     def __exit__(self, exception_type, exception_value, traceback):
         pass
-		
+
 
 class MPU9250:
     """Class which provides interface to MPU9250 9-axis motion tracking device."""
-    def __init__(self, i2c, mpu6500 = None, ak8963 = None):
+
+    def __init__(self, i2c, mpu6500=None, ak8963=None):
         if mpu6500 is None:
             self.mpu6500 = MPU6500(i2c)
         else:
@@ -386,8 +398,8 @@ class MPU9250:
     #     """
     #     return self.mpu6500.acceleration
     def mpu9250_get_temperature(self):
-		return self.mpu6500.temperature
-		
+        return self.mpu6500.temperature
+
     def mpu9250_get_values(self):
         """
         Acceleration measured by the sensor. By default will return a
@@ -395,7 +407,7 @@ class MPU9250:
         pass `accel_fs=SF_G` parameter to the MPU6500 constructor.
         """
         g = self.mpu6500.acceleration()
-        a = [round(x/9.8, 2) for x in g]
+        a = [round(x / 9.8, 2) for x in g]
         return tuple(a)
 
     def mpu9250_get_x(self):
@@ -404,15 +416,15 @@ class MPU9250:
         3-tuple of X, Y, Z axis values in m/s^2 as floats. To get values in g
         pass `accel_fs=SF_G` parameter to the MPU6500 constructor.
         """
-        return round(self.mpu6500.acceleration()[0]/9.8, 2)
-    
+        return round(self.mpu6500.acceleration()[0] / 9.8, 2)
+
     def mpu9250_get_y(self):
         """
         Acceleration measured by the sensor. By default will return a
         3-tuple of X, Y, Z axis values in m/s^2 as floats. To get values in g
         pass `accel_fs=SF_G` parameter to the MPU6500 constructor.
         """
-        return round(self.mpu6500.acceleration()[1]/9.8, 2)
+        return round(self.mpu6500.acceleration()[1] / 9.8, 2)
 
     def mpu9250_get_z(self):
         """
@@ -420,45 +432,47 @@ class MPU9250:
         3-tuple of X, Y, Z axis values in m/s^2 as floats. To get values in g
         pass `accel_fs=SF_G` parameter to the MPU6500 constructor.
         """
-        return round(self.mpu6500.acceleration()[2]/9.8, 2)
+        return round(self.mpu6500.acceleration()[2] / 9.8, 2)
 
-           
-    def mpu9250_is_gesture(self,choice):
-    	if choice == 'face up':
-    		if self.mpu6500.acceleration()[2] <= -9:
-    			return True
-    		else:
-    			return False
-    	if choice == 'face down':
-    		if self.mpu6500.acceleration()[2] >= 9:
-    			return True
-    		else:
-    			return False
-        if choice == 'shake':
-    		if abs(self.mpu6500.acceleration()[0]) >= 9 and abs(self.mpu6500.acceleration()[1]) >= 9 :
-    			return True
-    		else:
-    			return False
-        if choice == 'up':
-    		if self.mpu6500.acceleration()[1] >= 9:
-    			return True
-    		else:
-    			return False
-    	if choice == 'down':
-    		if self.mpu6500.acceleration()[1] <= -9:
-    			return True
-    		else:
-    			return False
-        if choice == 'right':
-    		if self.mpu6500.acceleration()[0] <= -9:
-    			return True
-    		else:
-    			return False
-    	if choice == 'left':
-    		if self.mpu6500.acceleration()[0] >= 9:
-    			return True
-    		else:
-    			return False
+    def mpu9250_is_gesture(self, choice):
+        if choice == "face up":
+            if self.mpu6500.acceleration()[2] <= -9:
+                return True
+            else:
+                return False
+        if choice == "face down":
+            if self.mpu6500.acceleration()[2] >= 9:
+                return True
+            else:
+                return False
+        if choice == "shake":
+            if (
+                abs(self.mpu6500.acceleration()[0]) >= 9
+                and abs(self.mpu6500.acceleration()[1]) >= 9
+            ):
+                return True
+            else:
+                return False
+        if choice == "up":
+            if self.mpu6500.acceleration()[1] >= 9:
+                return True
+            else:
+                return False
+        if choice == "down":
+            if self.mpu6500.acceleration()[1] <= -9:
+                return True
+            else:
+                return False
+        if choice == "right":
+            if self.mpu6500.acceleration()[0] <= -9:
+                return True
+            else:
+                return False
+        if choice == "left":
+            if self.mpu6500.acceleration()[0] >= 9:
+                return True
+            else:
+                return False
 
     @property
     def mpu9250_gyro(self):
@@ -499,23 +513,27 @@ class MPU9250:
 
     def mpu9250_magnetic_values(self):
         return self.mpu9250_magnetic
-        
+
     # @property
     def mpu9250_get_field_strength(self):
-    	x=self.mpu9250_magnetic[0]
-    	y=self.mpu9250_magnetic[1]
-    	z=self.mpu9250_magnetic[2]
-    	return (x**2+y**2+z**2)**0.5*1000
+        x = self.mpu9250_magnetic[0]
+        y = self.mpu9250_magnetic[1]
+        z = self.mpu9250_magnetic[2]
+        return (x**2 + y**2 + z**2) ** 0.5 * 1000
 
     def mpu9250_heading(self):
-        x=self.mpu9250_magnetic[0]
-        y=self.mpu9250_magnetic[1]
-        z=self.mpu9250_magnetic[2]
-        a=math.atan(z/x)
-        b=math.atan(z/y)
-        xr=x*math.cos(a)+y*math.sin(a)*math.sin(b)-z*math.cos(b)*math.sin(a)
-        yr=x*math.cos(b)+z*math.sin(b)
-        return 60*math.atan(yr/xr)
+        x = self.mpu9250_magnetic[0]
+        y = self.mpu9250_magnetic[1]
+        z = self.mpu9250_magnetic[2]
+        a = math.atan(z / x)
+        b = math.atan(z / y)
+        xr = (
+            x * math.cos(a)
+            + y * math.sin(a) * math.sin(b)
+            - z * math.cos(b) * math.sin(a)
+        )
+        yr = x * math.cos(b) + z * math.sin(b)
+        return 60 * math.atan(yr / xr)
 
     @property
     def whoami(self):
@@ -526,6 +544,7 @@ class MPU9250:
 
     def __exit__(self, exception_type, exception_value, traceback):
         pass
+
 
 class Compass:
     RAD_TO_DEG = 57.295779513082320876798154814105
@@ -547,20 +566,23 @@ class Compass:
 
     def heading(self):
         from math import atan2
+
         xyz = self.sensor.mpu9250_magnetic
         return int(((atan2(xyz[1], xyz[0]) * Compass.RAD_TO_DEG) + 180) % 360)
-
 
     def is_calibrate(self):
         try:
             import compass_cfg
+
             return True
         except Exception as e:
             return False
 
     def reset_calibrate(self):
         import os
+
         os.remove("compass_cfg.py")
+
+
 # compass = mpu
 # accelerometer = mpu
-

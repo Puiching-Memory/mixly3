@@ -32,7 +32,7 @@ class OLED12864_I2C():
         self.screen[0] = 0x40
     
     def command(self, c):
-        i2c.write(self.ADDR, b'·' + bytearray(c))
+        i2c.write(self.ADDR, b'\xb7' + bytearray(c))
 
     def set_pos(self, col=0, page=0):
         self.command([0xb0 | page])    # page number
