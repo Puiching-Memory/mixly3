@@ -4040,5 +4040,6 @@ ZhHans.MIXLY_MAX_VOLUME = '最大音量';
 ZhHans.MIXLY_MINIMUM = '最小音量';
 ZhHans.MIXLY_OPEN_RESPONSE = '打开回复';
 ZhHans.MIXLY_CLOSE_RESPONSE = '关闭回复';
-ZhHans.MIXLY_QUIT = '退出';
+ZhHans.MILXY_ENTER_WAKE_UP = '进入唤醒';
+ZhHans.MIXLY_QUIT_WAKE_UP = '退出唤醒';
 })();

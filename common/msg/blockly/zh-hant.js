@@ -3890,5 +3890,6 @@ ZhHant.MIXLY_MAX_VOLUME = '最大音量';
 ZhHant.MIXLY_MINIMUM = '最小音量';
 ZhHant.MIXLY_OPEN_RESPONSE = '打開回覆';
 ZhHant.MIXLY_CLOSE_RESPONSE = '關閉回覆';
-ZhHant.MIXLY_QUIT = '退出';
+ZhHant.MILXY_ENTER_WAKE_UP = '進入喚醒';
+ZhHant.MIXLY_QUIT_WAKE_UP = '退出喚醒';
 })();

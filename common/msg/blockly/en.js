@@ -3886,5 +3886,6 @@ En.MIXLY_MAX_VOLUME = 'Max Volume';
 En.MIXLY_MINIMUM = 'Min Volume';
 En.MIXLY_OPEN_RESPONSE = 'Open Response';
 En.MIXLY_CLOSE_RESPONSE = 'Close Response';
-En.MIXLY_QUIT = 'Quit';
+En.MILXY_ENTER_WAKE_UP = 'Enter wake up';
+En.MIXLY_QUIT_WAKE_UP = 'Quit wake up ';
 })();

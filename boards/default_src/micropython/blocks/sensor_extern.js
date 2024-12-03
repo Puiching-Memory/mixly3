@@ -617,8 +617,7 @@ export const CI130X_SET_SYSTEM_CMD = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXLY_SYSTEM + Blockly.Msg.MIXLY_CMD)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_HELLO_XIAOZHI,"1"],
-                [Blockly.Msg.MIXLY_XIAOZHIXIAOZHI,"2"],
+                [Blockly.Msg.MILXY_ENTER_WAKE_UP,"1"],
                 [Blockly.Msg.MIXLY_INCREASE_VOLUME,"202"],
                 [Blockly.Msg.MIXLY_REDUCE_VOLUME,"203"],
                 [Blockly.Msg.MIXLY_MAX_VOLUME,"204"],
