@@ -5,7 +5,7 @@
     "scripts": {
         "serve": "webpack-dev-server --config=webpack.dev.js",
         "build:dev": "webpack --config=webpack.dev.js",
-        "build:prod": "webpack --config=webpack.prod.js && npm run build:examples",
+        "build:prod": "npm run build:examples & webpack --config=webpack.prod.js",
         "build:examples": "node ../../../scripts/build-examples.js -t special",
         "build:examples:ob": "node ../../../scripts/build-examples.js -t special --obfuscate",
         "build:examples:": "node ../../../scripts/build-examples.js -t special",

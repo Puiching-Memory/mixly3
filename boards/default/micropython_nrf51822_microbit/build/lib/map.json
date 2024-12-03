@@ -1,0 +1,80 @@
+{
+    "lcd1602": {
+        "__require__": [
+            "microbit"
+        ],
+        "__file__": true,
+        "__name__": "lcd1602.py"
+    },
+    "mixpy": {
+        "__require__": [
+            "math"
+        ],
+        "__file__": true,
+        "__name__": "mixpy.py"
+    },
+    "motor_control": {
+        "__require__": [
+            "microbit"
+        ],
+        "__file__": true,
+        "__name__": "motor_control.py"
+    },
+    "MP3": {
+        "__require__": [
+            "microbit"
+        ],
+        "__file__": true,
+        "__name__": "MP3.py"
+    },
+    "ntc": {
+        "__require__": [
+            "microbit",
+            "math"
+        ],
+        "__file__": true,
+        "__name__": "ntc.py"
+    },
+    "oled": {
+        "__require__": [
+            "microbit"
+        ],
+        "__file__": true,
+        "__name__": "oled.py"
+    },
+    "rgb": {
+        "__require__": [
+            "microbit"
+        ],
+        "__file__": true,
+        "__name__": "rgb.py"
+    },
+    "RTC": {
+        "__require__": [
+            "microbit"
+        ],
+        "__file__": true,
+        "__name__": "RTC.py"
+    },
+    "Servo": {
+        "__require__": [
+            "microbit"
+        ],
+        "__file__": true,
+        "__name__": "Servo.py"
+    },
+    "TCS": {
+        "__require__": [
+            "microbit"
+        ],
+        "__file__": true,
+        "__name__": "TCS.py"
+    },
+    "ultrasonic": {
+        "__require__": [
+            "microbit"
+        ],
+        "__file__": true,
+        "__name__": "ultrasonic.py"
+    }
+}
