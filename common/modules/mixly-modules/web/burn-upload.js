@@ -14,6 +14,7 @@ goog.require('Mixly.Msg');
 goog.require('Mixly.Workspace');
 goog.require('Mixly.Debug');
 goog.require('Mixly.HTMLTemplate');
+goog.require('Mixly.MString');
 goog.require('Mixly.Web.Serial');
 goog.require('Mixly.Web.USB');
 goog.require('Mixly.Web.Ampy');
@@ -29,7 +30,8 @@ const {
     Msg,
     Workspace,
     Debug,
-    HTMLTemplate
+    HTMLTemplate,
+    MString
 } = Mixly;
 
 const {
@@ -453,64 +455,61 @@ BU.burnWithAdafruitEsptool = async (binFile) => {
 }
 
 BU.getImportModulesName = (code) => {
-    const { web = {} } = SELECTED_BOARD;
-    const { lib } = web;
-    if (!(lib instanceof Object)) {
-        return [];
-    }
-    let lineList = [];
-    code.trim().split("\n").forEach(function (v, i) {
-        lineList.push(v);
-    });
-    let moduleName = "";
-    let moduleList = [];
-    for (let data of lineList) {
-        let fromLoc = data.indexOf("from");
-        let importLoc = data.indexOf("import");
-        const str = data.substring(0, (fromLoc === -1)? importLoc : fromLoc);
-        str.split('').forEach((ch) => {
-            if (ch !== ' ' && ch !== '\t') {
-                fromLoc = -1;
-                importLoc = -1;
-                return;
-            }
-        });
-        if (fromLoc !== -1) {
-            moduleName = data.substring(fromLoc + 4, data.indexOf("import"));
-        } else if (importLoc !== -1) {
-            moduleName = data.substring(importLoc + 6);
-        } else {
-            continue;
+    // 正则表达式: 匹配 import 或 from 导入语句
+    const importRegex = /(?:import\s+([a-zA-Z0-9_]+)|from\s+([a-zA-Z0-9_]+)\s+import)/g;
+
+    let imports = [];
+    let match;
+    while ((match = importRegex.exec(code)) !== null) {
+        if (match[1]) {
+            imports.push(match[1]); // 'import module'
         }
-        moduleName = moduleName.replaceAll(' ', '');
-        moduleName = moduleName.replaceAll('\r', '');
-        moduleList = [ ...moduleList, ...moduleName.split(",") ];
+        if (match[2]) {
+            imports.push(match[2]); // 'from module import ...'
+        }
     }
-    return moduleList;
+    return imports;
 }
 
-BU.searchLibs = (moduleList, libList = []) => {
-    const { web = {} } = SELECTED_BOARD;
-    const { lib } = web;
-    if (!(lib instanceof Object)) {
-        return [];
-    }
-    const { mainStatusBarTabs } = Mixly;
-    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
-    for (let name of moduleList) {
-        if (!libList.includes(name)) {
-            if (!lib[name]) {
-                continue;
-            }
-            libList.push(name);
-            statusBarTerminal.addValue(Msg.Lang['shell.copyLib'] + ' ' + name + '.py\n');
-            if (!lib[name].import.length) {
-                continue;
-            }
-            libList = BU.searchLibs(lib[name].import, libList);
+BU.getImportModules = (code) => {
+    let importsMap = {};
+    const libPath = SELECTED_BOARD.upload.libPath;
+    for (let i = libPath.length - 1; i >= 0; i--) {
+        const dirname = MString.tpl(libPath[i], { indexPath: Env.boardDirPath });
+        const map = goog.getJSON(path.join(dirname, 'map.json'));
+        if (!(map && map instanceof Object)) {
+            continue;
+        }
+        for (let key in map) {
+            importsMap[key] = structuredClone(map[key]);
+            importsMap[key]['__path__'] = path.join(dirname, map[key]['__name__']);
         }
     }
-    return libList;
+
+    let usedMap = {};
+    let currentImports = BU.getImportModulesName(code);
+    while (currentImports.length) {
+        let temp = [];
+        for (let moduleName of currentImports) {
+            let moduleInfo = importsMap[moduleName];
+            if (!moduleInfo) {
+                continue;
+            }
+            usedMap[moduleName] = moduleInfo;
+            const moduleImports = moduleInfo['__require__'];
+            if (!moduleImports) {
+                continue;
+            }
+            for (let name of moduleImports) {
+                if (usedMap[name] || !importsMap[name] || temp.includes(name)) {
+                    continue;
+                }
+                temp.push(name);
+            }
+        }
+        currentImports = temp;
+    }
+    return usedMap;
 }
 
 BU.initUpload = async () => {
@@ -548,32 +547,48 @@ BU.uploadWithAmpy = (portName) => {
         shade: LayerExt.SHADE_NAV,
         resize: false,
         closeBtn: 0,
-        success: function (layero, index) {
+        success: async function (layero, index) {
             const serial = new Serial(portName);
             const ampy = new Ampy(serial);
             const code = editor.getCode();
-            /*let moduleList = BU.getImportModulesName(code);
-            moduleList = BU.searchLibs(moduleList);
-            const moduleInfo = {};
-            for (let name of moduleList) {
-                moduleInfo[name] = SELECTED_BOARD.web.lib[name].path;
-            }*/
             let closePromise = Promise.resolve();
             if (statusBarSerial) {
                 closePromise = statusBarSerial.close();
             }
-            closePromise
-            .then(() => ampy.enter())
-            .then(() => {
+            try {
+                const importsMap = BU.getImportModules(code);
+                let libraries = {};
+                for (let key in importsMap) {
+                    const filename = importsMap[key]['__name__'];
+                    const data = goog.get(importsMap[key]['__path__']);
+                    libraries[filename] = {
+                        data,
+                        size: importsMap[key]['__size__']
+                    };
+                }
+                await closePromise;
+                await ampy.enter();
+                const rootInfo = await ampy.ls('/');
+                let rootMap = {};
+                for (let item of rootInfo) {
+                    rootMap[item[0]] = item[1];
+                }
                 statusBarTerminal.addValue('Writing main.py ');
-                return ampy.put('main.py', code);
-            })
-            .then(() => {
+                await ampy.put('main.py', code);
                 statusBarTerminal.addValue('Done!\n');
-                return ampy.exit();
-            })
-            .then(() => ampy.dispose())
-            .then(() => {
+                if (libraries && libraries instanceof Object) {
+                    for (let key in libraries) {
+                        if (rootMap[`/${key}`] !== undefined && rootMap[`/${key}`] === libraries[key].size) {
+                            statusBarTerminal.addValue(`Skip ${key}\n`);
+                            continue;
+                        }
+                        statusBarTerminal.addValue(`Writing ${key} `);
+                        await ampy.put(key, libraries[key].data);
+                        statusBarTerminal.addValue('Done!\n');
+                    }
+                }
+                await ampy.exit();
+                await ampy.dispose();
                 layer.close(index);
                 layer.msg(Msg.Lang['shell.uploadSucc'], { time: 1000 });
                 statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadSucc']}==\n`);
@@ -583,19 +598,16 @@ BU.uploadWithAmpy = (portName) => {
                 }
                 statusBarSerial.setValue('');
                 mainStatusBarTabs.changeTo(portName);
-                statusBarSerial.open().catch(Debug.error);
-            })
-            .catch((error) => {
+                await statusBarSerial.open();
+            } catch (error) {
                 ampy.dispose();
                 layer.close(index);
                 console.error(error);
                 statusBarTerminal.addValue(`${error}\n`);
                 statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadFailed']}==\n`);
-            })
-            .finally(async () => {
-                BU.burning = false;
-                BU.uploading = false;
-            });
+            }
+            BU.burning = false;
+            BU.uploading = false;
         }
     });
 }
