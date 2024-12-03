@@ -50,6 +50,33 @@ class WebSocket {
         }
     }
 
+    async emitAsync(eventName, ...args) {
+        return new Promise((resolve, reject) => {
+            if (this.isConnected()) {
+                const callback = (...callbackArgs) => {
+                    if (callbackArgs[0].error) {
+                        reject(callbackArgs[0].error);
+                        return;
+                    }
+                    resolve(...callbackArgs);
+                }
+                let emitStatus = {
+                    finished: false
+                };
+                let status = this.#socket_.emit(eventName, ...args, (...callbackArgs) => {
+                    if (emitStatus.finished) {
+                        return;
+                    }
+                    emitStatus.finished = true;
+                    callback(...callbackArgs);
+                });
+                this.#detectStatus_(emitStatus, callback);
+            } else {
+                reject('socket is not connected');
+            }
+        })
+    }
+
     getSocket() {
         return this.#socket_;
     }

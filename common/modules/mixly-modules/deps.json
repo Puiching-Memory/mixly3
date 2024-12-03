@@ -2,9 +2,11 @@
     {
         "path": "/common/ampy-file-tree.js",
         "require": [
+            "Mixly.Env",
             "Mixly.FileTree",
             "Mixly.Electron.AmpyFS",
-            "Mixly.Web.AmpyFS"
+            "Mixly.Web.AmpyFS",
+            "Mixly.WebSocket.AmpyFS"
         ],
         "provide": [
             "Mixly.AmpyFileTree"
@@ -1719,6 +1721,34 @@
         ]
     },
     {
+        "path": "/web-socket/ampy-fs.js",
+        "require": [
+            "path",
+            "Mixly.Env",
+            "Mixly.FS",
+            "Mixly.Debug",
+            "Mixly.MJSON",
+            "Mixly.WebSocket.Ampy"
+        ],
+        "provide": [
+            "Mixly.WebSocket.AmpyFS"
+        ]
+    },
+    {
+        "path": "/web-socket/ampy.js",
+        "require": [
+            "path",
+            "Mustache",
+            "Mixly.Ampy",
+            "Mixly.Env",
+            "Mixly.Serial",
+            "Mixly.WebSocket"
+        ],
+        "provide": [
+            "Mixly.WebSocket.Ampy"
+        ]
+    },
+    {
         "path": "/web-socket/arduino-shell.js",
         "require": [
             "layui",
@@ -1784,7 +1814,8 @@
             "Mixly.WebSocket",
             "Mixly.WebSocket.Serial",
             "Mixly.WebSocket.ArduShell",
-            "Mixly.WebSocket.BU"
+            "Mixly.WebSocket.BU",
+            "Mixly.WebSocket.Ampy"
         ],
         "provide": [
             "Mixly.WebSocket.Socket"

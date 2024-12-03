@@ -6,6 +6,7 @@ goog.require('Mixly.WebSocket');
 goog.require('Mixly.WebSocket.Serial');
 goog.require('Mixly.WebSocket.ArduShell');
 goog.require('Mixly.WebSocket.BU');
+goog.require('Mixly.WebSocket.Ampy');
 goog.provide('Mixly.WebSocket.Socket');
 
 const {
@@ -18,7 +19,8 @@ const {
     Socket,
     Serial,
     ArduShell,
-    BU
+    BU,
+    Ampy
 } = WebSocket;
 
 
@@ -76,6 +78,7 @@ Socket.init = function () {
     Serial.init(mixlySocket);
     ArduShell.init(mixlySocket);
     BU.init(mixlySocket);
+    Ampy.init(mixlySocket);
 }
 
 });

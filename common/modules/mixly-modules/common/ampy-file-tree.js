@@ -1,17 +1,34 @@
 goog.loadJs('common', () => {
 
+goog.require('Mixly.Env');
 goog.require('Mixly.FileTree');
 goog.require('Mixly.Electron.AmpyFS');
 goog.require('Mixly.Web.AmpyFS');
+goog.require('Mixly.WebSocket.AmpyFS');
 goog.provide('Mixly.AmpyFileTree');
 
 const {
+    Env,
     FileTree,
     Electron = {},
-    Web = {}
+    Web = {},
+    WebSocket = {}
 } = Mixly;
 
-const { AmpyFS } = goog.isElectron? Electron : Web;
+
+let currentObj = null;
+
+if (goog.isElectron) {
+    currentObj = Electron;
+} else {
+    if (Env.hasSocketServer) {
+        currentObj = WebSocket;
+    } else {
+        currentObj = Web;
+    }
+}
+
+const { AmpyFS } = currentObj;
 
 
 class AmpyFileTree extends FileTree {
