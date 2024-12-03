@@ -44,6 +44,9 @@ class WebSocketArduShell {
             const socket = this.socket;
 
             socket.on('arduino.dataEvent', (data) => {
+                if (data.length > 1000) {
+                    return;
+                }
                 const { mainStatusBarTabs } = Mixly;
                 const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
                 statusBarTerminal.addValue(data);
@@ -52,6 +55,12 @@ class WebSocketArduShell {
             socket.on('arduino.errorEvent', (data) => {
                 const { mainStatusBarTabs } = Mixly;
                 const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+                try {
+                    data = decodeURIComponent(data.replace(/(_E[0-9A-F]{1}_[0-9A-F]{2}_[0-9A-F]{2})+/gm, '%$1'));
+                    data = decodeURIComponent(data.replace(/\\(u[0-9a-fA-F]{4})/gm, '%$1'));
+                } catch (error) {
+                    Debug.error(error);
+                }
                 statusBarTerminal.addValue(data);
             });
         }
