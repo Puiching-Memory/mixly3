@@ -1,5 +1,6 @@
 goog.loadJs('web', () => {
 
+goog.require('path');
 goog.require('layui');
 goog.require('dayjs.duration');
 goog.require('Mixly.Debug');
@@ -8,6 +9,7 @@ goog.require('Mixly.Msg');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.Workspace');
+goog.require('Mixly.MString');
 goog.require('Mixly.WebSocket.Serial');
 goog.provide('Mixly.WebSocket.BU');
 
@@ -18,6 +20,7 @@ const {
     Msg,
     Env,
     Workspace,
+    MString,
     WebSocket
 } = Mixly;
 
@@ -193,13 +196,21 @@ class WebSocketBU {
             this.#running_ = true;
             this.#upload_ = true;
             await this.showProgress();
+
+            const importsMap = this.getImportModules(code);
+            let libraries = {};
+            for (let key in importsMap) {
+                const filename = importsMap[key]['__name__'];
+                const data = goog.get(importsMap[key]['__path__']);
+                libraries[filename] = data;
+            }
             const config = {
                 boardDirPath: `.${Env.boardDirPath}`,
                 command: SELECTED_BOARD.upload.command,
-                libPath: SELECTED_BOARD.upload.libPath,
                 filePath: SELECTED_BOARD.upload.filePath,
-                port, code
+                port, code, libraries
             };
+            
             const mixlySocket = WebSocketBU.getMixlySocket();
             mixlySocket.emit('micropython.upload', config, (response) => {
                 this.hideProgress();
@@ -215,6 +226,64 @@ class WebSocketBU {
                 }
             });
         });
+    }
+
+    getImportModulesName(code) {
+        // 正则表达式: 匹配 import 或 from 导入语句
+        const importRegex = /(?:import\s+([a-zA-Z0-9_]+)|from\s+([a-zA-Z0-9_]+)\s+import)/g;
+
+        let imports = [];
+        let match;
+        while ((match = importRegex.exec(code)) !== null) {
+            if (match[1]) {
+                imports.push(match[1]); // 'import module'
+            }
+            if (match[2]) {
+                imports.push(match[2]); // 'from module import ...'
+            }
+        }
+        return imports;
+    }
+
+    getImportModules(code) {
+        let importsMap = {};
+        const libPath = SELECTED_BOARD.upload.libPath;
+        for (let i = libPath.length - 1; i >= 0; i--) {
+            const dirname = MString.tpl(libPath[i], { indexPath: Env.boardDirPath });
+            const map = goog.getJSON(path.join(dirname, 'map.json'));
+            if (!(map && map instanceof Object)) {
+                continue;
+            }
+            for (let key in map) {
+                importsMap[key] = structuredClone(map[key]);
+                importsMap[key]['__path__'] = path.join(dirname, map[key]['__name__']);
+            }
+        }
+
+        let usedMap = {};
+        let currentImports = this.getImportModulesName(code);
+        while (currentImports.length) {
+            let temp = [];
+            for (let moduleName of currentImports) {
+                let moduleInfo = importsMap[moduleName];
+                if (!moduleInfo) {
+                    continue;
+                }
+                usedMap[moduleName] = moduleInfo;
+                const moduleImports = moduleInfo['__require__'];
+                if (!moduleImports) {
+                    continue;
+                }
+                for (let name of moduleImports) {
+                    if (usedMap[name] || !importsMap[name] || temp.includes(name)) {
+                        continue;
+                    }
+                    temp.push(name);
+                }
+            }
+            currentImports = temp;
+        }
+        return usedMap;
     }
 
     async kill() {

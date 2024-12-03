@@ -1736,13 +1736,16 @@
     {
         "path": "/web-socket/burn-upload.js",
         "require": [
+            "path",
             "layui",
             "dayjs.duration",
             "Mixly.Debug",
             "Mixly.LayerExt",
             "Mixly.Msg",
+            "Mixly.Env",
             "Mixly.Config",
             "Mixly.Workspace",
+            "Mixly.MString",
             "Mixly.WebSocket.Serial"
         ],
         "provide": [
