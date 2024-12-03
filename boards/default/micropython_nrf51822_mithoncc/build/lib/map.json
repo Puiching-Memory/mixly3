@@ -4,6 +4,7 @@
             "math"
         ],
         "__file__": true,
+        "__size__": 1949,
         "__name__": "mixpy.py"
     },
     "motor_control": {
@@ -11,6 +12,7 @@
             "microbit"
         ],
         "__file__": true,
+        "__size__": 993,
         "__name__": "motor_control.py"
     },
     "rgb_show": {
@@ -19,6 +21,7 @@
             "neopixel"
         ],
         "__file__": true,
+        "__size__": 264,
         "__name__": "rgb_show.py"
     }
 }

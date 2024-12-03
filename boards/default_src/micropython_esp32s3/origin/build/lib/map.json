@@ -5,6 +5,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 7908,
         "__name__": "es8374.py"
     },
     "mixgo_nova": {
@@ -27,6 +28,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 9577,
         "__name__": "mixgo_nova.py"
     },
     "mixgo_nova_voice": {
@@ -40,6 +42,7 @@
             "urequests"
         ],
         "__file__": true,
+        "__size__": 3175,
         "__name__": "mixgo_nova_voice.py"
     },
     "mixgo_zero": {
@@ -61,6 +64,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 8017,
         "__name__": "mixgo_zero.py"
     },
     "mixgo_zero_voice": {
@@ -74,6 +78,7 @@
             "urequests"
         ],
         "__file__": true,
+        "__size__": 3173,
         "__name__": "mixgo_zero_voice.py"
     },
     "music_spk": {
@@ -84,6 +89,7 @@
             "struct"
         ],
         "__file__": true,
+        "__size__": 6541,
         "__name__": "music_spk.py"
     },
     "nova_g1": {
@@ -92,6 +98,7 @@
             "mixgo_nova"
         ],
         "__file__": true,
+        "__size__": 3269,
         "__name__": "nova_g1.py"
     },
     "sdcard": {
@@ -101,6 +108,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 8557,
         "__name__": "sdcard.py"
     },
     "st7789_bf": {
@@ -111,6 +119,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 3191,
         "__name__": "st7789_bf.py"
     }
 }

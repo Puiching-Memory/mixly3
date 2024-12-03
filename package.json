@@ -4,7 +4,7 @@
     "scripts": {
         "start": "npm run test",
         "static": "node ./static-server/server.js",
-        "test": "npm run deps && npm run static",
+        "test": "npm run deps & npm run static",
         "deps": "node scripts/deps-gen.js",
         "build:boards:all": "node scripts/build-boards.js --type all",
         "build:boards:arduino": "node scripts/build-boards.js --type arduino",
