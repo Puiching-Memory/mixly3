@@ -183,7 +183,7 @@ class BLESimpleCentral:
 			self._addr_type=self._info[1][index]
 			self._addr=self._info[2][index]
 		else:
-			raise ValueError("Bluetooth was not found")
+			raise ValueError("The '{}' Bluetooth was not found, Please check device is working".format(mac if name is None else name))
 		self._conn_callback = callback
 		self._ble.gap_connect(self._addr_type, self._addr)
 		return True
