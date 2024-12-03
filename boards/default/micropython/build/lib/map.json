@@ -6,6 +6,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 1644,
         "__name__": "adxl345.py"
     },
     "ahtx0": {
@@ -14,6 +15,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 3204,
         "__name__": "ahtx0.py"
     },
     "ap3216c": {
@@ -22,6 +24,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 1786,
         "__name__": "ap3216c.py"
     },
     "apds9960": {
@@ -30,6 +33,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 12718,
         "__name__": "apds9960.py"
     },
     "baidu_speech": {
@@ -42,6 +46,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 3703,
         "__name__": "baidu_speech.py"
     },
     "ble_advertising": {
@@ -51,6 +56,7 @@
             "bluetooth"
         ],
         "__file__": true,
+        "__size__": 2492,
         "__name__": "ble_advertising.py"
     },
     "ble_central": {
@@ -63,6 +69,7 @@
             "ble_advertising"
         ],
         "__file__": true,
+        "__size__": 7312,
         "__name__": "ble_central.py"
     },
     "ble_handle": {
@@ -70,6 +77,7 @@
             "ble_peripheral"
         ],
         "__file__": true,
+        "__size__": 1034,
         "__name__": "ble_handle.py"
     },
     "ble_hid_keyboard": {
@@ -84,6 +92,7 @@
             "ble_hid_key"
         ],
         "__file__": true,
+        "__size__": 9698,
         "__name__": "ble_hid_keyboard.py"
     },
     "ble_hid_mouse": {
@@ -98,6 +107,7 @@
             "ble_hid_key"
         ],
         "__file__": true,
+        "__size__": 8209,
         "__name__": "ble_hid_mouse.py"
     },
     "ble_peripheral": {
@@ -108,6 +118,7 @@
             "ble_advertising"
         ],
         "__file__": true,
+        "__size__": 2919,
         "__name__": "ble_peripheral.py"
     },
     "ble_uart_peripheral": {
@@ -117,6 +128,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 2846,
         "__name__": "ble_uart_peripheral.py"
     },
     "ble_uart_repl": {
@@ -128,6 +140,7 @@
             "ble_uart_peripheral"
         ],
         "__file__": true,
+        "__size__": 1824,
         "__name__": "ble_uart_repl.py"
     },
     "blynklib": {
@@ -139,6 +152,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 14064,
         "__name__": "blynklib.py"
     },
     "blynktimer": {
@@ -149,6 +163,7 @@
             "uselect"
         ],
         "__file__": true,
+        "__size__": 4600,
         "__name__": "blynktimer.py"
     },
     "bmp280": {
@@ -157,6 +172,7 @@
             "utime"
         ],
         "__file__": true,
+        "__size__": 6037,
         "__name__": "bmp280.py"
     },
     "cbr817": {
@@ -166,6 +182,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 3913,
         "__name__": "cbr817.py"
     },
     "cc_g1": {
@@ -174,6 +191,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 2474,
         "__name__": "cc_g1.py"
     },
     "ch914x_at": {
@@ -182,6 +200,7 @@
             "time"
         ],
         "__file__": true,
+        "__size__": 4131,
         "__name__": "ch914x_at.py"
     },
     "ci130x": {
@@ -191,6 +210,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 2484,
         "__name__": "ci130x.py"
     },
     "debugnet": {
@@ -206,6 +226,7 @@
             "ujson"
         ],
         "__file__": true,
+        "__size__": 5719,
         "__name__": "debugnet.py"
     },
     "dhtx": {
@@ -216,6 +237,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 1627,
         "__name__": "dhtx.py"
     },
     "ds18b20": {
@@ -225,16 +247,19 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 2129,
         "__name__": "ds18b20.py"
     },
     "expression_picture": {
         "__require__": [],
         "__file__": true,
+        "__size__": 31406,
         "__name__": "expression_picture.py"
     },
     "eye_picture": {
         "__require__": [],
         "__file__": true,
+        "__size__": 82105,
         "__name__": "eye_picture.py"
     },
     "gnss": {
@@ -243,6 +268,7 @@
             "ubinascii"
         ],
         "__file__": true,
+        "__size__": 3335,
         "__name__": "gnss.py"
     },
     "hp203x": {
@@ -251,6 +277,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 2574,
         "__name__": "hp203x.py"
     },
     "ht16k33": {
@@ -259,6 +286,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 1834,
         "__name__": "ht16k33.py"
     },
     "huskylens": {
@@ -267,6 +295,7 @@
             "ubinascii"
         ],
         "__file__": true,
+        "__size__": 9047,
         "__name__": "huskylens.py"
     },
     "i2cdevice": {
@@ -275,6 +304,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 9852,
         "__name__": "i2cdevice.py"
     },
     "i2clcd": {
@@ -283,6 +313,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 2839,
         "__name__": "i2clcd.py"
     },
     "icm42670": {
@@ -292,11 +323,13 @@
             "math"
         ],
         "__file__": true,
+        "__size__": 3049,
         "__name__": "icm42670.py"
     },
     "informatio_picture": {
         "__require__": [],
         "__file__": true,
+        "__size__": 39510,
         "__name__": "informatio_picture.py"
     },
     "irremote": {
@@ -308,6 +341,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 6243,
         "__name__": "irremote.py"
     },
     "ltr308al": {
@@ -316,6 +350,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 2049,
         "__name__": "ltr308al.py"
     },
     "ltr381rgb": {
@@ -324,6 +359,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 2344,
         "__name__": "ltr381rgb.py"
     },
     "ltr390uv": {
@@ -332,6 +368,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 2258,
         "__name__": "ltr390uv.py"
     },
     "ltr553als": {
@@ -340,11 +377,13 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 3221,
         "__name__": "ltr553als.py"
     },
     "matcher": {
         "__require__": [],
         "__file__": true,
+        "__size__": 3336,
         "__name__": "matcher.py"
     },
     "matrix16x8": {
@@ -352,6 +391,7 @@
             "ht16k33"
         ],
         "__file__": true,
+        "__size__": 4053,
         "__name__": "matrix16x8.py"
     },
     "matrix32x12": {
@@ -359,6 +399,7 @@
             "tm1680"
         ],
         "__file__": true,
+        "__size__": 9947,
         "__name__": "matrix32x12.py"
     },
     "matrix8x5": {
@@ -366,6 +407,7 @@
             "tm1652"
         ],
         "__file__": true,
+        "__size__": 1966,
         "__name__": "matrix8x5.py"
     },
     "max30102": {
@@ -374,6 +416,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 11529,
         "__name__": "max30102.py"
     },
     "mixgo_ai": {
@@ -382,6 +425,7 @@
             "gc"
         ],
         "__file__": true,
+        "__size__": 5832,
         "__name__": "mixgo_ai.py"
     },
     "mixiot": {
@@ -397,6 +441,7 @@
             "ussl"
         ],
         "__file__": true,
+        "__size__": 11930,
         "__name__": "mixiot.py"
     },
     "mixpy": {
@@ -406,6 +451,7 @@
             "json"
         ],
         "__file__": true,
+        "__size__": 2892,
         "__name__": "mixpy.py"
     },
     "mmc5603": {
@@ -416,6 +462,7 @@
             "magnetic_cal"
         ],
         "__file__": true,
+        "__size__": 5888,
         "__name__": "mmc5603.py"
     },
     "mpu9250": {
@@ -432,6 +479,7 @@
             "compass_cfg"
         ],
         "__file__": true,
+        "__size__": 15746,
         "__name__": "mpu9250.py"
     },
     "ms32006": {
@@ -440,6 +488,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 3671,
         "__name__": "ms32006.py"
     },
     "msa301": {
@@ -448,6 +497,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 1994,
         "__name__": "msa301.py"
     },
     "music": {
@@ -456,6 +506,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 6726,
         "__name__": "music.py"
     },
     "mxc6655xa": {
@@ -466,6 +517,7 @@
             "math"
         ],
         "__file__": true,
+        "__size__": 2818,
         "__name__": "mxc6655xa.py"
     },
     "ns9300": {
@@ -474,6 +526,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 3593,
         "__name__": "ns9300.py"
     },
     "ntptime": {
@@ -485,11 +538,13 @@
             "ustruct"
         ],
         "__file__": true,
+        "__size__": 1423,
         "__name__": "ntptime.py"
     },
     "object_picture": {
         "__require__": [],
         "__file__": true,
+        "__size__": 35094,
         "__name__": "object_picture.py"
     },
     "oled128x64": {
@@ -497,6 +552,7 @@
             "ssd1106"
         ],
         "__file__": true,
+        "__size__": 481,
         "__name__": "oled128x64.py"
     },
     "onenet": {
@@ -505,6 +561,7 @@
             "umqtt"
         ],
         "__file__": true,
+        "__size__": 1102,
         "__name__": "onenet.py"
     },
     "pe_g1": {
@@ -513,6 +570,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 3574,
         "__name__": "pe_g1.py"
     },
     "pm2_5": {
@@ -520,11 +578,13 @@
             "time"
         ],
         "__file__": true,
+        "__size__": 1076,
         "__name__": "pm2_5.py"
     },
     "progres_picture": {
         "__require__": [],
         "__file__": true,
+        "__size__": 77320,
         "__name__": "progres_picture.py"
     },
     "ps2": {
@@ -534,6 +594,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 3369,
         "__name__": "ps2.py"
     },
     "qmc5883l": {
@@ -543,6 +604,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 7226,
         "__name__": "qmc5883l.py"
     },
     "qmi8658": {
@@ -551,6 +613,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 4410,
         "__name__": "qmi8658.py"
     },
     "radio": {
@@ -561,6 +624,7 @@
             "espnow"
         ],
         "__file__": true,
+        "__size__": 4526,
         "__name__": "radio.py"
     },
     "rc522": {
@@ -569,6 +633,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 7526,
         "__name__": "rc522.py"
     },
     "rfm98": {
@@ -579,6 +644,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 8617,
         "__name__": "rfm98.py"
     },
     "rtctime": {
@@ -590,6 +656,7 @@
             "ustruct"
         ],
         "__file__": true,
+        "__size__": 1559,
         "__name__": "rtctime.py"
     },
     "sc7a20": {
@@ -600,6 +667,7 @@
             "math"
         ],
         "__file__": true,
+        "__size__": 2454,
         "__name__": "sc7a20.py"
     },
     "sdcard": {
@@ -609,6 +677,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 8738,
         "__name__": "sdcard.py"
     },
     "seniverse_api": {
@@ -617,6 +686,7 @@
             "urequests"
         ],
         "__file__": true,
+        "__size__": 7264,
         "__name__": "seniverse_api.py"
     },
     "servo": {
@@ -624,6 +694,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 1338,
         "__name__": "servo.py"
     },
     "sht20": {
@@ -632,6 +703,7 @@
             "time"
         ],
         "__file__": true,
+        "__size__": 1155,
         "__name__": "sht20.py"
     },
     "shtc3": {
@@ -641,6 +713,7 @@
             "struct"
         ],
         "__file__": true,
+        "__size__": 3837,
         "__name__": "shtc3.py"
     },
     "sonar": {
@@ -649,6 +722,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 1103,
         "__name__": "sonar.py"
     },
     "spl06_001": {
@@ -657,6 +731,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 4309,
         "__name__": "spl06_001.py"
     },
     "ssd1106": {
@@ -665,6 +740,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 4247,
         "__name__": "ssd1106.py"
     },
     "st7735": {
@@ -675,6 +751,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 3670,
         "__name__": "st7735.py"
     },
     "st7789": {
@@ -686,6 +763,7 @@
             "ustruct"
         ],
         "__file__": true,
+        "__size__": 10458,
         "__name__": "st7789.py"
     },
     "syn6288": {
@@ -694,6 +772,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 2622,
         "__name__": "syn6288.py"
     },
     "tm1650": {
@@ -702,6 +781,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 2008,
         "__name__": "tm1650.py"
     },
     "tm1652": {
@@ -712,6 +792,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 2222,
         "__name__": "tm1652.py"
     },
     "tm1680": {
@@ -720,6 +801,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 2226,
         "__name__": "tm1680.py"
     },
     "tm1931": {
@@ -730,11 +812,13 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 1916,
         "__name__": "tm1931.py"
     },
     "uart_com": {
         "__require__": [],
         "__file__": true,
+        "__size__": 588,
         "__name__": "uart_com.py"
     },
     "ucs12071": {
@@ -743,6 +827,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 2378,
         "__name__": "ucs12071.py"
     },
     "uframebuf": {
@@ -753,6 +838,7 @@
             "framebuf"
         ],
         "__file__": true,
+        "__size__": 20598,
         "__name__": "uframebuf.py"
     },
     "umqtt": {
@@ -762,6 +848,7 @@
             "ussl"
         ],
         "__file__": true,
+        "__size__": 6687,
         "__name__": "umqtt.py"
     },
     "urequests": {
@@ -772,6 +859,7 @@
             "ujson"
         ],
         "__file__": true,
+        "__size__": 4346,
         "__name__": "urequests.py"
     },
     "vl53l0x": {
@@ -781,6 +869,7 @@
             "utime"
         ],
         "__file__": true,
+        "__size__": 9639,
         "__name__": "vl53l0x.py"
     },
     "ws2812": {
@@ -789,6 +878,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 2374,
         "__name__": "ws2812.py"
     },
     "ws_lora": {
@@ -800,6 +890,7 @@
             "hp203x"
         ],
         "__file__": true,
+        "__size__": 4484,
         "__name__": "ws_lora.py"
     },
     "ws_solo": {
@@ -809,6 +900,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 3247,
         "__name__": "ws_solo.py"
     }
 }

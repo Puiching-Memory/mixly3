@@ -9,6 +9,7 @@
             "rc522"
         ],
         "__file__": true,
+        "__size__": 1327,
         "__name__": "me_g1.py"
     },
     "me_go": {
@@ -20,6 +21,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 8787,
         "__name__": "me_go.py"
     },
     "mixgocar_c3": {
@@ -32,6 +34,7 @@
             "music"
         ],
         "__file__": true,
+        "__size__": 9865,
         "__name__": "mixgocar_c3.py"
     },
     "mixgo_cc": {
@@ -52,6 +55,7 @@
             "shtc3"
         ],
         "__file__": true,
+        "__size__": 7436,
         "__name__": "mixgo_cc.py"
     },
     "mixgo_me": {
@@ -67,6 +71,7 @@
             "mmc5603"
         ],
         "__file__": true,
+        "__size__": 5363,
         "__name__": "mixgo_me.py"
     }
 }

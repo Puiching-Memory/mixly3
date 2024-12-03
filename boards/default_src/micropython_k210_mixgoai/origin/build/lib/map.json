@@ -6,6 +6,7 @@
             "ustruct"
         ],
         "__file__": true,
+        "__size__": 2467,
         "__name__": "adxl345.py"
     },
     "aionenet": {
@@ -20,6 +21,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 4362,
         "__name__": "aionenet.py"
     },
     "ai_face": {
@@ -31,6 +33,7 @@
             "board"
         ],
         "__file__": true,
+        "__size__": 3905,
         "__name__": "ai_face.py"
     },
     "base64": {
@@ -44,6 +47,7 @@
             "getopt"
         ],
         "__file__": true,
+        "__size__": 8087,
         "__name__": "base64.py"
     },
     "bmp280": {
@@ -53,11 +57,13 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 6271,
         "__name__": "bmp280.py"
     },
     "ce_com": {
         "__require__": [],
         "__file__": true,
+        "__size__": 628,
         "__name__": "ce_com.py"
     },
     "dht11": {
@@ -66,6 +72,7 @@
             "board"
         ],
         "__file__": true,
+        "__size__": 1851,
         "__name__": "dht11.py"
     },
     "hcr04": {
@@ -74,6 +81,7 @@
             "board"
         ],
         "__file__": true,
+        "__size__": 790,
         "__name__": "hcr04.py"
     },
     "irremote": {
@@ -82,11 +90,13 @@
             "board"
         ],
         "__file__": true,
+        "__size__": 999,
         "__name__": "irremote.py"
     },
     "matcher": {
         "__require__": [],
         "__file__": true,
+        "__size__": 3336,
         "__name__": "matcher.py"
     },
     "miot_no": {
@@ -101,6 +111,7 @@
             "ussl"
         ],
         "__file__": true,
+        "__size__": 8532,
         "__name__": "miot_no.py"
     },
     "mixiot": {
@@ -116,6 +127,7 @@
             "ussl"
         ],
         "__file__": true,
+        "__size__": 11091,
         "__name__": "mixiot.py"
     },
     "mixly_tool": {
@@ -125,6 +137,7 @@
             "sys"
         ],
         "__file__": true,
+        "__size__": 688,
         "__name__": "mixly_tool.py"
     },
     "mixpy": {
@@ -132,6 +145,7 @@
             "math"
         ],
         "__file__": true,
+        "__size__": 2689,
         "__name__": "mixpy.py"
     },
     "mpu9250": {
@@ -146,6 +160,7 @@
             "compass_cfg"
         ],
         "__file__": true,
+        "__size__": 17641,
         "__name__": "mpu9250.py"
     },
     "ms32006": {
@@ -154,6 +169,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 4382,
         "__name__": "ms32006.py"
     },
     "net_espat": {
@@ -165,6 +181,7 @@
             "time"
         ],
         "__file__": true,
+        "__size__": 1364,
         "__name__": "net_espat.py"
     },
     "pid": {
@@ -173,6 +190,7 @@
             "math"
         ],
         "__file__": true,
+        "__size__": 1789,
         "__name__": "pid.py"
     },
     "player": {
@@ -187,6 +205,7 @@
             "lcd"
         ],
         "__file__": true,
+        "__size__": 4103,
         "__name__": "player.py"
     },
     "reset": {
@@ -199,6 +218,7 @@
             "gc"
         ],
         "__file__": true,
+        "__size__": 968,
         "__name__": "reset.py"
     },
     "servo": {
@@ -208,6 +228,7 @@
             "time"
         ],
         "__file__": true,
+        "__size__": 3159,
         "__name__": "servo.py"
     },
     "sht20": {
@@ -216,6 +237,7 @@
             "time"
         ],
         "__file__": true,
+        "__size__": 1096,
         "__name__": "sht20.py"
     }
 }

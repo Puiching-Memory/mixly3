@@ -1569,6 +1569,7 @@
             "Mixly.Workspace",
             "Mixly.Debug",
             "Mixly.HTMLTemplate",
+            "Mixly.MString",
             "Mixly.Web.Serial",
             "Mixly.Web.USB",
             "Mixly.Web.Ampy"

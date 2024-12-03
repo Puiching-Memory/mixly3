@@ -9,6 +9,7 @@
             "ble_advertising"
         ],
         "__file__": true,
+        "__size__": 7299,
         "__name__": "ble_central.py"
     },
     "mini_bot": {
@@ -20,6 +21,7 @@
             "framebuf"
         ],
         "__file__": true,
+        "__size__": 12529,
         "__name__": "mini_bot.py"
     },
     "mini_g2": {
@@ -29,6 +31,7 @@
             "rc522"
         ],
         "__file__": true,
+        "__size__": 544,
         "__name__": "mini_g2.py"
     },
     "mini_go": {
@@ -40,6 +43,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 8481,
         "__name__": "mini_go.py"
     },
     "mixgo_mini": {
@@ -55,6 +59,7 @@
             "mini_bot"
         ],
         "__file__": true,
+        "__size__": 4611,
         "__name__": "mixgo_mini.py"
     },
     "musicx": {
@@ -62,6 +67,7 @@
             "time"
         ],
         "__file__": true,
+        "__size__": 3545,
         "__name__": "musicx.py"
     },
     "ws2812x": {
@@ -70,6 +76,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 1881,
         "__name__": "ws2812x.py"
     }
 }

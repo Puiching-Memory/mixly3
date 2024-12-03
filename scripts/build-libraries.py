@@ -41,8 +41,11 @@ if __name__ == "__main__":
         if path.isfile(file_path) and extname == ".py":
             output[name]["__require__"] = extract_imports(file_path)
             output[name]["__file__"] = True
+            output[name]["__size__"] = os.path.getsize(file_path)
         else:
+            output[name]["__require__"] = []
             output[name]["__file__"] = False
+            output[name]["__size__"] = 0
         output[name]["__name__"] = i
     fw = open(path.join(target_path, "map.json"), "w", encoding="utf-8")
     json.dump(output, fw, indent=4, ensure_ascii=False)

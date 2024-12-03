@@ -10,6 +10,7 @@
             "matrix16x8"
         ],
         "__file__": true,
+        "__size__": 4507,
         "__name__": "mixgo.py"
     },
     "mixgo_pe": {
@@ -21,6 +22,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 1328,
         "__name__": "mixgo_pe.py"
     },
     "mpython": {
@@ -35,6 +37,7 @@
             "qmi8658"
         ],
         "__file__": true,
+        "__size__": 3562,
         "__name__": "mpython.py"
     }
 }

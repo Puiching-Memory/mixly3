@@ -8,6 +8,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 8886,
         "__name__": "ce_go.py"
     },
     "mixgo_ce": {
@@ -23,6 +24,7 @@
             "machine"
         ],
         "__file__": true,
+        "__size__": 6730,
         "__name__": "mixgo_ce.py"
     }
 }

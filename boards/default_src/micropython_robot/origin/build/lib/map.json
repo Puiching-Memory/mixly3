@@ -5,6 +5,7 @@
             "micropython"
         ],
         "__file__": true,
+        "__size__": 10425,
         "__name__": "bot51.py"
     },
     "feiyi": {
@@ -21,6 +22,7 @@
             "mmc5603"
         ],
         "__file__": true,
+        "__size__": 3586,
         "__name__": "feiyi.py"
     },
     "mixbot": {
@@ -36,6 +38,7 @@
             "icm42670"
         ],
         "__file__": true,
+        "__size__": 10967,
         "__name__": "mixbot.py"
     },
     "mixbot_ext": {
@@ -44,6 +47,7 @@
             "mixbot"
         ],
         "__file__": true,
+        "__size__": 993,
         "__name__": "mixbot_ext.py"
     },
     "rm_e1": {
@@ -54,6 +58,7 @@
             "ws2812"
         ],
         "__file__": true,
+        "__size__": 4138,
         "__name__": "rm_e1.py"
     }
 }
