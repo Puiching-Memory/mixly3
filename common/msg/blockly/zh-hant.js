@@ -155,7 +155,7 @@ ZhHant.MSG = {
     catAudio: "音頻",
     catNeopixel: "RGB燈",
     catOneWire: "OneWire通信",
-    catBLE: "藍牙透傳",
+    catBLE: "藍牙傳透",
     catBLEC:"藍牙遙控",
     catBLEKM:"藍牙鍵鼠",
     catBLE_HID: "外圍設備(從機)",
