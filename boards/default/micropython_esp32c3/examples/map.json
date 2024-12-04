@@ -360,6 +360,114 @@
             "__file__": true,
             "__name__": "44-2-智能小车-P双巡线(MEGO).mix"
         },
+        "北师大版教材示例代码": {
+            "第三单元": {
+                "3-12 MIXIO使用.mix": {
+                    "__file__": true,
+                    "__name__": "3-12 MIXIO使用.mix"
+                },
+                "3-2a 无线发送.mix": {
+                    "__file__": true,
+                    "__name__": "3-2a 无线发送.mix"
+                },
+                "3-2b 无线接收.mix": {
+                    "__file__": true,
+                    "__name__": "3-2b 无线接收.mix"
+                },
+                "3-3a 蓝牙主机.mix": {
+                    "__file__": true,
+                    "__name__": "3-3a 蓝牙主机.mix"
+                },
+                "3-3b 蓝牙从机.mix": {
+                    "__file__": true,
+                    "__name__": "3-3b 蓝牙从机.mix"
+                },
+                "3-4 HTTP协议.mix": {
+                    "__file__": true,
+                    "__name__": "3-4 HTTP协议.mix"
+                },
+                "3-5 MQTT协议.mix": {
+                    "__file__": true,
+                    "__name__": "3-5 MQTT协议.mix"
+                },
+                "__file__": false,
+                "__name__": "第三单元"
+            },
+            "第二单元": {
+                "2-11 RFID读取.mix": {
+                    "__file__": true,
+                    "__name__": "2-11 RFID读取.mix"
+                },
+                "2-16 WIFI扫描.mix": {
+                    "__file__": true,
+                    "__name__": "2-16 WIFI扫描.mix"
+                },
+                "2-4 获取光强.mix": {
+                    "__file__": true,
+                    "__name__": "2-4 获取光强.mix"
+                },
+                "2-5 楼道灯.mix": {
+                    "__file__": true,
+                    "__name__": "2-5 楼道灯.mix"
+                },
+                "__file__": false,
+                "__name__": "第二单元"
+            },
+            "第五单元": {
+                "5-11 停车显示.mix": {
+                    "__file__": true,
+                    "__name__": "5-11 停车显示.mix"
+                },
+                "5-19 车位检测.mix": {
+                    "__file__": true,
+                    "__name__": "5-19 车位检测.mix"
+                },
+                "5-20 空位显示.mix": {
+                    "__file__": true,
+                    "__name__": "5-20 空位显示.mix"
+                },
+                "5-9 停车空位.mix": {
+                    "__file__": true,
+                    "__name__": "5-9 停车空位.mix"
+                },
+                "__file__": false,
+                "__name__": "第五单元"
+            },
+            "第六单元": {
+                "2-10 摔倒检测.mix": {
+                    "__file__": true,
+                    "__name__": "2-10 摔倒检测.mix"
+                },
+                "2-2 温度与光照.mix": {
+                    "__file__": true,
+                    "__name__": "2-2 温度与光照.mix"
+                },
+                "2-7 震动强度.mix": {
+                    "__file__": true,
+                    "__name__": "2-7 震动强度.mix"
+                },
+                "__file__": false,
+                "__name__": "第六单元"
+            },
+            "第四单元": {
+                "4-10-11 MIXIO学生抢答.mix": {
+                    "__file__": true,
+                    "__name__": "4-10-11 MIXIO学生抢答.mix"
+                },
+                "4-15-16 MIXIO学生抢答2.mix": {
+                    "__file__": true,
+                    "__name__": "4-15-16 MIXIO学生抢答2.mix"
+                },
+                "4-5 MIXIO学生点到.mix": {
+                    "__file__": true,
+                    "__name__": "4-5 MIXIO学生点到.mix"
+                },
+                "__file__": false,
+                "__name__": "第四单元"
+            },
+            "__file__": false,
+            "__name__": "北师大版教材示例代码"
+        },
         "__file__": false,
         "__name__": "MixGo CC"
     },
