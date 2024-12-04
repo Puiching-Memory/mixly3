@@ -69,7 +69,7 @@
             "ble_advertising"
         ],
         "__file__": true,
-        "__size__": 7312,
+        "__size__": 7391,
         "__name__": "ble_central.py"
     },
     "ble_handle": {
