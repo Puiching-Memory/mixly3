@@ -221,7 +221,7 @@ export const display_rgb = function (_, generator) {
     var value_led = generator.valueToCode(this, '_LED_', generator.ORDER_ATOMIC);
     var COLOR = generator.valueToCode(this, 'COLOR', generator.ORDER_ATOMIC);
     COLOR = COLOR.replace(/#/g, "0x");
-    var code = 'rgb_display_' + dropdown_rgbpin + '.setPixelColor((' + value_led + ')-1, ' + COLOR + ');\n';
+    var code = 'rgb_display_' + dropdown_rgbpin + '.setPixelColor(' + value_led + ' - 1, ' + COLOR + ');\n';
     return code;
 };
 
@@ -231,7 +231,7 @@ export const RGB_color_HSV = function (_, generator) {
     var H = generator.valueToCode(this, 'H', generator.ORDER_ATOMIC);
     var S = generator.valueToCode(this, 'S', generator.ORDER_ATOMIC);
     var V = generator.valueToCode(this, 'V', generator.ORDER_ATOMIC);
-    var code = 'rgb_display_' + dropdown_rgbpin + '.setPixelColor((' + value_led + ')-1, ' + 'rgb_display_' + dropdown_rgbpin + '.ColorHSV(' + H + ',' + S + ',' + V + '));\n';
+    var code = 'rgb_display_' + dropdown_rgbpin + '.setPixelColor(' + value_led + ' - 1, ' + 'rgb_display_' + dropdown_rgbpin + '.ColorHSV(' + H + ',' + S + ',' + V + '));\n';
     return code;
 };
 
