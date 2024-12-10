@@ -134,9 +134,9 @@ BU.initBurn = () => {
             BU.burnWithSpecialBin();
         } else {
             if (boardKey.indexOf('micropython:esp32s2') !== -1) {
-                BU.burnWithAdafruitEsptool(web.burn.binFile);
+                BU.burnWithAdafruitEsptool(web.burn.binFile, web.burn.erase);
             } else {
-                BU.burnWithEsptool(web.burn.binFile);
+                BU.burnWithEsptool(web.burn.binFile, web.burn.erase);
             }
         }
     }
@@ -224,7 +224,7 @@ BU.burnByUSB = () => {
     });
 }
 
-BU.burnWithEsptool = async (binFile) => {
+BU.burnWithEsptool = async (binFile, erase) => {
     const { mainStatusBarTabs } = Mixly;
     let portName = Serial.getSelectedPortName();
     if (!portName) {
@@ -324,7 +324,9 @@ BU.burnWithEsptool = async (binFile) => {
                 }
             });
             try {
-                await esploader.eraseFlash();
+                if (erase) {
+                    await esploader.eraseFlash();
+                }
                 await esploader.writeFlash(flashOptions);
                 layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
                 statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
@@ -341,7 +343,7 @@ BU.burnWithEsptool = async (binFile) => {
     });
 }
 
-BU.burnWithAdafruitEsptool = async (binFile) => {
+BU.burnWithAdafruitEsptool = async (binFile, erase) => {
     const { mainStatusBarTabs } = Mixly;
     let portName = Serial.getSelectedPortName();
     if (!portName) {
@@ -425,6 +427,9 @@ BU.burnWithAdafruitEsptool = async (binFile) => {
             let cancel = false;
             $("#mixly-loader-btn").hide();
             try {
+                if (erase) {
+                    await espStub.eraseFlash();
+                }
                 for (let file of data) {
                     await espStub.flashData(
                         file.data,
