@@ -82,6 +82,7 @@ class App extends Component {
     constructor(element) {
         super();
         const $content = $(HTMLTemplate.get('html/app.html').render());
+        $content.on('contextmenu', (e) => e.preventDefault());
         this.setContent($content);
         this.mountOn($(element));
         this.#nav_ = new Nav();
