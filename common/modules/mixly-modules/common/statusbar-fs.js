@@ -179,6 +179,13 @@ class Panel extends Component {
 
     dispose() {
         this.#$fsSelect_.select2('destroy');
+        this.#$folderInput_ = null;
+        this.#$closeBtn_ = null;
+        this.#$selectFolderBtn_ = null;
+        this.#$downloadBtn_ = null;
+        this.#$uploadBtn_ = null;
+        this.#$fsSelect_ = null;
+        this.#$progress_ = null;
         super.dispose();
     }
 }
@@ -193,9 +200,8 @@ class StatusBarFS extends PageBase {
     }
 
     #$btn_ = null;
-    #fsBoard_ = null;
-    #$close_ = null;
     #$mask_ = null;
+    #fsBoard_ = null;
     #registry_ = new Registry();
     #opened_ = false;
 
@@ -221,24 +227,20 @@ class StatusBarFS extends PageBase {
 
     init() {
         this.addDirty();
-        const $tab = this.getTab();
-        this.#$close_ = $tab.find('.chrome-tab-close');
-        this.#$close_.addClass('layui-badge-dot layui-bg-blue');
+        this.setMarkStatus('negative');
     }
 
     setStatus(isOpened) {
-        if (this.#opened_ === isOpened || !this.#$close_) {
+        if (this.#opened_ === isOpened) {
             return;
         }
         this.#opened_ = isOpened;
         if (isOpened) {
             this.#$mask_.css('display', 'block');
-            this.#$close_.removeClass('layui-bg-blue');
-            this.#$close_.addClass('layui-bg-orange');
+            this.setMarkStatus('positive');
         } else {
             this.#$mask_.css('display', 'none');
-            this.#$close_.removeClass('layui-bg-orange');
-            this.#$close_.addClass('layui-bg-blue');
+            this.setMarkStatus('negative');
         }
     }
 
@@ -310,7 +312,12 @@ class StatusBarFS extends PageBase {
         for (let id of this.#registry_.keys()) {
             this.#registry_.getItem(id).dispose();
         }
+        this.#$btn_ = null;
+        this.#$mask_ = null;
+        this.#fsBoard_.dispose();
+        this.#fsBoard_ = null;
         this.#registry_.reset();
+        this.#registry_ = null;
         super.dispose();
     }
 

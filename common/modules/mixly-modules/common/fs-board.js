@@ -85,6 +85,10 @@ class FSBoard {
     getHandler() {
         return this.#handler_;
     }
+
+    dispose() {
+        this.#handler_ = null;
+    }
 }
 
 Mixly.FSBoard = FSBoard;

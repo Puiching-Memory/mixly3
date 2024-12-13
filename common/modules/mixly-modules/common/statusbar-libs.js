@@ -39,7 +39,6 @@ class StatusBarLibs extends PageBase {
     }
 
     #manager_ = null;
-    #$close_ = null;
 
     constructor() {
         super();
@@ -56,8 +55,7 @@ class StatusBarLibs extends PageBase {
     init() {
         this.addDirty();
         const $tab = this.getTab();
-        this.#$close_ = $tab.find('.chrome-tab-close');
-        this.#$close_.addClass('layui-badge-dot layui-bg-blue');
+        this.setMarkStatus('negative');
     }
 
     getManager() {
@@ -77,6 +75,12 @@ class StatusBarLibs extends PageBase {
     onUnmounted() {
         this.#manager_.onUnmounted();
         super.onUnmounted();
+    }
+
+    dispose() {
+        this.#manager_.dispose();
+        this.#manager_ =  null;
+        super.dispose();
     }
 }
 
