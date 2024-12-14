@@ -33,6 +33,7 @@ const { PythonShell } = Electron;
 
 Loader.init = () => {
     $('body').append(XML.TEMPLATE_STR['INTERFACE']);
+    $('body').on('contextmenu', (e) => e.preventDefault());
     if (goog.isElectron) {
         PythonShell.init();
     }

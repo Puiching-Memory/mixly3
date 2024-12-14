@@ -10,7 +10,7 @@ body ::-webkit-scrollbar {
 /* 设置滚动条滑槽 */
 ::-webkit-scrollbar-track,
 body ::-webkit-scrollbar-track {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: transparent;
     border-radius: 1px;
 }
 
@@ -74,7 +74,7 @@ html[data-bs-theme=dark] body ::-webkit-scrollbar-thumb:active {
 /* 设置滚动条滑槽 */
 .mixly-scrollbar ::-webkit-scrollbar-track,
 .mixly-scrollbar::-webkit-scrollbar-track {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: transparent;
     border-radius: 0px;
 }
 
@@ -142,7 +142,7 @@ html[data-bs-theme=dark] ::-webkit-scrollbar-corner {
 /* 设置滚动条滑槽 */
 .blocklyDropDownDiv ::-webkit-scrollbar-track,
 .blocklyWidgetDiv ::-webkit-scrollbar-track {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: transparent;
     border-radius: 0px;
 }
 

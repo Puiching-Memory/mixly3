@@ -357,10 +357,14 @@ html[data-bs-theme=dark] .chrome-tabs .chrome-tab.dirty .chrome-tab-close:hover 
   background-color: #5f6368 !important;
 }
 
-html[data-bs-theme=light] .chrome-tabs .chrome-tab.dirty .chrome-tab-close {
-  background-color: #000;
+.chrome-tabs .chrome-tab.dirty .chrome-tab-close.positive {
+  background-color: #ffb800;
 }
 
-html[data-bs-theme=dark] .chrome-tabs .chrome-tab.dirty .chrome-tab-close {
-  background-color: #fff;
+html[data-bs-theme=light] .chrome-tabs .chrome-tab.dirty .chrome-tab-close.negative {
+  background-color: var(--app-light-color);
+}
+
+html[data-bs-theme=dark] .chrome-tabs .chrome-tab.dirty .chrome-tab-close.negative {
+  background-color: var(--app-dark-color);
 }

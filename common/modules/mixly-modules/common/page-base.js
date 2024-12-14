@@ -15,6 +15,7 @@ const {
 class PageBase extends Component {
     #pages_ = new Registry();
     #$tab_ = null;
+    #$close_ = null;
     #dirty_ = false;
     #active_ = true;
     #inited_ = false;
@@ -64,7 +65,9 @@ class PageBase extends Component {
     dispose() {
         this.#forward_('dispose');
         this.#pages_.reset();
+        this.#$close_ = null;
         this.#$tab_ && this.#$tab_.remove();
+        this.#$tab_ = null;
         super.dispose();
     }
 
@@ -97,20 +100,23 @@ class PageBase extends Component {
 
     setTab($tab) {
         this.#$tab_ = $tab;
+        this.#$close_ = $tab.find('.chrome-tab-close');
     }
 
     hideCloseBtn() {
-        const $closeBtn = this.getTab().find('.chrome-tab-close');
-        $closeBtn.css('display', 'none');
+        this.#$close_.css('display', 'none');
     }
 
     showCloseBtn() {
-        const $closeBtn = this.getTab().find('.chrome-tab-close');
-        $closeBtn.css('display', 'block');
+        this.#$close_.css('display', 'block');
     }
 
     getTab() {
         return this.#$tab_;
+    }
+
+    setMarkStatus(styleClass) {
+        this.#$close_.attr('class', `chrome-tab-close layui-badge-dot ${styleClass}`);
     }
 
     addDirty() {

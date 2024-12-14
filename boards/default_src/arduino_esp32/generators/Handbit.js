@@ -61,7 +61,7 @@ export const handbit_rgb = function (_, generator) {
     generator.definitions_['include_Adafruit_NeoPixel'] = '#include <Adafruit_NeoPixel.h>';
     generator.definitions_['var_declare_rgb_display17'] = 'Adafruit_NeoPixel rgb_display_17= Adafruit_NeoPixel(3,17,NEO_GRB + NEO_KHZ800);';
     generator.setups_['setup_rgb_display_begin_17'] = 'rgb_display_17.begin();';
-    var code = 'rgb_display_17.setPixelColor(' + value_led + '-1,' + COLOR + ');\n';
+    var code = 'rgb_display_17.setPixelColor(' + value_led + ' - 1,' + COLOR + ');\n';
     return code;
 }
 
@@ -177,6 +177,6 @@ export const handbit_RGB_color_HSV = function (_, generator) {
     var H = generator.valueToCode(this, 'H', generator.ORDER_ATOMIC);
     var S = generator.valueToCode(this, 'S', generator.ORDER_ATOMIC);
     var V = generator.valueToCode(this, 'V', generator.ORDER_ATOMIC);
-    var code = 'rgb_display_' + dropdown_rgbpin + '.setPixelColor(' + value_led + ')-1, ' + 'rgb_display_' + dropdown_rgbpin + '.ColorHSV(' + H + ',' + S + ',' + V + '));\n';
+    var code = 'rgb_display_' + dropdown_rgbpin + '.setPixelColor(' + value_led + ' - 1, ' + 'rgb_display_' + dropdown_rgbpin + '.ColorHSV(' + H + ',' + S + ',' + V + '));\n';
     return code;
 }

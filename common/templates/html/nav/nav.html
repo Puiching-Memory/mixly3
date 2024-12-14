@@ -11,6 +11,14 @@
         color: var(--lay-color-white) !important;
     }
 
+    html[data-bs-theme=light] ul[m-id="{{d.mId}}"] {
+        border-bottom: 1px solid #c9c9c9;
+    }
+
+    html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] {
+        border-bottom: 1px solid rgba(128, 128, 128, 0.35);
+    }
+
     ul[m-id="{{d.mId}}"] button {
         position: relative;
         overflow: hidden;

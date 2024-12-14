@@ -46,7 +46,6 @@ class StatusBarAmpy extends PageBase {
         );
     }
 
-    #$close_ = null;
     #$fileTree_ = null;
     #$editor_ = null;
     #$openFS_ = null;
@@ -370,9 +369,7 @@ class StatusBarAmpy extends PageBase {
     init() {
         super.init();
         this.addDirty();
-        const $tab = this.getTab();
-        this.#$close_ = $tab.find('.chrome-tab-close');
-        this.#$close_.addClass('layui-badge-dot layui-bg-blue');
+        this.setMarkStatus('negative');
         this.#editor_.init();
         this.#addEventsListener_();
         const editor = this.#editor_.getEditor();
@@ -434,22 +431,28 @@ class StatusBarAmpy extends PageBase {
     }
 
     setStatus(isChanged) {
-        if (this.#changed_ === isChanged || !this.#$close_) {
+        if (this.#changed_ === isChanged) {
             return;
         }
         this.#changed_ = isChanged;
         if (isChanged) {
-            this.#$close_.removeClass('layui-bg-blue');
-            this.#$close_.addClass('layui-bg-orange');
+            this.setMarkStatus('positive');
         } else {
-            this.#$close_.removeClass('layui-bg-orange');
-            this.#$close_.addClass('layui-bg-blue');
+            this.setMarkStatus('negative');
         }
     }
 
     dispose() {
+        this.#$fileTree_ = null;
+        this.#$editor_ = null;
+        this.#$openFS_ = null;
+        this.#$editorEmpty_ = null;
         this.#editor_.dispose();
+        this.#editor_ = null;
         this.#fileTree_.dispose();
+        this.#fileTree_ = null;
+        this.#drag_.dispose();
+        this.#drag_ = null;
         super.dispose();
     }
 }

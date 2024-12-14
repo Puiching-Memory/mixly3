@@ -76,9 +76,6 @@ class StatusBarSerial extends PageBase {
         }
     }
 
-    #$close_ = null;
-    #opened_ = false;
-    #valueTemp_ = '';
     #$sendInput_ = null;
     #$settingMenu_ = null;
     #$scroll_ = null;
@@ -86,6 +83,8 @@ class StatusBarSerial extends PageBase {
     #$dtr_ = null;
     #$rts_ = null;
     #$hex_ = null;
+    #opened_ = false;
+    #valueTemp_ = '';
     #manager_ = null;
     #output_ = null;
     #chart_ = null;
@@ -98,7 +97,6 @@ class StatusBarSerial extends PageBase {
         sendWith: '\r\n',
         hex: false
     };
-    #dropdownMenu_ = null;
     #addTimestamp_ = false;
     #maxLine_ = 200;
     #lastUpdate_ = 0;
@@ -444,9 +442,8 @@ class StatusBarSerial extends PageBase {
     init() {
         super.init();
         this.addDirty();
+        this.setMarkStatus('negative');
         const $tab = this.getTab();
-        this.#$close_ = $tab.find('.chrome-tab-close');
-        this.#$close_.addClass('layui-badge-dot layui-bg-blue');
         this.#port_ = $tab.attr('data-tab-id');
         this.#serial_ = new Serial(this.getPortName());
         this.#serial_.config(this.#config_).catch(Debug.error);
@@ -513,16 +510,14 @@ class StatusBarSerial extends PageBase {
     }
 
     setStatus(isOpened) {
-        if (this.isOpened() === isOpened || !this.#$close_) {
+        if (this.isOpened() === isOpened) {
             return;
         }
         this.#opened_ = isOpened;
         if (isOpened) {
-            this.#$close_.removeClass('layui-bg-blue');
-            this.#$close_.addClass('layui-bg-orange');
+            this.setMarkStatus('positive');
         } else {
-            this.#$close_.removeClass('layui-bg-orange');
-            this.#$close_.addClass('layui-bg-blue');
+            this.setMarkStatus('negative');
         }
         this.#output_.setStatus(isOpened);
         this.#chart_.setStatus(isOpened);
@@ -576,9 +571,17 @@ class StatusBarSerial extends PageBase {
         this.#serial_.close()
             .catch(Debug.error)
             .finally(() => {
+                this.#$sendInput_ = null;
+                this.#$settingMenu_ = null;
+                this.#$scroll_ = null;
+                this.#$timestamp_ = null;
+                this.#$dtr_ = null;
+                this.#$rts_ = null;
+                this.#$hex_ = null;
+                this.#output_ = null;
+                this.#chart_ = null;
                 this.#manager_.dispose();
                 this.#manager_ = null;
-                this.#$close_ = null;
                 this.#serial_.dispose();
                 this.#serial_ = null;
                 super.dispose();
