@@ -1573,7 +1573,6 @@
             "Mixly.HTMLTemplate",
             "Mixly.MString",
             "Mixly.Web.Serial",
-            "Mixly.Web.USB",
             "Mixly.Web.Ampy"
         ],
         "provide": [
@@ -1630,6 +1629,17 @@
         ]
     },
     {
+        "path": "/web/hid.js",
+        "require": [
+            "Mixly.Serial",
+            "Mixly.Registry",
+            "Mixly.Web"
+        ],
+        "provide": [
+            "Mixly.Web.HID"
+        ]
+    },
+    {
         "path": "/web/lms.js",
         "require": [
             "saveAs",
@@ -1648,13 +1658,11 @@
     {
         "path": "/web/serial.js",
         "require": [
-            "Mixly.Serial",
+            "Mixly.Config",
             "Mixly.Env",
-            "Mixly.Nav",
-            "Mixly.Msg",
-            "Mixly.Debug",
-            "Mixly.Registry",
-            "Mixly.Web"
+            "Mixly.Web.SerialPort",
+            "Mixly.Web.USB",
+            "Mixly.Web.HID"
         ],
         "provide": [
             "Mixly.Web.Serial"
@@ -1663,7 +1671,8 @@
     {
         "path": "/web/serialport.js",
         "require": [
-            "Mixly.MString",
+            "Mixly.Serial",
+            "Mixly.Registry",
             "Mixly.Web"
         ],
         "provide": [
@@ -1675,10 +1684,6 @@
         "require": [
             "DAPjs",
             "Mixly.Serial",
-            "Mixly.Env",
-            "Mixly.Nav",
-            "Mixly.Msg",
-            "Mixly.Debug",
             "Mixly.Registry",
             "Mixly.Web"
         ],

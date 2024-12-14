@@ -33,11 +33,14 @@ class AmpyExt extends Ampy {
 
     #device_ = null;
     #receiveTemp_ = [];
-    #writeBuffer_ = false;
+    #writeBuffer_ = true;
     #active_ = false;
-    constructor(device) {
+    #dataLength_ = 256;
+    constructor(device, writeBuffer = true, dataLength = 256) {
         super();
         this.#device_ = device;
+        this.#writeBuffer_ = writeBuffer;
+        this.#dataLength_ = dataLength;
         this.#addEventsListener_();
     }
 
@@ -134,16 +137,20 @@ class AmpyExt extends Ampy {
     async exec(str) {
         if (this.#writeBuffer_) {
             const buffer = this.#device_.encode(str);
-            const len = Math.ceil(buffer.length / 256);
+            const len = Math.ceil(buffer.length / this.#dataLength_);
             for (let i = 0; i < len; i++) {
-                const writeBuffer = buffer.slice(i * 256, Math.min((i + 1) * 256, buffer.length));
+                const start = i * this.#dataLength_;
+                const end = Math.min((i + 1) * this.#dataLength_, buffer.length);
+                const writeBuffer = buffer.slice(start, end);
                 await this.#device_.sendBuffer(writeBuffer);
                 await this.#device_.sleep(10);
             }
         } else {
-            for (let i = 0; i < str.length / 60; i++) {
-                let newData = str.substring(i * 60, (i + 1) * 60);
-                await this.#device_.sendString(newData);
+            for (let i = 0; i < str.length / this.#dataLength_; i++) {
+                const start = i * this.#dataLength_;
+                const end = Math.min((i + 1) * this.#dataLength_, str.length);
+                let data = str.substring(start, end);
+                await this.#device_.sendString(data);
                 await this.#device_.sleep(10);
             }
         }

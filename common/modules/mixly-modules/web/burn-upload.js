@@ -16,7 +16,6 @@ goog.require('Mixly.Debug');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.MString');
 goog.require('Mixly.Web.Serial');
-goog.require('Mixly.Web.USB');
 goog.require('Mixly.Web.Ampy');
 goog.provide('Mixly.Web.BU');
 
@@ -37,7 +36,6 @@ const {
 const {
     Serial,
     BU,
-    USB,
     Ampy
 } = Web;
 
@@ -61,11 +59,7 @@ BU.FILMWARE_LAYER = new HTMLTemplate(
 const BAUD = goog.platform() === 'darwin' ? 460800 : 921600;
 
 BU.requestPort = async () => {
-    if (SELECTED_BOARD.web.com === 'usb') {
-        await USB.requestPort();
-    } else {
-        await Serial.requestPort();
-    }
+    await Serial.requestPort();
 }
 
 const readBinFile = (path, offset) => {
@@ -182,7 +176,7 @@ BU.burnByUSB = () => {
                 $(".layui-layer-page").css("z-index","198910151");
                 $("#mixly-loader-btn").hide();
                 let prevPercent = 0;
-                USB.DAPLink.on(DAPjs.DAPLink.EVENT_PROGRESS, progress => {
+                Serial.DAPLink.on(DAPjs.DAPLink.EVENT_PROGRESS, progress => {
                     const nowPercent = Math.floor(progress * 100);
                     if (nowPercent > prevPercent) {
                         prevPercent = nowPercent;
@@ -194,7 +188,7 @@ BU.burnByUSB = () => {
                     const rightStr = (new Array(50 - nowProgressLen).fill('-')).join('');
                     statusBarTerminal.addValue(`[${leftStr}${rightStr}] ${nowPercent}%\n`);
                 });
-                USB.flash(buffer)
+                Serial.flash(buffer)
                 .then(() => {
                     layer.close(index);
                     layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
@@ -212,7 +206,7 @@ BU.burnByUSB = () => {
                         toolConfig.baudRates = prevBaud;
                         await serialport.setBaudRate(prevBaud);
                     }
-                    USB.DAPLink.removeAllListeners(DAPjs.DAPLink.EVENT_PROGRESS);
+                    Serial.DAPLink.removeAllListeners(DAPjs.DAPLink.EVENT_PROGRESS);
                 });
             },
             end: function () {
@@ -545,6 +539,14 @@ BU.uploadWithAmpy = (portName) => {
     mainStatusBarTabs.changeTo('output');
     const mainWorkspace = Workspace.getMain();
     const editor = mainWorkspace.getEditorsManager().getActive();
+    let useBuffer = true, dataLength = 256;
+    if (BOARD.web.com === 'usb') {
+        useBuffer = false;
+        dataLength = 64;
+    } else if (BOARD.web.com === 'hid') {
+        useBuffer = true;
+        dataLength = 30;
+    }
     const layerNum = layer.open({
         type: 1,
         title: Msg.Lang['shell.uploading'] + '...',
@@ -554,7 +556,7 @@ BU.uploadWithAmpy = (portName) => {
         closeBtn: 0,
         success: async function (layero, index) {
             const serial = new Serial(portName);
-            const ampy = new Ampy(serial);
+            const ampy = new Ampy(serial, useBuffer, dataLength);
             const code = editor.getCode();
             let closePromise = Promise.resolve();
             if (statusBarSerial) {

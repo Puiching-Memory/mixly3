@@ -2,20 +2,12 @@ goog.loadJs('web', () => {
 
 goog.require('DAPjs');
 goog.require('Mixly.Serial');
-goog.require('Mixly.Env');
-goog.require('Mixly.Nav');
-goog.require('Mixly.Msg');
-goog.require('Mixly.Debug');
 goog.require('Mixly.Registry');
 goog.require('Mixly.Web');
 goog.provide('Mixly.Web.USB');
 
 const {
     Serial,
-    Env,
-    Nav,
-    Msg,
-    Debug,
     Registry,
     Web
 } = Mixly;
@@ -93,22 +85,25 @@ class USB extends Serial {
         }
 
         this.addEventsListener = function () {
-            navigator.usb.addEventListener('connect', (event) => {
+            navigator?.usb?.addEventListener('connect', (event) => {
                 this.addPort(event.device);
                 this.refreshPorts();
             });
 
-            navigator.usb.addEventListener('disconnect', (event) => {
+            navigator?.usb?.addEventListener('disconnect', (event) => {
                 this.removePort(event.device);
                 this.refreshPorts();
             });
         }
-        navigator.usb.getDevices().then((devices) => {
-            for (let device of devices) {
-                this.addPort(device);
-            }
-        });
-        this.addEventsListener();
+
+        this.init = function () {
+            navigator?.usb?.getDevices().then((devices) => {
+                for (let device of devices) {
+                    this.addPort(device);
+                }
+            });
+            this.addEventsListener();
+        }
     }
 
     #device_ = null;

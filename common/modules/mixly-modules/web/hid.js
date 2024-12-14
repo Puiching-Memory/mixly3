@@ -3,7 +3,7 @@ goog.loadJs('web', () => {
 goog.require('Mixly.Serial');
 goog.require('Mixly.Registry');
 goog.require('Mixly.Web');
-goog.provide('Mixly.Web.SerialPort');
+goog.provide('Mixly.Web.HID');
 
 const {
     Serial,
@@ -12,7 +12,7 @@ const {
 } = Mixly;
 
 
-class WebSerialPort extends Serial {
+class WebHID extends Serial {
     static {
         this.portToNameRegistry = new Registry();
         this.nameToPortRegistry = new Registry();
@@ -38,8 +38,10 @@ class WebSerialPort extends Serial {
         }
 
         this.requestPort = async function () {
-            const serialport = await navigator.serial.requestPort();
-            this.addPort(serialport);
+            const devices = await navigator.hid.requestDevice({
+                filters: []
+            });
+            this.addPort(devices[0]);
             this.refreshPorts();
         }
 
@@ -47,57 +49,58 @@ class WebSerialPort extends Serial {
             return this.nameToPortRegistry.getItem(name);
         }
 
-        this.addPort = function (serialport) {
-            if (this.portToNameRegistry.hasKey(serialport)) {
+        this.addPort = function (device) {
+            if (this.portToNameRegistry.hasKey(device)) {
                 return;
             }
             let name = '';
             for (let i = 1; i <= 20; i++) {
-                name = `serial${i}`;
+                name = `hid${i}`;
                 if (this.nameToPortRegistry.hasKey(name)) {
                     continue;
                 }
                 break;
             }
-            this.portToNameRegistry.register(serialport, name);
-            this.nameToPortRegistry.register(name, serialport);
+            this.portToNameRegistry.register(device, name);
+            this.nameToPortRegistry.register(name, device);
         }
 
-        this.removePort = function (serialport) {
-            if (!this.portToNameRegistry.hasKey(serialport)) {
+        this.removePort = function (device) {
+            if (!this.portToNameRegistry.hasKey(device)) {
                 return;
             }
-            const name = this.portToNameRegistry.getItem(serialport);
+            const name = this.portToNameRegistry.getItem(device);
             if (!name) {
                 return;
             }
-            this.portToNameRegistry.unregister(serialport);
+            this.portToNameRegistry.unregister(device);
             this.nameToPortRegistry.unregister(name);
         }
 
         this.addEventsListener = function () {
-            navigator?.serial?.addEventListener('connect', (event) => {
-                this.addPort(event.target);
+            navigator?.hid?.addEventListener('connect', (event) => {
+                this.addPort(event.device);
                 this.refreshPorts();
             });
 
-            navigator?.serial?.addEventListener('disconnect', (event) => {
-                this.removePort(event.target);
+            navigator?.hid?.addEventListener('disconnect', (event) => {
+                event.device.onclose && event.device.onclose();
+                this.removePort(event.device);
                 this.refreshPorts();
             });
         }
 
         this.init = function () {
-            navigator?.serial?.getPorts().then((serialports) => {
-                for (let serialport of serialports) {
-                    this.addPort(serialport);
+            navigator?.hid?.getDevices().then((devices) => {
+                for (let device of devices) {
+                    this.addPort(device);
                 }
             });
             this.addEventsListener();
         }
     }
 
-    #serialport_ = null;
+    #device_ = null;
     #keepReading_ = null;
     #reader_ = null;
     #writer_ = null;
@@ -111,24 +114,23 @@ class WebSerialPort extends Serial {
     }
 
     async #addReadEventListener_() {
-        const { readable } = this.#serialport_;
-        while (readable && this.#keepReading_) {
-            this.#reader_ = readable.getReader();
-            try {
-                while (true) {
-                    const { value, done } = await this.#reader_.read();
-                    value && this.onBuffer(value);
-                    if (done) {
-                        break;
-                    }
-                }
-            } catch (error) {
-                this.#keepReading_ = false;
-                Debug.error(error);
-            } finally {
-                this.#reader_ && this.#reader_.releaseLock();
-                await this.close();
+        this.#device_.oninputreport = (event) => {
+            const { data, reportId } = event;
+            const length = Math.min(data.getUint8(0), data.byteLength);
+            let buffer = [];
+            for (let i = 1; i <= length; i++) {
+                buffer.push(data.getUint8(i));
             }
+            this.onBuffer(buffer);
+        };
+
+        this.#device_.onclose = () => {
+            if (!this.isOpened()) {
+                return;
+            }
+            super.close();
+            this.#stringTemp_ = '';
+            this.onClose(1);
         }
     }
 
@@ -137,7 +139,7 @@ class WebSerialPort extends Serial {
             const portsName = Serial.getCurrentPortsName();
             const currentPortName = this.getPortName();
             if (!portsName.includes(currentPortName)) {
-                reject('无可用串口');
+                reject('无可用设备');
                 return;
             }
             if (this.isOpened()) {
@@ -145,12 +147,11 @@ class WebSerialPort extends Serial {
                 return;
             }
             baud = baud ?? this.getBaudRate();
-            this.#serialport_ = WebSerialPort.getPort(currentPortName);
-            this.#serialport_.open({ baudRate: baud })
+            this.#device_ = WebHID.getPort(currentPortName);
+            this.#device_.open()
                 .then(() => {
                     super.open(baud);
                     super.setBaudRate(baud);
-                    this.#keepReading_ = true;
                     this.onOpen();
                     this.#addEventsListener_();
                     resolve();
@@ -159,44 +160,20 @@ class WebSerialPort extends Serial {
         });
     }
 
-    async #waitForUnlock_(timeout) {
-        while (
-            (this.#serialport_.readable && this.#serialport_.readable.locked) ||
-            (this.#serialport_.writable && this.#serialport_.writable.locked)
-        ) {
-            await this.sleep(timeout);
-        }
-    }
-
     async close() {
         if (!this.isOpened()) {
             return;
         }
         super.close();
-        if (this.#serialport_.readable?.locked) {
-            this.#keepReading_ = false;
-            await this.#reader_?.cancel();
-        }
-        await this.#waitForUnlock_(400);
-        this.#reader_ = undefined;
-        await this.#serialport_.close();
+        await this.#device_.close();
         this.#stringTemp_ = '';
+        this.#device_.oninputreport = null;
+        this.#device_.onclose = null;
         this.onClose(1);
     }
 
     async setBaudRate(baud) {
-        return new Promise((resolve, reject) => {
-            if (!this.isOpened()
-                || this.getBaudRate() === baud
-                || !this.baudRateIsLegal(baud)) {
-                resolve();
-                return;
-            }
-            this.close()
-                .then(() => this.open(baud))
-                .then(resolve)
-                .catch(reject);
-        });
+        return Promise.resolve();
     }
 
     async sendString(str) {
@@ -206,39 +183,23 @@ class WebSerialPort extends Serial {
 
     async sendBuffer(buffer) {
         return new Promise((resolve, reject) => {
-            const { writable } = this.#serialport_;
-            const writer = writable.getWriter();
-            if (!(buffer instanceof Uint8Array)) {
+            if (buffer instanceof Uint8Array) {
+                let temp = new Uint8Array(buffer.length + 1);
+                temp[0] = buffer.length;
+                temp.set(buffer, 1);
+                buffer= temp;
+            } else {
+                buffer.unshift(buffer.length);
                 buffer = new Uint8Array(buffer);
             }
-            writer.write(buffer)
-                .then(() => {
-                    writer.releaseLock();
-                    resolve();
-                })
-                .catch(() => {
-                    writer.releaseLock();
-                    reject();
-                });
+            this.#device_.sendReport(0, buffer)
+                .then(resolve)
+                .catch(reject);
         });
     }
 
     async setDTRAndRTS(dtr, rts) {
-        return new Promise((resolve, reject) => {
-            if (!this.isOpened()) {
-                resolve();
-                return;
-            }
-            this.#serialport_.setSignals({
-                dataTerminalReady: dtr,
-                requestToSend: rts
-            })
-            .then(() => {
-                super.setDTRAndRTS(dtr, rts);
-                resolve();
-            })
-            .catch(reject);
-        });
+        return Promise.resolve();
     }
 
     async setDTR(dtr) {
@@ -270,6 +231,6 @@ class WebSerialPort extends Serial {
     }
 }
 
-Web.SerialPort = WebSerialPort;
+Web.HID = WebHID;
 
 });
