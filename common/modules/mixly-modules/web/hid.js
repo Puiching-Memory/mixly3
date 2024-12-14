@@ -41,6 +41,9 @@ class WebHID extends Serial {
             const devices = await navigator.hid.requestDevice({
                 filters: []
             });
+            if (!devices.length) {
+                return;
+            }
             this.addPort(devices[0]);
             this.refreshPorts();
         }
