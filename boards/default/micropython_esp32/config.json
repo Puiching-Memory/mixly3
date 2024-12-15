@@ -63,7 +63,7 @@
     },
     "pythonToBlockly": false,
     "web": {
-        "com": "serial",
+        "com": "hid",
         "burn": {
             "erase": true,
             "micropython:esp32:mixgo": {
