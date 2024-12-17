@@ -31,6 +31,41 @@ const Variables = {};
  */
 Variables.NAME_TYPE = 'VARIABLE';
 
+Variables.DATA_TYPE = [
+    [Blockly.Msg.LANG_MATH_INT, 'int'],
+    [Blockly.Msg.LANG_MATH_UNSIGNED_INT, 'unsigned int'],
+    [Blockly.Msg.LANG_MATH_WORD, 'word'],
+    [Blockly.Msg.LANG_MATH_LONG, 'long'],
+    [Blockly.Msg.LANG_MATH_UNSIGNED_LONG, 'unsigned long'],
+    [Blockly.Msg.LANG_MATH_FLOAT, 'float'],
+    [Blockly.Msg.LANG_MATH_DOUBLE, 'double'],
+    [Blockly.Msg.LANG_MATH_BOOLEAN, 'bool'],
+    [Blockly.Msg.LANG_MATH_BYTE, 'byte'],
+    [Blockly.Msg.LANG_MATH_CHAR, 'char'],
+    [Blockly.Msg.LANG_MATH_UNSIGNED_CHAR, 'unsigned char'],
+    [Blockly.Msg.LANG_MATH_STRING, 'String'],
+    ['uint8_t', 'uint8_t'],
+    ['uint16_t', 'uint16_t'],
+    ['uint32_t', 'uint32_t'],
+    ['uint64_t', 'uint64_t'],
+    ['int*', 'int*'],
+    ['unsigned int*', 'unsigned int*'],
+    ['word*', 'word*'],
+    ['long*', 'long*'],
+    ['unsigned long*', 'unsigned long*'],
+    ['float*', 'float*'],
+    ['double*', 'double*'],
+    ['bool*', 'bool*'],
+    ['byte*', 'byte*'],
+    ['char*', 'char*'],
+    ['unsigned char*', 'unsigned char*'],
+    ['String*', 'String*'],
+    ['uint8_t*', 'uint8_t*'],
+    ['uint16_t*', 'uint16_t*'],
+    ['uint32_t*', 'uint32_t*'],
+    ['uint64_t*', 'uint64_t*']
+];
+
 /**
  * Find all user-created variables.
  * @param {!Blockly.Block|!Blockly.Workspace} root Root block or workspace.

@@ -443,25 +443,7 @@ export const procedures_defreturn = {
         this.appendValueInput('RETURN')
             .setAlign(Blockly.inputs.Align.RIGHT)
             .appendField(Blockly.Msg['PROCEDURES_DEFRETURN_RETURN'])
-            .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.LANG_MATH_INT, 'int'],
-                [Blockly.Msg.LANG_MATH_UNSIGNED_INT, 'unsigned int'],
-                [Blockly.Msg.LANG_MATH_WORD, 'word'],
-                [Blockly.Msg.LANG_MATH_LONG, 'long'],
-                [Blockly.Msg.LANG_MATH_UNSIGNED_LONG, 'unsigned long'],
-                [Blockly.Msg.LANG_MATH_FLOAT, 'float'],
-                [Blockly.Msg.LANG_MATH_DOUBLE, 'double'],
-                [Blockly.Msg.LANG_MATH_BOOLEAN, 'boolean'],
-                [Blockly.Msg.LANG_MATH_BYTE, 'byte'],
-                [Blockly.Msg.LANG_MATH_CHAR, 'char'],
-                [Blockly.Msg.LANG_MATH_UNSIGNED_CHAR, 'unsigned char'],
-                [Blockly.Msg.LANG_MATH_STRING, 'String'],
-                ["char*", "char*"],
-                ["uint8_t", "uint8_t"],
-                ["uint16_t", "uint16_t"],
-                ["uint32_t", "uint32_t"],
-                ["uint64_t", "uint64_t"]
-            ]), "TYPE");
+            .appendField(new Blockly.FieldDropdown(Variables.DATA_TYPE), "TYPE");
         this.setMutator(new Blockly.icons.MutatorIcon(['procedures_mutatorarg'], this));
         if ((this.workspace.options.comments ||
             (this.workspace.options.parentWorkspace &&
@@ -540,25 +522,7 @@ export const procedures_mutatorarg = {
 
         this.appendDummyInput()
             .appendField(Blockly.Msg.PROCEDURES_BEFORE_PARAMS)
-            .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.LANG_MATH_INT, 'int'],
-                [Blockly.Msg.LANG_MATH_UNSIGNED_INT, 'unsigned int'],
-                [Blockly.Msg.LANG_MATH_WORD, 'word'],
-                [Blockly.Msg.LANG_MATH_LONG, 'long'],
-                [Blockly.Msg.LANG_MATH_UNSIGNED_LONG, 'unsigned long'],
-                [Blockly.Msg.LANG_MATH_FLOAT, 'float'],
-                [Blockly.Msg.LANG_MATH_DOUBLE, 'double'],
-                [Blockly.Msg.LANG_MATH_BOOLEAN, 'boolean'],
-                [Blockly.Msg.LANG_MATH_BYTE, 'byte'],
-                [Blockly.Msg.LANG_MATH_CHAR, 'char'],
-                [Blockly.Msg.LANG_MATH_UNSIGNED_CHAR, 'unsigned char'],
-                [Blockly.Msg.LANG_MATH_STRING, 'String'],
-                ["char*", "char*"],
-                ["uint8_t", "uint8_t"],
-                ["uint16_t", "uint16_t"],
-                ["uint32_t", "uint32_t"],
-                ["uint64_t", "uint64_t"]
-            ]), "TYPEVAR")
+            .appendField(new Blockly.FieldDropdown(Variables.DATA_TYPE), "TYPEVAR")
             .appendField(field, 'NAME');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
