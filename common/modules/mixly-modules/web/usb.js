@@ -135,7 +135,7 @@ class USB extends Serial {
         }
     }
 
-    async #startSerialRead_(serialDelay = 10, autoConnect = false) {
+    async #startSerialRead_(serialDelay = 1, autoConnect = false) {
         this.#dapLink_.serialPolling = true;
 
         while (this.#dapLink_.serialPolling) {
