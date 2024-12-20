@@ -83,6 +83,7 @@ class Serial {
                 newOption.setAttribute('disabled', true);
                 $portSelector.append(newOption);
             }
+            $portSelector.select2('close');
             $portSelector.trigger('change');
             let footerStatus = ports.length ? 'inline-flex' : 'none';
             $('#mixly-footer-port-div').css('display', footerStatus);

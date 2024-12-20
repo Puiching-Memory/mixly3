@@ -201,7 +201,7 @@ BU.burnByUSB = () => {
                     statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
                 })
                 .catch((error) => {
-                    console.log(error);
+                    Debug.error(error);
                     layer.close(index);
                     statusBarTerminal.addValue(`==${Msg.Lang['shell.burnFailed']}==\n`);
                 })
@@ -269,7 +269,7 @@ BU.burnWithEsptool = async (binFile, erase) => {
         });
         let chip = await esploader.main();
     } catch (error) {
-        console.log(error);
+        Debug.error(error);
         statusBarTerminal.addValue(`\n${error.toString()}\n`);
         await transport.disconnect();
         return;
@@ -320,7 +320,7 @@ BU.burnWithEsptool = async (binFile, erase) => {
                     await transport.disconnect();
                 } catch (error) {
                     layer.close(index);
-                    console.log(error);
+                    Debug.error(error);
                 }
             });
             try {
@@ -331,7 +331,7 @@ BU.burnWithEsptool = async (binFile, erase) => {
                 layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
                 statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
             } catch (error) {
-                console.log(error);
+                Debug.error(error);
                 statusBarTerminal.addValue(`==${Msg.Lang['shell.burnFailed']}==\n`);
             } finally {
                 layer.close(index);
@@ -386,7 +386,7 @@ BU.burnWithAdafruitEsptool = async (binFile, erase) => {
         await esploader.initialize();
         espStub = await esploader.runStub();
     } catch (error) {
-        console.log(error);
+        Debug.error(error);
         statusBarTerminal.addValue(`\n${error.toString()}\n`);
         await port.close();
         return;
@@ -446,7 +446,7 @@ BU.burnWithAdafruitEsptool = async (binFile, erase) => {
                 layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
                 statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
             } catch (error) {
-                console.log(error);
+                Debug.error(error);
                 statusBarTerminal.addValue(`==${Msg.Lang['shell.burnFailed']}==\n`);
             } finally {
                 layer.close(index);
@@ -607,7 +607,7 @@ BU.uploadWithAmpy = (portName) => {
             } catch (error) {
                 ampy.dispose();
                 layer.close(index);
-                console.error(error);
+                Debug.error(error);
                 statusBarTerminal.addValue(`${error}\n`);
                 statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadFailed']}==\n`);
             }
@@ -677,7 +677,7 @@ BU.uploadWithEsptool = async (endType, obj, layerType) => {
         Serial.reset(portName, 'upload');
         mainStatusBarTabs.changeTo(portName);
     } catch (error) {
-        console.log(error);
+        Debug.error(error);
         layer.close(layerType);
         statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadFailed']}==\n`);
     } finally {
