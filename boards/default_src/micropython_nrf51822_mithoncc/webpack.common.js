@@ -5,7 +5,8 @@ const { merge } = require("webpack-merge");
 module.exports = merge(common, {
     resolve: {
         alias: {
-            '@mixly/python': path.resolve(__dirname, '../python')
+            '@mixly/python': path.resolve(__dirname, '../python'),
+            '@mixly/micropython': path.resolve(__dirname, '../micropython')
         }
     }
 });

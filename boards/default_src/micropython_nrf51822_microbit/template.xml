@@ -1872,7 +1872,7 @@
     <block type="variables_set">
       <field name="VAR">response</field>
       <value name="VALUE">
-         <block type="requests_get2">
+        <block type="requests_get2">
           <value name="URL">
             <shadow type="text">
               <field name="TEXT">http://mixio.mixly.cn</field>
@@ -1881,10 +1881,10 @@
         </block>
       </value>
     </block>
-        <block type="variables_set">
+    <block type="variables_set">
       <field name="VAR">response</field>
       <value name="VALUE">
-         <block type="requests_post">
+        <block type="requests_post">
           <value name="URL">
             <shadow type="text">
               <field name="TEXT">http://mixio.mixly.cn</field>

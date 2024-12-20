@@ -55,6 +55,21 @@ const CoreRegister = {
     PC: 15,
 };
 
+/**
+ * Utility to time out an action after a delay.
+ *
+ * The action cannot be cancelled; it may still proceed after the timeout.
+ */
+async function withTimeout(actionPromise, timeout) {
+    const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => {
+            reject(new Error());
+        }, timeout);
+    });
+    // timeoutPromise never resolves so result must be from action
+    return Promise.race([actionPromise, timeoutPromise]);
+}
+
 class Page {
     constructor(targetAddr, data) {
         this.targetAddr = targetAddr;
@@ -312,10 +327,10 @@ class PartialFlashing {
             const data = fs.getIntelHexForBoardId(boardId.normalize().id.toString(16));
             await this.dapwrapper.transport.open();
             await this.dapwrapper.daplink.flash(data.buffer);
-            console.log({
-                type: "WebUSB-info",
-                message: "full-flash-successful",
-            })
+            // console.log({
+            //     type: "WebUSB-info",
+            //     message: "full-flash-successful",
+            // });
         } finally {
             this.dapwrapper.daplink.removeListener(
                 DAPjs.DAPLink.EVENT_PROGRESS,
@@ -353,10 +368,10 @@ class PartialFlashing {
                 if (e instanceof Error) {
                     this.log("Resetting micro:bit timed out");
                     this.log("Partial flashing failed. Attempting full flash");
-                    console.log({
-                        type: "WebUSB-info",
-                        message: "flash-failed/attempting-full-flash",
-                    });
+                    // console.log({
+                    //     type: "WebUSB-info",
+                    //     message: "flash-failed/attempting-full-flash",
+                    // });
                     await this.fullFlashAsync(boardId, fs, updateProgress);
                     return false;
                 } else {

@@ -562,7 +562,7 @@ BU.uploadByUSB = async (portName) => {
             return;
         }
     }
-    const statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
+    let statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
     if (statusBarSerial) {
         await statusBarSerial.close();
     }
@@ -570,16 +570,18 @@ BU.uploadByUSB = async (portName) => {
     const port = Serial.getPort(portName);
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const dapWrapper = new DAPWrapper(port, {
-        event: (data) => {
-            console.log(data);
-        },
+        event: () => {},
         log: () => {}
     });
     const partialFlashing = new PartialFlashing(dapWrapper, {
-        event: (data) => {
-            console.log(data);
-        }
+        event: () => {}
     });
+
+    let boardId = 0x9901;
+    const boardKey = Boards.getSelectedBoardKey();
+    if (boardKey === 'micropython:nrf51822:v2') {
+        boardId = 0x9903;
+    }
 
     BU.burning = false;
     BU.uploading = true;
@@ -590,6 +592,12 @@ BU.uploadByUSB = async (portName) => {
     const editor = mainWorkspace.getEditorsManager().getActive();
     const code = editor.getCode();
     FSWrapper.writeFile('main.py', code);
+    const importsMap = BU.getImportModules(code);
+    for (let key in importsMap) {
+        const filename = importsMap[key]['__name__'];
+        const data = goog.get(importsMap[key]['__path__']);
+        FSWrapper.writeFile(filename, data);
+    }
     layer.open({
         type: 1,
         title: Msg.Lang['shell.uploading'] + '...',
@@ -599,7 +607,19 @@ BU.uploadByUSB = async (portName) => {
         closeBtn: 0,
         success: async function (layero, index) {
             try {
-                await partialFlashing.flashAsync(new BoardId(0x9900), FSWrapper, () => {});
+                let prevPercent = 0;
+                await partialFlashing.flashAsync(new BoardId(0x9900), FSWrapper, progress => {
+                    const nowPercent = Math.floor(progress * 100);
+                    if (nowPercent > prevPercent) {
+                        prevPercent = nowPercent;
+                    } else {
+                        return;
+                    }
+                    const nowProgressLen = Math.floor(nowPercent / 2);
+                    const leftStr = new Array(nowProgressLen).fill('=').join('');
+                    const rightStr = (new Array(50 - nowProgressLen).fill('-')).join('');
+                    statusBarTerminal.addValue(`[${leftStr}${rightStr}] ${nowPercent}%\n`);
+                });
                 layer.close(index);
                 layer.msg(Msg.Lang['shell.uploadSucc'], { time: 1000 });
                 statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadSucc']}==\n`);

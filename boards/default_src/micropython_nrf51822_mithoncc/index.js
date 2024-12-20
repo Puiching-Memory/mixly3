@@ -34,6 +34,11 @@ import {
 } from '@mixly/python';
 
 import {
+    MicroPythonNetworkBlocks,
+    MicroPythonNetworkGenerators
+} from '@mixly/micropython';
+
+import {
     MicropythonNRF51822MithonCCPins,
     MicropythonNRF51822MithonCCActuatorBlocks,
     MicropythonNRF51822MithonCCCommunicateBlocks,
@@ -83,6 +88,7 @@ Object.assign(
     PythonSetBlocks,
     PythonHtmlBlocks,
     PythonUtilityBlocks,
+    MicroPythonNetworkBlocks,
     MicropythonNRF51822MithonCCActuatorBlocks,
     MicropythonNRF51822MithonCCCommunicateBlocks,
     MicropythonNRF51822MithonCCDisplayBlocks,
@@ -111,6 +117,7 @@ Object.assign(
     PythonSetGenerators,
     PythonHtmlGenerators,
     PythonUtilityGenerators,
+    MicroPythonNetworkGenerators,
     MicropythonNRF51822MithonCCActuatorGenerators,
     MicropythonNRF51822MithonCCCommunicateGenerators,
     MicropythonNRF51822MithonCCDisplayGenerators,

@@ -77,6 +77,12 @@ const CortexSpecialReg = {
     // Many more.
 };
 
+const CoreRegister = {
+    SP: 13,
+    LR: 14,
+    PC: 15,
+};
+
 // Returns a representation of an Access Port Register.
 // Drawn from https://github.com/mmoskal/dapjs/blob/a32f11f54e9e76a9c61896ddd425c1cb1a29c143/src/util.ts#L63
 const apReg = (r, mode) => {
@@ -157,6 +163,40 @@ class DAPWrapper {
             this.device,
             this.logging.log.bind(this.logging)
         );
+    }
+
+    async connectAsync() {
+        await this.daplink.connect();
+        await this.daplink.setSerialBaudrate(115200);
+        await this.cortexM.connect();
+        this.logging.event({
+            type: "WebUSB-info",
+            message: "connected",
+        });
+
+        const serialInfo = this.boardSerialInfo();
+        this.log(`Detected board ID ${serialInfo.id}`);
+
+        if (
+            !this.loggedBoardSerialInfo ||
+            !this.loggedBoardSerialInfo.eq(this.boardSerialInfo())
+        ) {
+            this.loggedBoardSerialInfo = this.boardSerialInfo();
+            this.logging.event({
+                type: "WebUSB-info",
+                message: "board-id/" + this.boardSerialInfo().id,
+            });
+            this.logging.event({
+                type: "WebUSB-info",
+                message:
+                    "board-family-hic/" +
+                    this.boardSerialInfo().familyId +
+                    this.boardSerialInfo().hic,
+            });
+        }
+
+        this._pageSize = await this.cortexM.readMem32(FICR.CODEPAGESIZE);
+        this._numPages = await this.cortexM.readMem32(FICR.CODESIZE);
     }
 
     // Drawn from https://github.com/microsoft/pxt-microbit/blob/dec5b8ce72d5c2b4b0b20aafefce7474a6f0c7b2/editor/extension.tsx#L119

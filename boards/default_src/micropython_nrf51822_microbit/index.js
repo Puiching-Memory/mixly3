@@ -34,6 +34,13 @@ import {
 } from '@mixly/python';
 
 import {
+    MicroPythonNetworkBlocks,
+    MicroPythonSensorOnBoardBlocks,
+    MicroPythonNetworkGenerators,
+    MicroPythonSensorOnBoardGenerators
+} from '@mixly/micropython';
+
+import {
     MicropythonNRF51822MicrobitPins,
     MicropythonNRF51822MicrobitActuatorBlocks,
     MicropythonNRF51822MicrobitCommunicateBlocks,
@@ -81,6 +88,8 @@ Object.assign(
     PythonSetBlocks,
     PythonHtmlBlocks,
     PythonUtilityBlocks,
+    MicroPythonNetworkBlocks,
+    MicroPythonSensorOnBoardBlocks,
     MicropythonNRF51822MicrobitActuatorBlocks,
     MicropythonNRF51822MicrobitCommunicateBlocks,
     MicropythonNRF51822MicrobitDisplayBlocks,
@@ -107,6 +116,8 @@ Object.assign(
     PythonSetGenerators,
     PythonHtmlGenerators,
     PythonUtilityGenerators,
+    MicroPythonNetworkGenerators,
+    MicroPythonSensorOnBoardGenerators,
     MicropythonNRF51822MicrobitActuatorGenerators,
     MicropythonNRF51822MicrobitCommunicateGenerators,
     MicropythonNRF51822MicrobitDisplayGenerators,
