@@ -155,7 +155,7 @@
         },
         "language": "MicroPython"
     },
-    /*{
+    {
         "boardImg": "./boards/default/micropython_nrf51822_mithoncc/media/mithon_compressed.png",
         "boardType": "Mithon CC",
         "boardIndex": "./boards/default/micropython_nrf51822_mithoncc/index.xml",
@@ -178,7 +178,7 @@
             "webSocket": true
         },
         "language": "MicroPython"
-    },*/
+    },
     {
         "boardImg": "./boards/default/arduino_esp8266/media/esp8266_compressed.png",
         "boardType": "Arduino ESP8266",

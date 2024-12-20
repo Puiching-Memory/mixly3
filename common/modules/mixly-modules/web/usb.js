@@ -91,6 +91,7 @@ class USB extends Serial {
             });
 
             navigator?.usb?.addEventListener('disconnect', (event) => {
+                event.device.onclose && event.device.onclose();
                 this.removePort(event.device);
                 this.refreshPorts();
             });
@@ -122,13 +123,29 @@ class USB extends Serial {
     }
 
     #addReadEventListener_() {
-        this.#dapLink_.on(DAPjs.DAPLink.EVENT_SERIAL_DATA, data => {
-            const str = data.split('');
-            for (let i = 0; i < str.length; i++) {
-                this.onChar(str[i]);
+        this.#reader_ = this.#startSerialRead_();
+
+        this.#device_.onclose = () => {
+            if (!this.isOpened()) {
+                return;
             }
-        });
-        this.#dapLink_.startSerialRead(this.#device_);
+            super.close();
+            this.#stringTemp_ = '';
+            this.onClose(1);
+        }
+    }
+
+    async #startSerialRead_(serialDelay = 10, autoConnect = false) {
+        this.#dapLink_.serialPolling = true;
+
+        while (this.#dapLink_.serialPolling) {
+            const data = await this.#dapLink_.serialRead();
+            if (data !== undefined) {
+                const numberArray = Array.prototype.slice.call(new Uint8Array(data));
+                this.onBuffer(numberArray);
+            }
+            await new Promise(resolve => setTimeout(resolve, serialDelay));
+        }
     }
 
     async open(baud) {
@@ -156,9 +173,10 @@ class USB extends Serial {
             return;
         }
         super.close();
-        this.#dapLink_.removeAllListeners(DAPjs.DAPLink.EVENT_SERIAL_DATA);
         this.#dapLink_.stopSerialRead();
-        await this.#dapLink_.stopSerialRead();
+        if (this.#reader_) {
+            await this.#reader_;
+        }
         await this.#dapLink_.disconnect();
         this.#dapLink_ = null;
         await this.#webUSB_.close();
@@ -172,7 +190,7 @@ class USB extends Serial {
         if (!this.isOpened() || this.getBaudRate() === baud) {
             return;
         }
-        await this.setSerialBaudrate(baud);
+        await this.#dapLink_.setSerialBaudrate(baud);
         await super.setBaudRate(baud);
     }
 
@@ -204,18 +222,23 @@ class USB extends Serial {
         return this.setDTRAndRTS(this.getDTR(), rts);
     }
 
-    onChar(char) {
-        super.onChar(char);
-        if (['\r', '\n'].includes(char)) {
-            super.onString(this.#stringTemp_);
-            this.#stringTemp_ = '';
-        } else {
-            this.#stringTemp_ += char;
-        }
-        const buffer = this.encode(char);
+    onBuffer(buffer) {
         super.onBuffer(buffer);
         for (let i = 0; i < buffer.length; i++) {
             super.onByte(buffer[i]);
+        }
+        const string = this.decodeBuffer(buffer);
+        if (!string) {
+            return;
+        }
+        for (let char of string) {
+            super.onChar(char);
+            if (['\r', '\n'].includes(char)) {
+                super.onString(this.#stringTemp_);
+                this.#stringTemp_ = '';
+            } else {
+                this.#stringTemp_ += char;
+            }
         }
     }
 }

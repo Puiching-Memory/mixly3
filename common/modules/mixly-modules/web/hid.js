@@ -119,9 +119,9 @@ class WebHID extends Serial {
     async #addReadEventListener_() {
         this.#device_.oninputreport = (event) => {
             const { data, reportId } = event;
-            const length = Math.min(data.getUint8(0), data.byteLength);
+            const length = Math.min(data.getUint8(0) + 1, data.byteLength);
             let buffer = [];
-            for (let i = 1; i <= length; i++) {
+            for (let i = 1; i < length; i++) {
                 buffer.push(data.getUint8(i));
             }
             this.onBuffer(buffer);

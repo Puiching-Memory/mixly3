@@ -186,7 +186,8 @@ class StatusBarsManager extends PagesManager {
             }
         });*/
 
-        if (['micropython', 'circuitpython'].includes(BOARD.language.toLowerCase())) {
+        if (['micropython', 'circuitpython'].includes(BOARD.language.toLowerCase())
+            && !['BBC micro:bit', 'Mithon CC'].includes(BOARD.boardType)) {
             menu.add({
                 weight: 2,
                 type: 'sep1',

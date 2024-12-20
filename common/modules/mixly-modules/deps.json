@@ -684,30 +684,10 @@
             "Mixly.Boards",
             "Mixly.XML",
             "Mixly.LayerExt",
-            "Mixly.MicrobitFs",
             "Mixly.Msg"
         ],
         "provide": [
             "Mixly.MFile"
-        ]
-    },
-    {
-        "path": "/common/microbit-fs-wrapper.js",
-        "require": [
-            "microbitFs"
-        ],
-        "provide": [
-            "fsWrapper"
-        ]
-    },
-    {
-        "path": "/common/microbit-fs.js",
-        "require": [
-            "fsWrapper",
-            "Mixly.Config"
-        ],
-        "provide": [
-            "Mixly.MicrobitFs"
         ]
     },
     {
@@ -1558,6 +1538,9 @@
         "path": "/web/burn-upload.js",
         "require": [
             "path",
+            "FSWrapper",
+            "DAPWrapper",
+            "PartialFlashing",
             "ESPTool",
             "AdafruitESPTool",
             "CryptoJS",
@@ -1637,22 +1620,6 @@
         ],
         "provide": [
             "Mixly.Web.HID"
-        ]
-    },
-    {
-        "path": "/web/lms.js",
-        "require": [
-            "saveAs",
-            "Blob",
-            "Blockly",
-            "Mixly.MFile",
-            "Mixly.Config",
-            "Mixly.MicrobitFs",
-            "Mixly.LocalStorage",
-            "Mixly.Web.File"
-        ],
-        "provide": [
-            "Mixly.Web.Lms"
         ]
     },
     {

@@ -1,6 +1,10 @@
 goog.loadJs('web', () => {
 
 goog.require('path');
+goog.require('BoardId');
+goog.require('FSWrapper');
+goog.require('DAPWrapper');
+goog.require('PartialFlashing');
 goog.require('ESPTool');
 goog.require('AdafruitESPTool');
 goog.require('CryptoJS');
@@ -57,6 +61,10 @@ BU.FILMWARE_LAYER = new HTMLTemplate(
 });
 
 const BAUD = goog.platform() === 'darwin' ? 460800 : 921600;
+
+if (['BBC micro:bit', 'Mithon CC'].includes(BOARD.boardType)) {
+    FSWrapper.setupFilesystem(path.join(Env.boardDirPath, 'build'));
+}
 
 BU.requestPort = async () => {
     await Serial.requestPort();
@@ -136,85 +144,93 @@ BU.initBurn = () => {
     }
 }
 
-BU.burnByUSB = () => {
-    const portName = 'web-usb';
-    Serial.connect(portName, 115200, async (port) => {
-        if (!port) {
-            return;
-        }
-        let portObj = Serial.portsOperator[portName];
-        const { toolConfig, serialport } = portObj;
-        const prevBaud = toolConfig.baudRates;
-        if (prevBaud !== 115200) {
-            toolConfig.baudRates = 115200;
-            await serialport.setBaudRate(toolConfig.baudRates);
-        }
-        const { web } = SELECTED_BOARD;
-        const { burn } = web;
-        const hexStr = goog.get(path.join(Env.boardDirPath, burn.filePath));
-        const hex2Blob = new Blob([ hexStr ], { type: 'text/plain' });
-        const buffer = await hex2Blob.arrayBuffer();
-        if (!buffer) {
-            layer.msg(Msg.Lang['shell.bin.readFailed'], { time: 1000 });
-            return;
-        }
-        BU.burning = true;
-        BU.uploading = false;
-        const { mainStatusBarTabs } = Mixly;
-        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
-        statusBarTerminal.setValue(Msg.Lang['shell.burning'] + '...\n');
-        mainStatusBarTabs.show();
-        mainStatusBarTabs.changeTo('output');
-        const layerNum = layer.open({
-            type: 1,
-            title: Msg.Lang['shell.burning'] + '...',
-            content: $('#mixly-loader-div'),
-            shade: LayerExt.SHADE_NAV,
-            resize: false,
-            closeBtn: 0,
-            success: function (layero, index) {
-                $(".layui-layer-page").css("z-index","198910151");
-                $("#mixly-loader-btn").hide();
-                let prevPercent = 0;
-                Serial.DAPLink.on(DAPjs.DAPLink.EVENT_PROGRESS, progress => {
-                    const nowPercent = Math.floor(progress * 100);
-                    if (nowPercent > prevPercent) {
-                        prevPercent = nowPercent;
-                    } else {
-                        return;
-                    }
-                    const nowProgressLen = Math.floor(nowPercent / 2);
-                    const leftStr = new Array(nowProgressLen).fill('=').join('');
-                    const rightStr = (new Array(50 - nowProgressLen).fill('-')).join('');
-                    statusBarTerminal.addValue(`[${leftStr}${rightStr}] ${nowPercent}%\n`);
-                });
-                Serial.flash(buffer)
-                .then(() => {
-                    layer.close(index);
-                    layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
-                    statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
-                })
-                .catch((error) => {
-                    console.log(error);
-                    layer.close(index);
-                    statusBarTerminal.addValue(`==${Msg.Lang['shell.burnFailed']}==\n`);
-                })
-                .finally(async () => {
-                    BU.burning = false;
-                    BU.uploading = false;
-                    if (toolConfig.baudRates !== prevBaud) {
-                        toolConfig.baudRates = prevBaud;
-                        await serialport.setBaudRate(prevBaud);
-                    }
-                    Serial.DAPLink.removeAllListeners(DAPjs.DAPLink.EVENT_PROGRESS);
-                });
-            },
-            end: function () {
-                $("#mixly-loader-btn").css('display', 'inline-block');
-                $('#mixly-loader-div').css('display', 'none');
-                $("#layui-layer-shade" + layerNum).remove();
+BU.burnByUSB = async () => {
+    const { mainStatusBarTabs } = Mixly;
+    let portName = Serial.getSelectedPortName();
+    if (!portName) {
+        try {
+            await BU.requestPort();
+            portName = Serial.getSelectedPortName();
+            if (!portName) {
+                return;
             }
-        });
+        } catch (error) {
+            Debug.error(error);
+            return;
+        }
+    }
+    const statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
+    if (statusBarSerial) {
+        await statusBarSerial.close();
+    }
+
+    const { web } = SELECTED_BOARD;
+    const { burn } = web;
+    const hexStr = goog.get(path.join(Env.boardDirPath, burn.filePath));
+    const hex2Blob = new Blob([ hexStr ], { type: 'text/plain' });
+    const buffer = await hex2Blob.arrayBuffer();
+    if (!buffer) {
+        layer.msg(Msg.Lang['shell.bin.readFailed'], { time: 1000 });
+        return;
+    }
+    BU.burning = true;
+    BU.uploading = false;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+    statusBarTerminal.setValue(`${Msg.Lang['shell.burning']}...\n`);
+    mainStatusBarTabs.show();
+    mainStatusBarTabs.changeTo('output');
+    const port = Serial.getPort(portName);
+    const webUSB = new DAPjs.WebUSB(port);
+    const dapLink = new DAPjs.DAPLink(webUSB);
+    try {
+        await dapLink.connect();
+        await dapLink.setSerialBaudrate(115200);
+    } catch (error) {
+        Debug.error(error);
+        return;
+    }
+    let prevPercent = 0;
+    dapLink.on(DAPjs.DAPLink.EVENT_PROGRESS, progress => {
+        const nowPercent = Math.floor(progress * 100);
+        if (nowPercent > prevPercent) {
+            prevPercent = nowPercent;
+        } else {
+            return;
+        }
+        const nowProgressLen = Math.floor(nowPercent / 2);
+        const leftStr = new Array(nowProgressLen).fill('=').join('');
+        const rightStr = (new Array(50 - nowProgressLen).fill('-')).join('');
+        statusBarTerminal.addValue(`[${leftStr}${rightStr}] ${nowPercent}%\n`);
+    });
+    layer.open({
+        type: 1,
+        title: `${Msg.Lang['shell.burning']}...`,
+        content: $('#mixly-loader-div'),
+        shade: LayerExt.SHADE_NAV,
+        resize: false,
+        closeBtn: 0,
+        success: async (layero, index) => {
+            $('#mixly-loader-btn').hide();
+            try {
+                await dapLink.flash(buffer);
+                layer.close(index);
+                layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
+                statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
+            } catch (error) {
+                Debug.error(error);
+                layer.close(index);
+                statusBarTerminal.addValue(`==${Msg.Lang['shell.burnFailed']}==\n`);
+            } finally {
+                dapLink.removeAllListeners(DAPjs.DAPLink.EVENT_PROGRESS);
+                await dapLink.disconnect();
+                await webUSB.close();
+                await port.close();
+            }
+        },
+        end: function () {
+            $('#mixly-loader-btn').css('display', 'inline-block');
+            $('#mixly-loader-div').css('display', 'none');
+        }
     });
 }
 
@@ -299,7 +315,7 @@ BU.burnWithEsptool = async (binFile, erase) => {
         compress: true,
         calculateMD5Hash: (image) => CryptoJS.MD5(CryptoJS.enc.Latin1.parse(image))
     };
-    const layerNum = layer.open({
+    layer.open({
         type: 1,
         title: Msg.Lang['shell.burning'] + '...',
         content: $('#mixly-loader-div'),
@@ -410,7 +426,7 @@ BU.burnWithAdafruitEsptool = async (binFile, erase) => {
     statusBarTerminal.addValue("Done!\n");
     BU.burning = true;
     BU.uploading = false;
-    const layerNum = layer.open({
+    layer.open({
         type: 1,
         title: Msg.Lang['shell.burning'] + '...',
         content: $('#mixly-loader-div'),
@@ -525,7 +541,86 @@ BU.initUpload = async () => {
             return;
         }
     }
-    BU.uploadWithAmpy(portName);
+    if (['BBC micro:bit', 'Mithon CC'].includes(BOARD.boardType)) {
+        BU.uploadByUSB(portName);
+    } else {
+        BU.uploadWithAmpy(portName);
+    }
+}
+
+BU.uploadByUSB = async (portName) => {
+    const { mainStatusBarTabs } = Mixly;
+    if (!portName) {
+        try {
+            await BU.requestPort();
+            portName = Serial.getSelectedPortName();
+            if (!portName) {
+                return;
+            }
+        } catch (error) {
+            Debug.error(error);
+            return;
+        }
+    }
+    const statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
+    if (statusBarSerial) {
+        await statusBarSerial.close();
+    }
+
+    const port = Serial.getPort(portName);
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+    const dapWrapper = new DAPWrapper(port, {
+        event: (data) => {
+            console.log(data);
+        },
+        log: () => {}
+    });
+    const partialFlashing = new PartialFlashing(dapWrapper, {
+        event: (data) => {
+            console.log(data);
+        }
+    });
+
+    BU.burning = false;
+    BU.uploading = true;
+    statusBarTerminal.setValue(Msg.Lang['shell.uploading'] + '...\n');
+    mainStatusBarTabs.show();
+    mainStatusBarTabs.changeTo('output');
+    const mainWorkspace = Workspace.getMain();
+    const editor = mainWorkspace.getEditorsManager().getActive();
+    const code = editor.getCode();
+    FSWrapper.writeFile('main.py', code);
+    layer.open({
+        type: 1,
+        title: Msg.Lang['shell.uploading'] + '...',
+        content: $('#mixly-loader-div'),
+        shade: LayerExt.SHADE_NAV,
+        resize: false,
+        closeBtn: 0,
+        success: async function (layero, index) {
+            try {
+                await partialFlashing.flashAsync(new BoardId(0x9900), FSWrapper, () => {});
+                layer.close(index);
+                layer.msg(Msg.Lang['shell.uploadSucc'], { time: 1000 });
+                statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadSucc']}==\n`);
+                if (!statusBarSerial) {
+                    mainStatusBarTabs.add('serial', portName);
+                    statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
+                }
+                statusBarSerial.setValue('');
+                mainStatusBarTabs.changeTo(portName);
+                await statusBarSerial.open();
+            } catch (error) {
+                await dapWrapper.disconnectAsync();
+                layer.close(index);
+                console.error(error);
+                statusBarTerminal.addValue(`${error}\n`);
+                statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadFailed']}==\n`);
+            }
+            BU.burning = false;
+            BU.uploading = false;
+        }
+    });
 }
 
 BU.uploadWithAmpy = (portName) => {
@@ -547,7 +642,7 @@ BU.uploadWithAmpy = (portName) => {
         useBuffer = true;
         dataLength = 30;
     }
-    const layerNum = layer.open({
+    layer.open({
         type: 1,
         title: Msg.Lang['shell.uploading'] + '...',
         content: $('#mixly-loader-div'),

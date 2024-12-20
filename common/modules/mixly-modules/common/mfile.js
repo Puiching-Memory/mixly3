@@ -8,7 +8,6 @@ goog.require('Mixly.MArray');
 goog.require('Mixly.Boards');
 goog.require('Mixly.XML');
 goog.require('Mixly.LayerExt');
-goog.require('Mixly.MicrobitFs');
 goog.require('Mixly.Msg');
 goog.provide('Mixly.MFile');
 
@@ -20,7 +19,6 @@ const {
     Boards,
     XML,
     LayerExt,
-    MicrobitFs,
     Msg,
     MFile
 } = Mixly;
@@ -106,15 +104,6 @@ MFile.getCode = (type) => {
     else {
         return generator.workspaceToCode(editor) || '';
     }
-}
-
-MFile.getHex = () => {
-    const code = MFile.getCode();
-    return MicrobitFs.getHex(code);
-}
-
-MFile.loadHex = (hexStr) => {
-    MicrobitFs.loadHex('main.py', hexStr);
 }
 
 MFile.getMix = () => {

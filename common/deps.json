@@ -96,10 +96,6 @@
         "provide": ["LazyLoad"],
         "require": []
     }, {
-        "path": "modules/web-modules/microbit-fs.umd.min.js",
-        "provide": ["microbitFs"],
-        "require": []
-    }, {
         "path": "modules/web-modules/base64.min.js",
         "provide": ["Base64"],
         "require": []
@@ -138,6 +134,30 @@
     }, {
         "path": "modules/web-modules/avr-uploader.min.js",
         "provide": ["AvrUploader"],
+        "require": []
+    }, {
+        "path": "modules/web-modules/microbit/microbit-fs.umd.min.js",
+        "provide": ["microbitFs"],
+        "require": []
+    }, {
+        "path": "modules/web-modules/microbit/fs-wrapper.js",
+        "provide": ["FSWrapper"],
+        "require": ["microbitFs", "$", "path"]
+    }, {
+        "path": "modules/web-modules/microbit/board-id.js",
+        "provide": ["BoardId"],
+        "require": []
+    }, {
+        "path": "modules/web-modules/microbit/board-serial-info.js",
+        "provide": ["BoardSerialInfo"],
+        "require": ["BoardId"]
+    }, {
+        "path": "modules/web-modules/microbit/dap-wrapper.js",
+        "provide": ["DAPWrapper"],
+        "require": ["BoardSerialInfo", "DAPjs"]
+    }, {
+        "path": "modules/web-modules/microbit/partial-flashing.js",
+        "provide": ["PartialFlashing"],
         "require": []
     }, {
         "path": "modules/web-modules/ace/ace.js",
