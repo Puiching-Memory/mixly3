@@ -330,10 +330,13 @@ export default class StatusBarFileSystem extends PageBase {
         this.#fileTree_.showProgress();
         const id = this.#fileTree_.getSelectedNodeId();
         const fs = this.#fileTree_.getFS();
-        const [error,] = await fs.writeFile(id, this.#editor_.getValue());
-        this.#fileTree_.hideProgress();
-        if (!error) {
+        try {
+            await fs.writeFile(id, this.#editor_.getValue());
             this.setStatus(false);
+        } catch (error) {
+            Debug.error(error);
+        } finally {
+            this.#fileTree_.hideProgress();
         }
     }
 

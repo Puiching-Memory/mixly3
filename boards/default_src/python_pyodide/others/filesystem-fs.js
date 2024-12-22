@@ -22,6 +22,7 @@ class WebAccessFSExt extends WebAccessFS {
 
 export default class FileSystemFS extends FS {
     #fs_ = null;
+    #encoder_ = new TextEncoder();
 
     constructor() {
         super();
@@ -68,7 +69,8 @@ export default class FileSystemFS extends FS {
     }
 
     async writeFile(path, data) {
-        return this.#fs_.writeFile(path, data, 'utf8');
+        const encodedArray = this.#encoder_.encode(data);
+        return this.#fs_.writeFile(path, encodedArray);
     }
 
     async isFile(path) {
