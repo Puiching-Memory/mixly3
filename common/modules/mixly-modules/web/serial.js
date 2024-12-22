@@ -19,9 +19,9 @@ const { BOARD } = Config;
 
 let Device = SerialPort;
 
-if (BOARD.web.com === 'usb') {
+if (BOARD?.web?.com === 'usb') {
     Device = USB;
-} else if (BOARD.web.com === 'hid') {
+} else if (BOARD?.web?.com === 'hid') {
     Device = HID;
 }
 
