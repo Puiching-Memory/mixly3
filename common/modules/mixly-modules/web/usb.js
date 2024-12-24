@@ -40,9 +40,7 @@ class USB extends Serial {
 
         this.requestPort = async function () {
             const device = await navigator.usb.requestDevice({
-                filters: [{
-                    vendorId: 0xD28
-                }]
+                filters: []
             });
             this.addPort(device);
             this.refreshPorts();
