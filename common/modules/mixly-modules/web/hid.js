@@ -44,7 +44,9 @@ class WebHID extends Serial {
             if (!devices.length) {
                 return;
             }
-            this.addPort(devices[0]);
+            for (let device of devices) {
+                this.addPort(device);
+            }
             this.refreshPorts();
         }
 
