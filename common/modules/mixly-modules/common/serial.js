@@ -100,6 +100,8 @@ class Serial {
     #rts_ = false;
     #isOpened_ = false;
     #port_ = '';
+    #special_ = [];
+    #specialLength_ = 0;
     #events_ = new Events(['onOpen', 'onClose', 'onError', 'onBuffer', 'onString', 'onByte', 'onChar']);
     constructor(port) {
         this.#port_ = port;
@@ -126,14 +128,33 @@ class Serial {
     **/
     decodeByte(byte) {
         let output = '';
+        if (byte !== 0x5F && this.#special_.length && !this.#specialLength_) {
+            const str = this.#special_.join('');
+            try {
+                output += decodeURIComponent(str.replace(/_([0-9a-fA-F]{2})/gm, '%$1'));
+            } catch (_) {
+                output += str;
+            }
+            this.#special_ = [];
+        }
         if ((byte & 0x80) === 0x00) {
             // 1字节
             this.#buffer_ = [];
             this.#bufferLength_ = 0;
-            if (byte !== 0x0A) {
-                output += String.fromCharCode(byte);
+            if (byte === 0x5F) {
+                // 如果当前字节是 "_"
+                this.#specialLength_ = 2;
+                this.#special_.push(String.fromCharCode(byte));
+            } else if (byte !== 0x0A) {
+                // 如果当前字节是 "\n"
+                if  (this.#specialLength_) {
+                    this.#specialLength_--;
+                    this.#special_.push(String.fromCharCode(byte));
+                } else {
+                    output += String.fromCharCode(byte);
+                }
             }
-        } else if ((byte & 0xc0) === 0x80) {
+        } else if ((byte & 0xC0) === 0x80) {
             /*
             * 2字节以上的中间字节，10xxxxxx
             * 如果没有起始头，则丢弃这个字节
