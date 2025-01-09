@@ -41,7 +41,7 @@ class ST7789(uframebuf.FrameBuffer_Uincode):
 		self.font(font_address)
 		self._init()
 		self.show()
-		time.sleep_ms(100)
+		time.sleep_ms(200)
 		self._brightness = 0.6 
 		self.bl_led = PWM(Pin(bl_pin), duty_u16=int(self._brightness * 60000)) if bl_pin is not None else None
 

@@ -19,15 +19,8 @@ onboard_i2c = SoftI2C(scl=Pin(47), sda=Pin(48), freq=400000)
 '''SPI-onboard'''
 onboard_spi = SPI(1, baudrate=50000000, polarity=0, phase=0)
 
-'''TFT/320*240'''
+'''TFT/240*240'''
 onboard_tft = st7789_cf.ST7789(onboard_spi, 240, 240, dc_pin=40, cs_pin=None, bl_pin=None, font_address=0xE00000)
-
-'''BOT035-Sensor'''
-try :
-	import sant_bot
-	onboard_bot = sant_bot.BOT035(onboard_i2c)
-except Exception as e:
-	print("Warning: Failed to communicate with BOT035 (Coprocessor) or",e)
 
 '''ACC-Sensor'''
 try :
@@ -50,13 +43,6 @@ try :
 except Exception as e:
 	print("Warning: Failed to communicate with GXHTC3 (THS) or",e)
 
-'''ASR-Sensor'''
-try :
-	import ci130x
-	onboard_asr = ci130x.CI130X(onboard_i2c)     
-except Exception as e:
-	print("Warning: Failed to communicate with CI130X (ASR) or",e)
-
 '''MGS-Sensor'''
 try :
 	import mmc5603
@@ -70,6 +56,20 @@ try :
 	onboard_bps = spl06_001.SPL06(onboard_i2c)     
 except Exception as e:
 	print("Warning: Failed to communicate with SPL06-001 (BPS) or",e)
+
+'''BOT035-Sensor'''
+try :
+    import sant_bot
+    onboard_bot = sant_bot.BOT035(onboard_i2c)
+except Exception as e:
+    print("Warning: Failed to communicate with BOT035 (Coprocessor) or",e)
+
+'''ASR-Sensor'''
+try :
+    import ci130x
+    onboard_asr = ci130x.CI130X(onboard_i2c)     
+except Exception as e:
+    print("Warning: Failed to communicate with CI130X (ASR) or",e)
 
 '''2RGB_WS2812'''    
 from ws2812 import NeoPixel
