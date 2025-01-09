@@ -389,6 +389,25 @@ export const radar_set_DETECTION_THRESHOLD = {
     }
 };
 
+export const radar_set_DETECTION_THRESHOLD_SANT = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_RADAR+'CBR817')
+            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXlY_INTERACTION)
+        this.appendValueInput('VAR')
+            .appendField(Blockly.Msg.MIXLY_DETECTION_THRESHOLD);
+        this.appendValueInput('VAR2')
+            .appendField(Blockly.Msg.MIXLY_DELAY_TIME);
+        this.appendDummyInput()
+            .appendField('ms');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_THRESHOLD_TOOLTIP+' ; '+Blockly.Msg.MIXLY_DELAY_TIME_RANGE)
+    }
+};
+
 export const interaction_whether_to_interaction = {
     init:function(){
         this.setColour(SENSOR_EXTERN_HUE); 
@@ -396,6 +415,17 @@ export const interaction_whether_to_interaction = {
             .appendField(Blockly.Msg.MIXLY_RADAR+'CBR817')
             .setCheck("var");
         this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_GET_TO_INTERACTION)
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const interaction_whether_to_interaction_SANT = {
+    init:function(){
+        this.setColour(SENSOR_EXTERN_HUE); 
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_RADAR+'CBR817')
             .appendField(Blockly.Msg.MIXLY_GET_TO_INTERACTION)
         this.setOutput(true);
         this.setInputsInline(true);

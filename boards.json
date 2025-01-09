@@ -48,7 +48,7 @@
         "language": "MicroPython"
     },
     {
-        "boardImg": "./boards/default/micropython_educore/media/educore.jpg",
+        "boardImg": "./boards/default/micropython_educore/media/educore.png",
         "boardType": "Python Educore",
         "boardIndex": "./boards/default/micropython_educore/index.xml",
         "env": {

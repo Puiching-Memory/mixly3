@@ -437,7 +437,7 @@ export const get_power_output = function (_, generator) {
 }
 
 export const set_all_power_output = function (_, generator) {
-    var version = generator.getSelectedBoardKey().split(':')[2];
+    var version = Boards.getSelectedBoardKey().split(':')[2];
     var duty = generator.valueToCode(this, 'duty', generator.ORDER_ATOMIC);
     generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
     var code = 'onboard_bot.usben(freq = ' + duty + ')\n';

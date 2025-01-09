@@ -231,10 +231,24 @@ export const radar_set_DETECTION_THRESHOLD = function (_, generator) {
     return code;
 }
 
+export const radar_set_DETECTION_THRESHOLD_SANT = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2];
+    generator.definitions_['import_'+version +'_ext.mmw'] = 'from '+ version +' import ext.mmw';
+    var value = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    var value2 = generator.valueToCode(this, 'VAR2', generator.ORDER_ATOMIC);
+    var code = 'ext.mmw.threshold(' + value +')\n'+ 'ext.mmw.delay_ms(' + value2 +')\n';
+    return code;
+}
+
 export const interaction_whether_to_interaction = function(_,generator){
     generator.definitions_['import_cbr817'] = 'import cbr817';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var code = sub+'.result()';
+    return [code,generator.ORDER_ATOMIC];
+}
+
+export const interaction_whether_to_interaction_SANT = function(_,generator){
+    var code = 'ext.mmw.result()';
     return [code,generator.ORDER_ATOMIC];
 }
 

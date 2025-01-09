@@ -1728,7 +1728,8 @@
         </shadow>
       </value>
     </block>
-    <block type="analog_keyboard_str" m-show="micropython:esp32c2:mixgo_mini">; <value name="str">
+    <block type="analog_keyboard_str" m-show="micropython:esp32c2:mixgo_mini">
+     <value name="str">
         <shadow type="text">
           <field name="TEXT">Hello, Mixly!</field>
         </shadow>

@@ -33,6 +33,7 @@ ZhHant.MSG = {
     catCE_G6:"CE G6",
     catCC_G1:"CC G1",
     catMINI_G2:"MINI G2",
+    catSANT_G2:"SANT G2",
     catNova_G1:"Nova G1",
     catAIOT:"智能物聯",
     catAIsensor:"MixGoAI智能傳感",

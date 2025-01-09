@@ -1,8 +1,7 @@
 {
     "board": {
         "元控青春": "micropython:esp32s3:mixgo_nova",
-        "元控": "micropython:esp32s3:mixgo_zero",
-        "MixGo Sant": "micropython:esp32c3:mixgo_sant"
+        "元控自强": "micropython:esp32s3:mixgo_sant"
     },
     "language": "MicroPython",
     "burn": {

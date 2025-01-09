@@ -1420,44 +1420,33 @@
       </value>
     </block>
     <block type="sensor_mixgo_touch_slide"></block>
-    <block type="sensor_mixgo_pin_near" m-show='micropython:esp32s3:mixgo_zero'></block>
-    <block type="sensor_mixgo_nova_pin_near" m-show='micropython:esp32s3:mixgo_nova'></block>
-    <block type="sensor_mixgo_LTR308" m-show='micropython:esp32s3:mixgo_zero'></block>
-    <block type="sensor_mixgo_nova_LTR308" m-show='micropython:esp32s3:mixgo_nova'></block>
+    <block type="sensor_mixgo_pin_near" m-show='micropython:esp32s3:mixgo_sant'></block>
+    <!-- <block type="sensor_mixgo_nova_pin_near" m-show='micropython:esp32s3:mixgo_nova'></block> -->
+    <block type="sensor_mixgo_LTR308" m-show='micropython:esp32s3:mixgo_sant'></block>
+    <!-- <block type="sensor_mixgo_nova_LTR308" m-show='micropython:esp32s3:mixgo_nova'></block> -->
+    <block type="sensor_mixgo_sant_color" m-show='micropython:esp32s3:mixgo_sant'></block>
     <block type="sensor_sound"></block>
-    <block type="sensor_hp203" m-show='micropython:esp32s3:mixgo_zero'></block>
+    <block type="sensor_hp203" m-show='micropython:esp32s3:mixgo_sant'></block>
     <block type="sensor_aht11"></block>
     <block type="sensor_get_acceleration"></block>
     <block type="sensor_mixgo_cc_mmc5603_calibrate_compass"></block>
     <block type="sensor_mixgo_cc_mmc5603_get_magnetic"></block>
     <block type="sensor_mixgo_cc_mmc5603_get_angle"></block>
-    <block type="rfid_readid">
+    <block type="rfid_readid" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">rfid</field>
         </shadow>
       </value>
     </block>
-    <block type="rfid_readcontent">
+    <block type="rfid_readcontent" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="SECTOR">
         <shadow type="math_number">
           <field name="NUM">0</field>
         </shadow>
       </value>
     </block>
-    <block type="rfid_write">
-      <value name="SECTOR">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-      <value name="CONTENT">
-        <shadow type="text">
-          <field name="TEXT">Mixly</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="rfid_write_return">
+    <block type="rfid_write" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="SECTOR">
         <shadow type="math_number">
           <field name="NUM">0</field>
@@ -1469,6 +1458,27 @@
         </shadow>
       </value>
     </block>
+    <block type="rfid_write_return" m-hide='micropython:esp32s3:mixgo_sant'>
+      <value name="SECTOR">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="CONTENT">
+        <shadow type="text">
+          <field name="TEXT">Mixly</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="CI130X_IDENTIFY_AND_SAVE_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
+    <block type="CI130X_GET_WHETHER_IDENTIFY_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
+    <block type="CI130X_GET_THE_RECOGNIZED_CMD_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
+    <block type="CI130X_BROADCAST_SANT" m-show='micropython:esp32s3:mixgo_sant'>
+      <value name="NUM">
+        <block type="logic_null"></block>
+      </value>
+    </block>   
+    <block type = "CI130X_SET_SYSTEM_CMD_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
     <block type="onboard_RTC_set_datetime">
       <value name="year">
         <shadow type="math_number">
@@ -1559,7 +1569,7 @@
         </shadow>
       </value>
     </block>
-    <block type="actuator_mixgo_zero_led_color" m-show='micropython:esp32s3:mixgo_zero'>
+    <block type="actuator_mixgo_zero_led_color" m-show='micropython:esp32s3:mixgo_sant'>
       <value name="led">
         <shadow type="number">
         </shadow>
@@ -1569,22 +1579,22 @@
         </shadow>
       </value>
     </block>
-    <block type="actuator_mixgo_nova_mic_set">
+    <block type="actuator_mixgo_nova_mic_set" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="bright">
         <shadow type="math_number">
           <field name="NUM">100</field>
         </shadow>
       </value>
     </block>
-    <block type="actuator_mixgo_nova_mic_get"></block>
-    <block type="actuator_mixgo_nova_voice_set">
+    <block type="actuator_mixgo_nova_mic_get" m-hide='micropython:esp32s3:mixgo_sant'></block>
+    <block type="actuator_mixgo_nova_voice_set" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="bright">
         <shadow type="math_number">
           <field name="NUM">100</field>
         </shadow>
       </value>
     </block>
-    <block type="actuator_mixgo_nova_voice_get"></block>
+    <block type="actuator_mixgo_nova_voice_get" m-hide='micropython:esp32s3:mixgo_sant'></block>
     <!-- <block type="actuator_mixgo_nova_onboard_music_pitch">
       <value name="pitch">
         <shadow type="pins_tone_notes">
@@ -1592,7 +1602,7 @@
         </shadow>
       </value>
     </block> -->
-    <block type="esp32_onboard_music_pitch_with_time">
+    <block type="esp32_onboard_music_pitch_with_time" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="pitch">
         <shadow type="pins_tone_notes">
           <field name="PIN">440</field>
@@ -1611,12 +1621,12 @@
         </shadow>
       </value>
     </block> -->
-    <block type="esp32_onboard_music_play_list">
+    <block type="esp32_onboard_music_play_list" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="LIST">
         <shadow type="pins_playlist"></shadow>
       </value>
     </block>
-    <block type="actuator_mixgo_nova_record_audio">
+    <block type="actuator_mixgo_nova_record_audio" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="PATH">
         <shadow type="text">
           <field name="TEXT">/sd/1.wav</field>
@@ -1628,20 +1638,66 @@
         </shadow>
       </value>
     </block>
-    <block type="actuator_mixgo_nova_play_audio">
+    <block type="actuator_mixgo_nova_play_audio" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="PATH">
         <shadow type="text">
           <field name="TEXT">/sd/1.wav</field>
         </shadow>
       </value>
     </block>
-    <block type="actuator_mixgo_nova_play_online_audio">
+    <block type="actuator_mixgo_nova_play_online_audio" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="PATH">
         <shadow type="text">
           <field name="TEXT">https://gitee.com/dahanzimin/test/raw/master/wav/8.wav</field>
         </shadow>
       </value>
     </block>
+
+    <block type="esp32_onboard_music_pitch" m-show='micropython:esp32s3:mixgo_sant'>
+      <value name="pitch">
+        <shadow type="pins_tone_notes">
+          <field name="PIN">440</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="esp32_onboard_music_pitch_with_time" m-show='micropython:esp32s3:mixgo_sant'>
+      <value name="pitch">
+        <shadow type="pins_tone_notes">
+          <field name="PIN">440</field>
+        </shadow>
+      </value>
+      <value name="time">
+        <shadow type="math_number">
+          <field name="NUM">1000</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="esp32_onboard_music_stop" m-show='micropython:esp32s3:mixgo_sant'>
+      <value name="PIN">
+        <shadow type="pins_pwm_pin">
+          <field name="PIN">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="esp32_onboard_music_play_list" m-show='micropython:esp32s3:mixgo_sant'>
+      <value name="LIST">
+        <shadow type="pins_playlist"></shadow>
+      </value>
+    </block>
+    <block type="esp32_music_set_tempo" m-show='micropython:esp32s3:mixgo_sant'>
+      <value name="TICKS">
+        <shadow type="math_number">
+          <field name="NUM">4</field>
+        </shadow>
+      </value>
+      <value name="BPM">
+        <shadow type="math_number">
+          <field name="NUM">120</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="esp32_music_get_tempo" m-show='micropython:esp32s3:mixgo_sant'></block>
+    <block type="esp32_music_reset" m-show='micropython:esp32s3:mixgo_sant'></block>
 
     <block type="actuator_onboard_neopixel_rgb">
       <value name="_LED_">
@@ -1712,6 +1768,67 @@
       </value>
     </block>
     <block type="actuator_onboard_neopixel_write">
+    </block>
+    <block type="set_power_output" m-show="micropython:esp32s3:mixgo_sant">
+      <value name="duty">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="set_all_power_output" m-show="micropython:esp32s3:mixgo_sant">
+      <value name="duty">
+        <shadow type="math_number">
+          <field name="NUM">20000</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="analog_keyboard_input" m-show="micropython:esp32s3:mixgo_sant">
+      <value name="special">
+        <block type="special_key">
+        </block>
+      </value>
+      <value name="general">
+        <block type="general_key">
+        </block>
+      </value>
+    </block>
+    <block type="general_key_tuple" m-show="micropython:esp32s3:mixgo_sant">
+      <value name="general">
+        <block type="general_key">
+        </block>
+      </value>
+    </block>
+
+    <block type="analog_mouse_input" m-show="micropython:esp32s3:mixgo_sant">
+      <value name="key">
+        <block type="mouse_key">
+        </block>
+      </value>
+      <value name="x">
+        <shadow type="math_number">
+        </shadow>
+      </value>
+      <value name="y">
+        <shadow type="math_number">
+        </shadow>
+      </value>
+      <value name="wheel">
+        <shadow type="math_number">
+        </shadow>
+      </value>
+    </block>
+    <block type="analog_keyboard_str" m-show="micropython:esp32s3:mixgo_sant">
+      <value name="str">
+        <shadow type="text">
+          <field name="TEXT">Hello, Mixly!</field>
+        </shadow>
+      </value>
+      <value name="time">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
     </block>
   </category>
   <category id="catOnBoardDisplay" colour='#78B5B4'>
@@ -2156,225 +2273,54 @@
       </value>
     </block>
   </category>
-  <!-- <category id="catME_GO" colour="100">
-    <block type="ce_go_led_bright">
-      <value name="led">
-        <shadow type="ce_go_light_number">
-        </shadow>
-      </value>
-      <value name="bright">
-        <shadow type="ledswitch">
-        </shadow>
-      </value>
-    </block>
-    <block type="ce_go_get_led_state">
-      <value name="led">
-        <shadow type="ce_go_light_number">
-        </shadow>
-      </value>
-    </block>
-    <block type="ce_go_led_brightness">
-      <value name="led">
-        <shadow type="ce_go_light_number">
-        </shadow>
-      </value>
-      <value name="bright">
-        <shadow type="math_number">
-          <field name="NUM">100</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="ce_go_get_led_bright">
-      <value name="led">
-        <shadow type="ce_go_light_number">
-        </shadow>
-      </value>
-    </block>
-    <block type="ce_go_stepper_keep">
-      <value name="speed">
-        <shadow type="math_number">
-          <field name="NUM">100</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="ce_go_stepper_stop"></block>
-    <block type="ce_go_dc_motor">
-      <value name="speed">
-        <shadow type="math_number">
-          <field name="NUM">100</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="ce_go_hall_initialize">
-      <value name="num">
+  <category id="catSANT_G2" colour="40" m-show='micropython:esp32s3:mixgo_sant'>
+    <block type="mini_g2_rfid_readcontent">
+      <value name="SECTOR">
         <shadow type="math_number">
           <field name="NUM">0</field>
         </shadow>
       </value>
     </block>
-    <block type="ce_go_hall_data">
-    </block>
-    <block type="ce_go_hall_attachInterrupt">
-      <value name="DO">
-        <shadow type="factory_block_return">
-          <field name="VALUE">interrupt_func</field>
+    <block type="mini_g2_rfid_readid"></block>
+    <block type="mini_g2_rfid_write">
+      <value name="SECTOR">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="CONTENT">
+        <shadow type="text">
+          <field name="TEXT">Mixly</field>
         </shadow>
       </value>
     </block>
-    <block type="procedures_defnoreturn">
-      <mutation>
-        <arg name="turns"></arg>
-        <arg name="distance"></arg>
-      </mutation>
-      <field name="NAME">interrupt_func</field>
-      <statement name="STACK">
-        <block type="system_print_many">
-          <mutation items="2"></mutation>
-          <value name="ADD0">
-            <block type="variables_get">
-              <field name="VAR">turns</field>
-            </block>
-          </value>
-          <value name="ADD1">
-            <block type="variables_get">
-              <field name="VAR">distance</field>
-            </block>
-          </value>
-        </block>
-      </statement>
+    <block type="mini_g2_rfid_write_outcome">
+      <value name="SECTOR">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="CONTENT">
+        <shadow type="text">
+          <field name="TEXT">Mixly</field>
+        </shadow>
+      </value>
     </block>
-    <block type="ce_go_pin_near_state_change"></block>
-    <block type="ce_go_pin_near_line"></block>
-    <block type="ce_go_pin_near"></block>
-    <block type="ce_go_pin_light"></block>
-    <block type="sensor_mixgome_eulerangles"></block>
+    <block type="mini_g2_rfid_status"></block>
+    <block type="radar_set_DETECTION_THRESHOLD_SANT">
+      <value name="VAR">
+        <shadow type="math_number">
+          <field name="NUM">5000</field>
+        </shadow>
+      </value>
+      <value name="VAR2">
+        <shadow type="math_number">
+          <field name="NUM">500</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="interaction_whether_to_interaction_SANT"></block>
   </category>
-  <category id="catCE_G6" colour="100">
-    <block type="communicate_i2c_init">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">i2c_extend</field>
-        </shadow>
-      </value>
-      <value name="TX">
-        <shadow type="pins_digital_pin">
-          <field name="PIN">17</field>
-        </shadow>
-      </value>
-      <value name="RX">
-        <shadow type="pins_digital_pin">
-          <field name="PIN">18</field>
-        </shadow>
-      </value>
-      <value name="freq">
-        <shadow type="math_number">
-          <field name="NUM">400000</field>
-        </shadow>
-      </value>
-      <next>
-        <block type="pe_g1_use_i2c_init">
-          <value name="SUB">
-            <shadow type="variables_get">
-              <field name="VAR">g6</field>
-            </shadow>
-          </value>
-          <value name="I2CSUB">
-            <shadow type="variables_get">
-              <field name="VAR">i2c_extend</field>
-            </shadow>
-          </value>
-        </block>
-      </next>
-      </block>
-    <block type="pe_g1_battery_left">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">g6</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="pe_g1_servo_set_angle">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">g6</field>
-        </shadow>
-      </value>
-      <value name="PIN">
-          <shadow type="number5">
-          </shadow>
-        </value>
-      <value name="NUM">
-        <shadow type="math_number">
-         <field name="NUM">100</field>
-        </shadow>
-       </value>
-     </block>
-     <block type="pe_g1_servo_get_angle">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">g6</field>
-        </shadow>
-      </value>
-      <value name="PIN">
-          <shadow type="number5">
-          </shadow>
-        </value>
-     </block>
-     <block type="pe_g1_servo_set_speed">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">g6</field>
-        </shadow>
-      </value>
-      <value name="PIN">
-          <shadow type="number5">
-          </shadow>
-        </value>
-      <value name="NUM">
-        <shadow type="math_number">
-         <field name="NUM">100</field>
-        </shadow>
-       </value>
-     </block>       
-     <block type="pe_g1_servo_get_speed">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">g6</field>
-        </shadow>
-      </value>     
-      <value name="PIN">
-          <shadow type="number5">
-          </shadow>
-        </value>  
-     </block>
-    <block type="pe_g1_dc_motor">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">g6</field>
-        </shadow>
-      </value>
-      <value name="PIN">
-          <shadow type="number4">
-          </shadow>
-        </value>
-      <value name="speed">
-        <shadow type="math_number">
-          <field name="NUM">100</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="pe_g1_dc_motor_speed">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">g6</field>
-        </shadow>
-      </value>
-       <value name="PIN">
-          <shadow type="number4">
-          </shadow>
-        </value>
-    </block>
-  </category> -->
   <category id="catIot" colour="#2FAD7A">
     <category id="catBlynk" colour="#2FAD7A">
       <block type="iot_wifi_connect">
@@ -4054,7 +4000,7 @@
         </shadow>
       </value>
     </block>
-    <block type="radar_set_DETECTION_THRESHOLD">
+    <block type="radar_set_DETECTION_THRESHOLD" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
@@ -4071,35 +4017,35 @@
         </shadow>
       </value>
     </block>
-    <block type="interaction_whether_to_interaction">
+    <block type="interaction_whether_to_interaction" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="CI130X_IDENTIFY_AND_SAVE">
+    <block type="CI130X_IDENTIFY_AND_SAVE" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="CI130X_GET_WHETHER_IDENTIFY">
+    <block type="CI130X_GET_WHETHER_IDENTIFY" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="CI130X_GET_THE_RECOGNIZED_CMD">
+    <block type="CI130X_GET_THE_RECOGNIZED_CMD" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="CI130X_BROADCAST">
+    <block type="CI130X_BROADCAST" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
@@ -4109,11 +4055,12 @@
         <block type="logic_null"></block>
       </value>
     </block>   
-    <block type = "CI130X_SET_SYSTEM_CMD">
+    <block type = "CI130X_SET_SYSTEM_CMD" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
+      </value>
     </block>
     <block type="communicate_spi_init">
       <value name="VAR">

@@ -78,8 +78,10 @@ import {
     MicropythonESP32S3Pins,
     MicropythonESP32S3InoutBlocks,
     MicropythonESP32S3PinsBlocks,
+    MicropythonESP32S3SANTG2Blocks,
     MicropythonESP32S3InoutGenerators,
-    MicropythonESP32S3PinsGenerators
+    MicropythonESP32S3PinsGenerators,
+    MicropythonESP32S3SANTG2Generators
 } from './';
 
 import './css/color_esp32s2_mixgoce.css';
@@ -128,7 +130,8 @@ Object.assign(
     MicroPythonBlynkBlocks,
     MicroPythonNovaG1Blocks,
     MicropythonESP32S3InoutBlocks,
-    MicropythonESP32S3PinsBlocks
+    MicropythonESP32S3PinsBlocks,
+    MicropythonESP32S3SANTG2Blocks
 );
 
 Object.assign(
@@ -166,5 +169,6 @@ Object.assign(
     MicroPythonBlynkGenerators,
     MicroPythonNovaG1Generators,
     MicropythonESP32S3InoutGenerators,
-    MicropythonESP32S3PinsGenerators
+    MicropythonESP32S3PinsGenerators,
+    MicropythonESP32S3SANTG2Generators
 );

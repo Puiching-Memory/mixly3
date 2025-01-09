@@ -132,23 +132,39 @@ export const sensor_mixgo_pin_near_double = function (_, generator) {
 
 export const sensor_mixgo_pin_near = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_onboard_als'] = 'from ' + version + ' import onboard_als';
+    var code = 'onboard_als.ps()';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const sensor_mixgo_nova_pin_near = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
     var direction = this.getFieldValue('direction');
     generator.definitions_['import_' + version + '_' + direction] = 'from ' + version + ' import onboard_als_' + direction;
     var code = 'onboard_als_' + direction + '.ps_nl()';
     return [code, generator.ORDER_ATOMIC];
 }
 
-export const sensor_mixgo_nova_pin_near = sensor_mixgo_pin_near;
-
 export const sensor_mixgo_LTR308 = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_onboard_als'] = 'from ' + version + ' import onboard_als';
+    var code = 'onboard_als.als()';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const sensor_mixgo_sant_color = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_onboard_als'] = 'from ' + version + ' import onboard_als';
+    var code = 'onboard_als.coclor()';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const sensor_mixgo_nova_LTR308 = function (_, generator) {
     var direction = this.getFieldValue('direction');
     generator.definitions_['import_' + version + '_' + direction] = 'from ' + version + ' import onboard_als_' + direction;
     var code = 'onboard_als_' + direction + '.als_vis()';
     return [code, generator.ORDER_ATOMIC];
 }
-
-export const sensor_mixgo_nova_LTR308 = sensor_mixgo_LTR308;
 
 export const sensor_ds18x20 = function (_, generator) {
     generator.definitions_['import_ds18x20x'] = 'import ds18x20x';
@@ -342,10 +358,10 @@ export const sensor_mpu9250_get_acceleration = function (_, generator) {
 export const sensor_mixgoce_pin_pressed = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
     var pin = generator.valueToCode(this, 'button', generator.ORDER_ATOMIC);
-    if (version == 'mixgo_mini') {
+    if ( 'mixgo_mini'|| version == 'mixgo_sant') {
         generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
         var code = 'onboard_bot.touched(' + pin + ')';
-    } else {
+    }else {
         generator.definitions_['import_' + version] = 'import ' + version;
         var code = version + '.touched(' + pin + ')';
     }
@@ -354,7 +370,7 @@ export const sensor_mixgoce_pin_pressed = function (_, generator) {
 
 export const sensor_mixgo_touch_slide = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
-    if (version == 'mixgo_mini') {
+    if (version == 'mixgo_mini'|| version == 'mixgo_sant') {
         generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
         var code = 'onboard_bot.touch_slide()';
     } else {
@@ -853,4 +869,51 @@ export const educore_rfid_sensor_scan_data = function (_, generator) {
     var key = this.getFieldValue('key');
     var code = sub+'.'+key+'()';
     return [code, generator.ORDER_ATOMIC];
+}
+
+export const CI130X_IDENTIFY_AND_SAVE_SANT = function(_,generator){
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
+    var code = 'onboard_asr.cmd_id()\n';
+    return code;
+}
+
+export const CI130X_GET_WHETHER_IDENTIFY_SANT = function(_,generator){
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
+    var cmd = this.getFieldValue('cmd');
+    var code = 'onboard_asr.result('+cmd+')';
+    return [code,generator.ORDER_ATOMIC];
+}
+
+export const CI130X_GET_THE_RECOGNIZED_CMD_SANT = function(_,generator){
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
+    var key = this.getFieldValue('key');
+    if(key == 'status1'){
+        var code = 'onboard_asr.status()[0]';
+    }else if(key == 'status2'){
+        var code = 'onboard_asr.status()[1]';
+    }else{
+        var code = 'onboard_asr.'+key +'()';
+    }
+    return [code,generator.ORDER_ATOMIC];
+}
+
+export const CI130X_BROADCAST_SANT = function(_,generator){
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
+    var num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
+    var star = this.getFieldValue('star');
+    var end = this.getFieldValue('end');
+    var code = 'onboard_asr.play('+star+','+num+','+end+')\n';
+    return code;
+}
+
+export const CI130X_SET_SYSTEM_CMD_SANT = function(_,generator){
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
+    var cmd = this.getFieldValue('cmd');
+    var code = 'onboard_asr.sys_cmd('+cmd+')\n';
+    return code;
 }

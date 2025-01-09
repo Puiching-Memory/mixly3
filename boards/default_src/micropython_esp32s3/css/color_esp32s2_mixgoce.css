@@ -118,20 +118,12 @@ div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(12) > div.blo
     background:url('../../../../common/media/mark/display_new2.png') no-repeat;
     background-size: 100% auto;
 }
-#catME_GO.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
-    background:url('../../../../common/media/mark/act.png') no-repeat;
+#catSANT_G2.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+    background:url('../../../../common/media/mark/sensor.png') no-repeat;
     background-size: 100% auto;
 }
-#catME_GO.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
-    background:url('../../../../common/media/mark/act2.png') no-repeat;
-    background-size: 100% auto;
-}
-#catCE_G6.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
-    background:url('../../../../common/media/mark/act.png') no-repeat;
-    background-size: 100% auto;
-}
-#catCE_G6.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
-    background:url('../../../../common/media/mark/act2.png') no-repeat;
+#catSANT_G2.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+    background:url('../../../../common/media/mark/sensor2.png') no-repeat;
     background-size: 100% auto;
 }
 #catExternSensor.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
