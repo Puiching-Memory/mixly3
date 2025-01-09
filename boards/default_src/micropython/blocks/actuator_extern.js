@@ -1046,3 +1046,90 @@ export const mixbot_actuator_extern_set_addr = {
         this.setInputsInline(true);
     }
 }
+
+//educore
+export const PIN_init = {
+    init: function () {
+        this.setColour(ACTUATOR_EXTERN_HUE);
+        this.appendValueInput("PIN", Number)
+            .setCheck(Number)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.MIXLY_AT)
+            .appendField(Blockly.Msg.MIXLY_PIN);
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
+export const pin_led_bright = {
+    init: function () {
+        this.setColour(ACTUATOR_EXTERN_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_SETTING);
+        this.appendValueInput('pin')
+            .appendField('LED')
+        this.appendValueInput('bright')
+            .appendField(Blockly.Msg.MIXLY_PULSEIN_STAT)
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+    }
+};
+
+export const servo_PIN_init = {
+    init: function () {
+        this.setColour(ACTUATOR_EXTERN_HUE);
+        this.appendValueInput("PIN", Number)
+            .setCheck(Number)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.MIXLY_SERVO + Blockly.Msg.MIXLY_SETUP + Blockly.Msg.MIXLY_AT)
+            .appendField(Blockly.Msg.MIXLY_PIN);
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
+export const servo_move_angle = {
+    init: function () {
+        this.setColour(ACTUATOR_EXTERN_HUE);
+        this.appendValueInput("SUB")
+            .appendField(Blockly.Msg.MIXLY_SERVO);
+        this.appendValueInput("angle")
+            .setCheck(Number)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_ROTATE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.DRAW_POINTER_ANGLE)
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+export const parrot_PIN_init = {
+    init: function () {
+        this.setColour(ACTUATOR_EXTERN_HUE);
+        this.appendValueInput("PIN", Number)
+            .setCheck(Number)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.MIXLY_MOTOR + Blockly.Msg.MIXLY_SETUP + Blockly.Msg.MIXLY_AT)
+            .appendField(Blockly.Msg.MIXLY_PIN);
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
+export const parrot_move_speed = {
+    init: function () {
+        this.setColour(ACTUATOR_EXTERN_HUE);
+        this.appendValueInput("SUB")
+            .appendField(Blockly.Msg.MIXLY_MOTOR);
+        this.appendValueInput("speed")
+            .setCheck(Number)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_ROTATE +Blockly.Msg.MIXLY_SPEED);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};

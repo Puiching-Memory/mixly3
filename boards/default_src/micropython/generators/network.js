@@ -257,3 +257,56 @@ export const requests_post = function (_, generator) {
 
 };
 
+export const educore_wifi_connect = function (_, generator) {
+    generator.definitions_['import_educore_wifi'] = "from educore import wifi";
+    var username = generator.valueToCode(this, 'WIFINAME', generator.ORDER_ATOMIC);
+    var password = generator.valueToCode(this, 'PASSWORD', generator.ORDER_ATOMIC);
+    var timeout = generator.valueToCode(this, 'TIMEOUT', generator.ORDER_ATOMIC);
+    var code = 'wifi.connect(ssid='+username+', psd='+password+', timeout='+timeout+')\n';
+    return code;
+}
+
+export const educore_mqtt_connect = function (_, generator) {
+    generator.definitions_['import_educore_mqttclient'] = "from educore import mqttclient";
+    var server = generator.valueToCode(this, 'SERVER', generator.ORDER_ATOMIC);
+    var port = generator.valueToCode(this, 'PORT', generator.ORDER_ATOMIC);
+    var client_id = generator.valueToCode(this, 'CLIENT_ID', generator.ORDER_ATOMIC);
+    var username = generator.valueToCode(this, 'USERNAME', generator.ORDER_ATOMIC);
+    var password = generator.valueToCode(this, 'PASSWORD', generator.ORDER_ATOMIC);
+    // var a = "'" + username.replace("'", "").replace("'", "") + "/" + project.replace("'", "").replace("'", "") + "/'"
+    // var code = 'MQTT_USR_PRJ = ' + a + '\n' + 'mqtt_client = mixiot.init_MQTT_client(' + server + ', ' + username + ', ' + password + ', MQTT_USR_PRJ)\n';
+    var code = 'mqttclient.connect(server='+server+', port='+port+',client_id='+client_id+',user='+username+',psd='+password+')\n'
+    return code;
+}
+
+export const educore_mqtt_subscribe_message = function (_, generator) {
+    generator.definitions_['import_educore_mqttclient'] = "from educore import mqttclient";
+    var topic = generator.valueToCode(this, 'TOPIC', generator.ORDER_ATOMIC);
+    var message = generator.valueToCode(this, 'MESSAGE', generator.ORDER_ATOMIC);
+    var code = 'mqttclient.'+message+'(' + topic + ')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_mqtt_topic_subscribe = function (_, generator) {
+    var topic = generator.valueToCode(this, 'TOPIC', generator.ORDER_ATOMIC);
+    var method = generator.valueToCode(this, 'METHOD', generator.ORDER_ATOMIC);
+    generator.definitions_['import_educore_mqttclient'] = "from educore import mqttclient";
+    // var code = 'mqtt_client.set_callback(' + topic + ',' + method + ', MQTT_USR_PRJ)\n';
+    // code += 'mqtt_client.subscribe(MQTT_USR_PRJ + ' + topic + ')\n';
+    var code = 'mqttclient.received(topic='+topic+', callback='+method+')\n';
+    return code;
+}
+
+export const educore_mqtt_topic_publish = function (_, generator) {
+    generator.definitions_['import_educore_mqttclient'] = "from educore import mqttclient";
+    var topic = generator.valueToCode(this, 'TOPIC', generator.ORDER_ATOMIC);
+    var msg = generator.valueToCode(this, 'MSG', generator.ORDER_ATOMIC);
+    var code = 'mqtt_client.publish(topic=' + topic + ',content=' + msg + ')\n';
+    return code;
+}
+
+export const educore_mqtt_connect_success = function (_, generator) {
+    generator.definitions_['import_educore_mqttclient'] = "from educore import mqttclient";
+    var code = 'mqtt_client.connescted()';
+    return [code, generator.ORDER_ATOMIC];
+}

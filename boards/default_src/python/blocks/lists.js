@@ -824,3 +824,17 @@ export const enumerate = {
         this.setTooltip(Blockly.Msg.MIXLY_TOTO_INDEX_SEQUENC_TOOLTIP);
     }
 };
+
+export const content_in_lists = {
+    init: function () {
+        this.setColour(LISTS_HUE);
+        this.appendValueInput("CON")
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_ESP32_MIXGO_MUSIC_SHOW_IN);
+        this.appendValueInput("LIST")
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_MID);
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+}

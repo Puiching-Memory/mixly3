@@ -2,9 +2,14 @@ import { Boards } from 'mixly';
 
 export const display_show_image = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
-    var code = "onboard_matrix.shows(" + data + ")\n";
+    if (version == "educore"){
+        generator.definitions_['import_' + version + 'oled'] = "from " + version + " import oled";
+        var code = "oled.print(" + data + ")\n";
+    }else{
+        generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
+        var code = "onboard_matrix.shows(" + data + ")\n";
+    }
     return code;
 }
 

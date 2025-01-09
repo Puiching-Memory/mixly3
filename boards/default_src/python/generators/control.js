@@ -1,4 +1,5 @@
 import * as Blockly from 'blockly/core';
+import { Boards } from 'mixly';
 
 export const controls_main = function (a, generator) {
     var d = generator.statementToCode(a, "DO"),
@@ -285,4 +286,11 @@ export const datetime_fromtimestamp = function(_,generator){
     var ts = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var code = 'datatime.datatime.fromtimestamp(' + ts + ')';
     return [code, generator.ORDER_ATOMIC];
+}
+
+export const gene_unique_identifier = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + 'uuid'] = 'from ' + version + ' import uuid';
+    var code = 'uuid()';
+    return [code, generator.ORDER_ATOMIC]
 }

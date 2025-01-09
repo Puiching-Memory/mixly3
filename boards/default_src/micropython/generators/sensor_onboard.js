@@ -770,3 +770,87 @@ export const sensor_pin_near = sensor_mixgo_pin_near;
 export const sensor_mixgo_light = sensor_LTR308;
 export const sensor_light = sensor_mixgo_light;
 export const dht11 = sensor_dht11;
+
+//educore onboard_sensor
+export const educore_voice_sensor = function (_, generator) {
+    generator.definitions_['import_educore_sound'] = 'from educore import sound';
+    var code = "sound()";
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const sensor_read = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var code = sub+".read()";
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_light_sensor = function (_, generator) {
+    generator.definitions_['import_educore_light'] = 'from educore import light';
+    var code = "light()";
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_gyroscope_sensor = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_'+version+'_accelerometer'] = 'from '+version+' import accelerometer';
+    var code = "accelerometer()";
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_gyroscope_sensor_read = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_'+version+'_accelerometer'] = 'from '+version+' import accelerometer';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = sub+"."+key+"()";
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_gyroscope_sensor_shake = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_'+version+'_accelerometer'] = 'from '+version+' import accelerometer';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var code = sub+".shake()";
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_button_sensor = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_button'] = 'from ' + version + ' import button';
+    var btn = this.getFieldValue('btn');
+    var code = 'button(button.'+btn+')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_button_was_pressed = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_button'] = 'from ' + version + ' import button';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var code = sub + '.status()';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_rfid_sensor = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_rfid'] = 'from ' + version + ' import rfid';
+    var pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    var code = 'rfid(' + pin + ')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_rfid_sensor_scan = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_rfid'] = 'from ' + version + ' import rfid';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var code = sub+'.scanning()';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_rfid_sensor_scan_data = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_rfid'] = 'from ' + version + ' import rfid';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = sub+'.'+key+'()';
+    return [code, generator.ORDER_ATOMIC];
+}

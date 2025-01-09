@@ -1375,3 +1375,141 @@ export const sensor_light = sensor_mixgo_light;
 export const dht11 = sensor_dht11;
 export const sensor_field_strength = sensor_mpu9250_field_strength;
 export const sensor_temperature = sensor_mpu9250_temperature
+
+//educore sensor_onboard
+export const educore_voice_sensor = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_ESP32_EXTERN_SOUND);
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
+export const sensor_read = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_GET)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.blockpy_set_of + Blockly.Msg.MIXLY_MICROBIT_JS_I2C_VALUE);
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
+export const educore_light_sensor = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_LIGHT_SENSOR);
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
+export const educore_gyroscope_sensor = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_GYROSCOPE_SENSOR);
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
+export const educore_gyroscope_sensor_read = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_GET)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_Horizontal_inclination, "X"],
+                ["y", "[1]"],
+                ["z", "[2]"]
+            ]), "key");
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
+export const educore_gyroscope_sensor_shake = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_GET)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_BE_SHAKED)
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
+export const educore_button_sensor = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_BUTTON)
+            .appendField(new Blockly.FieldDropdown([
+                ["a", "a"],
+                ["b", "b"],
+                ["c", "c"]
+            ]), "btn");
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const educore_button_was_pressed = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_BUTTON);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_WAS_PRESSED);
+        this.setOutput(true, Boolean);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_SENOR_WAS_PRESSED);
+    }
+};
+
+export const educore_rfid_sensor = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendValueInput("PIN")
+            .appendField(Blockly.Msg.MIXLY_COMMUNICATION_RFID_INITIAL);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const educore_rfid_sensor_scan = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendValueInput("SUB")
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_COMMUNICATION_RFID_READ);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const educore_rfid_sensor_scan_data = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendValueInput("SUB")
+            .appendField(Blockly.Msg.MIXLY_COMMUNICATION_RFID_READ + Blockly.Msg.MIXLY_COMMUNICATION_DATA_FROM);
+        this.appendDummyInput('')
+            .appendField(Blockly.Msg.MIXLY_GET)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_SERIAL_NUMBER,"serial_number"]
+            ]),"key");
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};

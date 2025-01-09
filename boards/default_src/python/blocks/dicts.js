@@ -760,3 +760,14 @@ export const dicts_to_to ={
         this.setOutput(true);
     }
 }
+
+export const dicts_to_json2 = {
+    init: function () {
+        this.setColour(DICTS_HUE);
+        this.appendValueInput('DICT');
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_TO_JSON);
+        this.setTooltip(Blockly.Msg.MIXLY_TO_JSON_TOOLTIP);
+        this.setOutput(true);
+    }
+};

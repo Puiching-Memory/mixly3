@@ -48,6 +48,18 @@
         "language": "MicroPython"
     },
     {
+        "boardImg": "./boards/default/micropython_educore/media/educore.jpg",
+        "boardType": "Python Educore",
+        "boardIndex": "./boards/default/micropython_educore/index.xml",
+        "env": {
+            "electron": true,
+            "web": true,
+            "webCompiler": true,
+            "webSocket": true
+        },
+        "language": "MicroPython"
+    },
+    {
         "boardImg": "./boards/default/micropython_robot/media/mixbot.png",
         "boardType": "Python Robot",
         "boardIndex": "./boards/default/micropython_robot/index.xml",

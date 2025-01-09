@@ -1517,3 +1517,166 @@ export const analog_ble_mouse_send_battery = {
         this.setInputsInline(true);
     }
 }
+
+//educore actuator
+export const educore_buzzer = {
+    init: function () {
+        this.setColour(ACTUATOR_ONBOARD_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_MIDI);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+}
+
+export const educore_buzzer_play_tone = {
+    init: function () {
+        this.setColour(ACTUATOR_ONBOARD_HUE);
+        this.appendValueInput("buzzer");
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_TONE);
+        this.appendValueInput('pitch')
+            .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_FREQUENCY);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+export const educore_buzzer_play_tone_time = {
+    init: function () {
+        this.setColour(ACTUATOR_ONBOARD_HUE);
+        this.appendValueInput("buzzer");
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_TONE);
+        this.appendValueInput('pitch')
+            .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_FREQUENCY);
+        this.appendValueInput('time')
+            .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_DURATION);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+export const educore_buzzer_stop = {
+    init: function () {
+        this.setColour(ACTUATOR_ONBOARD_HUE);
+        this.appendValueInput("buzzer")
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_Turn_off_display);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+export const educore_rgb_light = {
+    init: function () {
+        this.setColour(ACTUATOR_ONBOARD_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_RGB);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+}
+
+export const educore_neopixel_rgb = {
+    init: function () {
+        this.setColour(ACTUATOR_ONBOARD_HUE);
+        this.appendValueInput("rgb");
+        this.appendValueInput("_LED_")
+            .setCheck(Number)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.MIXLY_RGB_NUM);
+        this.appendValueInput("RVALUE")
+            .setCheck(Number)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.MIXLY_RGB_R);
+        this.appendValueInput("GVALUE")
+            .setCheck(Number)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.MIXLY_RGB_G);
+        this.appendValueInput("BVALUE")
+            .setCheck(Number)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.MIXLY_RGB_B);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        // const boardKey = Boards.getSelectedBoardKey();
+        // switch (boardKey) {
+        //     case 'micropython:esp32c3:mixgo_cc':
+        //         this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOCC);
+        //         break;
+        //     case 'micropython:esp32s2:mixgo_ce':
+        //         this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOCC);
+        //         break;
+        //     case 'micropython:esp32c3:mixgo_me':
+        //         this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOME);
+        //         break;
+        //     case 'micropython:esp32:mPython':
+        //         this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MPYTHON);
+        //         break;
+        //     default:
+        //         this.setTooltip(Blockly.Msg.MIXLY_RGB_NUM_R_G_B_MIXGOME);
+        // }
+    }
+};
+
+export const educore_neopixel_clear = {
+    init: function () {
+        this.setColour(ACTUATOR_ONBOARD_HUE);
+        this.appendValueInput("rgb");
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_Turn_off_display)
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+    }
+};
+
+export const educore_ble_sensor_init = {
+    init: function () {
+        this.setColour(ACTUATOR_ONBOARD_HUE);
+        this.appendValueInput("name")
+            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXLY_BLUETOOTH+ Blockly.Msg.MIXLY_MICROBIT_JS_SYSTEM_DEVICE_NAME + Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_AS);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const educore_ble_sensor_connected = {
+    init: function () {
+        this.setColour(ACTUATOR_ONBOARD_HUE);
+        this.appendValueInput("SUB")
+            .appendField(Blockly.Msg.MIXLY_BLUETOOTH);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_BE_CONNETCED)
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const educore_ble_keyboard_input = {
+    init: function () {
+        this.setColour(ACTUATOR_ONBOARD_HUE);
+        this.appendValueInput("SUB")
+            .appendField(Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.ANALOG + Blockly.Msg.MIXLY_KEYBOARD);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_SEND_KEYBOARD);
+        this.appendValueInput('general');
+        // this.appendDummyInput()
+        //     .appendField(Blockly.Msg.MIXLY_RELEASE)
+        //     .appendField(new Blockly.FieldDropdown([
+        //         [Blockly.Msg.MICROPYTHON_DISPLAY_YES, "True"],
+        //         [Blockly.Msg.MICROPYTHON_DISPLAY_NO, "False"]
+        //     ]), 'release');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+    }
+};

@@ -117,4 +117,3 @@ export const controls_typeLists = function (_, generator) {
     // generator.definitions_['func_type' + type] = code;
     return [type, generator.ORDER_ATOMIC];
 }
-

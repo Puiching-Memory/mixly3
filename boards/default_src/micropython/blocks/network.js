@@ -571,3 +571,114 @@ export const requests_attribute2 = {
         this.setOutput(true, String);
     }
 };
+
+//educore_networke
+export const educore_wifi_connect = {
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_ESP32_IOT_CONNECT_WIFI);
+        this.appendValueInput('WIFINAME')
+            .setCheck(String)
+            .appendField(Blockly.Msg.HTML_NAME);
+        this.appendValueInput('PASSWORD')
+            .setCheck(String)
+            .appendField(Blockly.Msg.HTML_PASSWORD);
+        this.appendValueInput('TIMEOUT')
+            .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_IR_TIMEOUT);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_MILLIS)
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_IOT_WIFI_CONNECT_TOOLTIP);
+    }
+};
+
+
+
+export const educore_mqtt_connect = {
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_ESP32_IOT_EMQX_CONNECT_TOOLTIP);
+        this.appendValueInput('SERVER')
+            .setCheck(String)
+            .appendField(Blockly.Msg.MIXLY_EMQX_SERVER)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+        this.appendValueInput('PORT')
+            .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_EMQX_PORT)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+        this.appendValueInput('CLIENT_ID')
+            .setCheck(String)
+            .appendField(Blockly.Msg.MIXLY_EMQX_CLIENT_ID)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+        this.appendValueInput('USERNAME')
+            .setCheck(String)
+            .appendField(Blockly.Msg.MIXLY_WIFI_USERNAME)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+        this.appendValueInput('PASSWORD')
+            .setCheck(String)
+            .appendField(Blockly.Msg.MIXLY_IOT_PASSWORD)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+export const educore_mqtt_subscribe_message = {
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
+        this.appendValueInput('TOPIC')
+            .appendField(Blockly.Msg.MIXLY_EMQX_SUBSCRIBE + Blockly.Msg.MIXLY_MICROBIT_MSG)
+            .appendField(Blockly.Msg.MIXLY_EMQX_PUBLISH_TOPIC);
+        this.appendValueInput('MESSAGE')
+            .appendField(Blockly.Msg.blockpy_set_of);
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
+export const educore_mqtt_topic_subscribe = {
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
+        this.appendDummyInput()
+            .appendField("mqtt")
+        this.appendValueInput('TOPIC')
+            .appendField(Blockly.Msg.MIXLY_EMQX_SUBSCRIBE + Blockly.Msg.MIXLY_MICROBIT_MSG)
+            .appendField(Blockly.Msg.MIXLY_EMQX_PUBLISH_TOPIC);
+        this.appendValueInput('METHOD')
+            .appendField(Blockly.Msg.MIXLY_EMQX_SET_METHOD);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+export const educore_mqtt_topic_publish = {
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
+        this.appendDummyInput()
+            .appendField("mqtt")
+        this.appendValueInput('TOPIC')
+            .appendField(Blockly.Msg.MIXLY_EMQX_PUBLISH_NEW)
+            .appendField(Blockly.Msg.MIXLY_EMQX_PUBLISH_TOPIC);
+        this.appendValueInput('MSG')
+            .appendField(Blockly.Msg.HTML_BODY);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+export const educore_mqtt_connect_success = {
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
+        this.appendDummyInput()
+            .appendField("mqtt"+Blockly.Msg.MIXLY_EMQX_IS_CONNECT)
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};

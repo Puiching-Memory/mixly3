@@ -316,3 +316,80 @@ export const ce_go_pin_light = {
         });
     }
 };
+
+//educore car
+export const educore_car = {
+    init: function () {
+        this.setColour(MEGO_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_CAR);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+}
+
+export const educore_car_stepper_keep = {
+    init: function () {
+        this.setColour(MEGO_HUE);
+        this.appendValueInput('car');
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.blockpy_forward, "forward"],
+                // [Blockly.Msg.blockpy_backward, "B"],
+                [Blockly.Msg.blockpy_left, "turn_left"],
+                [Blockly.Msg.blockpy_right, "turn_right"]
+            ]), "VAR");
+        this.appendValueInput('speed')
+            .setCheck(Number)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.MIXLY_SETTING + Blockly.Msg.MIXLY_SPEED);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+    }
+}
+
+export const educore_car_stepper_stop = {
+    init: function () {
+        this.setColour(MEGO_HUE);
+        this.appendValueInput('car');
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MOTOR_P, "stop"]
+                // [Blockly.Msg.MOTOR_N, "N"]
+            ]), "VAR");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+    }
+}
+
+export const educore_car_pin_near_line = {
+    init: function () {
+        this.setColour(MEGO_HUE);
+        this.appendValueInput('car');
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.TEXT_TRIM_LEFT, "1"],
+                // [Blockly.Msg.MIXGO_LEFT_MID, "[1]"],
+                // [Blockly.Msg.MIXGO_RIGHT_MID, "[2]"],
+                [Blockly.Msg.TEXT_TRIM_RIGHT, "2"]
+                // [Blockly.Msg.MIXLY_ALL, ""]
+            ]), "key")
+            .appendField(Blockly.Msg.MIXGO_LINE_SENSOR_VAL);
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};
+
+export const educore_car_pin_near = {
+    init: function () {
+        this.setColour(MEGO_HUE);
+        this.appendValueInput('car');
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET+Blockly.Msg.MIXGO_PROXIMITY_SENSOR);
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};

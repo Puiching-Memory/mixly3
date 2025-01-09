@@ -261,3 +261,10 @@ export const enumerate = function (_, generator) {
     var code = 'enumerate(' +varName+',start='+ argument + ')';
     return [code, generator.ORDER_ATOMIC];
 }
+
+export const content_in_lists = function (_, generator) {
+    var varName = generator.valueToCode(this, 'LIST', generator.ORDER_ADDITIVE) || 'mylist';
+    var con = generator.valueToCode(this, 'CON', generator.ORDER_ASSIGNMENT) || '0';
+    var code = con +' in '+varName;
+    return [code, generator.ORDER_ATOMIC];
+}

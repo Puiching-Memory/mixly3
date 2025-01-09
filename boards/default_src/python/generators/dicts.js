@@ -23,6 +23,7 @@
  * @author acbart@vt.edu (Austin Cory Bart)
  */
 import * as Blockly from 'blockly/core';
+import { Boards } from 'mixly';
 
 export const dicts_create_with = function (_, generator) {
     // Create a list with any number of elements of any type.
@@ -49,11 +50,16 @@ export const dicts_keys = function (_, generator) {
 }
 
 export const dicts_get = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
     var varName = generator.valueToCode(this, 'DICT', generator.ORDER_ASSIGNMENT) || '0';
     //var size=window.parseFloat(this.getFieldValue('SIZE'));
     var text = generator.valueToCode(this, 'KEY', generator.ORDER_ASSIGNMENT);
     // var text=this.getFieldValue('KEY');
-    var code = varName + "[" + text + "]";
+    if (version=='educore'){
+        var code = varName+'.get('+text+')';
+    }else{
+        var code = varName + "[" + text + "]";
+    }
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -212,5 +218,13 @@ export const dicts_to_to = function (_, generator) {
     var L = generator.valueToCode(this, 'VAR3', generator.ORDER_ASSIGNMENT) || 'null';
     var N = generator.valueToCode(this, 'VAR4', generator.ORDER_ASSIGNMENT) || 'null';
     var code = varName + '['+R+']'+'['+I+']'+'['+L+']'+'['+N+']';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const dicts_to_json2 = function (_, generator) {
+    generator.definitions_['import_json'] = 'import json';
+    generator.definitions_['import_ujson'] = 'import ujson';
+    var varName = generator.valueToCode(this, 'DICT', generator.ORDER_ASSIGNMENT) || '0';
+    var code = 'ujson.loads(' + varName + ')';
     return [code, generator.ORDER_ATOMIC];
 }

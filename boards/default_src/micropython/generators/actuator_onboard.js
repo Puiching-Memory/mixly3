@@ -586,3 +586,90 @@ export const analog_ble_mouse_send_battery = function (_, generator) {
     var code = "ble_mouse.notify_battery(" + b + ")\n";
     return code;
 }
+
+//educore actuator
+export const educore_buzzer = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_speaker'] = 'from ' + version + ' import spesker';
+    var code = "speaker()";
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_buzzer_play_tone = function (block, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_speaker'] = 'from ' + version + ' import spesker';
+    var bu = generator.valueToCode(this, 'buzzer', generator.ORDER_ATOMIC);
+    var number_pitch = generator.valueToCode(block, 'pitch', generator.ORDER_ATOMIC);
+    var code = bu+'.tone(freq=[' + number_pitch + '])\n';
+    return code;
+}
+
+export const educore_buzzer_play_tone_time = function (block, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_speaker'] = 'from ' + version + ' import spesker';
+    var bu = generator.valueToCode(this, 'buzzer', generator.ORDER_ATOMIC);
+    var number_pitch = generator.valueToCode(block, 'pitch', generator.ORDER_ATOMIC);
+    var number_time = generator.valueToCode(block, 'time', generator.ORDER_ATOMIC);
+    var code = bu+'.tone(freq=' + number_pitch + ', dur=' + number_time + ')\n';
+    return code;
+}
+
+export const educore_buzzer_stop = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_speaker'] = 'from ' + version + ' import spesker';
+    var bu = generator.valueToCode(this, 'buzzer', generator.ORDER_ATOMIC);
+    var code = bu+'.stop()\n';
+    return code;
+}
+
+export const educore_rgb_light = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + 'rgb'] = 'from ' + version + ' import rgb';
+    var code = "rgb()";
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_neopixel_rgb = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + 'rgb'] = 'from ' + version + ' import rgb';
+    var rgb = generator.valueToCode(this, 'rgb', generator.ORDER_ATOMIC);
+    var value_led = generator.valueToCode(this, '_LED_', generator.ORDER_ATOMIC);
+    var value_rvalue = generator.valueToCode(this, 'RVALUE', generator.ORDER_ATOMIC);
+    var value_gvalue = generator.valueToCode(this, 'GVALUE', generator.ORDER_ATOMIC);
+    var value_bvalue = generator.valueToCode(this, 'BVALUE', generator.ORDER_ATOMIC);
+    var code = rgb+'.write(index[' + value_led + '], r=int(' + value_rvalue + '), g=int(' + value_gvalue + '), b=int(' + value_bvalue + '))\n';
+    return code;
+}
+
+export const educore_neopixel_clear = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + 'rgb'] = 'from ' + version + ' import rgb';
+    var rgb = generator.valueToCode(this, 'rgb', generator.ORDER_ATOMIC);
+    var code = rgb+'.clear()\n';
+    return code;
+}
+
+export const educore_ble_sensor_init = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_hid'] = 'from ' + version + ' import hid';
+    var n = generator.valueToCode(this, 'name', generator.ORDER_ATOMIC);
+    var code = 'hid.(name='+ n +')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_ble_sensor_connected = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_hid'] = 'from ' + version + ' import hid';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var code = sub+'.isconnected()';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_ble_keyboard_input = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_keycode'] = 'from ' + version + ' import keycode';
+    var ge = generator.valueToCode(this, 'general', generator.ORDER_ATOMIC);
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var code = sub+".keyboard_send("+ ge + ")\n";
+    return code;
+}

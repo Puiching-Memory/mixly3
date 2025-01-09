@@ -631,3 +631,55 @@ export const mixbot_actuator_extern_set_addr = function (_, generator) {
     var code = name + '.addr_set(' + oldaddr + ',' + newaddr + ')\n';
     return code;
 }
+
+//educore
+export const PIN_init = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + 'pin'] = 'from ' + version + ' import pin';
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    var code = 'pin('+ dropdown_pin +')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const pin_led_bright = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    var pin = generator.valueToCode(this, 'pin', generator.ORDER_ATOMIC);
+    generator.definitions_['import_' + version + 'pin'] = 'from ' + version + ' import pin';
+    var bright = generator.valueToCode(this, 'bright', generator.ORDER_ATOMIC);
+    var code = pin+".write_digital(value="  + bright + ")\n";
+    return code;
+}
+
+export const servo_PIN_init = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + 'servo'] = 'from ' + version + ' import servo';
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    var code = 'servo('+ dropdown_pin +')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const servo_move_angle = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + 'servo'] = 'from ' + version + ' import servo';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var a = generator.valueToCode(this, 'angle', generator.ORDER_ATOMIC);
+    var code = sub+'.angle('+ a +')\n';
+    return code;
+}
+
+export const parrot_PIN_init = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + 'parrot'] = 'from ' + version + ' import parrot';
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    var code = 'parrot('+ dropdown_pin +')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const parrot_move_speed = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + 'parrot'] = 'from ' + version + ' import parrot';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var speed = generator.valueToCode(this, 'speed', generator.ORDER_ATOMIC);
+    var code = sub+'.speed('+ speed +')\n';
+    return code;
+}

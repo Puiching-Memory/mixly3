@@ -254,3 +254,48 @@ export const ce_go_pin_light = function (_, generator) {
     var code = 'car.light()' + key + '';
     return [code, generator.ORDER_ATOMIC];
 }
+
+//educore car
+
+export const educore_car = function (_, generator) {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_'+version+'_car'] = 'from '+version+' import car';
+    var code = 'car()';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_car_stepper_keep = function (_, generator) {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_'+version+'_car'] = 'from '+version+' import car';
+    var car = generator.valueToCode(this, 'car', generator.ORDER_ASSIGNMENT);
+    var v = this.getFieldValue('VAR');
+    var speed = generator.valueToCode(this, 'speed', generator.ORDER_ASSIGNMENT);
+    var code = car+'.'+ v +'('+speed+")\n";
+    return code;
+}
+
+export const educore_car_stepper_stop = function (_, generator) {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_'+version+'_car'] = 'from '+version+' import car';
+    var car = generator.valueToCode(this, 'car', generator.ORDER_ASSIGNMENT);
+    var v = this.getFieldValue('VAR');
+    var code = car+'.'+ v +"()\n";
+    return code;
+}
+
+export const educore_car_pin_near_line = function (_, generator) {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_'+version+'_car'] = 'from '+version+' import car';
+    var car = generator.valueToCode(this, 'car', generator.ORDER_ASSIGNMENT);
+    var key = this.getFieldValue('key');
+    var code = car+'.get_itr_dnum(' + key + ')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_car_pin_near = function (_, generator) {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_'+version+'_car'] = 'from '+version+' import car';
+    var car = generator.valueToCode(this, 'car', generator.ORDER_ASSIGNMENT);
+    var code = car+'.get_distance()';
+    return [code, generator.ORDER_ATOMIC];
+}

@@ -956,3 +956,89 @@ export const sensor_DS18X20 = function(_, generator){
     var code ='DS18X20('+dropdown_pin+').temperature()';
     return [code, generator.ORDER_ATOMIC];
 };
+
+//educore sensor_extern 
+export const educore_body_sensor = function (_, generator) {
+    generator.definitions_['import_educore_tsd'] = 'from educore import tsd';
+    var pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    var code = 'tsd(' + pin + ')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_soilhum_sensor = function (_, generator) {
+    generator.definitions_['import_educore_solihum'] = 'from educore import soilhum';
+    var pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    var code = 'soilhum(' + pin + ')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_temphum_sensor = function (_, generator) {
+    generator.definitions_['import_educore_dht'] = 'from educore import dht';
+    var pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    var code = 'dht(' + pin + ')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_infrared_sensor = function (_, generator) {
+    generator.definitions_['import_educore_tsd'] = 'from educore import tsd';
+    var pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    var code = 'tsd(' + pin + ')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_button_sensor_extern = function (_, generator) {
+    generator.definitions_['import_educore_button'] = 'from educore import button';
+    var pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    var code = 'button(' + pin + ')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const sensor_read_humiture = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = sub+".read()["+key+"]";
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_ultrasonic_sensor = function (_, generator) {
+    generator.definitions_['import_educore_ultrasonic'] = 'from educore import ultrasonic';
+    var pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    var code = 'ultrasonic(' + pin + ')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const ultrasonic_sensor_read_distance = function (_, generator) {
+    generator.definitions_['import_educore_ultrasonic'] = 'from educore import ultrasonic';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var code = sub+".diatance()";
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_temp_sensor = function (_, generator) {
+    generator.definitions_['import_educore_ds18b20'] = 'from educore import ds18b20';
+    var pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    var code = 'ds18b20(' + pin + ')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const educore_camera_sensor = function (_, generator) {
+    generator.definitions_['import_educore_smartcamera'] = 'from educore import smartcamera';
+    var pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    var code = 'smartcamera(' + pin + ')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const camera_sensor_init = function (_, generator) {
+    generator.definitions_['import_educore_smartcamera'] = 'from educore import smartcamera';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = sub+'.init(' + key + ')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const camera_sensor_result = function (_, generator) {
+    generator.definitions_['import_educore_smartcamera'] = 'from educore import smartcamera';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var code = sub+'.result()';
+    return [code, generator.ORDER_ATOMIC];
+}

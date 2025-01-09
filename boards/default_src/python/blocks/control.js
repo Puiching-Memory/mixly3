@@ -1045,3 +1045,13 @@ export const datetime_fromtimestamp = {
         this.setOutput(true, Number);
     }
 };
+
+
+export const gene_unique_identifier = {
+    init: function () {
+        this.setColour(LOOPS_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_GET_UNIQUE_IDEN);
+        this.setOutput(true)
+    }
+};

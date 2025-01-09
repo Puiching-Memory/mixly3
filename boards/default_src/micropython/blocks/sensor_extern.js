@@ -2033,3 +2033,142 @@ export const sensor_weather_solo_rain = {
         this.setInputsInline(true);
     }
 };
+
+//educore sensor_extern
+export const educore_body_sensor = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput("PIN")
+            .appendField(Blockly.Msg.MIXLY_BODY_SENSOR);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const educore_soilhum_sensor = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput("PIN")
+            .appendField(Blockly.Msg.MIXLY_SOILHUM_SENSOR);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const educore_temphum_sensor = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput("PIN")
+            .appendField(Blockly.Msg.MIXLY_TEMP_AND_HUMIDITY_SENSOR);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const educore_infrared_sensor = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput("PIN")
+            .appendField(Blockly.Msg.MIXLY_Infrared_pyroelectric_sensor);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const educore_button_sensor_extern = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput("PIN")
+            .appendField(Blockly.Msg.HTML_BUTTON);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const sensor_read_humiture = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_GET)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.blockpy_set_of)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_TEMPERATURE,"0"],
+                [Blockly.Msg.MIXLY_Humidity,"1"]
+            ]),"key");
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
+export const educore_ultrasonic_sensor = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput("PIN")
+            .appendField(Blockly.Msg.MIXLY_EXTERN_SONAR);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const ultrasonic_sensor_read_distance = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_GET)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.blockpy_set_of+Blockly.Msg.ME_GO_HALL_SENSOR_DISTANCE);
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
+export const educore_temp_sensor = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput("PIN")
+            .appendField(Blockly.Msg.MIXLY_TEMP + Blockly.Msg.MIXLY_DS18B20);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const educore_camera_sensor = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput("PIN")
+            .appendField(Blockly.Msg.MIXLY_SMARTCAMERA);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const camera_sensor_init = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput("SUB")
+            .appendField(Blockly.Msg.MIXLY_SMARTCAMERA);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_PROCCED)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_AipFace,"FACE_RECOGNIZE"],
+                [Blockly.Msg.MIXLY_FACE_CLASSIFIER,"FACE_DETECT"]
+            ]),"key");
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const camera_sensor_result = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput("SUB")
+            .appendField(Blockly.Msg.MIXLY_SMARTCAMERA);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.blockpy_set_of + Blockly.Msg.MIXLY_RECOGNIZED_RESULT);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
