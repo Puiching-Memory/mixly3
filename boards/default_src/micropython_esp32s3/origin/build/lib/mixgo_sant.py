@@ -53,7 +53,7 @@ except Exception as e:
 '''ASR-Sensor'''
 try :
 	import ci130x
-	onboard_rfid = ci130x.CI130X(onboard_i2c)     
+	onboard_asr = ci130x.CI130X(onboard_i2c)     
 except Exception as e:
 	print("Warning: Failed to communicate with CI130X (ASR) or",e)
 
