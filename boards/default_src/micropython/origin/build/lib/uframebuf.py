@@ -401,7 +401,7 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 		for line in lines:
 			for char in line:
 				buffer = self._font.chardata(char)
-				if x > self.width - buffer[1][0]:
+				if x > self.width - buffer[1][0] * size:
 					x = 0
 					y = buffer[1][1] * size + y + space_y
 				if y > self.height:
