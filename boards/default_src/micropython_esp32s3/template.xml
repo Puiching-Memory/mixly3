@@ -1415,7 +1415,7 @@
     </block>
     <block type="sensor_mixgoce_pin_pressed">
       <value name="button">
-        <shadow type="number6">
+        <shadow type="number7">
         </shadow>
       </value>
     </block>
@@ -1569,7 +1569,7 @@
         </shadow>
       </value>
     </block>
-    <block type="actuator_mixgo_zero_led_color" m-show='micropython:esp32s3:mixgo_sant'>
+    <block type="actuator_mixgo_zero_led_color" m-hide='micropython:esp32s3:mixgo_sant'>
       <value name="led">
         <shadow type="number">
         </shadow>
