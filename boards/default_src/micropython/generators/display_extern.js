@@ -8,7 +8,7 @@ export const display_matrix_use_i2c_init = function (_, generator) {
     var font = '';
     if (['mpython', 'mixgo_pe', 'mixgo_nova'].indexOf(version) >= 0) {
         font = '0x700000'
-    } else if (['mixgo_zero'].indexOf(version) >= 0) {
+    } else if (['mixgo_sant'].indexOf(version) >= 0) {
         font = '0xE00000'
     } else {
         font = '0x3A0000'
@@ -361,7 +361,7 @@ export const tft_use_spi_init = function (_, generator) {
     var font = '';
     if (['mpython', 'mixgo_pe', 'mixgo_nova'].indexOf(version) >= 0) {
         font = '0x700000'
-    } else if (['mixgo_zero'].indexOf(version) >= 0) {
+    } else if (['mixgo_sant'].indexOf(version) >= 0) {
         font = '0xE00000'
     } else {
         font = '0x3A0000'
@@ -561,7 +561,7 @@ export const display_oled_use_i2c_init = function (_, generator) {
     var font = '';
     if (['mpython', 'mixgo_pe', 'mixgo_nova'].indexOf(version) >= 0) {
         font = '0x700000'
-    } else if (['mixgo_zero'].indexOf(version) >= 0) {
+    } else if (['mixgo_sant'].indexOf(version) >= 0) {
         font = '0xE00000'
     } else {
         font = '0x3A0000'

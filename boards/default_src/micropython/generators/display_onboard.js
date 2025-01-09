@@ -18,7 +18,7 @@ export const display_show_image_or_string_delay = function (_, generator) {
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var space = generator.valueToCode(this, 'space', generator.ORDER_ASSIGNMENT);
     var op = this.getFieldValue('center');
-    if (version == "mixgo_zero" || version == "mixgo_nova") {
+    if (version == "mixgo_sant" || version == "mixgo_nova") {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var code = "onboard_tft.shows(" + data + ",space = " + space + ',center = ' + op + ")\n";
         return code;

@@ -2161,7 +2161,7 @@
       </value>
     </block>
     <block type="onboard_tft_clear"></block>
-    <block type="onboard_tft_clock_init" m-show="micropython:esp32s3:mixgo_zero">
+    <block type="onboard_tft_clock_init" m-show="micropython:esp32s3:mixgo_sant">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">new_clock</field>
