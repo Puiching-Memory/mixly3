@@ -51,9 +51,9 @@ export const esp32_onboard_music_stop = function (block, generator) {
 export const esp32_onboard_music_play_list = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
     var lst = generator.valueToCode(this, 'LIST', generator.ORDER_ASSIGNMENT);
-    if (version == 'mixgo_zero') {
-        generator.definitions_['import_mixgo_zero_voice_spk_midi'] = "from mixgo_zero_voice import spk_midi";
-        var code = "spk_midi.play(" + lst + ")\n";
+    if (version == 'mixgo_sant') {
+        generator.definitions_['import_mixgo_sant_onboard_music'] = "from mixgo_sant import onboard_music";
+        var code = "onboard_music.play(" + lst + ")\n";
     } else if (version == 'mixgo_nova') {
         generator.definitions_['import_mixgo_nova_voice_spk_midi'] = "from mixgo_nova_voice import spk_midi";
         var code = "spk_midi.play(" + lst + ")\n";

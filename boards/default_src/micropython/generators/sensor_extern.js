@@ -232,11 +232,10 @@ export const radar_set_DETECTION_THRESHOLD = function (_, generator) {
 }
 
 export const radar_set_DETECTION_THRESHOLD_SANT = function (_, generator) {
-    var version = Boards.getSelectedBoardKey().split(':')[2];
-    generator.definitions_['import_'+version +'_ext_mmw'] = 'from '+ version +' import ext_mmw';
+    generator.definitions_['import_sant_g2_ext_mmw'] = 'from sant_g2 import ext_mmw';
     var value = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var value2 = generator.valueToCode(this, 'VAR2', generator.ORDER_ATOMIC);
-    var code = 'ext_mmw.threshold(' + value +')\n'+ 'ext.mmw.delay_ms(' + value2 +')\n';
+    var code = 'ext_mmw.threshold(' + value +')\n'+ 'ext_mmw.delay_ms(' + value2 +')\n';
     return code;
 }
 
@@ -248,8 +247,7 @@ export const interaction_whether_to_interaction = function(_,generator){
 }
 
 export const interaction_whether_to_interaction_SANT = function(_,generator){
-    var version = Boards.getSelectedBoardKey().split(':')[2];
-    generator.definitions_['import_'+version +'_ext_mmw'] = 'from '+ version +' import ext_mmw';
+    generator.definitions_['import_sant_g2_ext_mmw'] = 'from sant_g2 import ext_mmw';
     var code = 'ext_mmw.result()';
     return [code,generator.ORDER_ATOMIC];
 }
