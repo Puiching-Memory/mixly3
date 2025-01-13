@@ -5,6 +5,9 @@ Micropython library for the SANT_WCH(---)
 =======================================================
 @dahanzimin From the Mixly Team
 """
+import time
+from micropython import const
+
 _BOT035_ADDRESS     = const(0x13)
 _BOT5_TOUCH         = const(0x01)
 _BOT035_ADC         = const(0x05)
@@ -17,6 +20,7 @@ _BOT035_STR         = const(0x18)
 class BOT035:
     def __init__(self, i2c_bus):
         self._i2c = i2c_bus
+        self._touchs = [self.touch(0), self.touch(1)]
 
     def _wreg(self, reg, val):
         '''Write memory address'''
@@ -38,10 +42,10 @@ class BOT035:
     def touched(self, index, value=600):
         return self.touch(index, value)
 
-    def touch_slide(self):
+    def touch_slide(self, comp=1.2):
         values = []
         for i in range(30):
-            values.append((self.touch(1) - self._touchs[1]) - (self.touch(0) - self._touchs[0]))
+            values.append((self.touch(1) - self._touchs[1]) * comp - (self.touch(0) - self._touchs[0]))
         return round(sorted(values)[15] / 10) 
 
     def usben(self, index=1, duty=None, freq=None):
