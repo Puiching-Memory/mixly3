@@ -52,7 +52,11 @@
     },
     "pythonToBlockly": false,
     "web": {
-        "com": "usb",
+        "devices": {
+            "serial": false,
+            "hid": false,
+            "usb": true
+        },
         "burn": {
             "micropython:nrf51822:v1": {
                 "filePath": "./build/microbit-micropython-v1.hex"

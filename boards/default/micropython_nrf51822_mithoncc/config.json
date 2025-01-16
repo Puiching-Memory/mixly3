@@ -46,7 +46,11 @@
     },
     "pythonToBlockly": false,
     "web": {
-        "com": "usb",
+        "devices": {
+            "serial": false,
+            "hid": false,
+            "usb": true
+        },
         "burn": {
             "filePath": "./build/microbit-micropython-v1.hex"
         }

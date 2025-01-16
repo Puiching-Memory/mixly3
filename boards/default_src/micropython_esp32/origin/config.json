@@ -63,7 +63,11 @@
     },
     "pythonToBlockly": false,
     "web": {
-        "com": "serial",
+        "devices": {
+            "serial": true,
+            "hid": true,
+            "usb": false
+        },
         "burn": {
             "erase": true,
             "micropython:esp32:mixgo": {

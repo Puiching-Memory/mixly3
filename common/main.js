@@ -23,67 +23,6 @@ LazyLoad.js([
     COMMON_DIR_PATH + '/blockly-core/base.js',
     COMMON_DIR_PATH + '/modules/web-modules/jquery/jquery-3.7.1.min.js'
 ], function() {
-
-    /**
-     * debounce
-     * @param {integer} milliseconds This param indicates the number of milliseconds
-     *     to wait after the last call before calling the original function.
-     * @param {object} What "this" refers to in the returned function.
-     * @return {function} This returns a function that when called will wait the
-     *     indicated number of milliseconds after the last call before
-     *     calling the original function.
-     */
-    Function.prototype.debounce = function (milliseconds, context) {
-        var baseFunction = this,
-            timer = null,
-            wait = milliseconds;
-
-        return function () {
-            var self = context || this,
-                args = arguments;
-
-            function complete() {
-                baseFunction.apply(self, args);
-                timer = null;
-            }
-
-            if (timer) {
-                clearTimeout(timer);
-            }
-
-            timer = setTimeout(complete, wait);
-        };
-    };
-
-    /**
-    * throttle
-    * @param {integer} milliseconds This param indicates the number of milliseconds
-    *     to wait between calls before calling the original function.
-    * @param {object} What "this" refers to in the returned function.
-    * @return {function} This returns a function that when called will wait the
-    *     indicated number of milliseconds between calls before
-    *     calling the original function.
-    */
-    Function.prototype.throttle = function (milliseconds, context) {
-        var baseFunction = this,
-            lastEventTimestamp = null,
-            limit = milliseconds,
-            debounceFunc = baseFunction.debounce(milliseconds, context);
-
-        return function () {
-            var self = context || this,
-                args = arguments,
-                now = Date.now();
-
-            if (!lastEventTimestamp || now - lastEventTimestamp >= limit) {
-                lastEventTimestamp = now;
-                baseFunction.apply(self, args);
-            }
-
-            debounceFunc.apply(self, args);
-        };
-    };
-    
     /**
       * 当前视图
       * @type {string} 主页面 home | 板卡页面 board
@@ -143,8 +82,31 @@ LazyLoad.js([
         if (userAgent.indexOf('Mac') !== -1) return 'darwin';
         if (userAgent.indexOf('X11') !== -1) return 'linux';
         if (userAgent.indexOf('Linux') !== -1) return 'linux';
-        return 'other';
-  }
+        return 'unknown';
+    }
+
+    goog.fullPlatform = () => {
+        const userAgent = navigator.userAgent;
+        const platform = navigator.platform.toLowerCase();
+        let os = 'unknown';
+        if (platform.includes('win')) {
+            if (userAgent.indexOf('Windows NT 10.0') != -1) os = 'win10';
+            else if (userAgent.indexOf('Windows NT 6.3') != -1) os = 'win8.1';
+            else if (userAgent.indexOf('Windows NT 6.2') != -1) os = 'win8';
+            else if (userAgent.indexOf('Windows NT 6.1') != -1) os = 'win7';
+            else if (userAgent.indexOf('Windows NT 6.0') != -1) os = 'winvista';
+            else if (userAgent.indexOf('Windows NT 5.1') != -1) os = 'winxp';
+        } else if (platform.includes('mac')) {
+            os = 'darwin';
+        } else if (platform.includes('linux')) {
+            os = 'linux';
+        } else if (platform.includes('iphone') || platform.includes('ipad')) {
+            os = 'ios';
+        } else if (platform.includes('android')) {
+            os = 'android';
+        }
+        return os;
+    }
 
     /**
      * @function 根据传入的相对路径获取文件数据

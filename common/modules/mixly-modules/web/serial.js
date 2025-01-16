@@ -19,10 +19,24 @@ const { BOARD } = Config;
 
 let Device = SerialPort;
 
-if (BOARD?.web?.com === 'usb') {
+if (goog.platform() === 'win32' && goog.fullPlatform() !== 'win10') {
+    if (BOARD?.web?.devices?.hid) {
+        Device = HID;
+    } else if (BOARD?.web?.devices?.serial) {
+        Device = SerialPort;
+    } else if (BOARD?.web?.devices?.usb) {
+        Device = USB;
+    }
+} else if (goog.platform() === 'android') {
     Device = USB;
-} else if (BOARD?.web?.com === 'hid') {
-    Device = HID;
+} else {
+    if (BOARD?.web?.devices?.serial) {
+        Device = SerialPort;
+    } else if (BOARD?.web?.devices?.usb) {
+        Device = USB;
+    } else if (BOARD?.web?.devices?.hid) {
+        Device = HID;
+    }
 }
 
 

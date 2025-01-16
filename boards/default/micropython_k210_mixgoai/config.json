@@ -45,7 +45,11 @@
     },
     "pythonToBlockly": false,
     "web": {
-        "com": "serial",
+        "devices": {
+            "serial": true,
+            "hid": false,
+            "usb": false
+        },
         "upload": {
             "reset": []
         }
