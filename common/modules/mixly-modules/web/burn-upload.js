@@ -121,11 +121,11 @@ const readBinFileAsArrayBuffer = (path, offset) => {
 }
 
 BU.initBurn = () => {
-    if (SELECTED_BOARD.web.com === 'usb') {
+    if (['BBC micro:bit', 'Mithon CC'].includes(BOARD.boardType)) {
         BU.burnByUSB();
     } else {
-        const boardKey = Boards.getSelectedBoardKey();
         const { web } = SELECTED_BOARD;
+        const boardKey = Boards.getSelectedBoardKey();
         if (!web?.burn?.binFile) {
             return;
         }
@@ -311,7 +311,7 @@ BU.burnWithEsptool = async (binFile, erase) => {
     const flashOptions = {
         fileArray: data,
         flashSize: 'keep',
-        eraseAll: false,
+        eraseAll: erase,
         compress: true,
         calculateMD5Hash: (image) => CryptoJS.MD5(CryptoJS.enc.Latin1.parse(image))
     };
@@ -334,9 +334,6 @@ BU.burnWithEsptool = async (binFile, erase) => {
                 }
             });
             try {
-                if (erase) {
-                    await esploader.eraseFlash();
-                }
                 await esploader.writeFlash(flashOptions);
                 layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
                 statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
@@ -883,9 +880,9 @@ BU.burnWithSpecialBin = () => {
                     const boardKey = Boards.getSelectedBoardKey();
                     const { web } = SELECTED_BOARD;
                     if (boardKey.indexOf('micropython:esp32s2') !== -1) {
-                        BU.burnWithAdafruitEsptool(binFile);
+                        BU.burnWithAdafruitEsptool(binFile, web.burn.erase);
                     } else {
-                        BU.burnWithEsptool(binFile);
+                        BU.burnWithEsptool(binFile, web.burn.erase);
                     }
                 });
             });
