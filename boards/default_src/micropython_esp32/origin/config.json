@@ -65,7 +65,7 @@
     "web": {
         "devices": {
             "serial": true,
-            "hid": true,
+            "hid": false,
             "usb": false
         },
         "burn": {
