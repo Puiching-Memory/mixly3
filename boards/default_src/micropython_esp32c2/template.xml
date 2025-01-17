@@ -1804,10 +1804,12 @@
       </value>
     </block>
     <block type="mixgomini_display_image_create" m-show='micropython:esp32c2:mixgo_mini'></block>
+    <block type="display_image_builtins_all" m-show='micropython:esp32c2:mixgo_mini'></block>
     <block type="image_arithmetic">
       <value name="A">
         <shadow type="pins_builtinimg"></shadow>
-      </value>> <value name="B">
+      </value> 
+      <value name="B">
         <shadow type="pins_builtinimg"></shadow>
       </value>
     </block>
