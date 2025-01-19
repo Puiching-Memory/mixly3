@@ -4,6 +4,7 @@ goog.require('Mixly.Config');
 goog.require('Mixly.Env');
 goog.require('Mixly.Web.SerialPort');
 goog.require('Mixly.Web.USB');
+goog.require('Mixly.Web.USBMini');
 goog.require('Mixly.Web.HID');
 goog.provide('Mixly.Web.Serial');
 
@@ -12,6 +13,7 @@ const { Config, Env, Web } = Mixly;
 const {
     SerialPort,
     USB,
+    USBMini,
     HID
 } = Web;
 
@@ -25,7 +27,11 @@ if (goog.platform() === 'win32' && goog.fullPlatform() !== 'win10') {
     } else if (BOARD?.web?.devices?.serial) {
         Device = SerialPort;
     } else if (BOARD?.web?.devices?.usb) {
-        Device = USB;
+        if (['BBC micro:bit', 'Mithon CC'].includes(BOARD.boardType)) {
+            Device = USB;
+        } else {
+            Device = USBMini;
+        }
     }
 } else if (goog.platform() === 'android') {
     Device = USB;
@@ -33,7 +39,11 @@ if (goog.platform() === 'win32' && goog.fullPlatform() !== 'win10') {
     if (BOARD?.web?.devices?.serial) {
         Device = SerialPort;
     } else if (BOARD?.web?.devices?.usb) {
-        Device = USB;
+        if (['BBC micro:bit', 'Mithon CC'].includes(BOARD.boardType)) {
+            Device = USB;
+        } else {
+            Device = USBMini;
+        }
     } else if (BOARD?.web?.devices?.hid) {
         Device = HID;
     }

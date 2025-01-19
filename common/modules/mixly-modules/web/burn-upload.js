@@ -603,6 +603,7 @@ BU.uploadByUSB = async (portName) => {
         resize: false,
         closeBtn: 0,
         success: async function (layero, index) {
+            $('#mixly-loader-btn').hide();
             try {
                 let prevPercent = 0;
                 await partialFlashing.flashAsync(new BoardId(0x9900), FSWrapper, progress => {
@@ -636,6 +637,10 @@ BU.uploadByUSB = async (portName) => {
             }
             BU.burning = false;
             BU.uploading = false;
+        },
+        end: function () {
+            $('#mixly-loader-btn').css('display', 'inline-block');
+            $('#mixly-loader-div').css('display', 'none');
         }
     });
 }
@@ -653,7 +658,7 @@ BU.uploadWithAmpy = (portName) => {
     const editor = mainWorkspace.getEditorsManager().getActive();
     let useBuffer = true, dataLength = 256;
     if (BOARD.web.com === 'usb') {
-        useBuffer = false;
+        useBuffer = true;
         dataLength = 64;
     } else if (BOARD.web.com === 'hid') {
         useBuffer = true;
@@ -667,6 +672,7 @@ BU.uploadWithAmpy = (portName) => {
         resize: false,
         closeBtn: 0,
         success: async function (layero, index) {
+            $('#mixly-loader-btn').hide();
             const serial = new Serial(portName);
             const ampy = new Ampy(serial, useBuffer, dataLength);
             const code = editor.getCode();
@@ -727,6 +733,10 @@ BU.uploadWithAmpy = (portName) => {
             }
             BU.burning = false;
             BU.uploading = false;
+        },
+        end: function () {
+            $('#mixly-loader-btn').css('display', 'inline-block');
+            $('#mixly-loader-div').css('display', 'none');
         }
     });
 }

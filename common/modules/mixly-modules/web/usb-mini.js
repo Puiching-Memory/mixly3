@@ -1,10 +1,9 @@
 goog.loadJs('web', () => {
 
-goog.require('DAPjs');
 goog.require('Mixly.Serial');
 goog.require('Mixly.Registry');
 goog.require('Mixly.Web');
-goog.provide('Mixly.Web.USB');
+goog.provide('Mixly.Web.USBMini');
 
 const {
     Serial,
@@ -12,7 +11,7 @@ const {
     Web
 } = Mixly;
 
-class USB extends Serial {
+class USBMini extends Serial {
     static {
         this.type = 'usb';
         this.portToNameRegistry = new Registry();
@@ -107,12 +106,15 @@ class USB extends Serial {
     }
 
     #device_ = null;
-    #webUSB_ = null;
-    #dapLink_ = null;
     #keepReading_ = null;
     #reader_ = null;
-    #writer_ = null;
+    #serialPolling_ = false;
     #stringTemp_ = '';
+    #defaultClass_ = 0xFF;
+    #defaultConfiguration_ = 1;
+    #endpointIn_ = null;
+    #endpointOut_ = null;
+    #interfaceNumber_ = 0;
     constructor(port) {
         super(port);
     }
@@ -134,17 +136,48 @@ class USB extends Serial {
         }
     }
 
-    async #startSerialRead_(serialDelay = 1, autoConnect = false) {
-        this.#dapLink_.serialPolling = true;
-
-        while (this.#dapLink_.serialPolling) {
-            const data = await this.#dapLink_.serialRead();
-            if (data !== undefined) {
-                const numberArray = Array.prototype.slice.call(new Uint8Array(data));
-                this.onBuffer(numberArray);
-            }
-            await new Promise(resolve => setTimeout(resolve, serialDelay));
+    async #read_() {
+        let result;
+        if (this.#endpointIn_) {
+            result = await this.#device_.transferIn(this.#endpointIn_, 64);
+        } else {
+            result = await this.#device_.controlTransferIn({
+                requestType: 'class',
+                recipient: 'interface',
+                request: 0x01,
+                value: 0x100,
+                index: this.#interfaceNumber_
+            }, 64);
         }
+        return result?.data;
+    }
+
+    async #write_(data) {
+        if (this.#endpointOut_) {
+            await this.#device_.transferOut(this.#endpointOut_, data);
+        } else {
+            await this.#device_.controlTransferOut({
+                requestType: 'class',
+                recipient: 'interface',
+                request: 0x09,
+                value: 0x200,
+                index: this.#interfaceNumber_
+            }, data);
+        }
+    }
+
+    async #startSerialRead_(serialDelay = 1) {
+        this.#serialPolling_ = true;
+        try {
+            while (this.#serialPolling_ ) {
+                const data = await this.#read_();
+                if (data !== undefined) {
+                    const numberArray = Array.prototype.slice.call(new Uint8Array(data.buffer));
+                    this.onBuffer(numberArray);
+                }
+                await new Promise(resolve => setTimeout(resolve, serialDelay));
+            }
+        } catch (_) {}
     }
 
     async open(baud) {
@@ -157,12 +190,28 @@ class USB extends Serial {
             return;
         }
         baud = baud ?? this.getBaudRate();
-        this.#device_ = USB.getPort(currentPortName);
-        this.#webUSB_ = new DAPjs.WebUSB(this.#device_);
-        this.#dapLink_ = new DAPjs.DAPLink(this.#webUSB_);
-        await this.#dapLink_.connect();
-        super.open(baud);
+        this.#device_ = USBMini.getPort(currentPortName);
+        await this.#device_.open();
+        await this.#device_.selectConfiguration(this.#defaultConfiguration_);
+        const interfaces = this.#device_.configuration.interfaces.filter(iface => {
+            return iface.alternates[0].interfaceClass === this.#defaultClass_;
+        });
+        let selectedInterface = interfaces.find(iface => iface.alternates[0].endpoints.length > 0);
+        if (!selectedInterface) {
+            selectedInterface = interfaces[0];
+        }
+        this.#interfaceNumber_ = selectedInterface.interfaceNumber;
+        const { endpoints } = selectedInterface.alternates[0];
+        for (const endpoint of endpoints) {
+            if (endpoint.direction === 'in') {
+                this.#endpointIn_ = endpoint.endpointNumber;
+            } else if (endpoint.direction === 'out') {
+                this.#endpointOut_ = endpoint.endpointNumber;
+            }
+        }
+        await this.#device_.claimInterface(this.#interfaceNumber_);
         await this.setBaudRate(baud);
+        super.open(baud);
         this.onOpen();
         this.#addEventsListener_();
     }
@@ -171,16 +220,12 @@ class USB extends Serial {
         if (!this.isOpened()) {
             return;
         }
+        this.#serialPolling_ = false;
         super.close();
-        this.#dapLink_.stopSerialRead();
+        await this.#device_.close();
         if (this.#reader_) {
             await this.#reader_;
         }
-        await this.#dapLink_.disconnect();
-        this.#dapLink_ = null;
-        await this.#webUSB_.close();
-        this.#webUSB_ = null;
-        await this.#device_.close();
         this.#device_ = null;
         this.onClose(1);
     }
@@ -189,20 +234,20 @@ class USB extends Serial {
         if (!this.isOpened() || this.getBaudRate() === baud) {
             return;
         }
-        await this.#dapLink_.setSerialBaudrate(baud);
         await super.setBaudRate(baud);
     }
 
     async sendString(str) {
-        return this.#dapLink_.serialWrite(str);
+        const buffer = this.encode(str);
+        return this.sendBuffer(buffer);
     }
 
     async sendBuffer(buffer) {
         if (typeof buffer.unshift === 'function') {
-            buffer.unshift(buffer.length);
+            // buffer.unshift(buffer.length);
             buffer = new Uint8Array(buffer).buffer;
         }
-        return this.#dapLink_.send(132, buffer);
+        return this.#write_(buffer);
     }
 
     async setDTRAndRTS(dtr, rts) {
@@ -242,6 +287,6 @@ class USB extends Serial {
     }
 }
 
-Web.USB = USB;
+Web.USBMini = USBMini;
 
 });

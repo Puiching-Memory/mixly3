@@ -14,6 +14,7 @@ const {
 
 class WebHID extends Serial {
     static {
+        this.type = 'hid';
         this.portToNameRegistry = new Registry();
         this.nameToPortRegistry = new Registry();
 

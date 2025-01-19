@@ -1639,6 +1639,7 @@
             "Mixly.Env",
             "Mixly.Web.SerialPort",
             "Mixly.Web.USB",
+            "Mixly.Web.USBMini",
             "Mixly.Web.HID"
         ],
         "provide": [
@@ -1654,6 +1655,17 @@
         ],
         "provide": [
             "Mixly.Web.SerialPort"
+        ]
+    },
+    {
+        "path": "/web/usb-mini.js",
+        "require": [
+            "Mixly.Serial",
+            "Mixly.Registry",
+            "Mixly.Web"
+        ],
+        "provide": [
+            "Mixly.Web.USBMini"
         ]
     },
     {

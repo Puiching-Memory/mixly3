@@ -14,6 +14,7 @@ const {
 
 class WebSerialPort extends Serial {
     static {
+        this.type = 'serialport';
         this.portToNameRegistry = new Registry();
         this.nameToPortRegistry = new Registry();
 

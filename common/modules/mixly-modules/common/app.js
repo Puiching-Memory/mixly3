@@ -239,6 +239,9 @@ class App extends Component {
             id: 'command-burn-btn',
             displayText: Msg.Lang['nav.btn.burn'],
             preconditionFn: () => {
+                if (!goog.isElectron && !goog.hasSocketServer && Serial.type !== 'serialport') {
+                    return false;
+                }
                 return SELECTED_BOARD?.nav?.burn;
             },
             callback: () => BU.initBurn(),
