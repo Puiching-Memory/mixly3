@@ -7,7 +7,7 @@ export const serial_print_byte = {
         this.setColour(SERIAL_HUE);
         this.appendValueInput("CONTENT", String)
             .appendField("Serial")
-            .appendField(new Blockly.FieldDropdown([['uart1', '1'], ['uart2', '2']]), 'mode')
+            .appendField(new Blockly.FieldDropdown([['uart1', '1']]), 'mode')
             .appendField(Blockly.Msg.MIXLY_SERIAL_WRITE + '(' + Blockly.Msg.LANG_MATH_BYTE + ')');
         //this.setFieldValue('1','mode')
         this.setPreviousStatement(true, null);
@@ -21,7 +21,7 @@ export const serial_print = {
         this.setColour(SERIAL_HUE);
         this.appendValueInput("CONTENT", String)
             .appendField("Serial")
-            .appendField(new Blockly.FieldDropdown([['uart1', '1'], ['uart2', '2']]), 'mode')
+            .appendField(new Blockly.FieldDropdown([['uart1', '1']]), 'mode')
             .appendField(Blockly.Msg.MIXLY_SERIAL_PRINT);
         //this.setFieldValue('1','mode')
         this.setPreviousStatement(true, null);
@@ -35,7 +35,7 @@ export const serial_println = {
         this.setColour(SERIAL_HUE);
         this.appendValueInput("CONTENT", String)
             .appendField("Serial")
-            .appendField(new Blockly.FieldDropdown([['uart1', '1'], ['uart2', '2']]), 'mode')
+            .appendField(new Blockly.FieldDropdown([['uart1', '1']]), 'mode')
             .appendField(Blockly.Msg.MIXLY_SERIAL_PRINTLN);
         //this.setFieldValue('1','mode')
         this.setPreviousStatement(true, null);
@@ -50,7 +50,7 @@ export const serial_print_hex = {
         this.setColour(SERIAL_HUE);
         this.appendDummyInput()
             .appendField("Serial")
-            .appendField(new Blockly.FieldDropdown([['uart1', '1'], ['uart2', '2']]), 'mode')
+            .appendField(new Blockly.FieldDropdown([['uart1', '1']]), 'mode')
             .appendField(Blockly.Msg.MIXLY_SERIAL_PRINTLN);
         this.appendValueInput("CONTENT", Number)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MATH_BIN, "bin"], [Blockly.Msg.MATH_OCT, "oct"], [Blockly.Msg.MATH_DEC, "int"], [Blockly.Msg.MATH_HEX, "hex"]]), "STAT")
@@ -79,7 +79,7 @@ export const serial_readstr = {
         this.setColour(SERIAL_HUE);
         this.appendDummyInput()
             .appendField("Serial")
-            .appendField(new Blockly.FieldDropdown([['uart1', '1'], ['uart2', '2']]), 'mode')
+            .appendField(new Blockly.FieldDropdown([['uart1', '1']]), 'mode')
             .appendField(Blockly.Msg.MIXLY_SERIAL_READSTR);
         //this.setFieldValue('1','mode')
         this.setOutput(true, String);
@@ -92,7 +92,7 @@ export const serial_any = {
         this.setColour(SERIAL_HUE);
         this.appendDummyInput()
             .appendField("Serial")
-            .appendField(new Blockly.FieldDropdown([['uart1', '1'], ['uart2', '2']]), 'mode')
+            .appendField(new Blockly.FieldDropdown([['uart1', '1']]), 'mode')
             .appendField(Blockly.Msg.MIXLY_SERIAL_AVAILABLE);
         //this.setFieldValue('1','mode')
         this.setOutput(true, Boolean);
@@ -105,7 +105,7 @@ export const serial_readline = {
         this.setColour(SERIAL_HUE);
         this.appendDummyInput()
             .appendField("Serial")
-            .appendField(new Blockly.FieldDropdown([['uart1', '1'], ['uart2', '2']]), 'mode')
+            .appendField(new Blockly.FieldDropdown([['uart1', '1']]), 'mode')
             .appendField(Blockly.Msg.MIXLY_ESP32_READ_LINE);
         //this.setFieldValue('1','mode')
         this.setOutput(true, String);
@@ -137,7 +137,7 @@ export const serial_softserial_new = {
         this.setColour(SERIAL_HUE);
         this.appendValueInput("RX")
             .appendField(Blockly.Msg.MIXLY_SETUP)
-            .appendField(new Blockly.FieldDropdown([['uart1', '1'], ['uart2', '2']]), 'mode')
+            .appendField(new Blockly.FieldDropdown([['uart1', '1']]), 'mode')
             .appendField("RX#")
             .setCheck(Number)
             .setAlign(Blockly.inputs.Align.RIGHT);
@@ -360,7 +360,7 @@ export const serial_send_to_ai = {
         this.setColour(SERIAL_HUE);
         this.appendValueInput("CONTENT")
             .appendField("Serial")
-            .appendField(new Blockly.FieldDropdown([['uart1', '1'], ['uart2', '2']]), 'mode')
+            .appendField(new Blockly.FieldDropdown([['uart1', '1']]), 'mode')
             .appendField(Blockly.Msg.MIXLY_EMQX_PUBLISH);
         this.appendDummyInput()
             .appendField(Blockly.Msg.LANG_CONTROLS_FOR_INPUT_TO + Blockly.Msg.MIXLY_OTHER + 'MP' + Blockly.Msg.MIXLY_DEVICE)
@@ -376,7 +376,7 @@ export const serial_read_from_ai = {
         this.setColour(SERIAL_HUE);
         this.appendDummyInput()
             .appendField("Serial")
-            .appendField(new Blockly.FieldDropdown([['uart1', '1'], ['uart2', '2']]), 'mode')
+            .appendField(new Blockly.FieldDropdown([['uart1', '1']]), 'mode')
             .appendField(Blockly.Msg.MIXLY_ESP32_READ + Blockly.Msg.MIXLY_OTHER + 'MP' + Blockly.Msg.MIXLY_DEVICE + Blockly.Msg.MIXLY_SD_DATA);
         this.setOutput(true, Boolean);
     }
