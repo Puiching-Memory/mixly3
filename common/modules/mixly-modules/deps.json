@@ -1452,6 +1452,7 @@
             "Mixly.Msg",
             "Mixly.Debug",
             "Mixly.MArray",
+            "Mixly.Config",
             "Mixly.Electron"
         ],
         "provide": [

@@ -5,6 +5,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Debug');
 goog.require('Mixly.MArray');
+goog.require('Mixly.Config');
 goog.require('Mixly.Electron');
 goog.provide('Mixly.Electron.Serial');
 
@@ -23,8 +24,11 @@ const {
     Msg,
     Debug,
     MArray,
+    Config,
     Electron
 } = Mixly;
+
+const { BOARD } = Config;
 
 
 class ElectronSerial extends Serial {
@@ -137,7 +141,8 @@ class ElectronSerial extends Serial {
                 parity: 'none',  // 奇偶校验
                 stopBits: 1,  // 停止位
                 flowControl: false,
-                autoOpen: false  // 不自动打开
+                autoOpen: false,  // 不自动打开
+                rtscts: BOARD?.serial?.rts ?? false
             }, false);
             this.#parserBytes_ = this.#serialport_.pipe(new ByteLengthParser({ length: 1 }));
             this.#parserLine_ = this.#serialport_.pipe(new ReadlineParser());
