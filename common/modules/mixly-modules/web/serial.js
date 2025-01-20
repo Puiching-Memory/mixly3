@@ -20,8 +20,10 @@ const {
 const { BOARD } = Config;
 
 let Device = SerialPort;
+const platform = goog.platform();
+const fullPlatform = goog.fullPlatform();
 
-if (goog.platform() === 'win32' && goog.fullPlatform() !== 'win10') {
+if (platform === 'win32' && fullPlatform !== 'win10') {
     if (BOARD?.web?.devices?.hid) {
         Device = HID;
     } else if (BOARD?.web?.devices?.serial) {
@@ -33,8 +35,12 @@ if (goog.platform() === 'win32' && goog.fullPlatform() !== 'win10') {
             Device = USBMini;
         }
     }
-} else if (goog.platform() === 'android') {
-    Device = USB;
+} else if (fullPlatform === 'android') {
+    if (['BBC micro:bit', 'Mithon CC'].includes(BOARD.boardType)) {
+        Device = USB;
+    } else {
+        Device = USBMini;
+    }
 } else {
     if (BOARD?.web?.devices?.serial) {
         Device = SerialPort;

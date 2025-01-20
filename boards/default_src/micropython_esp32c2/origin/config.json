@@ -68,7 +68,7 @@
         "devices": {
             "serial": true,
             "hid": true,
-            "usb": false
+            "usb": true
         },
         "burn": {
             "erase": true,
