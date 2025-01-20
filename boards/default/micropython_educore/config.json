@@ -1,6 +1,6 @@
 {
     "board": {
-        "Edu Core": "micropython:educore:educore"
+        "mpython": "micropython:educore:educore"
     },
     "language": "MicroPython",
     "burn": {

@@ -80,6 +80,21 @@
         "__size__": 1034,
         "__name__": "ble_handle.py"
     },
+    "ble_hid": {
+        "__require__": [
+            "bluetooth",
+            "struct",
+            "time",
+            "micropython",
+            "ubinascii",
+            "ble_advertising",
+            "bluetooth",
+            "ble_hid_key"
+        ],
+        "__file__": true,
+        "__size__": 11263,
+        "__name__": "ble_hid.py"
+    },
     "ble_hid_keyboard": {
         "__require__": [
             "bluetooth",
@@ -298,6 +313,16 @@
         "__size__": 9047,
         "__name__": "huskylens.py"
     },
+    "hx720": {
+        "__require__": [
+            "time",
+            "machine",
+            "micropython"
+        ],
+        "__file__": true,
+        "__size__": 1794,
+        "__name__": "hx720.py"
+    },
     "i2cdevice": {
         "__require__": [
             "random",
@@ -425,7 +450,7 @@
             "gc"
         ],
         "__file__": true,
-        "__size__": 5832,
+        "__size__": 5845,
         "__name__": "mixgo_ai.py"
     },
     "mixiot": {
@@ -847,7 +872,7 @@
             "framebuf"
         ],
         "__file__": true,
-        "__size__": 20605,
+        "__size__": 20872,
         "__name__": "uframebuf.py"
     },
     "umqtt": {

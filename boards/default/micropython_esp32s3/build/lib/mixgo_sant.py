@@ -16,11 +16,26 @@ rtc_clock = RTC()
 #onboard_i2c = I2C(0)
 onboard_i2c = SoftI2C(scl=Pin(47), sda=Pin(48), freq=400000)
 
+'''BOT035-Sensor'''
+try :
+    import sant_bot
+    onboard_bot = sant_bot.BOT035(onboard_i2c)
+except Exception as e:
+    print("Warning: Failed to communicate with BOT035 (Coprocessor) or",e)
+
 '''SPI-onboard'''
-onboard_spi = SPI(1, baudrate=50000000, polarity=0, phase=0)
+onboard_spi = SPI(1, baudrate=80000000, polarity=1, phase=1)
+
+onboard_bot.tft_reset(0)
+time.sleep_ms(50)
+onboard_bot.tft_reset(1)
+time.sleep_ms(150)
+
+'''SPI-onboard'''
+onboard_spi = SPI(1, baudrate=80000000, polarity=1, phase=1)
 
 '''TFT/240*240'''
-onboard_tft = st7789_cf.ST7789(onboard_spi, 240, 240, dc_pin=40, cs_pin=None, bl_pin=None, font_address=0xE00000)
+onboard_tft = st7789_cf.ST7789(onboard_spi, 240, 240, dc_pin=40, backlight=onboard_bot.tft_brightness, font_address=0xE00000)
 
 '''ACC-Sensor'''
 try :
@@ -57,13 +72,6 @@ try :
 except Exception as e:
 	print("Warning: Failed to communicate with SPL06-001 (BPS) or",e)
 
-'''BOT035-Sensor'''
-try :
-    import sant_bot
-    onboard_bot = sant_bot.BOT035(onboard_i2c)
-except Exception as e:
-    print("Warning: Failed to communicate with BOT035 (Coprocessor) or",e)
-
 '''ASR-Sensor'''
 try :
     import ci130x
@@ -77,7 +85,7 @@ onboard_rgb = NeoPixel(Pin(21), 4)
 
 '''1Buzzer-Music'''
 from music import MIDI
-onboard_music =MIDI(16)
+onboard_music = MIDI(16)
 
 '''5KEY_Sensor'''
 class KEYSensor:
@@ -128,10 +136,10 @@ class Button(KEYSensor):
 
 B1key = Button(0)
 B2key = KEYSensor(15,0)
-A1key = KEYSensor(15,2900)
-A2key = KEYSensor(15,2300)
-A3key = KEYSensor(15,1650)
-A4key = KEYSensor(15,850)
+A1key = KEYSensor(15,2300)
+A2key = KEYSensor(15,1650)
+A3key = KEYSensor(15,850)
+A4key = KEYSensor(15,2900)
 
 '''2-LED''' 
 class LED:

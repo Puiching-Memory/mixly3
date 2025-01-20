@@ -54,16 +54,16 @@
             "math",
             "ws2812",
             "music",
+            "sant_bot",
             "sc7a20",
             "mk_pb4023",
             "shtc3",
             "mmc5603",
             "spl06_001",
-            "sant_bot",
             "ci130x"
         ],
         "__file__": true,
-        "__size__": 6779,
+        "__size__": 6968,
         "__name__": "mixgo_sant.py"
     },
     "mixgo_zero": {
@@ -128,7 +128,7 @@
             "micropython"
         ],
         "__file__": true,
-        "__size__": 3237,
+        "__size__": 3783,
         "__name__": "sant_bot.py"
     },
     "sant_g2": {
@@ -171,7 +171,7 @@
             "micropython"
         ],
         "__file__": true,
-        "__size__": 3421,
+        "__size__": 2825,
         "__name__": "st7789_cf.py"
     }
 }
