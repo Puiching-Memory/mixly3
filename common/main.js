@@ -96,14 +96,14 @@ LazyLoad.js([
             else if (userAgent.indexOf('Windows NT 6.1') != -1) os = 'win7';
             else if (userAgent.indexOf('Windows NT 6.0') != -1) os = 'winvista';
             else if (userAgent.indexOf('Windows NT 5.1') != -1) os = 'winxp';
+        } else if (userAgent.includes('Android')) {
+            os = 'android';
         } else if (platform.includes('mac')) {
             os = 'darwin';
         } else if (platform.includes('linux')) {
             os = 'linux';
         } else if (platform.includes('iphone') || platform.includes('ipad')) {
             os = 'ios';
-        } else if (platform.includes('android')) {
-            os = 'android';
         }
         return os;
     }

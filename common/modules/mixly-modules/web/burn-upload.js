@@ -657,12 +657,12 @@ BU.uploadWithAmpy = (portName) => {
     const mainWorkspace = Workspace.getMain();
     const editor = mainWorkspace.getEditorsManager().getActive();
     let useBuffer = true, dataLength = 256;
-    if (BOARD.web.com === 'usb') {
+    if (BOARD?.web?.devices?.usb) {
         useBuffer = true;
         dataLength = 64;
-    } else if (BOARD.web.com === 'hid') {
+    } else if (BOARD?.web?.devices?.hid) {
         useBuffer = true;
-        dataLength = 30;
+        dataLength = 31;
     }
     layer.open({
         type: 1,

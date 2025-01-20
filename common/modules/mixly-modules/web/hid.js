@@ -189,7 +189,7 @@ class WebHID extends Serial {
                 let temp = new Uint8Array(buffer.length + 1);
                 temp[0] = buffer.length;
                 temp.set(buffer, 1);
-                buffer= temp;
+                buffer = temp;
             } else {
                 buffer.unshift(buffer.length);
                 buffer = new Uint8Array(buffer);
