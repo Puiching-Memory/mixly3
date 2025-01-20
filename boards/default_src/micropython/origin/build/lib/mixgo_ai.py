@@ -35,7 +35,7 @@ class INFO:
 class AI:
 	def __init__(self, uart, quick=False):
 		self._uart=uart
-		self._uart.init(baudrate=115200)
+		self._uart.init(baudrate=115200, timeout=500)
 		self._info=[] 
 		self._sdata=[]
 		self._removal=quick

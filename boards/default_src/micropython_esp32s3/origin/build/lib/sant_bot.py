@@ -12,7 +12,8 @@ _BOT035_ADDRESS     = const(0x13)
 _BOT5_TOUCH         = const(0x01)
 _BOT035_ADC         = const(0x05)
 _BOT035_PWM         = const(0x07)
-
+_BOT035_LED         = const(0x0C)
+_BOT035_CMD         = const(0x0D)
 _BOT035_KB          = const(0x10)
 _BOT035_MS          = const(0x14)
 _BOT035_STR         = const(0x18)
@@ -60,6 +61,15 @@ class BOT035:
         if freq is None and duty is None:
             return self._rreg(_BOT035_PWM + index + 2), self._rreg(_BOT035_PWM) | self._rreg(_BOT035_PWM + 1) << 8
 
+    def tft_brightness(self, brightness=None):
+        if brightness is None:
+            return self._rreg(_BOT035_LED)
+        else:
+            self._wreg(_BOT035_LED, max(min(brightness, 100), 0))
+
+    def tft_reset(self, value):
+        self._wreg(_BOT035_CMD, (self._rreg(_BOT035_CMD) & 0x7F) | (value << 7))
+
     def hid_keyboard(self, special=0, general=0, release=True):
         self._buf = bytearray(4)
         self._buf[0] = special
@@ -78,6 +88,10 @@ class BOT035:
         for char in str(string):
             self._wreg(_BOT035_STR, ord(char) & 0xFF)
             time.sleep_ms(20 + delay)
+
+    def hid_keyboard_state(self):
+        state = self._rreg(_BOT035_CMD)
+        return bool(state & 0x10), bool(state & 0x20), bool(state & 0x40)
 
     def hid_mouse(self, keys=0, move=(0, 0), wheel=0, release=True):
         self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_MS, bytes([keys & 0x0F, move[0] & 0xFF, move[1] & 0xFF, wheel & 0xFF]))

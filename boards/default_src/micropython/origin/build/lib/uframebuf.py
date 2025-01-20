@@ -346,7 +346,7 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 		size = max(round(size), 1)
 		x =(self.width - width * size) // 2 if x is None else x
 		y =(self.height - height * size) // 2 if y is None else y
-		self.fill_rect(x, y, width * size, height * size, 0)
+		if self.auto_show: self.fill_rect(x, y, width * size, height * size, 0)
 		self.bitmap((buffer_info,(width, height)), x, y, size, color)    
 		if self.auto_show: self.show()
 
@@ -371,33 +371,36 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 			font_len = font_len + buffer[1][0] * size + space
 		return font_len, font_buffer
 
-	def shows(self, data, space=0, center=True, x=0, y=None, size=None, color=0xffff):
+	def shows(self, data, space=0, center=True, x=0, y=None, size=None, color=0xffff, bg_color=0x0):
 		"""Display character"""
 		if data is not None:
 			if type(data) in [list, bytes, tuple, bytearray]:
-				self.fill(0)
+				if self.auto_show: self.fill(bg_color)
 				self.set_buffer(data)
 				if self.auto_show: self.show()
 			else:
 				yy = y 
-				size = self.height // (self._font.height * 3) if size is None else size
+				if size is None:
+					font_len, font_buffer = self._take_buffer(str(data), space, 1)
+					size = min(self.width // font_len, self.height // self._font.height)
 				size = max(round(size), 1)
 				font_len, font_buffer = self._take_buffer(str(data), space, size)
 				x = (self.width - font_len + space) // 2 if center else x
 				y = (self.height - self._font.height * size) // 2 if y is None else y
-				if yy is None:
-					self.fill(0)
-				else:
-					self.fill_rect(x - 1, y - 1, font_len + 2, font_buffer[0][1][1] * size + 2, 0)
+				if self.auto_show:
+					if yy is None:
+						self.fill(bg_color)
+					else:
+						self.fill_rect(x - 1, y - 1, font_len + 2, font_buffer[0][1][1] * size + 2, bg_color)
 				for buffer in font_buffer:    #Display character
 					self.bitmap(buffer, x, y, size, color)
 					x = buffer[1][0] * size + x + space
 				if self.auto_show: self.show()
 
-	def texts(self, data, space_x=0, space_y=1, x=0, y=0, size=1, color=0xffff):
+	def texts(self, data, space_x=0, space_y=1, x=0, y=0, size=1, color=0xffff, bg_color=0x0):
 		size = max(round(size), 1)
 		lines = data.split('\n')
-		self.fill(0)
+		if self.auto_show: self.fill(bg_color)
 		for line in lines:
 			for char in line:
 				buffer = self._font.chardata(char)
@@ -413,13 +416,13 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 			y = self._font.height * size + y + space_y
 		if self.auto_show: self.show()
 
-	def frame(self, data, delay=500, size=None, color=0xffff):
+	def frame(self, data, delay=500, size=None, color=0xffff, bg_color=0x0):
 		"""Display one frame per character"""
 		if data is not None:
 			if type(data) in [list, tuple]:
 				for dat in data:
 					if type(dat) in [list, bytes, tuple,  bytearray]:
-						self.fill(0)
+						if self.auto_show: self.fill(bg_color)
 						self.set_buffer(dat)
 						self.show()
 						time.sleep_ms(delay)
@@ -430,12 +433,12 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 				for buffer in font_buffer:
 					x=(self.width - buffer[1][0] * size) // 2 
 					y=(self.height - buffer[1][1] * size) // 2 
-					self.fill_rect(x - 1, y - 1, buffer[1][0] * size + 2, buffer[1][1] * size + 2, 0)
+					if self.auto_show: self.fill(bg_color)
 					self.bitmap(buffer, x, y, size, color)
 					self.show()
 					time.sleep_ms(delay) 
 
-	def scroll(self, data, space=0, speed=20, y=None, size=None, step= None, color=0xffff):
+	def scroll(self, data, space=0, speed=20, y=None, size=None, step= None, color=0xffff, bg_color=0x0):
 		"""Scrolling characters"""
 		if data is not None:
 			size = self.height // (self._font.height * 3) if size is None else size
@@ -445,7 +448,7 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 			for i in range(0, font_len - space + self.width, step):
 				x = -i + self.width
 				y = (self.height - self._font.height * size) // 2 if y is None else y
-				self.fill_rect(x - 1 , y - 1 , self.width -x + 2, font_buffer[0][1][1] * size + 2, 0)
+				if self.auto_show: self.fill_rect(x - 2 , y - 2 , self.width -x + 4, font_buffer[0][1][1] * size + 4, bg_color)
 				for buffer in font_buffer:
 					self.bitmap(buffer, x, y, size, color)
 					x = buffer[1][0] * size + x + space
