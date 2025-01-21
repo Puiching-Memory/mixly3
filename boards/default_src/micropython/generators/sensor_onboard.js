@@ -155,7 +155,7 @@ export const sensor_mixgo_LTR308 = function (_, generator) {
 export const sensor_mixgo_sant_color = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
     generator.definitions_['import_' + version + '_onboard_als'] = 'from ' + version + ' import onboard_als';
-    var code = 'onboard_als.coclor()';
+    var code = 'onboard_als.color()';
     return [code, generator.ORDER_ATOMIC];
 }
 
