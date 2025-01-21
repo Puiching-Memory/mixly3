@@ -472,7 +472,7 @@ export const analog_mouse_input = function (_, generator) {
     var wheel = generator.valueToCode(this, 'wheel', generator.ORDER_ATOMIC);
     var re = this.getFieldValue('release');
     generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
-    var code = "hid_mouse(keys=" + key + ",move=(" + x + "," + y + "),wheel=" + wheel + ",release=" + re + ")\n";
+    var code = "onboard_bot.hid_mouse(keys=" + key + ",move=(" + x + "," + y + "),wheel=" + wheel + ",release=" + re + ")\n";
     return code;
 }
 
