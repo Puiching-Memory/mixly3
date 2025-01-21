@@ -194,9 +194,8 @@ class Clock:
     def drawDial(self,color):  #画钟表刻度
         r_tic1 = self.r - 1
         r_tic2 = self.r - 2
-
-        self.display.ellipse(self.xc, self.yc, self.r,self.r, self.color)
-        self.display.ellipse(self.xc, self.yc, 2, 2, self.color,True)
+        self.display.ellipse(self.xc, self.yc, self.r, self.r, color)
+        self.display.ellipse(self.xc, self.yc, 2, 2, color,True)
 
         for h in range(12):
             at = math.pi * 2.0 * h / 12.0
@@ -207,7 +206,6 @@ class Clock:
             self.display.line(x1, y1, x2, y2, color)
 
     def drawHour(self,color):  #画时针
-
         r_hour = int(self.r / 10.0 * 5)
         ah = math.pi * 2.0 * ((self.hour % 12) + self.min / 60.0) / 12.0
         xh = int(self.xc + r_hour * math.sin(ah))
@@ -215,33 +213,31 @@ class Clock:
         self.display.line(self.xc, self.yc, xh, yh, color)
 
     def drawMin(self,color):  #画分针
-
         r_min = int(self.r / 10.0 * 7)
         am = math.pi * 2.0 * self.min / 60.0
-
         xm = round(self.xc + r_min * math.sin(am))
         ym = round(self.yc - r_min * math.cos(am))
         self.display.line(self.xc, self.yc, xm, ym, color)
 
     def drawSec(self,color):  #画秒针
-
         r_sec = int(self.r / 10.0 * 9)
         asec = math.pi * 2.0 * self.sec / 60.0
         xs = round(self.xc + r_sec * math.sin(asec))
         ys = round(self.yc - r_sec * math.cos(asec))
         self.display.line(self.xc, self.yc, xs, ys, color)
 
-    def draw_clock(self):  #画完整钟表
+    def draw_clock(self, bg_color=0):  #画完整钟表
         self.drawDial(self.color)
         self.drawHour(self.color)
         self.drawMin(self.color)
         self.drawSec(self.color)
         self.display.show()
+        self.drawHour(bg_color)
+        self.drawMin(bg_color)
+        self.drawSec(bg_color)
 
-    def clear(self,color=0):  #清除
-        self.drawHour(color)
-        self.drawMin(color)
-        self.drawSec(color)
+    def clear(self, color=0):  #清除
+        self.display.ellipse(self.xc, self.yc, self.r, self.r, color, True)
 
 '''Reclaim memory'''
 gc.collect()
