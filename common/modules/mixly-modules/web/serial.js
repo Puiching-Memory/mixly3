@@ -58,6 +58,8 @@ if (platform === 'win32' && fullPlatform !== 'win10') {
 
 class WebSerial extends Device {
     static {
+        this.type = Device.type;
+
         this.getConfig = function () {
             return Device.getConfig();
         }
