@@ -168,7 +168,7 @@ ZhHans.MSG = {
     catAudio: "音频",
     catNeopixel: "RGB灯",
     catOneWire: "OneWire通信",
-    catBLE: "蓝牙传透",
+    catBLE: "蓝牙透传",
     catBLEC:"蓝牙遥控",
     catBLEKM:"蓝牙键鼠",
     catBLE_HID: "外围设备(从机)",

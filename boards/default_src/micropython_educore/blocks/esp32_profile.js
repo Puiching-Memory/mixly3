@@ -2,7 +2,7 @@ import { Profile } from 'mixly';
 
 const pins = {};
 
-pins["Edu Core"] = {
+pins["mpython"] = {
     description: "MicroPython[EDUCORE Edu Core]",
     digital_pin: Profile.generate(['0-10', '18']),
     input_pin: Profile.generate(['0-10', '18']),

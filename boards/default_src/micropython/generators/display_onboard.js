@@ -22,6 +22,9 @@ export const display_show_image_or_string_delay = function (_, generator) {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var code = "onboard_tft.shows(" + data + ",space = " + space + ',center = ' + op + ")\n";
         return code;
+    }else if (version == "educore"){
+        generator.definitions_['import_' + version + 'oled'] = "from " + version + " import oled";
+        var code = "oled.print(" + data + ',space = ' + space + ',center = ' + op + ")\n";
     }
     generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
     var code = "onboard_matrix.shows(" + data + ',space = ' + space + ',center = ' + op + ")\n";
@@ -30,7 +33,7 @@ export const display_show_image_or_string_delay = function (_, generator) {
 
 export const display_show_frame_string = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    if (version == 'mpython') {
+    if (version == 'mpython' || version == 'educore') {
         generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_oled";
         var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
         var code = "onboard_oled.frame(" + data + ")\n";
@@ -44,16 +47,22 @@ export const display_show_frame_string = function (_, generator) {
 
 export const display_show_frame_string_delay = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var time = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
-    var code = "onboard_matrix.frame(" + data + ',delay = ' + time + ")\n";
+    if (version == 'mpython' || version == 'educore') {
+        generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_oled";
+        var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
+        var code = "onboard_oled.frame(" + data + ',delay = ' + time + ")\n";
+    } else {
+        generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
+        var code = "onboard_matrix.frame(" + data + ',delay = ' + time + ")\n";
+    }
     return code;
 }
 
 export const display_scroll_string = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    if (version == 'mpython') {
+    if (version == 'mpython'|| version == 'educore') {
         generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_oled";
         var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
         var code = "onboard_oled.scroll(" + data + ")\n";
@@ -67,11 +76,16 @@ export const display_scroll_string = function (_, generator) {
 
 export const display_scroll_string_delay = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var time = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
     var space = generator.valueToCode(this, 'space', generator.ORDER_ASSIGNMENT);
-    var code = "onboard_matrix.scroll(" + data + ',speed =' + time + ',space = ' + space + ")\n";
+    if (version == 'mpython'|| version == 'educore') {
+        generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_oled";
+        var code = "onboard_oled.scroll(" + data + ',speed =' + time + ',space = ' + space + ")\n";
+    }else{
+        generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
+        var code = "onboard_matrix.scroll(" + data + ',speed =' + time + ',space = ' + space + ")\n";
+    }
     return code;
 }
 
