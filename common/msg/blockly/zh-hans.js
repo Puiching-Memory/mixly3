@@ -4057,4 +4057,6 @@ ZhHans.MIXLY_AT = '于';
 ZhHans.MIXLY_SMARTCAMERA = '摄像头';
 ZhHans.MIXLY_PROCCED = '进行';
 ZhHans.MIXLY_RECOGNIZED_RESULT = '识别结果';
+ZhHans.MIXLY_WEIGH_SENSOR = '称重传感器';
+ZhHans.MIXLY_Calibration_ratio = '校准比例';
 })();

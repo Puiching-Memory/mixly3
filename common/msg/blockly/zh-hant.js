@@ -3907,4 +3907,7 @@ ZhHant.MIXLY_AT = '於';
 ZhHant.MIXLY_SMARTCAMERA = '攝像頭';
 ZhHant.MIXLY_PROCCED = '進行';
 ZhHant.MIXLY_RECOGNIZED_RESULT = '識別結果';
+Zhhant.MIXLY_RFID_SCAN_OK = '讀到卡';
+Zhhant.MIXLY_RFID_SCAN_NOTAGERR = '卡無反應';
+Zhhant.MIXLY_RFID_SCAN_ERROR = '卡錯誤';
 })();

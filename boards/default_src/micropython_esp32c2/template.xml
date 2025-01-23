@@ -3537,7 +3537,7 @@
         </block>
       </next>
     </block>
-    <block type="sensor_mpu9250_get_acceleration" m-hide='micropython:esp32c3:mixgocar_c3'>
+   <block type="sensor_mpu9250_get_acceleration" m-hide='micropython:esp32c3:mixgocar_c3'>
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
@@ -4050,7 +4050,7 @@
           <field name="VAR">zsensor</field>
         </shadow>
       </value>
-    </block>
+    </block> 
   </category>
   <category id="catExternActuator" colour='#74A55B'>
     <block type="servo_move" m-show='micropython:esp32c3:mixgocar_c3'>

@@ -2202,3 +2202,33 @@ export const camera_sensor_result = {
         this.setInputsInline(true);
     }
 };
+
+export const sensor_weigh_init = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_SETUP + 'HX711/720' + Blockly.Msg.MIXLY_WEIGH_SENSOR);
+        this.appendValueInput('sck')
+            .appendField('#SCK');
+        this.appendValueInput('dat')
+            .appendField('#DAT');
+        this.appendValueInput('pc')
+            .appendField(Blockly.Msg.MIXLY_Calibration_ratio);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip('');
+    }
+};
+
+export const weigh_sensor_get_weight = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_WEIGH_SENSOR)
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.blockpy_set_of + Blockly.Msg.MIXLY_DATA)
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+}

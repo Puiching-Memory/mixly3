@@ -3903,4 +3903,7 @@ En.MIXLY_AT = 'At';
 En.MIXLY_SMARTCAMERA = 'Camera';
 En.MIXLY_PROCCED = 'Proceed';
 En.MIXLY_RECOGNIZED_RESULT = 'Recognition Result';
+En.MIXLY_RFID_SCAN_OK = 'read the card';
+En.MIXLY_RFID_SCAN_NOTAGERR = 'no card response';
+En.MIXLY_RFID_SCAN_ERROR = 'card error';
 })();
