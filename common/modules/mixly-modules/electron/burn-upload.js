@@ -253,7 +253,7 @@ BU.initWithDropdownBox = function (type, startPath) {
         },
         end: function () {
             $('#mixly-loader-div').css('display', 'none');
-            $("#layui-layer-shade" + layerNum).remove();
+            $(`#layui-layer-shade${layerNum}`).remove();
         }
     });
 }

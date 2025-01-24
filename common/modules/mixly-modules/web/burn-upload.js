@@ -423,7 +423,7 @@ BU.burnWithAdafruitEsptool = async (binFile, erase) => {
     statusBarTerminal.addValue("Done!\n");
     BU.burning = true;
     BU.uploading = false;
-    layer.open({
+    const layerNum = layer.open({
         type: 1,
         title: Msg.Lang['shell.burning'] + '...',
         content: $('#mixly-loader-div'),
@@ -462,6 +462,9 @@ BU.burnWithAdafruitEsptool = async (binFile, erase) => {
                     await espStub.port.close();
                 }
             }
+        },
+        end: function () {
+            $(`#layui-layer-shade${layerNum}`).remove();
         }
     });
 }
@@ -595,7 +598,7 @@ BU.uploadByUSB = async (portName) => {
         const data = goog.get(importsMap[key]['__path__']);
         FSWrapper.writeFile(filename, data);
     }
-    layer.open({
+    const layerNum = layer.open({
         type: 1,
         title: Msg.Lang['shell.uploading'] + '...',
         content: $('#mixly-loader-div'),
@@ -641,6 +644,7 @@ BU.uploadByUSB = async (portName) => {
         end: function () {
             $('#mixly-loader-btn').css('display', 'inline-block');
             $('#mixly-loader-div').css('display', 'none');
+            $(`#layui-layer-shade${layerNum}`).remove();
         }
     });
 }
@@ -662,7 +666,7 @@ BU.uploadWithAmpy = (portName) => {
     } else if (Serial.type === 'hid') {
         dataLength = 31;
     }
-    layer.open({
+    const layerNum = layer.open({
         type: 1,
         title: Msg.Lang['shell.uploading'] + '...',
         content: $('#mixly-loader-div'),
@@ -735,6 +739,7 @@ BU.uploadWithAmpy = (portName) => {
         end: function () {
             $('#mixly-loader-btn').css('display', 'inline-block');
             $('#mixly-loader-div').css('display', 'none');
+            $(`#layui-layer-shade${layerNum}`).remove();
         }
     });
 }
@@ -861,13 +866,13 @@ BU.burnWithSpecialBin = () => {
         });
         firmwareMap[firmware.name] = firmware.binFile;
     }
-    LayerExt.open({
+    const layerNum = LayerExt.open({
         title: [Msg.Lang['nav.btn.burn'], '36px'],
         area: ['400px', '160px'],
         max: false,
         min: false,
         content: BU.FILMWARE_LAYER,
-        shade: Mixly.LayerExt.SHADE_ALL,
+        shade: LayerExt.SHADE_ALL,
         resize: false,
         success: function (layero, index) {
             const $select = layero.find('select');
@@ -898,6 +903,9 @@ BU.burnWithSpecialBin = () => {
         beforeEnd: function (layero) {
             layero.find('select').select2('destroy');
             layero.find('button').off();
+        },
+        end: function () {
+            $(`#layui-layer-shade${layerNum}`).remove();
         }
     });
 }
