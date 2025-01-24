@@ -1058,17 +1058,17 @@ export const camera_sensor_result = function (_, generator) {
 }
 
 export const sensor_weigh_init = function (_, generator) {
-    generator.definitions_['import_hx270'] = 'import hx270';
+    generator.definitions_['import_hx270'] = 'import hx720';
     var sck = generator.valueToCode(this, 'sck', generator.ORDER_ATOMIC);
     var dat = generator.valueToCode(this, 'dat', generator.ORDER_ATOMIC);
     var pc = generator.valueToCode(this, 'pc', generator.ORDER_ATOMIC);
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var code = sub + ' = hx270.HX270(' + sck + ', ' + dat + ', ' + pc + ')\n';
+    var code = sub + ' = hx720.HX720(' + sck + ', ' + dat + ', ' + pc + ')\n';
     return code;
 }
 
 export const weigh_sensor_get_weight = function (_, generator) {
-    generator.definitions_['import_hx270'] = 'import hx270';
+    generator.definitions_['import_hx270'] = 'import hx720';
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var code = v + ".read_weight(10)";
     return [code, generator.ORDER_ATOMIC];
