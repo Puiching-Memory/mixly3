@@ -3906,4 +3906,6 @@ En.MIXLY_RECOGNIZED_RESULT = 'Recognition Result';
 En.MIXLY_RFID_SCAN_OK = 'read the card';
 En.MIXLY_RFID_SCAN_NOTAGERR = 'no card response';
 En.MIXLY_RFID_SCAN_ERROR = 'card error';
+En.MIXLY_WEIGH_SENSOR = 'Load cell';
+En.MIXLY_Calibration_ratio = 'Calibration ratio';
 })();
