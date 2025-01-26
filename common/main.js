@@ -98,12 +98,12 @@ LazyLoad.js([
             else if (userAgent.indexOf('Windows NT 5.1') != -1) os = 'winxp';
         } else if (userAgent.includes('Android')) {
             os = 'android';
+        } else if (platform.includes('iphone') || platform.includes('ipad') || platform.includes('ipod')) {
+            os = 'ios';
         } else if (platform.includes('mac')) {
             os = 'darwin';
         } else if (platform.includes('linux')) {
             os = 'linux';
-        } else if (platform.includes('iphone') || platform.includes('ipad')) {
-            os = 'ios';
         }
         return os;
     }
