@@ -96,7 +96,7 @@ LazyLoad.js([
             else if (userAgent.indexOf('Windows NT 6.1') != -1) os = 'win7';
             else if (userAgent.indexOf('Windows NT 6.0') != -1) os = 'winvista';
             else if (userAgent.indexOf('Windows NT 5.1') != -1) os = 'winxp';
-        } else if (userAgent.includes('Android')) {
+        } else if (navigator.serial==undefined) {
             os = 'android';
         } else if (platform.includes('iphone') || platform.includes('ipad') || platform.includes('ipod')) {
             os = 'ios';
