@@ -24,11 +24,11 @@ const platform = goog.platform();
 const fullPlatform = goog.fullPlatform();
 
 if (platform === 'win32' && fullPlatform !== 'win10') {
-    if (BOARD?.web?.devices?.hid) {
+    if (BOARD?.web?.devices?.hid && navigator.hid) {
         Device = HID;
-    } else if (BOARD?.web?.devices?.serial) {
+    } else if (BOARD?.web?.devices?.serial && navigator.serial) {
         Device = SerialPort;
-    } else if (BOARD?.web?.devices?.usb) {
+    } else if (BOARD?.web?.devices?.usb && navigator.usb) {
         if (['BBC micro:bit', 'Mithon CC'].includes(BOARD.boardType)) {
             Device = USB;
         } else {
@@ -42,15 +42,15 @@ if (platform === 'win32' && fullPlatform !== 'win10') {
         Device = USBMini;
     }
 } else {
-    if (BOARD?.web?.devices?.serial) {
+    if (BOARD?.web?.devices?.serial && navigator.serial) {
         Device = SerialPort;
-    } else if (BOARD?.web?.devices?.usb) {
+    } else if (BOARD?.web?.devices?.usb && navigator.usb) {
         if (['BBC micro:bit', 'Mithon CC'].includes(BOARD.boardType)) {
             Device = USB;
         } else {
             Device = USBMini;
         }
-    } else if (BOARD?.web?.devices?.hid) {
+    } else if (BOARD?.web?.devices?.hid && navigator.hid) {
         Device = HID;
     }
 }
