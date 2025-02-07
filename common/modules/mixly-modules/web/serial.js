@@ -35,7 +35,7 @@ if (platform === 'win32' && fullPlatform !== 'win10') {
             Device = USBMini;
         }
     }
-} else if (['android', 'ios'].includes(fullPlatform)) {
+} else if (platform === 'mobile') {
     if (['BBC micro:bit', 'Mithon CC'].includes(BOARD.boardType)) {
         Device = USB;
     } else {

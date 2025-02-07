@@ -77,7 +77,7 @@ LazyLoad.js([
 
     goog.platform = () => {
         const userAgent = navigator.userAgent;
-        if (userAgent.indexOf('Mobile') !== -1) return 'mobile';
+        if (!navigator.serial) return 'mobile';
         if (userAgent.indexOf('Windows NT') !== -1) return 'win32';
         if (userAgent.indexOf('Mac') !== -1) return 'darwin';
         if (userAgent.indexOf('X11') !== -1) return 'linux';
@@ -96,7 +96,7 @@ LazyLoad.js([
             else if (userAgent.indexOf('Windows NT 6.1') != -1) os = 'win7';
             else if (userAgent.indexOf('Windows NT 6.0') != -1) os = 'winvista';
             else if (userAgent.indexOf('Windows NT 5.1') != -1) os = 'winxp';
-        } else if (navigator.serial==undefined) {
+        } else if (!navigator.serial) {
             os = 'android';
         } else if (platform.includes('iphone') || platform.includes('ipad') || platform.includes('ipod')) {
             os = 'ios';
