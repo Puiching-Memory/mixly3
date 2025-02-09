@@ -61,7 +61,8 @@ export const WEATHER_HOUR = {
         this.setInputsInline(true);
         this.setOutput(true);
     }
-}
+};
+
 export const Weather_now = {
     init: function () {
         this.setColour(WEATHER_HUE);
@@ -69,10 +70,10 @@ export const Weather_now = {
             .appendField(Blockly.Msg.MSG.catweather)
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.MIXLY_WEB_DATA_SENIVERSE_GET_WEATHER_NOW, "Weather_now"],
-                [Blockly.Msg.MIXLY_WEB_DATA_SENIVERSE_GET_WEATHER_ALARM, "weather_alarm"],
-                [Blockly.Msg.MIXLY_WEB_DATA_SENIVERSE_GET_AIR_NOW, "air_now"],
-                [Blockly.Msg.MIXLY_WEB_DATA_SENIVERSE_GET_TIDE_DAILY, "tide_daily"],
-                [Blockly.Msg.MIXLY_WEB_PLACE + Blockly.Msg.HTML_SEARCH, "location_search"],
+                [Blockly.Msg.MIXLY_WEB_DATA_SENIVERSE_GET_WEATHER_ALARM, "Weather_alarm"],
+                [Blockly.Msg.MIXLY_WEB_DATA_SENIVERSE_GET_AIR_NOW, "Air_now"],
+                [Blockly.Msg.MIXLY_WEB_DATA_SENIVERSE_GET_TIDE_DAILY, "Tide_daily"],
+                [Blockly.Msg.MIXLY_WEB_PLACE + Blockly.Msg.HTML_SEARCH, "Location_search"],
                 [Blockly.Msg.MIXLY_WEB_DATA_SENIVERSE_GET_LIFE_SUGGESTION, "Life_suggestion"]
             ]), "mode");
         this.appendValueInput('key')
