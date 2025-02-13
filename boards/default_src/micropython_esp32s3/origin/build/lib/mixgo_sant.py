@@ -172,7 +172,6 @@ onboard_led = LED(pins=[45, 46])
 class Voice_Energy:
 	def read(self):
 		_dat = onboard_asr._rreg(0x08, 3) #在语音识别里获取
-		print("-----",_dat)
 		return (_dat[0] | _dat[1] << 8) // 10
 
 onboard_sound = Voice_Energy()
