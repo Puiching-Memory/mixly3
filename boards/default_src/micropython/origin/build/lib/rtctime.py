@@ -30,7 +30,7 @@ def settime(times):
         try:
             val = eval(times)
             if len(val) >= 6:
-                times=(val[0], val[1], val[2], 0, val[3], val[4], val[5], 0) 
+                times=(val[0], val[1], val[2], val[3], val[4], val[5], 0) 
             else:
                 raise ValueError("Clock information format error")
         except:

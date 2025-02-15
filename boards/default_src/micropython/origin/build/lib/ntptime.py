@@ -28,12 +28,12 @@ def settime(times):
         try:
             val = eval(times)
             if len(val) >= 6:
-                times=(val[0], val[1], val[2], 0, val[3], val[4], val[5], 0) 
+                times=(val[0], val[1], val[2], val[3], val[4], val[5], 0) 
             else:
                 raise ValueError("Clock information format error")
         except:
             raise ValueError("Clock information format error, use ',' to separate at least 6 numerical values")
-    if isinstance(times, tuple):
+    if type(times) in (tuple, list):
         if 6 <= len(times) <= 8:
             RTC().datetime((times[0], times[1], times[2], 0, times[3], times[4], times[5], 0))
         else:
