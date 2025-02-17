@@ -20,6 +20,7 @@ class ESPNow(espnow.ESPNow):
         self.active(True)
         self._channel = channel
         self._txpower = txpower
+        self._on_handle = {}
         self._nic = network.WLAN(network.STA_IF) #if version else network.WLAN(network.AP_IF)
         self._nic.active(True)
         self._nic.config(channel=self._channel, txpower=self._txpower)
@@ -77,6 +78,13 @@ class ESPNow(espnow.ESPNow):
                             func(hexlify(data[0]).decode(), data[1].decode())
                     else:
                         func(hexlify(data[0]).decode(), data[1].decode())
+            elif isinstance(self._on_handle, dict):
+                mac = hexlify(data[0]).decode()
+                decoded_msg = str(data[1].decode())
+                if '__all__' in self._on_handle:
+                    self._on_handle['__all__'](mac, decoded_msg)
+                if decoded_msg in self._on_handle:
+                    self._on_handle[decoded_msg](mac, decoded_msg)
             else:
                 self._on_handle(hexlify(data[0]).decode(), data[1].decode())
 
@@ -93,13 +101,23 @@ class ESPNow(espnow.ESPNow):
                             func(hexlify(host).decode(), msg.decode())
                     else:
                         func(hexlify(host).decode(), msg.decode())
+            elif isinstance(self._on_handle, dict):
+                mac = hexlify(host).decode()
+                decoded_msg = str(msg.decode())
+                if '__all__' in self._on_handle:
+                    self._on_handle['__all__'](mac, decoded_msg)
+                if decoded_msg in self._on_handle:
+                    self._on_handle[decoded_msg](mac, decoded_msg)
             else:
                 self._on_handle(hexlify(host).decode(), msg.decode())
 
-    def recv_cb(self, recv_cbs):
+    def recv_cb(self, *args):
         '''Receive callback'''
-        self._on_handle = recv_cbs
-        if recv_cbs:
+        if isinstance(args[0], str):
+            self._on_handle[args[0]] = args[1]
+        else:
+            self._on_handle = args[0]
+        if args[0]:
             if version == 0:
                 self.irq(self._cb_handle0)
             else:

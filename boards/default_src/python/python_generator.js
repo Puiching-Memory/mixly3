@@ -145,20 +145,42 @@ Python.finish = function (code) {
         code = code.replace(/\n/g, '\n');
         code = code.replace(/\n\s+$/, '\n');
     }
-    var definitions = [];
-    for (var name in Python.definitions_) {
-        definitions.push(Python.definitions_[name]);
+    var imports = [];
+    var definitions_var = []; //变量定义
+    var definitions_fun = []; //函数定义
+    for (var name in this.definitions_) {
+        var def = this.definitions_[name];
+        if (name.indexOf('import') === 0) {
+            imports.push(def);
+        } else if (name.indexOf('var_declare') === 0) {
+            definitions_var.push(def);
+        } else {
+            definitions_fun.push(def);
+        }
+    }
+    if (imports.length) {
+        imports.push('\n\n');
+    }
+    if (definitions_var.length) {
+        definitions_var.push('\n\n');
+    }
+    if (definitions_fun.length) {
+        definitions_fun.push('\n\n');
     }
     var functions = [];
     for (var name in Python.functions_) {
         functions.push(Python.functions_[name]);
     }
+    if (functions.length) {
+        functions.push('\n\n');
+    }
     var setups = [];
     for (var name in Python.setups_) {
         setups.push(Python.setups_[name]);
     }
-    if (setups.length !== 0)
-        setups.push('\n');
+    if (setups.length) {
+        setups.push('\n\n');
+    }
     var loops = [];
     for (var name in Python.loops_) {
         loops.push(Python.loops_[name]);
@@ -167,15 +189,15 @@ Python.finish = function (code) {
     for (var name in Python.codeEnd_) {
         codeEnd.push(Python.codeEnd_[name]);
     }
-    if (codeEnd.length !== 0)
+    if (codeEnd.length !== 0) {
         codeEnd.push('\n');
-    // Clean up temporary data.
-    //delete Python.definitions_;
-    //delete Python.functionNames_;
-    //Python.variableDB_.reset();
-    if (loops.length > 0)
-        return definitions.join('\n') + '\n' + functions.join('\n') + '\n' + setups.join('') + '\n' + code + 'while True:\n' + loops.join('') + codeEnd.join('\n');
-    return definitions.join('\n') + '\n' + functions.join('\n') + '\n' + setups.join('') + '\n' + code + codeEnd.join('\n');
+    }
+    if (loops.length > 0) {
+        return imports.join('\n') + definitions_var.join('\n') + definitions_fun.join('\n')
+            + functions.join('\n') + setups.join('') + code + 'while True:\n' + loops.join('') + codeEnd.join('\n');
+    }
+    return imports.join('\n') + definitions_var.join('\n') + definitions_fun.join('\n')
+        + functions.join('\n') + setups.join('') + code + codeEnd.join('\n');
 }
 
 

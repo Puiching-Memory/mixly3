@@ -394,7 +394,7 @@ export const network_espnow_recv_handle = function (block, generator) {
 //radio
 export const espnow_radio_channel = function (block, generator) {
     generator.definitions_['import_radio'] = "import radio";
-    generator.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
+    generator.definitions_['var_declare_ESPNow_radio'] = "ESPNow_radio=radio.ESPNow()";
     var varName = generator.valueToCode(this, 'CHNL', generator.ORDER_ATOMIC);
     var code = "ESPNow_radio.set_channel(channel=" + varName + ")\n";
     return code;
@@ -402,7 +402,7 @@ export const espnow_radio_channel = function (block, generator) {
 
 export const espnow_radio_txpower = function (block, generator) {
     generator.definitions_['import_radio'] = "import radio";
-    generator.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
+    generator.definitions_['var_declare_ESPNow_radio'] = "ESPNow_radio=radio.ESPNow()";
     var power = this.getFieldValue('op');
     var code = "ESPNow_radio.set_channel(txpower=" + power + ")\n";
     return code;
@@ -411,7 +411,7 @@ export const espnow_radio_txpower = function (block, generator) {
 export const espnow_radio_channel_new = function (block, generator) {
     generator.definitions_['import_radio'] = "import radio";
     var varName2 = generator.valueToCode(this, 'DB', generator.ORDER_ATOMIC);
-    generator.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow(channel=1,txpower=" + varName2 + ")";
+    generator.definitions_['var_declare_ESPNow_radio'] = "ESPNow_radio=radio.ESPNow(channel=1,txpower=" + varName2 + ")";
     var varName = generator.valueToCode(this, 'CHNL', generator.ORDER_ATOMIC);
     var code = "ESPNow_radio.set_channel(" + varName + ")\n";
     return code;
@@ -419,7 +419,7 @@ export const espnow_radio_channel_new = function (block, generator) {
 
 export const espnow_radio_on_off = function (block, generator) {
     generator.definitions_['import_radio'] = "import radio";
-    generator.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
+    generator.definitions_['var_declare_ESPNow_radio'] = 'ESPNow_radio = radio.ESPNow()';
     var op = this.getFieldValue('on_off');
     var code = "ESPNow_radio.active(" + op + ")\n";
     return code;
@@ -427,7 +427,7 @@ export const espnow_radio_on_off = function (block, generator) {
 
 export const espnow_radio_send = function (block, generator) {
     generator.definitions_['import_radio'] = "import radio";
-    generator.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
+    generator.definitions_['var_declare_ESPNow_radio'] = 'ESPNow_radio = radio.ESPNow()';
     var varName = generator.valueToCode(this, 'send', generator.ORDER_ATOMIC);
     var code = 'ESPNow_radio.send("ffffffffffff",' + varName + ")\n";
     return code;
@@ -435,7 +435,7 @@ export const espnow_radio_send = function (block, generator) {
 
 export const espnow_radio_rec = function (block, generator) {
     generator.definitions_['import_radio'] = "import radio";
-    generator.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
+    generator.definitions_['var_declare_ESPNow_radio'] = 'ESPNow_radio = radio.ESPNow()';
     var code = "ESPNow_radio.recv()";
     return [code, generator.ORDER_ATOMIC];
 }
@@ -448,7 +448,7 @@ export const espnow_radio_recv_msg = function (block, generator) {
 export const espnow_radio_recv = function (block, generator) {
     generator.definitions_['import_radio'] = "import radio";
     generator.definitions_['import_ubinascii'] = 'import ubinascii';
-    generator.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
+    generator.definitions_['var_declare_ESPNow_radio'] = 'ESPNow_radio = radio.ESPNow()';
     var doCode = generator.statementToCode(block, 'DO') || generator.PASS;
     generator.definitions_['def_ESPNow_radio_recv'] = 'def ESPNow_radio_recv(mac,ESPNow_radio_msg):\n' + doCode;
     generator.definitions_['def_ESPNow_radio_recv_all'] = '_radio_msg_list = []\n' + 'def ESPNow_radio_recv_callback(mac,ESPNow_radio_msg):\n' + '    global _radio_msg_list\n' + '    try: ESPNow_radio_recv(mac,ESPNow_radio_msg)\n' + '    except: pass\n' + '    if str(ESPNow_radio_msg) in _radio_msg_list:\n' + "        eval('radio_recv_' + bytes.decode(ubinascii.hexlify(ESPNow_radio_msg)) + '()')\n";
@@ -504,7 +504,7 @@ var toUTF8Hex = function (str) {
 export const espnow_radio_recv_certain_msg = function (block, generator) {
     generator.definitions_['import_radio'] = "import radio";
     generator.definitions_['import_ubinascii'] = 'import ubinascii';
-    generator.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
+    generator.definitions_['var_declare_ESPNow_radio'] = 'ESPNow_radio = radio.ESPNow()';
     var doCode = generator.statementToCode(block, 'DO') || generator.PASS;
     generator.definitions_['def_ESPNow_radio_recv_all'] = '_radio_msg_list = []\n' + 'def ESPNow_radio_recv_callback(mac,ESPNow_radio_msg):\n' + '    global _radio_msg_list\n' + '    try: ESPNow_radio_recv(mac,ESPNow_radio_msg)\n' + '    except: pass\n' + '    if str(ESPNow_radio_msg) in _radio_msg_list:\n' + "        eval('radio_recv_' + bytes.decode(ubinascii.hexlify(ESPNow_radio_msg)) + '()')\n";
     generator.definitions_['ESPNow_radio_recv_callback'] = "ESPNow_radio.recv_cb(ESPNow_radio_recv_callback)\n";
@@ -517,27 +517,21 @@ export const espnow_radio_recv_certain_msg = function (block, generator) {
 }
 
 export const espnow_radio_recv_new = function (block, generator) {
-    generator.definitions_['import_radio'] = "import radio";
-    generator.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
-    generator.definitions_['ESPNow_radio_handlelist'] = "handle_list=[]";
+    generator.definitions_['import_radio'] = 'import radio';
+    generator.definitions_['var_declare_ESPNow_radio'] = 'ESPNow_radio = radio.ESPNow()';
     var doCode = generator.statementToCode(block, 'DO') || generator.PASS;
-    generator.definitions_['def_ESPNow_radio_recv'] = 'def ESPNow_radio_recv(mac,ESPNow_radio_msg):\n' + doCode;
-    generator.definitions_['ESPNow_radio_handlelist_append'] = 'if not ESPNow_radio_recv in handle_list:\n    handle_list.append(ESPNow_radio_recv)';
-    generator.definitions_['ESPNow_radio_recv_callback'] = "ESPNow_radio.recv_cb(handle_list)\n";
-
+    generator.definitions_['def_ESPNow_radio_recv'] = 'def ESPNow_radio_recv(mac, ESPNow_radio_msg):\n'
+        + `${doCode}\nESPNow_radio.recv_cb("__all__", ESPNow_radio_recv)\n`;
     return '';
 }
 
 export const espnow_radio_recv_certain_msg_new = function (block, generator) {
-    generator.definitions_['import_radio'] = "import radio";
-    generator.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
-    generator.definitions_['ESPNow_radio_handlelist'] = "handle_list=[]";
+    generator.definitions_['import_radio'] = 'import radio';
+    generator.definitions_['var_declare_ESPNow_radio'] = 'ESPNow_radio = radio.ESPNow()';
     var doCode = generator.statementToCode(block, 'DO') || generator.PASS;
     var message = block.getFieldValue('msg');
-    generator.definitions_['def_ESPNow_radio_recv__' + message] = 'def ESPNow_radio_recv__' + message + '(mac,ESPNow_radio_msg):\n' + doCode;
-    generator.definitions_['ESPNow_radio_handlelist_append__' + message] = 'if not ESPNow_radio_recv__' + message + ' in handle_list:\n    handle_list.append(ESPNow_radio_recv__' + message + ')';
-    generator.definitions_['ESPNow_radio_recv_callback__' + message] = "ESPNow_radio.recv_cb(handle_list)\n";
-
+    generator.definitions_['def_ESPNow_radio_recv_' + message] = 'def ESPNow_radio_recv(mac, ESPNow_radio_msg):\n'
+        + `${doCode}\nESPNow_radio.recv_cb("${message}", ESPNow_radio_recv)\n`;
     return '';
 }
 
