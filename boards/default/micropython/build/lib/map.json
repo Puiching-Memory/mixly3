@@ -572,7 +572,7 @@
             "ustruct"
         ],
         "__file__": true,
-        "__size__": 1423,
+        "__size__": 1424,
         "__name__": "ntptime.py"
     },
     "object_picture": {
@@ -690,7 +690,7 @@
             "ustruct"
         ],
         "__file__": true,
-        "__size__": 1559,
+        "__size__": 1556,
         "__name__": "rtctime.py"
     },
     "sc7a20": {
