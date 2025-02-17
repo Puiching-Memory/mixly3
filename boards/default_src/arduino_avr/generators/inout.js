@@ -20,7 +20,7 @@ export const inout_digital_write2 = function (_, generator) {
     var code = "";
     var isVar = true;
     for (var pin of Profile.default.digital) {
-        if (pin[0] === dropdown_pin) {
+        if (pin[1] === dropdown_pin) {
             isVar = false;
             break;
         }
@@ -33,7 +33,7 @@ export const inout_digital_write2 = function (_, generator) {
         }
         generator.setups_['setup_output_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', OUTPUT);';
     }
-    code += 'digitalWrite(' + dropdown_pin + ',' + dropdown_stat + ');\n'
+    code += 'digitalWrite(' + dropdown_pin + ', ' + dropdown_stat + ');\n'
     return code;
 }
 
@@ -47,20 +47,24 @@ export const inout_digital_read = function (_, generator) {
 export const inout_digital_read2 = function (_, generator) {
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var code = "";
-    if (window.isNaN(dropdown_pin) && !(new RegExp("^A([0-9]|10|11|12|13|14|15)$").test(dropdown_pin))) {
+    var isVar = true;
+    for (var pin of Profile.default.digital) {
+        if (pin[1] === dropdown_pin) {
+            isVar = false;
+            break;
+        }
+    }
+    if (isVar) {
         var funcName = 'mixly_digitalRead';
-        var code2 = 'boolean' + ' ' + funcName + '(uint8_t pin) {\n'
+        generator.definitions_[funcName] = 'boolean' + ' ' + funcName + '(uint8_t pin) {\n'
             + '  pinMode(pin, INPUT);\n'
             + '  boolean _return =  digitalRead(pin);\n'
             + '  pinMode(pin, OUTPUT);\n'
             + '  return _return;\n'
             + '}\n';
-        generator.definitions_[funcName] = code2;
         code = 'mixly_digitalRead(' + dropdown_pin + ')';
     } else {
-        if (generator.setups_['setup_output_' + dropdown_pin]) {
-            //存在pinMode已设为output则不再设为input
-        } else {
+        if (!generator.setups_['setup_output_' + dropdown_pin]) {
             generator.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
         }
         if (generator.setups_['setup_setup']) { //解决pullup重复问题
@@ -115,7 +119,7 @@ export const OneButton_interrupt = function (_, generator) {
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
     var dropdown_stat = generator.valueToCode(this, 'STAT', generator.ORDER_ATOMIC);
-    generator.definitions_['var_declare_button' + dropdown_pin] = 'OneButton button' + dropdown_pin + '(' + dropdown_pin + ',' + ((dropdown_stat == 'HIGH') ? 'false' : 'true') + ');';
+    generator.definitions_['var_declare_button' + dropdown_pin] = 'OneButton button' + dropdown_pin + '(' + dropdown_pin + ', ' + ((dropdown_stat == 'HIGH') ? 'false' : 'true') + ');';
     generator.setups_['setup_onebutton_' + dropdown_pin + dropdown_mode] = 'button' + dropdown_pin + '.' + dropdown_mode + '(' + dropdown_mode + dropdown_pin + ');';
     var code = 'button' + dropdown_pin + '.tick();';
     var funcName = dropdown_mode + dropdown_pin;
@@ -131,7 +135,7 @@ export const controls_attachInterrupt = function (_, generator) {
     generator.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT_PULLUP);';
     //var interrupt_pin=digitalPinToInterrupt(dropdown_pin).toString();
     var interrupt_pin = 'digitalPinToInterrupt(' + dropdown_pin + ')';
-    var code = 'attachInterrupt' + '(' + interrupt_pin + ',' + 'attachInterrupt_fun_' + dropdown_mode + '_' + dropdown_pin + ',' + dropdown_mode + ');\n'
+    var code = 'attachInterrupt' + '(' + interrupt_pin + ',' + 'attachInterrupt_fun_' + dropdown_mode + '_' + dropdown_pin + ', ' + dropdown_mode + ');\n'
     var funcName = 'attachInterrupt_fun_' + dropdown_mode + '_' + dropdown_pin;
     var branch = generator.statementToCode(this, 'DO');
     var code2 = 'void' + ' ' + funcName + '() {\n' + branch + '}\n';
@@ -154,7 +158,7 @@ export const controls_attachPinInterrupt = function (_, generator) {
     generator.definitions_['include_PinChangeInterrupt'] = '#include <PinChangeInterrupt.h>';
     generator.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
     //var interrupt_pin=digitalPinToInterrupt(dropdown_pin).toString();
-    var code = 'attachPCINT(digitalPinToPCINT(' + dropdown_pin + '),' + 'attachPinInterrupt_fun_' + dropdown_mode + '_' + dropdown_pin + ',' + dropdown_mode + ');\n'
+    var code = 'attachPCINT(digitalPinToPCINT(' + dropdown_pin + '),' + 'attachPinInterrupt_fun_' + dropdown_mode + '_' + dropdown_pin + ', ' + dropdown_mode + ');\n'
     var funcName = 'attachPinInterrupt_fun_' + dropdown_mode + '_' + dropdown_pin;
     var branch = generator.statementToCode(this, 'DO');
     var code2 = 'void' + ' ' + funcName + '() {\n' + branch + '}\n';
@@ -203,7 +207,7 @@ export const ESP32touchButton = function (_, generator) {
     generator.definitions_['include_ESP32touchButton'] = '#include <ESP32touchButton.h>';
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
-    generator.definitions_['var_declare_button' + dropdown_pin] = 'ESP32touchButton button' + dropdown_pin + '(' + dropdown_pin + ',true);';
+    generator.definitions_['var_declare_button' + dropdown_pin] = 'ESP32touchButton button' + dropdown_pin + '(' + dropdown_pin + ', true);';
     generator.setups_['setup_onebutton_' + dropdown_pin + dropdown_mode] = 'button' + dropdown_pin + '.' + dropdown_mode + '(' + dropdown_mode + dropdown_pin + ');';
     var code = 'button' + dropdown_pin + '.tick();';
     var funcName = dropdown_mode + dropdown_pin;
@@ -236,7 +240,7 @@ export const ADS1015_setGain = function (_, generator) {
     generator.definitions_['include_Wire'] = '#include <Wire.h>';
     generator.definitions_['include_Adafruit_ADS1015'] = '#include <Adafruit_ADS1015.h>';
     generator.definitions_['var_declare_Adafruit_ADS1015_ads'] = 'Adafruit_ADS1015 ads;\n';
-    generator.setups_['setup_ads.begin()'] = 'ads.begin(); \n';
+    generator.setups_['setup_ads.begin()'] = 'ads.begin();\n';
     generator.setups_['setup_ads.setGain'] = 'ads.setGain(' + GAIN + ');';
     var code = '';
     return code;
@@ -258,7 +262,7 @@ export const PCF8591T = function (_, generator) {
     //generator.definitions_['include_Wire'] = '#include <Arduino.h>';
     generator.definitions_['include_PCF8591_h'] = '#include <PCF8591.h>';
     generator.definitions_['var_declare_PCF8591'] = 'PCF8591 pcf8591(0x48);';
-    generator.setups_['setup_pcf8591.begin()'] = 'pcf8591.begin(); \n';
+    generator.setups_['setup_pcf8591.begin()'] = 'pcf8591.begin();\n';
     var dropdown_type = this.getFieldValue('PCF8591T_AIN');
     var code = dropdown_type;
     return [code, generator.ORDER_ATOMIC];

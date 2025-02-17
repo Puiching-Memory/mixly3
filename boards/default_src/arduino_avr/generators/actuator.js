@@ -4,7 +4,7 @@ import { Variables } from 'blockly/core';
 export const servo_move = function (_, generator) {
     var dropdown_pin = this.getFieldValue('PIN');
     var value_degree = generator.valueToCode(this, 'DEGREE', generator.ORDER_ATOMIC);
-    var delay_time = generator.valueToCode(this, 'DELAY_TIME', generator.ORDER_ATOMIC) || '0'
+    var delay_time = generator.valueToCode(this, 'DELAY_TIME', generator.ORDER_ATOMIC) || '0';
     generator.definitions_['include_Servo'] = '#include <Servo.h>';
     generator.definitions_['var_declare_servo' + dropdown_pin] = 'Servo servo_' + dropdown_pin + ';';
     generator.setups_['setup_servo_' + dropdown_pin] = 'servo_' + dropdown_pin + '.attach(' + dropdown_pin + ');';
@@ -157,7 +157,7 @@ export const group_stepper_setup = function (_, generator) {
     var steps = generator.valueToCode(this, 'steps', generator.ORDER_ATOMIC);
     var speed = generator.valueToCode(this, 'speed', generator.ORDER_ATOMIC);
     generator.definitions_['include_Stepper'] = '#include <Stepper.h>';
-    generator.definitions_['var_declare_stepper' + varName] = 'Stepper ' + varName + '(' + steps + ',' + dropdown_pin1 + ',' + dropdown_pin2 + ');';
+    generator.definitions_['var_declare_stepper' + varName] = 'Stepper ' + varName + '(' + steps + ', ' + dropdown_pin1 + ', ' + dropdown_pin2 + ');';
     generator.setups_['setup_stepper' + varName] = varName + '.setSpeed(' + speed + ');';
     return '';
 };
@@ -171,7 +171,7 @@ export const group_stepper_setup2 = function (_, generator) {
     var steps = generator.valueToCode(this, 'steps', generator.ORDER_ATOMIC);
     var speed = generator.valueToCode(this, 'speed', generator.ORDER_ATOMIC);
     generator.definitions_['include_Stepper'] = '#include <Stepper.h>';
-    generator.definitions_['var_declare_stepper' + varName] = 'Stepper ' + varName + '(' + steps + ',' + dropdown_pin1 + ',' + dropdown_pin2 + ',' + dropdown_pin3 + ',' + dropdown_pin4 + ');';
+    generator.definitions_['var_declare_stepper' + varName] = 'Stepper ' + varName + '(' + steps + ', ' + dropdown_pin1 + ', ' + dropdown_pin2 + ', ' + dropdown_pin3 + ', ' + dropdown_pin4 + ');';
     generator.setups_['setup_stepper' + varName] = varName + '.setSpeed(' + speed + ');';
     return '';
 };
@@ -202,7 +202,7 @@ export const display_rgb_init = function (_, generator) {
     var type = this.getFieldValue('TYPE');
     var value_ledcount = generator.valueToCode(this, 'LEDCOUNT', generator.ORDER_ATOMIC);
     generator.definitions_['include_Adafruit_NeoPixel'] = '#include <Adafruit_NeoPixel.h>';
-    generator.definitions_['var_declare_rgb_display' + dropdown_rgbpin] = 'Adafruit_NeoPixel rgb_display_' + dropdown_rgbpin + ' = Adafruit_NeoPixel(' + value_ledcount + ',' + dropdown_rgbpin + ',' + type + ' + NEO_KHZ800);';
+    generator.definitions_['var_declare_rgb_display' + dropdown_rgbpin] = 'Adafruit_NeoPixel rgb_display_' + dropdown_rgbpin + ' = Adafruit_NeoPixel(' + value_ledcount + ', ' + dropdown_rgbpin + ', ' + type + ' + NEO_KHZ800);';
     generator.setups_['setup_rgb_display_begin_' + dropdown_rgbpin] = 'rgb_display_' + dropdown_rgbpin + '.begin();';
     return '';
 };
@@ -231,7 +231,7 @@ export const RGB_color_HSV = function (_, generator) {
     var H = generator.valueToCode(this, 'H', generator.ORDER_ATOMIC);
     var S = generator.valueToCode(this, 'S', generator.ORDER_ATOMIC);
     var V = generator.valueToCode(this, 'V', generator.ORDER_ATOMIC);
-    var code = 'rgb_display_' + dropdown_rgbpin + '.setPixelColor(' + value_led + ' - 1, ' + 'rgb_display_' + dropdown_rgbpin + '.ColorHSV(' + H + ',' + S + ',' + V + '));\n';
+    var code = 'rgb_display_' + dropdown_rgbpin + '.setPixelColor(' + value_led + ' - 1, ' + 'rgb_display_' + dropdown_rgbpin + '.ColorHSV(' + H + ', ' + S + ', ' + V + '));\n';
     return code;
 };
 
@@ -250,25 +250,23 @@ export const display_rgb_rainbow1 = function (_, generator) {
     var wait_time = generator.valueToCode(this, 'WAIT', generator.ORDER_ATOMIC);
     generator.setups_['setup_rgb_display_begin_' + dropdown_rgbpin] = 'rgb_display_' + dropdown_rgbpin + '.begin();\n';
     var funcName2 = 'Wheel';
-    var code2 = 'uint32_t Wheel(byte WheelPos){\n'
-        + '  if(WheelPos < 85){\n'
+    var code2 = 'uint32_t Wheel(byte WheelPos) {\n'
+        + '  if(WheelPos < 85) {\n'
         + '    return rgb_display_' + dropdown_rgbpin + '.Color(WheelPos * 3, 255 - WheelPos * 3, 0);\n'
-        + '  }\n'
-        + '  else if(WheelPos < 170){\n'
+        + '  } else if (WheelPos < 170) {\n'
         + '    WheelPos -= 85;\n'
         + '    return rgb_display_' + dropdown_rgbpin + '.Color(255 - WheelPos * 3, 0, WheelPos * 3);\n'
-        + '  }\n '
-        + '  else{\n'
+        + '  } else {\n'
         + '    WheelPos -= 170;\n'
         + '    return rgb_display_' + dropdown_rgbpin + '.Color(0, WheelPos * 3, 255 - WheelPos * 3);\n'
         + '  }\n'
         + '}\n';
     generator.definitions_[funcName2] = code2;
     var funcName3 = 'rainbow';
-    var code3 = 'void rainbow(uint8_t wait){\n'
+    var code3 = 'void rainbow(uint8_t wait) {\n'
         + '  uint16_t i, j;\n'
-        + '  for(j=0; j<256; j++){\n'
-        + '    for(i=0; i<rgb_display_' + dropdown_rgbpin + '.numPixels(); i++){\n'
+        + '  for(j = 0; j < 256; j++) {\n'
+        + '    for(i = 0; i < rgb_display_' + dropdown_rgbpin + '.numPixels(); i++){\n'
         + '      rgb_display_' + dropdown_rgbpin + '.setPixelColor(i, Wheel((i+j) & 255));\n'
         + '    }\n'
         + '    rgb_display_' + dropdown_rgbpin + '.show();\n'
@@ -284,25 +282,23 @@ export const display_rgb_rainbow2 = function (_, generator) {
     var dropdown_rgbpin = this.getFieldValue('PIN');
     var wait_time = generator.valueToCode(this, 'WAIT', generator.ORDER_ATOMIC);
     var funcName2 = 'Wheel';
-    var code2 = 'uint32_t Wheel(byte WheelPos){\n'
-        + '  if(WheelPos < 85){\n'
+    var code2 = 'uint32_t Wheel(byte WheelPos) {\n'
+        + '  if (WheelPos < 85) {\n'
         + '    return rgb_display_' + dropdown_rgbpin + '.Color(WheelPos * 3, 255 - WheelPos * 3, 0);\n'
-        + '  }\n'
-        + '  else if(WheelPos < 170){\n'
+        + '  } else if (WheelPos < 170) {\n'
         + '    WheelPos -= 85;\n'
         + '    return rgb_display_' + dropdown_rgbpin + '.Color(255 - WheelPos * 3, 0, WheelPos * 3);\n'
-        + '  }\n'
-        + '  else{\n'
+        + '  } else {\n'
         + '    WheelPos -= 170;\n'
         + '    return rgb_display_' + dropdown_rgbpin + '.Color(0, WheelPos * 3, 255 - WheelPos * 3);\n'
         + '  }\n'
         + '}\n';
     generator.definitions_[funcName2] = code2;
     var funcName3 = 'rainbow';
-    var code3 = 'void rainbow(uint8_t wait){\n'
+    var code3 = 'void rainbow(uint8_t wait) {\n'
         + '  uint16_t i, j;\n'
-        + '  for(j=0; j<256; j++){\n'
-        + '    for(i=0; i<rgb_display_' + dropdown_rgbpin + '.numPixels(); i++){\n'
+        + '  for(j = 0; j < 256; j++){\n'
+        + '    for(i = 0; i < rgb_display_' + dropdown_rgbpin + '.numPixels(); i++) {\n'
         + '      rgb_display_' + dropdown_rgbpin + '.setPixelColor(i, Wheel((i+j) & 255));\n'
         + '    }\n'
         + '    rgb_display_' + dropdown_rgbpin + '.show();\n'
@@ -313,8 +309,8 @@ export const display_rgb_rainbow2 = function (_, generator) {
     var funcName4 = 'rainbowCycle';
     var code4 = 'void rainbowCycle(uint8_t wait){\n'
         + '  uint16_t i, j;\n'
-        + '  for(j=0; j<256*5; j++){\n'
-        + '    for(i=0; i< rgb_display_' + dropdown_rgbpin + '.numPixels(); i++){\n'
+        + '  for(j = 0; j < 256 * 5; j++) {\n'
+        + '    for(i = 0; i < rgb_display_' + dropdown_rgbpin + '.numPixels(); i++){\n'
         + '      rgb_display_' + dropdown_rgbpin + '.setPixelColor(i, Wheel(((i * 256 / rgb_display_' + dropdown_rgbpin + '.numPixels()) + j) & 255));\n'
         + '    }\n'
         + '    rgb_display_' + dropdown_rgbpin + '.show();\n'
@@ -331,26 +327,24 @@ export const display_rgb_rainbow3 = function (_, generator) {
     var rainbow_color = generator.valueToCode(this, 'rainbow_color', generator.ORDER_ATOMIC);
     var type = this.getFieldValue('TYPE');
     var funcName2 = 'Wheel';
-    var code2 = 'uint32_t Wheel(byte WheelPos){\n'
-        + '  if(WheelPos < 85){\n'
+    var code2 = 'uint32_t Wheel(byte WheelPos) {\n'
+        + '  if (WheelPos < 85) {\n'
         + '    return rgb_display_' + dropdown_rgbpin + '.Color(WheelPos * 3, 255 - WheelPos * 3, 0);\n'
-        + '  }\n'
-        + '  else if(WheelPos < 170){\n'
+        + '  } else if (WheelPos < 170) {\n'
         + '    WheelPos -= 85;\n'
         + '    return rgb_display_' + dropdown_rgbpin + '.Color(255 - WheelPos * 3, 0, WheelPos * 3);\n'
-        + '  }\n'
-        + '  else{\n'
+        + '  } else {\n'
         + '    WheelPos -= 170;return rgb_display_' + dropdown_rgbpin + '.Color(0, WheelPos * 3, 255 - WheelPos * 3);\n'
         + '  }\n'
         + '}\n';
     generator.definitions_[funcName2] = code2;
     if (type == "normal")
-        var code3 = 'for(int RGB_RAINBOW_i = 0; RGB_RAINBOW_i < rgb_display_' + dropdown_rgbpin + '.numPixels(); RGB_RAINBOW_i++){\n'
+        var code3 = 'for (int RGB_RAINBOW_i = 0; RGB_RAINBOW_i < rgb_display_' + dropdown_rgbpin + '.numPixels(); RGB_RAINBOW_i++) {\n'
             + '  rgb_display_' + dropdown_rgbpin + '.setPixelColor(RGB_RAINBOW_i, Wheel(' + rainbow_color + ' & 255));\n'
             + '}\n'
             + 'rgb_display_' + dropdown_rgbpin + '.show();\n';
     else
-        var code3 = 'for(int RGB_RAINBOW_i = 0; RGB_RAINBOW_i < rgb_display_' + dropdown_rgbpin + '.numPixels(); RGB_RAINBOW_i++){\n'
+        var code3 = 'for (int RGB_RAINBOW_i = 0; RGB_RAINBOW_i < rgb_display_' + dropdown_rgbpin + '.numPixels(); RGB_RAINBOW_i++) {\n'
             + '  rgb_display_' + dropdown_rgbpin + '.setPixelColor(RGB_RAINBOW_i, Wheel(((RGB_RAINBOW_i * 256 / rgb_display_' + dropdown_rgbpin + '.numPixels()) + ' + rainbow_color + ') & 255));\n'
             + '}\n'
             + 'rgb_display_' + dropdown_rgbpin + '.show();\n';
@@ -370,7 +364,7 @@ export const Mixly_motor = function (_, generator) {
     generator.setups_['setup_output_' + PIN1 + PIN2 + '_D_W'] = 'digitalWrite(' + PIN2 + ', LOW);';
     var funcName = 'setMotor';
     var code2 = 'void ' + funcName + '(int dirpin1, int dirpin2, int speedpin, int speed) {\n'
-        + '  digitalWrite(dirpin2,!digitalRead(dirpin1));\n'
+        + '  digitalWrite(dirpin2, !digitalRead(dirpin1));\n'
         + '  if (speed == 0) {\n'
         + '    digitalWrite(dirpin1, LOW);\n'
         + '    analogWrite(speedpin, 0);\n'
@@ -418,24 +412,24 @@ export const voice_module = function (_, generator) {
     var dropdown_voice = this.getFieldValue('VOICE');
     var wait_time = generator.valueToCode(this, 'WAIT', generator.ORDER_ASSIGNMENT) || '0';
     generator.setups_['setup_output_sda'] = 'pinMode(' + dropdown_pin + ', OUTPUT);';
-    var code = 'send_data(' + dropdown_voice + '); //volume control 0xE0-E7;\n';
+    var code = 'send_data(' + dropdown_voice + '); // volume control 0xE0-E7;\n';
     code += 'delay(' + wait_time + ');\n'
     var code2 = 'void send_data(int addr) {\n'
         + '  int i;\n'
         + '  digitalWrite(' + dropdown_pin + ', LOW);\n'
-        + '  delay(3); //>2ms\n'
+        + '  delay(3); // >2ms\n'
         + '  for (i = 0; i < 8; i++) {\n'
         + '    digitalWrite(' + dropdown_pin + ', HIGH);\n'
         + '    if (addr & 1) {\n'
-        + '      delayMicroseconds(2400); //>2400us\n'
+        + '      delayMicroseconds(2400); // >2400us\n'
         + '      digitalWrite(' + dropdown_pin + ', LOW);\n'
         + '      delayMicroseconds(800);\n'
-        + '    } //>800us\n'
+        + '    } // >800us\n'
         + '    else {\n'
-        + '      delayMicroseconds(800); //>800us\n'
+        + '      delayMicroseconds(800); // >800us\n'
         + '      digitalWrite(' + dropdown_pin + ', LOW);\n'
         + '      delayMicroseconds(2400);\n'
-        + '    } //>2400us\n'
+        + '    } // >2400us\n'
         + '    addr >>= 1;\n'
         + '  }\n'
         + '  digitalWrite(' + dropdown_pin + ', HIGH);\n'
@@ -523,7 +517,7 @@ export const AFMotorRun = function (_, generator) {
     var speed = generator.valueToCode(this, 'speed', generator.ORDER_ATOMIC);
     var code = "";
     generator.definitions_['var_declare_motor_' + motorNO] = "AF_DCMotor" + ' motor' + motorNO + '(' + motorNO + ');';
-    code = ' motor' + motorNO + ".setSpeed(" + speed + ");\n" + ' motor' + motorNO + ".run(" + direction + ");\n";
+    code = 'motor' + motorNO + ".setSpeed(" + speed + ");\n" + 'motor' + motorNO + ".run(" + direction + ");\n";
     return code;
 };
 
@@ -532,7 +526,7 @@ export const AFMotorStop = function (_, generator) {
     var motorNO = this.getFieldValue('motor');
     var code = "";
     generator.definitions_['var_declare_motor_' + motorNO] = "AF_DCMotor" + ' motor' + motorNO + '(' + motorNO + ');';
-    code = ' motor' + motorNO + ".setSpeed(0);\n" + ' motor' + motorNO + ".run(RELEASE);\n";
+    code = 'motor' + motorNO + ".setSpeed(0);\n" + 'motor' + motorNO + ".run(RELEASE);\n";
     return code;
 };
 
@@ -688,11 +682,18 @@ export const I2Cmotor = function (_, generator) {
         + 'pwm.setPWMFreq(400);\n'
         + 'Wire.setClock(400000);';
     var code2;
-    code2 = 'void motor(int ID,int SPEED){  //0-7\n'
-        + '    if(SPEED>0){pwm.setPin(ID*2, 0 );pwm.setPin(ID*2+1, (SPEED+1)*16-1);}\n'
-        + '    else if(SPEED==0){pwm.setPin(ID*2, 4095 );pwm.setPin(ID*2+1, 4095);}\n'
-        + '    else if(SPEED<0){pwm.setPin(ID*2, 1-(SPEED+1)*16);pwm.setPin(ID*2+1, 0);}\n'
-        + '    }\n';
+    code2 = 'void motor(int ID, int SPEED) {  // 0-7\n'
+        + '  if(SPEED > 0) {\n'
+        + '    pwm.setPin(ID * 2, 0);\n'
+        + '    pwm.setPin(ID * 2 + 1, (SPEED + 1) * 16 - 1);\n'
+        + '  } else if (SPEED == 0) {\n'
+        + '    pwm.setPin(ID * 2, 4095);\n'
+        + '    pwm.setPin(ID * 2 + 1, 4095);\n'
+        + '  } else if (SPEED < 0) {\n'
+        + '    pwm.setPin(ID * 2, 1 - (SPEED + 1) * 16);\n'
+        + '    pwm.setPin(ID * 2 + 1, 0);\n'
+        + '  }\n'
+        + '}\n';
     generator.definitions_['motor'] = code2;
     var code = 'motor(' + motorNO + ',' + speed + ');\n';
     return code;

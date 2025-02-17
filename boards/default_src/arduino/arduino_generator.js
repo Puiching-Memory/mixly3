@@ -104,7 +104,7 @@ export class ArduinoGenerator extends Blockly.Generator {
         for (let name in this.loops_end_) {
             loopsEnd.push(this.loops_end_[name]);
         }
-        code = 'void loop(){\n'
+        code = 'void loop() {\n'
             + (loopsBegin.length ? ('  ' + loopsBegin.join('\n  ')) : '')
             + code
             + (loopsEnd.length ? ('  ' + loopsEnd.join('\n  ')) : '')
@@ -112,7 +112,7 @@ export class ArduinoGenerator extends Blockly.Generator {
         var allDefs = define.join('\n') + '\n' + imports.join('\n') + '\n\n'
             + definitions_var.join('\n')
             + '\n\n' + definitions_fun.join('\n')
-            + '\n\nvoid setup(){\n  '
+            + '\n\nvoid setup() {\n  '
             + setupsBegin.join('\n  ') + ((setupsBegin.length && (setupsEnd.length || setups.length)) ? '\n  ' : '')
             + setups.join('\n  ') + ((setupsEnd.length && setups.length) ? '\n  ' : '')
             + setupsEnd.join('\n  ') + '\n}' + '\n\n';
