@@ -9,7 +9,6 @@ goog.require('Mixly.DragV');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorBase');
-goog.require('Mixly.EditorMonaco');
 goog.require('Mixly.EditorCode');
 goog.provide('Mixly.EditorMd');
 
@@ -21,7 +20,6 @@ const {
     IdGenerator,
     HTMLTemplate,
     EditorBase,
-    EditorMonaco,
     EditorCode
 } = Mixly;
 
