@@ -587,6 +587,59 @@ export const analog_ble_mouse_send_battery = function (_, generator) {
     return code;
 }
 
+export const analog_ble_keyboard_mouse_init = function (_, generator) {
+    generator.definitions_['import_HID_ble_hid'] = 'from ble_hid import HID';
+    var kname = generator.valueToCode(this, 'kname', generator.ORDER_ATOMIC)
+    var code = 'ble_hid = HID(' + kname + ')\n';
+    return code;
+}
+
+export const ble_keyboard_mouse_get_mac = function (_, generator) {
+    generator.definitions_['import_HID_ble_hid'] = 'from ble_hid import HID';
+    var code = 'ble_hid.mac';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const ble_keyboard_mouse_connect = function (_, generator) {
+    generator.definitions_['import_HID_ble_hid'] = 'from ble_hid import HID';
+    var code = 'ble_hid.is_connected()';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const analog_ble_keyboard_mouse_send_battery = function (_, generator) {
+    var b = generator.valueToCode(this, 'battery', generator.ORDER_ATOMIC);
+    generator.definitions_['import_HID_ble_hid'] = 'from ble_hid import HID';
+    var code = "ble_hid.battery_notify(" + b + ")\n";
+    return code;
+}
+
+export const analog_ble_keyboard_mouse_input = function (_, generator) {
+    var sp = generator.valueToCode(this, 'special', generator.ORDER_ATOMIC);
+    var ge = generator.valueToCode(this, 'general', generator.ORDER_ATOMIC);
+    var re = this.getFieldValue('release');
+    generator.definitions_['import_HID_ble_hid'] = 'from ble_hid import HID';
+    var code = "ble_hid.keyboard_notify(" + sp + "," + ge + "," + re + ")\n";
+    return code;
+}
+
+export const analog_ble_keyboard_mouse_str = function (_, generator) {
+    var str = generator.valueToCode(this, 'str', generator.ORDER_ATOMIC);
+    var t = generator.valueToCode(this, 'time', generator.ORDER_ATOMIC);
+    generator.definitions_['import_HID_ble_hid'] = 'from ble_hid import HID';
+    var code = "ble_hid.keyboard_str(" + str + ",delay=" + t + ")\n";
+    return code;
+}
+
+export const analog_ble_mouse_keyboard_input = function (_, generator) {
+    var key = generator.valueToCode(this, 'key', generator.ORDER_ATOMIC);
+    var x = generator.valueToCode(this, 'x', generator.ORDER_ATOMIC);
+    var y = generator.valueToCode(this, 'y', generator.ORDER_ATOMIC);
+    var wheel = generator.valueToCode(this, 'wheel', generator.ORDER_ATOMIC);
+    var re = this.getFieldValue('release');
+    generator.definitions_['import_HID_ble_hid'] = 'from ble_hid import HID';
+    var code = "ble_hid.mouse_notify(" + key + ",(" + x + "," + y + ")," + wheel + "," + re + ")\n";
+    return code;
+}
 //educore actuator
 export const educore_buzzer = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
