@@ -45,7 +45,7 @@ class ESPNow(espnow.ESPNow):
             elif err.args[1] == 'ESP_ERR_ESPNOW_IF':
                 self._nic.active(True)
             elif err.args[1] == 'ESP_ERR_ESPNOW_NOT_FOUND':
-                super().add_peer(_peer)
+                super().add_peer(_peer, channel=self._channel)
                 return super().send(_peer, str(msg))
             elif err.args[1] == 'ESP_ERR_ESPNOW_NO_MEM':
                 raise OSError("internal ESP-NOW buffers are full")

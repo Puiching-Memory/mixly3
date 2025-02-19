@@ -658,7 +658,7 @@
             "espnow"
         ],
         "__file__": true,
-        "__size__": 5431,
+        "__size__": 5454,
         "__name__": "radio.py"
     },
     "rc522": {
@@ -690,7 +690,7 @@
             "ustruct"
         ],
         "__file__": true,
-        "__size__": 1556,
+        "__size__": 1791,
         "__name__": "rtctime.py"
     },
     "sc7a20": {
