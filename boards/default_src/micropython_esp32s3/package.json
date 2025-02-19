@@ -5,10 +5,10 @@
     "scripts": {
         "serve": "webpack-dev-server --config=webpack.dev.js",
         "build:dev": "webpack --config=webpack.dev.js",
-        "build:prod": "npm run build:examples & npm run build:libraries & webpack --config=webpack.prod.js",
+        "build:prod": "npm run build:examples & webpack --config=webpack.prod.js & npm run build:libraries",
         "build:examples": "node ../../../scripts/build-examples.js -t special",
         "build:examples:ob": "node ../../../scripts/build-examples.js -t special --obfuscate",
-        "build:libraries": "python ../../../scripts/build-libraries.py ./origin/build/lib",
+        "build:libraries": "python ../../../scripts/build-libraries.py ../../default/micropython_esp32s3/build/lib",
         "publish:board": "npm publish --registry https://registry.npmjs.org/"
     },
     "main": "./export.js",
