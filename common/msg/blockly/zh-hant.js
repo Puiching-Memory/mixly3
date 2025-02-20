@@ -3912,4 +3912,5 @@ ZhHant.MIXLY_RFID_SCAN_NOTAGERR = '卡無反應';
 ZhHant.MIXLY_RFID_SCAN_ERROR = '卡錯誤';
 ZhHant.MIXLY_WEIGH_SENSOR = '稱重傳感器';
 ZhHant.MIXLY_Calibration_ratio = '校準比例';
+ZhHant.MIXLY_KEYBOARD_AND_MOUSE = '鍵鼠';
 })();

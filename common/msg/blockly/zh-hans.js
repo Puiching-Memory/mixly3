@@ -4062,4 +4062,5 @@ ZhHans.MIXLY_RFID_SCAN_NOTAGERR = '卡无反应';
 ZhHans.MIXLY_RFID_SCAN_ERROR = '卡错误';
 ZhHans.MIXLY_WEIGH_SENSOR = '称重传感器';
 ZhHans.MIXLY_Calibration_ratio = '校准比例';
+ZhHans.MIXLY_KEYBOARD_AND_MOUSE = '键鼠';
 })();

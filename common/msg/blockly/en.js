@@ -3908,4 +3908,5 @@ En.MIXLY_RFID_SCAN_NOTAGERR = 'no card response';
 En.MIXLY_RFID_SCAN_ERROR = 'card error';
 En.MIXLY_WEIGH_SENSOR = 'Load cell';
 En.MIXLY_Calibration_ratio = 'Calibration ratio';
+En.MIXLY_KEYBOARD_AND_MOUSE = "keyboard and mouse "
 })();
