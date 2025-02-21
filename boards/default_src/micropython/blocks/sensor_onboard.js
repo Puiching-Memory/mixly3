@@ -612,6 +612,20 @@ export const onboard_RTC_get_time_str = {
     }
 };
 
+export const onboard_RTC_get_timetuple_to_str = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendValueInput('CONTENT')
+            .appendField('RTC '+Blockly.Msg.blockpy_USE_TUPLE)
+            .setCheck()
+        this.appendDummyInput()
+            .appendField( Blockly.Msg.MATH_ZHW + Blockly.Msg.MIXLY_GPS_TIME+Blockly.Msg.LANG_MATH_STRING)
+        this.setOutput(true, String);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_RTC_GET_TIME_TOOLTIP);
+    }
+};
+
 export const sensor_LTR308 = {
     init: function () {
         this.setColour(SENSOR_ONBOARD_HUE);
