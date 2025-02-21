@@ -1580,6 +1580,7 @@
             "path",
             "Blockly",
             "Mixly.MFile",
+            "Mixly.Title",
             "Mixly.LayerExt",
             "Mixly.Msg",
             "Mixly.Workspace"

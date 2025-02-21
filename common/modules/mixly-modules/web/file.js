@@ -3,6 +3,7 @@ goog.loadJs('web', () => {
 goog.require('path');
 goog.require('Blockly');
 goog.require('Mixly.MFile');
+goog.require('Mixly.Title');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Workspace');
@@ -51,6 +52,7 @@ File.open = async () => {
                 return;
             }
             File.parseData(extname, await fileInfo.text());
+            Title.updateTitle(obj.name + ' - ' + Title.title);
         } catch (error) {
             console.log(error);
         }
@@ -60,6 +62,7 @@ File.open = async () => {
             let { data, filename } = fileObj;
             const extname = path.extname(filename);
             File.parseData(extname, data);
+            Title.updateTitle(filename + ' - ' + Title.title);
         });
     }
 }
@@ -131,6 +134,7 @@ File.saveAs = async () => {
         }
         File.obj = obj;
         File.save();
+        Title.updateTitle(obj.name + ' - ' + Title.title);
     } catch (error) {
         console.log(error);
     }
@@ -148,12 +152,14 @@ File.new = async () => {
         workspaceToCode = generator.workspaceToCode(blockEditor) || '';
         if (!blocksList.length && workspaceToCode === code) {
             layer.msg(Msg.Lang['代码区已清空'], { time: 1000 });
+            Title.updateTitle(Title.title);
             File.obj = null;
             return;
         }
     } else {
         if (!blocksList.length) {
             layer.msg(Msg.Lang['工作区已清空'], { time: 1000 });
+            Title.updateTitle(Title.title);
             File.obj = null;
             return;
         }
@@ -177,6 +183,7 @@ File.new = async () => {
         blockEditor.scrollCenter();
         Blockly.hideChaff();
         codeEditor.setValue(generator.workspaceToCode(blockEditor) || '', -1);
+        Title.updateTitle(Title.title);
         File.obj = null;
     });
 }
