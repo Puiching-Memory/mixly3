@@ -145,8 +145,8 @@ class Serial {
                 // 如果当前字节是 "_"
                 this.#specialLength_ = 2;
                 this.#special_.push(String.fromCharCode(byte));
-            } else if (byte !== 0x0A) {
-                // 如果当前字节是 "\n"
+            } else if (byte !== 0x0D) {
+                // 如果当前字节不是 "\r"
                 if  (this.#specialLength_) {
                     this.#specialLength_--;
                     this.#special_.push(String.fromCharCode(byte));
