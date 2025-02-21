@@ -1557,7 +1557,7 @@ export const analog_ble_keyboard_mouse_send_battery = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.MIXLY_KEYBOARD_AND_MOUSE);
         this.appendValueInput('battery')
-            .appendField(Blockly.Msg.MIXLY_SEND_KEYBOARD + Blockly.Msg.MIXLY_MOUSE + Blockly.Msg.MIXLY_BELONG + Blockly.Msg.MIXLY_BATTERY + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO);
+            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXLY_BATTERY + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO);
         this.appendDummyInput()
             .appendField('%');
         this.setPreviousStatement(true);

@@ -616,13 +616,12 @@ export const onboard_RTC_get_timetuple_to_str = {
     init: function () {
         this.setColour(SENSOR_ONBOARD_HUE);
         this.appendValueInput('CONTENT')
-            .appendField('RTC '+Blockly.Msg.blockpy_USE_TUPLE)
+            .appendField(Blockly.Msg.MIXLY_GPS_TIME + Blockly.Msg.MIXLY_MICROBIT_TYPE_TUPLE)
             .setCheck()
         this.appendDummyInput()
-            .appendField( Blockly.Msg.MATH_ZHW + Blockly.Msg.MIXLY_GPS_TIME+Blockly.Msg.LANG_MATH_STRING)
+            .appendField( Blockly.Msg.A_TO_B + Blockly.Msg.MIXLY_GPS_TIME + Blockly.Msg.LANG_MATH_STRING)
         this.setOutput(true, String);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.MIXLY_ESP32_RTC_GET_TIME_TOOLTIP);
     }
 };
 
