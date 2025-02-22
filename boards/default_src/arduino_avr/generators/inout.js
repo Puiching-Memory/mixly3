@@ -46,7 +46,7 @@ export const inout_digital_read = function (_, generator) {
 
 export const inout_digital_read2 = function (_, generator) {
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
-    var code = "";
+    var code = 'digitalRead(' + dropdown_pin + ')';
     var isVar = true;
     for (var pin of Profile.default.digital) {
         if (pin[1] === dropdown_pin) {
@@ -54,16 +54,7 @@ export const inout_digital_read2 = function (_, generator) {
             break;
         }
     }
-    if (isVar) {
-        var funcName = 'mixly_digitalRead';
-        generator.definitions_[funcName] = 'boolean' + ' ' + funcName + '(uint8_t pin) {\n'
-            + '  pinMode(pin, INPUT);\n'
-            + '  boolean _return =  digitalRead(pin);\n'
-            + '  pinMode(pin, OUTPUT);\n'
-            + '  return _return;\n'
-            + '}\n';
-        code = 'mixly_digitalRead(' + dropdown_pin + ')';
-    } else {
+    if (!isVar) {
         if (!generator.setups_['setup_output_' + dropdown_pin]) {
             generator.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
         }
@@ -72,7 +63,6 @@ export const inout_digital_read2 = function (_, generator) {
                 delete generator.setups_['setup_input_' + dropdown_pin];
             }
         }
-        code = 'digitalRead(' + dropdown_pin + ')';
     }
     return [code, generator.ORDER_ATOMIC];
 }
