@@ -1652,6 +1652,7 @@
         "require": [
             "Mixly.Serial",
             "Mixly.Registry",
+            "Mixly.Debug",
             "Mixly.Web"
         ],
         "provide": [

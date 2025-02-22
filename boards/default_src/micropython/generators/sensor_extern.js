@@ -179,16 +179,16 @@ export const sensor_use_i2c_init = function (_, generator) {
     } else if (key == 'LTR381RGB') {
         generator.definitions_['import_ltr381rgb'] = 'import ltr381rgb';
         code = v + ' = ltr381rgb.LTR_381RGB(' + iv + ')\n';
-    } else if(key == 'UCS12071'){
+    } else if (key == 'UCS12071') {
         generator.definitions_['import_ucs12071'] = 'import ucs12071';
         code = v + ' = ucs12071.UCS12071(' + iv + ')\n';
-    } else if (key == 'LTR390UV'){
+    } else if (key == 'LTR390UV') {
         generator.definitions_['import_ltr390uv'] = 'import ltr390uv';
-        code = v + ' = ltr390uv.ALS_UVS(' + iv +')\n';
+        code = v + ' = ltr390uv.ALS_UVS(' + iv + ')\n';
     } else if (key == 'HP203X') {
         generator.definitions_['import_hp203x'] = 'import hp203x';
         code = v + ' = hp203x.HP203X(' + iv + ')\n';
-    } else if(key == "SPL06_001"){
+    } else if (key == "SPL06_001") {
         generator.definitions_['import_spl06_001'] = 'import spl06_001';
         code = v + ' = spl06_001.SPL06(' + iv + ')\n';
     } else if (key == 'SHTC3') {
@@ -212,10 +212,10 @@ export const sensor_use_i2c_init = function (_, generator) {
     } else if (key == 'RFID') {
         generator.definitions_['import_rc522'] = 'import rc522';
         code = v + ' = rc522.RC522(' + iv + ')\n';
-    }else if (key == 'CBR817') {
+    } else if (key == 'CBR817') {
         generator.definitions_['import_cbr817'] = 'import cbr817';
         code = v + ' = cbr817.' + key + "(" + iv + ')\n';
-    }else if (key == 'CI130X'){
+    } else if (key == 'CI130X') {
         generator.definitions_['import_ci130x'] = 'import ci130x';
         code = v + ' = ci130x.' + key + "(" + iv + ')\n';
     }
@@ -227,7 +227,7 @@ export const radar_set_DETECTION_THRESHOLD = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var value = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var value2 = generator.valueToCode(this, 'VAR2', generator.ORDER_ATOMIC);
-    var code = sub + '.threshold(' + value +')\n'+sub + '.delay_ms(' + value2 +')\n';
+    var code = sub + '.threshold(' + value + ')\n' + sub + '.delay_ms(' + value2 + ')\n';
     return code;
 }
 
@@ -235,67 +235,67 @@ export const radar_set_DETECTION_THRESHOLD_SANT = function (_, generator) {
     generator.definitions_['import_sant_g2_ext_mmw'] = 'from sant_g2 import ext_mmw';
     var value = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var value2 = generator.valueToCode(this, 'VAR2', generator.ORDER_ATOMIC);
-    var code = 'ext_mmw.threshold(' + value +')\n'+ 'ext_mmw.delay_ms(' + value2 +')\n';
+    var code = 'ext_mmw.threshold(' + value + ')\n' + 'ext_mmw.delay_ms(' + value2 + ')\n';
     return code;
 }
 
-export const interaction_whether_to_interaction = function(_,generator){
+export const interaction_whether_to_interaction = function (_, generator) {
     generator.definitions_['import_cbr817'] = 'import cbr817';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var code = sub+'.result()';
-    return [code,generator.ORDER_ATOMIC];
+    var code = sub + '.result()';
+    return [code, generator.ORDER_ATOMIC];
 }
 
-export const interaction_whether_to_interaction_SANT = function(_,generator){
+export const interaction_whether_to_interaction_SANT = function (_, generator) {
     generator.definitions_['import_sant_g2_ext_mmw'] = 'from sant_g2 import ext_mmw';
     var code = 'ext_mmw.result()';
-    return [code,generator.ORDER_ATOMIC];
+    return [code, generator.ORDER_ATOMIC];
 }
 
-export const CI130X_IDENTIFY_AND_SAVE = function(_,generator){
+export const CI130X_IDENTIFY_AND_SAVE = function (_, generator) {
     generator.definitions_['import_ci130x'] = 'import ci130x';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var code = sub+'.cmd_id()\n';
+    var code = sub + '.cmd_id()\n';
     return code;
 }
 
-export const CI130X_GET_WHETHER_IDENTIFY = function(_,generator){
+export const CI130X_GET_WHETHER_IDENTIFY = function (_, generator) {
     generator.definitions_['import_ci130x'] = 'import ci130x';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var cmd = this.getFieldValue('cmd');
-    var code = sub+'.result('+cmd+')';
-    return [code,generator.ORDER_ATOMIC];
+    var code = sub + '.result(' + cmd + ')';
+    return [code, generator.ORDER_ATOMIC];
 }
 
-export const CI130X_GET_THE_RECOGNIZED_CMD = function(_,generator){
+export const CI130X_GET_THE_RECOGNIZED_CMD = function (_, generator) {
     generator.definitions_['import_ci130x'] = 'import ci130x';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
-    if(key == 'status1'){
-        var code = sub+'.status()[0]';
-    }else if(key == 'status2'){
-        var code = sub+'.status()[1]';
-    }else{
-        var code = sub+'.'+key +'()';
+    if (key == 'status1') {
+        var code = sub + '.status()[0]';
+    } else if (key == 'status2') {
+        var code = sub + '.status()[1]';
+    } else {
+        var code = sub + '.' + key + '()';
     }
-    return [code,generator.ORDER_ATOMIC];
+    return [code, generator.ORDER_ATOMIC];
 }
 
-export const CI130X_BROADCAST = function(_,generator){
+export const CI130X_BROADCAST = function (_, generator) {
     generator.definitions_['import_ci130x'] = 'import ci130x';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
     var star = this.getFieldValue('star');
     var end = this.getFieldValue('end');
-    var code = sub+'.play('+star+','+num+','+end+')\n';
+    var code = sub + '.play(' + star + ',' + num + ',' + end + ')\n';
     return code;
 }
 
-export const CI130X_SET_SYSTEM_CMD = function(_,generator){
+export const CI130X_SET_SYSTEM_CMD = function (_, generator) {
     generator.definitions_['import_ci130x'] = 'import ci130x';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var cmd = this.getFieldValue('cmd');
-    var code = sub+'.sys_cmd('+cmd+')\n';
+    var code = sub + '.sys_cmd(' + cmd + ')\n';
     return code;
 }
 
@@ -350,16 +350,16 @@ export const sensor_ucs12071_extern = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
     generator.definitions_['import_ucs12071'] = 'import ucs12071';
-    if (key == '0'){
+    if (key == '0') {
         var code = sub + '.color()';
     }
-    else if(key == '1'){
+    else if (key == '1') {
         var code = sub + '.color_raw()';
     }
-    else if(key == '2'){
+    else if (key == '2') {
         var code = sub + '.als()';
     }
-    else{
+    else {
         var code = sub + '.ir()';
     }
     return [code, generator.ORDER_ATOMIC];
@@ -964,14 +964,14 @@ export const sensor_weather_solo_rain = function (_, generator) {
 }
 
 
-export const sensor_DS18X20 = function(_, generator){
+export const sensor_DS18X20 = function (_, generator) {
     generator.definitions_['import_DS18X20'] = 'from ds18b20 import DS18X20';
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
-    var code ='DS18X20('+dropdown_pin+').temperature()';
+    var code = 'DS18X20(' + dropdown_pin + ').temperature()';
     return [code, generator.ORDER_ATOMIC];
 };
 
-//educore sensor_extern 
+//educore sensor_extern
 export const educore_body_sensor = function (_, generator) {
     generator.definitions_['import_educore_tsd'] = 'from educore import tsd';
     var pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
@@ -1010,7 +1010,7 @@ export const educore_button_sensor_extern = function (_, generator) {
 export const sensor_read_humiture = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
-    var code = sub+".read()["+key+"]";
+    var code = sub + ".read()[" + key + "]";
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -1024,7 +1024,7 @@ export const educore_ultrasonic_sensor = function (_, generator) {
 export const ultrasonic_sensor_read_distance = function (_, generator) {
     generator.definitions_['import_educore_ultrasonic'] = 'from educore import ultrasonic';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var code = sub+".diatance()";
+    var code = sub + ".diatance()";
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -1046,14 +1046,14 @@ export const camera_sensor_init = function (_, generator) {
     generator.definitions_['import_educore_smartcamera'] = 'from educore import smartcamera';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
-    var code = sub+'.init(' + key + ')';
+    var code = sub + '.init(' + key + ')';
     return [code, generator.ORDER_ATOMIC];
 }
 
 export const camera_sensor_result = function (_, generator) {
     generator.definitions_['import_educore_smartcamera'] = 'from educore import smartcamera';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var code = sub+'.result()';
+    var code = sub + '.result()';
     return [code, generator.ORDER_ATOMIC];
 }
 

@@ -2,12 +2,14 @@ goog.loadJs('web', () => {
 
 goog.require('Mixly.Serial');
 goog.require('Mixly.Registry');
+goog.require('Mixly.Debug');
 goog.require('Mixly.Web');
 goog.provide('Mixly.Web.SerialPort');
 
 const {
     Serial,
     Registry,
+    Debug,
     Web
 } = Mixly;
 
