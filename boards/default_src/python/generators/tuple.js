@@ -290,3 +290,9 @@ export const tuple_totuple = function (_, generator) {
     var str = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC) || '0'
     return ['tuple(' + str + ')', generator.ORDER_ATOMIC];
 }
+
+export const tuple_input = function (_, generator) {
+    var text = this.getFieldValue('CONTENT');
+    var code = '(' + text + ')';
+    return [code, generator.ORDER_ATOMIC];
+}

@@ -1419,7 +1419,7 @@
     <block type="sensor_mixgocar_pin_near_state_change"
     m-show='micropython:esp32c3:mixgocar_c3'></block>
     <block type="sensor_mixgocar_battery_left" m-show='micropython:esp32c3:mixgocar_c3'></block>
- -->
+    -->
     <block type="sensor_mixgo_pin_near_single" m-show='micropython:esp32c2:mixgo_mini'></block>
     <block type="sensor_LTR308" m-show='micropython:esp32c2:mixgo_mini'></block>
     <block type="sensor_eulerangles" m-show="micropython:esp32c2:mixgo_mini"></block>
@@ -1503,8 +1503,8 @@
     </block>
     <block type="onboard_RTC_settime_string">
       <value name="CONTENT">
-        <shadow type="text">
-          <field name="TEXT">2023,1,1,12,0,0</field>
+        <shadow type="tuple_input">
+          <field name="TUPLE">2023,1,1,12,0,0</field>
         </shadow>
       </value>
     </block>
@@ -1524,8 +1524,8 @@
     </block>
     <block type="onboard_RTC_get_timetuple_to_str">
       <value name="CONTENT">
-        <shadow type="math_number">
-          <field name="NUM">2023,1,1,12,0,0</field>
+        <shadow type="tuple_input">
+          <field name="TUPLE">2023,1,1,12,0,0</field>
         </shadow>
       </value>
     </block>

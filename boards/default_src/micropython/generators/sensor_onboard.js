@@ -587,7 +587,7 @@ export const onboard_RTC_get_time_str = function(_,generator){
 export const onboard_RTC_get_timetuple_to_str = function(_,generator){
     generator.definitions_['import_rtctime'] = 'import rtctime';
     var ct = generator.valueToCode(this, 'CONTENT', generator.ORDER_ATOMIC);
-    var code = 'rtctime.strtime(('+ ct +'))';
+    var code = 'rtctime.strtime('+ ct +')';
     return [code, generator.ORDER_ATOMIC];
 }
 

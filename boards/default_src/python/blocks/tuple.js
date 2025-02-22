@@ -720,3 +720,14 @@ export const tuple_totuple = {
         this.setTooltip(Blockly.Msg.MIXLY_PYTHON_TOOLTIP_TOTUPLE);
     }
 };
+
+export const tuple_input = {
+    init: function () {
+        this.setColour(TUPLE_HUE);
+        this.appendDummyInput("")
+            .appendField('(')
+            .appendField(new Blockly.FieldTextInput('0,0,0'),"CONTENT")
+            .appendField(')');
+        this.setOutput(true);
+    }
+};
