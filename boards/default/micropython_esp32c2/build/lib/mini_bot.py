@@ -21,6 +21,7 @@ _BOT035_PGA			= const(0x20)
 _BOT035_KB			= const(0x1C)
 _BOT035_MS			= const(0x20)
 _BOT035_STR			= const(0x24)
+_BOT035_STA			= const(0x25)
 _FONT_W				= const(5)
 _FONT_H				= const(8)
 _LEDS_W				= const(12)
@@ -315,6 +316,10 @@ class BOT035(FrameBuffer):
 				time.sleep_ms(20 + delay)
 		else:
 			print("Warning: Please upgrade the coprocessor firmware to use this feature")
+
+	def hid_keyboard_state(self):
+		state = self._rreg(_BOT035_STA)
+		return bool(state & 0x10), bool(state & 0x20), bool(state & 0x40)
 
 	def hid_mouse(self, keys=0, move=(0, 0), wheel=0, release=True):
 		if self._version:

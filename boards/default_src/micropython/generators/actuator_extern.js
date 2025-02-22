@@ -220,51 +220,51 @@ export const actuator_use_uart_init = function (_, generator) {
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
     var key2 = this.getFieldValue('key2');
-    if (key2=='SYN6288'){
+    if (key2 == 'SYN6288') {
         generator.definitions_['import_syn6288'] = 'import syn6288';
         var code = v + '=syn6288.SYN6288(' + key + ')\n';
         return code;
-    }else if(key2=='NS9300'){
+    } else if (key2 == 'NS9300') {
         generator.definitions_['import_ns9300'] = 'import ns9300';
         var code = v + '=ns9300.NS9300(' + key + ')\n';
         return code;
     }
-    
+
 }
 
-export const player_whether_stop = function(_,generator){
+export const player_whether_stop = function (_, generator) {
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
-    var code = v+'.status('+key+')';
-    return [code,generator.ORDER_ATOMIC];
+    var code = v + '.status(' + key + ')';
+    return [code, generator.ORDER_ATOMIC];
 }
 
-export const player_set_play = function(_,generator){
+export const player_set_play = function (_, generator) {
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
-    var code = v+'.control('+key+')\n';
+    var code = v + '.control(' + key + ')\n';
     return code;
 }
 
-export const player_set_volume = function(_,generator){
+export const player_set_volume = function (_, generator) {
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var vol = generator.valueToCode(this, 'volume', generator.ORDER_ATOMIC);
-    var code = v+'.volume('+vol+')\n';
+    var code = v + '.volume(' + vol + ')\n';
     return code;
 }
 
-export const player_set_mode = function(_,generator){
+export const player_set_mode = function (_, generator) {
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
-    var code = v +'.mode('+key+')\n';
+    var code = v + '.mode(' + key + ')\n';
     return code;
 }
 
-export const player_play_music = function(_,generator){
+export const player_play_music = function (_, generator) {
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
     var s = generator.valueToCode(this, 'song', generator.ORDER_ATOMIC);
-    var code = v +'.'+key+'('+s+')\n';
+    var code = v + '.' + key + '(' + s + ')\n';
     return code;
 }
 
@@ -637,7 +637,7 @@ export const PIN_init = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
     generator.definitions_['import_' + version + 'pin'] = 'from ' + version + ' import pin';
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
-    var code = 'pin('+ dropdown_pin +')';
+    var code = 'pin(' + dropdown_pin + ')';
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -646,7 +646,7 @@ export const pin_led_bright = function (_, generator) {
     var pin = generator.valueToCode(this, 'pin', generator.ORDER_ATOMIC);
     generator.definitions_['import_' + version + 'pin'] = 'from ' + version + ' import pin';
     var bright = generator.valueToCode(this, 'bright', generator.ORDER_ATOMIC);
-    var code = pin+".write_digital(value="  + bright + ")\n";
+    var code = pin + ".write_digital(value=" + bright + ")\n";
     return code;
 }
 
@@ -654,7 +654,7 @@ export const servo_PIN_init = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
     generator.definitions_['import_' + version + 'servo'] = 'from ' + version + ' import servo';
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
-    var code = 'servo('+ dropdown_pin +')';
+    var code = 'servo(' + dropdown_pin + ')';
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -663,7 +663,7 @@ export const servo_move_angle = function (_, generator) {
     generator.definitions_['import_' + version + 'servo'] = 'from ' + version + ' import servo';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var a = generator.valueToCode(this, 'angle', generator.ORDER_ATOMIC);
-    var code = sub+'.angle('+ a +')\n';
+    var code = sub + '.angle(' + a + ')\n';
     return code;
 }
 
@@ -671,7 +671,7 @@ export const parrot_PIN_init = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
     generator.definitions_['import_' + version + 'parrot'] = 'from ' + version + ' import parrot';
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
-    var code = 'parrot('+ dropdown_pin +')';
+    var code = 'parrot(' + dropdown_pin + ')';
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -680,6 +680,6 @@ export const parrot_move_speed = function (_, generator) {
     generator.definitions_['import_' + version + 'parrot'] = 'from ' + version + ' import parrot';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var speed = generator.valueToCode(this, 'speed', generator.ORDER_ATOMIC);
-    var code = sub+'.speed('+ speed +')\n';
+    var code = sub + '.speed(' + speed + ')\n';
     return code;
 }
