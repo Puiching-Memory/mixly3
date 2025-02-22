@@ -726,7 +726,7 @@ export const tuple_input = {
         this.setColour(TUPLE_HUE);
         this.appendDummyInput("")
             .appendField('(')
-            .appendField(new Blockly.FieldTextInput('0,0,0'),"CONTENT")
+            .appendField(new Blockly.FieldTextInput('2020,1,2,3,4,5'),"CONTENT")
             .appendField(')');
         this.setOutput(true);
     }
