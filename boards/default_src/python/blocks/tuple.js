@@ -720,13 +720,24 @@ export const tuple_totuple = {
         this.setTooltip(Blockly.Msg.MIXLY_PYTHON_TOOLTIP_TOTUPLE);
     }
 };
-
+function getCurrentTimeTuple() {
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1; // 月份从 0 开始，所以要加 1
+    var day = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    
+    // 返回元组格式的时间字符串
+    return  year + "," + month + "," + day + "," + hour + "," + minute + "," + second ;
+}
 export const tuple_input = {
     init: function () {
         this.setColour(TUPLE_HUE);
         this.appendDummyInput("")
             .appendField('(')
-            .appendField(new Blockly.FieldTextInput('2020,1,2,3,4,5'),"CONTENT")
+            .appendField(new Blockly.FieldTextInput(getCurrentTimeTuple()),"CONTENT")
             .appendField(')');
         this.setOutput(true);
     }
