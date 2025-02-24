@@ -123,6 +123,8 @@ LazyLoad.js([
             const path = require('path');
             if (inPath.indexOf(window.location.origin) !== -1) {
                 inPath = inPath.replace(window.location.origin, nw.__dirname);
+            } else if (!inPath.indexOf('/')) {
+                inPath = path.resolve(nw.__dirname, './' + inPath);
             } else {
                 let dirPath;
                 if (fs.existsSync(nw.__filename) && fs.statSync(nw.__filename).isFile()) {

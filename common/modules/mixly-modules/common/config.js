@@ -62,7 +62,7 @@ Config.init = () => {
 
     let pathPrefix = '../';
 
-    Config.SOFTWARE = goog.getJSON(path.join(pathPrefix, 'sw-config.json'), SOFTWARE_DEFAULT_CONFIG);
+    Config.SOFTWARE = goog.getJSON(path.join(Env.srcDirPath, 'sw-config.json'), SOFTWARE_DEFAULT_CONFIG);
     Config.pathPrefix = pathPrefix;
 
     Env.hasSocketServer = Config.SOFTWARE?.webSocket?.enabled ? true : false;

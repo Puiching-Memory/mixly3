@@ -13,7 +13,7 @@ const {
     Msg
 } = Mixly;
 
-const { BOARD } = Config;
+const { SELECTED_BOARD } = Config;
 
 
 class Serial {
@@ -43,7 +43,7 @@ class Serial {
         }
 
         this.getConfig = function () {
-            let config = BOARD?.serial ?? {};
+            let config = SELECTED_BOARD?.serial ?? {};
             return {
                 ...this.DEFAULT_CONFIG,
                 ...config

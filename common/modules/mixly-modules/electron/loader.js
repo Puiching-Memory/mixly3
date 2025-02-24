@@ -32,7 +32,7 @@ Loader.onbeforeunload = function(reload = false) {
             window.location.reload(true);
         }
     }
-    let href = Config.pathPrefix + 'index.html?' + Url.jsonToUrl({ boardType: BOARD.boardType ?? 'None' });
+    let href = Env.srcDirPath + '/index.html?' + Url.jsonToUrl({ boardType: BOARD.boardType ?? 'None' });
     let endPromise = [];
     const { mainStatusBarTabs } = Mixly;
     Serial.getCurrentPortsName().map((name) => {
