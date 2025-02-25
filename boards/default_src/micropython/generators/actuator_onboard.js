@@ -83,34 +83,74 @@ export const ledswitch = function (_, generator) {
 export const actuator_led_bright = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
     var op = generator.valueToCode(this, 'led', generator.ORDER_ATOMIC);
-    generator.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
     var bright = generator.valueToCode(this, 'bright', generator.ORDER_ATOMIC);
-    var code = "onboard_led.setonoff(" + op + "," + bright + ")\n";
+    if (version == 'mixgo'){
+        if(op == 1){
+            generator.definitions_['import_' + version + 'led1'] = 'from ' + version + ' import led1';
+            var code = "led1.setonoff(" + bright + ")\n";
+        }else if (op == 2){
+            generator.definitions_['import_' + version + 'led2'] = 'from ' + version + ' import led2';
+            var code = "led2.setonoff("+ bright + ")\n";
+        }
+    }else{
+        generator.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
+        var code = "onboard_led.setonoff(" + op + "," + bright + ")\n";
+    }
     return code;
 }
 
 export const actuator_get_led_bright = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
     var op = generator.valueToCode(this, 'led', generator.ORDER_ATOMIC);
-    generator.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
-    var code = "onboard_led.getbrightness(" + op + ")";
+    if (version == 'mixgo'){
+        if(op == 1){
+            generator.definitions_['import_' + version + 'led1'] = 'from ' + version + ' import led1';
+            var code = "led1.getbrightness()";
+        }else if (op == 2){
+            generator.definitions_['import_' + version + 'led2'] = 'from ' + version + ' import led2';
+            var code = "led2.getbrightness()";
+        }
+    }else{
+        generator.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
+        var code = "onboard_led.getbrightness(" + op + ")";
+    }
     return [code, generator.ORDER_ATOMIC];
 }
 
 export const actuator_get_led_state = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
     var op = generator.valueToCode(this, 'led', generator.ORDER_ATOMIC);
-    generator.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
-    var code = "onboard_led.getonoff(" + op + ")";
+    if (version == 'mixgo'){
+        if(op == 1){
+            generator.definitions_['import_' + version + 'led1'] = 'from ' + version + ' import led1';
+            var code = "led1.getonoff()";
+        }else if (op == 2){
+            generator.definitions_['import_' + version + 'led2'] = 'from ' + version + ' import led2';
+            var code = "led2.getonoff()";
+        }
+    }else{
+        generator.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
+        var code = "onboard_led.getonoff(" + op + ")";
+    }
     return [code, generator.ORDER_ATOMIC];
 }
 
 export const actuator_led_brightness = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
     var op = generator.valueToCode(this, 'led', generator.ORDER_ATOMIC);
-    generator.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
     var flag = generator.valueToCode(this, 'bright', generator.ORDER_ATOMIC);
-    var code = "onboard_led.setbrightness(" + op + "," + flag + ")\n";
+    if (version == 'mixgo'){
+        if(op == 1){
+            generator.definitions_['import_' + version + 'led1'] = 'from ' + version + ' import led1';
+            var code = "led1.setbrightness("+ flag + ")\n";
+        }else if (op == 2){
+            generator.definitions_['import_' + version + 'led2'] = 'from ' + version + ' import led2';
+            var code = "led2.setbrightness("+ flag + ")\n";
+        }
+    }else{
+        generator.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
+        var code = "onboard_led.setbrightness(" + op + "," + flag + ")\n";
+    }
     return code;
 }
 
