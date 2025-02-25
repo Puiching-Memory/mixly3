@@ -1,5 +1,5 @@
 {
-  "name": "Mixly3.0",
+  "name": "Mixly",
   "version": "3.0.0",
   "description": "Mixly，A Visual Program IDE for K12",
   "repository": "",
@@ -9,6 +9,7 @@
   "scripts": {
     "start": "nw .",
     "build:nw:win:x64": "build --tasks win-x64 --mirror https://npmmirror.com/mirrors/nwjs/ .",
+    "build:nw:win:x86": "build --tasks win-x86 --mirror https://npmmirror.com/mirrors/nwjs/ .",
     "build:nw:linux:x64": "build --tasks linux-x64 --mirror https://npmmirror.com/mirrors/nwjs/ .",
     "build:nw:mac:x64": "build --tasks mac-x64 --mirror https://npmmirror.com/mirrors/nwjs/ ."
   },
@@ -23,10 +24,10 @@
   "author": "Mixly TEAM",
   "license": "other",
   "build": {
-    "nwVersion": "0.91.0"
+    "nwVersion": "0.72.0"
   },
   "devDependencies": {
-    "nw": "0.91.0-sdk",
+    "nw": "0.72.0-sdk",
     "nwjs-builder-phoenix": "^1.15.0"
   },
   "dependencies": {
