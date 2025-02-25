@@ -9,7 +9,7 @@
  * @author fraser@google.com (Neil Fraser)
  */
 import * as Blockly from 'blockly/core';
-import Procedures from '../others/procedures';
+import { Variables, Procedures } from 'blockly/core';
 
 export const procedures_defnoreturn = {
     /**
@@ -66,7 +66,6 @@ export const procedures_defnoreturn = {
      * @this {Blockly.Block}
      */
     updateParams_: function () {
-
         // Merge the arguments into a human-readable list.
         var paramString = '';
         if (this.arguments_.length) {
@@ -138,6 +137,58 @@ export const procedures_defnoreturn = {
 
         // Show or hide the statement input.
         this.setStatements_(xmlElement.getAttribute('statements') !== 'false');
+    },
+    /**
+     * Returns the state of this block as a JSON serializable object.
+     *
+     * @returns The state of this block, eg the parameters and statements.
+     */
+    saveExtraState: function () {
+        if (!this.argumentVarModels_.length && this.hasStatements_) {
+            return null;
+        }
+        const state = Object.create(null);
+        if (this.argumentVarModels_.length) {
+            state['params'] = [];
+            for (let i = 0; i < this.argumentVarModels_.length; i++) {
+                state['params'].push({
+                    // We don't need to serialize the name, but just in case we decide
+                    // to separate params from variables.
+                    'name': this.argumentVarModels_[i].name,
+                    'id': this.argumentVarModels_[i].getId(),
+                });
+            }
+        }
+        if (!this.hasStatements_) {
+            state['hasStatements'] = false;
+        }
+        return state;
+    },
+    /**
+     * Applies the given state to this block.
+     *
+     * @param state The state to apply to this block, eg the parameters
+     *     and statements.
+     */
+    loadExtraState: function (state) {
+        this.arguments_ = [];
+        this.argumentVarModels_ = [];
+        if (state['params']) {
+            for (let i = 0; i < state['params'].length; i++) {
+                const param = state['params'][i];
+                const variable = Variables.getOrCreateVariablePackage(
+                    this.workspace,
+                    param['id'],
+                    param['name'],
+                    '',
+                );
+                this.arguments_.push(variable.name);
+                this.argumentVarModels_.push(variable);
+            }
+        }
+        this.updateParams_();
+        Procedures.mutateCallers(this);
+        this.setStatements_(state['hasStatements'] !== false);
     },
     /**
      * Populate the mutator's dialog with this block's components.
@@ -596,7 +647,6 @@ export const procedures_callnoreturn = {
         this.quarkIds_ = null;
         this.previousEnabledState_ = true;
     },
-
     /**
      * Returns the name of the procedure this block calls.
      * @return {string} Procedure name.
@@ -635,52 +685,52 @@ export const procedures_callnoreturn = {
         // Data structures:
         // this.arguments = ['x', 'y']
         //     Existing param names.
-        // this.quarkConnections_ {piua: null, f8b_: Blockly.Connection}
+        // this.quarkConnections_ {piua: null, f8b_: Connection}
         //     Look-up of paramIds to connections plugged into the call block.
         // this.quarkIds_ = ['piua', 'f8b_']
         //     Existing param IDs.
         // Note that quarkConnections_ may include IDs that no longer exist, but
         // which might reappear if a param is reattached in the mutator.
-        var defBlock = Procedures.getDefinition(this.getProcedureCall(),
-            this.workspace);
+        const defBlock = Procedures.getDefinition(
+            this.getProcedureCall(),
+            this.workspace,
+        );
         const mutatorIcon = defBlock && defBlock.getIcon(Blockly.icons.MutatorIcon.TYPE);
-        const mutatorOpen =
-            mutatorIcon && mutatorIcon.bubbleIsVisible();
+        const mutatorOpen = mutatorIcon && mutatorIcon.bubbleIsVisible();
         if (!mutatorOpen) {
             this.quarkConnections_ = {};
             this.quarkIds_ = null;
-        }
-        if (!paramIds) {
-            // Reset the quarks (a mutator is about to open).
-            return;
+        } else {
+            // fix #6091 - this call could cause an error when outside if-else
+            // expanding block while mutating prevents another error (ancient fix)
+            this.setCollapsed(false);
         }
         // Test arguments (arrays of strings) for changes. '\n' is not a valid
         // argument name character, so it is a valid delimiter here.
-        if (paramNames.join('\n') == this.arguments_.join('\n')) {
+        if (paramNames.join('\n') === this.arguments_.join('\n')) {
             // No change.
             this.quarkIds_ = paramIds;
             return;
         }
-        if (paramIds.length != paramNames.length) {
+        if (paramIds.length !== paramNames.length) {
             throw Error('paramNames and paramIds must be the same length.');
         }
-        this.setCollapsed(false);
         if (!this.quarkIds_) {
             // Initialize tracking for this block.
             this.quarkConnections_ = {};
             this.quarkIds_ = [];
         }
-        // Switch off rendering while the block is rebuilt.
-        var savedRendered = this.rendered;
-        this.rendered = false;
         // Update the quarkConnections_ with existing connections.
-        for (var i = 0; i < this.arguments_.length; i++) {
-            var input = this.getInput('ARG' + i);
+        for (let i = 0; i < this.arguments_.length; i++) {
+            const input = this.getInput('ARG' + i);
             if (input) {
-                var connection = input.connection.targetConnection;
+                const connection = input?.connection?.targetConnection;
                 this.quarkConnections_[this.quarkIds_[i]] = connection;
-                if (mutatorOpen && connection &&
-                    paramIds.indexOf(this.quarkIds_[i]) == -1) {
+                if (
+                    mutatorOpen &&
+                    connection &&
+                    !paramIds.includes(this.quarkIds_[i])
+                ) {
                     // This connection should no longer be attached to this block.
                     connection.disconnect();
                     connection.getSourceBlock().bumpNeighbours();
@@ -701,21 +751,17 @@ export const procedures_callnoreturn = {
         this.quarkIds_ = paramIds;
         // Reconnect any child blocks.
         if (this.quarkIds_) {
-            for (var i = 0; i < this.arguments_.length; i++) {
-                var quarkId = this.quarkIds_[i];
+            for (let i = 0; i < this.arguments_.length; i++) {
+                const quarkId = this.quarkIds_[i]; // TODO(#6920)
                 if (quarkId in this.quarkConnections_) {
-                    var connection = this.quarkConnections_[quarkId];
-                    if (connection && !connection.reconnect(this, 'ARG' + i)) {
+                    // TODO(#6920): investigate claimed circular initialisers.
+                    const connection = this.quarkConnections_[quarkId];
+                    if (!connection?.reconnect(this, 'ARG' + i)) {
                         // Block no longer exists or has been attached elsewhere.
                         delete this.quarkConnections_[quarkId];
                     }
                 }
             }
-        }
-        // Restore rendering and show the changes.
-        this.rendered = savedRendered;
-        if (this.rendered) {
-            this.render();
         }
     },
     /**
@@ -797,6 +843,35 @@ export const procedures_callnoreturn = {
             }
         }
         this.setProcedureParameters_(args, paramIds);
+    },
+    /**
+     * Returns the state of this block as a JSON serializable object.
+     *
+     * @returns The state of this block, ie the params and procedure name.
+     */
+    saveExtraState: function () {
+        const state = Object.create(null);
+        state['name'] = this.getProcedureCall();
+        if (this.arguments_.length) {
+            state['params'] = this.arguments_;
+        }
+        return state;
+    },
+    /**
+     * Applies the given state to this block.
+     *
+     * @param state The state to apply to this block, ie the params and
+     *     procedure name.
+     */
+    loadExtraState: function (state) {
+        this.renameProcedure(this.getProcedureCall(), state['name']);
+        const params = state['params'];
+        if (params) {
+            const ids = [];
+            ids.length = params.length;
+            ids.fill(null); // TODO(#6920)
+            this.setProcedureParameters_(params, ids);
+        }
     },
     /**
      * Return all variables referenced by this block.
