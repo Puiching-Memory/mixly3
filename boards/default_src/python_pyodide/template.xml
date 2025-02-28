@@ -1987,6 +1987,7 @@
         </shadow>
       </value>
     </block>
+    <!--
     <block type="turtle_onkey">
       <value name="TUR">
         <shadow type="variables_get">
@@ -2141,6 +2142,7 @@
         </shadow>
       </value>
     </block>
+    -->
 
     <block type="turtle_screen_savefig">
       <value name="TUR">
