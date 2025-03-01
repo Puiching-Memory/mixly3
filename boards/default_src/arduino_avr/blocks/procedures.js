@@ -182,6 +182,7 @@ export const procedures_defnoreturn = {
                     // to separate params from variables.
                     'name': this.argumentVarModels_[i].name,
                     'id': this.argumentVarModels_[i].getId(),
+                    'type': this.argumentstype_[i],
                 });
             }
         }
@@ -198,6 +199,7 @@ export const procedures_defnoreturn = {
      */
     loadExtraState: function (state) {
         this.arguments_ = [];
+        this.argumentstype_ = [];
         this.argumentVarModels_ = [];
         if (state['params']) {
             for (let i = 0; i < state['params'].length; i++) {
@@ -209,6 +211,7 @@ export const procedures_defnoreturn = {
                     '',
                 );
                 this.arguments_.push(variable.name);
+                this.argumentstype_.push(param['type']);
                 this.argumentVarModels_.push(variable);
             }
         }
