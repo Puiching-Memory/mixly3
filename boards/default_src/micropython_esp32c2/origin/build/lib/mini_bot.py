@@ -35,7 +35,7 @@ class BOT035(FrameBuffer):
 		self._buffer = bytearray(12)
 		self._brightness = brightness
 		self._touchs = [self.touch(0), self.touch(1)]
-		self._version = True if self._rreg(0x00) == 0x27 else False
+		self._version = True if self._rreg(0x00) >= 0x27 else False
 		super().__init__(self._buffer, _LEDS_W, _LEDS_H, MONO_VLSB)
 		self.reset()
 		self.show()
@@ -230,6 +230,17 @@ class BOT035(FrameBuffer):
 		'''Read memory address'''
 		self._i2c.writeto(_BOT035_ADDRESS, reg.to_bytes(1, 'little'))
 		return  self._i2c.readfrom(_BOT035_ADDRESS, nbytes)[0]
+
+	def version(self):
+		_ver = self._rreg(0x00)
+		if _ver == 0x26:
+			return "v1.7", "Only supports CDC serial port"
+		elif _ver == 0x27:
+			return "v2.5", "Composite devices (CDC, keyboard and mouse)"
+		elif _ver == 0x28:
+			return "v2.9", "Composite devices (CDC, HID, WEBUSB, Keyboard and mouse)"		
+		else:
+			return "vx.x", "Unknown, awaiting update"
 
 	def reset(self):
 		"""Reset SPK, PWM, HID registers to default state"""
