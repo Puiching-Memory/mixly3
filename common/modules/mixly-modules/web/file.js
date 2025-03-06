@@ -22,19 +22,76 @@ const { MSG } = Blockly.Msg;
 
 const { File } = Web;
 
+const platform = goog.platform();
+
 File.obj = null;
 
+
+
+File.getFileTypes = (filters) => {
+    let fileTypes = [];
+    if (platform === 'mobile') {
+        fileTypes.push({
+            description: 'Mixly File',
+            accept: {
+                'application/octet-stream': filters
+            }
+        });
+    } else {
+        fileTypes.push({
+            description: 'Mixly File',
+            accept: {
+                'application/xml': filters
+            }
+        });
+    }
+    return fileTypes;
+}
+
 File.open = async () => {
-    const filters = '.' + MFile.openFilters.join(',.');
-    MFile.openFile(filters, 'text', (fileObj) => {
-        let { data, filename } = fileObj;
-        const extname = path.extname(filename);
-        File.parseData(extname, data);
-        Title.updateTitle(filename + ' - ' + Title.title);
-    });
+    if (window.location.protocol === 'https:') {
+        let filters = [];
+        MFile.openFilters.map((data) => {
+            filters.push(`.${data}`);
+        });
+        const fileConfig = {
+            multiple: false,
+            types: File.getFileTypes(filters),
+            excludeAcceptAllOption: true,
+            multiple: false,
+        };
+        try {
+            const [ obj ] = await window.showOpenFilePicker(fileConfig);
+            if (!obj) {
+                return;
+            }
+            File.obj = obj;
+            const extname = path.extname(obj.name);
+            const fileInfo = await File.obj.getFile();
+            if (!fileInfo) {
+                return;
+            }
+            File.parseData(extname, await fileInfo.text());
+            Title.updateTitle(`${obj.name} - ${Title.title}`);
+        } catch (error) {
+            console.log(error);
+        }
+    } else {
+        const filters = '.' + MFile.openFilters.join(',.');
+        MFile.openFile(filters, 'text', (fileObj) => {
+            let { data, filename } = fileObj;
+            const extname = path.extname(filename);
+            File.parseData(extname, data);
+            Title.updateTitle(`${filename} - ${Title.title}`);
+        });
+    }
 }
 
 File.parseData = (extname, text) => {
+    const index = extname.indexOf(' ');
+    if (index !== -1) {
+        extname = extname.substring(0, index);
+    }
     if (['.bin', '.hex'].includes(extname)) {
         MFile.loadHex(text);
     } else if (['.mix', '.xml', '.ino', '.py'].includes(extname)) {
@@ -42,7 +99,7 @@ File.parseData = (extname, text) => {
         const editor = mainWorkspace.getEditorsManager().getActive();
         editor.setValue(text, extname);
     } else {
-        layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
+        layer.msg(Msg.Lang['file.type.error'], { time: 1000 });
         File.obj = null;
     }
 }
@@ -58,24 +115,40 @@ File.save = async () => {
     const mainWorkspace = Workspace.getMain();
     const editor = mainWorkspace.getEditorsManager().getActive();
     let text = '';
-    const extname = path.extname(File.obj.name);
-    switch (extname) {
-    case '.mix':
-    case '.xml':
+    let extname = path.extname(File.obj.name);
+    const index = extname.indexOf(' ');
+    if (index !== -1) {
+        extname = extname.substring(0, index);
+    }
+    if (['.mix', '.xml'].includes(extname)) {
         text = editor.getValue();
-        break;
-    case '.ino':
-    case '.py':
+    } else if (['.ino', '.py'].includes(extname)) {
         text = editor.getCode();
-        break;
-    default:
+    } else {
         return;
     }
     try {
-        const writer = await File.obj.createWritable();
+        let currentLayero = null;
+        const loadIndex = layer.msg(Msg.Lang['file.saving'], {
+            icon: 16,
+            shade: 0,
+            time: 0,
+            success: function(layero) {
+                currentLayero = layero;
+            }
+        });
+        const writer = await File.obj.createWritable({
+            keepExistingData: true
+        });
         await writer.write(text);
         await writer.close();
-        layer.msg('写入新数据到' + File.obj.name, { time: 1000 });
+        let $content = currentLayero.children('.layui-layer-content');
+        $content.html(`<i class="layui-layer-face layui-icon layui-icon-success"></i>${Msg.Lang['file.saveSucc']}`);
+        currentLayero = null;
+        $content = null;
+        setTimeout(() => {
+            layer.close(loadIndex);
+        }, 500);
     } catch (error) {
         console.log(error);
     }
@@ -84,15 +157,10 @@ File.save = async () => {
 File.saveAs = async () => {
     let filters = [];
     MFile.saveFilters.map((data) => {
-        filters.push('.' + data.extensions[0]);
+        filters.push(`.${data.extensions[0]}`);
     });
     const fileConfig = {
-        types: [{
-            description: 'Mixly File',
-            accept: {
-                'application/xml': filters
-            }
-        }],
+        types: File.getFileTypes(filters),
         suggestedName: 'mixly.mix'
     };
     try {
@@ -102,7 +170,7 @@ File.saveAs = async () => {
         }
         File.obj = obj;
         File.save();
-        Title.updateTitle(obj.name + ' - ' + Title.title);
+        Title.updateTitle(`${obj.name} - ${Title.title}`);
     } catch (error) {
         console.log(error);
     }
@@ -119,14 +187,14 @@ File.new = async () => {
         const code = codeEditor.getValue(),
         workspaceToCode = generator.workspaceToCode(blockEditor) || '';
         if (!blocksList.length && workspaceToCode === code) {
-            layer.msg(Msg.Lang['代码区已清空'], { time: 1000 });
+            layer.msg(Msg.Lang['editor.codeEditorEmpty'], { time: 1000 });
             Title.updateTitle(Title.title);
             File.obj = null;
             return;
         }
     } else {
         if (!blocksList.length) {
-            layer.msg(Msg.Lang['工作区已清空'], { time: 1000 });
+            layer.msg(Msg.Lang['editor.blockEditorEmpty'], { time: 1000 });
             Title.updateTitle(Title.title);
             File.obj = null;
             return;
@@ -141,7 +209,7 @@ File.new = async () => {
             classList.remove('layui-layer-close2');
             classList.add('layui-layer-close1');
         },
-        btn: [MSG['newfile_yes'], MSG['newfile_no']],
+        btn: [Msg.Lang['nav.btn.ok'], Msg.Lang['nav.btn.cancel']],
         btn2: (index, layero) => {
             layer.close(index);
         }
@@ -154,22 +222,6 @@ File.new = async () => {
         Title.updateTitle(Title.title);
         File.obj = null;
     });
-}
-
-File.saveCode = () => {
-
-}
-
-File.saveMix = () => {
-
-}
-
-File.saveImg = () => {
-
-}
-
-File.saveHex = () => {
-
 }
 
 });

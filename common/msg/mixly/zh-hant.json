@@ -349,6 +349,7 @@
     "file.exportAs": "匯出庫",
     "file.saveFailed": "儲存失敗",
     "file.saveSucc": "儲存成功",
+    "file.saving": "正在保存...",
     "file.notExist": "檔案不存在",
     "toolboxSearcher.search": "查找",
     "toolboxSearcher.empty": "無資料",
