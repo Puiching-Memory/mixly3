@@ -125,7 +125,8 @@ File.saveAs = async () => {
             accept: {
                 'application/xml': filters
             }
-        }]
+        }],
+        suggestedName: 'mixly.mix'
     };
     try {
         const obj = await window.showSaveFilePicker(fileConfig);
