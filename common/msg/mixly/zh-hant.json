@@ -389,5 +389,10 @@
     "libManager.empty": "無資料",
     "wiki.home": "首頁",
     "wiki.pageNotFound": "未找到Wiki頁",
-    "wiki.open": "開啟Wiki"
+    "wiki.open": "開啟Wiki",
+    "layer.devices.serial": "新增Serial裝置",
+    "layer.devices.hid": "新增HID裝置",
+    "layer.devices.usb": "新增USB裝置",
+    "layer.devices.select": "選擇裝置",
+    "burn.notSupport": "無法使用此設備燒錄固件"
 }

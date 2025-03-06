@@ -1,14 +1,12 @@
 goog.loadJs('web', () => {
 
 goog.require('Mixly.Serial');
-goog.require('Mixly.Registry');
 goog.require('Mixly.Debug');
 goog.require('Mixly.Web');
 goog.provide('Mixly.Web.SerialPort');
 
 const {
     Serial,
-    Registry,
     Debug,
     Web
 } = Mixly;
@@ -17,8 +15,6 @@ const {
 class WebSerialPort extends Serial {
     static {
         this.type = 'serialport';
-        this.portToNameRegistry = new Registry();
-        this.nameToPortRegistry = new Registry();
 
         this.getConfig = function () {
             return Serial.getConfig();
@@ -33,11 +29,7 @@ class WebSerialPort extends Serial {
         }
 
         this.refreshPorts = function () {
-            let portsName = [];
-            for (let name of this.nameToPortRegistry.keys()) {
-                portsName.push({ name });
-            }
-            Serial.renderSelectBox(portsName);
+            Serial.refreshPorts();;
         }
 
         this.requestPort = async function () {
@@ -47,7 +39,7 @@ class WebSerialPort extends Serial {
         }
 
         this.getPort = function (name) {
-            return this.nameToPortRegistry.getItem(name);
+            return Serial.nameToPortRegistry.getItem(name);
         }
 
         this.addPort = function (serialport) {
@@ -57,25 +49,25 @@ class WebSerialPort extends Serial {
             let name = '';
             for (let i = 1; i <= 20; i++) {
                 name = `serial${i}`;
-                if (this.nameToPortRegistry.hasKey(name)) {
+                if (Serial.nameToPortRegistry.hasKey(name)) {
                     continue;
                 }
                 break;
             }
-            this.portToNameRegistry.register(serialport, name);
-            this.nameToPortRegistry.register(name, serialport);
+            Serial.portToNameRegistry.register(serialport, name);
+            Serial.nameToPortRegistry.register(name, serialport);
         }
 
         this.removePort = function (serialport) {
-            if (!this.portToNameRegistry.hasKey(serialport)) {
+            if (!Serial.portToNameRegistry.hasKey(serialport)) {
                 return;
             }
-            const name = this.portToNameRegistry.getItem(serialport);
+            const name = Serial.portToNameRegistry.getItem(serialport);
             if (!name) {
                 return;
             }
-            this.portToNameRegistry.unregister(serialport);
-            this.nameToPortRegistry.unregister(name);
+            Serial.portToNameRegistry.unregister(serialport);
+            Serial.nameToPortRegistry.unregister(name);
         }
 
         this.addEventsListener = function () {

@@ -840,6 +840,7 @@
         "require": [
             "Mixly.Config",
             "Mixly.Events",
+            "Mixly.Registry",
             "Mixly.Nav",
             "Mixly.Msg"
         ],
@@ -1626,7 +1627,6 @@
         "path": "/web/hid.js",
         "require": [
             "Mixly.Serial",
-            "Mixly.Registry",
             "Mixly.Web"
         ],
         "provide": [
@@ -1636,8 +1636,14 @@
     {
         "path": "/web/serial.js",
         "require": [
+            "path",
             "Mixly.Config",
             "Mixly.Env",
+            "Mixly.Msg",
+            "Mixly.Registry",
+            "Mixly.Serial",
+            "Mixly.LayerExt",
+            "Mixly.HTMLTemplate",
             "Mixly.Web.SerialPort",
             "Mixly.Web.USB",
             "Mixly.Web.USBMini",
@@ -1651,7 +1657,6 @@
         "path": "/web/serialport.js",
         "require": [
             "Mixly.Serial",
-            "Mixly.Registry",
             "Mixly.Debug",
             "Mixly.Web"
         ],

@@ -389,5 +389,10 @@
     "libManager.empty": "No data",
     "wiki.home": "Homepage",
     "wiki.pageNotFound": "Wiki page not found",
-    "wiki.open": "Open Wiki"
+    "wiki.open": "Open Wiki",
+    "layer.devices.serial": "Add Serial device",
+    "layer.devices.hid": "Add HID device",
+    "layer.devices.usb": "Add USB device",
+    "layer.devices.select": "Select device",
+    "burn.notSupport": "Unable to flash firmware with this device"
 }

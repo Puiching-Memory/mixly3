@@ -2,6 +2,7 @@ goog.loadJs('common', () => {
 
 goog.require('Mixly.Config');
 goog.require('Mixly.Events');
+goog.require('Mixly.Registry');
 goog.require('Mixly.Nav');
 goog.require('Mixly.Msg');
 goog.provide('Mixly.Serial');
@@ -9,6 +10,7 @@ goog.provide('Mixly.Serial');
 const {
     Config,
     Events,
+    Registry,
     Nav,
     Msg
 } = Mixly;
@@ -19,6 +21,8 @@ const { SELECTED_BOARD } = Config;
 class Serial {
     static {
         this.portsName = [];
+        this.portToNameRegistry = new Registry();
+        this.nameToPortRegistry = new Registry();
         this.DEFAULT_CONFIG = {
             ctrlCBtn: false,
             ctrlDBtn: false,
@@ -40,6 +44,14 @@ class Serial {
 
         this.getCurrentPortsName = function () {
             return this.portsName;
+        }
+
+        this.refreshPorts = function () {
+            let portsName = [];
+            for (let name of Serial.nameToPortRegistry.keys()) {
+                portsName.push({ name });
+            }
+            Serial.renderSelectBox(portsName);
         }
 
         this.getConfig = function () {

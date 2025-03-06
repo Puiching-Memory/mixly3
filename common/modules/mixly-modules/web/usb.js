@@ -15,9 +15,7 @@ const {
 class USB extends Serial {
     static {
         this.type = 'usb';
-        this.portToNameRegistry = new Registry();
         this.serialNumberToNameRegistry = new Registry();
-        this.nameToPortRegistry = new Registry();
 
         this.getConfig = function () {
             return Serial.getConfig();
@@ -32,11 +30,7 @@ class USB extends Serial {
         }
 
         this.refreshPorts = function () {
-            let portsName = [];
-            for (let name of this.nameToPortRegistry.keys()) {
-                portsName.push({ name });
-            }
-            Serial.renderSelectBox(portsName);
+            Serial.refreshPorts();;
         }
 
         this.requestPort = async function () {
@@ -48,11 +42,11 @@ class USB extends Serial {
         }
 
         this.getPort = function (name) {
-            return this.nameToPortRegistry.getItem(name);
+            return Serial.nameToPortRegistry.getItem(name);
         }
 
         this.addPort = function (device) {
-            if (this.portToNameRegistry.hasKey(device)) {
+            if (Serial.portToNameRegistry.hasKey(device)) {
                 return;
             }
             const { serialNumber } = device;
@@ -60,27 +54,27 @@ class USB extends Serial {
             if (!name) {
                 for (let i = 1; i <= 20; i++) {
                     name = `usb${i}`;
-                    if (this.nameToPortRegistry.hasKey(name)) {
+                    if (Serial.nameToPortRegistry.hasKey(name)) {
                         continue;
                     }
                     break;
                 }
                 this.serialNumberToNameRegistry.register(serialNumber, name);
             }
-            this.portToNameRegistry.register(device, name);
-            this.nameToPortRegistry.register(name, device);
+            Serial.portToNameRegistry.register(device, name);
+            Serial.nameToPortRegistry.register(name, device);
         }
 
         this.removePort = function (device) {
-            if (!this.portToNameRegistry.hasKey(device)) {
+            if (!Serial.portToNameRegistry.hasKey(device)) {
                 return;
             }
-            const name = this.portToNameRegistry.getItem(device);
+            const name = Serial.portToNameRegistry.getItem(device);
             if (!name) {
                 return;
             }
-            this.portToNameRegistry.unregister(device);
-            this.nameToPortRegistry.unregister(name);
+            Serial.portToNameRegistry.unregister(device);
+            Serial.nameToPortRegistry.unregister(name);
         }
 
         this.addEventsListener = function () {

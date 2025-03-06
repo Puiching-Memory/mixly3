@@ -389,5 +389,10 @@
     "libManager.empty": "无数据",
     "wiki.home": "首页",
     "wiki.pageNotFound": "未找到Wiki页",
-    "wiki.open": "打开Wiki"
+    "wiki.open": "打开Wiki",
+    "layer.devices.serial": "添加Serial设备",
+    "layer.devices.hid": "添加HID设备",
+    "layer.devices.usb": "添加USB设备",
+    "layer.devices.select": "选择设备",
+    "burn.notSupport": "无法使用此设备烧录固件"
 }

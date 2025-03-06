@@ -249,11 +249,15 @@ BU.burnWithEsptool = async (binFile, erase) => {
             return;
         }
     }
+    const port = Serial.getPort(portName);
+    if (port instanceof window.HIDDevice || port instanceof window.USBDevice) {
+        layer.msg(Msg.Lang['burn.notSupport'], { time: 1000 });
+        return;
+    }
     const statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
     if (statusBarSerial) {
         await statusBarSerial.close();
     }
-    const port = Serial.getPort(portName);
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.setValue(Msg.Lang['shell.burning'] + '...\n');
     mainStatusBarTabs.show();
@@ -365,11 +369,15 @@ BU.burnWithAdafruitEsptool = async (binFile, erase) => {
             return;
         }
     }
+    const port = Serial.getPort(portName);
+    if (port instanceof window.HIDDevice || port instanceof window.USBDevice) {
+        layer.msg(Msg.Lang['burn.notSupport'], { time: 1000 });
+        return;
+    }
     const statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
     if (statusBarSerial) {
         await statusBarSerial.close();
     }
-    const port = Serial.getPort(portName);
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.setValue(Msg.Lang['shell.burning'] + '...\n');
     mainStatusBarTabs.show();

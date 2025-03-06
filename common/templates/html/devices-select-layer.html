@@ -1,0 +1,42 @@
+<style>
+    div[m-id="{{d.mId}}"] {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 5px;
+    }
+
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > button {
+        color: #000;
+    }
+
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > button[disabled] {
+        color: #ccc;
+    }
+
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > button:hover,
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > button:active {
+        background-color: var(--app-light-color);
+        color: #fff;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > button {
+        color: #fff;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > button[disabled] {
+        color: #777;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > button:hover,
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > button:active {
+        background-color: var(--app-dark-color);
+        color: #fff;
+    }
+</style>
+<div m-id="{{d.mId}}" class="page-item list-group">
+    <button type="button" m-id="serial" class="list-group-item list-group-item-action m-btn" {{d.serialStatus}}>{{d.serialMsg}}</button>
+    <button type="button" m-id="hid" class="list-group-item list-group-item-action m-btn" {{d.hidStatus}}>{{d.hidMsg}}</button>
+    <button type="button" m-id="usb" class="list-group-item list-group-item-action m-btn" {{d.usbStatus}}>{{d.usbMsg}}</button>
+</div>
