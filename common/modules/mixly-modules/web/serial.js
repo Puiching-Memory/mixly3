@@ -113,11 +113,11 @@ class WebSerial extends Serial {
         }
 
         this.getHandler = function (device) {
-            if (device instanceof window.SerialPort) {
+            if (device.constructor.name === 'SerialPort') {
                 return SerialPort;
-            } else if (device instanceof window.HIDDevice) {
+            } else if (device.constructor.name === 'HIDDevice') {
                 return HID;
-            } else if (device instanceof window.USBDevice) {
+            } else if (device.constructor.name === 'USBDevice') {
                 if (this.devicesRegistry.hasKey('usbmini')) {
                     return USBMini;
                 } else {
