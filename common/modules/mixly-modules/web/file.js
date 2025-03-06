@@ -25,46 +25,13 @@ const { File } = Web;
 File.obj = null;
 
 File.open = async () => {
-    if (window.location.protocol === 'https:') {
-        let filters = [];
-        MFile.openFilters.map((data) => {
-            filters.push('.' + data);
-        });
-        const fileConfig = {
-            multiple: false,
-            types: [{
-                description: 'Mixly File',
-                accept: {
-                    'application/xml': filters
-                }
-            }],
-            suggestedStartLocation: 'pictures-library'
-        };
-        try {
-            const [ obj ] = await window.showOpenFilePicker(fileConfig);
-            if (!obj) {
-                return;
-            }
-            File.obj = obj;
-            const extname = path.extname(obj.name);
-            const fileInfo = await File.obj.getFile();
-            if (!fileInfo) {
-                return;
-            }
-            File.parseData(extname, await fileInfo.text());
-            Title.updateTitle(obj.name + ' - ' + Title.title);
-        } catch (error) {
-            console.log(error);
-        }
-    } else {
-        const filters = '.' + MFile.openFilters.join(',.');
-        MFile.openFile(filters, 'text', (fileObj) => {
-            let { data, filename } = fileObj;
-            const extname = path.extname(filename);
-            File.parseData(extname, data);
-            Title.updateTitle(filename + ' - ' + Title.title);
-        });
-    }
+    const filters = '.' + MFile.openFilters.join(',.');
+    MFile.openFile(filters, 'text', (fileObj) => {
+        let { data, filename } = fileObj;
+        const extname = path.extname(filename);
+        File.parseData(extname, data);
+        Title.updateTitle(filename + ' - ' + Title.title);
+    });
 }
 
 File.parseData = (extname, text) => {
