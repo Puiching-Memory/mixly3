@@ -239,7 +239,14 @@ class App extends Component {
             id: 'command-burn-btn',
             displayText: Msg.Lang['nav.btn.burn'],
             preconditionFn: () => {
-                return SELECTED_BOARD?.nav?.burn;
+                if (goog.isElectron || Env.hasSocketServer) {
+                    return SELECTED_BOARD?.nav?.burn;
+                }
+                if (Serial.devicesRegistry.hasKey('serial')) {
+                    return SELECTED_BOARD?.nav?.burn;
+                } else {
+                    return false;
+                }
             },
             callback: () => BU.initBurn(),
             scopeType: Nav.Scope.LEFT,

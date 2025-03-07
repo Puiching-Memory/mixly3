@@ -250,7 +250,7 @@ BU.burnWithEsptool = async (binFile, erase) => {
         }
     }
     const port = Serial.getPort(portName);
-    if (port instanceof window.HIDDevice || port instanceof window.USBDevice) {
+    if (['HIDDevice', 'USBDevice'].includes(port.constructor.name)) {
         layer.msg(Msg.Lang['burn.notSupport'], { time: 1000 });
         return;
     }
@@ -370,7 +370,7 @@ BU.burnWithAdafruitEsptool = async (binFile, erase) => {
         }
     }
     const port = Serial.getPort(portName);
-    if (port instanceof window.HIDDevice || port instanceof window.USBDevice) {
+    if (['HIDDevice', 'USBDevice'].includes(port.constructor.name)) {
         layer.msg(Msg.Lang['burn.notSupport'], { time: 1000 });
         return;
     }
