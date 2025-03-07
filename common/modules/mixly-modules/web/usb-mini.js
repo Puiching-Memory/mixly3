@@ -109,6 +109,7 @@ class USBMini extends Serial {
     #endpointIn_ = null;
     #endpointOut_ = null;
     #interfaceNumber_ = 0;
+    #dataLength_ = 64;
     constructor(port) {
         super(port);
     }
@@ -178,7 +179,7 @@ class USBMini extends Serial {
         const portsName = Serial.getCurrentPortsName();
         const currentPortName = this.getPortName();
         if (!portsName.includes(currentPortName)) {
-            throw new Error('无可用串口');
+            throw new Error('no device available');
         }
         if (this.isOpened()) {
             return;
@@ -237,11 +238,17 @@ class USBMini extends Serial {
     }
 
     async sendBuffer(buffer) {
-        if (typeof buffer.unshift === 'function') {
-            // buffer.unshift(buffer.length);
-            buffer = new Uint8Array(buffer).buffer;
+        if (buffer.constructor.name !== 'Uint8Array') {
+            buffer = new Uint8Array(buffer);
         }
-        return this.#write_(buffer);
+        const len = Math.ceil(buffer.length / this.#dataLength_);
+        for (let i = 0; i < len; i++) {
+            const start = i * this.#dataLength_;
+            const end = Math.min((i + 1) * this.#dataLength_, buffer.length);
+            const writeBuffer = buffer.slice(start, end);
+            await this.#write_(writeBuffer)
+            await this.sleep(5);
+        }
     }
 
     async setDTRAndRTS(dtr, rts) {

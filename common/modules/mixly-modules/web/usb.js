@@ -145,7 +145,7 @@ class USB extends Serial {
         const portsName = Serial.getCurrentPortsName();
         const currentPortName = this.getPortName();
         if (!portsName.includes(currentPortName)) {
-            throw new Error('无可用串口');
+            throw new Error('no device available');
         }
         if (this.isOpened()) {
             return;
@@ -192,11 +192,11 @@ class USB extends Serial {
     }
 
     async sendBuffer(buffer) {
-        if (typeof buffer.unshift === 'function') {
+        if (buffer.constructor.name !== 'Uint8Array') {
             buffer.unshift(buffer.length);
-            buffer = new Uint8Array(buffer).buffer;
+            buffer = new Uint8Array(buffer);
         }
-        return this.#dapLink_.send(132, buffer);
+        await this.#dapLink_.send(132, buffer);
     }
 
     async setDTRAndRTS(dtr, rts) {

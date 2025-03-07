@@ -669,12 +669,6 @@ BU.uploadWithAmpy = (portName) => {
     const mainWorkspace = Workspace.getMain();
     const editor = mainWorkspace.getEditorsManager().getActive();
     const port = Serial.getPort(portName);
-    let useBuffer = true, dataLength = 256;
-    if (port.constructor.name === 'USBDevice') {
-        dataLength = 64;
-    } else if (port.constructor.name === 'HIDDevice') {
-        dataLength = 31;
-    }
     const layerNum = layer.open({
         type: 1,
         title: Msg.Lang['shell.uploading'] + '...',
@@ -685,7 +679,7 @@ BU.uploadWithAmpy = (portName) => {
         success: async function (layero, index) {
             $('#mixly-loader-btn').hide();
             const serial = new Serial(portName);
-            const ampy = new Ampy(serial, useBuffer, dataLength);
+            const ampy = new Ampy(serial);
             const code = editor.getCode();
             let closePromise = Promise.resolve();
             if (statusBarSerial) {

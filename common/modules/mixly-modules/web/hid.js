@@ -103,6 +103,7 @@ class WebHID extends Serial {
     #reader_ = null;
     #writer_ = null;
     #stringTemp_ = '';
+    #dataLength_ = 31;
     constructor(port) {
         super(port);
     }
@@ -133,7 +134,7 @@ class WebHID extends Serial {
             const portsName = Serial.getCurrentPortsName();
             const currentPortName = this.getPortName();
             if (!portsName.includes(currentPortName)) {
-                reject('无可用设备');
+                reject('no device available');
                 return;
             }
             if (this.isOpened()) {
@@ -176,20 +177,20 @@ class WebHID extends Serial {
     }
 
     async sendBuffer(buffer) {
-        return new Promise((resolve, reject) => {
-            if (buffer instanceof Uint8Array) {
-                let temp = new Uint8Array(buffer.length + 1);
-                temp[0] = buffer.length;
-                temp.set(buffer, 1);
-                buffer = temp;
-            } else {
-                buffer.unshift(buffer.length);
-                buffer = new Uint8Array(buffer);
-            }
-            this.#device_.sendReport(0, buffer)
-                .then(resolve)
-                .catch(reject);
-        });
+        if (buffer.constructor.name !== 'Uint8Array') {
+            buffer = new Uint8Array(buffer);
+        }
+        const len = Math.ceil(buffer.length / this.#dataLength_);
+        for (let i = 0; i < len; i++) {
+            const start = i * this.#dataLength_;
+            const end = Math.min((i + 1) * this.#dataLength_, buffer.length);
+            const writeBuffer = buffer.slice(start, end);
+            let temp = new Uint8Array(end - start + 1);
+            temp[0] = writeBuffer.length;
+            temp.set(writeBuffer, 1);
+            await this.#device_.sendReport(0, temp);
+            await this.sleep(10);
+        }
     }
 
     async setDTRAndRTS(dtr, rts) {

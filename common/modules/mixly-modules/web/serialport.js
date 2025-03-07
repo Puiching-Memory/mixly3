@@ -132,7 +132,7 @@ class WebSerialPort extends Serial {
             const portsName = Serial.getCurrentPortsName();
             const currentPortName = this.getPortName();
             if (!portsName.includes(currentPortName)) {
-                reject('无可用串口');
+                reject('no device available');
                 return;
             }
             if (this.isOpened()) {
@@ -200,22 +200,18 @@ class WebSerialPort extends Serial {
     }
 
     async sendBuffer(buffer) {
-        return new Promise((resolve, reject) => {
-            const { writable } = this.#serialport_;
-            const writer = writable.getWriter();
-            if (!(buffer instanceof Uint8Array)) {
-                buffer = new Uint8Array(buffer);
-            }
-            writer.write(buffer)
-                .then(() => {
-                    writer.releaseLock();
-                    resolve();
-                })
-                .catch(() => {
-                    writer.releaseLock();
-                    reject();
-                });
-        });
+        const { writable } = this.#serialport_;
+        const writer = writable.getWriter();
+        if (buffer.constructor.name !== 'Uint8Array') {
+            buffer = new Uint8Array(buffer);
+        }
+        try {
+            await writer.write(buffer);
+            writer.releaseLock();
+        } catch (error) {
+            writer.releaseLock();
+            throw Error(error);
+        }
     }
 
     async setDTRAndRTS(dtr, rts) {
