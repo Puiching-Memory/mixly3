@@ -7,6 +7,10 @@
   "main": "http://localhost:7000",
   "node-remote": "http://localhost:7000",
   "user-agent": "Mozilla/5.0 (%osinfo) AppleWebKit/%webkit_ver (KHTML, like Gecko, Chrome, Safari) NWjs/%nwver",
+  "chromium-args": "--user-data-dir=./nw_cache/ --disk-cache-size=0 --media-cache-size=0",
+  "webkit": {
+         "page-cache":false
+    },
   "scripts": {
     "start": "nw .",
     "build:nw:win:x64": "build --tasks win-x64 --mirror https://npmmirror.com/mirrors/nwjs/ .",
