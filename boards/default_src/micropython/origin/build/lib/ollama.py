@@ -4,7 +4,7 @@ import json
 
 
 class Ollama():
-    def __init__(self, url="", model=""):
+    def __init__(self, url="", model="", max_history_num=0):
         self._heads = {
             "Accept": "text/event-stream",
             # "Cache-Control": "no-cache",
@@ -13,7 +13,7 @@ class Ollama():
         }
         self._url = url
         self._max_retries = 1
-        self._max_history_num = 0
+        self._max_history_num = max_history_num
         self._timeout = 10000
         self._messages = []
         self._data = {
