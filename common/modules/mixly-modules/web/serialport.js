@@ -128,30 +128,23 @@ class WebSerialPort extends Serial {
     }
 
     async open(baud) {
-        return new Promise((resolve, reject) => {
-            const portsName = Serial.getCurrentPortsName();
-            const currentPortName = this.getPortName();
-            if (!portsName.includes(currentPortName)) {
-                reject('no device available');
-                return;
-            }
-            if (this.isOpened()) {
-                resolve();
-                return;
-            }
-            baud = baud ?? this.getBaudRate();
-            this.#serialport_ = WebSerialPort.getPort(currentPortName);
-            this.#serialport_.open({ baudRate: baud })
-                .then(() => {
-                    super.open(baud);
-                    super.setBaudRate(baud);
-                    this.#keepReading_ = true;
-                    this.onOpen();
-                    this.#addEventsListener_();
-                    resolve();
-                })
-                .catch(reject);
-        });
+        const portsName = Serial.getCurrentPortsName();
+        const currentPortName = this.getPortName();
+        if (!portsName.includes(currentPortName)) {
+            throw Error('no device available');
+            return;
+        }
+        if (this.isOpened()) {
+            return;
+        }
+        baud = baud ?? this.getBaudRate();
+        this.#serialport_ = WebSerialPort.getPort(currentPortName);
+        await this.#serialport_.open({ baudRate: baud });
+        super.open(baud);
+        super.setBaudRate(baud);
+        this.#keepReading_ = true;
+        this.onOpen();
+        this.#addEventsListener_();
     }
 
     async #waitForUnlock_(timeout) {
@@ -180,18 +173,13 @@ class WebSerialPort extends Serial {
     }
 
     async setBaudRate(baud) {
-        return new Promise((resolve, reject) => {
-            if (!this.isOpened()
-                || this.getBaudRate() === baud
-                || !this.baudRateIsLegal(baud)) {
-                resolve();
-                return;
-            }
-            this.close()
-                .then(() => this.open(baud))
-                .then(resolve)
-                .catch(reject);
-        });
+        if (!this.isOpened()
+            || this.getBaudRate() === baud
+            || !this.baudRateIsLegal(baud)) {
+            return;
+        }
+        await this.close();
+        await this.open(baud);
     }
 
     async sendString(str) {
@@ -215,21 +203,14 @@ class WebSerialPort extends Serial {
     }
 
     async setDTRAndRTS(dtr, rts) {
-        return new Promise((resolve, reject) => {
-            if (!this.isOpened()) {
-                resolve();
-                return;
-            }
-            this.#serialport_.setSignals({
-                dataTerminalReady: dtr,
-                requestToSend: rts
-            })
-            .then(() => {
-                super.setDTRAndRTS(dtr, rts);
-                resolve();
-            })
-            .catch(reject);
+        if (!this.isOpened()) {
+            return;
+        }
+        await this.#serialport_.setSignals({
+            dataTerminalReady: dtr,
+            requestToSend: rts
         });
+        super.setDTRAndRTS(dtr, rts);
     }
 
     async setDTR(dtr) {
