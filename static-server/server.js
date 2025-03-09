@@ -26,7 +26,6 @@ const init = () => {
 if (!module.parent) {
     deleteFile('./nw_cache/Default/Preferences');
     init();
-        
 } else {
     module.exports = init;
 }
