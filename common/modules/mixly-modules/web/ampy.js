@@ -84,10 +84,10 @@ class AmpyExt extends Ampy {
                 }
             }
             if (nowTime - startTime >= timeout) {
-                throw new Error(ending + '查找失败');
+                return '';
             }
             if (!this.isActive()) {
-                throw new Error('数据读取中断');
+                throw new Error(Msg.Lang['ampy.dataReadInterrupt']);
             }
             await this.#device_.sleep(100);
         }
@@ -163,14 +163,14 @@ class AmpyExt extends Ampy {
         }
         this.#active_ = true;
         await this.#device_.open(115200);
-        await this.#device_.sleep(500);
+        /*await this.#device_.sleep(500);
         const { SELECTED_BOARD } = Config;
         if (SELECTED_BOARD?.serial
             && SELECTED_BOARD.serial?.dtr !== undefined
             && SELECTED_BOARD.serial?.rts !== undefined) {
             const { dtr, rts } = SELECTED_BOARD.serial;
             await this.#device_.setDTRAndRTS(dtr, rts);
-        }
+        }*/
         await this.#device_.sleep(500);
         await this.#device_.sendBuffer([2]);
         if (!await this.interrupt()) {
@@ -197,7 +197,7 @@ class AmpyExt extends Ampy {
 
     async get(filename, timeout = 5000) {
         if (!this.isActive()) {
-            throw new Error('串口未打开');
+            throw new Error(Msg.Lang['ampy.portIsNotOpen']);
         }
         const code = Mustache.render(AmpyExt.GET, {
             path: filename
@@ -205,7 +205,7 @@ class AmpyExt extends Ampy {
         await this.exec(code);
         await this.#device_.sleep(100);
         if (!await this.readUntil('ok', true, timeout)) {
-            throw new Error('无法执行python代码');
+            throw new Error(Msg.Lang['ampy.executePythonCodeFailed']);
         }
         let str = await this.readUntil('>', false, timeout);
         str = str.replace('\x04\x04', '');
@@ -218,7 +218,7 @@ class AmpyExt extends Ampy {
 
     async put(filename, code) {
         if (!this.isActive()) {
-            throw new Error('串口未打开');
+            throw new Error(Msg.Lang['ampy.portIsNotOpen']);
         }
         let str = `file = open('${filename}', 'wb')\n`;
         const buffer = this.#device_.encode(code);
@@ -241,7 +241,7 @@ class AmpyExt extends Ampy {
 
     async ls(directory = '/', longFormat = true, recursive = false, timeout = 5000) {
         if (!this.isActive()) {
-            throw new Error('串口未打开');
+            throw new Error(Msg.Lang['ampy.portIsNotOpen']);
         }
         let code = '';
         if (longFormat) {
@@ -260,7 +260,7 @@ class AmpyExt extends Ampy {
         await this.exec(code);
         await this.#device_.sleep(100);
         if (!await this.readUntil('ok', true, timeout)) {
-            throw new Error('无法执行python代码');
+            throw new Error(Msg.Lang['ampy.executePythonCodeFailed']);
         }
         let str = await this.readUntil('>', false, timeout);
         let info = null;
@@ -273,7 +273,7 @@ class AmpyExt extends Ampy {
 
     async mkdir(directory, timeout = 5000) {
         if (!this.isActive()) {
-            throw new Error('串口未打开');
+            throw new Error(Msg.Lang['ampy.portIsNotOpen']);
         }
         const code = Mustache.render(AmpyExt.MKDIR, {
             path: directory
@@ -281,7 +281,7 @@ class AmpyExt extends Ampy {
         await this.exec(code);
         await this.#device_.sleep(100);
         if (!await this.readUntil('ok', true, timeout)) {
-            throw new Error('无法执行python代码');
+            throw new Error(Msg.Lang['ampy.executePythonCodeFailed']);
         }
         let str = await this.readUntil('>', false, timeout);
         if (str.indexOf('OSError') === -1) {
@@ -292,7 +292,7 @@ class AmpyExt extends Ampy {
 
     async mkfile(file, timeout = 5000) {
         if (!this.isActive()) {
-            throw new Error('串口未打开');
+            throw new Error(Msg.Lang['ampy.portIsNotOpen']);
         }
         const code = Mustache.render(AmpyExt.MKFILE, {
             path: file
@@ -300,7 +300,7 @@ class AmpyExt extends Ampy {
         await this.exec(code);
         await this.#device_.sleep(100);
         if (!await this.readUntil('ok', true, timeout)) {
-            throw new Error('无法执行python代码');
+            throw new Error(Msg.Lang['ampy.executePythonCodeFailed']);
         }
         let str = await this.readUntil('>', false, timeout);
         if (str.indexOf('OSError') === -1) {
@@ -311,7 +311,7 @@ class AmpyExt extends Ampy {
 
     async rename(oldname, newname, timeout = 5000) {
         if (!this.isActive()) {
-            throw new Error('串口未打开');
+            throw new Error(Msg.Lang['ampy.portIsNotOpen']);
         }
         const code = Mustache.render(AmpyExt.RENAME, {
             oldPath: oldname,
@@ -320,7 +320,7 @@ class AmpyExt extends Ampy {
         await this.exec(code);
         await this.#device_.sleep(100);
         if (!await this.readUntil('ok', true, timeout)) {
-            throw new Error('无法执行python代码');
+            throw new Error(Msg.Lang['ampy.executePythonCodeFailed']);
         }
         let str = await this.readUntil('>', false, timeout);
         if (str.indexOf('OSError') === -1) {
@@ -331,7 +331,7 @@ class AmpyExt extends Ampy {
 
     async rm(filename, timeout = 5000) {
         if (!this.isActive()) {
-            throw new Error('串口未打开');
+            throw new Error(Msg.Lang['ampy.portIsNotOpen']);
         }
         const code = Mustache.render(AmpyExt.RM, {
             path: filename
@@ -339,7 +339,7 @@ class AmpyExt extends Ampy {
         await this.exec(code);
         await this.#device_.sleep(100);
         if (!await this.readUntil('ok', true, timeout)) {
-            throw new Error('无法执行python代码');
+            throw new Error(Msg.Lang['ampy.executePythonCodeFailed']);
         }
         let str = await this.readUntil('>', false, timeout);
         if (str.indexOf('OSError') === -1) {
@@ -350,7 +350,7 @@ class AmpyExt extends Ampy {
 
     async rmdir(directory, timeout = 5000) {
         if (!this.isActive()) {
-            throw new Error('串口未打开');
+            throw new Error(Msg.Lang['ampy.portIsNotOpen']);
         }
         const code = Mustache.render(AmpyExt.RMDIR, {
             path: directory
@@ -358,7 +358,7 @@ class AmpyExt extends Ampy {
         await this.exec(code);
         await this.#device_.sleep(100);
         if (!await this.readUntil('ok', true, timeout)) {
-            throw new Error('无法执行python代码');
+            throw new Error(Msg.Lang['ampy.executePythonCodeFailed']);
         }
         let str = await this.readUntil('>', false, timeout);
         if (str.indexOf('OSError') === -1) {
