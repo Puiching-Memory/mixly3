@@ -4077,6 +4077,6 @@ ZhHans.MIXLY_LLM_CONTENT_CALLBACK = '结果输出回调';
 // ZhHans.MIXLY_OLLAMA_SET_CUSTOM_URL = '设置自定义链接';
 // ZhHans.MIXLY_SELECT_MODEL = '选择模型';
 // ZhHans.MIXLY_CLEAR_USER_HISTORY = '清除用户的历史记录';
-ZhHans.MIXLY_EMPTY_HISTORY = '清空历史记录'
+ZhHans.MIXLY_EMPTY_HISTORY = '清空历史记录';
 
 })();

@@ -3908,5 +3908,14 @@ En.MIXLY_RFID_SCAN_NOTAGERR = 'no card response';
 En.MIXLY_RFID_SCAN_ERROR = 'card error';
 En.MIXLY_WEIGH_SENSOR = 'Load cell';
 En.MIXLY_Calibration_ratio = 'Calibration ratio';
-En.MIXLY_KEYBOARD_AND_MOUSE = "keyboard and mouse "
+En.MIXLY_KEYBOARD_AND_MOUSE = "keyboard and mouse ";
+En.MIXLY_KEYBOARD_LIGHT = 'Keyboard Indicator Light';
+En.MIXLY_NumLock = 'Num Lock';
+En.MIXLY_CapsLock = 'Caps Lock';
+En.MIXLY_ScorllLock = 'Scroll Lock';
+En.MIXLY_CONNECT_OLLAMA = 'Connect to ollama Platform and Use Large Language Model';
+En.MIXLY_SET_MAXIMUM_HISTORICAL_SESSIONS_NUM = 'Set Maximum Number of Historical Conversations to Retain';
+En.MIXLY_LLM_CHAT = 'Chat with Large Language Model';
+En.MIXLY_LLM_CONTENT_CALLBACK = 'Result Output Callback';
+En.MIXLY_EMPTY_HISTORY = 'Clear History';
 })();

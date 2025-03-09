@@ -1790,6 +1790,7 @@
         </shadow>
       </value>
     </block>
+    <block type = "get_keyboard_light" m-show="micropython:esp32s3:mixgo_sant"></block>
     <block type="analog_keyboard_input" m-show="micropython:esp32s3:mixgo_sant">
       <value name="special">
         <block type="special_key">
