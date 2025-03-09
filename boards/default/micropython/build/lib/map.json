@@ -589,6 +589,16 @@
         "__size__": 481,
         "__name__": "oled128x64.py"
     },
+    "ollama": {
+        "__require__": [
+            "urequests",
+            "time",
+            "json"
+        ],
+        "__file__": true,
+        "__size__": 3329,
+        "__name__": "ollama.py"
+    },
     "onenet": {
         "__require__": [
             "ujson",
