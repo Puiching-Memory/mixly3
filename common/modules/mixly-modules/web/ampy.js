@@ -163,14 +163,14 @@ class AmpyExt extends Ampy {
         }
         this.#active_ = true;
         await this.#device_.open(115200);
-        /*await this.#device_.sleep(500);
+        await this.#device_.sleep(500);
         const { SELECTED_BOARD } = Config;
         if (SELECTED_BOARD?.serial
             && SELECTED_BOARD.serial?.dtr !== undefined
             && SELECTED_BOARD.serial?.rts !== undefined) {
             const { dtr, rts } = SELECTED_BOARD.serial;
             await this.#device_.setDTRAndRTS(dtr, rts);
-        }*/
+        }
         await this.#device_.sleep(500);
         await this.#device_.sendBuffer([2]);
         if (!await this.interrupt()) {
