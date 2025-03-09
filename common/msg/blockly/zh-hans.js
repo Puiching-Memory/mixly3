@@ -4063,4 +4063,20 @@ ZhHans.MIXLY_RFID_SCAN_ERROR = '卡错误';
 ZhHans.MIXLY_WEIGH_SENSOR = '称重传感器';
 ZhHans.MIXLY_Calibration_ratio = '校准比例';
 ZhHans.MIXLY_KEYBOARD_AND_MOUSE = '键鼠';
+ZhHans.MIXLY_THE_COPROCESSOR_VERSION = '协处理器版本';
+ZhHans.MIXLY_KEYBOARD_LIGHT = '键盘指示灯';
+ZhHans.MIXLY_NumLock = '数字锁定';
+ZhHans.MIXLY_CapsLock = '大写锁定';
+ZhHans.MIXLY_ScorllLock = '滚动锁定';
+ZhHans.MIXLY_CONNECT_OLLAMA = '连接ollama平台 使用大语言模型';
+ZhHans.MIXLY_SET_MAXIMUM_HISTORICAL_SESSIONS_NUM = '设置历史对话记录最大保留数量';
+ZhHans.MIXLY_LLM_CHAT = '与大语言模型进行对话';
+ZhHans.MIXLY_LLM_CONTENT_CALLBACK = '结果输出回调';
+// ZhHans.MIXLY_OLLAMA_SET_TIMEOUT = '设置超时时间';
+// ZhHans.MIXLY_OLLAMA_SET_MAX_RETRIES = '设置最大重试次数';
+// ZhHans.MIXLY_OLLAMA_SET_CUSTOM_URL = '设置自定义链接';
+// ZhHans.MIXLY_SELECT_MODEL = '选择模型';
+// ZhHans.MIXLY_CLEAR_USER_HISTORY = '清除用户的历史记录';
+ZhHans.MIXLY_EMPTY_HISTORY = '清空历史记录'
+
 })();

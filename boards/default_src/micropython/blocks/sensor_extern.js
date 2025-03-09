@@ -2227,7 +2227,7 @@ export const weigh_sensor_get_weight = {
         this.appendValueInput('SUB')
             .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_WEIGH_SENSOR)
         this.appendDummyInput()
-            .appendField(Blockly.Msg.blockpy_set_of + Blockly.Msg.MIXLY_DATA)
+            .appendField(Blockly.Msg.blockpy_set_of + Blockly.Msg.MIXLY_DATA + '(g)')
         this.setOutput(true);
         this.setInputsInline(true);
     }

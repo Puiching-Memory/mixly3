@@ -1431,6 +1431,7 @@
     <block type="sensor_mixgo_cc_mmc5603_calibrate_compass" m-show="micropython:esp32c2:mixgo_mini"></block>
     <block type="sensor_mixgo_cc_mmc5603_get_magnetic" m-show="micropython:esp32c2:mixgo_mini"></block>
     <block type="sensor_mixgo_cc_mmc5603_get_angle" m-show="micropython:esp32c2:mixgo_mini"></block>
+    <block type="sensor_get_the_coprocessor_version" m-show="micropython:esp32c2:mixgo_mini"></block>
     <block type="rfid_readid" m-show='micropython:esp32c3:mixgo_cc'>
       <value name="SUB">
         <shadow type="variables_get">
@@ -1699,6 +1700,7 @@
         </shadow>
       </value>
     </block>
+    <block type = "get_keyboard_light"></block>
     <block type="analog_keyboard_input" m-show="micropython:esp32c2:mixgo_mini">
       <value name="special">
         <block type="special_key">
@@ -2335,6 +2337,92 @@
         </value>
       </block>
       <block type="iot_mqtt_data"></block>
+      <block type="IOT_CONNECT_OLLAMA">
+        <value name="SERVER">
+          <shadow type="text">
+            <field name="TEXT">192.168.1.1</field>
+          </shadow>
+        </value>
+        <value name="NAME">
+          <shadow type="text">
+            <field name="TEXT">qwen2.5-coder:0.5b</field>
+          </shadow>
+        </value>
+        <value name="NUMBER">
+          <shadow type="math_number">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="use_ollama_llm_to_chat">
+        <value name="TOPIC">
+          <shadow type="text">
+            <field name="TEXT">content</field>
+          </shadow>
+        </value>
+        <value name="METHOD">
+          <shadow type="factory_block_return">
+            <field name="VALUE">content_callback</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="procedures_defnoreturn">
+        <mutation>
+          <arg name="content"></arg>
+        </mutation>
+        <field name="NAME">content_callback</field>
+        <statement name="STACK">
+          <block type="system_print_end">
+            <value name="VAR">
+              <block type="variables_get">
+                <field name="VAR">content</field>
+              </block>
+            </value>
+            <value name="END">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+          </block>
+        </statement>
+      </block>
+      <block type="use_ollama_llm_to_chat_return">
+        <value name="TOPIC">
+          <shadow type="text">
+            <field name="TEXT">请介绍一下米思齐？</field>
+          </shadow>
+        </value>
+      </block>
+      <!-- <block type="ollama_set_timeout">
+        <value name="VAR">
+          <shadow type="math_number">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="ollama_set_max_retries">
+        <value name="VAR">
+          <shadow type="math_number">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="ollama_set_custom_url">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">192.168.1.1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="ollama_select_model">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">qwen2.5-coder:0.5b</field>
+          </shadow>
+        </value>
+      </block> -->
+      <block type="ollama_empty_history"></block>
+      <!-- <block type="ollama_clear_user_history"></block> -->
     </category>
     <category id="catOnenet" colour="#78AAE0">
       <block type="iot_wifi_connect">

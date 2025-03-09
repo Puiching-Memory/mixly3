@@ -1038,6 +1038,7 @@ export const sensor_mixgo_cc_mmc5603_get_magnetic = {
         });
     }
 };
+
 export const sensor_mixgo_cc_mmc5603_get_angle = {
     init: function () {
         this.setColour(SENSOR_ONBOARD_HUE);
@@ -1045,7 +1046,6 @@ export const sensor_mixgo_cc_mmc5603_get_angle = {
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET_COMPASS + Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE)
         this.setOutput(true, Number);
         this.setInputsInline(true);
-
     }
 };
 
@@ -1735,6 +1735,16 @@ export const CI130X_SET_SYSTEM_CMD_SANT = {
             ]), "cmd")
         this.setPreviousStatement(true);
         this.setNextStatement(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const sensor_get_the_coprocessor_version = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_THE_COPROCESSOR_VERSION)
+        this.setOutput(true);
         this.setInputsInline(true);
     }
 };

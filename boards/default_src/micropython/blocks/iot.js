@@ -622,3 +622,118 @@ export const iot_onenetconnect = iot_onenet_connect;
 export const iot_onenetdisconnect = iot_onenet_disconnect;
 export const iot_checkonenet = iot_onenet_check;
 export const iot_publish = iot_onenet_publish;
+
+export const IOT_CONNECT_OLLAMA = {
+    init: function () {
+        this.setColour(IOT_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_CONNECT_OLLAMA);
+        this.appendValueInput('SERVER')
+            .appendField(Blockly.Msg.MIXLY_EMQX_SERVER)
+            .setAlign(Blockly.inputs.Align.RIGHT);
+        this.appendValueInput('NAME')
+            .appendField(Blockly.Msg.MODEL_NAME)
+            .setAlign(Blockly.inputs.Align.RIGHT);
+        this.appendValueInput('NUMBER')
+            .appendField(Blockly.Msg.MIXLY_SET_MAXIMUM_HISTORICAL_SESSIONS_NUM);
+        this.setInputsInline(false);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+export const use_ollama_llm_to_chat = {
+    init: function () {
+        this.setColour(IOT_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_LLM_CHAT);
+        this.appendValueInput('TOPIC')
+            .appendField(Blockly.Msg.MIXLY_MIXGO_ESPNOW_SEND);
+        this.appendValueInput('METHOD')
+            .appendField(Blockly.Msg.MIXLY_LLM_CONTENT_CALLBACK);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+export const use_ollama_llm_to_chat_return = {
+    init: function () {
+        this.setColour(IOT_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_LLM_CHAT);
+        this.appendValueInput('TOPIC')
+            .appendField(Blockly.Msg.MIXLY_MIXGO_ESPNOW_SEND);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXPY_REQUESTS_GET_RESULT)
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
+// export const ollama_set_timeout = {
+//     init: function () {
+//         this.setColour(IOT_HUE);
+//         this.appendValueInput("VAR")
+//             .appendField('Ollama ' + Blockly.Msg.MIXLY_OLLAMA_SET_TIMEOUT);
+//         this.setInputsInline(true);
+//         this.setPreviousStatement(true);
+//         this.setNextStatement(true);
+//     }
+// }
+
+// export const ollama_set_max_retries = {
+//     init: function () {
+//         this.setColour(IOT_HUE);
+//         this.appendValueInput("VAR")
+//             .appendField('Ollama ' + Blockly.Msg.MIXLY_OLLAMA_SET_MAX_RETRIES);
+//         this.setInputsInline(true);
+//         this.setPreviousStatement(true);
+//         this.setNextStatement(true);
+//     }
+// }
+
+// export const ollama_set_custom_url = {
+//     init: function () {
+//         this.setColour(IOT_HUE);
+//         this.appendValueInput("TEXT")
+//             .appendField('Ollama ' + Blockly.Msg.MIXLY_OLLAMA_SET_CUSTOM_URL);
+//         this.setInputsInline(true);
+//         this.setPreviousStatement(true);
+//         this.setNextStatement(true);
+//     }
+// }
+
+// export const ollama_select_model = {
+//     init: function () {
+//         this.setColour(IOT_HUE);
+//         this.appendValueInput("TEXT")
+//             .appendField('Ollama ' + Blockly.Msg.MIXLY_SELECT_MODEL);
+//         this.setInputsInline(true);
+//         this.setPreviousStatement(true);
+//         this.setNextStatement(true);
+//     }
+// }
+
+// export const ollama_clear_user_history = {
+//     init: function () {
+//         this.setColour(IOT_HUE);
+//         this.appendDummyInput()
+//             .appendField('Ollama ' + Blockly.Msg.MIXLY_CLEAR_USER_HISTORY);
+//         this.setInputsInline(true);
+//         this.setPreviousStatement(true);
+//         this.setNextStatement(true);
+//     }
+// }
+
+export const ollama_empty_history = {
+    init: function () {
+        this.setColour(IOT_HUE);
+        this.appendDummyInput()
+            .appendField('Ollama ' + Blockly.Msg.MIXLY_EMPTY_HISTORY);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+}
+

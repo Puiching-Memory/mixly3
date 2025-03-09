@@ -766,3 +766,12 @@ export const educore_ble_keyboard_input = function (_, generator) {
     var code = sub+".keyboard_send("+ ge + ")\n";
     return code;
 }
+
+export const get_keyboard_light = function (_,generator){
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
+    var key = this.getFieldValue('key');
+    var code = "onboard_bot.hid_keyboard_state()["+ key +']';
+    return [code,generator.ORDER_ATOMIC]
+
+}

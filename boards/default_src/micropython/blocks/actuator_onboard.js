@@ -1791,3 +1791,19 @@ export const educore_ble_keyboard_input = {
         this.setInputsInline(true);
     }
 };
+
+export const get_keyboard_light = {
+    init: function () {
+        this.setColour(ACTUATOR_ONBOARD_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_KEYBOARD_LIGHT)
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_NumLock, "0"],
+                [Blockly.Msg.MIXLY_CapsLock, "1"],
+                [Blockly.Msg.MIXLY_ScorllLock, "2"]
+            ]),'key');
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};

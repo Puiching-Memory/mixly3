@@ -925,3 +925,10 @@ export const CI130X_SET_SYSTEM_CMD_SANT = function (_, generator) {
     var code = 'onboard_asr.sys_cmd(' + cmd + ')\n';
     return code;
 }
+
+export const sensor_get_the_coprocessor_version = function(_,generator){
+    var version = Boards.getSelectedBoardKey().split(':')[2];
+    generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
+    var code = 'onboard_bot.version()';
+    return [code, generator.ORDER_ATOMIC];
+}
