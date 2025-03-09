@@ -4,6 +4,7 @@ goog.require('path');
 goog.require('Mustache');
 goog.require('Mixly.Ampy');
 goog.require('Mixly.Env');
+goog.require('Mixly.Msg');
 goog.require('Mixly.Serial');
 goog.require('Mixly.Electron');
 goog.provide('Mixly.Electron.Ampy');
@@ -11,6 +12,7 @@ goog.provide('Mixly.Electron.Ampy');
 const {
     Ampy,
     Env,
+    Msg,
     Serial,
     Electron
 } = Mixly;
@@ -102,7 +104,7 @@ class AmpyExt extends Ampy {
     async exec(port, command) {
         const portsName = Serial.getCurrentPortsName();
         if (!portsName.includes(port)) {
-            throw new Error('无可用串口');
+            throw new Error(Msg.Lang['statusbar.serial.noPort']);
             return;
         }
         const { mainStatusBarTabs } = Mixly;
