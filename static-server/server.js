@@ -2,21 +2,21 @@ const fs = require('fs')
 const StaticServer = require('./static-server.js');
 const SSLStaticServer = require('./static-sslserver.js');
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
 
-
-async function deleteDirectory(dirPath) {
+function deleteFile(filePath) {
     try {
-        fs.unlinkSync(dirPath);
-        console.log('Directory deleted successfully.');
+        if (!fs.existsSync(filePath)) {
+            return;
+        }
+        const stats = fs.statSync(filePath);
+        if (stats.isFile()) {
+            fs.unlinkSync(filePath);
+            console.log('File deleted successfully.');
+        }
     } catch (err) {
-        console.error('Error deleting directory:', err);
+        console.error('Error deleting file:', err);
     }
 }
-
-
 
 const init = () => {
     StaticServer.run('7000');
@@ -24,10 +24,9 @@ const init = () => {
 }
 
 if (!module.parent) {
-    deleteDirectory('./nw_cache/Default/Preferences');
-	sleep(200);
-	init();
-		
+    deleteFile('./nw_cache/Default/Preferences');
+    init();
+        
 } else {
     module.exports = init;
 }
