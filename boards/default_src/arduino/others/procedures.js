@@ -25,8 +25,14 @@
  * @namespace
  */
 import * as Blockly from 'blockly/core';
+import Variables from './variables';
 
 const Procedures = {};
+
+Procedures.DATA_TYPE = [
+    ...Variables.DATA_TYPE,
+    [Blockly.Msg.MIXLY_OTHER, 'CUSTOM']
+];
 
 /**
  * Constant to separate procedure names from variables and generated functions

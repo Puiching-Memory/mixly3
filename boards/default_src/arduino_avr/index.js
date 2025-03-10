@@ -3,9 +3,13 @@ import { Profile } from 'mixly';
 
 import {
     ArduinoEthernetBlocks,
+    ArduinoProceduresBlocks,
     ArduinoTextBlocks,
+    ArduinoVariablesBlocks,
     ArduinoEthernetGenerators,
+    ArduinoProceduresGenerators,
     ArduinoTextGenerators,
+    ArduinoVariablesGenerators,
     Procedures,
     Variables,
     Arduino
@@ -26,14 +30,12 @@ import {
     ArduinoAVRMathBlocks,
     ArduinoAVRPinoutBlocks,
     ArduinoAVRPinsBlocks,
-    ArduinoAVRProceduresBlocks,
     ArduinoAVRScoopBlocks,
     ArduinoAVRSensorBlocks,
     ArduinoAVRSerialBlocks,
     ArduinoAVRStorageBlocks,
     ArduinoAVRTextBlocks,
     ArduinoAVRToolsBlocks,
-    ArduinoAVRVariablesBlocks,
     ArduinoAVRActuatorGenerators,
     ArduinoAVRBlynkGenerators,
     ArduinoAVRCommunicateGenerators,
@@ -47,14 +49,12 @@ import {
     ArduinoAVRMathGenerators,
     ArduinoAVRPinoutGenerators,
     ArduinoAVRPinsGenerators,
-    ArduinoAVRProceduresGenerators,
     ArduinoAVRScoopGenerators,
     ArduinoAVRSensorGenerators,
     ArduinoAVRSerialGenerators,
     ArduinoAVRStorageGenerators,
     ArduinoAVRTextGenerators,
-    ArduinoAVRToolsGenerators,
-    ArduinoAVRVariablesGenerators
+    ArduinoAVRToolsGenerators
 } from './';
 
 import './css/color.css';
@@ -72,7 +72,9 @@ Object.assign(Profile.default, ArduinoAVRPins.arduino_standard);
 Object.assign(
     Blockly.Blocks,
     ArduinoEthernetBlocks,
+    ArduinoProceduresBlocks,
     ArduinoTextBlocks,
+    ArduinoVariablesBlocks,
     ArduinoAVRActuatorBlocks,
     ArduinoAVRBlynkBlocks,
     ArduinoAVRCommunicateBlocks,
@@ -86,20 +88,20 @@ Object.assign(
     ArduinoAVRMathBlocks,
     ArduinoAVRPinoutBlocks,
     ArduinoAVRPinsBlocks,
-    ArduinoAVRProceduresBlocks,
     ArduinoAVRScoopBlocks,
     ArduinoAVRSensorBlocks,
     ArduinoAVRSerialBlocks,
     ArduinoAVRStorageBlocks,
     ArduinoAVRTextBlocks,
-    ArduinoAVRToolsBlocks,
-    ArduinoAVRVariablesBlocks
+    ArduinoAVRToolsBlocks
 );
 
 Object.assign(
     Blockly.Arduino.forBlock,
     ArduinoEthernetGenerators,
+    ArduinoProceduresGenerators,
     ArduinoTextGenerators,
+    ArduinoVariablesGenerators,
     ArduinoAVRActuatorGenerators,
     ArduinoAVRBlynkGenerators,
     ArduinoAVRCommunicateGenerators,
@@ -113,12 +115,10 @@ Object.assign(
     ArduinoAVRMathGenerators,
     ArduinoAVRPinoutGenerators,
     ArduinoAVRPinsGenerators,
-    ArduinoAVRProceduresGenerators,
     ArduinoAVRScoopGenerators,
     ArduinoAVRSensorGenerators,
     ArduinoAVRSerialGenerators,
     ArduinoAVRStorageGenerators,
     ArduinoAVRTextGenerators,
-    ArduinoAVRToolsGenerators,
-    ArduinoAVRVariablesGenerators
+    ArduinoAVRToolsGenerators
 );

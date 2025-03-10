@@ -498,7 +498,7 @@ export const procedures_defreturn = {
         this.appendValueInput('RETURN')
             .setAlign(Blockly.inputs.Align.RIGHT)
             .appendField(Blockly.Msg['PROCEDURES_DEFRETURN_RETURN'])
-            .appendField(new Blockly.FieldDropdown(Variables.DATA_TYPE), "TYPE");
+            .appendField(new Blockly.FieldDropdown(Procedures.DATA_TYPE, this.adjustReturnInput.bind(this)), "TYPE");
         this.setMutator(new Blockly.icons.MutatorIcon(['procedures_mutatorarg'], this));
         if ((this.workspace.options.comments ||
             (this.workspace.options.parentWorkspace &&
@@ -513,11 +513,45 @@ export const procedures_defreturn = {
         this.argumentVarModels_ = [];
         this.setStatements_(true);
         this.statementConnection_ = null;
+        this.returnType = 'void';
+    },
+    adjustReturnInput: function (value) {
+        const fieldName = 'RETRUN_TYPE';
+        if (value === 'CUSTOM') {
+            if (!this.getField(fieldName)) {
+                this.getInput('RETURN').appendField(
+                    new Blockly.FieldTextInput(this.returnType ?? ''),
+                    fieldName,
+                );
+            }
+        } else {
+            if (this.getField('RETRUN_TYPE')) {
+                this.returnType = this.getFieldValue('RETRUN_TYPE') || 'void';
+            }
+            this.getInput('RETURN').removeField(fieldName, true);
+        }
     },
     setStatements_: procedures_defnoreturn.setStatements_,
     updateParams_: procedures_defnoreturn.updateParams_,
     mutationToDom: procedures_defnoreturn.mutationToDom,
     domToMutation: procedures_defnoreturn.domToMutation,
+    saveExtraState: function () {
+        const output = procedures_defnoreturn.saveExtraState.call(this) ?? {};
+        if (this.getField('RETRUN_TYPE')) {
+            output['returnType'] = this.getFieldValue('RETRUN_TYPE');
+        }
+        return output;
+    },
+    loadExtraState: function (state) {
+        this.returnType = state?.returnType;
+        if (!this.getField('RETRUN_TYPE')) {
+            this.getInput('RETURN').appendField(
+                new Blockly.FieldTextInput(this.returnType ?? ''),
+                'RETRUN_TYPE',
+            );
+        }
+        procedures_defnoreturn.loadExtraState.call(this, state);
+    },
     decompose: procedures_defnoreturn.decompose,
     compose: procedures_defnoreturn.compose,
     /**
@@ -1096,6 +1130,8 @@ export const procedures_callreturn = {
     updateShape_: procedures_callnoreturn.updateShape_,
     mutationToDom: procedures_callnoreturn.mutationToDom,
     domToMutation: procedures_callnoreturn.domToMutation,
+    saveExtraState: procedures_callnoreturn.saveExtraState,
+    loadExtraState: procedures_callnoreturn.loadExtraState,
     renameVar: procedures_callnoreturn.renameVar,
     getVars: procedures_callnoreturn.getVars,
     getVarModels: procedures_callnoreturn.getVarModels,

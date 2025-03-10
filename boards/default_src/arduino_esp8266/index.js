@@ -3,9 +3,13 @@ import { Profile } from 'mixly';
 
 import {
     ArduinoEthernetBlocks,
+    ArduinoProceduresBlocks,
     ArduinoTextBlocks,
+    ArduinoVariablesBlocks,
     ArduinoEthernetGenerators,
+    ArduinoProceduresGenerators,
     ArduinoTextGenerators,
+    ArduinoVariablesGenerators,
     Procedures,
     Variables,
     Arduino
@@ -24,13 +28,11 @@ import {
     ArduinoAVRLogicBlocks,
     ArduinoAVRMathBlocks,
     ArduinoAVRPinsBlocks,
-    ArduinoAVRProceduresBlocks,
     ArduinoAVRSensorBlocks,
     ArduinoAVRSerialBlocks,
     ArduinoAVRStorageBlocks,
     ArduinoAVRTextBlocks,
     ArduinoAVRToolsBlocks,
-    ArduinoAVRVariablesBlocks,
     ArduinoAVRActuatorGenerators,
     ArduinoAVRBlynkGenerators,
     ArduinoAVRCommunicateGenerators,
@@ -43,13 +45,11 @@ import {
     ArduinoAVRLogicGenerators,
     ArduinoAVRMathGenerators,
     ArduinoAVRPinsGenerators,
-    ArduinoAVRProceduresGenerators,
     ArduinoAVRSensorGenerators,
     ArduinoAVRSerialGenerators,
     ArduinoAVRStorageGenerators,
     ArduinoAVRTextGenerators,
-    ArduinoAVRToolsGenerators,
-    ArduinoAVRVariablesGenerators
+    ArduinoAVRToolsGenerators
 } from '@mixly/arduino-avr';
 
 import {
@@ -86,7 +86,9 @@ addBoardFSItem();
 Object.assign(
     Blockly.Blocks,
     ArduinoEthernetBlocks,
+    ArduinoProceduresBlocks,
     ArduinoTextBlocks,
+    ArduinoVariablesBlocks,
     ArduinoAVRActuatorBlocks,
     ArduinoAVRBlynkBlocks,
     ArduinoAVRCommunicateBlocks,
@@ -99,13 +101,11 @@ Object.assign(
     ArduinoAVRLogicBlocks,
     ArduinoAVRMathBlocks,
     ArduinoAVRPinsBlocks,
-    ArduinoAVRProceduresBlocks,
     ArduinoAVRSensorBlocks,
     ArduinoAVRSerialBlocks,
     ArduinoAVRStorageBlocks,
     ArduinoAVRTextBlocks,
     ArduinoAVRToolsBlocks,
-    ArduinoAVRVariablesBlocks,
     ArduinoESP8266EthernetBlocks,
     ArduinoESP8266PinoutBlocks
 );
@@ -113,7 +113,9 @@ Object.assign(
 Object.assign(
     Blockly.Arduino.forBlock,
     ArduinoEthernetGenerators,
+    ArduinoProceduresGenerators,
     ArduinoTextGenerators,
+    ArduinoVariablesGenerators,
     ArduinoAVRActuatorGenerators,
     ArduinoAVRBlynkGenerators,
     ArduinoAVRCommunicateGenerators,
@@ -126,13 +128,11 @@ Object.assign(
     ArduinoAVRLogicGenerators,
     ArduinoAVRMathGenerators,
     ArduinoAVRPinsGenerators,
-    ArduinoAVRProceduresGenerators,
     ArduinoAVRSensorGenerators,
     ArduinoAVRSerialGenerators,
     ArduinoAVRStorageGenerators,
     ArduinoAVRTextGenerators,
     ArduinoAVRToolsGenerators,
-    ArduinoAVRVariablesGenerators,
     ArduinoESP8266EthernetGenerators,
     ArduinoESP8266PinoutGenerators
 );

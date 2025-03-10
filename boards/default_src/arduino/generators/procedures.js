@@ -12,6 +12,13 @@ export const procedures_defreturn = function (_, generator) {
     var returnValue = generator.valueToCode(this, 'RETURN',
         generator.ORDER_NONE) || '';
     var type = this.getFieldValue('TYPE');
+    if (type === 'CUSTOM') {
+        if (this.getField('RETRUN_TYPE')) {
+            type = this.getFieldValue('RETRUN_TYPE');
+        } else {
+            type = 'void';
+        }
+    }
     if (returnValue) {
         returnValue = '  return ' + returnValue + ';\n';
     }
