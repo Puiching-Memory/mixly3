@@ -1,6 +1,6 @@
 import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
-import { sensor_mixgo_pin_near } from './MixGo';
+import { sensor_mixgo_pin_near } from './mixgo';
 
 const SENSOR_HUE = 40;
 const ACTUATOR_HUE = 100;

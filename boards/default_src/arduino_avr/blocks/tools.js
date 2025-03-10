@@ -101,56 +101,6 @@ export const tool_modulus = {
     }
 };
 
-export const uno_pin = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../media/boards/uno.png'), 525, 372, "*"));
-        this.setColour(TOOLS_HUE);
-        this.setTooltip();
-        this.setHelpUrl();
-    }
-};
-
-export const nano_pin = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../media/boards/nano.png'), 525, 368, "*"));
-        this.setColour(TOOLS_HUE);
-        this.setTooltip();
-        this.setHelpUrl();
-    }
-};
-
-export const mega_pin = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../media/boards/mega.png'), 525, 736, "*"));
-        this.setColour(TOOLS_HUE);
-        this.setTooltip();
-        this.setHelpUrl();
-    }
-};
-
-export const promini_pin = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../media/boards/ProMini.png'), 525, 371, "*"));
-        this.setColour(TOOLS_HUE);
-        this.setTooltip();
-        this.setHelpUrl();
-    }
-};
-
-export const leonardo_pin = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../media/boards/leonardo.png'), 525, 371, "*"));
-        this.setColour(TOOLS_HUE);
-        this.setTooltip();
-        this.setHelpUrl();
-    }
-};
-
 //获取两个日期差值
 export const get_the_number_of_days_between_the_two_dates = {
     init: function () {

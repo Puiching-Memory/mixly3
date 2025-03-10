@@ -1,3 +1,4 @@
+import * as goog from 'goog';
 import { Workspace, ContextMenu } from 'mixly';
 import FSArduEsp32Handler from './fs-board-handler';
 import { Msg } from 'blockly/core';

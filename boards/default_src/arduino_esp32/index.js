@@ -62,13 +62,13 @@ import {
     ArduinoESP32InoutBlocks,
     ArduinoESP32MixePiBlocks,
     ArduinoESP32MixGoBlocks,
+    ArduinoESP32PinoutBlocks,
     ArduinoESP32PinsBlocks,
     ArduinoESP32PocketCardBlocks,
     ArduinoESP32SensorBlocks,
     ArduinoESP32SerialBlocks,
     ArduinoESP32SidanBlocks,
     ArduinoESP32StorageBlocks,
-    ArduinoESP32ToolsBlocks,
     ArduinoESP32ActuatorGenerators,
     ArduinoESP32CommunicateGenerators,
     ArduinoESP32ControlGenerators,
@@ -77,13 +77,13 @@ import {
     ArduinoESP32InoutGenerators,
     ArduinoESP32MixePiGenerators,
     ArduinoESP32MixGoGenerators,
+    ArduinoESP32PinoutGenerators,
     ArduinoESP32PinsGenerators,
     ArduinoESP32PocketCardGenerators,
     ArduinoESP32SensorGenerators,
     ArduinoESP32SerialGenerators,
     ArduinoESP32SidanGenerators,
     ArduinoESP32StorageGenerators,
-    ArduinoESP32ToolsGenerators,
     ArduinoESP32ZhHans,
     ArduinoESP32ZhHant,
     ArduinoESP32En
@@ -140,13 +140,13 @@ Object.assign(
     ArduinoESP32InoutBlocks,
     ArduinoESP32MixePiBlocks,
     ArduinoESP32MixGoBlocks,
+    ArduinoESP32PinoutBlocks,
     ArduinoESP32PinsBlocks,
     ArduinoESP32PocketCardBlocks,
     ArduinoESP32SensorBlocks,
     ArduinoESP32SerialBlocks,
     ArduinoESP32SidanBlocks,
-    ArduinoESP32StorageBlocks,
-    ArduinoESP32ToolsBlocks
+    ArduinoESP32StorageBlocks
 );
 
 Object.assign(
@@ -180,11 +180,11 @@ Object.assign(
     ArduinoESP32InoutGenerators,
     ArduinoESP32MixePiGenerators,
     ArduinoESP32MixGoGenerators,
+    ArduinoESP32PinoutGenerators,
     ArduinoESP32PinsGenerators,
     ArduinoESP32PocketCardGenerators,
     ArduinoESP32SensorGenerators,
     ArduinoESP32SerialGenerators,
     ArduinoESP32SidanGenerators,
-    ArduinoESP32StorageGenerators,
-    ArduinoESP32ToolsGenerators
+    ArduinoESP32StorageGenerators
 );

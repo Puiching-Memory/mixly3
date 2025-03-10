@@ -1060,7 +1060,7 @@
     },
     "Labplus mPython": {
         "group": "ESP32",
-        "xmlPath": "./xml/esp32.xml",
+        "xmlPath": "./xml/mpython.xml",
         "key": "esp32:esp32:mPython",
         "config": [
             {

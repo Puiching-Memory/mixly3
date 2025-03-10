@@ -11,6 +11,7 @@ import * as ArduinoAVRInoutBlocks from './blocks/inout';
 import * as ArduinoAVRListsBlocks from './blocks/lists';
 import * as ArduinoAVRLogicBlocks from './blocks/logic';
 import * as ArduinoAVRMathBlocks from './blocks/math';
+import * as ArduinoAVRPinoutBlocks from './blocks/pinout';
 import * as ArduinoAVRPinsBlocks from './blocks/pins';
 import * as ArduinoAVRProceduresBlocks from './blocks/procedures';
 import * as ArduinoAVRScoopBlocks from './blocks/scoop';
@@ -32,6 +33,7 @@ import * as ArduinoAVRInoutGenerators from './generators/inout';
 import * as ArduinoAVRListsGenerators from './generators/lists';
 import * as ArduinoAVRLogicGenerators from './generators/logic';
 import * as ArduinoAVRMathGenerators from './generators/math';
+import * as ArduinoAVRPinoutGenerators from './generators/pinout';
 import * as ArduinoAVRPinsGenerators from './generators/pins';
 import * as ArduinoAVRProceduresGenerators from './generators/procedures';
 import * as ArduinoAVRScoopGenerators from './generators/scoop';
@@ -55,6 +57,7 @@ export {
     ArduinoAVRListsBlocks,
     ArduinoAVRLogicBlocks,
     ArduinoAVRMathBlocks,
+    ArduinoAVRPinoutBlocks,
     ArduinoAVRPinsBlocks,
     ArduinoAVRProceduresBlocks,
     ArduinoAVRScoopBlocks,
@@ -75,6 +78,7 @@ export {
     ArduinoAVRListsGenerators,
     ArduinoAVRLogicGenerators,
     ArduinoAVRMathGenerators,
+    ArduinoAVRPinoutGenerators,
     ArduinoAVRPinsGenerators,
     ArduinoAVRProceduresGenerators,
     ArduinoAVRScoopGenerators,

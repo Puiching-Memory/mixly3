@@ -537,15 +537,6 @@ export const tool_modulus = function (_, generator) {
     return [code, generator.ORDER_ATOMIC];
 }
 
-export const nano_pin = function () {
-    return "";
-}
-
-export const promini_pin = nano_pin;
-export const leonardo_pin = nano_pin;
-export const uno_pin = nano_pin;
-export const mega_pin = nano_pin;
-
 //获取两个日期差值
 export const get_the_number_of_days_between_the_two_dates = function (_, generator) {
     var year_start = generator.valueToCode(this, 'year_start', generator.ORDER_ATOMIC);

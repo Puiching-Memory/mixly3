@@ -283,6 +283,7 @@ pins["arduino_esp32"];
 
 pins['Arduino HandBit'] =
 pins['mPython'] =
+pins['Labplus mPython'] =
 pins["esp32_handbit"];
 
 pins['Arduino MixGo'] =

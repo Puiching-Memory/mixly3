@@ -3340,6 +3340,10 @@
   <block type="esp32_cam_pin" m-show="esp32cam"></block>
   <!-- nodemcu 32s管脚图 -->
   <block type="nodemcu_32s_pin" m-show="nodemcu-32s"></block>
+  <block type="handbit_A" m-show="mPython"></block>
+  <block type="handbit_B" m-show="mPython"></block>
+  <block type="handbit_pin_A" m-show="mPython"></block>
+  <block type="handbit_pin_B" m-show="mPython"></block>
   <block type="esp32c3_pin" m-show="esp32c3"></block>
   <block type="core_esp32c3_pin" m-show="esp32c3@core"></block>
   <block type="esp32s2_pin" m-show="esp32s2"></block>

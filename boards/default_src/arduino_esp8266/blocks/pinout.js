@@ -1,12 +1,12 @@
 import * as Blockly from 'blockly/core';
 
-const TOOLS_HUE = "#555555";
+const PINOUT_HUE = '#555555';
 
 export const esp8266_pin = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../media/ESP8266-NodeMCU.png'), 525, 346, "*"));
-        this.setColour(TOOLS_HUE);
+            .appendField(new Blockly.FieldImage(require('../media/boards/NodeMCU.png'), 510, 346, '*'));
+        this.setColour(PINOUT_HUE);
         this.setTooltip();
         this.setHelpUrl();
     }
@@ -15,8 +15,8 @@ export const esp8266_pin = {
 export const wemos_d1_mini_pin = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require('../media/ESP8266-WeMos-D1-Mini.png'), 525, 264, "*"));
-        this.setColour(TOOLS_HUE);
+            .appendField(new Blockly.FieldImage(require('../media/boards/WeMosD1Mini.png'), 510, 264, '*'));
+        this.setColour(PINOUT_HUE);
         this.setTooltip();
         this.setHelpUrl();
     }

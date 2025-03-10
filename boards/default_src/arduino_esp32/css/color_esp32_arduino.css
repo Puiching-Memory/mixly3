@@ -98,6 +98,42 @@ div.blocklyToolboxDiv>div.blocklyToolboxContents>div:nth-child(10)>div.blocklyTr
     background-size: 100% auto;
 }
 
+/*子模块的第一个图标（未选中时）*/
+div.blocklyToolboxDiv>div.blocklyToolboxContents>div:nth-child(10)>div:nth-child(2)>div:nth-child(1)>div.blocklyTreeRow>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon {
+    background: url('../../../../common/media/mark/resources.png') no-repeat;
+    background-size: 100% auto;
+}
+
+/*子模块的第一个图标（选中时）*/
+div.blocklyToolboxDiv>div.blocklyToolboxContents>div:nth-child(10)>div:nth-child(2)>div:nth-child(1)>div.blocklyTreeRow.blocklyTreeSelected>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon {
+    background: url('../../../../common/media/mark/resources2.png') no-repeat;
+    background-size: 100% auto;
+}
+
+/*子模块的第二个图标（未选中时）*/
+div.blocklyToolboxDiv>div.blocklyToolboxContents>div:nth-child(10)>div:nth-child(2)>div:nth-child(2)>div.blocklyTreeRow>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon {
+    background: url('../../../../common/media/mark/resources.png') no-repeat;
+    background-size: 100% auto;
+}
+
+/*子模块的第二个图标（选中时）*/
+div.blocklyToolboxDiv>div.blocklyToolboxContents>div:nth-child(10)>div:nth-child(2)>div:nth-child(2)>div.blocklyTreeRow.blocklyTreeSelected>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon {
+    background: url('../../../../common/media/mark/resources2.png') no-repeat;
+    background-size: 100% auto;
+}
+
+/*子模块的第三个图标（未选中时）*/
+div.blocklyToolboxDiv>div.blocklyToolboxContents>div:nth-child(10)>div:nth-child(2)>div:nth-child(3)>div.blocklyTreeRow>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon {
+    background: url('../../../../common/media/mark/resources.png') no-repeat;
+    background-size: 100% auto;
+}
+
+/*子模块的第三个图标（选中时）*/
+div.blocklyToolboxDiv>div.blocklyToolboxContents>div:nth-child(10)>div:nth-child(2)>div:nth-child(3)>div.blocklyTreeRow.blocklyTreeSelected>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon {
+    background: url('../../../../common/media/mark/resources2.png') no-repeat;
+    background-size: 100% auto;
+}
+
 div.blocklyToolboxDiv>div.blocklyToolboxContents>div:nth-child(11)>div.blocklyTreeRow>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon {
     background: url('../../../../common/media/mark/sensor.png') no-repeat;
     background-size: 100% auto;

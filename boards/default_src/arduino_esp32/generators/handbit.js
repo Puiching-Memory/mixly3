@@ -8,7 +8,6 @@ export const handbit_button_is_pressed = function (_, generator) {
 }
 
 export const handbit_light = sensor_light;
-
 export const handbit_sound = sensor_sound;
 
 // 传感器_重力感应块
