@@ -56,23 +56,6 @@ class EditorMix extends EditorBase {
             'html/editor/editor-mix-btns.html',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/editor/editor-mix-btns.html')))
         );
-
-        this.BLOCKLY_IGNORE_EVENTS = [
-            Blockly.Events.UI,
-            Blockly.Events.VIEWPORT_CHANGE,
-            Blockly.Events.COMMENT_CHANGE,
-            Blockly.Events.COMMENT_CREATE,
-            Blockly.Events.COMMENT_DELETE,
-            Blockly.Events.COMMENT_MOVE,
-            Blockly.Events.TRASHCAN_OPEN,
-            Blockly.Events.CLICK,
-            Blockly.Events.SELECTED,
-            Blockly.Events.THEME_CHANGE,
-            Blockly.Events.BUBBLE_OPEN,
-            Blockly.Events.THEME_CHANGE,
-            Blockly.Events.TOOLBOX_ITEM_SELECT,
-            Blockly.Events.BLOCK_DRAG
-        ];
     }
 
     #language_ = null;
@@ -365,7 +348,11 @@ class EditorMix extends EditorBase {
         this.codeChangeListener = blocklyWorkspace.addChangeListener((event) => {
             const blockPage = this.getPage('block');
             const codePage = this.getPage('code');
-            if (EditorMix.BLOCKLY_IGNORE_EVENTS.includes(event.type)) {
+            if (
+                event.isUiEvent ||
+                event.type == Blockly.Events.FINISHED_LOADING ||
+                blocklyWorkspace.isDragging()
+            ) {
                 return;
             }
             this.addDirty();
