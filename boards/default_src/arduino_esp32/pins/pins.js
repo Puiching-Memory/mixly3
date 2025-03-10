@@ -257,9 +257,6 @@ pins["OLIMEX ESP32-EVB"] =
 pins["OLIMEX ESP32-GATEWAY"] =
 pins["OLIMEX ESP32-PoE"] =
 pins["ThaiEasyElec's ESPino32"] =
-pins["M5Stick-C"] =
-pins["M5Stack-CORE"] =
-pins["M5Stack-FIRE"] =
 pins["ODROID ESP32"] =
 pins["Heltec_WIFI_Kit_32"] =
 pins["Heltec_WIFI_LoRa_32"] =
@@ -280,6 +277,11 @@ pins['MixGo CE'] =
 pins['MixGo Car'] =
 pins['AI Thinker ESP32-CAM'] =
 pins["arduino_esp32"];
+
+pins["M5Stick-C"] =
+pins["M5Stack-CORE"] =
+pins["M5Stack-FIRE"] =
+pins["m5stick_c"];
 
 pins['Arduino HandBit'] =
 pins['mPython'] =
