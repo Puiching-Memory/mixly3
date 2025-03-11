@@ -66,6 +66,32 @@
     "pythonToBlockly": false,
     "web": {
         "devices": {
+            "micropython:esp32c2:mixgo_mini": {
+                "serial": {
+                    "filters": [
+                        {
+                            "usbVendorId": 6790,
+                            "usbProductId": 65036
+                        }
+                    ]
+                },
+                "hid": {
+                    "filters": [
+                        {
+                            "vendorId": 6790,
+                            "productId": 65036
+                        }
+                    ]
+                },
+                "usb": {
+                    "filters": [
+                        {
+                            "vendorId": 6790,
+                            "productId": 65036
+                        }
+                    ]
+                }
+            },
             "serial": true,
             "hid": true,
             "usb": true
