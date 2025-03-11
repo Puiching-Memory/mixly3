@@ -1,14 +1,17 @@
 goog.loadJs('web', () => {
 
 goog.require('Mixly.Serial');
+goog.require('Mixly.Config');
 goog.require('Mixly.Web');
 goog.provide('Mixly.Web.HID');
 
 const {
     Serial,
+    Config,
     Web
 } = Mixly;
 
+const { SELECTED_BOARD } = Config;
 
 class WebHID extends Serial {
     static {
@@ -31,9 +34,13 @@ class WebHID extends Serial {
         }
 
         this.requestPort = async function () {
-            const devices = await navigator.hid.requestDevice({
-                filters: []
-            });
+            let options = SELECTED_BOARD?.web?.devices?.hid;
+            if (options && typeof(options) !== 'object') {
+                options = {
+                    filters: []
+                };
+            }
+            const devices = await navigator.hid.requestDevice(options);
             if (!devices.length) {
                 return;
             }

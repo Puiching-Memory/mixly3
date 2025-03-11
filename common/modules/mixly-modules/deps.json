@@ -1628,6 +1628,7 @@
         "path": "/web/hid.js",
         "require": [
             "Mixly.Serial",
+            "Mixly.Config",
             "Mixly.Web"
         ],
         "provide": [
@@ -1659,6 +1660,7 @@
         "require": [
             "Mixly.Serial",
             "Mixly.Debug",
+            "Mixly.Config",
             "Mixly.Web"
         ],
         "provide": [
@@ -1670,6 +1672,7 @@
         "require": [
             "Mixly.Serial",
             "Mixly.Registry",
+            "Mixly.Config",
             "Mixly.Web"
         ],
         "provide": [
@@ -1682,6 +1685,7 @@
             "DAPjs",
             "Mixly.Serial",
             "Mixly.Registry",
+            "Mixly.Config",
             "Mixly.Web"
         ],
         "provide": [

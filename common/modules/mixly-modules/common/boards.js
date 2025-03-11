@@ -170,6 +170,9 @@ Boards.changeTo = (boardName) => {
             }, {
                 type: 'upload',
                 obj: BOARD.web.upload
+            }, {
+                type: 'devices',
+                obj: BOARD.web.devices
             }]) {
             if (!(value.obj instanceof Object)) {
                 continue;

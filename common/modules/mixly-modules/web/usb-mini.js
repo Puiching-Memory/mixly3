@@ -2,14 +2,18 @@ goog.loadJs('web', () => {
 
 goog.require('Mixly.Serial');
 goog.require('Mixly.Registry');
+goog.require('Mixly.Config');
 goog.require('Mixly.Web');
 goog.provide('Mixly.Web.USBMini');
 
 const {
     Serial,
     Registry,
+    Config,
     Web
 } = Mixly;
+
+const { SELECTED_BOARD } = Config;
 
 class USBMini extends Serial {
     static {
@@ -33,9 +37,13 @@ class USBMini extends Serial {
         }
 
         this.requestPort = async function () {
-            const device = await navigator.usb.requestDevice({
-                filters: []
-            });
+            let options = SELECTED_BOARD?.web?.devices?.usb;
+            if (options && typeof(options) !== 'object') {
+                options = {
+                    filters: []
+                };
+            }
+            const device = await navigator.usb.requestDevice(options);
             this.addPort(device);
             this.refreshPorts();
         }

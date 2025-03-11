@@ -2,15 +2,18 @@ goog.loadJs('web', () => {
 
 goog.require('Mixly.Serial');
 goog.require('Mixly.Debug');
+goog.require('Mixly.Config');
 goog.require('Mixly.Web');
 goog.provide('Mixly.Web.SerialPort');
 
 const {
     Serial,
     Debug,
+    Config,
     Web
 } = Mixly;
 
+const { SELECTED_BOARD } = Config;
 
 class WebSerialPort extends Serial {
     static {
@@ -33,7 +36,13 @@ class WebSerialPort extends Serial {
         }
 
         this.requestPort = async function () {
-            const serialport = await navigator.serial.requestPort();
+            let options = SELECTED_BOARD?.web?.devices?.serial;
+            if (options && typeof(options) !== 'object') {
+                options = {
+                    filters: []
+                };
+            }
+            const serialport = await navigator.serial.requestPort(options);
             this.addPort(serialport);
             this.refreshPorts();
         }
