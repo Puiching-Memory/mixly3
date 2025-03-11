@@ -357,11 +357,6 @@ class EditorAce extends EditorBase {
     focus() {
         this.#editor_.focus();
     }
-
-    onUnmounted() {
-        this.scrollToTop();
-        super.onUnmounted();
-    }
 }
 
 Mixly.EditorAce = EditorAce;
