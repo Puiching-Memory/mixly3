@@ -37,7 +37,6 @@ class Drag {
         this.$last = $($children[1]);
         this.config.elem = [ this.$first, this.$last ];
         this.$dragElem = $('<div class="drag-elem"></div>');
-        this.$dragElemShadow = $('<div class="drag-elem-shadow"></div>');
         const dragType = this.config.type === 'h'? 's' : 'w';
         this.$container.addClass(`drag-${dragType}-container`);
         this.shown = Drag.Extend.POSITIVE;
@@ -63,7 +62,6 @@ class Drag {
             this.shown = Drag.Extend.NEGATIVE;
         }
         this.$container.prepend(this.$dragElem);
-        this.$container.prepend(this.$dragElemShadow);
         this.size = [`${size}%`, `${100 - size}%`];
         if (size >=100 || size <=0) {
             const startExitFullSize = parseFloat(this.config.startExitFullSize);
@@ -87,17 +85,22 @@ class Drag {
         const dragElem = this.$dragElem[0];
         const container = this.$container[0];
         const { type, min, elem, full } = this.config;
+        dragElem.onpointerdown = (elemEvent) => {
+            const { currentTarget } = elemEvent;
+            currentTarget.setPointerCapture(elemEvent.pointerId);
+        };
+        dragElem.onpointerup = (elemEvent) => {
+            const { currentTarget } = elemEvent;
+            currentTarget.releasePointerCapture(elemEvent.pointerId);
+        };
         dragElem.onmousedown = (elemEvent) => {
-            this.$dragElemShadow.addClass('active');
             let dis, prev;
             if (type === 'h') {
                 dis = elemEvent.clientY;
                 dragElem.top = dragElem.offsetTop;
-                $('body').addClass('drag-s-resize');
             } else {
                 dis = elemEvent.clientX;
                 dragElem.left = dragElem.offsetLeft;
-                $('body').addClass('drag-w-resize');
             }
             const prevSize = this.size;
 
@@ -135,12 +138,6 @@ class Drag {
                 return false;
             };
             document.onmouseup = () => {
-                this.$dragElemShadow.removeClass('active');
-                if (type === 'h') {
-                    $('body').removeClass('drag-s-resize');
-                } else {
-                    $('body').removeClass('drag-w-resize');
-                }
                 this.prevSize = prevSize;
                 document.onmousemove = null;
                 document.onmouseup = null;
@@ -245,8 +242,9 @@ class Drag {
     dispose() {
         this.resetEvent();
         this.$dragElem[0].onmousedown = null;
+        this.$dragElem[0].onpointerdown = null;
+        this.$dragElem[0].onpointerup = null;
         this.$dragElem.remove();
-        this.$dragElemShadow.remove();
     }
 
     bind(type, func) {

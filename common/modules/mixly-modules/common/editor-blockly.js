@@ -78,6 +78,16 @@ class EditorBlockly extends EditorBase {
                 } : {}
             });
 
+            const $blocklyScrollbarHandle = this.$blockly.find('.blocklyScrollbarHandle');
+            $blocklyScrollbarHandle.on('pointerdown', (event) => {
+                const { currentTarget } = event;
+                currentTarget.setPointerCapture(event.pointerId);
+            });
+            $blocklyScrollbarHandle.on('pointerup', (event) => {
+                const { currentTarget } = event;
+                currentTarget.releasePointerCapture(event.pointerId);
+            });
+
             this.editor.registerToolboxCategoryCallback(
                 Blockly.Variables.CATEGORY_NAME,
                 (...args) => Blockly.Variables.flyoutCategory(...args)
