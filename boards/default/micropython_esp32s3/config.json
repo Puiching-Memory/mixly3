@@ -8,13 +8,13 @@
         "type": "command",
         "portSelect": "all",
         "micropython:esp32s3:mixgo_sant": {
-            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/Mixgo_Sant-v1.23.0.bin\" 0xE00000 \"{indexPath}/../micropython/build/HZK16_GBK.bin\""
+            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/Mixgo_Sant_lib-v1.23.0.bin\" 0xE00000 \"{indexPath}/../micropython/build/HZK16_GBK.bin\""
         },
         "micropython:esp32s3:mixgo_nova": {
-            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/Mixgo_Nova-v1.21.0.bin\" 0x700000 \"{indexPath}/../micropython/build/HZK12.bin\""
+            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/Mixgo_Nova_lib-v1.21.0.bin\" 0x700000 \"{indexPath}/../micropython/build/HZK12.bin\""
         },
         "micropython:esp32s3:generic": {
-            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after=no_reset write_flash 0x0 \"{indexPath}/build/Mixgo_Nova-v1.21.0.bin\""
+            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after=no_reset write_flash 0x0 \"{indexPath}/build/Mixgo_Nova_lib-v1.21.0.bin\""
         }
     },
     "upload": {
@@ -26,7 +26,7 @@
         ],
         "command": "\"{ampy}\" -p {com} -d 1 -r \"{reset}\" put \"{indexPath}/build/upload\"",
         "filePath": "{indexPath}/build/upload/main.py",
-        "copyLib": true,
+        "copyLib": false,
         "reset": []
     },
     "nav": {
@@ -52,7 +52,7 @@
     "lib": {
         "mixly": {
             "url": [
-                "http://download.mixlylibs.cloud/mixly3-packages/cloud-libs/micropython_esp32c3/libs.json"
+                "http://download.mixlylibs.cloud/mixly3-packages/cloud-libs/micropython_esp32s3/libs.json"
             ]
         }
     },

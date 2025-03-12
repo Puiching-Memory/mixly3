@@ -6,11 +6,18 @@
     "burn": {
         "type": "command",
         "portSelect": "all",
-        "micropython:esp32c2:mixgo_mini": {
-            "command": "\"{esptool}\" --chip esp32c2 --port {com} --baud 115200 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32c2 --port {com} --baud 460800 --after=no_reset_stub write_flash 0x0 \"{indexPath}/build/Mixgo_Mini-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
-        },
-        "micropython:esp32c2:generic_2M": {
-            "command": "\"{esptool}\" --chip esp32c2 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c2 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/Mixgo_Mini-v1.23.0-26mhz.bin\" "
+        "micropython:educore:educore": {
+            "command": "\"{esptool}\" --chip esp32c2 --port {com} --baud 115200 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32c2 --port {com} --baud 460800 --after=no_reset_stub write_flash 0x0 \"{indexPath}/build/Mixgo_Mini_lib-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\"",
+            "special": [
+                {
+                    "name": "Firmware No Ble With SSL",
+                    "command": "\"{esptool}\" --chip esp32c2 --port {com} --baud 115200 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32c2 --port {com} --baud 460800 --after=no_reset_stub write_flash 0x0 \"{indexPath}/build/Mixgo_Mini_lib-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
+                },
+                {
+                    "name": "Firmware With Ble No SSL",
+                    "command": "\"{esptool}\" --chip esp32c2 --port {com} --baud 115200 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32c2 --port {com} --baud 460800 --after=no_reset_stub write_flash 0x0 \"{indexPath}/build/Mixgo_Mini_lib_ble-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
+                }
+            ]
         }
     },
     "upload": {
@@ -22,7 +29,7 @@
         ],
         "command": "\"{ampy}\" -p {com} -d 1 -r \"{reset}\" put \"{indexPath}/build/upload\"",
         "filePath": "{indexPath}/build/upload/main.py",
-        "copyLib": true,
+        "copyLib": false,
         "reset": []
     },
     "nav": {
@@ -48,7 +55,7 @@
     "lib": {
         "mixly": {
             "url": [
-                "http://download.mixlylibs.cloud/mixly3-packages/cloud-libs/micropython_esp32c3/libs.json"
+                "http://download.mixlylibs.cloud/mixly3-packages/cloud-libs/micropython_esp32c2/libs.json"
             ]
         }
     },
@@ -61,7 +68,7 @@
         },
         "burn": {
             "erase": true,
-            "micropython:esp32c2:mixgo_mini": {
+            "micropython:educore:educore": {
                 "binFile": [
                     {
                         "offset": "0x0000",
@@ -98,14 +105,6 @@
                                 "path": "../micropython/build/HZK12.bin"
                             }
                         ]
-                    }
-                ]
-            },
-            "micropython:esp32c2:generic_2M": {
-                "binFile": [
-                    {
-                        "offset": "0x0000",
-                        "path": "./build/Mixgo_Mini-v1.23.0-26mhz.bin"
                     }
                 ]
             }

@@ -10,16 +10,16 @@
         "type": "command",
         "portSelect": "all",
         "micropython:esp32c3:mixgo_cc": {
-            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/Mixgo_CC-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
+            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/Mixgo_CC_lib-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
         },
         "micropython:esp32c3:mixgo_me": {
-            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/Mixgo_ME-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
+            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/Mixgo_ME_lib-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
         },
         "micropython:esp32c3:mixgocar_c3": {
-            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/Mixgo_Car-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
+            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/Mixgo_Car_lib-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
         },
         "micropython:esp32c3:generic": {
-            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/Generic_C3_UART-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
+            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/Generic_C3_UART_lib-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
         }
     },
     "upload": {
@@ -31,7 +31,7 @@
         ],
         "command": "\"{ampy}\" -p {com} -d 1 -r \"{reset}\" put \"{indexPath}/build/upload\"",
         "filePath": "{indexPath}/build/upload/main.py",
-        "copyLib": true,
+        "copyLib": false,
         "reset": []
     },
     "nav": {

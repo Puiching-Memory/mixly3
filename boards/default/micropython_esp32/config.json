@@ -10,16 +10,16 @@
         "type": "command",
         "portSelect": "all",
         "micropython:esp32:mixgo": {
-            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/Mixgo-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
+            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/Mixgo_lib-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
         },
         "micropython:esp32:mixgo_pe": {
-            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/Mixgo_PE-v1.23.0.bin\" 0x700000 \"{indexPath}/../micropython/build/HZK12.bin\""
+            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/Mixgo_PE_lib-v1.23.0.bin\" 0x700000 \"{indexPath}/../micropython/build/HZK12.bin\""
         },
         "micropython:esp32:generic": {
-            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/Generic_ESP32-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
+            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/Generic_ESP32_lib-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
         },
         "micropython:esp32:mpython": {
-            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/mPython-v1.23.0.bin\" 0x700000 \"{indexPath}/../micropython/build/HZK12.bin\""
+            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/mPython_lib-v1.23.0.bin\" 0x700000 \"{indexPath}/../micropython/build/HZK12.bin\""
         }
     },
     "upload": {
@@ -31,7 +31,7 @@
         ],
         "command": "\"{ampy}\" -p {com} -d 1 -r \"{reset}\" put \"{indexPath}/build/upload\"",
         "filePath": "{indexPath}/build/upload/main.py",
-        "copyLib": true,
+        "copyLib": false,
         "reset": []
     },
     "nav": {

@@ -9,13 +9,13 @@
         "type": "command",
         "portSelect": "all",        
         "micropython:esp32c3:feiyi": {
-            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/Mixgo_FeiYi-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
+            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/Mixgo_FeiYi_lib-v1.23.0.bin\" 0X3A0000 \"{indexPath}/../micropython/build/HZK12.bin\""
         },
         "micropython:esp32:rm_e1": {
-            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/RM_E1-v1.23.0.bin\""
+            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/RM_E1_lib-v1.23.0.bin\""
         },
         "micropython:esp32:mixbot": {
-            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixBot-v1.23.0.bin\""
+            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixBot_lib-v1.23.0.bin\""
         }
     },
     "upload": {
@@ -27,7 +27,7 @@
         ],
         "command": "\"{ampy}\" -p {com} -d 1 -r \"{reset}\" put \"{indexPath}/build/upload\"",
         "filePath": "{indexPath}/build/upload/main.py",
-        "copyLib": true,
+        "copyLib": false,
         "reset": [],
         "micropython:esp32c3:feiyi": {
             "reset": [
