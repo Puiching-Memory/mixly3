@@ -27,7 +27,7 @@
             "{indexPath}/../micropython/build/lib",
             "{indexPath}/build/lib"
         ],
-        "command": "\"{ampy}\" -p {com} -d 1 -r \"{reset}\" put \"{indexPath}/build/upload\"",
+        "command": "\"{ampy}\" -p {com} -d 1 -r \"{reset}\" put \"{indexPath}/build/upload/main.py\"",
         "filePath": "{indexPath}/build/upload/main.py",
         "copyLib": false,
         "reset": []
