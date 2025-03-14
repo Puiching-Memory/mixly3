@@ -85,7 +85,7 @@ onboard_rgb = NeoPixel(Pin(21), 4)
 
 '''1Buzzer-Music'''
 from music import MIDI
-onboard_music = MIDI(16)
+onboard_music = MIDI(16, pa_ctrl=onboard_asr.pa_ctrl)
 
 '''5KEY_Sensor'''
 class KEYSensor:

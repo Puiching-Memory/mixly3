@@ -225,7 +225,7 @@
             "micropython"
         ],
         "__file__": true,
-        "__size__": 2484,
+        "__size__": 2770,
         "__name__": "ci130x.py"
     },
     "debugnet": {
@@ -540,7 +540,7 @@
             "machine"
         ],
         "__file__": true,
-        "__size__": 6726,
+        "__size__": 6994,
         "__name__": "music.py"
     },
     "mxc6655xa": {
@@ -668,7 +668,7 @@
             "espnow"
         ],
         "__file__": true,
-        "__size__": 5454,
+        "__size__": 5905,
         "__name__": "radio.py"
     },
     "rc522": {

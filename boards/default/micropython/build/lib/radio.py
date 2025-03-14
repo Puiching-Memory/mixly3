@@ -21,6 +21,7 @@ class ESPNow(espnow.ESPNow):
         self._channel = channel
         self._txpower = txpower
         self._on_handle = {}
+        self._once_irq = True
         self._nic = network.WLAN(network.STA_IF) #if version else network.WLAN(network.AP_IF)
         self._nic.active(True)
         self._nic.config(channel=self._channel, txpower=self._txpower)
@@ -46,7 +47,10 @@ class ESPNow(espnow.ESPNow):
                 self._nic.active(True)
             elif err.args[1] == 'ESP_ERR_ESPNOW_NOT_FOUND':
                 super().add_peer(_peer, channel=self._channel)
-                return super().send(_peer, str(msg))
+                try:
+                    return super().send(_peer, str(msg))
+                except:
+                    raise OSError("ESPNOW channel ({}) conflicts with WiFi channel ({})".format(self._channel, self.channel))
             elif err.args[1] == 'ESP_ERR_ESPNOW_NO_MEM':
                 raise OSError("internal ESP-NOW buffers are full")
             elif err.args[1] == 'ESP_ERR_ESPNOW_ARG':
@@ -65,6 +69,8 @@ class ESPNow(espnow.ESPNow):
     def set_channel(self, channel=None, txpower=None):
         self._channel = self._channel if channel is None else channel
         self._nic.config(channel=self._channel, txpower=self._txpower if txpower is None else txpower)
+        if self._channel != self.channel:
+            print("Warning: The set channel ({}) does not match the actual channel ({})".format(self._channel, self.channel))
 
     def _cb_handle0(self, event_code, data):
         '''Callback processing conversion'''
@@ -112,12 +118,14 @@ class ESPNow(espnow.ESPNow):
                 self._on_handle(hexlify(host).decode(), msg.decode())
 
     def recv_cb(self, *args):
-        '''Receive callback'''
-        if isinstance(args[0], str):
-            self._on_handle[args[0]] = args[1]
+        '''Receive callback (single dictionary or lists)'''
+        if len(args) >= 2:
+            self._on_handle.update({args[0]: args[1]})
         else:
             self._on_handle = args[0]
-        if args[0]:
+
+        if self._once_irq:
+            self._once_irq = False
             if version == 0:
                 self.irq(self._cb_handle0)
             else:

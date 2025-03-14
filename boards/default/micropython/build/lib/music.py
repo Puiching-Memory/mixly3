@@ -28,12 +28,13 @@ normal_tone = {
 Letter = 'ABCDEFG#R'
 
 class MIDI():
-	def __init__(self,pin,volume=100,invert=0):
+	def __init__(self, pin, volume=100, invert=0, pa_ctrl=None):
 		self.reset()
 		self._invert=invert
 		self._pin = pin
 		self._volume = volume
 		self._pwm = None
+		self._pa_ctrl = pa_ctrl
 
 	def set_volume(self,volume):
 		if not 0 <= volume <= 100:
@@ -97,6 +98,7 @@ class MIDI():
 			tone = tone[:pos]
 
 	def play(self, tune, duration=None):
+		if self._pa_ctrl: self._pa_ctrl(1)
 		self._pwm = PWM(Pin(self._pin), duty=1023 if self._invert else 0)
 		if duration is None:
 			self.set_default(tune[0])
@@ -112,25 +114,29 @@ class MIDI():
 			sleep_ms(midi[1])
 			self._pwm.freq(400000)
 			sleep_ms(1)
+		if self._pa_ctrl: self._pa_ctrl(0)
 		self._pwm.deinit()
 		sleep_ms(10)
 
 	def pitch(self, freq):
+		if self._pa_ctrl: self._pa_ctrl(1)
 		self._pwm = PWM(Pin(self._pin))
 		self._pwm.duty(1023-self._volume) if self._invert else self._pwm.duty(self._volume)
 		self._pwm.freq(int(freq)) 
 
 	def pitch_time(self, freq, delay):
+		if self._pa_ctrl: self._pa_ctrl(1)
 		self._pwm = PWM(Pin(self._pin))
 		self._pwm.duty(1023-self._volume) if self._invert else self._pwm.duty(self._volume)
 		self._pwm.freq(int(freq))  
 		sleep_ms(delay)
+		if self._pa_ctrl: self._pa_ctrl(0)
 		self._pwm.deinit()
 		sleep_ms(10)
 		
 	def stop(self):
-		if self._pwm:
-			self._pwm.deinit()
+		if self._pa_ctrl: self._pa_ctrl(0)
+		if self._pwm: self._pwm.deinit()
 		sleep_ms(10)
 
 	DADADADUM=['r4:2','g','g','g','eb:8','r:2','f','f','f','d:8']

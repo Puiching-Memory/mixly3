@@ -14,6 +14,7 @@ _CI_ID_GET			= const(0x02)
 _CI_ID_SET			= const(0x03)
 _CI_ID_NUM			= const(0x06)
 _CI_ID_CLE			= const(0x07)
+_CI_ID_PACTRL		= const(0x09)
 _CI_ID_END			= const(0x5A)
 
 class CI130X:
@@ -24,7 +25,11 @@ class CI130X:
 		try:
 			self._rreg(_CI_ID_GET, 3)
 		except:
-			raise AttributeError("Cannot find a CI130X")
+			try: #C130X 启动慢，加延时判断
+				time.sleep_ms(500)
+				self._rreg(_CI_ID_GET, 3)
+			except:
+				raise AttributeError("Cannot find a CI130X")
 
 	def _wreg(self, reg):
 		'''Write memory address'''
@@ -83,3 +88,7 @@ class CI130X:
 		if end is not None: 
 			self.play_id(end)
 			time.sleep_ms(delay)
+
+	def pa_ctrl(self, value=True, delay=10):
+		self._wreg(bytes([_CI_ID_PACTRL, int(value), 0, _CI_ID_END]))
+		if value: time.sleep_ms(delay)
