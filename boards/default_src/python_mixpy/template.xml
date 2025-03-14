@@ -3728,4 +3728,17 @@
       </value>
     </block>
   </category>
+  <category id="catFactory" name="Factory" colour="#777777">
+    <block type="factory_import"></block>
+    <block type="factory_from_import"></block>
+    <block type="factory_function_noreturn"></block>
+    <block type="factory_function_return"></block>
+    <block type="factory_declare"></block>
+    <block type="factory_callMethod_noreturn"></block>
+    <block type="factory_callMethod_return"></block>
+    <block type="factory_block"></block>
+    <block type="factory_block_return"></block>
+    <block type="factory_block_with_textarea"></block>
+    <block type="factory_block_return_with_textarea"></block>
+  </category>
 </xml>
