@@ -36,7 +36,6 @@ Socket.init = function () {
     const socket = mixlySocket.getSocket();
 
     socket.on('connect', () => {
-
         Serial.getPorts()
             .then((ports) => {
                 let portsName = [];

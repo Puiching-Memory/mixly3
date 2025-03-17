@@ -343,20 +343,15 @@ class WebSocketSerial extends Serial {
     }
 
     async dispose() {
-        return new Promise((resolve, reject) => {
-            const port = this.getPortName();
-            const eventRegistry = WebSocketSerial.getEventRegistry();
-            eventRegistry.unregister(`${port}-buffer`);
-            eventRegistry.unregister(`${port}-string`);
-            eventRegistry.unregister(`${port}-error`);
-            eventRegistry.unregister(`${port}-open`);
-            eventRegistry.unregister(`${port}-close`);
-            super.dispose()
-                .then(() => {
-                    return this.#awaitDispose_();
-                })
-                .catch(reject);
-        })
+        const port = this.getPortName();
+        const eventRegistry = WebSocketSerial.getEventRegistry();
+        eventRegistry.unregister(`${port}-buffer`);
+        eventRegistry.unregister(`${port}-string`);
+        eventRegistry.unregister(`${port}-error`);
+        eventRegistry.unregister(`${port}-open`);
+        eventRegistry.unregister(`${port}-close`);
+        await super.dispose();
+        await this.#awaitDispose_();
     }
 }
 
