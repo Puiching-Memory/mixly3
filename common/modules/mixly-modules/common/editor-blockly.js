@@ -59,7 +59,7 @@ class EditorBlockly extends EditorBase {
         this.workspace = null;
         this.initBlockly = () => {
             const DEFAULT_CATEGORIES = HTMLTemplate.get('xml/default-categories.xml').render();
-            const media = path.join(Env.srcDirPath, 'common/media/');
+            const media = path.join(Env.srcDirPath, 'common/media/blockly');
             const renderer = ['geras', 'zelos'].includes(USER.blockRenderer) ? USER.blockRenderer : 'geras';
             this.editor = Blockly.inject(this.$blockly[0], {
                 media,

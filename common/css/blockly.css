@@ -117,25 +117,25 @@
 
 .classic-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon.blocklyTreeIconOpen,
 .dark-theme .blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconOpen {
-    background-image: url('../../common/media/sprites.png') !important;
+    background-image: url('../../common/media/blockly/sprites.svg') !important;
     background-position: -16px -17px !important;
 }
 
 .classic-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon.blocklyTreeIconClosed,
 .dark-theme .blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconClosed {
-    background-image: url('../../common/media/sprites.png') !important;
+    background-image: url('../../common/media/blockly/sprites.svg') !important;
     background-position: -32px -17px !important;
 }
 
 .classic-theme .blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconOpen,
 .dark-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon.blocklyTreeIconOpen {
-    background-image: url('../../common/media/sprites.png') !important;
+    background-image: url('../../common/media/blockly/sprites.svg') !important;
     background-position: -16px -1px !important;
 }
 
 .classic-theme .blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconClosed,
 .dark-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon.blocklyTreeIconClosed {
-    background-image: url('../../common/media/sprites.png') !important;
+    background-image: url('../../common/media/blockly/sprites.svg') !important;
     background-position: -32px -1px !important;
 }
 
