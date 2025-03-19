@@ -3,8 +3,6 @@ goog.loadJs('common', () => {
 goog.require('layui');
 goog.require('$.select2');
 goog.require('Mixly.Env');
-goog.require('Mixly.Config');
-goog.require('Mixly.Command');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
 goog.require('Mixly.HTMLTemplate');
@@ -13,17 +11,13 @@ goog.provide('Mixly.Nav');
 
 const {
     Env,
-    Config,
-    Command,
     XML,
     Msg,
     HTMLTemplate,
     Component
 } = Mixly;
 
-const { BOARD, USER } = Config;
-
-const { element, form } = layui;
+const { element } = layui;
 
 
 class Nav extends Component {

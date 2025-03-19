@@ -25,11 +25,11 @@ class WikiGenerator {
     #$xml_ = null;
     #desPath_ = '';
     #tree_ = [];
-    constructor($xml, desPath) {
+    constructor(workspace, generator, $xml, desPath) {
         this.#$xml_ = $xml;
         this.#desPath_ = desPath;
-        this.workspace = Mixly.Workspace.getMain().getEditorsManager().getActive().getPage('block').getEditor();
-        this.generator = Mixly.Workspace.getMain().getEditorsManager().getActive().getPage('block').generator;
+        this.workspace = workspace;
+        this.generator = generator;
     }
 
     buildTree($nodes) {

@@ -159,8 +159,7 @@
     {
         "path": "/common/css-loader.js",
         "require": [
-            "Mixly.Config",
-            "Mixly.Env"
+            "Mixly"
         ],
         "provide": [
             "Mixly.CssLoader"
@@ -747,8 +746,6 @@
             "layui",
             "$.select2",
             "Mixly.Env",
-            "Mixly.Config",
-            "Mixly.Command",
             "Mixly.XML",
             "Mixly.Msg",
             "Mixly.HTMLTemplate",
@@ -829,7 +826,7 @@
     {
         "path": "/common/script-loader.js",
         "require": [
-            "Mixly"
+            "Mixly.Env"
         ],
         "provide": [
             "Mixly.ScriptLoader"
@@ -1112,15 +1109,6 @@
         ],
         "provide": [
             "Mixly.Storage"
-        ]
-    },
-    {
-        "path": "/common/theme.js",
-        "require": [
-            "Blockly"
-        ],
-        "provide": [
-            "Mixly.Theme"
         ]
     },
     {

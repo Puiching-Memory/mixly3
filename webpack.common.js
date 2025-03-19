@@ -70,6 +70,7 @@ module.exports = {
         'xscrollbar': 'XScrollbar',
         'jquery': '$',
         'ace': 'ace',
-        'goog': 'goog'
+        'goog': 'goog',
+        'monaco': 'monaco'
     }
 };
