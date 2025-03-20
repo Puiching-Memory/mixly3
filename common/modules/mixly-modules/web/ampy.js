@@ -35,8 +35,8 @@ class AmpyExt extends Ampy {
     #receiveTemp_ = [];
     #writeBuffer_ = true;
     #active_ = false;
-    #dataLength_ = 256;
-    constructor(device, writeBuffer = true, dataLength = 256) {
+    #dataLength_ = 32;
+    constructor(device, writeBuffer = true, dataLength = 32) {
         super();
         this.#device_ = device;
         this.#writeBuffer_ = writeBuffer;
