@@ -213,7 +213,6 @@ class EditorBlockly extends EditorBase {
         }
 
         this.reloadWorkspace = () => {
-            Blockly.Events.disable();
             let workspaceState = Blockly.serialization.workspaces.save(this.editor);
             let undoStack = [...this.editor.undoStack_];
             let redoStack = [...this.editor.redoStack_];
@@ -222,7 +221,6 @@ class EditorBlockly extends EditorBase {
             });
             this.editor.undoStack_ = [...undoStack];
             this.editor.redoStack_ = [...redoStack];
-            Blockly.Events.enable();
         }
 
         this.initBlockly();
