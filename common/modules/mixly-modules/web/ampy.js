@@ -35,8 +35,8 @@ class AmpyExt extends Ampy {
     #receiveTemp_ = [];
     #writeBuffer_ = true;
     #active_ = false;
-    #dataLength_ = 32;
-    constructor(device, writeBuffer = true, dataLength = 32) {
+    #dataLength_ = 256;
+    constructor(device, writeBuffer = true, dataLength = 256) {
         super();
         this.#device_ = device;
         this.#writeBuffer_ = writeBuffer;
@@ -93,23 +93,25 @@ class AmpyExt extends Ampy {
         }
     }
 
-    async interrupt(timeout = 5000) {
-        // 中断两次
-        await this.#device_.sendBuffer([3, 3]);
-        await this.#device_.sleep(100);
-        let succeed = false;
-        if (await this.readUntil('>>>', true, timeout)) {
-            succeed = true;
+    async interrupt(timeout = 1000) {
+        for (let i = 0; i < 5; i++) {
+            // 中断两次
+            await this.#device_.sendBuffer([3, 3]);
+            await this.#device_.sleep(100);
+            if (await this.readUntil('>>>', true, timeout)) {
+                return true;
+            }
         }
-        return succeed;
+        return false;
     }
 
-    async enterRawREPL(timeout = 5000) {
-        await this.#device_.sendBuffer([1]);
-        await this.#device_.sleep(100);
-        let succeed = false;
-        if (await this.readUntil('raw repl; ctrl-b to exit', true, timeout)) {
-            return true;
+    async enterRawREPL(timeout = 1000) {
+        for (let i = 0; i < 5; i++) {
+            await this.#device_.sendBuffer([1]);
+            await this.#device_.sleep(100);
+            if (await this.readUntil('raw repl; ctrl-b to exit', true, timeout)) {
+                return true;
+            }
         }
         return false;
     }
@@ -134,7 +136,7 @@ class AmpyExt extends Ampy {
         return succeed;
     }
 
-    async exec(str) {
+    async exec(str, timeout = 5000) {
         if (this.#writeBuffer_) {
             const buffer = this.#device_.encode(str);
             const len = Math.ceil(buffer.length / this.#dataLength_);
@@ -155,6 +157,25 @@ class AmpyExt extends Ampy {
             }
         }
         await this.#device_.sendBuffer([4]);
+        return await this.follow(timeout);
+    }
+
+    async follow(timeout = 1000) {
+        let data = await this.readUntil('\x04', true, timeout);
+        if (data.length < 1) {
+            throw new Error(Msg.Lang['ampy.waitingFirstEOFTimeout']);
+        }
+        let start = data.toLowerCase().indexOf('>ok');
+        if (start === -1){
+            start = 0;
+        }
+        data = data.substring(start + 3, data.length - 1);
+        let dataError = await this.readUntil('\x04', true, timeout);
+        if (dataError.length < 1) {
+            throw new Error(Msg.Lang['ampy.secondEOFTimeout']);
+        }
+        dataError = dataError.substring(0, dataError.length - 1);
+        return { data, dataError };
     }
 
     async enter() {
@@ -202,29 +223,22 @@ class AmpyExt extends Ampy {
         const code = Mustache.render(AmpyExt.GET, {
             path: filename
         });
-        await this.exec(code);
-        await this.#device_.sleep(100);
-        if (!await this.readUntil('ok', true, timeout)) {
-            throw new Error(Msg.Lang['ampy.executePythonCodeFailed']);
+        const { data, dataError } = await this.exec(code, timeout);
+        if (dataError) {
+            return '';
         }
-        let str = await this.readUntil('>', false, timeout);
-        str = str.replace('\x04\x04', '');
-        if (str.indexOf('OSError') === -1) {
-            str = this.#device_.decode(this.unhexlify(str));
-            return str;
-        }
-        return false;
+        return this.#device_.decode(this.unhexlify(data));
     }
 
-    async put(filename, code) {
+    async put(filename, code, timeout = 5000) {
         if (!this.isActive()) {
             throw new Error(Msg.Lang['ampy.portIsNotOpen']);
         }
-        let str = `file = open('${filename}', 'wb')\n`;
+        await this.exec(`file = open('${filename}', 'wb')`, timeout);
         const buffer = this.#device_.encode(code);
-        const len = Math.ceil(buffer.length / 500);
+        const len = Math.ceil(buffer.length / 64);
         for (let i = 0; i < len; i++) {
-            const writeBuffer = buffer.slice(i * 500, Math.min((i + 1) * 500, buffer.length));
+            const writeBuffer = buffer.slice(i * 64, Math.min((i + 1) * 64, buffer.length));
             let writeStr = '';
             for (let num of writeBuffer) {
                 let numStr = num.toString(16);
@@ -233,10 +247,9 @@ class AmpyExt extends Ampy {
                 }
                 writeStr += '\\x' + numStr;
             }
-            str += `file.write(b'${writeStr}')\n`;
+            await this.exec(`file.write(b'${writeStr}')`, timeout);
         }
-        str += `file.close()\n`;
-        await this.exec(str);
+        await this.exec(`file.close()`, timeout);
     }
 
     async ls(directory = '/', longFormat = true, recursive = false, timeout = 5000) {
@@ -257,18 +270,11 @@ class AmpyExt extends Ampy {
                 path: directory
             });
         }
-        await this.exec(code);
-        await this.#device_.sleep(100);
-        if (!await this.readUntil('ok', true, timeout)) {
-            throw new Error(Msg.Lang['ampy.executePythonCodeFailed']);
+        const { data, dataError } = await this.exec(code, timeout);
+        if (dataError) {
+            return '[]';
         }
-        let str = await this.readUntil('>', false, timeout);
-        let info = null;
-        str = str.replace('\x04\x04', '');
-        str = str.replaceAll('\'', '\"');
-        str = str.substring(0, str.lastIndexOf(']') + 1);
-        info = JSON.parse(str);
-        return info;
+        return JSON.parse(data.replaceAll('\'', '\"'));
     }
 
     async mkdir(directory, timeout = 5000) {
@@ -278,16 +284,8 @@ class AmpyExt extends Ampy {
         const code = Mustache.render(AmpyExt.MKDIR, {
             path: directory
         });
-        await this.exec(code);
-        await this.#device_.sleep(100);
-        if (!await this.readUntil('ok', true, timeout)) {
-            throw new Error(Msg.Lang['ampy.executePythonCodeFailed']);
-        }
-        let str = await this.readUntil('>', false, timeout);
-        if (str.indexOf('OSError') === -1) {
-            return true;
-        }
-        return false;
+        const { dataError } = await this.exec(code, timeout);
+        return !dataError;
     }
 
     async mkfile(file, timeout = 5000) {
@@ -297,16 +295,8 @@ class AmpyExt extends Ampy {
         const code = Mustache.render(AmpyExt.MKFILE, {
             path: file
         });
-        await this.exec(code);
-        await this.#device_.sleep(100);
-        if (!await this.readUntil('ok', true, timeout)) {
-            throw new Error(Msg.Lang['ampy.executePythonCodeFailed']);
-        }
-        let str = await this.readUntil('>', false, timeout);
-        if (str.indexOf('OSError') === -1) {
-            return true;
-        }
-        return false;
+        const { dataError } = await this.exec(code, timeout);
+        return !dataError;
     }
 
     async rename(oldname, newname, timeout = 5000) {
@@ -317,16 +307,9 @@ class AmpyExt extends Ampy {
             oldPath: oldname,
             newPath: newname
         });
-        await this.exec(code);
-        await this.#device_.sleep(100);
-        if (!await this.readUntil('ok', true, timeout)) {
-            throw new Error(Msg.Lang['ampy.executePythonCodeFailed']);
-        }
-        let str = await this.readUntil('>', false, timeout);
-        if (str.indexOf('OSError') === -1) {
-            return true;
-        }
-        return false;
+        const result = await this.exec(code, timeout);
+        const { dataError } = await this.exec(code, timeout);
+        return !dataError;
     }
 
     async rm(filename, timeout = 5000) {
@@ -337,15 +320,9 @@ class AmpyExt extends Ampy {
             path: filename
         });
         await this.exec(code);
-        await this.#device_.sleep(100);
-        if (!await this.readUntil('ok', true, timeout)) {
-            throw new Error(Msg.Lang['ampy.executePythonCodeFailed']);
-        }
-        let str = await this.readUntil('>', false, timeout);
-        if (str.indexOf('OSError') === -1) {
-            return true;
-        }
-        return false;
+        const result = await this.exec(code, timeout);
+        const { dataError } = await this.exec(code, timeout);
+        return !dataError;
     }
 
     async rmdir(directory, timeout = 5000) {
@@ -355,16 +332,9 @@ class AmpyExt extends Ampy {
         const code = Mustache.render(AmpyExt.RMDIR, {
             path: directory
         });
-        await this.exec(code);
-        await this.#device_.sleep(100);
-        if (!await this.readUntil('ok', true, timeout)) {
-            throw new Error(Msg.Lang['ampy.executePythonCodeFailed']);
-        }
-        let str = await this.readUntil('>', false, timeout);
-        if (str.indexOf('OSError') === -1) {
-            return true;
-        }
-        return false;
+        const result = await this.exec(code, timeout);
+        const { dataError } = await this.exec(code, timeout);
+        return !dataError;
     }
 
     getDevice() {

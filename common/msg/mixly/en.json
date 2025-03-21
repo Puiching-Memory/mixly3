@@ -320,6 +320,8 @@
     "ampy.portIsNotOpen": "Serial port is not open",
     "ampy.executePythonCodeFailed": "Unable to execute python code",
     "ampy.dataReadInterrupt": "Data reading interrupted",
+    "ampy.waitingFirstEOFTimeout": "timeout waiting for first EOF reception",
+    "ampy.waitingSecondEOFTimeout": "timeout waiting for second EOF reception",
     "editor.contextMenu.cut": "Cut",
     "editor.contextMenu.copy": "Copy",
     "editor.contextMenu.paste": "Paste",

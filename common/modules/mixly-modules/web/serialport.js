@@ -121,7 +121,7 @@ class WebSerialPort extends Serial {
             try {
                 while (true) {
                     const { value, done } = await this.#reader_.read();
-                    value && this.onBuffer(value);
+                    value !== undefined && this.onBuffer(value);
                     if (done) {
                         break;
                     }

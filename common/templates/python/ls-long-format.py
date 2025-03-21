@@ -19,4 +19,5 @@ for f in listdir('{{&path}}'):
     except:
         size = os.size(f)
     r.append([f, size])
+
 print(r)

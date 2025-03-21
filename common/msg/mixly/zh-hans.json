@@ -320,6 +320,8 @@
     "ampy.portIsNotOpen": "串口未打开",
     "ampy.executePythonCodeFailed": "无法执行python代码",
     "ampy.dataReadInterrupt": "数据读取中断",
+    "ampy.waitingFirstEOFTimeout": "等待第一个EOF超时",
+    "ampy.waitingSecondEOFTimeout": "等待第二个EOF超时",
     "editor.contextMenu.cut": "剪切",
     "editor.contextMenu.copy": "复制",
     "editor.contextMenu.paste": "粘贴",
