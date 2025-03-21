@@ -525,6 +525,7 @@ class EditorMix extends EditorBase {
         let config, configStr = configDom && configDom.html();
         config = configStr? MJSON.parse(configStr) : {};
         let boardName = xmlDom.attr('board') ?? '';
+        blockPage.getEditor().clear();
         Boards.setSelectedBoard(boardName, config);
         let code = codeDom ? codeDom.html() : '';
         if (Base64.isValid(code)) {
@@ -550,7 +551,6 @@ class EditorMix extends EditorBase {
             }
             this.drag.full(Drag.Extend.NEGATIVE); // 完全显示代码编辑器
             codePage.setValue(code, this.#language_);
-            blockPage.getEditor().clear();
             endFunc('USE_CODE');
             return;
         }
