@@ -93,7 +93,7 @@ Blockly.generator = Python;
 
 Profile.default = {};
 Object.assign(Profile, MicropythonESP32S3Pins);
-Object.assign(Profile.default, MicropythonESP32S3Pins['MixGo CE']);
+Object.assign(Profile.default, MicropythonESP32S3Pins['元控青春']);
 
 Object.assign(
     Blockly.Blocks,
