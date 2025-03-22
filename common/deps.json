@@ -168,9 +168,13 @@
         "provide": ["ace.ExtLanguageTools"],
         "require": ["ace"]
     }, {
+        "path": "modules/web-modules/monaco-i18n-loader.js",
+        "provide": ["monacoI18N"],
+        "require": ["path", "Mixly.Msg", "Mixly.Env"]
+    }, {
         "path": "modules/web-modules/monaco-editor/main.bundle.js",
         "provide": ["monaco"],
-        "require": []
+        "require": ["monacoI18N"]
     }, {
         "path": "modules/web-modules/dap.umd.js",
         "provide": ["DAPjs"],

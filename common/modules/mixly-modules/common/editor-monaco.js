@@ -159,15 +159,6 @@ class EditorMonaco extends EditorBase {
 
     #addChangeEventListener_() {
         const $content = EditorMonaco.getContent();
-        const $slider = $content.find('.slider,.minimap-slider');
-        $slider.on('pointerdown', (event) => {
-            const { currentTarget } = event;
-            currentTarget.setPointerCapture(event.pointerId);
-        });
-        $slider.on('pointerup', (event) => {
-            const { currentTarget } = event;
-            currentTarget.releasePointerCapture(event.pointerId);
-        });
         this.#changeListener_ = EditorMonaco.events.bind('change', () => {
             this.#enableChangeEvent_ && this.runEvent('change');
         });
@@ -182,9 +173,7 @@ class EditorMonaco extends EditorBase {
         super.onUnmounted();
         const editor = EditorMonaco.getEditor();
         const $content = EditorMonaco.getContent();
-        const $slider = $content.find('.slider,.minimap-slider');
         this.#state_ = editor.saveViewState();
-        $slider.off('pointerdown pointerup');
         $content.detach();
         this.getContent().empty();
         this.#removeChangeEventListener_();
