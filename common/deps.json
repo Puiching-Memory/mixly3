@@ -124,10 +124,6 @@
         "provide": ["Terminal"],
         "require": []
     }, {
-        "path": "modules/web-modules/highcharts.min.js",
-        "provide": ["Highcharts"],
-        "require": []
-    }, {
         "path": "modules/web-modules/pouchdb.min.js",
         "provide": ["PouchDB"],
         "require": []
