@@ -1,14 +1,20 @@
-import { Boards } from 'mixly';
+import { Boards, JSFuncs } from 'mixly';
 
 export const display_show_image = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
-    if (version == "educore"){
-        generator.definitions_['import_' + version + 'oled'] = "from " + version + " import oled";
-        var code = "oled.print(" + data + ")\n";
-    }else{
-        generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
-        var code = "onboard_matrix.shows(" + data + ")\n";
+    if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
+        generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
+        var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
+        var code = "onboard_tft.image(" + data + ", color=0xffff)\n";
+    } else {
+        if (version == "educore") {
+            generator.definitions_['import_' + version + '_oled'] = "from " + version + " import oled";
+            var code = "oled.print(" + data + ")\n";
+        } else {
+            generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
+            var code = "onboard_matrix.shows(" + data + ")\n";
+        }
     }
     return code;
 }

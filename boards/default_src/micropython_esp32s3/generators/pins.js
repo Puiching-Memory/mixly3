@@ -1,7 +1,7 @@
 export const pins_digital = function (_, generator) {
-    var code = this.getFieldValue('PIN');
+    const code = this.getFieldValue('PIN');
     return [code, generator.ORDER_ATOMIC];
-}
+};
 
 export const pins_button = pins_digital;
 export const pins_buttonB = pins_digital;
@@ -30,7 +30,6 @@ export const pins_touch_pin = pins_digital;
 export const pins_touch = pins_digital;
 export const pins_interrupt = pins_digital;
 export const pins_serial = pins_digital;
-export const pins_builtinimg = pins_digital;
 export const pins_builtinimg_extern = pins_digital;
 export const pins_imglist = pins_digital;
 export const pins_playlist = pins_digital;
@@ -47,3 +46,13 @@ export const pins_radio_power = pins_digital;
 export const pins_radio_datarate = pins_digital;
 export const pins_one_more = pins_digital;
 export const pins_digital_dot = pins_digital;
+
+export const pins_builtinimg = function (_, generator) {
+    const PIN_VALUE = this.getFieldValue('PIN');
+    const data = PIN_VALUE.split('.');
+    if (data.length !== 2) {
+        throw Error('pin value error');
+    }
+    generator.definitions_[`import_${data[0]}_${data[1]}`] = `from ${data[0]} import ${data[1]}`;
+    return [data[1], generator.ORDER_ATOMIC];
+};

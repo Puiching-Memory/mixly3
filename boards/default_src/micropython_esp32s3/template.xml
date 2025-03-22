@@ -1841,16 +1841,14 @@
   </category>
   <category id="catOnBoardDisplay" colour='#78B5B4'>
     <block type="mpython_pbm_image"></block>
-    <block type="onboard_tft_show_image">
+    <block type="display_show_image">
       <value name="data">
-        <shadow type="mpython_pbm_image">
-        </shadow>
+        <shadow type="pins_builtinimg"></shadow>
       </value>
     </block>
     <block type="onboard_tft_show_image_xy">
       <value name="data">
-        <shadow type="mpython_pbm_image">
-        </shadow>
+        <shadow type="pins_builtinimg"></shadow>
       </value>
       <value name="x">
         <shadow type="math_number">
