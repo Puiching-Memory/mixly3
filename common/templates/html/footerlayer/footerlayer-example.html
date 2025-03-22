@@ -49,5 +49,10 @@
     .footer-layer-example .layui-tree-iconClick .layui-icon {
         font-size: 16px;
     }
+
+    div[m-id="{{d.mId}}"] {
+        width: 100%;
+        height: 100%;
+    }
 </style>
-<div class="example-tree-body page-item"></div>
+<div m-id={{d.mId}} class="example-tree-body"></div>
