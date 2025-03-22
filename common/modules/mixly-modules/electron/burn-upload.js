@@ -523,6 +523,8 @@ BU.uploadByCmd = async function (layerNum, port, command) {
     const code = editor.getCode();
     if (upload.copyLib) {
         BU.copyLib(upload.filePath, code);
+    } else {
+        BU.copyLib(upload.filePath, '');
     }
     fs_extra.outputFile(upload.filePath, code)
     .then(() => {
