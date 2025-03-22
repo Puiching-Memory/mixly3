@@ -298,12 +298,12 @@ export const lists_zip = {
         }
     }
 };
+
 export const lists_zip_container = {
     init: function () {
         this.setColour(VARIABLES_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_PYTHON_LISTS_ZIP)
-            .appendField('[]');
+            .appendField(Blockly.Msg.MIXLY_PYTHON_LISTS_ZIP);
         this.appendStatementInput('STACK');
         this.setTooltip(Blockly.Msg.MIXLY_MIXPY_INOUT_PRINT_MANY_CONTAINER_TOOLTIP);
         this.contextMenu = false;
