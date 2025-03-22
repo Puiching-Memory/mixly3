@@ -19,16 +19,24 @@ const {
     EditorBase
 } = Mixly;
 
+
 class EditorAce extends EditorBase {
     static {
         this.CTRL_BTNS = ['resetFontSize', 'increaseFontSize', 'decreaseFontSize'];
         this.CTRL_BTN_TEMPLATE = '<div m-id="{{d.mId}}" class="code-editor-btn setFontSize"></div>';
         this.MODE_MAP = goog.getJSON(path.join(Env.templatePath, 'json/ace-mode-map.json'));
+        this.I18N = {
+            'zh-hans': goog.getJSON(path.join(Env.templatePath, 'json/ace-i18n-zh-hans.json')),
+            'zh-hant': goog.getJSON(path.join(Env.templatePath, 'json/ace-i18n-zh-hant.json')),
+            'en': goog.getJSON(path.join(Env.templatePath, 'json/ace-i18n-en.json'))
+        }
 
         HTMLTemplate.add(
             'html/editor/editor-code.html',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/editor/editor-code.html')))
         );
+
+        ace.config.setMessages(this.I18N[Msg.nowLang]);
     }
 
     #editor_ = null;
