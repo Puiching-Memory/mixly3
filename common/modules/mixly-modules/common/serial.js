@@ -335,6 +335,9 @@ class Serial {
         if (this.isOpened()) {
             await this.close();
         }
+        this.#events_ = null;
+        this.#encoder_ = null;
+        this.#decoder_ = null;
     }
 
     bind(type, func) {

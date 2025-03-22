@@ -341,7 +341,7 @@ ArduShell.upload = (boardType, port) => {
         statusBarSerial.open()
             .then(() => {
                 const baudRates = code.match(/(?<=Serial.begin[\s]*\([\s]*)[0-9]*(?=[\s]*\))/g);
-                if (!baudRates.length) {
+                if (!baudRates?.length) {
                     statusBarSerial.setBaudRate(9600);
                 } else {
                     statusBarSerial.setBaudRate(baudRates[0] - 0);

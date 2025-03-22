@@ -258,6 +258,13 @@ class ElectronSerial extends Serial {
             super.onChar(char);
         }
     }
+
+    async dispose() {
+        await super.dispose();
+        this.#parserBytes_ = null;
+        this.#parserLine_ = null;
+        this.#serialport_ = null;
+    }
 }
 
 Electron.Serial = ElectronSerial;
