@@ -1827,7 +1827,6 @@
       </value>
     </block>
     <block type="display_shift">
-
       <value name="val">
         <shadow type="math_number">
           <field name="NUM">1</field>
@@ -1835,7 +1834,6 @@
       </value>
     </block>
     <block type="display_get_pixel">
-
       <value name="x">
         <shadow type="pins_exlcdh"></shadow>
       </value>

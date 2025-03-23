@@ -1921,7 +1921,7 @@
         </shadow>
       </value>
     </block>
-    <block type="onboard_tft_scroll_string">
+    <block type="display_scroll_string">
       <value name="data">
         <shadow type="text">
           <field name="TEXT">Mixly</field>
@@ -1963,7 +1963,7 @@
         </shadow>
       </value>
     </block>
-    <block type="onboard_tft_show_frame_string">
+    <block type="display_show_frame_string">
       <value name="data">
         <shadow type="text">
           <field name="TEXT">Mixly</field>
@@ -2105,8 +2105,7 @@
         </shadow>
       </value>
     </block>
-    <block type="onboard_tft_shift">
-
+    <block type="display_shift">
       <value name="val">
         <shadow type="math_number">
           <field name="NUM">1</field>
@@ -2114,7 +2113,6 @@
       </value>
     </block>
     <block type="onboard_tft_get_pixel">
-
       <value name="x">
         <shadow type="math_number">
           <field name="NUM">0</field>
@@ -2146,9 +2144,8 @@
         </shadow>
       </value>
     </block>
-    <block type="onboard_tft_get_screen_pixel"></block>
-    <block type="onboard_tft_bright_screen">
-
+    <block type="display_get_screen_pixel"></block>
+    <block type="display_bright_screen">
       <value name="x">
         <shadow type="math_number">
           <field name="NUM">0.5</field>
@@ -2156,7 +2153,6 @@
       </value>
     </block>
     <block type="onboard_tft_fill">
-
       <value name="VAR">
         <block type="display_color_seclet">
           <field name="COLOR">#ffffff</field>
@@ -2166,7 +2162,7 @@
         </shadow>
       </value>
     </block>
-    <block type="onboard_tft_clear"></block>
+    <block type="display_clear"></block>
     <block type="onboard_tft_clock_init" m-show="micropython:esp32s3:mixgo_sant">
       <value name="SUB">
         <shadow type="variables_get">
