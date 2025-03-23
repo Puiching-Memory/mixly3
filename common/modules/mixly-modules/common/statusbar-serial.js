@@ -458,12 +458,6 @@ class StatusBarSerial extends PageBase {
 
     async open() {
         await this.#serial_.open(this.#config_.baud);
-        await this.#serial_.sleep(200);
-        try {
-            await this.#serial_.setDTRAndRTS(this.#config_.dtr, this.#config_.rts);
-        } catch (error) {
-            Debug.error(error);
-        }
         if (SELECTED_BOARD?.serial?.ctrlCBtn) {
             await this.#serial_.sleep(500);
             await this.#serial_.interrupt();
