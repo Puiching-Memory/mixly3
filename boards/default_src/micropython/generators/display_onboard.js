@@ -80,7 +80,7 @@ export const display_scroll_string = function (_, generator) {
         var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
         var code = "onboard_oled.scroll(" + data + ")\n";
     } else if(version == 'mixgo_nova'){
-        generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_tft";
+        generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
         var code = "onboard_tft.scroll(" + data + ",color=0xffff)\n";
     }else {
