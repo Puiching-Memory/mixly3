@@ -448,20 +448,15 @@ export const mixgo_display_image_create_new = function (block, generator) {
 }
 
 //mpython
-
-// export const mpython_pbm_image = function (block, generator) {
-//     var code = block.getFieldValue('path');
-//     var sort = ['expression_picture', 'eye_picture', 'informatio_picture', 'object_picture', 'progres_picture']
-//     var img = [["Angry", "Bored", "Confused", "Happy", "Heart", "Paper", "Rock", "Sad", "Scissors", "Silly", "Sleep", "Small_heart", "Small_paper", "Small_rock", "Small_scissors", "Smile", "Surprise", "Wonderful"], ["Eyes_Angry", "Awake", "Black_eye", "Bottom_left", "Bottom_right", "Crazy_1", "Crazy_2", "Disappointed", "Dizzy", "Down", "Hurt", "Evil", "Knocked_out", "Love", "Middle_left", "Middle_right", "Neutral", "Nuclear", "Pinch_left", "Pinch_middle", "Pinch_right", "Tear", "Tired_middle", "Tired_left", "Tired_right", "Toxic", "Up", "Winking"], ["Accept", "Backward", "Decline", "Forward", "Left", "No_go", "Question_mark", "Right", "Stop_1", "Stop_2", "Thumbs_down", "Thumbs_up", "Warning"], ["Bomb", "Boom", "Fire", "Flowers", "Forest", "Lightning", "Light_off", "Light_on", "Night", "Pirate", "Snow", "Target"], ["Bar_0", "Bar_1", "Bar_2", "Bar_3", "Bar_4", "Dial_0", "Dial_1", "Dial_2", "Dial_3", "Dial_4", "Dots_0", "Dots_1", "Dots_2", "Dots_3", "Hourglass_0", "Hourglass_1", "Hourglass_2", "Timer_0", "Timer_1", "Timer_2", "Timer_3", "Timer_4", "Water_level_0", "Water_level_1", "Water_level_2", "Water_level_3"]]
-//     for (var i = 0; i < 5; i++) {
-//         if (img[i].indexOf(code) != -1) {
-//             var tag = i;
-//             break;
-//         }
-//     }
-//     generator.definitions_['import_' + sort[tag] + '_' + code] = "from " + sort[tag] + " import " + code;
-//     return [code, generator.ORDER_ATOMIC];
-// }
+export const mpython_pbm_image = function (_, generator) {
+    const PIN_VALUE = this.getFieldValue('path');
+    const data = PIN_VALUE.split('.');
+    if (data.length !== 2) {
+        throw Error('pin value error');
+    }
+    generator.definitions_[`import_${data[0]}_${data[1]}`] = `from ${data[0]} import ${data[1]}`;
+    return [data[1], generator.ORDER_ATOMIC];
+}
 
 export const onboard_oled_show_image = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
