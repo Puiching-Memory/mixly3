@@ -347,6 +347,7 @@ export const sensor_use_i2c_init = {
                 [Blockly.Msg.MIXLY_EXTERN_LIGHTUV + "(LTR390UV)", "LTR390UV"],
                 [Blockly.Msg.MIXLY_ALTITUDE_SENSOR + "(HP203X)", "HP203X"],
                 [Blockly.Msg.MIXLY_ALTITUDE_SENSOR + "(SPL06_001)", "SPL06_001"],
+                [Blockly.Msg.MIXLY_ALTITUDE_SENSOR + "(MS5611)", "MS5611"],
                 [Blockly.Msg.MIXLY_ALTITUDE_SENSOR + "(BMP280)", "BMP280"],
                 [Blockly.Msg.MIXLY_TEMP_AND_HUMIDITY_SENSOR + "(SHTC3)", "SHTC3"],
                 [Blockly.Msg.MIXLY_TEMP_AND_HUMIDITY_SENSOR + "(AHT21)", "AHT21"],
@@ -855,6 +856,23 @@ export const sensor_spl06_001_extern = {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.Msg.MIXLY_Altitude + Blockly.Msg.MSG.catSensor + " SPL06_001")
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_GETPRESSURE, "pressure()"],
+                [Blockly.Msg.MIXLY_GETTEMPERATUE, "temperature()"],
+                [Blockly.Msg.MIXLY_GET_ALTITUDE, "altitude()"],
+            ]), "key");
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};
+
+export const sensor_ms5611_extern = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_Altitude + Blockly.Msg.MSG.catSensor + " MS5611")
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([

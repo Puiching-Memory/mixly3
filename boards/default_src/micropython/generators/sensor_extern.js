@@ -218,6 +218,9 @@ export const sensor_use_i2c_init = function (_, generator) {
     } else if (key == 'CI130X') {
         generator.definitions_['import_ci130x'] = 'import ci130x';
         code = v + ' = ci130x.' + key + "(" + iv + ')\n';
+    } else if (key == 'MS5611'){
+        generator.definitions_['import_ms5611'] = 'import ms5611';
+        code = v + ' = ms5611.MS5611(' + iv + ')\n';
     }
     return code;
 }
@@ -334,6 +337,14 @@ export const sensor_spl06_001_extern = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
     generator.definitions_['import_spl06_001'] = 'import spl06_001';
+    var code = sub + '.' + key;
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const sensor_ms5611_extern = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    generator.definitions_['import_ms5611'] = 'import ms5611';
     var code = sub + '.' + key;
     return [code, generator.ORDER_ATOMIC];
 }

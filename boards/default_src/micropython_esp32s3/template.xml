@@ -1840,7 +1840,7 @@
     </block>
   </category>
   <category id="catOnBoardDisplay" colour='#78B5B4'>
-    <block type="mpython_pbm_image"></block>
+    <block type="display_image_builtins_all"></block>
     <block type="display_show_image">
       <value name="data">
         <shadow type="pins_builtinimg"></shadow>
@@ -3996,6 +3996,13 @@
       </value>
     </block>
     <block type="sensor_spl06_001_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">xsensor</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sensor_ms5611_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
