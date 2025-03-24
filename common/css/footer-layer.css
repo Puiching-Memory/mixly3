@@ -4,12 +4,23 @@
     overflow:hidden;
 }
 
+@supports (max-height: 1dvh) {
+    .footer-layer > .footer-layer-content {
+        max-height: calc(100dvh - var(--footer-height) - var(--nav-height) - 25px);
+    }
+}
+
+@supports not (max-height: 1dvh) {
+    .footer-layer > .footer-layer-content {
+        max-height: calc(100vh - var(--footer-height) - var(--nav-height) - 25px);
+    }
+}
+
 .footer-layer > .footer-layer-content {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    max-height: calc(100dvh - var(--footer-height) - var(--nav-height) - 25px);
 }
 
 .footer-layer > .footer-layer-content > .layui-layer-title {
