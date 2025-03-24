@@ -659,15 +659,6 @@ export const bitbot_display_image_create = function (block, generator) {
     return [code, generator.ORDER_ATOMIC];
 }
 
-//mixgo_nova onboard tft below:
-export const onboard_tft_show_image = function (_, generator) {
-    var version = Boards.getSelectedBoardKey().split(':')[2];
-    generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
-    var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
-    var code = "onboard_tft.image(" + data + ", color=0xffff)\n";
-    return code;
-}
-
 export const onboard_tft_show_image_xy = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
@@ -946,3 +937,38 @@ export const draw_pointer = function(_, generator) {
     var code = "onboard_matrix.pointern(angle=" + angle + ")\n";
     return code;
 }
+
+/**
+ * @deprecated To be removed in the future
+ */
+export const onboard_tft_show_image = display_show_image;
+
+/**
+ * @deprecated To be removed in the future
+ */
+export const onboard_tft_scroll_string = display_scroll_string;
+
+/**
+ * @deprecated To be removed in the future
+ */
+export const onboard_tft_show_frame_string = display_get_screen_pixel;
+
+/**
+ * @deprecated To be removed in the future
+ */
+export const onboard_tft_shift = display_shift;
+
+/**
+ * @deprecated To be removed in the future
+ */
+export const onboard_tft_get_screen_pixel = display_get_screen_pixel;
+
+/**
+ * @deprecated To be removed in the future
+ */
+export const onboard_tft_bright_screen = display_bright_screen;
+
+/**
+ * @deprecated To be removed in the future
+ */
+export const onboard_tft_clear = display_clear;

@@ -832,8 +832,6 @@ export const mpython_pbm_image = {
                         ["Water_level_1", "Water_level_1"],
                         ["Water_level_2", "Water_level_2"],
                         ["Water_level_3", "Water_level_3"],
-
-
                     ],
                     "type": "field_dropdown"
                 }
@@ -938,19 +936,6 @@ export const bitbot_display_image_create = {
         this.setOutput(true);
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
-    }
-};
-
-//mixgo_nova onboard tft below:
-export const onboard_tft_show_image = {
-    init: function () {
-        this.setColour(DISPLAY_ONBOARD_HUE);
-        this.appendValueInput('data')
-            .appendField(Blockly.Msg.OLED_BITMAP);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.OLED_BITMAP_OR_STRING);
     }
 };
 
@@ -1367,5 +1352,95 @@ export const draw_pointer = {
         this.setNextStatement(true, null);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.DRAW_POINTER_TOOLTIP);
+    }
+};
+
+/**
+ * @deprecated To be removed in the future
+ */
+export const onboard_tft_show_image = {
+    init: function () {
+        this.setColour(DISPLAY_ONBOARD_HUE);
+        this.appendValueInput('data')
+            .appendField(Blockly.Msg.OLED_BITMAP);
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.OLED_BITMAP_OR_STRING);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
+    }
+};
+
+/**
+ * @deprecated To be removed in the future
+ */
+export const onboard_tft_scroll_string = {
+    init: function () {
+        display_scroll_string.init.call(this);
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
+    }
+};
+
+/**
+ * @deprecated To be removed in the future
+ */
+export const onboard_tft_show_frame_string = {
+    init: function () {
+        display_show_frame_string.init.call(this);
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
+    }
+};
+
+/**
+ * @deprecated To be removed in the future
+ */
+export const onboard_tft_shift = {
+    init: function () {
+        display_shift.init.call(this);
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
+    }
+};
+
+/**
+ * @deprecated To be removed in the future
+ */
+export const onboard_tft_get_screen_pixel = {
+    init: function () {
+        display_get_screen_pixel.init.call(this);
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
+    }
+};
+
+/**
+ * @deprecated To be removed in the future
+ */
+export const onboard_tft_bright_screen = {
+    init: function () {
+        display_bright_screen.init.call(this);
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
+    }
+};
+
+/**
+ * @deprecated To be removed in the future
+ */
+export const onboard_tft_clear = {
+    init: function () {
+        display_clear.init.call(this);
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
     }
 };
