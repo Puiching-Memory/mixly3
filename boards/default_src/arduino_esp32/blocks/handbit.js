@@ -73,22 +73,6 @@ export const touchAttachInterrupt = {
     }
 };
 
-var HANDBIT_MSA300_GETAB = [
-    [Blockly.Msg.MixGo_MPU9250_AX, "msa.getX()"],
-    [Blockly.Msg.MixGo_MPU9250_AY, "msa.getY()"],
-    [Blockly.Msg.MixGo_MPU9250_AZ, "msa.getZ()"],
-];
-
-var HANDBIT_MSA300_ACTION = [
-    [Blockly.Msg.HANDBIT_FORWARD, "msa.getX()>1500&&msa.getX()<2000&&msa.getZ()>-1000&&msa.getZ()<0"],
-    [Blockly.Msg.HANDBIT_BACKWARD, "msa.getX()>1500&&msa.getX()<2000&&msa.getZ()>0&&msa.getZ()<1500"],
-    [Blockly.Msg.HANDBIT_LEFT, "msa.getY()<1000&&msa.getY()>0"],
-    [Blockly.Msg.HANDBIT_RIGHT, "msa.getY()<0&&msa.getY()>-1000"],
-    [Blockly.Msg.HANDBIT_UP, "msa.getX()>-400&&msa.getX()<400&&msa.getY()>-400&&msa.getY()<400&&msa.getZ()>-1800&&msa.getZ()<-1400"],
-    [Blockly.Msg.HANDBIT_DOWN, "msa.getX()>-400&&msa.getX()<400&&msa.getY()>-400&&msa.getY()<400&&msa.getZ()>2000&&msa.getZ()<2400"],
-
-];
-
 //传感器_重力感应
 export const handbit_MSA300 = {
     init: function () {
@@ -97,12 +81,17 @@ export const handbit_MSA300 = {
             .appendField(Blockly.Msg.MixGo_MPU9250);
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(new Blockly.FieldDropdown(HANDBIT_MSA300_GETAB), "HANDBIT_MSA300_GETAB");
+            .appendField(new Blockly.FieldDropdown(this.HANDBIT_MSA300_GETAB), "HANDBIT_MSA300_GETAB");
         this.setInputsInline(true);
         this.setOutput(true);
         this.setTooltip("");
         this.setHelpUrl('');
-    }
+    },
+    HANDBIT_MSA300_GETAB: [
+        [Blockly.Msg.MixGo_MPU9250_AX, "msa.getX()"],
+        [Blockly.Msg.MixGo_MPU9250_AY, "msa.getY()"],
+        [Blockly.Msg.MixGo_MPU9250_AZ, "msa.getZ()"],
+    ]
 };
 
 export const handbit_MSA300_action = {
@@ -112,12 +101,20 @@ export const handbit_MSA300_action = {
             .appendField(Blockly.Msg.Handbit);
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(new Blockly.FieldDropdown(HANDBIT_MSA300_ACTION), "HANDBIT_MSA300_ACTION");
+            .appendField(new Blockly.FieldDropdown(this.HANDBIT_MSA300_ACTION), "HANDBIT_MSA300_ACTION");
         this.setInputsInline(true);
         this.setOutput(true);
         this.setTooltip("");
         this.setHelpUrl('');
-    }
+    },
+    HANDBIT_MSA300_ACTION: [
+        [Blockly.Msg.HANDBIT_FORWARD, "msa.getX()>1500&&msa.getX()<2000&&msa.getZ()>-1000&&msa.getZ()<0"],
+        [Blockly.Msg.HANDBIT_BACKWARD, "msa.getX()>1500&&msa.getX()<2000&&msa.getZ()>0&&msa.getZ()<1500"],
+        [Blockly.Msg.HANDBIT_LEFT, "msa.getY()<1000&&msa.getY()>0"],
+        [Blockly.Msg.HANDBIT_RIGHT, "msa.getY()<0&&msa.getY()>-1000"],
+        [Blockly.Msg.HANDBIT_UP, "msa.getX()>-400&&msa.getX()<400&&msa.getY()>-400&&msa.getY()<400&&msa.getZ()>-1800&&msa.getZ()<-1400"],
+        [Blockly.Msg.HANDBIT_DOWN, "msa.getX()>-400&&msa.getX()<400&&msa.getY()>-400&&msa.getY()<400&&msa.getZ()>2000&&msa.getZ()<2400"],
+    ]
 };
 
 export const handbit_rgb_rainbow1 = {
@@ -135,18 +132,13 @@ export const handbit_rgb_rainbow1 = {
     }
 };
 
-var DISPLAY_RAINBOW_TYPE = [
-    [Blockly.Msg.MIXLY_RGB_DISPLAY_RAINBOW_TYPE_1, "normal"],
-    [Blockly.Msg.MIXLY_RGB_DISPLAY_RAINBOW_TYPE_2, "change"]
-];
-
 export const handbit_rgb_rainbow3 = {
     init: function () {
         this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(DISPLAY_RAINBOW_TYPE), "TYPE");
+            .appendField(new Blockly.FieldDropdown(this.DISPLAY_RAINBOW_TYPE), "TYPE");
         this.appendValueInput("rainbow_color")
             .setCheck(Number)
             .setAlign(Blockly.inputs.Align.RIGHT)
@@ -154,7 +146,11 @@ export const handbit_rgb_rainbow3 = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-    }
+    },
+    DISPLAY_RAINBOW_TYPE: [
+        [Blockly.Msg.MIXLY_RGB_DISPLAY_RAINBOW_TYPE_1, "normal"],
+        [Blockly.Msg.MIXLY_RGB_DISPLAY_RAINBOW_TYPE_2, "change"]
+    ]
 };
 
 export const handbit_rgb = {

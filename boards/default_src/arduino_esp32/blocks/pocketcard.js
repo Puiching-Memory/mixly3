@@ -81,6 +81,7 @@ export const MPU9250_update = {
         this.setInputsInline(true);
     }
 };
+
 export const Pocket_rgb = {
     init: function () {
         this.setColour(ACTUATOR_HUE);
@@ -128,6 +129,7 @@ export const Pocket_rgb_Brightness = {
         this.setTooltip('');
     }
 };
+
 export const Pocket_rgb_show = {
     init: function () {
         this.setColour(ACTUATOR_HUE);
@@ -137,6 +139,7 @@ export const Pocket_rgb_show = {
         this.setNextStatement(true, null);
     }
 };
+
 export const pocket_RGB_color_HSV = {
     init: function () {
         this.setColour(ACTUATOR_HUE);

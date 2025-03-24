@@ -133,7 +133,6 @@ export const logic_null = {
     }
 };
 
-
 export const logic_true_or_false = {
     init: function () {
         this.setColour(LOGIC_HUE);

@@ -11,19 +11,15 @@ export const base_setup = {
         this.setHelpUrl(
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id2"
         );
-    },
+    }
 };
 
 export const controls_delay = {
     init: function () {
-        var UNIT = [
-            [Blockly.Msg.MIXLY_MILLIS, "delay"],
-            [Blockly.Msg.MIXLY_MILLISECOND, "delayMicroseconds"],
-        ];
         this.setColour(LOOPS_HUE);
         this.appendValueInput("DELAY_TIME", Number)
             .appendField(Blockly.Msg.MIXLY_DELAY)
-            .appendField(new Blockly.FieldDropdown(UNIT), "UNIT")
+            .appendField(new Blockly.FieldDropdown(this.UNIT), "UNIT")
             .setCheck(Number);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -33,6 +29,10 @@ export const controls_delay = {
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id9"
         );
     },
+    UNIT: [
+        [Blockly.Msg.MIXLY_MILLIS, "delay"],
+        [Blockly.Msg.MIXLY_MILLISECOND, "delayMicroseconds"],
+    ]
 };
 
 export const controls_for = {
@@ -75,7 +75,7 @@ export const controls_for = {
         if (Blockly.Names.equals(oldName, this.getFieldValue("VAR"))) {
             this.setTitleValue(newName, "VAR");
         }
-    },
+    }
 };
 
 export const controls_whileUntil = {
@@ -101,12 +101,11 @@ export const controls_whileUntil = {
             return TOOLTIPS[op];
         });
     },
+    OPERATORS: [
+        [Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE, "WHILE"],
+        [Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL, "UNTIL"]
+    ]
 };
-
-controls_whileUntil.OPERATORS = [
-    [Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE, "WHILE"],
-    [Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL, "UNTIL"],
-];
 
 export const controls_flow_statements = {
     init: function () {
@@ -155,26 +154,25 @@ export const controls_flow_statements = {
             this.setWarningText(Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_WARNING);
         }
     },
+    OPERATORS: [
+        [Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, "BREAK"],
+        [Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, "CONTINUE"],
+    ]
 };
-
-controls_flow_statements.OPERATORS = [
-    [Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, "BREAK"],
-    [Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, "CONTINUE"],
-];
 
 export const controls_millis = {
     init: function () {
-        var UNIT = [
-            [Blockly.Msg.MIXLY_MILLIS, "millis"],
-            [Blockly.Msg.MIXLY_MILLISECOND, "micros"],
-        ];
         this.setColour(LOOPS_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_RUNTIME)
-            .appendField(new Blockly.FieldDropdown(UNIT), "UNIT");
+            .appendField(new Blockly.FieldDropdown(this.UNIT), "UNIT");
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_MILLIS);
     },
+    UNIT: [
+        [Blockly.Msg.MIXLY_MILLIS, "millis"],
+        [Blockly.Msg.MIXLY_MILLISECOND, "micros"],
+    ]
 };
 
 export const controls_if = {
@@ -477,7 +475,7 @@ export const controls_if = {
                 statementConnections[i].reconnect(this, "DO" + i);
         }
         elseStatementConnection && elseStatementConnection.reconnect(this, "ELSE");
-    },
+    }
 };
 
 export const controls_if_if = {
@@ -491,7 +489,7 @@ export const controls_if_if = {
         this.appendStatementInput("STACK");
         this.setTooltip(Blockly.Msg.CONTROLS_IF_IF_TOOLTIP);
         this.contextMenu = false;
-    },
+    }
 };
 
 export const controls_if_elseif = {
@@ -508,7 +506,7 @@ export const controls_if_elseif = {
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.CONTROLS_IF_ELSEIF_TOOLTIP);
         this.contextMenu = false;
-    },
+    }
 };
 
 export const controls_if_else = {
@@ -524,7 +522,7 @@ export const controls_if_else = {
         this.setPreviousStatement(true);
         this.setTooltip(Blockly.Msg.CONTROLS_IF_ELSE_TOOLTIP);
         this.contextMenu = false;
-    },
+    }
 };
 
 export const controls_switch_case = {
@@ -687,7 +685,7 @@ export const controls_switch_case = {
             clauseBlock =
                 clauseBlock.nextConnection && clauseBlock.nextConnection.targetBlock();
         }
-    },
+    }
 };
 
 export const controls_switch = {
@@ -700,7 +698,7 @@ export const controls_switch = {
         this.appendDummyInput().appendField("switch");
         this.appendStatementInput("STACK");
         this.contextMenu = false;
-    },
+    }
 };
 
 export const controls_case = {
@@ -714,7 +712,7 @@ export const controls_case = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.contextMenu = false;
-    },
+    }
 };
 
 export const controls_default = {
@@ -727,7 +725,7 @@ export const controls_default = {
         this.appendDummyInput().appendField("default");
         this.setPreviousStatement(true);
         this.contextMenu = false;
-    },
+    }
 };
 
 export const controls_mstimer2 = {
@@ -738,14 +736,15 @@ export const controls_mstimer2 = {
             .setAlign(Blockly.inputs.Align.RIGHT)
             .appendField("MsTimer2" + Blockly.Msg.MIXLY_MSTIMER2_EVERY);
         this.appendDummyInput().appendField("ms");
-        this.appendStatementInput("DO").appendField(Blockly.Msg.MIXLY_MSTIMER2_DO);
+        this.appendStatementInput("DO")
+            .appendField(Blockly.Msg.MIXLY_MSTIMER2_DO);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_MSTIMER2);
         this.setHelpUrl(
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#MsTimer2"
         );
-    },
+    }
 };
 
 export const controls_mstimer2_start = {
@@ -760,7 +759,7 @@ export const controls_mstimer2_start = {
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id45"
         );
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_MSTIMER2_START);
-    },
+    }
 };
 
 export const controls_mstimer2_stop = {
@@ -775,52 +774,56 @@ export const controls_mstimer2_stop = {
         this.setHelpUrl(
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id48"
         );
-    },
+    }
 };
 
 export const controls_end_program = {
     init: function () {
         this.setColour(LOOPS_HUE);
-        this.appendDummyInput().appendField(Blockly.Msg.MIXLY_CONTROL_END_PROGRAM);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_CONTROL_END_PROGRAM);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_END_PROGRAM);
-    },
+    }
 };
 export const controls_soft_reset = {
     init: function () {
         this.setColour(LOOPS_HUE);
-        this.appendDummyInput().appendField(Blockly.Msg.SOFT_RESET);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.SOFT_RESET);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_END_PROGRAM);
-    },
+    }
 };
 
 export const controls_interrupts = {
     init: function () {
         this.setColour(LOOPS_HUE);
-        this.appendDummyInput().appendField(Blockly.Msg.MIXLY_CONTROL_INTERRUPTS);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_CONTROL_INTERRUPTS);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_ALLOW_INTERRUPT);
         this.setHelpUrl(
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id51"
         );
-    },
+    }
 };
 
 export const controls_nointerrupts = {
     init: function () {
         this.setColour(LOOPS_HUE);
-        this.appendDummyInput().appendField(Blockly.Msg.MIXLY_CONTROL_NOINTERRUPTS);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_CONTROL_NOINTERRUPTS);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_CONTROL_NOINTERRUPTS);
         this.setHelpUrl(
             "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id55"
         );
-    },
+    }
 };
 export const base_delay = controls_delay;
 
@@ -829,30 +832,12 @@ export const simple_timer = {
     init: function () {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SIMPLE_TIMER)
-            .appendField(
-                new Blockly.FieldDropdown([
-                    ["1", "1"],
-                    ["2", "2"],
-                    ["3", "3"],
-                    ["4", "4"],
-                    ["5", "5"],
-                    ["6", "6"],
-                    ["7", "7"],
-                    ["8", "8"],
-                    ["9", "9"],
-                    ["10", "10"],
-                    ["11", "11"],
-                    ["12", "12"],
-                    ["13", "13"],
-                    ["14", "14"],
-                    ["15", "15"],
-                    ["16", "16"],
-                ]),
-                "NO"
-            )
+            .appendField(new Blockly.FieldDropdown(this.NUMBER), "NO")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_SCROLL_INTERVAL);
-        this.appendValueInput("timein").setCheck(null);
-        this.appendDummyInput().appendField(Blockly.Msg.MIXLY_mSecond);
+        this.appendValueInput("timein")
+            .setCheck(null);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_mSecond);
         this.appendStatementInput("zxhs")
             .setCheck(null)
             .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
@@ -860,7 +845,26 @@ export const simple_timer = {
         this.setTooltip();
         this.setHelpUrl("");
     },
+    NUMBER: [
+        ["1", "1"],
+        ["2", "2"],
+        ["3", "3"],
+        ["4", "4"],
+        ["5", "5"],
+        ["6", "6"],
+        ["7", "7"],
+        ["8", "8"],
+        ["9", "9"],
+        ["10", "10"],
+        ["11", "11"],
+        ["12", "12"],
+        ["13", "13"],
+        ["14", "14"],
+        ["15", "15"],
+        ["16", "16"],
+    ]
 };
+
 //do-while循环
 export const do_while = {
     init: function () {
@@ -890,32 +894,31 @@ export const super_delay_function1 = {
     init: function () {
         this.appendDummyInput()
             .appendField(Blockly.Msg.super_delay_function)
-            .appendField(
-                new Blockly.FieldDropdown([
-                    ["1", "1"],
-                    ["2", "2"],
-                    ["3", "3"],
-                    ["4", "4"],
-                    ["5", "5"],
-                    ["6", "6"],
-                    ["7", "7"],
-                    ["8", "8"],
-                    ["9", "9"],
-                    ["10", "10"],
-                    ["11", "11"],
-                    ["12", "12"],
-                    ["13", "13"],
-                    ["14", "14"],
-                    ["15", "15"],
-                    ["16", "16"],
-                ]),
-                "number"
-            );
-        this.appendStatementInput("delay_function").setCheck(null);
+            .appendField(new Blockly.FieldDropdown(this.NUMBER), "number");
+        this.appendStatementInput("delay_function")
+            .setCheck(null);
         this.setColour(120);
         this.setTooltip(Blockly.Msg.super_delay_function_help);
         this.setHelpUrl("");
     },
+    NUMBER: [
+        ["1", "1"],
+        ["2", "2"],
+        ["3", "3"],
+        ["4", "4"],
+        ["5", "5"],
+        ["6", "6"],
+        ["7", "7"],
+        ["8", "8"],
+        ["9", "9"],
+        ["10", "10"],
+        ["11", "11"],
+        ["12", "12"],
+        ["13", "13"],
+        ["14", "14"],
+        ["15", "15"],
+        ["16", "16"],
+    ]
 };
 
 //执行超级延时函数
@@ -923,27 +926,7 @@ export const execute_super_delay_function1 = {
     init: function () {
         this.appendDummyInput()
             .appendField(Blockly.Msg.execute_super_delay_function)
-            .appendField(
-                new Blockly.FieldDropdown([
-                    ["1", "1"],
-                    ["2", "2"],
-                    ["3", "3"],
-                    ["4", "4"],
-                    ["5", "5"],
-                    ["6", "6"],
-                    ["7", "7"],
-                    ["8", "8"],
-                    ["9", "9"],
-                    ["10", "10"],
-                    ["11", "11"],
-                    ["12", "12"],
-                    ["13", "13"],
-                    ["14", "14"],
-                    ["15", "15"],
-                    ["16", "16"],
-                ]),
-                "number"
-            );
+            .appendField(new Blockly.FieldDropdown(this.NUMBER), "number");
         this.appendValueInput("time_interval")
             .setCheck(null)
             .appendField(Blockly.Msg.time_interval);
@@ -957,4 +940,22 @@ export const execute_super_delay_function1 = {
         this.setTooltip(Blockly.Msg.execute_super_delay_function_help);
         this.setHelpUrl("");
     },
+    NUMBER: [
+        ["1", "1"],
+        ["2", "2"],
+        ["3", "3"],
+        ["4", "4"],
+        ["5", "5"],
+        ["6", "6"],
+        ["7", "7"],
+        ["8", "8"],
+        ["9", "9"],
+        ["10", "10"],
+        ["11", "11"],
+        ["12", "12"],
+        ["13", "13"],
+        ["14", "14"],
+        ["15", "15"],
+        ["16", "16"],
+    ]
 };

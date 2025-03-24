@@ -2,7 +2,7 @@ import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
 import { inout_analog_write } from '@mixly/arduino-avr/blocks/inout';
 
-const BASE_HUE = 20//'#ae3838';//40;
+const BASE_HUE = 20;
 
 export const ledcSetup = {
     init: function () {
@@ -40,6 +40,7 @@ export const ledcAttachPin = {
         this.setTooltip();
     }
 };
+
 export const ledcDetachPin = {
     init: function () {
         this.setColour(BASE_HUE);
@@ -52,6 +53,7 @@ export const ledcDetachPin = {
         this.setTooltip();
     }
 };
+
 export const ledcWrite = inout_analog_write;
 
 export const inout_touchRead = {
@@ -85,6 +87,7 @@ export const touchAttachInterrupt = {
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_ATTACHINTERRUPT);
     }
 };
+
 export const inout_esp32_dac = {
     init: function () {
         this.appendValueInput("value")
@@ -110,7 +113,24 @@ export const esp32_led_pwm = {
             .appendField(Blockly.Msg.MIXLY_FREQUENCY)
             .appendField(new Blockly.FieldTextInput("5000"), "freq")
             .appendField(Blockly.Msg.MIXLY_CHANNEL)
-            .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"], ["11", "11"], ["12", "12"], ["13", "13"], ["14", "14"], ["15", "15"]]), "ledChannel")
+            .appendField(new Blockly.FieldDropdown([
+                ["0", "0"],
+                ["1", "1"],
+                ["2", "2"],
+                ["3", "3"],
+                ["4", "4"],
+                ["5", "5"],
+                ["6", "6"],
+                ["7", "7"],
+                ["8", "8"],
+                ["9", "9"],
+                ["10", "10"],
+                ["11", "11"],
+                ["12", "12"],
+                ["13", "13"],
+                ["14", "14"],
+                ["15", "15"]
+            ]), "ledChannel")
             .appendField(Blockly.Msg.MIXLY_ANALOGWRITE_PIN);
         this.appendValueInput("val")
             .setCheck(null)

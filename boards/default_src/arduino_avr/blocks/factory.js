@@ -175,7 +175,8 @@ export const factory_declare = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
     }
-}
+};
+
 export const factory_declare2 = {
     init: function () {
         this.setColour(FACTORY_HUE);
@@ -185,6 +186,7 @@ export const factory_declare2 = {
         this.setNextStatement(true);
     }
 };
+
 export const factory_define = {
     init: function () {
         this.setColour(FACTORY_HUE);
@@ -195,7 +197,8 @@ export const factory_define = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
     }
-}
+};
+
 export const factory_static_method_noreturn = {
     init: function () {
         this.setColour(FACTORY_HUE);
@@ -216,7 +219,7 @@ export const factory_static_method_noreturn = {
     compose: factory_function_noreturn.compose,
     saveConnections: factory_function_noreturn.saveConnections,
     updateShape_: factory_function_noreturn.updateShape_
-}
+};
 
 export const factory_static_method_return = {
     init: function () {
@@ -237,7 +240,7 @@ export const factory_static_method_return = {
     compose: factory_function_noreturn.compose,
     saveConnections: factory_function_noreturn.saveConnections,
     updateShape_: factory_function_noreturn.updateShape_
-}
+};
 
 export const factory_callMethod_noreturn = {
     init: function () {

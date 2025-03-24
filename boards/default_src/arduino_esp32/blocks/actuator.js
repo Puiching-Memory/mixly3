@@ -97,7 +97,6 @@ export const motor_id = {
     }
 };
 
-
 export const HR8833_Motor_Setup = {
     init: function () {
         this.setColour(ACTUATOR_HUE);

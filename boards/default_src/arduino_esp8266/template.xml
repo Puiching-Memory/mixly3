@@ -726,21 +726,13 @@
   <category id="catSensor" colour="40">
     <block type="chaoshengbo2">
     </block>
-    <block type="DHT">
-      <value name="PIN">
-        <shadow type="pins_digital"></shadow>
-      </value>
-    </block>
+    <block type="DHT"></block>
     <block type="LM35">
       <value name="PIN">
         <shadow type="pins_analog"></shadow>
       </value>
     </block>
-    <block type="ds18b20">
-      <value name="PIN">
-        <shadow type="pins_digital"></shadow>
-      </value>
-    </block>
+    <block type="ds18b20"></block>
     <block type="BME280_READ">
       <value name="address">
         <shadow type="math_number">
@@ -784,27 +776,27 @@
       </value>
       <value name="tcs230_s1">
         <shadow type="pins_digital">
-          <field name="PIN">3</field>
+          <field name="PIN">4</field>
         </shadow>
       </value>
       <value name="tcs230_s2">
         <shadow type="pins_digital">
-          <field name="PIN">4</field>
+          <field name="PIN">5</field>
         </shadow>
       </value>
       <value name="tcs230_s3">
         <shadow type="pins_digital">
-          <field name="PIN">5</field>
+          <field name="PIN">12</field>
         </shadow>
       </value>
       <value name="tcs230_led">
         <shadow type="pins_digital">
-          <field name="PIN">6</field>
+          <field name="PIN">13</field>
         </shadow>
       </value>
       <value name="tcs230_out">
         <shadow type="pins_digital">
-          <field name="PIN">7</field>
+          <field name="PIN">14</field>
         </shadow>
       </value>
     </block>
@@ -1019,9 +1011,7 @@
         <block type="keypad_type_data"></block>
       </value>
     </block>
-    <block type="get_keypad_num">
-      <value name="keypad_name"></value>
-    </block>
+    <block type="get_keypad_num"></block>
     <block type="gps_init">
       <value name="RX">
         <shadow type="pins_digital"></shadow>
@@ -1105,7 +1095,7 @@
         </value>
         <value name="PIN_EN">
           <shadow type="pins_pwm">
-            <field name="PIN">6</field>
+            <field name="PIN">12</field>
           </shadow>
         </value>
         <value name="speed">
@@ -1166,20 +1156,16 @@
           </shadow>
         </value>
       </block>
-      <block type="servo_read_degrees">
-        <value name="PIN">
-          <shadow type="pins_digital"></shadow>
-        </value>
-      </block>
+      <block type="servo_read_degrees"></block>
       <block type="group_stepper_setup">
         <value name="PIN1">
           <shadow type="pins_digital">
-            <field name="PIN">1</field>
+            <field name="PIN">2</field>
           </shadow>
         </value>
         <value name="PIN2">
           <shadow type="pins_digital">
-            <field name="PIN">2</field>
+            <field name="PIN">4</field>
           </shadow>
         </value>
         <value name="steps">
@@ -1196,22 +1182,22 @@
       <block type="group_stepper_setup2">
         <value name="PIN1">
           <shadow type="pins_digital">
-            <field name="PIN">1</field>
+            <field name="PIN">2</field>
           </shadow>
         </value>
         <value name="PIN2">
           <shadow type="pins_digital">
-            <field name="PIN">2</field>
+            <field name="PIN">4</field>
           </shadow>
         </value>
         <value name="PIN3">
           <shadow type="pins_digital">
-            <field name="PIN">3</field>
+            <field name="PIN">5</field>
           </shadow>
         </value>
         <value name="PIN4">
           <shadow type="pins_digital">
-            <field name="PIN">4</field>
+            <field name="PIN">12</field>
           </shadow>
         </value>
         <value name="steps">
@@ -1328,14 +1314,14 @@
       <block type="M9101X_S_MP3_CONTROL">
         <value name="PIN">
           <shadow type="pins_digital">
-            <field name="PIN">8</field>
+            <field name="PIN"></field>
           </shadow>
         </value>
       </block>
       <block type="M9101X_S_MP3_VOL_CONTROL">
         <value name="PIN">
           <shadow type="pins_digital">
-            <field name="PIN">8</field>
+            <field name="PIN"></field>
           </shadow>
         </value>
         <value name="NUM">
@@ -1347,7 +1333,7 @@
       <block type="M9101X_S_MP3_PLAY_NUM">
         <value name="PIN">
           <shadow type="pins_digital">
-            <field name="PIN">8</field>
+            <field name="PIN"></field>
           </shadow>
         </value>
         <value name="NUM">
@@ -1370,12 +1356,12 @@
         <field name="serial_select">mySerial</field>
         <value name="RX">
           <shadow type="pins_digital">
-            <field name="PIN">10</field>
+            <field name="PIN"></field>
           </shadow>
         </value>
         <value name="TX">
           <shadow type="pins_digital">
-            <field name="PIN">11</field>
+            <field name="PIN"></field>
           </shadow>
         </value>
         <next>
@@ -1516,11 +1502,6 @@
             <field name="NUM">4</field>
           </shadow>
         </value>
-        <value name="Brightness">
-          <shadow type="math_number">
-            <field name="NUM">20</field>
-          </shadow>
-        </value>
       </block>
       <block type="display_rgb_Brightness">
         <value name="Brightness">
@@ -1589,11 +1570,6 @@
             <field name="NUM">20</field>
           </shadow>
         </value>
-        <value name="Brightness">
-          <shadow type="math_number">
-            <field name="NUM">20</field>
-          </shadow>
-        </value>
       </block>
       <block type="display_rgb_rainbow3">
         <value name="rainbow_color">
@@ -1633,11 +1609,6 @@
             <field name="TEXT">2345</field>
           </shadow>
         </value>
-        <value name="Speed">
-          <shadow type="math_number">
-            <field name="NUM">300</field>
-          </shadow>
-        </value>
       </block>
       <block type="display_TM1637_displayTime">
         <value name="hour">
@@ -1648,10 +1619,6 @@
         <value name="minute">
           <shadow type="math_number">
             <field name="NUM">30</field>
-          </shadow>
-        </value>
-        <value name="STAT">
-          <shadow type="inout_highlow">
           </shadow>
         </value>
       </block>
@@ -1706,7 +1673,7 @@
         <field name="number">0</field>
         <value name="row">
           <shadow type="math_number">
-            <field name=" NUM">1</field>
+            <field name="NUM">1</field>
           </shadow>
         </value>
         <value name="column">
@@ -1743,9 +1710,6 @@
       <block type="u8g2_spi_init">
         <field name="U8G2_TYPE_SPI">SSD1306_128X64_NONAME</field>
         <field name="ROTATION">U8G2_R0</field>
-        <field name="CS">10</field>
-        <field name="DC">9</field>
-        <field name="RST">8</field>
         <next>
           <block type="oled_page">
             <statement name="DO">
@@ -1766,7 +1730,6 @@
           <shadow type="pins_MOSI">
           </shadow>
         </value>
-        <field name="DC">10</field>
         <next>
           <block type="oled_page">
             <statement name="DO">
@@ -1778,17 +1741,13 @@
         </next>
       </block>
       <sep gap="50"></sep>
-      <block type="oled_set_EN_Font">
-      </block>
-      <block type="oled_set_CN_Font">
-      </block>
-      <block type="oled_set_ZH_TW_Font">
-      </block>
+      <block type="oled_set_EN_Font"></block>
+      <block type="oled_set_CN_Font"></block>
+      <block type="oled_set_ZH_TW_Font"></block>
       <block type="procedures_defnoreturn">
         <field name="NAME">page1</field>
         <statement name="STACK">
           <block type="oled_set_EN_Font">
-            <field name="TYPE">timR08_tr</field>
             <next>
               <block type="oled_print">
                 <value name="POS_X">
@@ -1823,13 +1782,8 @@
             <field name="modulus_direction">2</field>
             <field name="hz_sharp">STHeiti</field>
             <field name="hz_line_height">16</field>
-            <field name="hz_up_down">hz_up</field>
-            <field name="hz_up_down_data">0</field>
-            <field name="hz_left_right">hz_left</field>
-            <field name="hz_left_right_data">0</field>
             <field name="bitmap_width">48</field>
             <field name="bitmap_height">16</field>
-            <field name="show_hz">TRUE</field>
             <field name="input_data">米思齐</field>
           </block>
         </value>
@@ -1880,7 +1834,6 @@
             <field name="NUM">0</field>
           </shadow>
         </value>
-        <field name="Icon_size"></field>
       </block>
       <block type="oled_icons">
         <value name="POS_X">
@@ -1893,7 +1846,6 @@
             <field name="NUM">20</field>
           </shadow>
         </value>
-        <field name="Icon_size"></field>
       </block>
       <block type="oled_drawPixel">
         <value name="POS_X">
@@ -2094,11 +2046,6 @@
         </value>
       </block>
       <block type="HT16K33_Init">
-        <value name="PIN1">
-          <shadow type="pins_digital">
-            <field name="PIN">SDA</field>
-          </shadow>
-        </value>
         <value name="PIN2">
           <shadow type="pins_digital">
             <field name="PIN">SCL</field>
@@ -2220,9 +2167,6 @@
       <block type="blynk_iot_ir_send" name='红外发送'>
         <value name="PIN">
           <shadow type="pins_digital"></shadow>
-        </value>
-        <value name="data">
-          <shadow type="math_number"></shadow>
         </value>
         <value name="bits">
           <shadow type="math_number">
@@ -2688,7 +2632,6 @@
         <mutation>
           <arg name="vpin_value" vartype="int"></arg>
         </mutation>
-        <field name="Vpin">V0</field>
         <value name="TIME">
           <shadow type="math_number">
             <field name="NUM">1000</field>
@@ -3269,11 +3212,6 @@
         <value name="data">
           <shadow type="math_number">
             <field name="NUM">120</field>
-          </shadow>
-        </value>
-        <value name="Topic">
-          <shadow type="text">
-            <field name="TEXT">Topic_0</field>
           </shadow>
         </value>
       </block>

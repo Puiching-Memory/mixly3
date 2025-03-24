@@ -29,14 +29,6 @@ export const math_arithmetic = {
      * @this Blockly.Block
      */
     init: function () {
-        var OPERATORS = [
-            [Blockly.Msg.MATH_ADDITION_SYMBOL, 'ADD'],
-            [Blockly.Msg.MATH_SUBTRACTION_SYMBOL, 'MINUS'],
-            [Blockly.Msg.MATH_MULTIPLICATION_SYMBOL, 'MULTIPLY'],
-            [Blockly.Msg.MATH_DIVISION_SYMBOL, 'DIVIDE'],
-            [Blockly.Msg.MATH_QUYU_SYMBOL, 'QUYU'],
-            [Blockly.Msg.MATH_POWER_SYMBOL, 'POWER']
-        ];
         //this.setHelpUrl(Blockly.Msg.MATH_ARITHMETIC_HELPURL);
         this.setColour(MATH_HUE);
         this.setOutput(true, Number);
@@ -45,7 +37,7 @@ export const math_arithmetic = {
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#id4");
         this.appendValueInput('B')
             .setCheck(null)
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
         this.setInputsInline(true);
         // Assign 'this' to a variable for use in the tooltip closure below.
         var thisBlock = this;
@@ -61,29 +53,37 @@ export const math_arithmetic = {
             };
             return TOOLTIPS[mode];
         });
-    }
+    },
+    OPERATORS: [
+        [Blockly.Msg.MATH_ADDITION_SYMBOL, 'ADD'],
+        [Blockly.Msg.MATH_SUBTRACTION_SYMBOL, 'MINUS'],
+        [Blockly.Msg.MATH_MULTIPLICATION_SYMBOL, 'MULTIPLY'],
+        [Blockly.Msg.MATH_DIVISION_SYMBOL, 'DIVIDE'],
+        [Blockly.Msg.MATH_QUYU_SYMBOL, 'QUYU'],
+        [Blockly.Msg.MATH_POWER_SYMBOL, 'POWER']
+    ]
 };
 
 export const math_bit = {
     init: function () {
-        var OPERATORS = [
-            ['&', '&'],
-            ['|', '|'],
-            ['xor', '^'],
-            ['>>', '>>'],
-            ['<<', '<<']
-        ];
         this.setColour(MATH_HUE);
         this.setOutput(true, Number);
         this.appendValueInput('A')
             .setCheck(Number);
         this.appendValueInput('B')
             .setCheck(Number)
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
         this.setInputsInline(true);
         this.setTooltip("");
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#id8");
-    }
+    },
+    OPERATORS: [
+        ['&', '&'],
+        ['|', '|'],
+        ['xor', '^'],
+        ['>>', '>>'],
+        ['<<', '<<']
+    ]
 };
 
 export const math_trig = {
@@ -92,27 +92,12 @@ export const math_trig = {
      * @this Blockly.Block
      */
     init: function () {
-        var OPERATORS = [
-            ['sin', 'SIN'],
-            ['cos', 'COS'],
-            ['tan', 'TAN'],
-            ['asin', 'ASIN'],
-            ['acos', 'ACOS'],
-            ['atan', 'ATAN'],
-            ['ln', 'LN'],
-            ['log10', 'LOG10'],
-            ['e^', 'EXP'],
-            ['10^', 'POW10'],
-            ['++', '++'],
-            ['--', '--'],
-            ['~', '~'],
-        ];
         //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
         this.setColour(MATH_HUE);
         this.setOutput(true, Number);
         this.appendValueInput('NUM')
             .setCheck(Number)
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
         // Assign 'this' to a variable for use in the tooltip closure below.
         var thisBlock = this;
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#id17");
@@ -128,24 +113,31 @@ export const math_trig = {
             };
             return TOOLTIPS[mode];
         });
-    }
+    },
+    OPERATORS: [
+        ['sin', 'SIN'],
+        ['cos', 'COS'],
+        ['tan', 'TAN'],
+        ['asin', 'ASIN'],
+        ['acos', 'ACOS'],
+        ['atan', 'ATAN'],
+        ['ln', 'LN'],
+        ['log10', 'LOG10'],
+        ['e^', 'EXP'],
+        ['10^', 'POW10'],
+        ['++', '++'],
+        ['--', '--'],
+        ['~', '~'],
+    ]
 };
 
 //取整等
 export const math_to_int = {
     init: function () {
-        var OPERATORS = [
-            [Blockly.Msg.LANG_MATH_TO_ROUND, 'round'],
-            [Blockly.Msg.LANG_MATH_TO_CEIL, 'ceil'],
-            [Blockly.Msg.LANG_MATH_TO_FLOOR, 'floor'],
-            [Blockly.Msg.MATH_ABS, 'abs'],
-            [Blockly.Msg.MATH_SQ, 'sq'],
-            [Blockly.Msg.MATH_SQRT, 'sqrt']
-        ];
         this.setColour(MATH_HUE);
         this.appendValueInput('A')
             .setCheck(Number)
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
         this.setOutput(true, Number);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#id18");
         var thisBlock = this;
@@ -162,37 +154,47 @@ export const math_to_int = {
             };
             return TOOLTIPS[mode];
         });
-    }
+    },
+    OPERATORS: [
+        [Blockly.Msg.LANG_MATH_TO_ROUND, 'round'],
+        [Blockly.Msg.LANG_MATH_TO_CEIL, 'ceil'],
+        [Blockly.Msg.LANG_MATH_TO_FLOOR, 'floor'],
+        [Blockly.Msg.MATH_ABS, 'abs'],
+        [Blockly.Msg.MATH_SQ, 'sq'],
+        [Blockly.Msg.MATH_SQRT, 'sqrt']
+    ]
 };
+
 //变量定义
 export const arduino_variate_type = {
     init: function () {
-        var DATATYPES = [
-            [Blockly.Msg.LANG_MATH_INT, 'int'],
-            [Blockly.Msg.LANG_MATH_UNSIGNED_INT, 'unsigned int'],
-            [Blockly.Msg.LANG_MATH_WORD, 'word'],
-            [Blockly.Msg.LANG_MATH_LONG, 'long'],
-            [Blockly.Msg.LANG_MATH_UNSIGNED_LONG, 'unsigned long'],
-            [Blockly.Msg.LANG_MATH_FLOAT, 'float'],
-            [Blockly.Msg.LANG_MATH_DOUBLE, 'double'],
-            [Blockly.Msg.LANG_MATH_BOOLEAN, 'boolean'],
-            [Blockly.Msg.LANG_MATH_BYTE, 'byte'],
-            [Blockly.Msg.LANG_MATH_CHAR, 'char'],
-            [Blockly.Msg.LANG_MATH_UNSIGNED_CHAR, 'unsigned char'],
-            [Blockly.Msg.LANG_MATH_STRING, 'String'],
-            ["uint8_t", "uint8_t"],
-            ["uint16_t", "uint16_t"],
-            ["uint32_t", "uint32_t"],
-            ["uint64_t", "uint64_t"]
-        ];
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown(DATATYPES), "variate_type");
+            .appendField(new Blockly.FieldDropdown(this.DATATYPES), "variate_type");
         this.setOutput(true, null);
         this.setColour(MATH_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
-    }
+    },
+    DATATYPES: [
+        [Blockly.Msg.LANG_MATH_INT, 'int'],
+        [Blockly.Msg.LANG_MATH_UNSIGNED_INT, 'unsigned int'],
+        [Blockly.Msg.LANG_MATH_WORD, 'word'],
+        [Blockly.Msg.LANG_MATH_LONG, 'long'],
+        [Blockly.Msg.LANG_MATH_UNSIGNED_LONG, 'unsigned long'],
+        [Blockly.Msg.LANG_MATH_FLOAT, 'float'],
+        [Blockly.Msg.LANG_MATH_DOUBLE, 'double'],
+        [Blockly.Msg.LANG_MATH_BOOLEAN, 'boolean'],
+        [Blockly.Msg.LANG_MATH_BYTE, 'byte'],
+        [Blockly.Msg.LANG_MATH_CHAR, 'char'],
+        [Blockly.Msg.LANG_MATH_UNSIGNED_CHAR, 'unsigned char'],
+        [Blockly.Msg.LANG_MATH_STRING, 'String'],
+        ["uint8_t", "uint8_t"],
+        ["uint16_t", "uint16_t"],
+        ["uint32_t", "uint32_t"],
+        ["uint64_t", "uint64_t"]
+    ]
 };
+
 //获取某个变量在内存中所占用的字节数
 export const math_SizeOf = {
     init: function () {
@@ -206,18 +208,15 @@ export const math_SizeOf = {
         this.setHelpUrl("");
     }
 };
+
 //最大最小值
 export const math_max_min = {
     init: function () {
-        var OPERATORS = [
-            [Blockly.Msg.MIXLY_MAX, 'max'],
-            [Blockly.Msg.MIXLY_MIN, 'min'],
-        ];
         this.setColour(MATH_HUE);
         this.appendValueInput('A')
             .setCheck(Number)
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP')
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP')
             .appendField('(');
         this.appendValueInput('B')
             .setCheck(Number)
@@ -238,7 +237,11 @@ export const math_max_min = {
             };
             return TOOLTIPS[mode];
         });
-    }
+    },
+    OPERATORS: [
+        [Blockly.Msg.MIXLY_MAX, 'max'],
+        [Blockly.Msg.MIXLY_MIN, 'min'],
+    ]
 };
 
 export const math_random_seed = {
@@ -305,7 +308,10 @@ export const base_map = {
         this.setColour(MATH_HUE);
         this.appendValueInput("NUM", Number)
             .appendField(Blockly.Msg.MIXLY_MAP)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.LANG_MATH_INT, "map_int"], [Blockly.Msg.LANG_MATH_FLOAT, "map_float"]]), "maptype")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.LANG_MATH_INT, "map_int"],
+                [Blockly.Msg.LANG_MATH_FLOAT, "map_float"]
+            ]), "maptype")
             .setCheck(Number);
         this.appendValueInput("fromLow", Number)
             .appendField(Blockly.Msg.MIXLY_MAP_FROM)
@@ -335,7 +341,12 @@ export const variables_operation = {
             .setCheck(null);
         this.appendValueInput("data")
             .setCheck(null)
-            .appendField(new Blockly.FieldDropdown([["+=", "+"], ["-=", "-"], ["*=", "*"], ["/=", "/"]]), "type");
+            .appendField(new Blockly.FieldDropdown([
+                ["+=", "+"],
+                ["-=", "-"],
+                ["*=", "*"],
+                ["/=", "/"]
+            ]), "type");
         this.appendDummyInput();
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -349,7 +360,10 @@ export const math_auto_add_or_minus = {
         this.appendValueInput("math_auto_add_minus_output")
             .setCheck(null);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown([["++", "++"], ["--", "--"]]), "math_auto_add_minus_type");
+            .appendField(new Blockly.FieldDropdown([
+                ["++", "++"],
+                ["--", "--"]
+            ]), "math_auto_add_minus_type");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);

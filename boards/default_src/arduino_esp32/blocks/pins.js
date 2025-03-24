@@ -20,6 +20,7 @@ export const pins_button = {
         this.setOutput(true, Number);
     }
 };
+
 export const pins_sda = {
     init: function () {
         this.setColour(PINS_HUE);
@@ -100,6 +101,7 @@ export const pins_axis = {
         this.setOutput(true, Number);
     }
 };
+
 export const pins_brightness = {
     init: function () {
         this.setColour(PINS_HUE);
@@ -171,7 +173,6 @@ export const brightness = {
         this.setOutput(true);
     }
 };
-
 
 export const CHANNEL = {
     init: function () {

@@ -27,7 +27,6 @@ export const folding_block = {
     }
 };
 
-
 //IIC地址查找
 export const IICSCAN = {
     init: function () {

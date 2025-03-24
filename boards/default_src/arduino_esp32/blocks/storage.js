@@ -14,10 +14,6 @@ export const initialize_spiffs = {
         this.setHelpUrl("");
     }
 };
-var OPEN_MODE = [
-    [Blockly.Msg.MIXLY_READONLY, 'FILE_READ'],
-    [Blockly.Msg.TEXT_WRITE_TEXT, 'FILE_WRITE'],
-    [Blockly.Msg.TEXT_APPEND_APPENDTEXT, 'FILE_APPEND']]
 
 //打开文件并向其中写入数据
 export const spiffs_open_file = {
@@ -33,14 +29,19 @@ export const spiffs_open_file = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MODE);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown(OPEN_MODE), 'MODE');
+            .appendField(new Blockly.FieldDropdown(this.OPEN_MODE), 'MODE');
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(STORAGE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
-    }
+    },
+    OPEN_MODE: [
+        [Blockly.Msg.MIXLY_READONLY, 'FILE_READ'],
+        [Blockly.Msg.TEXT_WRITE_TEXT, 'FILE_WRITE'],
+        [Blockly.Msg.TEXT_APPEND_APPENDTEXT, 'FILE_APPEND']
+    ]
 };
 
 //打开文件并向其中写入数据
@@ -58,6 +59,7 @@ export const spiffs_close_file = {
         this.setHelpUrl("");
     }
 };
+
 //将数据追加到文件
 export const spiffs_write_data = {
     init: function () {
@@ -77,6 +79,7 @@ export const spiffs_write_data = {
         this.setHelpUrl("");
     }
 };
+
 //文件可读
 export const spiffs_read_available = {
     init: function () {

@@ -7,7 +7,10 @@ export const ethernet_init_begin = {
         this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ETHERNET_BEGIN)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_ETHERNET, 'Ethernet'], [Blockly.Msg.MIXLY_ETHERNET2, 'Ethernet2']]), "Ethernet");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_ETHERNET, 'Ethernet'],
+                [Blockly.Msg.MIXLY_ETHERNET2, 'Ethernet2']
+            ]), "Ethernet");
         this.appendValueInput('MAC')
             .setCheck(Array)
             .setAlign(Blockly.inputs.Align.RIGHT)
@@ -35,7 +38,7 @@ export const ethernet_mac_address = {
         this.setOutput(true, Array);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_ETHERNET_MACADDRESS);
     }
-}
+};
 
 export const ethernet_init_local_ip = {
     init: function () {
@@ -167,8 +170,7 @@ export const ethernet_client_get_request = {
         }
         return new Blockly.FieldImage(file, 12, 12, '"');
     }
-}
-
+};
 
 export const NTP_server = {
     init: function () {
@@ -190,16 +192,7 @@ export const NTP_server = {
         this.setHelpUrl();
     }
 };
-//传感器-实时时钟块_时间变量
-var NTP_TIME_TYPE = [
-    [Blockly.Msg.MIXLY_YEAR, "NTP.getDateYear()"],
-    [Blockly.Msg.MIXLY_MONTH, "NTP.getDateMonth()"],
-    [Blockly.Msg.MIXLY_DAY, "NTP.getDateDay()"],
-    [Blockly.Msg.MIXLY_HOUR, "NTP.getTimeHour24()"],
-    [Blockly.Msg.MIXLY_MINUTE, "NTP.getTimeMinute()"],
-    [Blockly.Msg.MIXLY_SECOND, "NTP.getTimeSecond()"],
-    [Blockly.Msg.MIXLY_WEEK, "NTP.getDateWeekday()"]
-];
+
 //传感器-实时时钟块_获取时间
 export const NTP_server_get_time = {
     init: function () {
@@ -209,10 +202,19 @@ export const NTP_server_get_time = {
             .appendField(Blockly.Msg.NTP_server_get_time);
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(new Blockly.FieldDropdown(NTP_TIME_TYPE), "TIME_TYPE");
+            .appendField(new Blockly.FieldDropdown(this.NTP_TIME_TYPE), "TIME_TYPE");
         this.setInputsInline(true);
         this.setOutput(true, Number);
-    }
+    },
+    NTP_TIME_TYPE: [
+        [Blockly.Msg.MIXLY_YEAR, "NTP.getDateYear()"],
+        [Blockly.Msg.MIXLY_MONTH, "NTP.getDateMonth()"],
+        [Blockly.Msg.MIXLY_DAY, "NTP.getDateDay()"],
+        [Blockly.Msg.MIXLY_HOUR, "NTP.getTimeHour24()"],
+        [Blockly.Msg.MIXLY_MINUTE, "NTP.getTimeMinute()"],
+        [Blockly.Msg.MIXLY_SECOND, "NTP.getTimeSecond()"],
+        [Blockly.Msg.MIXLY_WEEK, "NTP.getDateWeekday()"]
+    ]
 };
 
 export const MQTT_server = {
@@ -315,7 +317,8 @@ export const MQTT_connect = {
         this.setTooltip();
     }
 };
-var Topic_validator = function (newValue) {
+
+const Topic_validator = function (newValue) {
     return newValue.replace(/\//g, '');
 };
 
@@ -352,6 +355,7 @@ export const MQTT_subscribe_value = {
         this.setOutput(true, String);
     }
 };
+
 export const MQTT_add_subscribe_topic = {
     /**
      * Mutator bolck for else-if condition.
@@ -487,7 +491,6 @@ export const MQTT_subscribe = {
             clauseBlock = clauseBlock.nextConnection &&
                 clauseBlock.nextConnection.targetBlock();
         }
-
         this.updateShape_();
         // Reconnect any child blocks.
         this.reconnectChildBlocks_(statementConnections);
@@ -612,7 +615,10 @@ export const WIFI_smartConfig = {
         this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.blynk_smartconfig)
-            .appendField(new Blockly.FieldDropdown([["SmartConfig", 'SmartConfig'], ["AP", 'AP']]), "MODE");
+            .appendField(new Blockly.FieldDropdown([
+                ["SmartConfig", 'SmartConfig'],
+                ["AP", 'AP']
+            ]), "MODE");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);//可上下连接
         this.setNextStatement(true, null);
@@ -695,7 +701,10 @@ export const WIFI_incomingPacket = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(require('../media/blynk/wifi_udp.png'), 25, 25, "*"))
-            .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF + " WIFI UDP " + Blockly.Msg.MIXLY_STM32_SPI_DATA_RECEIVED + "？")
+            .appendField(
+                Blockly.Msg.CONTROLS_IF_MSG_IF + " WIFI UDP "
+                + Blockly.Msg.MIXLY_STM32_SPI_DATA_RECEIVED + "？"
+            )
         this.appendValueInput("input_data")
             .setCheck(null)
             .appendField(Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS);

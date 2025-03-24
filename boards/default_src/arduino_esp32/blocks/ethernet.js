@@ -44,7 +44,11 @@ export const esp32_wifi_connection_event = {
     init: function () {
         this.appendDummyInput()
             .appendField("WiFi连接事件")
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_ESP32_WIFI_CONNECTION_EVENT1, "1"], [Blockly.Msg.MIXLY_ESP32_WIFI_CONNECTION_EVENT2, "2"], [Blockly.Msg.MIXLY_ESP32_WIFI_CONNECTION_EVENT3, "3"]]), "type");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_ESP32_WIFI_CONNECTION_EVENT1, "1"],
+                [Blockly.Msg.MIXLY_ESP32_WIFI_CONNECTION_EVENT2, "2"],
+                [Blockly.Msg.MIXLY_ESP32_WIFI_CONNECTION_EVENT3, "3"]
+            ]), "type");
         this.appendStatementInput("event")
             .setCheck(null);
         this.setColour(ETHERNET_HUE);

@@ -33,7 +33,7 @@ export const text = {
     }
 };
 
-Blockly.FieldTextInput.char_validator = function (text) {
+const charValidator = function (text) {
     if (text.length > 1) {
         if (text.charAt(0) === "\\") {
             var charAtOne = text.charAt(1);
@@ -59,7 +59,7 @@ export const text_char = {
         this.setColour(TEXTS_HUE);
         this.appendDummyInput()
             .appendField(this.newQuote_(true))
-            .appendField(new Blockly.FieldTextInput('', Blockly.FieldTextInput.char_validator), 'TEXT')
+            .appendField(new Blockly.FieldTextInput('', charValidator), 'TEXT')
             .appendField(this.newQuote_(false));
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.TEXT_CHAR_TOOLTIP);
@@ -75,7 +75,6 @@ export const text_char = {
     }
 };
 
-
 export const text_join = {
     init: function () {
         this.setColour(TEXTS_HUE);
@@ -89,7 +88,6 @@ export const text_join = {
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_TEXT_JOIN);
     }
 };
-
 
 export const text_to_number = {
     init: function () {
@@ -131,7 +129,7 @@ export const char_to_ascii = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_TOASCII)
             .appendField("'")
-            .appendField(new Blockly.FieldTextInput('', Blockly.FieldTextInput.char_validator), 'TEXT')
+            .appendField(new Blockly.FieldTextInput('', charValidator), 'TEXT')
             .appendField("'");
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_TEXT_TOASCII);
@@ -176,7 +174,7 @@ export const text_length = {
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_TEXT_LENGTH);
     }
-}
+};
 
 export const text_char_at = {
     init: function () {
@@ -195,20 +193,15 @@ export const text_char_at = {
             return Blockly.Msg.MIXLY_TOOLTIP_TEXT_FIND_CHAR_AT.replace('%1', Blockly.Arduino.valueToCode(self, 'VAR', Blockly.Arduino.ORDER_ATOMIC));
         });
     }
-}
+};
 
 export const text_equals_starts_ends = {
     init: function () {
-        var TEXT_DOWHAT = [
-            [Blockly.Msg.MIXLY_EQUALS, 'equals'],
-            [Blockly.Msg.MIXLY_STARTSWITH, 'startsWith'],
-            [Blockly.Msg.MIXLY_ENDSWITH, 'endsWith']
-        ];
         this.setColour(TEXTS_HUE);
         this.appendValueInput("STR1")
             .setCheck([String, Number]);
         this.appendValueInput("STR2")
-            .appendField(new Blockly.FieldDropdown(TEXT_DOWHAT), 'DOWHAT')
+            .appendField(new Blockly.FieldDropdown(this.TEXT_DOWHAT), 'DOWHAT')
             .setCheck([String, Number]);
         this.setOutput(true, [Boolean, Number]);
         this.setInputsInline(true);
@@ -222,8 +215,13 @@ export const text_equals_starts_ends = {
             };
             return Blockly.Msg.MIXLY_TOOLTIP_TEXT_EQUALS_STARTS_ENDS.replace('%1', TOOLTIPS[op]).replace('%2', Blockly.Arduino.valueToCode(self, 'STR2', Blockly.Arduino.ORDER_ATOMIC));
         });
-    }
-}
+    },
+    TEXT_DOWHAT: [
+        [Blockly.Msg.MIXLY_EQUALS, 'equals'],
+        [Blockly.Msg.MIXLY_STARTSWITH, 'startsWith'],
+        [Blockly.Msg.MIXLY_ENDSWITH, 'endsWith']
+    ]
+};
 
 export const text_compareTo = {
     init: function () {
@@ -237,7 +235,8 @@ export const text_compareTo = {
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_COMPARETO_HELP);
     }
-}
+};
+
 //小数获取有效位
 export const decimal_places = {
     init: function () {
@@ -255,6 +254,7 @@ export const decimal_places = {
         this.setHelpUrl("");
     }
 };
+
 //截取字符串
 export const substring = {
     init: function () {
@@ -274,6 +274,7 @@ export const substring = {
         this.setHelpUrl("");
     }
 };
+
 //字符串转化为大小写
 export const letter_conversion = {
     init: function () {
@@ -282,7 +283,10 @@ export const letter_conversion = {
             .appendField(Blockly.Msg.STRING_VARIABLE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.LETTERS_ARE_CONVERTED_TO)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.CAPITAL, ".toUpperCase()"], [Blockly.Msg.LOWER_CASE, ".toLowerCase()"]]), "type");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.CAPITAL, ".toUpperCase()"],
+                [Blockly.Msg.LOWER_CASE, ".toLowerCase()"]
+            ]), "type");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(TEXTS_HUE);
@@ -338,7 +342,10 @@ export const first_and_last = {
             .setCheck(null)
             .appendField(Blockly.Msg.AS_A_STRING);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.STARTSWITH, ".startsWith"], [Blockly.Msg.ENDSWITH, ".endsWith"]]), "type");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.STARTSWITH, ".startsWith"],
+                [Blockly.Msg.ENDSWITH, ".endsWith"]
+            ]), "type");
         this.setOutput(true, null);
         this.setColour(TEXTS_HUE);
         this.setTooltip(Blockly.Msg.FIRST_AND_LAST_HELP);
@@ -352,7 +359,15 @@ export const type_conversion = {
         this.appendValueInput("variable")
             .setCheck(null)
             .appendField(Blockly.Msg.DATA_TYPE_CONVERSION)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.LANG_MATH_STRING, "String"], [Blockly.Msg.LANG_MATH_CHAR, "char"], [Blockly.Msg.LANG_MATH_BYTE, "byte"], [Blockly.Msg.LANG_MATH_INT, "int"], [Blockly.Msg.LANG_MATH_LONG, "long"], [Blockly.Msg.LANG_MATH_FLOAT, "float"], [Blockly.Msg.LANG_MATH_WORD, "word"]]), "type");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.LANG_MATH_STRING, "String"],
+                [Blockly.Msg.LANG_MATH_CHAR, "char"],
+                [Blockly.Msg.LANG_MATH_BYTE, "byte"],
+                [Blockly.Msg.LANG_MATH_INT, "int"],
+                [Blockly.Msg.LANG_MATH_LONG, "long"],
+                [Blockly.Msg.LANG_MATH_FLOAT, "float"],
+                [Blockly.Msg.LANG_MATH_WORD, "word"]
+            ]), "type");
         this.setOutput(true, null);
         this.setColour(TEXTS_HUE);
         this.setTooltip(Blockly.Msg.TYPE_CONVERSION_HELP);
@@ -559,7 +574,13 @@ export const String_to_Long_Integer = {
         this.appendValueInput("data")
             .setCheck(null)
             .appendField(Blockly.Msg.MIXLY_MICROBIT_TYPE_STRING + Blockly.Msg.A_TO_B + Blockly.Msg.LANG_MATH_LONG)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MATH_HEX, "16"], [Blockly.Msg.MATH_DEC, "10"], [Blockly.Msg.MATH_OCT, "8"], [Blockly.Msg.MATH_BIN, "2"], [Blockly.Msg.blynk_IOT_AUTO, "0"]]), "type");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MATH_HEX, "16"],
+                [Blockly.Msg.MATH_DEC, "10"],
+                [Blockly.Msg.MATH_OCT, "8"],
+                [Blockly.Msg.MATH_BIN, "2"],
+                [Blockly.Msg.blynk_IOT_AUTO, "0"]
+            ]), "type");
         this.setOutput(true, null);
         this.setColour(TEXTS_HUE);
         this.setTooltip("");

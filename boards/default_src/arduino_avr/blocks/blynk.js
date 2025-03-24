@@ -66,7 +66,7 @@ export const blynk_server = {
 };
 
 //虚拟管脚选择
-var BLYNK_VIRTUALPIN_SELECT = [
+const BLYNK_VIRTUALPIN_SELECT = [
     ["V0", "V0"],
     ["V1", "V1"],
     ["V2", "V2"],
@@ -111,7 +111,7 @@ var BLYNK_VIRTUALPIN_SELECT = [
 ];
 
 //定时器选择
-var BLYNK_TIMER_SELECT = [
+const BLYNK_TIMER_SELECT = [
     ["1", "1"],
     ["2", "2"],
     ["3", "3"],
@@ -152,9 +152,9 @@ export const blynk_iot_push_data = {
 //从app端获取数据
 export const blynk_iot_get_data = {
     /**
-   * Block for defining a procedure with no return value.
-   * @this Blockly.Block
-   */
+     * Block for defining a procedure with no return value.
+     * @this Blockly.Block
+     */
     init: function () {
         this.setColour(BLYNK1_HUE);
         this.appendDummyInput("")
@@ -173,17 +173,14 @@ export const blynk_iot_get_data = {
         this.setNextStatement(false, null);
         this.statementConnection_ = null;
     },
-
     getVars: function () {
         return [this.getFieldValue("VAR")];
     },
-
     renameVar: function (oldName, newName) {
         if (Blockly.Names.equals(oldName, this.getFieldValue("VAR"))) {
             this.setTitleValue(newName, "VAR");
         }
     },
-
     /**
      * Add or remove the statement block from this function definition.
      * @param {boolean} hasStatements True if a statement block is needed.
@@ -277,7 +274,6 @@ export const blynk_iot_get_data = {
         }
         this.updateParams_();
         // Blockly.Procedures.mutateCallers(this);
-
         // Show or hide the statement input.
         this.setStatements_(xmlElement.getAttribute("statements") !== "false");
     },
@@ -492,7 +488,7 @@ export const Blynk_connect_state = {
     }
 };
 
-var BLYNK_CONNECT_STATE_SELECT = [
+const BLYNK_CONNECT_STATE_SELECT = [
     [Blockly.Msg.BLYNK_CONNECTED, 'BLYNK_CONNECTED'],
     [Blockly.Msg.BLYNK_DISCONNECTED, 'BLYNK_DISCONNECTED'],
     [Blockly.Msg.BLYNK_APP_CONNECTED, 'BLYNK_APP_CONNECTED'],
@@ -588,26 +584,30 @@ export const blynk_iot_WidgetLED_VALUE = {
     }
 };
 
-var AC_TYPE = [
+const AC_TYPE = [
     [Blockly.Msg.blynk_IOT_GREE, "Gree"],
     [Blockly.Msg.blynk_IOT_MIDEA, "Midea"],
 ];
 
-var AC_POWER = [
+const AC_POWER = [
     [Blockly.Msg.MIXLY_ON, "true"],
     [Blockly.Msg.MIXLY_OFF, "false"]
 ];
-var AC_MODE = [
+
+const AC_MODE = [
     [Blockly.Msg.blynk_IOT_FAN, "FAN"],
     [Blockly.Msg.blynk_IOT_HEAT, "HEAT"],
     [Blockly.Msg.blynk_IOT_COOL, "COOL"],
     [Blockly.Msg.blynk_IOT_DRY, "DRY"],
-    [Blockly.Msg.blynk_IOT_AUTO, "AUTO"]];
-var AC_FAN = [
+    [Blockly.Msg.blynk_IOT_AUTO, "AUTO"]
+];
+
+const AC_FAN = [
     [Blockly.Msg.blynk_IOT_FAN_3, "FAN_3"],
     [Blockly.Msg.blynk_IOT_FAN_2, "FAN_2"],
     [Blockly.Msg.blynk_IOT_FAN_1, "FAN_1"],
-    [Blockly.Msg.blynk_IOT_FAN_0, "FAN_0"]];
+    [Blockly.Msg.blynk_IOT_FAN_0, "FAN_0"]
+];
 
 //红外控制空调
 export const blynk_iot_ir_send_ac = {
@@ -643,7 +643,9 @@ export const blynk_iot_ir_send_ac = {
 export const blynk_iot_ir_recv_raw = {
     init: function () {
         this.setColour(BLYNK1_HUE);
-        this.appendValueInput("PIN", Number).appendField(Blockly.Msg.blynk_IOT_IR_RECEIVE_RAW).setCheck(Number);
+        this.appendValueInput("PIN", Number)
+            .appendField(Blockly.Msg.blynk_IOT_IR_RECEIVE_RAW)
+            .setCheck(Number);
         //  this.appendValueInput("PIN", Number).appendField(Blockly.Msg.MIXLY_PIN).setCheck(Number);
         this.setPreviousStatement(true);
         this.setNextStatement(true);

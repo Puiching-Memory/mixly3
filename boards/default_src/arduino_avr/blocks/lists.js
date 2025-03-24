@@ -175,7 +175,7 @@ export const lists_create_with_text = {
         }
         return new Blockly.FieldImage(file, 12, 12, '"');
     }
-}
+};
 
 export const lists_create_with2 = {
     /**
@@ -577,6 +577,7 @@ export const lists_array2_setup = {
         this.setHelpUrl("");
     }
 };
+
 export const lists_array2_setup_get_data = {
     /**
      * Block for creating a list with any number of elements of any type.
@@ -720,10 +721,14 @@ export const loop_array = {
     init: function () {
         this.appendValueInput("name")
             .setCheck(null)
-            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_CONTORL_GET_TYPE).appendField(new Blockly.FieldDropdown(DATATYPES), "TYPE")
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_CONTORL_GET_TYPE)
+            .appendField(new Blockly.FieldDropdown(DATATYPES), "TYPE")
             .appendField(Blockly.Msg.MIXLY_LIST_NAME);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.LEFT_CYCLE, "0"], [Blockly.Msg.RIGHT_CYCLE, "1"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.LEFT_CYCLE, "0"],
+                [Blockly.Msg.RIGHT_CYCLE, "1"]
+            ]), "mode");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(LISTS_HUE);
@@ -739,7 +744,10 @@ export const lists_array2_get_length = {
             .appendField(Blockly.Msg.MIXLY_ARRAY2)
             .appendField(new Blockly.FieldTextInput("mylist"), "list_name")
             .appendField(" " + Blockly.Msg.MIXLY_GET)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.array2_rows, "row"], [Blockly.Msg.array2_cols, "col"]]), "type");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.array2_rows, "row"],
+                [Blockly.Msg.array2_cols, "col"]
+            ]), "type");
         this.setInputsInline(true);
         this.setOutput(true, null);
         this.setColour(LISTS_HUE);

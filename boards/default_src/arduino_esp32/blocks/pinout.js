@@ -2,7 +2,6 @@ import * as Blockly from 'blockly/core';
 
 const PINOUT_HUE = '#555555';
 
-
 export const esp32_pin = {
     init: function () {
         this.appendDummyInput()

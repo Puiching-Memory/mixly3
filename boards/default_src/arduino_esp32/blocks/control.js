@@ -7,14 +7,22 @@ export const controls_hw_timer = {
         this.setColour(LOOPS_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_ESP32_HW_TIMER)
-            .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]]), "TIMER_NUM");
+            .appendField(new Blockly.FieldDropdown([
+                ["0", "0"],
+                ["1", "1"],
+                ["2", "2"],
+                ["3", "3"]
+            ]), "TIMER_NUM");
         this.appendValueInput('TIME')
             .setCheck(Number)
             .appendField(Blockly.Msg.MIXLY_MSTIMER2_EVERY);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MILLIS)
             .appendField(Blockly.Msg.MIXLY_MODE)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_PYTHON_ONE_SHOT, "false"], [Blockly.Msg.MIXLY_PYTHON_PERIODIC, "true"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_PYTHON_ONE_SHOT, "false"],
+                [Blockly.Msg.MIXLY_PYTHON_PERIODIC, "true"]
+            ]), "mode");
         this.appendStatementInput('DO')
             .appendField(Blockly.Msg.MIXLY_MSTIMER2_DO);
         this.setPreviousStatement(false);
@@ -28,9 +36,21 @@ export const controls_runnig_core = {
         this.appendDummyInput()
             .appendField("ESP32")
             .appendField("Task")
-            .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"]]), "task")
+            .appendField(new Blockly.FieldDropdown([
+                ["1", "1"],
+                ["2", "2"],
+                ["3", "3"],
+                ["4", "4"],
+                ["5", "5"],
+                ["6", "6"],
+                ["7", "7"],
+                ["8", "8"]
+            ]), "task")
             .appendField("Core")
-            .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"]]), "core");
+            .appendField(new Blockly.FieldDropdown([
+                ["0", "0"],
+                ["1", "1"]
+            ]), "core");
         this.appendValueInput("length")
             .setCheck(null)
             .setAlign(Blockly.inputs.Align.RIGHT)
@@ -61,12 +81,18 @@ export const control_core_delay = {
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SCOOP_SLEEP);
     }
 };
+
 export const controls_hw_timer_start = {
     init: function () {
         this.setColour(LOOPS_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_ESP32_HW_TIMER)
-            .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]]), "TIMER_NUM")
+            .appendField(new Blockly.FieldDropdown([
+                ["0", "0"],
+                ["1", "1"],
+                ["2", "2"],
+                ["3", "3"]
+            ]), "TIMER_NUM")
             .appendField(Blockly.Msg.MIXLY_MSTIMER2_START);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -79,7 +105,12 @@ export const controls_hw_timer_stop = {
         this.setColour(LOOPS_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_ESP32_HW_TIMER)
-            .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]]), "TIMER_NUM")
+            .appendField(new Blockly.FieldDropdown([
+                ["0", "0"],
+                ["1", "1"],
+                ["2", "2"],
+                ["3", "3"]
+            ]), "TIMER_NUM")
             .appendField(Blockly.Msg.MIXLY_STOP);
         this.setPreviousStatement(true);
         this.setNextStatement(true);

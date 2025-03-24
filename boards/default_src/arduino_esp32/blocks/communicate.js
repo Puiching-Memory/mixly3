@@ -14,6 +14,7 @@ export const serialBT_Init = {
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SERIAL_BEGIN);
     }
 };
+
 export const serialBT_available = {
     init: function () {
         this.setColour(COMMUNICATE_HUE);
@@ -34,6 +35,7 @@ export const serialBT_read = {
 
     }
 };
+
 export const serialBT_write = {
     init: function () {
         this.setColour(COMMUNICATE_HUE);
@@ -44,4 +46,3 @@ export const serialBT_write = {
         this.setTooltip(Blockly.Msg.TEXT_WRITE_TOOLTIP);
     }
 };
-

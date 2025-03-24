@@ -94,25 +94,24 @@ export const sd_card_root_files = {
     }
 };
 
-var volume_TYPE = [
-    [Blockly.Msg.MIXLY_SD_clusterCount, 'volume.clusterCount()'],
-    [Blockly.Msg.MIXLY_SD_blocksPerCluster, 'volume.blocksPerCluster()'],
-    [Blockly.Msg.MIXLY_SD_TOTAL_blocks, 'volume.blocksPerCluster() * volume.clusterCount()'],
-    ["FAT" + Blockly.Msg.MIXLY_TYPE, 'volume.fatType()'],
-    [Blockly.Msg.MIXLY_volume + "(KB)", 'volume.blocksPerCluster()*volume.clusterCount()/2'],
-    [Blockly.Msg.MIXLY_volume + "(MB)", 'volume.blocksPerCluster()*volume.clusterCount()/2/1024'],
-    [Blockly.Msg.MIXLY_volume + "(GB)", 'volume.blocksPerCluster()*volume.clusterCount()/2/1024/1024.0'],
-];
-
 export const sd_volume = {
     init: function () {
         this.setColour(STORAGE_HUE);
         this.appendDummyInput()
             .appendField("SD")
-            .appendField(new Blockly.FieldDropdown(volume_TYPE), 'volume_TYPE');
+            .appendField(new Blockly.FieldDropdown(this.VOLUME_TYPE), 'volume_TYPE');
         this.setOutput(true, Number);
         this.setTooltip();
-    }
+    },
+    VOLUME_TYPE: [
+        [Blockly.Msg.MIXLY_SD_clusterCount, 'volume.clusterCount()'],
+        [Blockly.Msg.MIXLY_SD_blocksPerCluster, 'volume.blocksPerCluster()'],
+        [Blockly.Msg.MIXLY_SD_TOTAL_blocks, 'volume.blocksPerCluster() * volume.clusterCount()'],
+        ["FAT" + Blockly.Msg.MIXLY_TYPE, 'volume.fatType()'],
+        [Blockly.Msg.MIXLY_volume + "(KB)", 'volume.blocksPerCluster()*volume.clusterCount()/2'],
+        [Blockly.Msg.MIXLY_volume + "(MB)", 'volume.blocksPerCluster()*volume.clusterCount()/2/1024'],
+        [Blockly.Msg.MIXLY_volume + "(GB)", 'volume.blocksPerCluster()*volume.clusterCount()/2/1024/1024.0'],
+    ]
 };
 
 export const sd_exist = {
@@ -230,7 +229,6 @@ export const store_eeprom_put = {
         this.appendValueInput("ADDRESS")
             .setCheck(null)
             .appendField(Blockly.Msg.MIXLY_ESP32_WRITE)
-            //.appendField(new Blockly.FieldDropdown([[Blockly.Msg.LANG_MATH_INT,"int"],[Blockly.Msg.LANG_MATH_LONG,"long"],[Blockly.Msg.LANG_MATH_FLOAT,"float"],[Blockly.Msg.LANG_MATH_BYTE,"byte"],["字节数组","byte_array"],["字符数组","char_array"]]), "type")
             .appendField("EEPROM")
             .appendField(Blockly.Msg.MQTT_SERVER_ADD);
         this.appendValueInput("DATA")
@@ -249,7 +247,6 @@ export const store_eeprom_get = {
         this.appendValueInput("ADDRESS")
             .setCheck(null)
             .appendField(Blockly.Msg.MIXLY_SERIAL_READ)
-            //.appendField(new Blockly.FieldDropdown([[Blockly.Msg.LANG_MATH_INT,"int"],[Blockly.Msg.LANG_MATH_LONG,"long"],[Blockly.Msg.LANG_MATH_FLOAT,"float"],[Blockly.Msg.LANG_MATH_BYTE,"byte"],["字节数组","byte_array"],["字符数组","char_array"]]), "type")
             .appendField("EEPROM")
             .appendField(Blockly.Msg.MQTT_SERVER_ADD);
         this.appendValueInput("DATA")
@@ -261,11 +258,6 @@ export const store_eeprom_get = {
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_STORE_EEPROM_GET);
     }
 };
-
-//ESP32简化SPIFFS
-var OPEN_MODE1 = [
-    [Blockly.Msg.TEXT_WRITE_TEXT, '1'],
-    [Blockly.Msg.TEXT_APPEND_APPENDTEXT, '2']]
 
 export const simple_spiffs_read = {
     init: function () {
@@ -293,11 +285,15 @@ export const simple_spiffs_store_spiffs_write = {
             .appendField(Blockly.Msg.MIXLY_SD_NEWLINE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MODE)
-            .appendField(new Blockly.FieldDropdown(OPEN_MODE1), 'MODE');
+            .appendField(new Blockly.FieldDropdown(this.OPEN_MODE), 'MODE');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_STORE_SDWRITE);
-    }
+    },
+    OPEN_MODE: [
+        [Blockly.Msg.TEXT_WRITE_TEXT, '1'],
+        [Blockly.Msg.TEXT_APPEND_APPENDTEXT, '2']
+    ]
 };
 
 export const simple_spiffs_DelFile = {

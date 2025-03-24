@@ -7,7 +7,10 @@ export const inout_highlow = {
     init: function () {
         this.setColour(BASE_HUE);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_HIGH, "HIGH"], [Blockly.Msg.MIXLY_LOW, "LOW"]]), 'BOOL')
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_HIGH, "HIGH"],
+                [Blockly.Msg.MIXLY_LOW, "LOW"]
+            ]), 'BOOL')
         this.setOutput(true, Boolean);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_HIGHLOW);
     }
@@ -21,14 +24,17 @@ export const inout_pinMode = {
             .setCheck(Number);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_STAT)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_PINMODEIN, "INPUT"], [Blockly.Msg.MIXLY_PINMODEOUT, "OUTPUT"], [Blockly.Msg.MIXLY_PINMODEPULLUP, "INPUT_PULLUP"]]), "MODE")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_PINMODEIN, "INPUT"],
+                [Blockly.Msg.MIXLY_PINMODEOUT, "OUTPUT"],
+                [Blockly.Msg.MIXLY_PINMODEPULLUP, "INPUT_PULLUP"]
+            ]), "MODE")
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_pinMode);
     }
 };
-
 
 export const inout_digital_write2 = {
     init: function () {
@@ -108,7 +114,10 @@ export const inout_buildin_led = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_BUILDIN_LED)
             .appendField(Blockly.Msg.MIXLY_STAT)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_ON, "HIGH"], [Blockly.Msg.MIXLY_OFF, "LOW"]]), "STAT");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_ON, "HIGH"],
+                [Blockly.Msg.MIXLY_OFF, "LOW"]
+            ]), "STAT");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('light or off the build-in LED');
@@ -122,7 +131,13 @@ export const OneButton_interrupt = {
             .appendField(Blockly.Msg.ONEBUTTON + " " + Blockly.Msg.MIXLY_PIN)
             .setCheck(Number);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_CLICK, "attachClick"], [Blockly.Msg.MIXLY_DOUBLE_CLICK, "attachDoubleClick"], [Blockly.Msg.MIXLY_LONG_PRESS_START, "attachLongPressStart"], [Blockly.Msg.MIXLY_DURING_LONG_PRESS, "attachDuringLongPress"], [Blockly.Msg.MIXLY_LONG_PRESS_END, "attachLongPressStop"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_CLICK, "attachClick"],
+                [Blockly.Msg.MIXLY_DOUBLE_CLICK, "attachDoubleClick"],
+                [Blockly.Msg.MIXLY_LONG_PRESS_START, "attachLongPressStart"],
+                [Blockly.Msg.MIXLY_DURING_LONG_PRESS, "attachDuringLongPress"],
+                [Blockly.Msg.MIXLY_LONG_PRESS_END, "attachLongPressStop"]
+            ]), "mode");
         this.appendValueInput("STAT")
             .appendField(Blockly.Msg.MIXLY_ELECLEVEL);
         this.appendStatementInput('DO')
@@ -141,7 +156,11 @@ export const controls_attachInterrupt = {
             .setCheck(Number);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MODE)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_RISING, "RISING"], [Blockly.Msg.MIXLY_FALLING, "FALLING"], [Blockly.Msg.MIXLY_CHANGE, "CHANGE"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_RISING, "RISING"],
+                [Blockly.Msg.MIXLY_FALLING, "FALLING"],
+                [Blockly.Msg.MIXLY_CHANGE, "CHANGE"]
+            ]), "mode");
         this.appendStatementInput('DO')
             .appendField(Blockly.Msg.MIXLY_DO);
         this.setPreviousStatement(true);
@@ -173,7 +192,11 @@ export const controls_attachPinInterrupt = {
             .setCheck(Number);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MODE)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_RISING, "RISING"], [Blockly.Msg.MIXLY_FALLING, "FALLING"], [Blockly.Msg.MIXLY_CHANGE, "CHANGE"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_RISING, "RISING"],
+                [Blockly.Msg.MIXLY_FALLING, "FALLING"],
+                [Blockly.Msg.MIXLY_CHANGE, "CHANGE"]
+            ]), "mode");
         this.appendStatementInput('DO')
             .appendField(Blockly.Msg.MIXLY_DO);
         this.setPreviousStatement(true);
@@ -202,7 +225,10 @@ export const inout_pulseIn = {
             .setCheck(Number);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_PULSEIN_STAT)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_HIGH, "HIGH"], [Blockly.Msg.MIXLY_LOW, "LOW"]]), "STAT");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_HIGH, "HIGH"],
+                [Blockly.Msg.MIXLY_LOW, "LOW"]
+            ]), "STAT");
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_pulseIn);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id33");
@@ -217,7 +243,10 @@ export const inout_pulseIn2 = {
             .setCheck(Number);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_PULSEIN_STAT)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_HIGH, "HIGH"], [Blockly.Msg.MIXLY_LOW, "LOW"]]), "STAT");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_HIGH, "HIGH"],
+                [Blockly.Msg.MIXLY_LOW, "LOW"]
+            ]), "STAT");
         this.appendValueInput("TIMEOUT", Number)
             .appendField(Blockly.Msg.MIXLY_PULSEIN_TIMEOUT)
             .setCheck(Number);
@@ -241,7 +270,10 @@ export const inout_shiftout = {
             .setCheck(Number);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_BITORDER)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_MSBFIRST, "MSBFIRST"], [Blockly.Msg.MIXLY_LSBFIRST, "LSBFIRST"]]), "ORDER");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_MSBFIRST, "MSBFIRST"],
+                [Blockly.Msg.MIXLY_LSBFIRST, "LSBFIRST"]
+            ]), "ORDER");
         this.appendValueInput("DATA", Number)
             .appendField(Blockly.Msg.MIXLY_DATA)
             .setCheck(Number);
@@ -253,7 +285,6 @@ export const inout_shiftout = {
     }
 };
 
-
 export const ESP32touchButton = {
     init: function () {
         this.setColour(BASE_HUE);
@@ -262,7 +293,13 @@ export const ESP32touchButton = {
             .setCheck(Number);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MODE)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_CLICK, "attachClick"], [Blockly.Msg.MIXLY_DOUBLE_CLICK, "attachDoubleClick"], [Blockly.Msg.MIXLY_LONG_PRESS_START, "attachLongPressStart"], [Blockly.Msg.MIXLY_DURING_LONG_PRESS, "attachDuringLongPress"], [Blockly.Msg.MIXLY_LONG_PRESS_END, "attachLongPressStop"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_CLICK, "attachClick"],
+                [Blockly.Msg.MIXLY_DOUBLE_CLICK, "attachDoubleClick"],
+                [Blockly.Msg.MIXLY_LONG_PRESS_START, "attachLongPressStart"],
+                [Blockly.Msg.MIXLY_DURING_LONG_PRESS, "attachDuringLongPress"],
+                [Blockly.Msg.MIXLY_LONG_PRESS_END, "attachLongPressStop"]
+            ]), "mode");
         this.appendStatementInput('DO')
             .appendField(Blockly.Msg.MIXLY_DO);
         this.setTooltip();
@@ -301,45 +338,62 @@ export const inout_cancel_soft_analog_write = {
     }
 };
 
-//ADS1015模拟数字转换模块-获取数据
-var ADS1015_setGain_type = [
-    ["±6.144V 3mv/bit", "GAIN_TWOTHIRDS"],
-    ["±4.096V 2mv/bit", "GAIN_ONE"],
-    ["±2.048V 1mv/bit", "GAIN_TWO"],
-    ["±1.024V 0.5mv/bit", "GAIN_FOUR"],
-    ["±0.512V 0.25mv/bit", "GAIN_EIGHT"],
-    ["±0.256V 0.125mv/bit", "GAIN_SIXTEEN"],
-];
-
 //ADS1015模拟数字转换模块-增益设置
 export const ADS1015_setGain = {
     init: function () {
         this.setColour(BASE_HUE);
-        this.appendDummyInput("").appendField(Blockly.Msg.MIXLY_SETTING).appendField(Blockly.Msg.ADS1015_setGain);
-        this.appendDummyInput("").setAlign(Blockly.inputs.Align.RIGHT).appendField(new Blockly.FieldDropdown(ADS1015_setGain_type), "ADS1015_setGain");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_SETTING)
+            .appendField(Blockly.Msg.ADS1015_setGain);
+        this.appendDummyInput("")
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(new Blockly.FieldDropdown(this.GAIN_TYPE), "ADS1015_setGain");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip();
-    }
+    },
+    GAIN_TYPE: [
+        ["±6.144V 3mv/bit", "GAIN_TWOTHIRDS"],
+        ["±4.096V 2mv/bit", "GAIN_ONE"],
+        ["±2.048V 1mv/bit", "GAIN_TWO"],
+        ["±1.024V 0.5mv/bit", "GAIN_FOUR"],
+        ["±0.512V 0.25mv/bit", "GAIN_EIGHT"],
+        ["±0.256V 0.125mv/bit", "GAIN_SIXTEEN"],
+    ]
 };
 
 //ADS1015模拟数字转换模块 数值获取
 export const ADS1015_Get_Value = {
     init: function () {
         this.setColour(BASE_HUE);
-        this.appendDummyInput("").appendField("ADS1015" + Blockly.Msg.ADS1015_Get_Value);
-        this.appendDummyInput("").appendField(new Blockly.FieldDropdown([["AIN0", "ads.readADC_SingleEnded(0)"], ["AIN1", "ads.readADC_SingleEnded(1)"], ["AIN2", "ads.readADC_SingleEnded(2)"], ["AIN3", "ads.readADC_SingleEnded(3)"]]), "ADS1015_AIN");
+        this.appendDummyInput("")
+            .appendField("ADS1015" + Blockly.Msg.ADS1015_Get_Value);
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown([
+                ["AIN0", "ads.readADC_SingleEnded(0)"],
+                ["AIN1", "ads.readADC_SingleEnded(1)"],
+                ["AIN2", "ads.readADC_SingleEnded(2)"],
+                ["AIN3", "ads.readADC_SingleEnded(3)"]
+            ]), "ADS1015_AIN");
         this.setInputsInline(true);
         this.setOutput(true);
     }
 };
+
 //PCF8591T模拟数字转换模块 数值获取
 export const PCF8591T = {
     init: function () {
         this.setColour(BASE_HUE);
-        this.appendDummyInput("").appendField("PCF8591T" + Blockly.Msg.ADS1015_Get_Value);
-        this.appendDummyInput("").appendField(new Blockly.FieldDropdown([["AIN0", "pcf8591.analogRead(AIN0)"], ["AIN1", "pcf8591.analogRead(AIN1)"], ["AIN2", "pcf8591.analogRead(AIN2)"], ["AIN3", "pcf8591.analogRead(AIN3)"]]), "PCF8591T_AIN");
+        this.appendDummyInput("")
+            .appendField("PCF8591T" + Blockly.Msg.ADS1015_Get_Value);
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown([
+                ["AIN0", "pcf8591.analogRead(AIN0)"],
+                ["AIN1", "pcf8591.analogRead(AIN1)"],
+                ["AIN2", "pcf8591.analogRead(AIN2)"],
+                ["AIN3", "pcf8591.analogRead(AIN3)"]
+            ]), "PCF8591T_AIN");
         this.setInputsInline(true);
         this.setOutput(true);
     }

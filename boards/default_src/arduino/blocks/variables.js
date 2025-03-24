@@ -1,21 +1,21 @@
 import * as Blockly from 'blockly/core';
 import { Variables } from 'blockly/core';
 
-
 const VARIABLES_HUE = 330;
 
-// ************************************************************************
-// THIS SECTION IS INSERTED INTO BLOCKLY BY BLOCKLYDUINO.
+
 export const variables_declare = {
-    // Variable setter.
     init: function () {
         this.setColour(VARIABLES_HUE);
         this.appendValueInput('VALUE', null)
             .appendField(Blockly.Msg.MIXLY_DECLARE)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GLOBAL_VARIABLE, "global_variate"], [Blockly.Msg.MIXLY_LOCAL_VARIABLE, "local_variate"]]), "variables_type")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_GLOBAL_VARIABLE, 'global_variate'],
+                [Blockly.Msg.MIXLY_LOCAL_VARIABLE, 'local_variate']
+            ]), 'variables_type')
             .appendField(new Blockly.FieldTextInput('item'), 'VAR')
             .appendField(Blockly.Msg.MIXLY_AS)
-            .appendField(new Blockly.FieldDropdown(Variables.DATA_TYPE), "TYPE")
+            .appendField(new Blockly.FieldDropdown(Variables.DATA_TYPE), 'TYPE')
             .appendField(Blockly.Msg.MIXLY_VALUE);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -30,7 +30,6 @@ export const variables_declare = {
         }
     }
 };
-// ************************************************************************
 
 export const variables_get = {
     init: function () {
@@ -47,15 +46,7 @@ export const variables_get = {
         if (Blockly.Names.equals(oldName, this.getFieldValue('VAR'))) {
             this.setFieldValue(newName, 'VAR');
         }
-    }/*,
-  onchange: function() {
-	  var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),Blockly.Variables.NAME_TYPE);
-	  if(Blockly.Arduino.definitions_['var_declare'+varName]){
-		  this.setWarningText(null);
-	  }else{
-		  this.setWarningText(Blockly.Msg.MIXLY_WARNING_NOT_DECLARE);
-	  }
-  }*/
+    }
 };
 
 export const variables_set = {
@@ -77,6 +68,7 @@ export const variables_set = {
         }
     }
 };
+
 /**
   * Block for basic data type change.
   * @this Blockly.Block
@@ -91,7 +83,3 @@ export const variables_change = {
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_VARIABLES_CHANGE);
     }
 };
-
-
-
-

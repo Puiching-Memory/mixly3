@@ -29,26 +29,28 @@ export const ir_recv = {
         }
     }
 };
+
+const TYPE = [
+    ['RC5', 'RC5'],
+    ['RC6', 'RC6'],
+    ['NEC', 'NEC'],
+    ['Sony', 'Sony'],
+    ['Panasonic', 'Panasonic'],
+    ['JVC', 'JVC'],
+    ['SAMSUNG', 'SAMSUNG'],
+    ['Whynter', 'Whynter'],
+    ['AiwaRCT501', 'AiwaRCT501'],
+    ['LG', 'LG'],
+    ['Sanyo', 'Sanyo'],
+    ['Mitsubishi', 'Mitsubishi'],
+    ['DISH', 'DISH'],
+    ['SharpRaw', 'SharpRaw'],
+    ['Denon', 'Denon']
+];
+
 //红外发射模块（NEC）
 export const ir_send_nec = {
     init: function () {
-        var TYPE = [
-            ['RC5', 'RC5'],
-            ['RC6', 'RC6'],
-            ['NEC', 'NEC'],
-            ['Sony', 'Sony'],
-            ['Panasonic', 'Panasonic'],
-            ['JVC', 'JVC'],
-            ['SAMSUNG', 'SAMSUNG'],
-            ['Whynter', 'Whynter'],
-            ['AiwaRCT501', 'AiwaRCT501'],
-            ['LG', 'LG'],
-            ['Sanyo', 'Sanyo'],
-            ['Mitsubishi', 'Mitsubishi'],
-            ['DISH', 'DISH'],
-            ['SharpRaw', 'SharpRaw'],
-            ['Denon', 'Denon']
-        ];
         this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_IR_SEND_NEC1)
@@ -117,8 +119,8 @@ export const ir_send_raw = {
         this.setTooltip(Blockly.Msg.MIXLY_IR_SEND_RAW_TOOLTIP);
     }
 };
-// IIC通信
 
+// IIC通信
 // IIC初始化主机
 export const i2c_master_Init = {
     init: function () {
@@ -131,6 +133,7 @@ export const i2c_master_Init = {
         this.setHelpUrl("");
     }
 };
+
 // IIC初始化从机
 export const i2c_slave_Init = {
     init: function () {
@@ -279,7 +282,6 @@ export const i2c_master_readerReg = {
     }
 };
 
-
 export const i2c_slave_onrequest = {
     init: function () {
         this.setColour(COMMUNICATE_HUE);
@@ -383,9 +385,10 @@ export const spi_transfer = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SPI_TRANSFER.replace('%1', Blockly.Arduino.valueToCode(this, 'pin', Blockly.Arduino.ORDER_ATOMIC)));
+        const pinValue = Blockly.Arduino.valueToCode(this, 'pin', Blockly.Arduino.ORDER_ATOMIC);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SPI_TRANSFER.replace('%1', pinValue));
     }
-}
+};
 
 //RFID
 export const RFID_init = {
@@ -426,7 +429,6 @@ export const RFID_on = {
     }
 };
 
-
 //读卡号
 export const RFID_readcardnum = {
     init: function () {
@@ -450,7 +452,6 @@ export const RFID_readcardnum = {
     this.setNextStatement(true, null);
   }
 }; */
-
 
 export const RFID_in = {
     init: function () {
@@ -483,7 +484,6 @@ export const RFID_writecarddata = {
     }
 };
 
-
 //读数据块的内容
 export const RFID_readcarddata = {
     init: function () {
@@ -510,7 +510,7 @@ export const RFID_serialprintcarddata = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
   }
-}; */
+};*/
 
 //关闭RFID
 export const RFID_off = {
@@ -652,7 +652,12 @@ export const MFRC522_ReadCard = {
 export const spi_begin_slave = {
     init: function () {
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_SETUP + "SPI" + Blockly.Msg.MIXLY_DEVICE + Blockly.Msg.MIXLY_AS + Blockly.Msg.MIXLY_SALVE);
+            .appendField(
+                Blockly.Msg.MIXLY_SETUP
+                + "SPI" + Blockly.Msg.MIXLY_DEVICE
+                + Blockly.Msg.MIXLY_AS
+                + Blockly.Msg.MIXLY_SALVE
+            );
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -665,7 +670,12 @@ export const spi_begin_slave = {
 export const spi_begin_master = {
     init: function () {
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_SETUP + "SPI" + Blockly.Msg.MIXLY_DEVICE + Blockly.Msg.MIXLY_AS + Blockly.Msg.MIXLY_MASTER);
+            .appendField(
+                Blockly.Msg.MIXLY_SETUP
+                + "SPI" + Blockly.Msg.MIXLY_DEVICE
+                + Blockly.Msg.MIXLY_AS
+                + Blockly.Msg.MIXLY_MASTER
+            );
         this.appendValueInput("spi_slave_pin")
             .setCheck(null)
             .setAlign(Blockly.inputs.Align.RIGHT)
@@ -683,7 +693,11 @@ export const spi_transfer_Init = {
     init: function () {
         this.appendValueInput("slave_pin")
             .setCheck(null)
-            .appendField("SPI" + Blockly.Msg.MIXLY_SEND_DATA + Blockly.Msg.MIXLY_SALVE + Blockly.Msg.MIXLY_PIN);
+            .appendField(
+                "SPI" + Blockly.Msg.MIXLY_SEND_DATA
+                + Blockly.Msg.MIXLY_SALVE
+                + Blockly.Msg.MIXLY_PIN
+            );
         this.appendStatementInput("transfer_data")
             .setCheck(null);
         this.setInputsInline(true);
@@ -699,7 +713,6 @@ export const spi_transfer_1 = {
     init: function () {
         this.appendValueInput("transfer_data")
             .setCheck(null)
-
             .appendField("SPI" + Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_SEND);
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
@@ -730,7 +743,10 @@ export const spi_slave_interrupt = {
     init: function () {
         this.appendValueInput("slave_interrupt_input")
             .setCheck(null)
-            .appendField("SPI " + Blockly.Msg.MIXLY_STM32_I2C_SLAVE_RECEIVE_EVENT + " " + Blockly.Msg.MIXLY_STM32_SPI_GET_REGISTER_DATA);
+            .appendField(
+                "SPI " + Blockly.Msg.MIXLY_STM32_I2C_SLAVE_RECEIVE_EVENT
+                + " " + Blockly.Msg.MIXLY_STM32_SPI_GET_REGISTER_DATA
+            );
         this.appendStatementInput("slave_interrupt_data")
             .setCheck(null)
             .appendField(Blockly.Msg.MIXLY_MSTIMER2_DO);
@@ -747,7 +763,10 @@ export const spi_slave_receive = {
     init: function () {
         this.appendValueInput("slave_receive_data")
             .setCheck(null)
-            .appendField("SPI " + Blockly.Msg.MIXLY_SALVE + " " + Blockly.Msg.MIXLY_STM32_SPI_GET_REGISTER_DATA);
+            .appendField(
+                "SPI " + Blockly.Msg.MIXLY_SALVE
+                + " " + Blockly.Msg.MIXLY_STM32_SPI_GET_REGISTER_DATA
+            );
         this.setInputsInline(true);
         this.setOutput(true, null);
         this.setColour(COMMUNICATE_HUE);

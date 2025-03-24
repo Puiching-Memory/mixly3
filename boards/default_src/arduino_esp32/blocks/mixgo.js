@@ -23,11 +23,6 @@ export const HT16K33_TEXT = {
 //执行器_点阵屏显示_画点显示
 export const HT16K33_POS = {
     init: function () {
-        //执行器_点阵屏显示_画点变量
-        var MixGo_DrawPixel_NUM = [
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, "LED_ON"],
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, "LED_OFF"]
-        ];
         this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_monitor);
@@ -42,12 +37,16 @@ export const HT16K33_POS = {
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
             .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_SHOWPOINT)
-            .appendField(new Blockly.FieldDropdown(MixGo_DrawPixel_NUM), "DrawPixel_TYPE");
+            .appendField(new Blockly.FieldDropdown(this.DRAW_TYPE), "DrawPixel_TYPE");
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip("");
-    }
+    },
+    DRAW_TYPE: [
+        [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, "LED_ON"],
+        [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, "LED_OFF"]
+    ]
 };
 
 //执行器_点阵屏显示_显示图案
@@ -211,7 +210,6 @@ export const HT16K33_LedArray = {
             .appendField(new Blockly.FieldCheckbox("FALSE"), "a116");
         this.setOutput(true, Number);
         this.setTooltip();
-
     }
 };
 
@@ -328,7 +326,6 @@ export const mixgo_button_is_pressed = {
     }
 };
 
-
 export const sensor_mixgo_light = {
     init: function () {
         this.setColour(Blockly.Msg['SENSOR_HUE']);
@@ -370,7 +367,10 @@ export const sensor_mixgo_pin_near = {
     init: function () {
         this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.TEXT_TRIM_LEFT, "34"], [Blockly.Msg.TEXT_TRIM_RIGHT, "36"]]), "direction")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.TEXT_TRIM_LEFT, "34"],
+                [Blockly.Msg.TEXT_TRIM_RIGHT, "36"]
+            ]), "direction")
             .appendField(Blockly.Msg.MIXLY_ESP32_NEAR);
         this.setOutput(true, Boolean);
         this.setInputsInline(true);
@@ -387,13 +387,17 @@ export const sensor_mixgo_pin_near = {
         });
     }
 };
+
 export const mixGo_led = {
     init: function () {
         this.setColour(ACTUATOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SETTING)
             .appendField(Blockly.Msg.MIXLY_BUILDIN_LED)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "5"]]), 'STAT');
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_LEFT, "0"],
+                [Blockly.Msg.MIXLY_RIGHT, "5"]
+            ]), 'STAT');
         this.appendValueInput('bright')
             .appendField(Blockly.Msg.MIXLY_PULSEIN_STAT)
         this.setPreviousStatement(true, null);
@@ -409,7 +413,10 @@ export const mixGo_led_brightness = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SETTING)
             .appendField(Blockly.Msg.MIXLY_BUILDIN_LED)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "5"]]), 'STAT');
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_LEFT, "0"],
+                [Blockly.Msg.MIXLY_RIGHT, "5"]
+            ]), 'STAT');
         this.appendValueInput('bright')
             .appendField(Blockly.Msg.MIXLY_PULSEIN_STAT)
         this.setPreviousStatement(true, null);
@@ -434,18 +441,13 @@ export const MixGo_rgb_rainbow1 = {
     }
 };
 
-var DISPLAY_RAINBOW_TYPE = [
-    [Blockly.Msg.MIXLY_RGB_DISPLAY_RAINBOW_TYPE_1, "normal"],
-    [Blockly.Msg.MIXLY_RGB_DISPLAY_RAINBOW_TYPE_2, "change"]
-];
-
 export const MixGo_rgb_rainbow3 = {
     init: function () {
         this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(DISPLAY_RAINBOW_TYPE), "TYPE");
+            .appendField(new Blockly.FieldDropdown(this.DISPLAY_RAINBOW_TYPE), "TYPE");
         this.appendValueInput("rainbow_color")
             .setCheck(Number)
             .setAlign(Blockly.inputs.Align.RIGHT)
@@ -453,7 +455,11 @@ export const MixGo_rgb_rainbow3 = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-    }
+    },
+    DISPLAY_RAINBOW_TYPE: [
+        [Blockly.Msg.MIXLY_RGB_DISPLAY_RAINBOW_TYPE_1, "normal"],
+        [Blockly.Msg.MIXLY_RGB_DISPLAY_RAINBOW_TYPE_2, "change"]
+    ]
 };
 
 export const MixGo_rgb = {
@@ -512,6 +518,7 @@ export const MixGo_rgb_Brightness = {
         this.setTooltip('');
     }
 };
+
 export const MixGo_rgb_show = {
     init: function () {
         this.setColour(ACTUATOR_HUE);

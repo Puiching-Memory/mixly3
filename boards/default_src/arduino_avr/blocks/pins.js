@@ -38,6 +38,7 @@ export const pins_interrupt = {
         this.setOutput(true, Number);
     }
 };
+
 export const pins_MOSI = {
     init: function () {
         this.setColour(PINS_HUE);
@@ -46,6 +47,7 @@ export const pins_MOSI = {
         this.setOutput(true, Number);
     }
 };
+
 export const pins_MISO = {
     init: function () {
         this.setColour(PINS_HUE);
@@ -54,6 +56,7 @@ export const pins_MISO = {
         this.setOutput(true, Number);
     }
 };
+
 export const pins_SCK = {
     init: function () {
         this.setColour(PINS_HUE);
@@ -62,6 +65,7 @@ export const pins_SCK = {
         this.setOutput(true, Number);
     }
 };
+
 export const pins_SCL = {
     init: function () {
         this.setColour(PINS_HUE);
@@ -70,6 +74,7 @@ export const pins_SCL = {
         this.setOutput(true, Number);
     }
 };
+
 export const pins_SDA = {
     init: function () {
         this.setColour(PINS_HUE);

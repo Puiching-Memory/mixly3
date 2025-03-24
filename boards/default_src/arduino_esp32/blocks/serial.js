@@ -60,7 +60,10 @@ export const serial_print = {
         this.appendValueInput("CONTENT", String)
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_PRINT)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_PRINT_INLINE, "print"], [Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP, "println"]]), "new_line");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_PRINT_INLINE, "print"],
+                [Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP, "println"]
+            ]), "new_line");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.TEXT_PRINT_TOOLTIP);
@@ -73,13 +76,15 @@ export const serial_println = {
         this.appendValueInput("CONTENT", String)
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_PRINT)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP, "println"], [Blockly.Msg.MIXLY_PRINT_INLINE, "print"]]), "new_line");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP, "println"],
+                [Blockly.Msg.MIXLY_PRINT_INLINE, "print"]
+            ]), "new_line");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.TEXT_PRINT_TOOLTIP);
     }
 };
-
 
 export const serial_print_num = {
     init: function () {
@@ -87,10 +92,18 @@ export const serial_print_num = {
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_PRINT)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_PRINT_INLINE, "print"], [Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP, "println"]]), "new_line")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_PRINT_INLINE, "print"],
+                [Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP, "println"]
+            ]), "new_line")
             .appendField(Blockly.Msg.MIXLY_NUMBER);
         this.appendValueInput("CONTENT", Number)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MATH_HEX, "HEX"], [Blockly.Msg.MATH_BIN, "BIN"], [Blockly.Msg.MATH_OCT, "OCT"], [Blockly.Msg.MATH_DEC, "DEC"]]), "STAT")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MATH_HEX, "HEX"],
+                [Blockly.Msg.MATH_BIN, "BIN"],
+                [Blockly.Msg.MATH_OCT, "OCT"],
+                [Blockly.Msg.MATH_DEC, "DEC"]
+            ]), "STAT")
             .setCheck(Number);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -142,7 +155,12 @@ export const serial_parseInt_Float = {
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select")
             //.appendField(Blockly.Msg.MIXLY_SERIAL_READ)
-            .appendField(new Blockly.FieldDropdown([["read", "read"], ["peek", "peek"], ["parseInt", "parseInt"], ["parseFloat", "parseFloat"]]), "STAT");
+            .appendField(new Blockly.FieldDropdown([
+                ["read", "read"],
+                ["peek", "peek"],
+                ["parseInt", "parseInt"],
+                ["parseFloat", "parseFloat"]
+            ]), "STAT");
         this.setOutput(true, Number);
         var thisBlock = this;
         this.setTooltip(function () {
@@ -167,6 +185,7 @@ export const serial_flush = {
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SERIAL_FLUSH);
     }
 };
+
 export const serial_softserial = {
     init: function () {
         this.setColour(SERIAL_HUE);

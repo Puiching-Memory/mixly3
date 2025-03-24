@@ -4,10 +4,9 @@ const SCOOP_HUE = 120;
 
 export const SCoopTask = {
     init: function () {
-        var _tasknum = [["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"]];
         this.appendDummyInput()
             .appendField("Scoop Task")
-            .appendField(new Blockly.FieldDropdown(_tasknum), "_tasknum");
+            .appendField(new Blockly.FieldDropdown(this.NUMBER), "_tasknum");
         this.appendStatementInput("setup")
             .appendField(Blockly.Msg.MIXLY_SETUP)
             .setCheck(null);
@@ -17,7 +16,17 @@ export const SCoopTask = {
         this.setColour(SCOOP_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SCOOP);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#scoop-task");
-    }
+    },
+    NUMBER: [
+        ["1", "1"],
+        ["2", "2"],
+        ["3", "3"],
+        ["4", "4"],
+        ["5", "5"],
+        ["6", "6"],
+        ["7", "7"],
+        ["8", "8"]
+    ]
 };
 
 export const SCoop_yield = {
@@ -31,6 +40,7 @@ export const SCoop_yield = {
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#scoop-task");
     }
 };
+
 export const SCoop_sleep = {
     init: function () {
         this.setColour(SCOOP_HUE);
