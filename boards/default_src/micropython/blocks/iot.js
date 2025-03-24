@@ -264,7 +264,6 @@ export const iot_publish_container = {
     }
 };
 
-
 export const iot_publish_item = {
     /**
      * Mutator bolck for adding items.
@@ -296,7 +295,6 @@ export const iot_create_with_item = {
         this.contextMenu = false;
     }
 };
-
 
 export const iot_mixio_connect = {
     init: function () {
@@ -489,7 +487,6 @@ export const IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE = {
     }
 };
 
-
 export const IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE = {
     init: function () {
         this.setColour(IOT_HUE);
@@ -506,7 +503,6 @@ export const IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE = {
         this.setNextStatement(true);
     }
 };
-
 
 export const iot_mixly_key = {
     init: function () {
@@ -735,5 +731,4 @@ export const ollama_empty_history = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
     }
-}
-
+};

@@ -512,17 +512,17 @@ export const actuator_use_uart_init = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
             .appendField(new Blockly.FieldDropdown([
-                ['SYN6288' + Blockly.Msg.MIXLY_AipSpeech_synthesis,'SYN6288'],
-                ['NS9300' + Blockly.Msg.MIXLY_MUSIC_PLAYER,'NS9300']
-            ]),'key2');
+                ['SYN6288' + Blockly.Msg.MIXLY_AipSpeech_synthesis, 'SYN6288'],
+                ['NS9300' + Blockly.Msg.MIXLY_MUSIC_PLAYER, 'NS9300']
+            ]), 'key2');
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
     }
 };
 
-export const player_whether_stop ={
-    init:function(){
+export const player_whether_stop = {
+    init: function () {
         this.setColour(ACTUATOR_EXTERN_HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_MUSIC_PLAYER)
@@ -540,7 +540,7 @@ export const player_whether_stop ={
 };
 
 export const player_set_play = {
-    init:function(){
+    init: function () {
         this.setColour(ACTUATOR_EXTERN_HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.Msg.MIXLY_MUSIC_PLAYER)
@@ -561,13 +561,13 @@ export const player_set_play = {
 };
 
 export const player_set_volume = {
-    init:function(){
+    init: function () {
         this.setColour(ACTUATOR_EXTERN_HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.Msg.MIXLY_MUSIC_PLAYER)
             .setCheck("var");
         this.appendValueInput('volume')
-            .appendField(Blockly.Msg.MIXLY_MP3_VOL +Blockly.Msg.MIXLY_STAT);
+            .appendField(Blockly.Msg.MIXLY_MP3_VOL + Blockly.Msg.MIXLY_STAT);
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -576,13 +576,13 @@ export const player_set_volume = {
 }
 
 export const player_set_mode = {
-    init:function(){
+    init: function () {
         this.setColour(ACTUATOR_EXTERN_HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.Msg.MIXLY_MUSIC_PLAYER)
             .setCheck("var");
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_MODE+Blockly.Msg.MIXLY_STAT)
+            .appendField(Blockly.Msg.MIXLY_MODE + Blockly.Msg.MIXLY_STAT)
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.MIXLY_MP3_LOOP_ALL, "0"],
                 [Blockly.Msg.MIXLY_MP3_LOOP_ONE, "1"],
@@ -598,14 +598,14 @@ export const player_set_mode = {
 };
 
 export const player_play_music = {
-    init:function(){
+    init: function () {
         this.setColour(ACTUATOR_EXTERN_HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.Msg.MIXLY_MUSIC_PLAYER)
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_MICROBIT_JS_START_MELODY,"play"],
+                [Blockly.Msg.MIXLY_MICROBIT_JS_START_MELODY, "play"],
                 [Blockly.Msg.MIXLY_PLAYER_INSERT_MUSIC, "insert"]
             ]), "key");
         this.appendValueInput('song');
@@ -616,7 +616,7 @@ export const player_play_music = {
     }
 }
 
-export const player_insert_music ={
+export const player_insert_music = {
 
 }
 
@@ -1127,7 +1127,7 @@ export const parrot_move_speed = {
         this.appendValueInput("speed")
             .setCheck(Number)
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_ROTATE +Blockly.Msg.MIXLY_SPEED);
+            .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_ROTATE + Blockly.Msg.MIXLY_SPEED);
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);

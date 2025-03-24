@@ -5,7 +5,7 @@ const PEG1_HUE = 100;
 
 export const pe_g1_use_i2c_init = {
     init: function () {
-        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
         if (version == "mixgo_ce") { var name = 'CE G6' }
         else if (version == "mixgo_pe") { var name = 'PE G1' }
         this.setColour(PEG1_HUE);
@@ -26,7 +26,7 @@ export const pe_g1_use_i2c_init = {
 
 export const pe_g1_battery_left = {
     init: function () {
-        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
         if (version == "mixgo_ce") { var name = 'CE G6' }
         else if (version == "mixgo_pe") { var name = 'PE G1' }
         this.setColour(PEG1_HUE);
@@ -42,7 +42,7 @@ export const pe_g1_battery_left = {
 
 export const pe_g1_dc_motor = {
     init: function () {
-        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
         if (version == "mixgo_ce") { var name = 'CE G6' }
         else if (version == "mixgo_pe") { var name = 'PE G1' }
         this.setColour(PEG1_HUE);
@@ -70,11 +70,11 @@ export const pe_g1_dc_motor = {
         this.setNextStatement(true, null);
         this.setInputsInline(true);
     }
-}
+};
 
 export const pe_g1_dc_motor_speed = {
     init: function () {
-        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
         if (version == "mixgo_ce") { var name = 'CE G6' }
         else if (version == "mixgo_pe") { var name = 'PE G1' }
         this.setColour(PEG1_HUE);
@@ -90,11 +90,11 @@ export const pe_g1_dc_motor_speed = {
         this.setOutput(true, Number);
         this.setInputsInline(true);
     }
-}
+};
 
 export const pe_g1_servo_set_angle = {
     init: function () {
-        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
         if (version == "mixgo_ce") { var name = 'CE G6' }
         else if (version == "mixgo_pe") { var name = 'PE G1' }
         this.setColour(PEG1_HUE);
@@ -118,7 +118,7 @@ export const pe_g1_servo_set_angle = {
 
 export const pe_g1_servo_set_speed = {
     init: function () {
-        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
         if (version == "mixgo_ce") { var name = 'CE G6' }
         else if (version == "mixgo_pe") { var name = 'PE G1' }
         this.setColour(PEG1_HUE);
@@ -144,7 +144,7 @@ export const pe_g1_servo_set_speed = {
 
 export const pe_g1_servo_get_angle = {
     init: function () {
-        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
         if (version == "mixgo_ce") { var name = 'CE G6' }
         else if (version == "mixgo_pe") { var name = 'PE G1' }
         this.setColour(PEG1_HUE);
@@ -163,7 +163,7 @@ export const pe_g1_servo_get_angle = {
 
 export const pe_g1_servo_get_speed = {
     init: function () {
-        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
         if (version == "mixgo_ce") { var name = 'CE G6' }
         else if (version == "mixgo_pe") { var name = 'PE G1' }
         this.setColour(PEG1_HUE);
@@ -173,7 +173,6 @@ export const pe_g1_servo_get_speed = {
         this.appendValueInput('PIN')
             .appendField('360°' + Blockly.Msg.MIXLY_SERVO)
             .appendField(Blockly.Msg.LCD_NUMBERING)
-
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_SPEED);
         this.setOutput(true, Number);

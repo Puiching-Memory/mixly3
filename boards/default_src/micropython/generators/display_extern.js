@@ -16,7 +16,7 @@ export const display_matrix_use_i2c_init = function (_, generator) {
     var code;
     if (key == '32x12 Matrix') {
         generator.definitions_['import_matrix32x12'] = 'import matrix32x12';
-        code = v + ' = matrix32x12.Matrix(' + iv + ',font_address=' + font + ')\n';
+        code = v + ' = matrix32x12.Matrix(' + iv + ', font_address=' + font + ')\n';
     } else if (key == '16x8 Matrix') {
         generator.definitions_['import_matrix16x8'] = 'import matrix16x8';
         code = v + ' = matrix16x8.Matrix(' + iv + ')\n';
@@ -36,7 +36,7 @@ export const display_matrix_extern_show_image_or_string_delay = function (_, gen
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var space = generator.valueToCode(this, 'space', generator.ORDER_ASSIGNMENT);
     var op = this.getFieldValue('center');
-    var code = v + ".shows(" + data + ',space = ' + space + ',center = ' + op + ")\n";
+    var code = v + ".shows(" + data + ', space=' + space + ', center=' + op + ")\n";
     return code;
 }
 
@@ -51,7 +51,7 @@ export const display_matrix_extern_show_frame_string_delay = function (_, genera
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var time = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
-    var code = v + ".frame(" + data + ',delay = ' + time + ")\n";
+    var code = v + ".frame(" + data + ', delay=' + time + ")\n";
     return code;
 }
 
@@ -67,7 +67,7 @@ export const display_matrix_extern_scroll_string_delay = function (_, generator)
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var time = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
     var space = generator.valueToCode(this, 'space', generator.ORDER_ASSIGNMENT);
-    var code = v + ".scroll(" + data + ',speed =' + time + ',space = ' + space + ")\n";
+    var code = v + ".scroll(" + data + ', speed=' + time + ', space=' + space + ")\n";
     return code;
 }
 
@@ -127,7 +127,7 @@ export const matrix_extern_image_arithmetic = function (a, generator) {
     var op = a.getFieldValue("OP");
     var imga = generator.valueToCode(a, 'A', generator.ORDER_ATOMIC);
     var imgb = generator.valueToCode(a, 'B', generator.ORDER_ATOMIC);
-    var code = v + '.map_' + op + '(' + imga + ',' + imgb + ')';
+    var code = v + '.map_' + op + '(' + imga + ', ' + imgb + ')';
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -146,7 +146,7 @@ export const display_use_i2c_init = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var row = generator.valueToCode(this, 'row', generator.ORDER_ATOMIC);
     var column = generator.valueToCode(this, 'column', generator.ORDER_ATOMIC);
-    var code = sub + " = ssd1306.SSD1306_I2C(" + row + "," + column + "," + i2csub + ")\n";
+    var code = sub + " = ssd1306.SSD1306_I2C(" + row + ", " + column + ", " + i2csub + ")\n";
     return code;
 }
 
@@ -158,7 +158,7 @@ export const display_draw_4strings = function (_, generator) {
     var value_text_line2 = generator.valueToCode(this, 'Text_line2', generator.ORDER_ASSIGNMENT) || '\'\'';
     var value_text_line3 = generator.valueToCode(this, 'Text_line3', generator.ORDER_ASSIGNMENT) || '\'\'';
     var value_text_line4 = generator.valueToCode(this, 'Text_line4', generator.ORDER_ASSIGNMENT) || '\'\'';
-    var code = varName + '.show_str(' + value_text_line1 + ',' + value_text_line2 + ',' + value_text_line3 + ',' + value_text_line4 + ')\n'
+    var code = varName + '.show_str(' + value_text_line1 + ', ' + value_text_line2 + ', ' + value_text_line3 + ', ' + value_text_line4 + ')\n'
     return code;
 }
 
@@ -186,10 +186,10 @@ export const display_rect = function (_, generator) {
     var size = this.getFieldValue('OP');
     switch (checkbox_fill) {
         case "True":
-            var code = varName + '.show_fill_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
+            var code = varName + '.show_fill_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ', ' + size + ')\n';
             return code;
         case "False":
-            var code = varName + '.show_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
+            var code = varName + '.show_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ', ' + size + ')\n';
             return code;
     }
 }
@@ -373,7 +373,7 @@ export const tft_use_spi_init = function (_, generator) {
     var w = generator.valueToCode(this, 'WIDTH', generator.ORDER_ATOMIC);
     var h = generator.valueToCode(this, 'HEIGHT', generator.ORDER_ATOMIC);
     var op = this.getFieldValue('rotate');
-    var code = v + ' = st7789.ST7789(' + sv + ',' + w + ',' + h + ',dc_pin=' + dv + ',cs_pin=' + pv + ',rotation=' + op + ',font_address=' + font + ')\n';
+    var code = v + ' = st7789.ST7789(' + sv + ', ' + w + ', ' + h + ', dc_pin=' + dv + ', cs_pin=' + pv + ', rotation=' + op + ', font_address=' + font + ')\n';
     return code;
 }
 
@@ -386,7 +386,7 @@ export const tft_show_image_xy = function (_, generator) {
     var size = generator.valueToCode(this, 'size', generator.ORDER_ASSIGNMENT);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
-        var code = v + ".image(" + data + ',x = ' + x + ',y = ' + y + ',size = ' + size + ',color=' + color + ")\n";
+        var code = v + ".image(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', color=' + color + ")\n";
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -394,7 +394,7 @@ export const tft_show_image_xy = function (_, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = v + ".image(" + data + ',x = ' + x + ',y = ' + y + ',size = ' + size + ',color=0x' + rgb565.toString(16) + ")\n";
+        var code = v + ".image(" + data + ', x= ' + x + ',y=' + y + ', size=' + size + ', color=0x' + rgb565.toString(16) + ")\n";
     }
     return code;
 }
@@ -417,7 +417,7 @@ export const tft_show_image_or_string_delay = function (_, generator) {
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var op = this.getFieldValue('center');
     if (color.slice(0, 2) == "0x") {
-        var code = v + ".shows(" + data + ',x = ' + x + ',y = ' + y + ',size = ' + size + ',space = ' + space + ',center = ' + op + ',color=' + color + ")\n";
+        var code = v + ".shows(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', space=' + space + ', center=' + op + ', color=' + color + ")\n";
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -425,7 +425,7 @@ export const tft_show_image_or_string_delay = function (_, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = v + ".shows(" + data + ',x = ' + x + ',y = ' + y + ',size = ' + size + ',space = ' + space + ',center = ' + op + ',color=0x' + rgb565.toString(16) + ")\n";
+        var code = v + ".shows(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', space=' + space + ', center=' + op + ', color=0x' + rgb565.toString(16) + ")\n";
     }
     return code;
 }
@@ -438,7 +438,7 @@ export const tft_show_frame_string_delay = function (_, generator) {
     var time = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
-        var code = v + ".frame(" + data + ',size = ' + size + ',delay = ' + time + ',color=' + color + ")\n";
+        var code = v + ".frame(" + data + ', size=' + size + ', delay=' + time + ', color=' + color + ")\n";
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -446,7 +446,7 @@ export const tft_show_frame_string_delay = function (_, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = v + ".frame(" + data + ',size = ' + size + ',delay = ' + time + ',color=0x' + rgb565.toString(16) + ")\n";
+        var code = v + ".frame(" + data + ', size=' + size + ', delay=' + time + ', color=0x' + rgb565.toString(16) + ")\n";
     }
     return code;
 }
@@ -461,7 +461,7 @@ export const tft_scroll_string_delay = function (_, generator) {
     var space = generator.valueToCode(this, 'space', generator.ORDER_ASSIGNMENT);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
-        var code = v + ".scroll(" + data + ',y = ' + y + ',size = ' + size + ',speed =' + time + ',space = ' + space + ',color=' + color + ")\n";
+        var code = v + ".scroll(" + data + ', y=' + y + ', size=' + size + ', speed=' + time + ', space=' + space + ', color=' + color + ")\n";
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -469,7 +469,7 @@ export const tft_scroll_string_delay = function (_, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = v + ".scroll(" + data + ',y = ' + y + ',size = ' + size + ',speed =' + time + ',space = ' + space + ',color=0x' + rgb565.toString(16) + ")\n";
+        var code = v + ".scroll(" + data + ', y=' + y + ', size=' + size + ', speed=' + time + ', space=' + space + ', color=0x' + rgb565.toString(16) + ")\n";
     }
     return code;
 }
@@ -511,7 +511,7 @@ export const display_lcd_use_i2c_init = function (_, generator) {
     var addr = generator.valueToCode(this, 'ADDR', generator.ORDER_ATOMIC);
     var code;
     generator.definitions_['import_i2clcd'] = 'import i2clcd';
-    code = v + ' = i2clcd.LCD' + "(" + iv + ',lcd_width=' + key + ',i2c_addr=' + addr +')\n';
+    code = v + ' = i2clcd.LCD' + "(" + iv + ', lcd_width=' + key + ', i2c_addr=' + addr + ')\n';
     return code;
 }
 
@@ -522,7 +522,7 @@ export const lcd_show_image_or_string_delay = function (_, generator) {
     var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
     var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
     var op = this.getFieldValue('center');
-    var code = v + ".shows(" + data + ',column = ' + x + ',line = ' + y + ',center = ' + op + ")\n";
+    var code = v + ".shows(" + data + ', column=' + x + ', line=' + y + ',center = ' + op + ")\n";
     return code;
 }
 
@@ -533,7 +533,7 @@ export const lcd_print_string = function (_, generator) {
     var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
     var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
     var delay = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
-    var code = v + ".print(" + data + ',column = ' + x + ',line = ' + y + ',delay=' + delay + ")\n";
+    var code = v + ".print(" + data + ', column=' + x + ', line=' + y + ', delay=' + delay + ")\n";
     return code;
 }
 
@@ -556,7 +556,7 @@ export const display_oled_use_i2c_init = function (_, generator) {
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var iv = generator.valueToCode(this, 'I2CSUB', generator.ORDER_ATOMIC);
     var addr = generator.valueToCode(this, 'ADDR', generator.ORDER_ATOMIC);
-    var m =this.getFieldValue("driver");
+    var m = this.getFieldValue("driver");
     var version = Boards.getSelectedBoardKey().split(':')[2]
     var font = '';
     if (['mpython', 'mixgo_pe', 'mixgo_nova'].indexOf(version) >= 0) {
@@ -568,7 +568,7 @@ export const display_oled_use_i2c_init = function (_, generator) {
     }
     var code;
     generator.definitions_['import_oled128x64'] = 'import oled128x64';
-    code = v + ' = oled128x64.OLED' + "(" + iv + ',address=' + addr + ',font_address=' + font + ',types='+m+')\n';
+    code = v + ' = oled128x64.OLED' + "(" + iv + ', address=' + addr + ', font_address=' + font + ', types=' + m + ')\n';
 
     return code;
 }
@@ -588,7 +588,7 @@ export const extern_oled_show_image_xy = function (_, generator) {
     var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
     var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
     var size = generator.valueToCode(this, 'size', generator.ORDER_ASSIGNMENT);
-    var code = v + ".image(" + data + ',x = ' + x + ',y = ' + y + ',size = ' + size + ")\n";
+    var code = v + ".image(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ")\n";
     return code;
 }
 
@@ -609,7 +609,7 @@ export const extern_oled_show_image_or_string_delay = function (_, generator) {
     var size = generator.valueToCode(this, 'size', generator.ORDER_ASSIGNMENT);
     var space = generator.valueToCode(this, 'space', generator.ORDER_ASSIGNMENT);
     var op = this.getFieldValue('center');
-    var code = v + ".shows(" + data + ',x = ' + x + ',y = ' + y + ',size = ' + size + ',space = ' + space + ',center = ' + op + ")\n";
+    var code = v + ".shows(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', space=' + space + ', center=' + op + ")\n";
     return code;
 }
 
@@ -627,7 +627,7 @@ export const extern_oled_show_frame_string_delay = function (_, generator) {
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var size = generator.valueToCode(this, 'size', generator.ORDER_ASSIGNMENT);
     var time = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
-    var code = v + ".frame(" + data + ',size = ' + size + ',delay = ' + time + ")\n";
+    var code = v + ".frame(" + data + ', size=' + size + ', delay=' + time + ")\n";
     return code;
 }
 
@@ -647,7 +647,7 @@ export const extern_oled_scroll_string_delay = function (_, generator) {
     var size = generator.valueToCode(this, 'size', generator.ORDER_ASSIGNMENT);
     var time = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
     var space = generator.valueToCode(this, 'space', generator.ORDER_ASSIGNMENT);
-    var code = v + ".scroll(" + data + ',y = ' + y + ',size = ' + size + ',speed =' + time + ',space = ' + space + ")\n";
+    var code = v + ".scroll(" + data + ', y=' + y + ', size=' + size + ', speed=' + time + ', space=' + space + ")\n";
     return code;
 }
 

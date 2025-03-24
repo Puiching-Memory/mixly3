@@ -20,7 +20,7 @@ export const servo_set_angle = function (_, generator) {
     generator.definitions_['import_servo'] = 'import servo';
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
-    var code = 'servo.servo180_angle(' + dropdown_pin + ',' + num + ')\n';
+    var code = 'servo.servo180_angle(' + dropdown_pin + ', ' + num + ')\n';
     return code;
 }
 
@@ -28,7 +28,7 @@ export const servo_set_speed = function (_, generator) {
     generator.definitions_['import_servo'] = 'import servo';
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
-    var code = 'servo.servo360_speed(' + dropdown_pin + ',' + num + ')\n';
+    var code = 'servo.servo360_speed(' + dropdown_pin + ', ' + num + ')\n';
     return code;
 }
 
@@ -51,7 +51,7 @@ export const actuator_ms32006_init = function (_, generator) {
     var address = this.getFieldValue('mode')
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var sub1 = generator.valueToCode(this, 'SUB1', generator.ORDER_ATOMIC);
-    var code = sub + '=ms32006.MS32006(' + sub1 + ',addr=' + address + ')\n';
+    var code = sub + '=ms32006.MS32006(' + sub1 + ', addr=' + address + ')\n';
     return code;
 }
 
@@ -60,7 +60,7 @@ export const actuator_ms32006_dcmotor = function (_, generator) {
     var direction = this.getFieldValue('direction')
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var speed = generator.valueToCode(this, 'speed', generator.ORDER_ATOMIC);
-    var code = sub + '.dc_motor(' + direction + ',' + speed + ')\n';
+    var code = sub + '.dc_motor(' + direction + ', ' + speed + ')\n';
     return code;
 }
 
@@ -71,7 +71,7 @@ export const actuator_ms32006_stepper = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var speed = generator.valueToCode(this, 'speed', generator.ORDER_ATOMIC);
     var steps = generator.valueToCode(this, 'steps', generator.ORDER_ATOMIC);
-    var code = sub + '.move(' + mode + ',' + direction + ',' + speed + ',' + steps + ')\n';
+    var code = sub + '.move(' + mode + ', ' + direction + ', ' + speed + ', ' + steps + ')\n';
     return code;
 }
 
@@ -142,7 +142,7 @@ export const servo_move = function (_, generator) {
     generator.definitions_['import_machine'] = 'import machine';
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var value_degree = generator.valueToCode(this, 'DEGREE', generator.ORDER_ATOMIC);
-    var code = 'servo.servo_write_angle(' + dropdown_pin + ',' + value_degree + ')\n';
+    var code = 'servo.servo_write_angle(' + dropdown_pin + ', ' + value_degree + ')\n';
     return code;
 }
 
@@ -229,7 +229,6 @@ export const actuator_use_uart_init = function (_, generator) {
         var code = v + '=ns9300.NS9300(' + key + ')\n';
         return code;
     }
-
 }
 
 export const player_whether_stop = function (_, generator) {
@@ -288,7 +287,7 @@ export const syn6288_builtin_voice = function (_, generator) {
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var mode = this.getFieldValue('mode');
     var voice = generator.valueToCode(this, 'VOICE', generator.ORDER_ASSIGNMENT);
-    var code = v + ".hint_tones(" + voice + ',blocking=' + mode + ")\n";
+    var code = v + ".hint_tones(" + voice + ', blocking=' + mode + ")\n";
     return code;
 }
 
@@ -298,7 +297,7 @@ export const syn6288_tts_play = function (_, generator) {
     var mode = this.getFieldValue('mode');
     var voice = generator.valueToCode(this, 'VOICE', generator.ORDER_ASSIGNMENT);
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
-    var code = v + ".synthesis(" + data + ',music=' + voice + ',blocking=' + mode + ")\n";
+    var code = v + ".synthesis(" + data + ', music=' + voice + ', blocking=' + mode + ")\n";
     return code;
 }
 
@@ -320,11 +319,11 @@ export const robot_motor_extern = function (_, generator) {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_motor'] = 'ext_motor_left = i2cdevice.Motor(ext_i2c_left)';
             var code = 'ext_motor_left.run(0,' + speed + ')\n';
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_motor'] = 'ext_motor_right = i2cdevice.Motor(ext_i2c_right)';
             var code = 'ext_motor_right.run(0,' + speed + ')\n';
         }
@@ -342,11 +341,11 @@ export const robot_motor_extern_get_speed = function (_, generator) {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_motor'] = 'ext_motor_left = i2cdevice.Motor(ext_i2c_left)';
             var code = 'ext_motor_left.run()';
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_motor'] = 'ext_motor_right = i2cdevice.Motor(ext_i2c_right)';
             var code = 'ext_motor_right.run()';
         }
@@ -362,8 +361,8 @@ export const robot_traffic_light_extern = function (_, generator) {
         generator.definitions_['import_mixbot_ext_ext_traffic'] = 'from mixbot_ext import ext_traffic';
         var mode = this.getFieldValue('mode');
         var light = this.getFieldValue('light');
-        var code = 'ext_traffic.led(' + mode + ',';
-        if (light == '0' || light == '1' || light == '2') { code += '0' + ',' }
+        var code = 'ext_traffic.led(' + mode + ', ';
+        if (light == '0' || light == '1' || light == '2') { code += '0' + ', ' }
         else if (light == '3' || light == '4') { code += '1' + ',' }
         else if (light == '5' || light == '6') { code += '2' + ',' }
         if (light == '0') { code += '0' }
@@ -375,11 +374,11 @@ export const robot_traffic_light_extern = function (_, generator) {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_traffic'] = 'ext_traffic_left = i2cdevice.Traffic_LED(ext_i2c_left)';
             var code = 'ext_traffic_left.led(0,';
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_traffic'] = 'ext_traffic_right = i2cdevice.Traffic_LED(ext_i2c_right)';
             var code = 'ext_traffic_right.led(0,';
         }
@@ -401,19 +400,19 @@ export const robot_led_extern = function (_, generator) {
     var value = generator.valueToCode(this, 'value', generator.ORDER_ATOMIC);
     if (version == 'mixbot') {
         generator.definitions_['import_mixbot_ext_' + color + '_LED'] = 'from mixbot_ext import ' + color + '_LED';
-        var code = color + '_LED.brightness(' + mode + ',' + value + ")\n";
+        var code = color + '_LED.brightness(' + mode + ', ' + value + ")\n";
         return code;
     } else if (version == 'feiyi') {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_' + color + '_LED'] = 'ext_' + color + '_LED_left = i2cdevice.' + color + '_LED(ext_i2c_left)';
-            var code = 'ext_' + color + '_LED_left.brightness(' + '0,' + value + ")\n";
+            var code = 'ext_' + color + '_LED_left.brightness(' + '0, ' + value + ")\n";
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_' + color + '_LED'] = 'ext_' + color + '_LED_right = i2cdevice.' + color + '_LED(ext_i2c_right)';
-            var code = 'ext_' + color + '_LED_right.brightness(' + '0,' + value + ")\n";
+            var code = 'ext_' + color + '_LED_right.brightness(' + '0, ' + value + ")\n";
         }
         return code;
     }
@@ -431,11 +430,11 @@ export const robot_led_extern_get_value = function (_, generator) {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_' + color + '_LED'] = 'ext_' + color + '_LED_left = i2cdevice.' + color + '_LED(ext_i2c_left)';
             var code = 'ext_' + color + '_LED_left.brightness(0)';
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_' + color + '_LED'] = 'ext_' + color + '_LED_right = i2cdevice.' + color + '_LED(ext_i2c_right)';
             var code = 'ext_' + color + '_LED_right.brightness(0)';
         }
@@ -455,11 +454,11 @@ export const robot_servo_extern_get_status = function (_, generator) {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_servo'] = 'ext_servo_left = i2cdevice.Motor_servo(ext_i2c_left)';
             var code = 'ext_servo_left.state(0)' + status;
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_servo'] = 'ext_servo_right = i2cdevice.Motor_servo(ext_i2c_right)';
             var code = 'ext_servo_right.state(0)' + status;
         }
@@ -473,19 +472,19 @@ export const robot_servo_extern_stop_mode = function (_, generator) {
     var status = this.getFieldValue('status');
     if (version == 'mixbot') {
         generator.definitions_['import_mixbot_ext_ext_servo'] = 'from mixbot_ext import ext_servo';
-        var code = 'ext_servo.stop_mode(' + mode + "," + status + ")\n";
+        var code = 'ext_servo.stop_mode(' + mode + ", " + status + ")\n";
         return code;
     } else if (version == 'feiyi') {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left=i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_servo'] = 'ext_servo_left = i2cdevice.Motor_servo(ext_i2c_left)';
-            var code = 'ext_servo_left.stop_mode(' + "0," + status + ")\n";
+            var code = 'ext_servo_left.stop_mode(' + "0, " + status + ")\n";
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_servo'] = 'ext_servo_right = i2cdevice.Motor_servo(ext_i2c_right)';
-            var code = 'ext_servo_right.stop_mode(' + "0," + status + ")\n";
+            var code = 'ext_servo_right.stop_mode(' + "0, " + status + ")\n";
         }
         return code;
     }
@@ -502,11 +501,11 @@ export const robot_servo_extern_stop = function (_, generator) {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_servo'] = 'ext_servo_left = i2cdevice.Motor_servo(ext_i2c_left)';
             var code = 'ext_servo_left.stop(0)\n';
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_servo'] = 'ext_servo_right = i2cdevice.Motor_servo(ext_i2c_right)';
             var code = 'ext_servo_right.stop(0)\n';
         }
@@ -523,19 +522,19 @@ export const robot_servo_extern_absolute_run = function (_, generator) {
     var angle = generator.valueToCode(this, 'angle', generator.ORDER_ATOMIC);
     if (version == 'mixbot') {
         generator.definitions_['import_mixbot_ext_ext_servo'] = 'from mixbot_ext import ext_servo';
-        var code = 'ext_servo.absolute_run(' + mode + "," + status + "," + speed + "," + direction + "," + angle + ")\n";
+        var code = 'ext_servo.absolute_run(' + mode + ", " + status + ", " + speed + ", " + direction + ", " + angle + ")\n";
         return code;
     } else if (version == 'feiyi') {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_servo'] = 'ext_servo_left = i2cdevice.Motor_servo(ext_i2c_left)';
-            var code = 'ext_servo_left.absolute_run(' + "0," + status + "," + speed + "," + direction + "," + angle + ")\n";
+            var code = 'ext_servo_left.absolute_run(' + "0, " + status + ", " + speed + ", " + direction + ", " + angle + ")\n";
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_servo'] = 'ext_servo_right = i2cdevice.Motor_servo(ext_i2c_right)';
-            var code = 'ext_servo_right.absolute_run(' + "0," + status + "," + speed + "," + direction + "," + angle + ")\n";
+            var code = 'ext_servo_right.absolute_run(' + "0, " + status + ", " + speed + ", " + direction + ", " + angle + ")\n";
         }
         return code;
     }
@@ -552,11 +551,11 @@ export const robot_servo_extern_relative_origin = function (_, generator) {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_servo'] = 'ext_servo_left = i2cdevice.Motor_servo(ext_i2c_left)';
             var code = 'ext_servo_left.relative_origin(0)\n';
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_servo'] = 'ext_servo_right = i2cdevice.Motor_servo(ext_i2c_right)';
             var code = 'ext_servo_right.relative_origin(0)\n';
         }
@@ -572,19 +571,19 @@ export const robot_servo_extern_relative_run = function (_, generator) {
     var angle = generator.valueToCode(this, 'angle', generator.ORDER_ATOMIC);
     if (version == 'mixbot') {
         generator.definitions_['import_mixbot_ext_ext_servo'] = 'from mixbot_ext import ext_servo';
-        var code = 'ext_servo.relative_run(' + mode + "," + status + "," + speed + "," + angle + ")\n";
+        var code = 'ext_servo.relative_run(' + mode + ", " + status + ", " + speed + ", " + angle + ")\n";
         return code;
     } else if (version == 'feiyi') {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_servo'] = 'ext_servo_left = i2cdevice.Motor_servo(ext_i2c_left)';
-            var code = 'ext_servo_left.relative_run(' + "0," + status + "," + speed + "," + angle + ")\n";
+            var code = 'ext_servo_left.relative_run(' + "0, " + status + ", " + speed + ", " + angle + ")\n";
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_servo'] = 'ext_servo_right = i2cdevice.Motor_servo(ext_i2c_right)';
-            var code = 'ext_servo_right.relative_run(' + "0," + status + "," + speed + "," + angle + ")\n";
+            var code = 'ext_servo_right.relative_run(' + "0, " + status + ", " + speed + ", " + angle + ")\n";
         }
         return code;
     }
@@ -598,19 +597,19 @@ export const robot_servo_extern_relative_continue = function (_, generator) {
     var direction = this.getFieldValue('direction');
     if (version == 'mixbot') {
         generator.definitions_['import_mixbot_ext_ext_servo'] = 'from mixbot_ext import ext_servo';
-        var code = 'ext_servo.relative_continue(' + mode + "," + status + "," + speed + "," + direction + ")\n";
+        var code = 'ext_servo.relative_continue(' + mode + ", " + status + ", " + speed + ", " + direction + ")\n";
         return code;
     } else if (version == 'feiyi') {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_servo'] = 'ext_servo_left = i2cdevice.Motor_servo(ext_i2c_left)';
-            var code = 'ext_servo_left.relative_continue(' + "0," + status + "," + speed + "," + direction + ")\n";
+            var code = 'ext_servo_left.relative_continue(' + "0, " + status + ", " + speed + ", " + direction + ")\n";
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_servo'] = 'ext_servo_right = i2cdevice.Motor_servo(ext_i2c_right)';
-            var code = 'ext_servo_right.relative_continue(' + "0," + status + "," + speed + "," + direction + ")\n";
+            var code = 'ext_servo_right.relative_continue(' + "0, " + status + ", " + speed + ", " + direction + ")\n";
         }
         return code;
     }
@@ -628,7 +627,7 @@ export const mixbot_actuator_extern_set_addr = function (_, generator) {
     generator.definitions_['import_mixbot_ext_' + name] = 'from mixbot_ext import ' + name;
     var oldaddr = generator.valueToCode(this, 'old', generator.ORDER_ATOMIC);
     var newaddr = generator.valueToCode(this, 'new', generator.ORDER_ATOMIC);
-    var code = name + '.addr_set(' + oldaddr + ',' + newaddr + ')\n';
+    var code = name + '.addr_set(' + oldaddr + ', ' + newaddr + ')\n';
     return code;
 }
 

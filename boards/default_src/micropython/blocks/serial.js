@@ -53,7 +53,12 @@ export const serial_print_hex = {
             .appendField(new Blockly.FieldDropdown([['uart1', '1']]), 'mode')
             .appendField(Blockly.Msg.MIXLY_SERIAL_PRINTLN);
         this.appendValueInput("CONTENT", Number)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MATH_BIN, "bin"], [Blockly.Msg.MATH_OCT, "oct"], [Blockly.Msg.MATH_DEC, "int"], [Blockly.Msg.MATH_HEX, "hex"]]), "STAT")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MATH_BIN, "bin"],
+                [Blockly.Msg.MATH_OCT, "oct"],
+                [Blockly.Msg.MATH_DEC, "int"],
+                [Blockly.Msg.MATH_HEX, "hex"]
+            ]), "STAT")
             .setCheck(Number);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -147,7 +152,20 @@ export const serial_softserial_new = {
             .setAlign(Blockly.inputs.Align.RIGHT);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SERIAL_BEGIN)
-            .appendField(new Blockly.FieldDropdown([['115200', '115200'], ['57600', '57600'], ['37400', '38400'], ['31250', '31250'], ['28800', '28800'], ['19200', '19200'], ['14400', '14400'], ['9600', '9600'], ['4800', '4800'], ['2400', '2400'], ['1200', '1200'], ['300', '300']]), 'baudrate');
+            .appendField(new Blockly.FieldDropdown([
+                ['115200', '115200'],
+                ['57600', '57600'],
+                ['37400', '38400'],
+                ['31250', '31250'],
+                ['28800', '28800'],
+                ['19200', '19200'],
+                ['14400', '14400'],
+                ['9600', '9600'],
+                ['4800', '4800'],
+                ['2400', '2400'],
+                ['1200', '1200'],
+                ['300', '300']
+            ]), 'baudrate');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -160,11 +178,27 @@ export const serial_softserial = {
         this.setColour(SERIAL_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SETUP)
-            .appendField(new Blockly.FieldDropdown([['uart1 (RX=23,TX=19)', '1'], ['uart2 (RX=5,TX=18)', '2']]), 'mode');
+            .appendField(new Blockly.FieldDropdown([
+                ['uart1 (RX=23,TX=19)', '1'],
+                ['uart2 (RX=5,TX=18)', '2']
+            ]), 'mode');
         //this.setFieldValue('1','mode')
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SERIAL_BEGIN)
-            .appendField(new Blockly.FieldDropdown([['115200', '115200'], ['57600', '57600'], ['37400', '38400'], ['31250', '31250'], ['28800', '28800'], ['19200', '19200'], ['14400', '14400'], ['9600', '9600'], ['4800', '4800'], ['2400', '2400'], ['1200', '1200'], ['300', '300']]), 'baudrate');
+            .appendField(new Blockly.FieldDropdown([
+                ['115200', '115200'],
+                ['57600', '57600'],
+                ['37400', '38400'],
+                ['31250', '31250'],
+                ['28800', '28800'],
+                ['19200', '19200'],
+                ['14400', '14400'],
+                ['9600', '9600'],
+                ['4800', '4800'],
+                ['2400', '2400'],
+                ['1200', '1200'],
+                ['300', '300']
+            ]), 'baudrate');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -177,7 +211,20 @@ export const serial_begin = {
         this.setColour(SERIAL_HUE);
         this.appendDummyInput()
             .appendField("Serial " + Blockly.Msg.MIXLY_SERIAL_BEGIN)
-            .appendField(new Blockly.FieldDropdown([['115200', '115200'], ['57600', '57600'], ['37400', '38400'], ['31250', '31250'], ['28800', '28800'], ['19200', '19200'], ['14400', '14400'], ['9600', '9600'], ['4800', '4800'], ['2400', '2400'], ['1200', '1200'], ['300', '300']]), 'baudrate');
+            .appendField(new Blockly.FieldDropdown([
+                ['115200', '115200'],
+                ['57600', '57600'],
+                ['37400', '38400'],
+                ['31250', '31250'],
+                ['28800', '28800'],
+                ['19200', '19200'],
+                ['14400', '14400'],
+                ['9600', '9600'],
+                ['4800', '4800'],
+                ['2400', '2400'],
+                ['1200', '1200'],
+                ['300', '300']
+            ]), 'baudrate');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -194,7 +241,7 @@ export const system_input = {
         this.setOutput(true);
         this.setTooltip(Blockly.Msg.INOUT_input_TOOLTIP);
     }
-}
+};
 
 export const system_print = {
     init: function () {
@@ -233,10 +280,8 @@ export const system_print_end = {
 };
 
 export const system_print_many = {
-
     init: function () {
         this.setColour(SERIAL_HUE);
-
         this.itemCount_ = 2;
         this.updateShape_();
         this.setPreviousStatement(false);
@@ -247,18 +292,15 @@ export const system_print_many = {
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_MIXPY_INOUT_PRINT_MANY_TOOLTIP);
     },
-
     mutationToDom: function () {
         var container = document.createElement('mutation');
         container.setAttribute('items', this.itemCount_);
         return container;
     },
-
     domToMutation: function (xmlElement) {
         this.itemCount_ = parseInt(xmlElement.getAttribute('items'), 10);
         this.updateShape_();
     },
-
     decompose: function (workspace) {
         var containerBlock =
             workspace.newBlock('system_print_container');
@@ -272,7 +314,6 @@ export const system_print_many = {
         }
         return containerBlock;
     },
-
     compose: function (containerBlock) {
         var itemBlock = containerBlock.getInputTargetBlock('STACK');
         // Count number of inputs.
@@ -294,7 +335,6 @@ export const system_print_many = {
             }
         }
     },
-
     saveConnections: function (containerBlock) {
         var itemBlock = containerBlock.getInputTargetBlock('STACK');
         var i = 0;
@@ -306,7 +346,6 @@ export const system_print_many = {
                 itemBlock.nextConnection.targetBlock();
         }
     },
-
     updateShape_: function () {
         // Delete everything.
         if (this.getInput('EMPTY')) {
@@ -332,6 +371,7 @@ export const system_print_many = {
         }
     }
 };
+
 export const system_print_container = {
     init: function () {
         this.setColour(SERIAL_HUE);
@@ -365,7 +405,10 @@ export const serial_send_to_ai = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.LANG_CONTROLS_FOR_INPUT_TO + Blockly.Msg.MIXLY_OTHER + 'MP' + Blockly.Msg.MIXLY_DEVICE)
             .appendField(Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE, 'True'], [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE, 'False']]), 'STAT')
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE, 'True'],
+                [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE, 'False']
+            ]), 'STAT')
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
     }

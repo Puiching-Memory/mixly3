@@ -63,7 +63,10 @@ export const monitor_show_string = {
         this.setColour(DISPLAY_HUE);
         this.appendValueInput('data')
             .setCheck(String)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.OLED_DRAWSTR_ONE_BY_ONE, 'show'], [Blockly.Msg.MIXLY_ESP32_MONITOR_SCROLL, 'scroll']]), "MODE")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.OLED_DRAWSTR_ONE_BY_ONE, 'show'],
+                [Blockly.Msg.MIXLY_ESP32_MONITOR_SCROLL, 'scroll']
+            ]), "MODE")
             .appendField(Blockly.Msg.OLED_DRAWSTR);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -86,7 +89,10 @@ export const monitor_show_scroll_string = {
         this.setColour(DISPLAY_HUE);
         this.appendValueInput('data')
             .setCheck(String)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.OLED_DRAWSTR_ONE_BY_ONE, 'show'], [Blockly.Msg.MIXLY_ESP32_MONITOR_SCROLL, 'scroll']]), "MODE")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.OLED_DRAWSTR_ONE_BY_ONE, 'show'],
+                [Blockly.Msg.MIXLY_ESP32_MONITOR_SCROLL, 'scroll']
+            ]), "MODE")
             .appendField(Blockly.Msg.OLED_DRAWSTR);
         this.appendValueInput("time")
             .setCheck(Number)
@@ -107,7 +113,6 @@ export const monitor_show_scroll_string = {
         });
     }
 };
-
 
 export const display_show_static = {
     init: function () {
@@ -135,8 +140,6 @@ export const microbit_display_show_image = {
     }
 };
 
-
-
 export const esp32_display_show_default_image = {
     init: function () {
         this.jsonInit({
@@ -147,16 +150,65 @@ export const esp32_display_show_default_image = {
             "helpUrl": "https://microbit-micropython.readthedocs.io/en/latest/display.html#microbit.display.show",
             "tooltip": "Show the referenced image on the display.",
             "message0": Blockly.Msg.OLED_BITMAP,
-            "args0": [{
-                "name": "image",
-                "options": [["HEART", "HEART"], ["HEART_SMALL", "HEART_SMALL"], ["HAPPY", "HAPPY"], ["SAD", "SAD"], ["SMILE", "SMILE"], ["SILLY", "SILLY"], ["FABULOUS", "FABULOUS"], ["SURPRISED", "SURPRISED"], ["ASLEEP", "ASLEEP"], ["ANGRY", "ANGRY"], ["CONFUSED", "CONFUSED"], ["NO", "NO"], ["YES", "YES"], ["LEFT_ARROW", "LEFT_ARROW"], ["RIGHT_ARROW", "RIGHT_ARROW"], ["DRESS", "DRESS"], ["TRANSFORMERS", "TRANSFORMERS"], ["SCISSORS", "SCISSORS"], ["EXIT", "EXIT"], ["TREE", "TREE"], ["PACMAN", "PACMAN"], ["TARGET", "TARGET"], ["TSHIRT", "TSHIRT"], ["ROLLERSKATE", "ROLLERSKATE"], ["DUCK", "DUCK"], ["HOUSE", "HOUSE"], ["TORTOISE", "TORTOISE"], ["BUTTERFLY", "BUTTERFLY"], ["STICKFIGURE", "STICKFIGURE"], ["GHOST", "GHOST"], ["PITCHFORK", "PITCHFORK"], ["MUSIC_QUAVERS", "MUSIC_QUAVERS"], ["MUSIC_QUAVER", "MUSIC_QUAVER"], ["MUSIC_CROTCHET", "MUSIC_CROTCHET"], ["COW", "COW"], ["RABBIT", "RABBIT"], ["SQUARE_SMALL", "SQUARE_SMALL"], ["SQUARE", "SQUARE"], ["DIAMOND_SMALL", "DIAMOND_SMALL"], ["DIAMOND", "DIAMOND"], ["CHESSBOARD", "CHESSBOARD"], ["TRIANGLE_LEFT", "TRIANGLE_LEFT"], ["TRIANGLE", "TRIANGLE"], ["SNAKE", "SNAKE"], ["UMBRELLA", "UMBRELLA"], ["SKULL", "SKULL"], ["GIRAFFE", "GIRAFFE"], ["SWORD", "SWORD"]],
-                "type": "field_dropdown"
-            }
+            "args0": [
+                {
+                    "name": "image",
+                    "options": [
+                        ["HEART", "HEART"],
+                        ["HEART_SMALL", "HEART_SMALL"],
+                        ["HAPPY", "HAPPY"],
+                        ["SAD", "SAD"],
+                        ["SMILE", "SMILE"],
+                        ["SILLY", "SILLY"],
+                        ["FABULOUS", "FABULOUS"],
+                        ["SURPRISED", "SURPRISED"],
+                        ["ASLEEP", "ASLEEP"],
+                        ["ANGRY", "ANGRY"],
+                        ["CONFUSED", "CONFUSED"],
+                        ["NO", "NO"],
+                        ["YES", "YES"],
+                        ["LEFT_ARROW", "LEFT_ARROW"],
+                        ["RIGHT_ARROW", "RIGHT_ARROW"],
+                        ["DRESS", "DRESS"],
+                        ["TRANSFORMERS", "TRANSFORMERS"],
+                        ["SCISSORS", "SCISSORS"],
+                        ["EXIT", "EXIT"],
+                        ["TREE", "TREE"],
+                        ["PACMAN", "PACMAN"],
+                        ["TARGET", "TARGET"],
+                        ["TSHIRT", "TSHIRT"],
+                        ["ROLLERSKATE", "ROLLERSKATE"],
+                        ["DUCK", "DUCK"],
+                        ["HOUSE", "HOUSE"],
+                        ["TORTOISE", "TORTOISE"],
+                        ["BUTTERFLY", "BUTTERFLY"],
+                        ["STICKFIGURE", "STICKFIGURE"],
+                        ["GHOST", "GHOST"],
+                        ["PITCHFORK", "PITCHFORK"],
+                        ["MUSIC_QUAVERS", "MUSIC_QUAVERS"],
+                        ["MUSIC_QUAVER", "MUSIC_QUAVER"],
+                        ["MUSIC_CROTCHET", "MUSIC_CROTCHET"],
+                        ["COW", "COW"],
+                        ["RABBIT", "RABBIT"],
+                        ["SQUARE_SMALL", "SQUARE_SMALL"],
+                        ["SQUARE", "SQUARE"],
+                        ["DIAMOND_SMALL", "DIAMOND_SMALL"],
+                        ["DIAMOND", "DIAMOND"],
+                        ["CHESSBOARD", "CHESSBOARD"],
+                        ["TRIANGLE_LEFT", "TRIANGLE_LEFT"],
+                        ["TRIANGLE", "TRIANGLE"],
+                        ["SNAKE", "SNAKE"],
+                        ["UMBRELLA", "UMBRELLA"],
+                        ["SKULL", "SKULL"],
+                        ["GIRAFFE", "GIRAFFE"],
+                        ["SWORD", "SWORD"]
+                    ],
+                    "type": "field_dropdown"
+                }
             ]
         });
     }
 };
-
 
 export const esp32_display_show_animation = {
     init: function () {
@@ -167,32 +219,33 @@ export const esp32_display_show_animation = {
             "previousStatement": null,
             "helpUrl": "https://microbit-micropython.readthedocs.io/en/latest/display.html#microbit.display.show",
             "message0": Blockly.Msg.MIXLY_MICROBIT_Animate_images,
-            "args0": [{
-                "check": "List",
-                "type": "input_value",
-                "name": "images"
-            }, {
-                "type": "input_value",
-                "name": "delay"
-            }, {
-                "type": "input_dummy"
-            }, {
-                "checked": true,
-                "type": "field_checkbox",
-                "name": "wait"
-            }, {
-                "type": "input_dummy"
-            }, {
-                "checked": false,
-                "type": "field_checkbox",
-                "name": "loop"
-            }, {
-                "type": "input_dummy"
-            }, {
-                "checked": false,
-                "type": "field_checkbox",
-                "name": "clear"
-            }
+            "args0": [
+                {
+                    "check": "List",
+                    "type": "input_value",
+                    "name": "images"
+                }, {
+                    "type": "input_value",
+                    "name": "delay"
+                }, {
+                    "type": "input_dummy"
+                }, {
+                    "checked": true,
+                    "type": "field_checkbox",
+                    "name": "wait"
+                }, {
+                    "type": "input_dummy"
+                }, {
+                    "checked": false,
+                    "type": "field_checkbox",
+                    "name": "loop"
+                }, {
+                    "type": "input_dummy"
+                }, {
+                    "checked": false,
+                    "type": "field_checkbox",
+                    "name": "clear"
+                }
             ]
         });
         this.setInputsInline(true);
@@ -223,7 +276,10 @@ export const esp32_display_on = {
     init: function () {
         this.setColour(DISPLAY_HUE);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_MICROBIT_Turn_on_display, 'on'], [Blockly.Msg.MIXLY_MICROBIT_Turn_off_display, 'off']]), 'on_off')
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_MICROBIT_Turn_on_display, 'on'],
+                [Blockly.Msg.MIXLY_MICROBIT_Turn_off_display, 'off']
+            ]), 'on_off')
             .appendField(Blockly.Msg.MIXLY_MICROBIT_monitor);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -273,7 +329,56 @@ export const display_image_builtins = {
             "colour": DISPLAY_HUE,
             "args0": [{
                 "name": "image",
-                "options": [["HEART", "HEART"], ["HEART_SMALL", "HEART_SMALL"], ["HAPPY", "HAPPY"], ["SAD", "SAD"], ["SMILE", "SMILE"], ["SILLY", "SILLY"], ["FABULOUS", "FABULOUS"], ["SURPRISED", "SURPRISED"], ["ASLEEP", "ASLEEP"], ["ANGRY", "ANGRY"], ["CONFUSED", "CONFUSED"], ["NO", "NO"], ["YES", "YES"], ["LEFT_ARROW", "LEFT_ARROW"], ["RIGHT_ARROW", "RIGHT_ARROW"], ["DRESS", "DRESS"], ["TRANSFORMERS", "TRANSFORMERS"], ["SCISSORS", "SCISSORS"], ["EXIT", "EXIT"], ["TREE", "TREE"], ["PACMAN", "PACMAN"], ["TARGET", "TARGET"], ["TSHIRT", "TSHIRT"], ["ROLLERSKATE", "ROLLERSKATE"], ["DUCK", "DUCK"], ["HOUSE", "HOUSE"], ["TORTOISE", "TORTOISE"], ["BUTTERFLY", "BUTTERFLY"], ["STICKFIGURE", "STICKFIGURE"], ["GHOST", "GHOST"], ["PITCHFORK", "PITCHFORK"], ["MUSIC_QUAVERS", "MUSIC_QUAVERS"], ["MUSIC_QUAVER", "MUSIC_QUAVER"], ["MUSIC_CROTCHET", "MUSIC_CROTCHET"], ["COW", "COW"], ["RABBIT", "RABBIT"], ["SQUARE_SMALL", "SQUARE_SMALL"], ["SQUARE", "SQUARE"], ["DIAMOND_SMALL", "DIAMOND_SMALL"], ["DIAMOND", "DIAMOND"], ["CHESSBOARD", "CHESSBOARD"], ["TRIANGLE_LEFT", "TRIANGLE_LEFT"], ["TRIANGLE", "TRIANGLE"], ["SNAKE", "SNAKE"], ["UMBRELLA", "UMBRELLA"], ["SKULL", "SKULL"], ["GIRAFFE", "GIRAFFE"], ["SWORD", "SWORD"]],
+                "options": [
+                    ["HEART", "HEART"],
+                    ["HEART_SMALL", "HEART_SMALL"],
+                    ["HAPPY", "HAPPY"],
+                    ["SAD", "SAD"],
+                    ["SMILE", "SMILE"],
+                    ["SILLY", "SILLY"],
+                    ["FABULOUS", "FABULOUS"],
+                    ["SURPRISED", "SURPRISED"],
+                    ["ASLEEP", "ASLEEP"],
+                    ["ANGRY", "ANGRY"],
+                    ["CONFUSED", "CONFUSED"],
+                    ["NO", "NO"],
+                    ["YES", "YES"],
+                    ["LEFT_ARROW", "LEFT_ARROW"],
+                    ["RIGHT_ARROW", "RIGHT_ARROW"],
+                    ["DRESS", "DRESS"],
+                    ["TRANSFORMERS", "TRANSFORMERS"],
+                    ["SCISSORS", "SCISSORS"],
+                    ["EXIT", "EXIT"],
+                    ["TREE", "TREE"],
+                    ["PACMAN", "PACMAN"],
+                    ["TARGET", "TARGET"],
+                    ["TSHIRT", "TSHIRT"],
+                    ["ROLLERSKATE", "ROLLERSKATE"],
+                    ["DUCK", "DUCK"],
+                    ["HOUSE", "HOUSE"],
+                    ["TORTOISE", "TORTOISE"],
+                    ["BUTTERFLY", "BUTTERFLY"],
+                    ["STICKFIGURE", "STICKFIGURE"],
+                    ["GHOST", "GHOST"],
+                    ["PITCHFORK", "PITCHFORK"],
+                    ["MUSIC_QUAVERS", "MUSIC_QUAVERS"],
+                    ["MUSIC_QUAVER", "MUSIC_QUAVER"],
+                    ["MUSIC_CROTCHET", "MUSIC_CROTCHET"],
+                    ["COW", "COW"],
+                    ["RABBIT", "RABBIT"],
+                    ["SQUARE_SMALL", "SQUARE_SMALL"],
+                    ["SQUARE", "SQUARE"],
+                    ["DIAMOND_SMALL", "DIAMOND_SMALL"],
+                    ["DIAMOND", "DIAMOND"],
+                    ["CHESSBOARD", "CHESSBOARD"],
+                    ["TRIANGLE_LEFT", "TRIANGLE_LEFT"],
+                    ["TRIANGLE", "TRIANGLE"],
+                    ["SNAKE", "SNAKE"],
+                    ["UMBRELLA", "UMBRELLA"],
+                    ["SKULL", "SKULL"],
+                    ["GIRAFFE", "GIRAFFE"],
+                    ["SWORD", "SWORD"]
+                ],
                 "type": "field_dropdown"
             }
             ],
@@ -285,540 +390,540 @@ export const display_image_builtins = {
     }
 };
 
-
 export const display_image_create = {
     init: function () {
         this.jsonInit({
             "colour": DISPLAY_HUE,
-            "args0": [{
-                "type": "input_dummy"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "00"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "01"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "02"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "03"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "04"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "05"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "06"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "07"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "08"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "09"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "0a"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "0b"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "0c"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "0d"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "0e"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "0f"
-            }, {
-                "type": "input_dummy"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "10"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "11"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "12"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "13"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "14"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "15"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "16"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "17"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "18"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "19"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "1a"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "1b"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "1c"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "1d"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "1e"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "1f"
-            }, {
-                "type": "input_dummy"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "20"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "21"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "22"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "23"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "24"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "25"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "26"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "27"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "28"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "29"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "2a"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "2b"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "2c"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "2d"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "2e"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "2f"
-            }, {
-                "type": "input_dummy"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "30"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "31"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "32"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "33"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "34"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "35"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "36"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "37"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "38"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "39"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "3a"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "3b"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "3c"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "3d"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "3e"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "3f"
-            }, {
-                "type": "input_dummy"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "40"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "41"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "42"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "43"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "44"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "45"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "46"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "47"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "48"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "49"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "4a"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "4b"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "4c"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "4d"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "4e"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "4f"
-            }, {
-                "type": "input_dummy"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "50"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "51"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "52"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "53"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "54"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "55"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "56"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "57"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "58"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "59"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "5a"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "5b"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "5c"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "5d"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "5e"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "5f"
-            }, {
-                "type": "input_dummy"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "60"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "61"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "62"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "63"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "64"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "65"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "66"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "67"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "68"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "69"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "6a"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "6b"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "6c"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "6d"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "6e"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "6f"
-            }, {
-                "type": "input_dummy"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "70"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "71"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "72"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "73"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "74"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "75"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "76"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "77"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "78"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "79"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "7a"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "7b"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "7c"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "7d"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "7e"
-            }, {
-                "colour": "#000000",
-                "type": "field_colour",
-                "name": "7f"
-            }
+            "args0": [
+                {
+                    "type": "input_dummy"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "00"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "01"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "02"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "03"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "04"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "05"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "06"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "07"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "08"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "09"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "0a"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "0b"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "0c"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "0d"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "0e"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "0f"
+                }, {
+                    "type": "input_dummy"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "10"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "11"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "12"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "13"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "14"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "15"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "16"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "17"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "18"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "19"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "1a"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "1b"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "1c"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "1d"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "1e"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "1f"
+                }, {
+                    "type": "input_dummy"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "20"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "21"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "22"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "23"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "24"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "25"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "26"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "27"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "28"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "29"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "2a"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "2b"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "2c"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "2d"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "2e"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "2f"
+                }, {
+                    "type": "input_dummy"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "30"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "31"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "32"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "33"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "34"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "35"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "36"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "37"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "38"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "39"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "3a"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "3b"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "3c"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "3d"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "3e"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "3f"
+                }, {
+                    "type": "input_dummy"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "40"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "41"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "42"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "43"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "44"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "45"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "46"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "47"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "48"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "49"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "4a"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "4b"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "4c"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "4d"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "4e"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "4f"
+                }, {
+                    "type": "input_dummy"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "50"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "51"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "52"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "53"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "54"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "55"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "56"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "57"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "58"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "59"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "5a"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "5b"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "5c"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "5d"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "5e"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "5f"
+                }, {
+                    "type": "input_dummy"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "60"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "61"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "62"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "63"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "64"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "65"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "66"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "67"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "68"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "69"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "6a"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "6b"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "6c"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "6d"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "6e"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "6f"
+                }, {
+                    "type": "input_dummy"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "70"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "71"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "72"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "73"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "74"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "75"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "76"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "77"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "78"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "79"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "7a"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "7b"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "7c"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "7d"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "7e"
+                }, {
+                    "colour": "#000000",
+                    "type": "field_colour",
+                    "name": "7f"
+                }
             ],
             "output": "esp32_image",
             "helpUrl": "https://microbit-micropython.readthedocs.io/en/latest/image.html#microbit.Image",
@@ -828,16 +933,8 @@ export const display_image_create = {
     }
 };
 
-
-
 export const image_shift = {
     init: function () {
-        var OPERATORS = [
-            [Blockly.Msg.MIXLY_UP, 'up'],
-            [Blockly.Msg.MIXLY_DOWN, 'down'],
-            [Blockly.Msg.MIXLY_LEFT, 'left'],
-            [Blockly.Msg.MIXLY_RIGHT, 'right'],
-        ];
         //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
         this.setColour(DISPLAY_HUE);
         this.setOutput(true);
@@ -847,7 +944,7 @@ export const image_shift = {
             .setCheck(["esp32_image", "List", String]);
         this.appendDummyInput('')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
         this.appendValueInput('val')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_SHIFT)
             .setCheck(Number);
@@ -867,15 +964,17 @@ export const image_shift = {
             };
             return mode0 + mode1 + TOOLTIPS[mode] + mode2;
         });
-    }
+    },
+    OPERATORS: [
+        [Blockly.Msg.MIXLY_UP, 'up'],
+        [Blockly.Msg.MIXLY_DOWN, 'down'],
+        [Blockly.Msg.MIXLY_LEFT, 'left'],
+        [Blockly.Msg.MIXLY_RIGHT, 'right'],
+    ]
 };
 
 export const image_arithmetic = {
     init: function () {
-        var OPERATORS = [
-            [Blockly.Msg.MICROBIT_DISPLAY_UNION, '+'],
-            [Blockly.Msg.MICROBIT_DISPLAY_MINUS, '-']
-        ];
         //this.setHelpUrl(Blockly.Msg.MATH_ARITHMETIC_HELPURL);
         this.setColour(DISPLAY_HUE);
         this.setOutput(true, "esp32_image");
@@ -884,7 +983,7 @@ export const image_arithmetic = {
             .appendField(Blockly.Msg.MICROBIT_DISPLAY_MERGE_SHAPE);
         this.appendValueInput('B')
             // .setCheck(["esp32_image", "List", String])
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
         this.setInputsInline(true);
         var thisBlock = this;
         this.setTooltip(function () {
@@ -895,13 +994,20 @@ export const image_arithmetic = {
             };
             return TOOLTIPS[mode];
         });
-    }
+    },
+    OPERATORS: [
+        [Blockly.Msg.MICROBIT_DISPLAY_UNION, '+'],
+        [Blockly.Msg.MICROBIT_DISPLAY_MINUS, '-']
+    ]
 };
 
 export const esp32_display_show_string = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.OLED_DRAWSTR_ONE_BY_ONE, 'show'], [Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_SCROLL_STRING, 'scroll']]), "MODE");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.OLED_DRAWSTR_ONE_BY_ONE, 'show'],
+                [Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_SCROLL_STRING, 'scroll']
+            ]), "MODE");
         this.jsonInit({
             "colour": DISPLAY_HUE,
             "inputsInline": true,
@@ -1072,7 +1178,13 @@ export const group_lcd_power = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_DF_LCD)
             .appendField('mylcd')
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_ON, "on()"], [Blockly.Msg.MIXLY_OFF, "off()"], [Blockly.Msg.MIXLY_LCD_STAT_CLEAR, "clear()"], [Blockly.Msg.MIXLY_LCD_NOBACKLIGHT, "backlight(off)"], [Blockly.Msg.MIXLY_LCD_BACKLIGHT, "backlight(on)"]]), "STAT");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_ON, "on()"],
+                [Blockly.Msg.MIXLY_OFF, "off()"],
+                [Blockly.Msg.MIXLY_LCD_STAT_CLEAR, "clear()"],
+                [Blockly.Msg.MIXLY_LCD_NOBACKLIGHT, "backlight(off)"],
+                [Blockly.Msg.MIXLY_LCD_BACKLIGHT, "backlight(on)"]
+            ]), "STAT");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -1181,10 +1293,6 @@ export const display_draw_4strings = {
 
 export const display_image_size = {
     init: function () {
-        var OPERATORS = [
-            [Blockly.Msg.MIXLY_HEIGHT, 'height'],
-            [Blockly.Msg.MIXLY_WIDTH, 'width']
-        ];
         this.setColour(DISPLAY_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET + Blockly.Msg.MIXLY_MICROBIT_IMAGE);
@@ -1192,7 +1300,7 @@ export const display_image_size = {
             .setCheck("esp32_image")
         // .appendField(Blockly.Msg.blockpy_USE_LIST);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
         this.setInputsInline(true);
         this.setOutput(true);
         var thisBlock = this;
@@ -1206,15 +1314,15 @@ export const display_image_size = {
             };
             return mode0 + mode1 + TOOLTIPS[mode];
         });
-    }
+    },
+    OPERATORS: [
+        [Blockly.Msg.MIXLY_HEIGHT, 'height'],
+        [Blockly.Msg.MIXLY_WIDTH, 'width']
+    ]
 };
 
 export const display_rect = {
     init: function () {
-        var brightness_or_not = [
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
-        ];
         this.setColour(DISPLAY_HUE);
         // this.appendDummyInput()
         //     .appendField(Blockly.Msg.OLED)
@@ -1224,8 +1332,7 @@ export const display_rect = {
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RECT)
-            .appendField(new Blockly.FieldDropdown(brightness_or_not), 'OP')
-
+            .appendField(new Blockly.FieldDropdown(this.STATUS), 'OP')
         // this.appendValueInput("PIN", Number)
         //    .setCheck(Number)
         //    .setAlign(Blockly.inputs.Align.RIGHT)
@@ -1262,7 +1369,11 @@ export const display_rect = {
         this.setNextStatement(true, null);
         this.setTooltip('');
         this.setTooltip(Blockly.Msg.MIXLY_OLED_RECT);
-    }
+    },
+    STATUS: [
+        [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
+        [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
+    ]
 };
 
 export const display_line = {
@@ -1280,22 +1391,26 @@ export const display_line = {
         //    .appendField(Blockly.Msg.MIXLY_PIN);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_DISPLAY_DRAW)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_DISPLAY_RLINE, "hline"], [Blockly.Msg.MIXLY_DISPLAY_VLINE, "vline"]]), "direction");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_DISPLAY_RLINE, "hline"],
+                [Blockly.Msg.MIXLY_DISPLAY_VLINE, "vline"]
+            ]), "direction");
         this.jsonInit({
             "message0": Blockly.Msg.MIXLY_MICROBIT_SHOW_LINE,
-            "args0": [{
-                "check": Number,
-                "type": "input_value",
-                "name": "x"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "length"
-            }
+            "args0": [
+                {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "length"
+                }
             ]
         });
         this.setInputsInline(true);
@@ -1320,23 +1435,24 @@ export const display_line_arbitrarily = {
         //    .appendField(Blockly.Msg.MIXLY_PIN);
         this.jsonInit({
             "message0": Blockly.Msg.MIXLY_MICROBIT_SHOW_LINE_ARBITRARILY,
-            "args0": [{
-                "check": Number,
-                "type": "input_value",
-                "name": "x1"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y1"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "x2"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y2"
-            },
+            "args0": [
+                {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x1"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y1"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x2"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y2"
+                },
             ]
         });
         this.setInputsInline(true);
@@ -1479,7 +1595,10 @@ export const display_onoff = {
     init: function () {
         this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_ESP32_ON, "ON"], [Blockly.Msg.MIXLY_ESP32_OFF, "OFF"]]), 'ONOFF')
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_ESP32_ON, "ON"],
+                [Blockly.Msg.MIXLY_ESP32_OFF, "OFF"]
+            ]), 'ONOFF')
         this.setOutput(true, Boolean);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_HIGHLOW);
     }
@@ -1564,7 +1683,11 @@ export const display_tm1650_power = {
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
         this.appendValueInput("VAR")
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_ON, "_on"], [Blockly.Msg.MIXLY_OFF, "_off"], [Blockly.Msg.MIXLY_LCD_STAT_CLEAR, "_clear"]]), "STAT");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_ON, "_on"],
+                [Blockly.Msg.MIXLY_OFF, "_off"],
+                [Blockly.Msg.MIXLY_LCD_STAT_CLEAR, "_clear"]
+            ]), "STAT");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -1609,53 +1732,50 @@ export const display_tm1650_show_dot = {
 
 export const display_animate = {
     init: function () {
-        var ANIMATE = [
-            ["ALL_CLOCKS", 'ALL_CLOCKS'],
-            ["ALL_ARROWS", 'ALL_ARROWS']
-        ];
         this.setColour(DISPLAY_HUE);
         this.setOutput(true, 'Tuple');
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ESP32_DISPLAY_ANIMATE)
-            .appendField(new Blockly.FieldDropdown(ANIMATE), 'ANIMATION')
+            .appendField(new Blockly.FieldDropdown(this.ANIMATE), 'ANIMATION')
         //this.setTooltip(Blockly.Msg.LOGIC_BOOLEAN_TOOLTIP);
-    }
+    },
+    ANIMATE: [
+        ["ALL_CLOCKS", 'ALL_CLOCKS'],
+        ["ALL_ARROWS", 'ALL_ARROWS']
+    ]
 };
 
 export const display_circle = {
     init: function () {
-        var brightness_or_not = [
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
-        ];
         this.setColour(DISPLAY_HUE);
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.OLED)
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MIXPY_TURTLE_DRAW_CIRCLE)
-            .appendField(new Blockly.FieldDropdown(brightness_or_not), 'OP')
+            .appendField(new Blockly.FieldDropdown(this.STATUS), 'OP')
         this.jsonInit({
             "message0": Blockly.Msg.MIXLY_HANBIT_SHOW_CIRCLE,
-            "args0": [{
-                "check": Number,
-                "type": "input_value",
-                "name": "x"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "r"
-            }, {
-                "type": "input_dummy"
-            }, {
-                "checked": false,
-                "type": "field_checkbox",
-                "name": "fill"
-            }
+            "args0": [
+                {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "r"
+                }, {
+                    "type": "input_dummy"
+                }, {
+                    "checked": false,
+                    "type": "field_checkbox",
+                    "name": "fill"
+                }
             ]
         });
         this.setInputsInline(true);
@@ -1663,55 +1783,56 @@ export const display_circle = {
         this.setNextStatement(true, null);
         this.setTooltip('');
         this.setTooltip(Blockly.Msg.MIXLY_MIXPY_TURTLE_DRAW_CIRCLE);
-    }
+    },
+    STATUS: [
+        [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
+        [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
+    ]
 };
 
 export const display_triangle = {
     init: function () {
-        var brightness_or_not = [
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
-        ];
         this.setColour(DISPLAY_HUE);
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.OLED)
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_DISPLAY_DRAW + Blockly.Msg.MIXLY_HANBIT_DRAW_TRIANGLE)
-            .appendField(new Blockly.FieldDropdown(brightness_or_not), 'OP')
+            .appendField(new Blockly.FieldDropdown(this.STATUS), 'OP')
         this.jsonInit({
             "message0": Blockly.Msg.MIXLY_HANBIT_SHOW_triangle,
-            "args0": [{
-                "check": Number,
-                "type": "input_value",
-                "name": "x0"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y0"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "x1"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y1"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "x2"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y2"
-            }, {
-                "type": "input_dummy"
-            }, {
-                "checked": false,
-                "type": "field_checkbox",
-                "name": "fill"
-            }
+            "args0": [
+                {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x0"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y0"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x1"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y1"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x2"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y2"
+                }, {
+                    "type": "input_dummy"
+                }, {
+                    "checked": false,
+                    "type": "field_checkbox",
+                    "name": "fill"
+                }
             ]
         });
         this.setInputsInline(true);
@@ -1719,7 +1840,11 @@ export const display_triangle = {
         this.setNextStatement(true, null);
         this.setTooltip('');
         this.setTooltip(Blockly.Msg.MIXLY_DISPLAY_DRAW + Blockly.Msg.MIXLY_HANBIT_DRAW_TRIANGLE);
-    }
+    },
+    STATUS: [
+        [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
+        [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
+    ]
 };
 
 export const display_help = {
@@ -1799,8 +1924,6 @@ export const display_matrix_use_i2c_init = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-
-
     }
 };
 
@@ -1830,4 +1953,3 @@ export const display_scroll_string_extern = {
         this.setInputsInline(true);
     }
 };
-

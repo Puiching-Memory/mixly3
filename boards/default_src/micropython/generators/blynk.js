@@ -143,7 +143,6 @@ export const mpython_blynktimer = function (_, generator) {
 def blynk_timer${Num}():
 `
         + branch;
-
     return '';
 }
 
@@ -191,9 +190,7 @@ export const mpython_blynk_email = function (_, generator) {
 export const mpython_blynk_set_property = function (_, generator) {
     var attribute_value = generator.valueToCode(this, 'attribute_value', generator.ORDER_ATOMIC);
     var attribute_name = generator.valueToCode(this, 'attribute_name', generator.ORDER_ATOMIC);
-
     var code = `blynk.set_property(pin, ${attribute_name}, ${attribute_value})` + '\n';
-
     return code;
 }
 

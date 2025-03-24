@@ -65,7 +65,11 @@ export const sensor_mixgo_extern_button_attachInterrupt = {
             .setCheck(Number);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MODE)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_RISING, "machine.Pin.IRQ_RISING"], [Blockly.Msg.MIXLY_FALLING, "machine.Pin.IRQ_FALLING"], [Blockly.Msg.MIXLY_CHANGE, "(machine.Pin.IRQ_RISING | machine.Pin.IRQ_FALLING)"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_RISING, "machine.Pin.IRQ_RISING"],
+                [Blockly.Msg.MIXLY_FALLING, "machine.Pin.IRQ_FALLING"],
+                [Blockly.Msg.MIXLY_CHANGE, "(machine.Pin.IRQ_RISING | machine.Pin.IRQ_FALLING)"]
+            ]), "mode");
         this.appendValueInput('DO')
             .appendField(Blockly.Msg.MIXLY_DO)
         this.setPreviousStatement(true);
@@ -73,7 +77,6 @@ export const sensor_mixgo_extern_button_attachInterrupt = {
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_ATTACHINTERRUPT);
     }
 };
-
 
 export const sensor_mpu9250_attachGestureInterrupt = {
     init: function () {
@@ -83,7 +86,17 @@ export const sensor_mpu9250_attachGestureInterrupt = {
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_CURRENT_GESTURE)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_MICROBIT_shake, "shake"], [Blockly.Msg.MIXLY_UP, "up"], [Blockly.Msg.MIXLY_DOWN, "down"], [Blockly.Msg.MIXLY_LEFT, "left"], [Blockly.Msg.MIXLY_RIGHT, "right"], [Blockly.Msg.MIXLY_MICROBIT_face_up, "face up"], [Blockly.Msg.MIXLY_MICROBIT_face_down, "face down"], [Blockly.Msg.MIXLY_MICROBIT_freefall, "freefall"], ["3g", "3g"], ["6g", "6g"], ["8g", "8g"]]), "gesture");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_MICROBIT_shake, "shake"],
+                [Blockly.Msg.MIXLY_UP, "up"],
+                [Blockly.Msg.MIXLY_DOWN, "down"],
+                [Blockly.Msg.MIXLY_LEFT, "left"],
+                [Blockly.Msg.MIXLY_RIGHT, "right"],
+                [Blockly.Msg.MIXLY_MICROBIT_face_up, "face up"],
+                [Blockly.Msg.MIXLY_MICROBIT_face_down, "face down"],
+                [Blockly.Msg.MIXLY_MICROBIT_freefall, "freefall"],
+                ["3g", "3g"], ["6g", "6g"], ["8g", "8g"]
+            ]), "gesture");
         this.appendStatementInput('DO')
             .appendField(Blockly.Msg.MIXLY_DO);
         this.setPreviousStatement(true);
@@ -112,7 +125,6 @@ export const sensor_mpu9250_attachGestureInterrupt = {
         });
     }
 };
-
 
 export const sensor_adxl345_get_acceleration = {
     init: function () {
@@ -148,8 +160,6 @@ export const sensor_adxl345_get_acceleration = {
     }
 };
 
-
-
 export const sensor_light_level = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
@@ -161,20 +171,18 @@ export const sensor_light_level = {
     }
 };
 
-
-
 export const sensor_dht11 = {
     init: function () {
-        var WHAT = [[Blockly.Msg.MIXLY_GETTEMPERATUE, 'temperature'], [Blockly.Msg.MIXLY_GETHUMIDITY, 'humidity']];
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput("PIN", Number)
-            .appendField(new Blockly.FieldDropdown([['DHT11', 'DHT11']
-                , ['DHT22', 'DHT22']//, ['DHT21', '21'], ['DHT33', '33'], ['DHT44', '44']
+            .appendField(new Blockly.FieldDropdown([
+                ['DHT11', 'DHT11'],
+                ['DHT22', 'DHT22']//, ['DHT21', '21'], ['DHT33', '33'], ['DHT44', '44']
             ]), 'TYPE')
             .appendField(Blockly.Msg.MIXLY_PIN)
             .setCheck(Number);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(WHAT), "WHAT");
+            .appendField(new Blockly.FieldDropdown(this.METHOD), "WHAT");
         this.setOutput(true, Number);
         var thisBlock = this;
         this.setTooltip(function () {
@@ -186,9 +194,12 @@ export const sensor_dht11 = {
             };
             return TOOLTIPS[op];
         });
-    }
+    },
+    METHOD: [
+        [Blockly.Msg.MIXLY_GETTEMPERATUE, 'temperature'],
+        [Blockly.Msg.MIXLY_GETHUMIDITY, 'humidity']
+    ]
 };
-
 
 export const sensor_mixgo_extern_light = {
     init: function () {
@@ -222,14 +233,15 @@ export const sensor_mixgo_extern_sound = {
     }
 };
 
-
-
 export const sensor_mixgo_extern_pin_near = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.TEXT_TRIM_LEFT, "left"], [Blockly.Msg.TEXT_TRIM_RIGHT, "right"]]), "direction")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.TEXT_TRIM_LEFT, "left"],
+                [Blockly.Msg.TEXT_TRIM_RIGHT, "right"]
+            ]), "direction")
             .appendField(Blockly.Msg.MIXLY_ESP32_NEAR);
         this.setOutput(true, Number);
         this.setInputsInline(true);
@@ -326,7 +338,6 @@ export const sensor_lm35 = {
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_LM35);
     }
 };
-
 
 //pe
 export const sensor_use_i2c_init = {
@@ -637,7 +648,7 @@ export const CI130X_BROADCAST = {
         this.setNextStatement(true);
         this.setInputsInline(true);
     }
-}
+};
 
 export const CI130X_SET_SYSTEM_CMD = {
     init: function () {
@@ -910,7 +921,15 @@ export const sensor_mpu9250_gesture = {
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_CURRENT_GESTURE)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_MICROBIT_shake, "shake"], [Blockly.Msg.MIXLY_UP, "up"], [Blockly.Msg.MIXLY_DOWN, "down"], [Blockly.Msg.MIXLY_LEFT, "left"], [Blockly.Msg.MIXLY_RIGHT, "right"], [Blockly.Msg.MIXLY_MICROBIT_face_up, "face up"], [Blockly.Msg.MIXLY_MICROBIT_face_down, "face down"]]), "gesture");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_MICROBIT_shake, "shake"],
+                [Blockly.Msg.MIXLY_UP, "up"],
+                [Blockly.Msg.MIXLY_DOWN, "down"],
+                [Blockly.Msg.MIXLY_LEFT, "left"],
+                [Blockly.Msg.MIXLY_RIGHT, "right"],
+                [Blockly.Msg.MIXLY_MICROBIT_face_up, "face up"],
+                [Blockly.Msg.MIXLY_MICROBIT_face_down, "face down"]
+            ]), "gesture");
         this.setOutput(true);
         var thisBlock = this;
         this.setTooltip(function () {
@@ -1052,7 +1071,6 @@ export const sensor_mpu9250_calibrate_compass = {
     }
 };
 
-
 export const sensor_mpu9250_temperature = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
@@ -1068,7 +1086,6 @@ export const sensor_mpu9250_temperature = {
     }
 };
 
-
 export const sensor_mpu9250_field_strength = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
@@ -1077,7 +1094,10 @@ export const sensor_mpu9250_field_strength = {
             .setCheck("var");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET_COMPASS)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_MICROBIT_JS_FIELD_STRENGTH, 'strength'], [Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE, 'heading']]), 'compass');
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_MICROBIT_JS_FIELD_STRENGTH, 'strength'],
+                [Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE, 'heading']
+            ]), 'compass');
         this.setOutput(true, Number);
         this.setInputsInline(true);
         var thisBlock = this;
@@ -1298,7 +1318,6 @@ export const weather_uart_mixio = {
 };
 
 export const weather_set_label = {
-
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
@@ -1314,18 +1333,15 @@ export const weather_set_label = {
         this.setNextStatement(true);
         this.setTooltip();
     },
-
     mutationToDom: function () {
         var container = document.createElement('mutation');
         container.setAttribute('items', this.itemCount_);
         return container;
     },
-
     domToMutation: function (xmlElement) {
         this.itemCount_ = parseInt(xmlElement.getAttribute('items'), 10);
         this.updateShape_();
     },
-
     decompose: function (workspace) {
         var containerBlock =
             workspace.newBlock('weather_set_label_container');
@@ -1339,7 +1355,6 @@ export const weather_set_label = {
         }
         return containerBlock;
     },
-
     compose: function (containerBlock) {
         var itemBlock = containerBlock.getInputTargetBlock('STACK');
         // Count number of inputs.
@@ -1361,7 +1376,6 @@ export const weather_set_label = {
             }
         }
     },
-
     saveConnections: function (containerBlock) {
         var itemBlock = containerBlock.getInputTargetBlock('STACK');
         var i = 0;
@@ -1373,7 +1387,6 @@ export const weather_set_label = {
                 itemBlock.nextConnection.targetBlock();
         }
     },
-
     updateShape_: function () {
         // Delete everything.
         if (this.getInput('EMPTY')) {
@@ -1399,6 +1412,7 @@ export const weather_set_label = {
         }
     }
 };
+
 export const weather_set_label_container = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
@@ -1562,8 +1576,7 @@ export const PS2_init = {
     }
 };
 
-
-var PSBUTTON = [
+const PSBUTTON = [
     [Blockly.Msg.PS2_TRIANGLE, "PSB_GREEN"],
     [Blockly.Msg.PS2_CIRCLE, "PSB_RED"],
     [Blockly.Msg.PS2_CROSS, "PSB_BLUE"],
@@ -1650,18 +1663,18 @@ export const PS2_Buttons = {
 export const PS2_stk = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
-        var PSSTK = [
-            [Blockly.Msg.PS2_RX, "0"],
-            [Blockly.Msg.PS2_RY, "1"],
-            [Blockly.Msg.PS2_LX, "2"],
-            [Blockly.Msg.PS2_LY, "3"],
-        ];
         this.appendDummyInput("")
             .appendField(Blockly.Msg.PS2_stick)
-            .appendField(new Blockly.FieldDropdown(PSSTK), "psstk");
+            .appendField(new Blockly.FieldDropdown(this.PSSTK), "psstk");
         this.setOutput(true, Number);
         this.setTooltip('');
-    }
+    },
+    PSSTK: [
+        [Blockly.Msg.PS2_RX, "0"],
+        [Blockly.Msg.PS2_RY, "1"],
+        [Blockly.Msg.PS2_LX, "2"],
+        [Blockly.Msg.PS2_LY, "3"],
+    ]
 };
 
 export const PS2_init_new = {
@@ -1722,20 +1735,20 @@ export const PS2_Buttons_new = {
 export const PS2_stk_new = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
-        var PSSTK = [
-            [Blockly.Msg.PS2_RX, "RX"],
-            [Blockly.Msg.PS2_RY, "RY"],
-            [Blockly.Msg.PS2_LX, "LX"],
-            [Blockly.Msg.PS2_LY, "LY"],
-        ];
         this.appendValueInput('SUB')
             .appendField(Blockly.Msg.PS2);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_JOYSTICK)
-            .appendField(new Blockly.FieldDropdown(PSSTK), "psstk");
+            .appendField(new Blockly.FieldDropdown(this.PSSTK), "psstk");
         this.setOutput(true, Number);
         this.setTooltip('');
-    }
+    },
+    PSSTK: [
+        [Blockly.Msg.PS2_RX, "RX"],
+        [Blockly.Msg.PS2_RY, "RY"],
+        [Blockly.Msg.PS2_LX, "LX"],
+        [Blockly.Msg.PS2_LY, "LY"],
+    ]
 };
 
 export const sensor_use_uart_init = {
@@ -1756,8 +1769,6 @@ export const sensor_use_uart_init = {
                 [Blockly.Msg.MIXLY_PM25_SENSOR, "PM"],
                 [Blockly.Msg.MIXLY_GNSS_SENSOR, "GNSS"]
             ]), "sensor");
-
-
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -1782,7 +1793,7 @@ export const pm25_get_data = {
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_PM_CONCENTRATION_TOOLTIP);
     }
-}
+};
 
 export const gnss_have_data = {
     init: function () {
@@ -1832,7 +1843,10 @@ export const robot_button_extern_get_value = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.MIXLY_BUTTON)
             .appendField(Blockly.Msg.PIN_NUMBERING)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_LEFT, "0"],
+                [Blockly.Msg.MIXLY_RIGHT, "1"]
+            ]), "mode");
         this.appendDummyInput()
             .appendField(Blockly.Msg.TURTLE_POS)
             .appendField(new Blockly.FieldDropdown([
@@ -1847,7 +1861,7 @@ export const robot_button_extern_get_value = {
         this.setOutput(true, Number);
         this.setInputsInline(true);
     }
-}
+};
 
 export const robot_touch_extern_get_value = {
     init: function () {
@@ -1855,13 +1869,16 @@ export const robot_touch_extern_get_value = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.MIXLY_MICROBIT_JS_INOUT_EVENT_TOUCH + Blockly.Msg.MSG.catSensor)
             .appendField(Blockly.Msg.PIN_NUMBERING)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_LEFT, "0"],
+                [Blockly.Msg.MIXLY_RIGHT, "1"]
+            ]), "mode");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MIXBOT_EXTERN_TOUCHED + "?")
         this.setOutput(true, Boolean);
         this.setInputsInline(true);
     }
-}
+};
 
 export const robot_infrared_extern_get_value = {
     init: function () {
@@ -1869,13 +1886,16 @@ export const robot_infrared_extern_get_value = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.MIXLY_ESP32_EXTERN_NEAR)
             .appendField(Blockly.Msg.PIN_NUMBERING)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_LEFT, "0"],
+                [Blockly.Msg.MIXLY_RIGHT, "1"]
+            ]), "mode");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_DATA)
         this.setOutput(true, Number);
         this.setInputsInline(true);
     }
-}
+};
 
 export const robot_infrared_extern_grey_get_value = {
     init: function () {
@@ -1883,13 +1903,16 @@ export const robot_infrared_extern_grey_get_value = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.MIXLY_ESP32_EXTERN_GRAY_NEAR)
             .appendField(Blockly.Msg.PIN_NUMBERING)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_LEFT, "0"],
+                [Blockly.Msg.MIXLY_RIGHT, "1"]
+            ]), "mode");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_DATA)
         this.setOutput(true, Number);
         this.setInputsInline(true);
     }
-}
+};
 
 export const robot_potentiometer_extern_get_value = {
     init: function () {
@@ -1897,13 +1920,16 @@ export const robot_potentiometer_extern_get_value = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.MIXLY_KNOB_POTENTIOMETER)
             .appendField(Blockly.Msg.PIN_NUMBERING)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_LEFT, "0"],
+                [Blockly.Msg.MIXLY_RIGHT, "1"]
+            ]), "mode");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_DATA)
         this.setOutput(true, Number);
         this.setInputsInline(true);
     }
-}
+};
 
 export const robot_color_extern_get_value = {
     init: function () {
@@ -1911,7 +1937,10 @@ export const robot_color_extern_get_value = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.HTML_COLOUR + Blockly.Msg.MSG.catSensor)
             .appendField(Blockly.Msg.PIN_NUMBERING)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_LEFT, "0"],
+                [Blockly.Msg.MIXLY_RIGHT, "1"]
+            ]), "mode");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
@@ -1924,7 +1953,7 @@ export const robot_color_extern_get_value = {
         this.setOutput(true, Boolean);
         this.setInputsInline(true);
     }
-}
+};
 
 export const mixbot_sensor_extern_get_addr = {
     init: function () {
@@ -1945,7 +1974,7 @@ export const mixbot_sensor_extern_get_addr = {
         this.setOutput(true);
         this.setInputsInline(true);
     }
-}
+};
 
 export const mixbot_sensor_extern_set_addr = {
     init: function () {
@@ -1975,7 +2004,7 @@ export const mixbot_sensor_extern_set_addr = {
         this.setNextStatement(true, null);
         this.setInputsInline(true);
     }
-}
+};
 
 export const robot_sonar_extern_get_value = {
     init: function () {
@@ -1983,13 +2012,16 @@ export const robot_sonar_extern_get_value = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.MIXLY_EXTERN_SONAR)
             .appendField(Blockly.Msg.PIN_NUMBERING)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_LEFT, "0"],
+                [Blockly.Msg.MIXLY_RIGHT, "1"]
+            ]), "mode");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_DATA + '(cm)')
         this.setOutput(true, Number);
         this.setInputsInline(true);
     }
-}
+};
 
 export const robot_sonar_extern_led = {
     init: function () {
@@ -1997,7 +2029,10 @@ export const robot_sonar_extern_led = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.MIXLY_EXTERN_SONAR)
             .appendField(Blockly.Msg.PIN_NUMBERING)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_LEFT, "0"],
+                [Blockly.Msg.MIXLY_RIGHT, "1"]
+            ]), "mode");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_EXTERN_INDICATOR_LIGHT)
         this.appendValueInput('light')
@@ -2010,7 +2045,7 @@ export const robot_sonar_extern_led = {
         this.setNextStatement(true, null);
         this.setInputsInline(true);
     }
-}
+};
 
 export const sensor_weather_solo_init = {
     init: function () {
@@ -2249,4 +2284,4 @@ export const weigh_sensor_get_weight = {
         this.setOutput(true);
         this.setInputsInline(true);
     }
-}
+};

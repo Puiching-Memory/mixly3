@@ -21,7 +21,7 @@ export const communicate_i2c_init = function (block, generator) {
     var dropdown_pin2 = generator.valueToCode(this, 'TX', generator.ORDER_ATOMIC);
     var freq = generator.valueToCode(this, 'freq', generator.ORDER_ATOMIC);
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    return "" + sub + " = machine.SoftI2C(scl = machine.Pin(" + dropdown_pin2 + "), sda = machine.Pin(" + dropdown_pin1 + "), freq = " + freq + ")\n";
+    return "" + sub + " = machine.SoftI2C(scl = machine.Pin(" + dropdown_pin2 + "), sda=machine.Pin(" + dropdown_pin1 + "), freq=" + freq + ")\n";
 }
 
 export const communicate_i2c_read = function (block, generator) {
@@ -50,7 +50,6 @@ export const communicate_i2c_master_read = function (block, generator) {
 }
 
 export const communicate_i2c_available = function (block, generator) {
-
     var name = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var code = "" + name + ".available()";
     return [code, generator.ORDER_ATOMIC];
@@ -98,7 +97,7 @@ export const communicate_spi_read_output = function (block, generator) {
     var varname = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var data = generator.valueToCode(this, 'data', generator.ORDER_ATOMIC);
     var val = generator.valueToCode(this, 'val', generator.ORDER_ATOMIC);
-    return ["" + varname + ".read(" + data + "," + val + ")", generator.ORDER_ATOMIC];
+    return ["" + varname + ".read(" + data + ", " + val + ")", generator.ORDER_ATOMIC];
 }
 
 export const communicate_spi_readinto = function (block, generator) {
@@ -111,7 +110,7 @@ export const communicate_spi_readinto_output = function (block, generator) {
     var varname = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var data = generator.valueToCode(this, 'data', generator.ORDER_ATOMIC);
     var val = generator.valueToCode(this, 'val', generator.ORDER_ATOMIC);
-    return ["" + varname + ".readinto(" + data + "," + val + ")", generator.ORDER_ATOMIC];
+    return ["" + varname + ".readinto(" + data + ", " + val + ")", generator.ORDER_ATOMIC];
 }
 
 export const communicate_spi_write = function (block, generator) {
@@ -126,7 +125,7 @@ export const communicate_spi_write_readinto = function (block, generator) {
     var val = generator.valueToCode(this, 'val', generator.ORDER_ATOMIC);
     // var op=this.getFieldValue('op');
     // if(op=="byte"){
-    return ["" + varname + ".write_readinto(" + data + ".encode('utf-8')," + val + ")", generator.ORDER_ATOMIC];
+    return ["" + varname + ".write_readinto(" + data + ".encode('utf-8'), " + val + ")", generator.ORDER_ATOMIC];
     // }else{
     //   return [""+varname+".write_readinto(" + data + ","+val+")", generator.ORDER_ATOMIC];
     // }
@@ -183,10 +182,10 @@ export const communicate_ir_recv_init = function (block, generator) {
         var code = "ir_rx = irremote.RC5_RX(" + pin + ")\n";
     }
     else if (sub == "") {
-        var code = "ir_rx = irremote.NEC_RX(" + pin + "," + bit + ")\n";
+        var code = "ir_rx = irremote.NEC_RX(" + pin + ", " + bit + ")\n";
     }
     else {
-        var code = "ir_rx = irremote.NEC_RX(" + pin + "," + bit + "," + sub + ")\n";
+        var code = "ir_rx = irremote.NEC_RX(" + pin + ", " + bit + ", " + sub + ")\n";
     }
     return code;
 }
@@ -224,10 +223,10 @@ export const communicate_ir_send_init = function (block, generator) {
     var sam = this.getFieldValue('type');
     var power = generator.valueToCode(this, 'power', generator.ORDER_ATOMIC);
     if (sam == "RC5") {
-        var code = "ir_tx = irremote.RC5_TX(" + pin + "," + power + ")\n";
+        var code = "ir_tx = irremote.RC5_TX(" + pin + ", " + power + ")\n";
     }
     else {
-        var code = "ir_tx = irremote.NEC_TX(" + pin + "," + sam + "," + power + ")\n";
+        var code = "ir_tx = irremote.NEC_TX(" + pin + ", " + sam + ", " + power + ")\n";
     }
     return code;
 }
@@ -237,7 +236,7 @@ export const ir_transmit_conventional_data = function (block, generator) {
     var cmd = generator.valueToCode(this, 'cmd', generator.ORDER_ATOMIC);
     var addr = generator.valueToCode(this, 'addr', generator.ORDER_ATOMIC);
     var toggle = generator.valueToCode(this, 'toggle', generator.ORDER_ATOMIC);
-    var code = "ir_tx.transmit(" + cmd + "," + addr + "," + toggle + ")\n";
+    var code = "ir_tx.transmit(" + cmd + ", " + addr + ", " + toggle + ")\n";
     return code;
 }
 
@@ -341,7 +340,7 @@ export const communicate_espnow_init = function (block, generator) {
     var name = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var varName = generator.valueToCode(this, 'CHNL', generator.ORDER_ATOMIC);
     var power = this.getFieldValue('op');
-    var code = "" + name + "=radio.ESPNow(channel=" + varName + ",txpower=" + power + ")\n";
+    var code = "" + name + "=radio.ESPNow(channel=" + varName + ", txpower=" + power + ")\n";
     return code;
 }
 
@@ -350,7 +349,7 @@ export const communicate_espnow_init_new = function (block, generator) {
     var name = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var varName = generator.valueToCode(this, 'CHNL', generator.ORDER_ATOMIC);
     var varName2 = generator.valueToCode(this, 'DB', generator.ORDER_ATOMIC);
-    var code = "" + name + "=radio.ESPNow(channel=" + varName + ',txpower=' + varName2 + ")\n";
+    var code = "" + name + "=radio.ESPNow(channel=" + varName + ', txpower=' + varName2 + ")\n";
     return code;
 }
 
@@ -379,7 +378,7 @@ export const network_espnow_send = function (block, generator) {
     var name = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var mac = generator.valueToCode(this, 'mac', generator.ORDER_ATOMIC);
     var content = generator.valueToCode(this, 'content', generator.ORDER_ATOMIC);
-    var code = name + ".send(" + mac + "," + content + ")\n";
+    var code = name + ".send(" + mac + ", " + content + ")\n";
     return code;
 }
 
@@ -411,7 +410,7 @@ export const espnow_radio_txpower = function (block, generator) {
 export const espnow_radio_channel_new = function (block, generator) {
     generator.definitions_['import_radio'] = "import radio";
     var varName2 = generator.valueToCode(this, 'DB', generator.ORDER_ATOMIC);
-    generator.definitions_['var_declare_ESPNow_radio'] = "ESPNow_radio=radio.ESPNow(channel=1,txpower=" + varName2 + ")";
+    generator.definitions_['var_declare_ESPNow_radio'] = "ESPNow_radio=radio.ESPNow(channel=1, txpower=" + varName2 + ")";
     var varName = generator.valueToCode(this, 'CHNL', generator.ORDER_ATOMIC);
     var code = "ESPNow_radio.set_channel(" + varName + ")\n";
     return code;
@@ -451,7 +450,15 @@ export const espnow_radio_recv = function (block, generator) {
     generator.definitions_['var_declare_ESPNow_radio'] = 'ESPNow_radio = radio.ESPNow()';
     var doCode = generator.statementToCode(block, 'DO') || generator.PASS;
     generator.definitions_['def_ESPNow_radio_recv'] = 'def ESPNow_radio_recv(mac,ESPNow_radio_msg):\n' + doCode;
-    generator.definitions_['def_ESPNow_radio_recv_all'] = '_radio_msg_list = []\n' + 'def ESPNow_radio_recv_callback(mac,ESPNow_radio_msg):\n' + '    global _radio_msg_list\n' + '    try: ESPNow_radio_recv(mac,ESPNow_radio_msg)\n' + '    except: pass\n' + '    if str(ESPNow_radio_msg) in _radio_msg_list:\n' + "        eval('radio_recv_' + bytes.decode(ubinascii.hexlify(ESPNow_radio_msg)) + '()')\n";
+    generator.definitions_['def_ESPNow_radio_recv_all'] = '_radio_msg_list = []\n'
+        + 'def ESPNow_radio_recv_callback(mac,ESPNow_radio_msg):\n'
+        + '    global _radio_msg_list\n'
+        + '    try:\n'
+        + '        ESPNow_radio_recv(mac,ESPNow_radio_msg)\n'
+        + '    except:\n'
+        + '        pass\n'
+        + '    if str(ESPNow_radio_msg) in _radio_msg_list:\n'
+        + "        eval('radio_recv_' + bytes.decode(ubinascii.hexlify(ESPNow_radio_msg)) + '()')\n";
     generator.definitions_['ESPNow_radio_recv_callback'] = "ESPNow_radio.recv_cb(ESPNow_radio_recv_callback)\n";
 
     return '';
@@ -506,7 +513,15 @@ export const espnow_radio_recv_certain_msg = function (block, generator) {
     generator.definitions_['import_ubinascii'] = 'import ubinascii';
     generator.definitions_['var_declare_ESPNow_radio'] = 'ESPNow_radio = radio.ESPNow()';
     var doCode = generator.statementToCode(block, 'DO') || generator.PASS;
-    generator.definitions_['def_ESPNow_radio_recv_all'] = '_radio_msg_list = []\n' + 'def ESPNow_radio_recv_callback(mac,ESPNow_radio_msg):\n' + '    global _radio_msg_list\n' + '    try: ESPNow_radio_recv(mac,ESPNow_radio_msg)\n' + '    except: pass\n' + '    if str(ESPNow_radio_msg) in _radio_msg_list:\n' + "        eval('radio_recv_' + bytes.decode(ubinascii.hexlify(ESPNow_radio_msg)) + '()')\n";
+    generator.definitions_['def_ESPNow_radio_recv_all'] = '_radio_msg_list = []\n'
+        + 'def ESPNow_radio_recv_callback(mac,ESPNow_radio_msg):\n'
+        + '    global _radio_msg_list\n'
+        + '    try:\n'
+        + '        ESPNow_radio_recv(mac,ESPNow_radio_msg)\n'
+        + '    except:\n'
+        + '        pass\n'
+        + '    if str(ESPNow_radio_msg) in _radio_msg_list:\n'
+        + "        eval('radio_recv_' + bytes.decode(ubinascii.hexlify(ESPNow_radio_msg)) + '()')\n";
     generator.definitions_['ESPNow_radio_recv_callback'] = "ESPNow_radio.recv_cb(ESPNow_radio_recv_callback)\n";
     var message = block.getFieldValue('msg');
     var message_utf8 = toUTF8Hex(message);
@@ -546,7 +561,7 @@ export const lora_init = function (block, generator) {
     var bandwidth = this.getFieldValue('bandwidth');
     var code;
     generator.definitions_['import_rfm98'] = 'import rfm98';
-    var code = v + ' = rfm98.RFM98(' + sv + ',cs_pin=' + pv + ',frequency_mhz=' + fr + ',signal_bandwidth=' + bandwidth + ',coding_rate=' + r + ',spreading_factor=' + f + ',tx_power=' + p + ')\n';
+    var code = v + ' = rfm98.RFM98(' + sv + ', cs_pin=' + pv + ', frequency_mhz=' + fr + ', signal_bandwidth=' + bandwidth + ', coding_rate=' + r + ', spreading_factor=' + f + ', tx_power=' + p + ')\n';
     return code;
 }
 

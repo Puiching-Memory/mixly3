@@ -1522,7 +1522,7 @@ export const analog_ble_keyboard_mouse_init = {
     init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXLY_BLUETOOTH +  Blockly.Msg.MIXLY_KEYBOARD_AND_MOUSE);
+            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.MIXLY_KEYBOARD_AND_MOUSE);
         this.appendValueInput('kname')
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_SYSTEM_DEVICE_NAME);
         this.setPreviousStatement(true);
@@ -1754,7 +1754,7 @@ export const educore_ble_sensor_init = {
     init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendValueInput("name")
-            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXLY_BLUETOOTH+ Blockly.Msg.MIXLY_MICROBIT_JS_SYSTEM_DEVICE_NAME + Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_AS);
+            .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXLY_BLUETOOTH + Blockly.Msg.MIXLY_MICROBIT_JS_SYSTEM_DEVICE_NAME + Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_AS);
         this.setOutput(true);
         this.setInputsInline(true);
     }
@@ -1802,7 +1802,7 @@ export const get_keyboard_light = {
                 [Blockly.Msg.MIXLY_NumLock, "0"],
                 [Blockly.Msg.MIXLY_CapsLock, "1"],
                 [Blockly.Msg.MIXLY_ScorllLock, "2"]
-            ]),'key');
+            ]), 'key');
         this.setOutput(true);
         this.setInputsInline(true);
     }

@@ -22,7 +22,6 @@ export const network_init = {
     }
 };
 
-
 export const network_open = {
     init: function () {
         this.setColour(NETWORK_HUE);
@@ -395,10 +394,8 @@ export const requests_get = {
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
             .setCheck(String);
         this.appendDummyInput("")
-
             .appendField(Blockly.Msg.blockpy_REQUESTS_GET)
             .appendField(new Blockly.FieldTextInput('response'), 'VAR')
-
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.blockpy_REQUESTS_GET_TOOLTIP);
@@ -411,23 +408,15 @@ export const requests_get = {
             this.setTitleValue(newName, 'VAR');
         }
     }
-
-}
-
+};
 
 export const requests_attribute = {
     init: function () {
         this.appendValueInput('VAL')
-
-        var attr =
-            [[Blockly.Msg.blockpy_REQUESTS_GET_ATTR_STATUS_CODE, 'status_code'], [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_TEXT, 'text']
-                , [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_COOKIES, 'cookies'], [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_CONTENT, 'content']];
         this.setColour(NETWORK_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET)
-            .appendField(new Blockly.FieldDropdown(attr), 'ATTR')
-
-
+            .appendField(new Blockly.FieldDropdown(this.ATTR), 'ATTR')
         this.setInputsInline(true);
         this.setOutput(true, String);
         var thisBlock = this;
@@ -440,29 +429,26 @@ export const requests_attribute = {
             };
             return TOOLTIPS[mode];
         });
-    }
+    },
+    ATTR: [
+        [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_STATUS_CODE, 'status_code'],
+        [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_TEXT, 'text'],
+        [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_COOKIES, 'cookies'],
+        [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_CONTENT, 'content']
+    ]
 };
-
-
 
 export const requests_method = {
     init: function () {
         this.appendValueInput("VAR")
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
             .setCheck(String);
-        var method = [
-            ['post', 'post'], ['put', 'put'],
-            ['delete', 'delete'], ['head', 'head'],
-            ['option', 'option']
-        ];
         this.setColour(NETWORK_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.blockpy_CONDUCT)
-            .appendField(new Blockly.FieldDropdown(method), 'DIR')
+            .appendField(new Blockly.FieldDropdown(this.METHOD), 'DIR')
         this.appendDummyInput("")
             .appendField(Blockly.Msg.blockpy_REQUESTS)
-
-
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -475,7 +461,12 @@ export const requests_method = {
             };
             return TOOLTIPS[mode];
         });
-    }
+    },
+    METHOD: [
+        ['post', 'post'], ['put', 'put'],
+        ['delete', 'delete'], ['head', 'head'],
+        ['option', 'option']
+    ]
 };
 
 export const ntptime_time = {
@@ -523,7 +514,11 @@ export const requests_get2 = {
             .setCheck(String);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.blockpy_CONDUCT)
-            .appendField(new Blockly.FieldDropdown([["get", "get"], ["head", "head"], ["delete", "delete"]]), 'TYPE')
+            .appendField(new Blockly.FieldDropdown([
+                ["get", "get"],
+                ["head", "head"],
+                ["delete", "delete"]
+            ]), 'TYPE')
             .appendField(Blockly.Msg.blockpy_REQUESTS)
             .appendField(Blockly.Msg.MIXPY_REQUESTS_GET_RESULT)
         this.setInputsInline(true);
@@ -540,7 +535,11 @@ export const requests_post = {
             .setCheck(String);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.blockpy_CONDUCT)
-            .appendField(new Blockly.FieldDropdown([["post", "post"], ["put", "put"], ["patch", "patch"]]), 'TYPE')
+            .appendField(new Blockly.FieldDropdown([
+                ["post", "post"],
+                ["put", "put"],
+                ["patch", "patch"]
+            ]), 'TYPE')
             .appendField(Blockly.Msg.blockpy_REQUESTS)
         this.appendValueInput("data")
             .appendField(Blockly.Msg.blockpy_REQUESTS + Blockly.Msg.OLED_STRING)
@@ -555,21 +554,20 @@ export const requests_post = {
 export const requests_attribute2 = {
     init: function () {
         this.appendValueInput('VAL')
-
-        var attr = [
-            [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_TEXT, 'text'],
-            [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_JSON, 'json()'],
-            [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_STATUS_CODE, 'status_code'],
-            [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_CONTENT, 'content'],
-            [Blockly.Msg.MIXPY_TEXT_ENCODE, 'encoding']
-        ];
         this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET)
-            .appendField(new Blockly.FieldDropdown(attr), 'ATTR')
+            .appendField(new Blockly.FieldDropdown(this.ATTR), 'ATTR')
         this.setInputsInline(true);
         this.setOutput(true, String);
-    }
+    },
+    ATTR: [
+        [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_TEXT, 'text'],
+        [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_JSON, 'json()'],
+        [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_STATUS_CODE, 'status_code'],
+        [Blockly.Msg.blockpy_REQUESTS_GET_ATTR_CONTENT, 'content'],
+        [Blockly.Msg.MIXPY_TEXT_ENCODE, 'encoding']
+    ]
 };
 
 //educore_networke
@@ -595,8 +593,6 @@ export const educore_wifi_connect = {
         this.setTooltip(Blockly.Msg.MIXLY_ESP32_IOT_WIFI_CONNECT_TOOLTIP);
     }
 };
-
-
 
 export const educore_mqtt_connect = {
     init: function () {
@@ -677,7 +673,7 @@ export const educore_mqtt_connect_success = {
     init: function () {
         this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput()
-            .appendField("mqtt"+Blockly.Msg.MIXLY_EMQX_IS_CONNECT)
+            .appendField("mqtt" + Blockly.Msg.MIXLY_EMQX_IS_CONNECT)
         this.setInputsInline(true);
         this.setOutput(true);
     }

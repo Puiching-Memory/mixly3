@@ -2,7 +2,7 @@ export const iot_wifi_connect = function (_, generator) {
     generator.definitions_['import_mixiot'] = "import mixiot";
     var username = generator.valueToCode(this, 'WIFINAME', generator.ORDER_ATOMIC);
     var password = generator.valueToCode(this, 'PASSWORD', generator.ORDER_ATOMIC);
-    var code = 'mixiot.wlan_connect(' + username + ',' + password + ')\n';
+    var code = 'mixiot.wlan_connect(' + username + ', ' + password + ')\n';
     return code;
 }
 
@@ -31,7 +31,7 @@ export const iot_onenet_publish_dict = function (_, generator) {
     var d = generator.valueToCode(this, 'DICT', generator.ORDER_ATOMIC);
     var check = this.getFieldValue("is_print") == 'TRUE' ? 'True' : 'False';
     generator.definitions_['import_onenet'] = "import onenet";
-    var code = v + '.publish(' + d + ', is_print = ' + check + ')\n';
+    var code = v + '.publish(' + d + ', is_print=' + check + ')\n';
     return code;
 }
 
@@ -208,7 +208,7 @@ export const iot_http_client = function (_, generator) {
     generator.definitions_['import_debugnet'] = "import debugnet";
     var addr = generator.valueToCode(this, 'addr', generator.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
-    var code = 'HTTP_client = debugnet.request("GET",' + addr + ',debug=' + key + ')\n';
+    var code = 'HTTP_client = debugnet.request("GET", ' + addr + ', debug=' + key + ')\n';
     return code;
 }
 
@@ -240,7 +240,7 @@ export const IOT_CONNECT_OLLAMA = function(_,generator) {
     var ser = generator.valueToCode(this, 'SERVER', generator.ORDER_ATOMIC);
     var name = generator.valueToCode(this, 'NAME', generator.ORDER_ATOMIC);
     var num = generator.valueToCode(this, 'NUMBER', generator.ORDER_ATOMIC);
-    var code = 'llm = Ollama(' + ser + ', ' + name + ','+ num +')\n';
+    var code = 'llm = Ollama(' + ser + ', ' + name + ', '+ num +')\n';
     return code;
 
 }
@@ -249,7 +249,7 @@ export const use_ollama_llm_to_chat = function (_, generator) {
     generator.definitions_['import_Ollama'] = "from ollama import Ollama";
     var topic = generator.valueToCode(this, 'TOPIC', generator.ORDER_ATOMIC);
     var method = generator.valueToCode(this, 'METHOD', generator.ORDER_ATOMIC);
-    var code = 'llm.chat(' + topic + ',' + method + ')\n';
+    var code = 'llm.chat(' + topic + ', ' + method + ')\n';
     return code;
 }
 

@@ -30,7 +30,7 @@ export const MICROPYTHON_AI_Speech_asr = function (_, generator) {
     generator.definitions_['import_baidu_speech'] = 'import baidu_speech';
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var fn = generator.valueToCode(this, 'FILE', generator.ORDER_ATOMIC) || '""';
-    var code = v + '.recognize(record_time=' + fn + ',dev_pid=' + language + ')';
+    var code = v + '.recognize(record_time=' + fn + ', dev_pid=' + language + ')';
     return [code, generator.ORDER_ATOMIC];
 }
 

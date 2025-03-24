@@ -103,7 +103,6 @@ export const i2c_B_pin = {
     }
 };
 
-
 export const spi_A_pin = {
     init: function () {
         this.setColour(PINS_HUE);

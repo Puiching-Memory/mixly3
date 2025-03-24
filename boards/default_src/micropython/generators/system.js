@@ -131,7 +131,7 @@ export const timer = function (_, generator) {
     var mode = generator.valueToCode(this, "mode", generator.ORDER_NONE) || "None";
     var callback = generator.valueToCode(this, "callback", generator.ORDER_NONE) || "None";
     // var callback = generator.valueToCode(this, "callback", generator.ORDER_NONE) || "None";
-    var code = v + ".init(period = " + period + ", mode = Timer." + mode + ", callback = " + callback + ")\n";
+    var code = v + ".init(period=" + period + ", mode=Timer." + mode + ", callback=" + callback + ")\n";
     return code;
 }
 
@@ -144,7 +144,7 @@ export const system_timer = function (_, generator) {
     var callback = generator.valueToCode(this, "callback", generator.ORDER_NONE) || "None";
     //var code = v + ".init(period = " + period + ", mode = machine.Timer." + mode + ", callback = " + v + "_callback_func)\n";
     //generator.setups_['timer_callback_func'] = 'def ' + v + '_callback_func(t):\n' + branch + '\n';
-    var code = v + ".init(period = " + period + ", mode = machine.Timer." + mode + ", callback = " + callback + ")\n";
+    var code = v + ".init(period = " + period + ", mode=machine.Timer." + mode + ", callback=" + callback + ")\n";
     return code;
 }
 

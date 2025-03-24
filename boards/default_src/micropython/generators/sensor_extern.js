@@ -31,7 +31,7 @@ export const sensor_mixgo_extern_button_attachInterrupt = function (_, generator
     var pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
     var atta = generator.valueToCode(this, 'DO', generator.ORDER_ATOMIC);
-    var code = 'mixgo.Button(' + pin + ').irq' + '(handler = ' + atta + ', trigger = ' + dropdown_mode + ')\n'
+    var code = 'mixgo.Button(' + pin + ').irq' + '(handler=' + atta + ', trigger=' + dropdown_mode + ')\n'
     return code;
 }
 
@@ -86,7 +86,7 @@ export const sensor_distance_hrsc04 = function (_, generator) {
         '        return dist\n' +
         '\n' +
         'sonar=HCSR04()\n'
-    return ['sonar.distance_mm()/10.0', generator.ORDER_ATOMIC];
+    return ['sonar.distance_mm() / 10.0', generator.ORDER_ATOMIC];
 }
 
 export const RTC_set_time = function (_, generator) {
@@ -105,7 +105,7 @@ export const RTC_set_date = function (_, generator) {
     var month = generator.valueToCode(this, "month", generator.ORDER_ASSIGNMENT);
     var day = generator.valueToCode(this, "day", generator.ORDER_ASSIGNMENT);
     generator.setups_['class_DS1307'] = generator.CLASS_DS1307_INIT;
-    var code = 'str(ds.Year(' + year + '))+ str(ds.Month(' + month + ')) +str(ds.Day(' + day + '))\n';
+    var code = 'str(ds.Year(' + year + ')) + str(ds.Month(' + month + ')) + str(ds.Day(' + day + '))\n';
     return code;
 }
 
@@ -218,7 +218,7 @@ export const sensor_use_i2c_init = function (_, generator) {
     } else if (key == 'CI130X') {
         generator.definitions_['import_ci130x'] = 'import ci130x';
         code = v + ' = ci130x.' + key + "(" + iv + ')\n';
-    } else if (key == 'MS5611'){
+    } else if (key == 'MS5611') {
         generator.definitions_['import_ms5611'] = 'import ms5611';
         code = v + ' = ms5611.MS5611(' + iv + ')\n';
     }
@@ -290,7 +290,7 @@ export const CI130X_BROADCAST = function (_, generator) {
     var num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
     var star = this.getFieldValue('star');
     var end = this.getFieldValue('end');
-    var code = sub + '.play(' + star + ',' + num + ',' + end + ')\n';
+    var code = sub + '.play(' + star + ', ' + num + ', ' + end + ')\n';
     return code;
 }
 
@@ -363,14 +363,11 @@ export const sensor_ucs12071_extern = function (_, generator) {
     generator.definitions_['import_ucs12071'] = 'import ucs12071';
     if (key == '0') {
         var code = sub + '.color()';
-    }
-    else if (key == '1') {
+    } else if (key == '1') {
         var code = sub + '.color_raw()';
-    }
-    else if (key == '2') {
+    } else if (key == '2') {
         var code = sub + '.als()';
-    }
-    else {
+    } else {
         var code = sub + '.ir()';
     }
     return [code, generator.ORDER_ATOMIC];
@@ -435,11 +432,11 @@ export const sensor_use_spi_init = function (_, generator) {
         generator.definitions_['import_' + version] = 'import ' + version;
         generator.definitions_['import_ws_lora'] = 'import ws_lora';
         if (version == 'mixgo_pe') {
-            var code = v + ' = ws_lora.Weather(' + sv + ',' + pv + ')\n';
+            var code = v + ' = ws_lora.Weather(' + sv + ', ' + pv + ')\n';
         } else if (version == 'mixgo_nova') {
-            var code = v + ' = ws_lora.Weather(' + sv + ',' + pv + ',' + version + '.onboard_i2c_soft' + ')\n';
+            var code = v + ' = ws_lora.Weather(' + sv + ', ' + pv + ', ' + version + '.onboard_i2c_soft' + ')\n';
         } else {
-            var code = v + ' = ws_lora.Weather(' + sv + ',' + pv + ',' + version + '.onboard_i2c' + ')\n';
+            var code = v + ' = ws_lora.Weather(' + sv + ', ' + pv + ', ' + version + '.onboard_i2c' + ')\n';
         }
     }
     return code;
@@ -450,7 +447,7 @@ export const extern_rfid_read = function (_, generator) {
     var sector = generator.valueToCode(this, 'SECTOR', generator.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
     generator.definitions_['import_rc522'] = 'import rc522';
-    var code = sub + '.read_card(' + sector + ',"' + key + '")';
+    var code = sub + '.read_card(' + sector + ', "' + key + '")';
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -474,7 +471,7 @@ export const extern_rfid_write = function (_, generator) {
     var sector = generator.valueToCode(this, 'SECTOR', generator.ORDER_ATOMIC);
     var cnt = generator.valueToCode(this, 'CONTENT', generator.ORDER_ATOMIC);
     generator.definitions_['import_rc522'] = 'import rc522';
-    var code = sub + '.write_card(' + cnt + ',' + sector + ')\n';
+    var code = sub + '.write_card(' + cnt + ', ' + sector + ')\n';
     return code;
 }
 
@@ -483,7 +480,7 @@ export const extern_rfid_write_return = function (_, generator) {
     var sector = generator.valueToCode(this, 'SECTOR', generator.ORDER_ATOMIC);
     var cnt = generator.valueToCode(this, 'CONTENT', generator.ORDER_ATOMIC);
     generator.definitions_['import_rc522'] = 'import rc522';
-    var code = sub + '.write_card(' + cnt + ',' + sector + ')';
+    var code = sub + '.write_card(' + cnt + ', ' + sector + ')';
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -491,7 +488,7 @@ export const extern_rfid_status = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
     generator.definitions_['import_rc522'] = 'import rc522';
-    var code = sub + '.scan_card()==' + key;
+    var code = sub + '.scan_card() == ' + key;
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -524,8 +521,7 @@ export const weather_set_label = function (_, generator) {
     var code = new Array(this.itemCount_);
     var default_value = '0';
     for (var n = 0; n < this.itemCount_; n++) {
-        code[n] = generator.valueToCode(this, 'ADD' + n,
-            generator.ORDER_NONE) || default_value;
+        code[n] = generator.valueToCode(this, 'ADD' + n, generator.ORDER_NONE) || default_value;
     }
     var code = sub + '.label(' + code.join(', ') + ')\n';
     return code;
@@ -585,7 +581,7 @@ export const HCSR04 = function (_, generator) {
     generator.definitions_['import_sonar'] = 'import sonar';
     var dropdown_pin1 = generator.valueToCode(this, "PIN1", generator.ORDER_ASSIGNMENT);
     var dropdown_pin2 = generator.valueToCode(this, "PIN2", generator.ORDER_ASSIGNMENT);
-    var code = 'sonar.Sonar(' + dropdown_pin1 + ',' + dropdown_pin2 + ').checkdist()';
+    var code = 'sonar.Sonar(' + dropdown_pin1 + ', ' + dropdown_pin2 + ').checkdist()';
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -596,7 +592,7 @@ export const PS2_init = function (_, generator) {
     var PS2_DOU = this.getFieldValue('PS2_DOU');
     var PS2_DIN = this.getFieldValue('PS2_DIN');
     var PS2_CS = this.getFieldValue('PS2_CS');
-    var code = 'mixgope_ps = ps2.PS2Controller(' + PS2_CLK + ',' + PS2_DOU + ',' + PS2_DIN + ',' + PS2_CS + ')\n';
+    var code = 'mixgope_ps = ps2.PS2Controller(' + PS2_CLK + ', ' + PS2_DOU + ', ' + PS2_DIN + ', ' + PS2_CS + ')\n';
     return code;
 }
 
@@ -604,7 +600,7 @@ export const PS2_vibration = function (_, generator) {
     generator.definitions_['import_ps2'] = 'import ps2';
     var ss = this.getFieldValue('smotorstate');
     var amp = generator.valueToCode(this, 'AMP', generator.ORDER_ATOMIC);
-    var code = "mixgope_ps.PS2_vibration(" + ss + ',' + amp + ")\n";
+    var code = "mixgope_ps.PS2_vibration(" + ss + ', ' + amp + ")\n";
     return code;
 }
 
@@ -649,7 +645,7 @@ export const RTC_set_datetime = function (_, generator) {
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     if (v == "rtc")
         generator.definitions_['import_mixgo_rtc'] = 'from mixgo import rtc';
-    var code = v + '.datetime((' + year + ',' + month + ',' + day + ',' + week + ',' + hour + ',' + minute + ',' + second + ',' + millisecond + '))\n';
+    var code = v + '.datetime((' + year + ', ' + month + ', ' + day + ', ' + week + ', ' + hour + ', ' + minute + ', ' + second + ', ' + millisecond + '))\n';
     return code;
 }
 
@@ -679,7 +675,7 @@ export const PS2_init_new = function (_, generator) {
     var PS2_DIN = generator.valueToCode(this, 'DIN', generator.ORDER_ATOMIC);
     var PS2_CS = generator.valueToCode(this, 'CS', generator.ORDER_ATOMIC);
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var code = sub + ' = ps2.PS2Controller(' + PS2_CLK + ',' + PS2_DOU + ',' + PS2_DIN + ',' + PS2_CS + ')\n';
+    var code = sub + ' = ps2.PS2Controller(' + PS2_CLK + ', ' + PS2_DOU + ', ' + PS2_DIN + ', ' + PS2_CS + ')\n';
     return code;
 }
 
@@ -688,7 +684,7 @@ export const PS2_vibration_new = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var ss = this.getFieldValue('smotorstate');
     var amp = generator.valueToCode(this, 'AMP', generator.ORDER_ATOMIC);
-    var code = sub + ".vibration(" + ss + ',' + amp + ")\n";
+    var code = sub + ".vibration(" + ss + ', ' + amp + ")\n";
     return code;
 }
 
@@ -759,11 +755,11 @@ export const robot_button_extern_get_value = function (_, generator) {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_button'] = 'ext_button_left = i2cdevice.Buttonx5(ext_i2c_left)';
             var code = 'ext_button_left.value()' + num;
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_button'] = 'ext_button_right = i2cdevice.Buttonx5(ext_i2c_right)';
             var code = 'ext_button_right.value()' + num;
         }
@@ -782,11 +778,11 @@ export const robot_touch_extern_get_value = function (_, generator) {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_collision'] = 'ext_collision_left = i2cdevice.Button(ext_i2c_left)';
             var code = 'ext_collision_left.value()';
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_collision'] = 'ext_collision_right = i2cdevice.Button(ext_i2c_right)';
             var code = 'ext_collision_right.value()';
         }
@@ -816,11 +812,11 @@ export const robot_infrared_extern_grey_get_value = function (_, generator) {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_grey_near'] = 'ext_grey_near_left = i2cdevice.Infrared(ext_i2c_left)';
             var code = 'ext_grey_near_left.value()';
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right=i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_grey_near'] = 'ext_grey_near_right = i2cdevice.Infrared(ext_i2c_right)';
             var code = 'ext_grey_near_right.value()';
         }
@@ -839,11 +835,11 @@ export const robot_potentiometer_extern_get_value = function (_, generator) {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_potentiometer'] = 'ext_potentiometer_left = i2cdevice.Dimmer(ext_i2c_left)';
             var code = 'ext_potentiometer_left.value()';
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_potentiometer'] = 'ext_potentiometer_right = i2cdevice.Dimmer(ext_i2c_right)';
             var code = 'ext_potentiometer_right.value()';
         }
@@ -863,11 +859,11 @@ export const robot_color_extern_get_value = function (_, generator) {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_color'] = 'ext_color_left = i2cdevice.Color_ID(ext_i2c_left)';
             var code = 'ext_color_left.recognition()' + color;
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_color'] = 'ext_color_right = i2cdevice.Color_ID(ext_i2c_right)';
             var code = 'ext_color_right.recognition()' + color;
         }
@@ -886,11 +882,11 @@ export const robot_sonar_extern_get_value = function (_, generator) {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_sonar'] = 'ext_sonar_left = i2cdevice.Sonar(ext_i2c_left)';
             var code = 'ext_sonar_left.value()';
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_sonar'] = 'ext_sonar_right = i2cdevice.Sonar(ext_i2c_right)';
             var code = 'ext_sonar_right.value()';
         }
@@ -905,19 +901,19 @@ export const robot_sonar_extern_led = function (_, generator) {
     var op = generator.valueToCode(this, 'bright', generator.ORDER_ATOMIC);
     if (version == 'mixbot') {
         generator.definitions_['import_mixbot_ext_ext_sonar'] = 'from mixbot_ext import ext_sonar';
-        var code = 'ext_sonar.led(' + mode + ',' + light + ',' + op + ")\n";
+        var code = 'ext_sonar.led(' + mode + ', ' + light + ', ' + op + ")\n";
         return code;
     } else if (version == 'feiyi') {
         generator.definitions_['import_machine'] = 'import machine';
         generator.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
-            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            generator.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl=machine.Pin(0), sda=machine.Pin(1), freq=10000)';
             generator.definitions_['import_left_sonar'] = 'ext_sonar_left = i2cdevice.Sonar(ext_i2c_left)';
-            var code = 'ext_sonar_left.led(0,' + light + ',' + op + ')\n';
+            var code = 'ext_sonar_left.led(0, ' + light + ', ' + op + ')\n';
         } else if (mode == "1") {
-            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            generator.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl=machine.Pin(2), sda=machine.Pin(3), freq=10000)';
             generator.definitions_['import_right_sonar'] = 'ext_sonar_right = i2cdevice.Sonar(ext_i2c_right)';
-            var code = 'ext_sonar_right.led(0,' + light + ',' + op + ')\n';
+            var code = 'ext_sonar_right.led(0, ' + light + ', ' + op + ')\n';
         }
         return code;
     }
@@ -935,7 +931,7 @@ export const mixbot_sensor_extern_set_addr = function (_, generator) {
     generator.definitions_['import_mixbot_ext_' + name] = 'from mixbot_ext import ' + name;
     var oldaddr = generator.valueToCode(this, 'old', generator.ORDER_ATOMIC);
     var newaddr = generator.valueToCode(this, 'new', generator.ORDER_ATOMIC);
-    var code = name + '.addr_set(' + oldaddr + ',' + newaddr + ')\n';
+    var code = name + '.addr_set(' + oldaddr + ', ' + newaddr + ')\n';
     return code;
 }
 

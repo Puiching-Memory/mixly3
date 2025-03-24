@@ -26,14 +26,14 @@ export const display_show_image_or_string_delay = function (_, generator) {
     var op = this.getFieldValue('center');
     if (version == "mixgo_sant" || version == "mixgo_nova") {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
-        var code = "onboard_tft.shows(" + data + ",space = " + space + ',center = ' + op + ")\n";
+        var code = "onboard_tft.shows(" + data + ", space=" + space + ', center=' + op + ")\n";
         return code;
-    }else if (version == "educore"){
-        generator.definitions_['import_' + version + 'oled'] = "from " + version + " import oled";
-        var code = "oled.print(" + data + ',space = ' + space + ',center = ' + op + ")\n";
+    } else if (version == "educore") {
+        generator.definitions_['import_' + version + '_oled'] = "from " + version + " import oled";
+        var code = "oled.print(" + data + ', space=' + space + ', center=' + op + ")\n";
     }
     generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
-    var code = "onboard_matrix.shows(" + data + ',space = ' + space + ',center = ' + op + ")\n";
+    var code = "onboard_matrix.shows(" + data + ', space=' + space + ', center=' + op + ")\n";
     return code;
 }
 
@@ -43,17 +43,16 @@ export const display_show_frame_string = function (_, generator) {
     if (version == 'mpython' || version == 'educore') {
         generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_oled";
         var code = "onboard_oled.frame(" + data + ")\n";
-    } else if(version == 'mixgo_nova'){
+    } else if (version == 'mixgo_nova') {
         generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_tft";
         var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
-        var code = "onboard_tft.frame(" + data + ",color=0xffff)\n";
-    }else {
+        var code = "onboard_tft.frame(" + data + ", color=0xffff)\n";
+    } else {
         generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
         var code = "onboard_matrix.frame(" + data + ")\n";
     }
     return code;
 }
-
 
 export const display_show_frame_string_delay = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
@@ -62,28 +61,28 @@ export const display_show_frame_string_delay = function (_, generator) {
     if (version == 'mpython' || version == 'educore') {
         generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_oled";
         var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
-        var code = "onboard_oled.frame(" + data + ',delay = ' + time + ")\n";
-    } else if(version == 'mixgo_nova'){
+        var code = "onboard_oled.frame(" + data + ', delay=' + time + ")\n";
+    } else if (version == 'mixgo_nova') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
-        var code = "onboard_tft.frame(" + data + ',size = 5 ,delay = ' + time + ',color=0xffff)\n';
+        var code = "onboard_tft.frame(" + data + ', size=5 , delay=' + time + ', color=0xffff)\n';
     } else {
         generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
-        var code = "onboard_matrix.frame(" + data + ',delay = ' + time + ")\n";
+        var code = "onboard_matrix.frame(" + data + ', delay=' + time + ")\n";
     }
     return code;
 }
 
 export const display_scroll_string = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    if (version == 'mpython'|| version == 'educore') {
+    if (version == 'mpython' || version == 'educore') {
         generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_oled";
         var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
         var code = "onboard_oled.scroll(" + data + ")\n";
-    } else if(version == 'mixgo_nova'){
+    } else if (version == 'mixgo_nova') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
-        var code = "onboard_tft.scroll(" + data + ",color=0xffff)\n";
-    }else {
+        var code = "onboard_tft.scroll(" + data + ", color=0xffff)\n";
+    } else {
         generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
         var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
         var code = "onboard_matrix.scroll(" + data + ")\n";
@@ -96,16 +95,15 @@ export const display_scroll_string_delay = function (_, generator) {
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var time = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
     var space = generator.valueToCode(this, 'space', generator.ORDER_ASSIGNMENT);
-    if (version == 'mpython'|| version == 'educore') {
+    if (version == 'mpython' || version == 'educore') {
         generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_oled";
-        var code = "onboard_oled.scroll(" + data + ',speed =' + time + ',space = ' + space + ")\n";
-    }else if(version == 'mixgo_nova'){
+        var code = "onboard_oled.scroll(" + data + ', speed=' + time + ', space=' + space + ")\n";
+    } else if (version == 'mixgo_nova') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
-        var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
-        var code = "onboard_tft.scroll(" + data + ',y = 0, size = 5,speed =' + time + ',space = ' + space + ',color= 0xffff )\n';
-    }else{
+        var code = "onboard_tft.scroll(" + data + ', y=0, size=5, speed=' + time + ', space=' + space + ', color=0xffff)\n';
+    } else {
         generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
-        var code = "onboard_matrix.scroll(" + data + ',speed =' + time + ',space = ' + space + ")\n";
+        var code = "onboard_matrix.scroll(" + data + ', speed=' + time + ', space=' + space + ")\n";
     }
     return code;
 }
@@ -120,7 +118,7 @@ export const onboard_tft_scroll_string_delay = function (_, generator) {
     var space = generator.valueToCode(this, 'space', generator.ORDER_ASSIGNMENT);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
-        var code = "onboard_tft.scroll(" + data + ',y = ' + y + ',size = ' + size + ',speed =' + time + ',space = ' + space + ',color=' + color + ")\n";
+        var code = "onboard_tft.scroll(" + data + ', y=' + y + ', size=' + size + ', speed=' + time + ', space=' + space + ', color=' + color + ")\n";
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -128,7 +126,7 @@ export const onboard_tft_scroll_string_delay = function (_, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = "onboard_tft.scroll(" + data + ',y = ' + y + ',size = ' + size + ',speed =' + time + ',space = ' + space + ',color=0x' + rgb565.toString(16) + ")\n";
+        var code = "onboard_tft.scroll(" + data + ', y=' + y + ', size=' + size + ', speed=' + time + ', space=' + space + ', color=0x' + rgb565.toString(16) + ")\n";
     }
     return code;
 }
@@ -143,15 +141,15 @@ export const display_image_builtins = function (block, generator) {
 
 export const display_image_builtins_all = function (block, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    if (version == 'mixgo_nova'){
+    if (version == 'mixgo_nova') {
         const PIN_VALUE = block.getFieldValue('image');
         const data = PIN_VALUE.split('.');
         if (data.length !== 2) {
-        throw Error('pin value error');
+            throw Error('pin value error');
         }
         generator.definitions_[`import_${data[0]}_${data[1]}`] = `from ${data[0]} import ${data[1]}`;
         var code = data[1];
-    }else{
+    } else {
         generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
         var dropdown_image = block.getFieldValue('image');
         var code = 'onboard_matrix.' + dropdown_image;
@@ -211,7 +209,6 @@ export const display_image_create = function (block, generator) {
                 correct = 55 - j
             }
             colorNum += Number(colours[block.getFieldValue(i + '-' + j)]) * Math.pow(2, 31 - correct);
-
         }
         colorRow += pad(colorNum.toString(16));
         colorList.unshift(colorRow);
@@ -230,10 +227,10 @@ export const display_clear = function (block, generator) {
     if (version == 'mpython') {
         generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_oled";
         var code = 'onboard_oled.fill(0)\n' + 'onboard_oled.show()\n';
-    }else if(version == 'mixgo_nova'){
+    } else if (version == 'mixgo_nova') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var code = 'onboard_tft.fill(0)\n' + 'onboard_tft.show()\n';
-    }else {
+    } else {
         generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
         var code = 'onboard_matrix.fill(0)\n' + 'onboard_matrix.show()\n';
     }
@@ -246,7 +243,7 @@ export const image_arithmetic = function (a, generator) {
     var op = a.getFieldValue("OP");
     var imga = generator.valueToCode(a, 'A', generator.ORDER_ATOMIC);
     var imgb = generator.valueToCode(a, 'B', generator.ORDER_ATOMIC);
-    var code = 'onboard_matrix.map_' + op + '(' + imga + ',' + imgb + ')';
+    var code = 'onboard_matrix.map_' + op + '(' + imga + ', ' + imgb + ')';
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -265,12 +262,12 @@ export const display_shift = function (a, generator) {
         var op = a.getFieldValue("OP");
         var value = generator.valueToCode(a, 'val', generator.ORDER_ATOMIC);
         var code = 'onboard_oled.' + op + '(' + value + ')\n';
-    } else if(version == 'mixgo_nova'){
+    } else if (version == 'mixgo_nova') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var op = a.getFieldValue("OP");
         var value = generator.valueToCode(a, 'val', generator.ORDER_ATOMIC);
         var code = 'onboard_tft.' + op + '(' + value + ')\n';
-    }else {
+    } else {
         generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
         var op = a.getFieldValue("OP");
         var value = generator.valueToCode(a, 'val', generator.ORDER_ATOMIC);
@@ -292,7 +289,7 @@ export const display_get_pixel = function (block, generator) {
         var value_x = generator.valueToCode(block, 'x', generator.ORDER_ATOMIC);
         var value_y = generator.valueToCode(block, 'y', generator.ORDER_ATOMIC);
         var code = 'onboard_oled.pixel(int(' + value_x + '), int(' + value_y + '))';
-    }else if (version == 'mixgo_nova') {
+    } else if (version == 'mixgo_nova') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var value_x = generator.valueToCode(block, 'x', generator.ORDER_ATOMIC);
         var value_y = generator.valueToCode(block, 'y', generator.ORDER_ATOMIC);
@@ -309,12 +306,12 @@ export const display_get_pixel = function (block, generator) {
 
 export const display_bright_point = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    if (version == 'mixgo_nova'){
+    if (version == 'mixgo_nova') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
-        var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT); 
+        var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
         var code = 'onboard_tft.pixel(int(' + x + '), int(' + y + '), 0xffff)\n' + 'onboard_tft.show()\n';
-    }else {
+    } else {
         generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
         var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
         var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
@@ -326,10 +323,10 @@ export const display_bright_point = function (_, generator) {
 
 export const display_get_screen_pixel = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    if (version == 'mixgo_nova'){
+    if (version == 'mixgo_nova') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var code = 'onboard_tft.get_brightness()';
-    }else {
+    } else {
         generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
         var code = 'onboard_matrix.get_brightness()';
     }
@@ -338,11 +335,11 @@ export const display_get_screen_pixel = function (_, generator) {
 
 export const display_bright_screen = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    if (version == 'mixgo_nova'){
+    if (version == 'mixgo_nova') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
         var code = 'onboard_tft.set_brightness(' + x + ')\n';
-    }else{
+    } else {
         generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
         var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
         var code = 'onboard_matrix.set_brightness(' + x + ')\n';
@@ -473,7 +470,7 @@ export const onboard_oled_show_image_xy = function (_, generator) {
     var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
     var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
     var size = generator.valueToCode(this, 'size', generator.ORDER_ASSIGNMENT);
-    var code = "onboard_oled.image(" + data + ',x = ' + x + ',y = ' + y + ',size = ' + size + ")\n";
+    var code = "onboard_oled.image(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ")\n";
     return code;
 }
 
@@ -494,7 +491,7 @@ export const onboard_oled_show_image_or_string_delay = function (_, generator) {
     var size = generator.valueToCode(this, 'size', generator.ORDER_ASSIGNMENT);
     var space = generator.valueToCode(this, 'space', generator.ORDER_ASSIGNMENT);
     var op = this.getFieldValue('center');
-    var code = "onboard_oled.shows(" + data + ',x = ' + x + ',y = ' + y + ',size = ' + size + ',space = ' + space + ',center = ' + op + ")\n";
+    var code = "onboard_oled.shows(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', space=' + space + ', center=' + op + ")\n";
     return code;
 }
 
@@ -504,7 +501,7 @@ export const onboard_oled_show_frame_string_delay = function (_, generator) {
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var size = generator.valueToCode(this, 'size', generator.ORDER_ASSIGNMENT);
     var time = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
-    var code = "onboard_oled.frame(" + data + ',size = ' + size + ',delay = ' + time + ")\n";
+    var code = "onboard_oled.frame(" + data + ', size=' + size + ', delay=' + time + ")\n";
     return code;
 }
 
@@ -516,7 +513,7 @@ export const onboard_oled_scroll_string_delay = function (_, generator) {
     var size = generator.valueToCode(this, 'size', generator.ORDER_ASSIGNMENT);
     var time = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
     var space = generator.valueToCode(this, 'space', generator.ORDER_ASSIGNMENT);
-    var code = "onboard_oled.scroll(" + data + ',y = ' + y + ',size = ' + size + ',speed =' + time + ',space = ' + space + ")\n";
+    var code = "onboard_oled.scroll(" + data + ', y=' + y + ', size=' + size + ', speed=' + time + ', space=' + space + ")\n";
     return code;
 }
 
@@ -673,7 +670,7 @@ export const onboard_tft_show_image_xy = function (_, generator) {
     var size = generator.valueToCode(this, 'size', generator.ORDER_ASSIGNMENT);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
-        var code = "onboard_tft.image(" + data + ',x = ' + x + ',y = ' + y + ',size = ' + size + ',color=' + color + ")\n";
+        var code = "onboard_tft.image(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', color=' + color + ")\n";
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -681,7 +678,7 @@ export const onboard_tft_show_image_xy = function (_, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = "onboard_tft.image(" + data + ',x = ' + x + ',y = ' + y + ',size = ' + size + ',color=0x' + rgb565.toString(16) + ")\n";
+        var code = "onboard_tft.image(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', color=0x' + rgb565.toString(16) + ")\n";
     }
     return code;
 }
@@ -697,7 +694,7 @@ export const onboard_tft_show_image_or_string_delay = function (_, generator) {
     var op = this.getFieldValue('center');
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
-        var code = "onboard_tft.shows(" + data + ',x = ' + x + ',y = ' + y + ',size = ' + size + ',space = ' + space + ',center = ' + op + ',color=' + color + ")\n";
+        var code = "onboard_tft.shows(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', space=' + space + ', center=' + op + ', color=' + color + ")\n";
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -705,7 +702,7 @@ export const onboard_tft_show_image_or_string_delay = function (_, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = "onboard_tft.shows(" + data + ',x = ' + x + ',y = ' + y + ',size = ' + size + ',space = ' + space + ',center = ' + op + ',color=0x' + rgb565.toString(16) + ")\n";
+        var code = "onboard_tft.shows(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', space=' + space + ', center=' + op + ', color=0x' + rgb565.toString(16) + ")\n";
     }
     return code;
 }
@@ -718,7 +715,7 @@ export const onboard_tft_show_frame_string_delay = function (_, generator) {
     var time = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
-        var code = "onboard_tft.frame(" + data + ',size = ' + size + ',delay = ' + time + ',color=' + color + ")\n";
+        var code = "onboard_tft.frame(" + data + ', size=' + size + ', delay=' + time + ', color=' + color + ")\n";
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -726,7 +723,7 @@ export const onboard_tft_show_frame_string_delay = function (_, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = "onboard_tft.frame(" + data + ',size = ' + size + ',delay = ' + time + ',color=0x' + rgb565.toString(16) + ")\n";
+        var code = "onboard_tft.frame(" + data + ', size=' + size + ', delay=' + time + ', color=0x' + rgb565.toString(16) + ")\n";
     }
     return code;
 }
@@ -854,7 +851,7 @@ export const onboard_tft_clock_init = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ASSIGNMENT);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
-        var code = sub + "=Clock(" + x + ',' + y + ',' + size + ',' + color + ")\n";
+        var code = sub + "=Clock(" + x + ', ' + y + ', ' + size + ', ' + color + ")\n";
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -862,7 +859,7 @@ export const onboard_tft_clock_init = function (_, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = sub + "=Clock(" + x + ',' + y + ',' + size + ',0x' + rgb565.toString(16) + ")\n";
+        var code = sub + "=Clock(" + x + ', ' + y + ', ' + size + ', 0x' + rgb565.toString(16) + ")\n";
     }
     return code;
 }
@@ -882,7 +879,7 @@ export const onboard_tft_clock_set_time = function (_, generator) {
     var h = generator.valueToCode(this, 'h', generator.ORDER_ASSIGNMENT);
     var m = generator.valueToCode(this, 'm', generator.ORDER_ASSIGNMENT);
     var s = generator.valueToCode(this, 's', generator.ORDER_ASSIGNMENT);
-    var code = sub + ".set_time(" + h + ',' + m + ',' + s + ")\n";
+    var code = sub + ".set_time(" + h + ', ' + m + ', ' + s + ")\n";
     return code;
 }
 
@@ -922,7 +919,7 @@ export const onboard_tft_display_shape_circle = function (block, generator) {
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var shape = block.getFieldValue('shape');
     if (color.slice(0, 2) == "0x") {
-        var code = 'onboard_tft.ellipse(' + x + ', ' + y + ', ' + R + ', ' + R + ', ' + color + ',' + shape + ')\n' + 'onboard_tft.show()\n';
+        var code = 'onboard_tft.ellipse(' + x + ', ' + y + ', ' + R + ', ' + R + ', ' + color + ', ' + shape + ')\n' + 'onboard_tft.show()\n';
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -930,14 +927,14 @@ export const onboard_tft_display_shape_circle = function (block, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = 'onboard_tft.ellipse(' + x + ', ' + y + ', ' + R + ', ' + R + ', 0x' + rgb565.toString(16) + ',' + shape + ')\n' + 'onboard_tft.show()\n';
+        var code = 'onboard_tft.ellipse(' + x + ', ' + y + ', ' + R + ', ' + R + ', 0x' + rgb565.toString(16) + ', ' + shape + ')\n' + 'onboard_tft.show()\n';
     }
     return code;
 }
 
-export const draw_pointer = function(_, generator) {
+export const draw_pointer = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
-    generator.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
+    generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
     var angle = generator.valueToCode(this, 'angle', generator.ORDER_ASSIGNMENT);
     var code = "onboard_matrix.pointern(angle=" + angle + ")\n";
     return code;

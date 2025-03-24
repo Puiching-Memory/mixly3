@@ -29,7 +29,7 @@ export const sensor_mixgo_button_attachInterrupt = function (_, generator) {
     var dropdown_btn = generator.valueToCode(this, 'btn', generator.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
     var atta = generator.valueToCode(this, 'DO', generator.ORDER_ATOMIC);
-    var code = 'mixgo.' + dropdown_btn + '.irq' + '(handler = ' + atta + ', trigger = ' + dropdown_mode + ')\n'
+    var code = 'mixgo.' + dropdown_btn + '.irq' + '(handler=' + atta + ', trigger=' + dropdown_mode + ')\n'
     return code;
 }
 
@@ -65,7 +65,7 @@ export const sensor_mixgo_extern_button_attachInterrupt = function (_, generator
     var pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
     var atta = generator.valueToCode(this, 'DO', generator.ORDER_ATOMIC);
-    var code = 'mixgo.Button(' + pin + ').irq' + '(handler = ' + atta + ', trigger = ' + dropdown_mode + ')\n'
+    var code = 'mixgo.Button(' + pin + ').irq' + '(handler=' + atta + ', trigger=' + dropdown_mode + ')\n'
     return code;
 }
 
@@ -218,7 +218,7 @@ export const sensor_distance_hrsc04 = function (_, generator) {
         '        return dist\n' +
         '\n' +
         'sonar=HCSR04()\n'
-    return ['sonar.distance_mm()/10.0', generator.ORDER_ATOMIC];
+    return ['sonar.distance_mm() / 10.0', generator.ORDER_ATOMIC];
 }
 
 export const RTC_get_time = function (_, generator) {
@@ -236,7 +236,7 @@ export const RTC_set_time = function (_, generator) {
     var minute = generator.valueToCode(this, "minute", generator.ORDER_ASSIGNMENT);
     var second = generator.valueToCode(this, "second", generator.ORDER_ASSIGNMENT);
     generator.setups_['class_DS1307'] = generator.CLASS_DS1307_INIT;
-    var code = 'str(ds.Hour(' + hour + '))+ str(ds.Minute(' + minute + ')) +str(ds.Second(' + second + '))\n';
+    var code = 'str(ds.Hour(' + hour + ')) + str(ds.Minute(' + minute + ')) + str(ds.Second(' + second + '))\n';
     return code;
 }
 
@@ -246,7 +246,7 @@ export const RTC_set_date = function (_, generator) {
     var month = generator.valueToCode(this, "month", generator.ORDER_ASSIGNMENT);
     var day = generator.valueToCode(this, "day", generator.ORDER_ASSIGNMENT);
     generator.setups_['class_DS1307'] = generator.CLASS_DS1307_INIT;
-    var code = 'str(ds.Year(' + year + '))+ str(ds.Month(' + month + ')) +str(ds.Day(' + day + '))\n';
+    var code = 'str(ds.Year(' + year + ')) + str(ds.Month(' + month + ')) + str(ds.Day(' + day + '))\n';
     return code;
 }
 
@@ -329,7 +329,7 @@ export const RTC_set_datetime = function (_, generator) {
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     if (v == "rtc")
         generator.definitions_['import_mixgo_rtc'] = 'from mixgo import rtc';
-    var code = v + '.datetime((' + year + ',' + month + ',' + day + ',' + week + ',' + hour + ',' + minute + ',' + second + ',' + millisecond + '))\n';
+    var code = v + '.datetime((' + year + ', ' + month + ', ' + day + ', ' + week + ', ' + hour + ', ' + minute + ', ' + second + ', ' + millisecond + '))\n';
     return code;
 }
 

@@ -92,7 +92,7 @@ export const servo_move = function (_, generator) {
     generator.definitions_['import_machine'] = 'import machine';
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var value_degree = generator.valueToCode(this, 'DEGREE', generator.ORDER_ATOMIC);
-    var code = 'servo.servo_write_angle(' + dropdown_pin + ',' + value_degree + ')\n';
+    var code = 'servo.servo_write_angle(' + dropdown_pin + ', ' + value_degree + ')\n';
     return code;
 }
 
@@ -160,7 +160,7 @@ export const actuator_neopixel_init = function (_, generator) {
     var value_ledcount = generator.valueToCode(this, 'LEDCOUNT', generator.ORDER_ATOMIC);
     generator.definitions_['import_machine'] = 'import machine';
     generator.definitions_['import_neopixel'] = 'import neopixel';
-    var code = v + ' = neopixel.NeoPixel(machine.Pin(' + dropdown_rgbpin + '), ' + value_ledcount + ', timing = True)\n';
+    var code = v + ' = neopixel.NeoPixel(machine.Pin(' + dropdown_rgbpin + '), ' + value_ledcount + ', timing=True)\n';
     return code;
 }
 

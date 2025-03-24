@@ -5,10 +5,6 @@ const DISPLAY_EXTERN_HUE = '5BA5A5';
 //var IMG = [["HEART", "HEART"],["HEART_SMALL", "HEART_SMALL"],["HAPPY", "HAPPY"],["SAD", "SAD"],["SMILE", "SMILE"],["SILLY", "SILLY"],["FABULOUS", "FABULOUS"],["SURPRISED", "SURPRISED"],["ASLEEP", "ASLEEP"],["ANGRY", "ANGRY"],["CONFUSED", "CONFUSED"],["NO", "NO"],["YES", "YES"],["LEFT_ARROW", "LEFT_ARROW"],["RIGHT_ARROW", "RIGHT_ARROW"],["DRESS", "DRESS"],["TRANSFORMERS", "TRANSFORMERS"],["SCISSORS", "SCISSORS"],["EXIT", "EXIT"],["TREE", "TREE"],["PACMAN", "PACMAN"],["TARGET", "TARGET"],["TSHIRT", "TSHIRT"],["ROLLERSKATE", "ROLLERSKATE"],["DUCK", "DUCK"],["HOUSE", "HOUSE"],["TORTOISE", "TORTOISE"],["BUTTERFLY", "BUTTERFLY"],["STICKFIGURE", "STICKFIGURE"],["GHOST", "GHOST"],["PITCHFORK", "PITCHFORK"],["MUSIC_QUAVERS", "MUSIC_QUAVERS"],["MUSIC_QUAVER", "MUSIC_QUAVER"],["MUSIC_CROTCHET", "MUSIC_CROTCHET"],["COW", "COW"],["RABBIT", "RABBIT"],["SQUARE_SMALL", "SQUARE_SMALL"],["SQUARE", "SQUARE"],["DIAMOND_SMALL", "DIAMOND_SMALL"],["DIAMOND", "DIAMOND"],["CHESSBOARD", "CHESSBOARD"],["TRIANGLE_LEFT", "TRIANGLE_LEFT"],["TRIANGLE", "TRIANGLE"],["SNAKE", "SNAKE"],["UMBRELLA", "UMBRELLA"],["SKULL", "SKULL"],["GIRAFFE", "GIRAFFE"],["SWORD", "SWORD"]];
 // var IMG = [["HEART", "HEART"], ["HEART_SMALL", "HEART_SMALL"], ["HAPPY", "HAPPY"], ["SAD", "SAD"], ["SMILE", "SMILE"], ["SILLY", "SILLY"], ["FABULOUS", "FABULOUS"], ["SURPRISED", "SURPRISED"], ["ASLEEP", "ASLEEP"], ["ANGRY", "ANGRY"], ["CONFUSED", "CONFUSED"], ["NO", "NO"], ["YES", "YES"]];
 
-
-
-
-
 export const display_matrix_use_i2c_init = {
     init: function () {
         this.setColour(DISPLAY_EXTERN_HUE);
@@ -27,8 +23,6 @@ export const display_matrix_use_i2c_init = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-
-
     }
 };
 
@@ -139,12 +133,6 @@ export const display_matrix_extern_show_frame_string_delay = {
 
 export const display_matrix_extern_shift = {
     init: function () {
-        var OPERATORS = [
-            [Blockly.Msg.MIXLY_UP, 'shift_up'],
-            [Blockly.Msg.MIXLY_DOWN, 'shift_down'],
-            [Blockly.Msg.MIXLY_LEFT, 'shift_left'],
-            [Blockly.Msg.MIXLY_RIGHT, 'shift_right'],
-        ];
         //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
         this.appendValueInput('SUB')
             .setCheck("var");
@@ -157,7 +145,7 @@ export const display_matrix_extern_shift = {
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET)
         this.appendDummyInput('')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
         this.appendValueInput('val')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_SHIFT)
             .setCheck(Number);
@@ -177,7 +165,13 @@ export const display_matrix_extern_shift = {
             };
             return mode0 + mode1 + TOOLTIPS[mode] + mode2;
         });
-    }
+    },
+    OPERATORS: [
+        [Blockly.Msg.MIXLY_UP, 'shift_up'],
+        [Blockly.Msg.MIXLY_DOWN, 'shift_down'],
+        [Blockly.Msg.MIXLY_LEFT, 'shift_left'],
+        [Blockly.Msg.MIXLY_RIGHT, 'shift_right'],
+    ]
 };
 
 export const display_matrix_extern_get_pixel = {
@@ -265,29 +259,35 @@ export const display_matrix_extern_clear = {
 
 export const display_matrix_extern_image_builtins = {
     init: function () {
-        var OPERATORS =
-            [["HEART", "HEART"], ["HEART_SMALL", "HEART_SMALL"], ["HAPPY", "HAPPY"], ["SAD", "SAD"], ["SMILE", "SMILE"], ["SILLY", "SILLY"], ["FABULOUS", "FABULOUS"], ["SURPRISED", "SURPRISED"], ["ASLEEP", "ASLEEP"], ["ANGRY", "ANGRY"], ["CONFUSED", "CONFUSED"], ["NO", "NO"], ["YES", "YES"]
-                // ,["LEFT_ARROW", "LEFT_ARROW"],["RIGHT_ARROW", "RIGHT_ARROW"],["DRESS", "DRESS"],["TRANSFORMERS", "TRANSFORMERS"],["SCISSORS", "SCISSORS"],["EXIT", "EXIT"],["TREE", "TREE"],["PACMAN", "PACMAN"],["TARGET", "TARGET"],["TSHIRT", "TSHIRT"],["ROLLERSKATE", "ROLLERSKATE"],["DUCK", "DUCK"],["HOUSE", "HOUSE"],["TORTOISE", "TORTOISE"],["BUTTERFLY", "BUTTERFLY"],["STICKFIGURE", "STICKFIGURE"],["GHOST", "GHOST"],["PITCHFORK", "PITCHFORK"],["MUSIC_QUAVERS", "MUSIC_QUAVERS"],["MUSIC_QUAVER", "MUSIC_QUAVER"],["MUSIC_CROTCHET", "MUSIC_CROTCHET"],["COW", "COW"],["RABBIT", "RABBIT"],["SQUARE_SMALL", "SQUARE_SMALL"],["SQUARE", "SQUARE"],["DIAMOND_SMALL", "DIAMOND_SMALL"],["DIAMOND", "DIAMOND"],["CHESSBOARD", "CHESSBOARD"],["TRIANGLE_LEFT", "TRIANGLE_LEFT"],["TRIANGLE", "TRIANGLE"],["SNAKE", "SNAKE"],["UMBRELLA", "UMBRELLA"],["SKULL", "SKULL"],["GIRAFFE", "GIRAFFE"],["SWORD", "SWORD"]
-            ];
         this.appendValueInput('SUB')
             .setCheck("var");
         this.setColour(DISPLAY_EXTERN_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_Built_in_image1)
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'image');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'image');
         this.setOutput(true, "esp32_image");
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Clear_display);
-    }
+    },
+    OPERATORS: [
+        ["HEART", "HEART"],
+        ["HEART_SMALL", "HEART_SMALL"],
+        ["HAPPY", "HAPPY"],
+        ["SAD", "SAD"],
+        ["SMILE", "SMILE"],
+        ["SILLY", "SILLY"],
+        ["FABULOUS", "FABULOUS"],
+        ["SURPRISED", "SURPRISED"],
+        ["ASLEEP", "ASLEEP"],
+        ["ANGRY", "ANGRY"],
+        ["CONFUSED", "CONFUSED"],
+        ["NO", "NO"],
+        ["YES", "YES"]
+    ]
 };
-
 
 export const matrix_extern_image_arithmetic = {
     init: function () {
-        var OPERATORS = [
-            [Blockly.Msg.MICROBIT_DISPLAY_UNION, 'add'],
-            [Blockly.Msg.MICROBIT_DISPLAY_MINUS, 'sub']
-        ];
         this.appendValueInput('SUB')
             .setCheck("var");
         this.setColour(DISPLAY_EXTERN_HUE);
@@ -297,7 +297,7 @@ export const matrix_extern_image_arithmetic = {
             .appendField(Blockly.Msg.MICROBIT_DISPLAY_MERGE_SHAPE);
         this.appendValueInput('B')
             // .setCheck(["esp32_image", "List", String])
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
         this.setInputsInline(true);
         var thisBlock = this;
         this.setTooltip(function () {
@@ -308,7 +308,11 @@ export const matrix_extern_image_arithmetic = {
             };
             return TOOLTIPS[mode];
         });
-    }
+    },
+    OPERATORS: [
+        [Blockly.Msg.MICROBIT_DISPLAY_UNION, 'add'],
+        [Blockly.Msg.MICROBIT_DISPLAY_MINUS, 'sub']
+    ]
 };
 
 export const matrix_extern_image_invert = {
@@ -385,10 +389,6 @@ export const display_draw_4strings = {
 
 export const display_image_size = {
     init: function () {
-        var OPERATORS = [
-            [Blockly.Msg.MIXLY_HEIGHT, 'height'],
-            [Blockly.Msg.MIXLY_WIDTH, 'width']
-        ];
         this.setColour(DISPLAY_EXTERN_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET + Blockly.Msg.MIXLY_MICROBIT_IMAGE);
@@ -396,7 +396,7 @@ export const display_image_size = {
             .setCheck("esp32_image")
         // .appendField(Blockly.Msg.blockpy_USE_LIST);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
         this.setInputsInline(true);
         this.setOutput(true);
         var thisBlock = this;
@@ -410,15 +410,15 @@ export const display_image_size = {
             };
             return mode0 + mode1 + TOOLTIPS[mode];
         });
-    }
+    },
+    OPERATORS: [
+        [Blockly.Msg.MIXLY_HEIGHT, 'height'],
+        [Blockly.Msg.MIXLY_WIDTH, 'width']
+    ]
 };
 
 export const display_rect = {
     init: function () {
-        var brightness_or_not = [
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
-        ];
         this.setColour(DISPLAY_EXTERN_HUE);
         // this.appendDummyInput()
         //     .appendField(Blockly.Msg.OLED)
@@ -428,37 +428,37 @@ export const display_rect = {
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RECT)
-            .appendField(new Blockly.FieldDropdown(brightness_or_not), 'OP')
-
+            .appendField(new Blockly.FieldDropdown(this.STATUS), 'OP')
         // this.appendValueInput("PIN", Number)
         //    .setCheck(Number)
         //    .setAlign(Blockly.inputs.Align.RIGHT)
         //    .appendField(Blockly.Msg.MIXLY_PIN);
         this.jsonInit({
             "message0": Blockly.Msg.MIXLY_MICROBIT_SHOW_RECT,
-            "args0": [{
-                "check": Number,
-                "type": "input_value",
-                "name": "x"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "width"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "height"
-            }, {
-                "type": "input_dummy"
-            }, {
-                "checked": false,
-                "type": "field_checkbox",
-                "name": "fill"
-            }
+            "args0": [
+                {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "width"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "height"
+                }, {
+                    "type": "input_dummy"
+                }, {
+                    "checked": false,
+                    "type": "field_checkbox",
+                    "name": "fill"
+                }
             ]
         });
         this.setInputsInline(true);
@@ -466,7 +466,11 @@ export const display_rect = {
         this.setNextStatement(true, null);
         this.setTooltip('');
         this.setTooltip(Blockly.Msg.MIXLY_OLED_RECT);
-    }
+    },
+    STATUS: [
+        [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
+        [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
+    ]
 };
 
 export const display_line = {
@@ -484,22 +488,26 @@ export const display_line = {
         //    .appendField(Blockly.Msg.MIXLY_PIN);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_DISPLAY_DRAW)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_DISPLAY_RLINE, "hline"], [Blockly.Msg.MIXLY_DISPLAY_VLINE, "vline"]]), "direction");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_DISPLAY_RLINE, "hline"],
+                [Blockly.Msg.MIXLY_DISPLAY_VLINE, "vline"]
+            ]), "direction");
         this.jsonInit({
             "message0": Blockly.Msg.MIXLY_MICROBIT_SHOW_LINE,
-            "args0": [{
-                "check": Number,
-                "type": "input_value",
-                "name": "x"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "length"
-            }
+            "args0": [
+                {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "length"
+                }
             ]
         });
         this.setInputsInline(true);
@@ -524,23 +532,24 @@ export const display_line_arbitrarily = {
         //    .appendField(Blockly.Msg.MIXLY_PIN);
         this.jsonInit({
             "message0": Blockly.Msg.MIXLY_MICROBIT_SHOW_LINE_ARBITRARILY,
-            "args0": [{
-                "check": Number,
-                "type": "input_value",
-                "name": "x1"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y1"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "x2"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y2"
-            },
+            "args0": [
+                {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x1"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y1"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x2"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y2"
+                },
             ]
         });
         this.setInputsInline(true);
@@ -601,7 +610,10 @@ export const display_onoff = {
     init: function () {
         this.setColour(DISPLAY_EXTERN_HUE);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_ESP32_ON, "ON"], [Blockly.Msg.MIXLY_ESP32_OFF, "OFF"]]), 'ONOFF')
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_ESP32_ON, "ON"],
+                [Blockly.Msg.MIXLY_ESP32_OFF, "OFF"]
+            ]), 'ONOFF')
         this.setOutput(true, Boolean);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_HIGHLOW);
     }
@@ -648,53 +660,50 @@ export const display_fill = {
 
 export const display_animate = {
     init: function () {
-        var ANIMATE = [
-            ["ALL_CLOCKS", 'ALL_CLOCKS'],
-            ["ALL_ARROWS", 'ALL_ARROWS']
-        ];
         this.setColour(DISPLAY_EXTERN_HUE);
         this.setOutput(true, 'Tuple');
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ESP32_DISPLAY_ANIMATE)
-            .appendField(new Blockly.FieldDropdown(ANIMATE), 'ANIMATION')
+            .appendField(new Blockly.FieldDropdown(this.ANIMATE), 'ANIMATION')
         //this.setTooltip(Blockly.Msg.LOGIC_BOOLEAN_TOOLTIP);
-    }
+    },
+    ANIMATE: [
+        ["ALL_CLOCKS", 'ALL_CLOCKS'],
+        ["ALL_ARROWS", 'ALL_ARROWS']
+    ]
 };
 
 export const display_circle = {
     init: function () {
-        var brightness_or_not = [
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
-        ];
         this.setColour(DISPLAY_EXTERN_HUE);
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.OLED)
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MIXPY_TURTLE_DRAW_CIRCLE)
-            .appendField(new Blockly.FieldDropdown(brightness_or_not), 'OP')
+            .appendField(new Blockly.FieldDropdown(this.STATUS), 'OP')
         this.jsonInit({
             "message0": Blockly.Msg.MIXLY_HANBIT_SHOW_CIRCLE,
-            "args0": [{
-                "check": Number,
-                "type": "input_value",
-                "name": "x"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "r"
-            }, {
-                "type": "input_dummy"
-            }, {
-                "checked": false,
-                "type": "field_checkbox",
-                "name": "fill"
-            }
+            "args0": [
+                {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "r"
+                }, {
+                    "type": "input_dummy"
+                }, {
+                    "checked": false,
+                    "type": "field_checkbox",
+                    "name": "fill"
+                }
             ]
         });
         this.setInputsInline(true);
@@ -702,7 +711,11 @@ export const display_circle = {
         this.setNextStatement(true, null);
         this.setTooltip('');
         this.setTooltip(Blockly.Msg.MIXLY_MIXPY_TURTLE_DRAW_CIRCLE);
-    }
+    },
+    STATUS: [
+        [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
+        [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
+    ]
 };
 
 export const display_triangle = {
@@ -720,37 +733,38 @@ export const display_triangle = {
             .appendField(new Blockly.FieldDropdown(brightness_or_not), 'OP')
         this.jsonInit({
             "message0": Blockly.Msg.MIXLY_HANBIT_SHOW_triangle,
-            "args0": [{
-                "check": Number,
-                "type": "input_value",
-                "name": "x0"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y0"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "x1"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y1"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "x2"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y2"
-            }, {
-                "type": "input_dummy"
-            }, {
-                "checked": false,
-                "type": "field_checkbox",
-                "name": "fill"
-            }
+            "args0": [
+                {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x0"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y0"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x1"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y1"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x2"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y2"
+                }, {
+                    "type": "input_dummy"
+                }, {
+                    "checked": false,
+                    "type": "field_checkbox",
+                    "name": "fill"
+                }
             ]
         });
         this.setInputsInline(true);
@@ -861,7 +875,11 @@ export const display_tm1650_power = {
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
         this.appendValueInput("VAR")
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_ON, "on"], [Blockly.Msg.MIXLY_OFF, "off"], [Blockly.Msg.MIXLY_LCD_STAT_CLEAR, "clear"]]), "STAT");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_ON, "on"],
+                [Blockly.Msg.MIXLY_OFF, "off"],
+                [Blockly.Msg.MIXLY_LCD_STAT_CLEAR, "clear"]
+            ]), "STAT");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -1016,7 +1034,6 @@ export const display_color_seclet = {
     }
 };
 
-
 export const tft_show_image_or_string_delay = {
     init: function () {
         this.setColour(DISPLAY_EXTERN_HUE);
@@ -1104,8 +1121,6 @@ export const tft_show_frame_string_delay = {
     }
 };
 
-
-
 export const tft_fill = {
     init: function () {
         this.setColour(DISPLAY_EXTERN_HUE);
@@ -1148,23 +1163,24 @@ export const tft_line_arbitrarily = {
         //    .appendField(Blockly.Msg.MIXLY_PIN);
         this.jsonInit({
             "message0": Blockly.Msg.MIXLY_MICROBIT_SHOW_LINE_ARBITRARILY,
-            "args0": [{
-                "check": Number,
-                "type": "input_value",
-                "name": "x1"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y1"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "x2"
-            }, {
-                "check": Number,
-                "type": "input_value",
-                "name": "y2"
-            },
+            "args0": [
+                {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x1"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y1"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "x2"
+                }, {
+                    "check": Number,
+                    "type": "input_value",
+                    "name": "y2"
+                },
             ]
         });
         this.appendValueInput('VAR')
@@ -1511,12 +1527,6 @@ export const extern_oled_show_frame_string_delay = {
 
 export const extern_oled_shift = {
     init: function () {
-        var OPERATORS = [
-            [Blockly.Msg.MIXLY_UP, 'shift_up'],
-            [Blockly.Msg.MIXLY_DOWN, 'shift_down'],
-            [Blockly.Msg.MIXLY_LEFT, 'shift_left'],
-            [Blockly.Msg.MIXLY_RIGHT, 'shift_right'],
-        ];
         //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
         this.setColour(DISPLAY_EXTERN_HUE);
         this.appendValueInput('SUB')
@@ -1530,7 +1540,7 @@ export const extern_oled_shift = {
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET)
         this.appendDummyInput('')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
         this.appendValueInput('val')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_SHIFT)
             .setCheck(Number);
@@ -1550,7 +1560,13 @@ export const extern_oled_shift = {
             };
             return mode0 + mode1 + TOOLTIPS[mode] + mode2;
         });
-    }
+    },
+    OPERATORS: [
+        [Blockly.Msg.MIXLY_UP, 'shift_up'],
+        [Blockly.Msg.MIXLY_DOWN, 'shift_down'],
+        [Blockly.Msg.MIXLY_LEFT, 'shift_left'],
+        [Blockly.Msg.MIXLY_RIGHT, 'shift_right'],
+    ]
 };
 
 export const extern_oled_get_pixel = {
@@ -1595,8 +1611,6 @@ export const extern_oled_bright_point = {
     }
 };
 
-
-
 export const extern_oled_clear = {
     init: function () {
         this.setColour(DISPLAY_EXTERN_HUE);
@@ -1619,7 +1633,6 @@ export const extern_oled_shape_rect = {
             "args0": [
                 {
                     "name": "SUB",
-
                     "type": "input_value"
                 },
                 {
@@ -1661,7 +1674,6 @@ export const extern_oled_shape_rect = {
                     "type": "input_value",
                     //"check": "Number"
                 }
-
             ],
             "inputsInline": true,
             "helpUrl": Blockly.Msg.mpython_HELPURL,
@@ -1680,7 +1692,6 @@ export const extern_oled_hvline = {
             "args0": [
                 {
                     "name": "SUB",
-
                     "type": "input_value"
                 },
                 {
@@ -1717,7 +1728,6 @@ export const extern_oled_hvline = {
                     "type": "input_value",
                     //"check": "Number"
                 }
-
             ],
             "inputsInline": true,
             "helpUrl": Blockly.Msg.mpython_HELPURL,
@@ -1736,7 +1746,6 @@ export const extern_oled_line = {
             "args0": [
                 {
                     "name": "SUB",
-
                     "type": "input_value"
                 },
                 {

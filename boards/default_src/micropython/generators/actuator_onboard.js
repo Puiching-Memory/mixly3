@@ -149,7 +149,7 @@ export const actuator_led_brightness = function (_, generator) {
         }
     }else{
         generator.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
-        var code = "onboard_led.setbrightness(" + op + "," + flag + ")\n";
+        var code = "onboard_led.setbrightness(" + op + ", " + flag + ")\n";
     }
     return code;
 }
@@ -159,7 +159,7 @@ export const actuator_mixgo_zero_led_color = function (_, generator) {
     var op = generator.valueToCode(this, 'led', generator.ORDER_ATOMIC);
     generator.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
     var color = this.getFieldValue('colorvalue');
-    var code = "onboard_led.setcolor(" + op + "," + color + ")\n";
+    var code = "onboard_led.setcolor(" + op + ", " + color + ")\n";
     return code;
 }
 
@@ -279,7 +279,7 @@ export const actuator_dc_motor = function (_, generator) {
     generator.definitions_['import_mixgocar_c3_car'] = 'from mixgocar_c3 import car';
     var v = this.getFieldValue('direction');
     var speed = generator.valueToCode(this, 'speed', generator.ORDER_ATOMIC);
-    var code = "car.motor(car.MOTO_" + wheel + ',"' + v + '",' + speed + ")\n";
+    var code = "car.motor(car.MOTO_" + wheel + ', "' + v + '", ' + speed + ")\n";
     return code;
 }
 
@@ -287,7 +287,7 @@ export const actuator_dc_motor_stop = function (_, generator) {
     var wheel = this.getFieldValue('wheel');
     generator.definitions_['import_mixgocar_c3_car'] = 'from mixgocar_c3 import car';
     var v = this.getFieldValue('direction');
-    var code = "car.motor(car.MOTO_" + wheel + ',"' + v + '"' + ")\n";
+    var code = "car.motor(car.MOTO_" + wheel + ', "' + v + '"' + ")\n";
     return code;
 }
 
@@ -304,7 +304,7 @@ export const mixbot_move = function (_, generator) {
     var mode = this.getFieldValue('mode');
     generator.definitions_['import_mixbot_motor'] = 'from mixbot import motor';
     var speed = generator.valueToCode(this, 'speed', generator.ORDER_ASSIGNMENT);
-    var code = 'motor.move("' + v + '",motor.' + mode + '_MODE,' + speed + ")\n";
+    var code = 'motor.move("' + v + '", motor.' + mode + '_MODE,' + speed + ")\n";
     return code;
 }
 
@@ -312,9 +312,9 @@ export const mixbot_stop = function (_, generator) {
     var v = this.getFieldValue('VAR');
     generator.definitions_['import_mixbot_motor'] = 'from mixbot import motor';
     if (v == 'N') {
-        var code = 'motor.move("N",motor.STOP_MODE)\n'
+        var code = 'motor.move("N", motor.STOP_MODE)\n'
     } else if (v == 'P') {
-        var code = 'motor.move("P",motor.BRAKE_MODE)\n'
+        var code = 'motor.move("P", motor.BRAKE_MODE)\n'
     }
     return code;
 }
@@ -324,7 +324,7 @@ export const mixbot_motor = function (_, generator) {
     generator.definitions_['import_mixbot_motor'] = 'from mixbot import motor';
     var mode = this.getFieldValue('mode');
     var speed = generator.valueToCode(this, 'speed', generator.ORDER_ATOMIC);
-    var code = 'motor.run(' + wheel + ',motor.' + mode + '_MODE,' + speed + ")\n";
+    var code = 'motor.run(' + wheel + ', motor.' + mode + '_MODE, ' + speed + ")\n";
     return code;
 }
 
@@ -341,7 +341,7 @@ export const bitbot_move = function (_, generator) {
     var v = this.getFieldValue('VAR');
     generator.definitions_['import_feiyi_onboard_bot51'] = 'from feiyi import onboard_bot51';
     var speed = generator.valueToCode(this, 'speed', generator.ORDER_ASSIGNMENT);
-    var code = 'onboard_bot51.move("' + v + '",' + speed + ")\n";
+    var code = 'onboard_bot51.move("' + v + '", ' + speed + ")\n";
     return code;
 }
 
@@ -357,7 +357,7 @@ export const bitbot_motor = function (_, generator) {
     var direction = this.getFieldValue('direction');
     generator.definitions_['import_feiyi_onboard_bot51'] = 'from feiyi import onboard_bot51';
     var speed = generator.valueToCode(this, 'speed', generator.ORDER_ATOMIC);
-    var code = 'onboard_bot51.motor(' + wheel + ',"' + direction + '",' + speed + ")\n";
+    var code = 'onboard_bot51.motor(' + wheel + ', "' + direction + '", ' + speed + ")\n";
     return code;
 }
 
@@ -464,7 +464,7 @@ export const set_power_output = function (_, generator) {
     var index = this.getFieldValue('index');
     var duty = generator.valueToCode(this, 'duty', generator.ORDER_ATOMIC);
     generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
-    var code = 'onboard_bot.usben(' + index + ',' + duty + ')\n';
+    var code = 'onboard_bot.usben(' + index + ', ' + duty + ')\n';
     return code;
 }
 
@@ -480,7 +480,7 @@ export const set_all_power_output = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     var duty = generator.valueToCode(this, 'duty', generator.ORDER_ATOMIC);
     generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
-    var code = 'onboard_bot.usben(freq = ' + duty + ')\n';
+    var code = 'onboard_bot.usben(freq=' + duty + ')\n';
     return code;
 }
 
@@ -490,7 +490,7 @@ export const analog_keyboard_input = function (_, generator) {
     var ge = generator.valueToCode(this, 'general', generator.ORDER_ATOMIC);
     var re = this.getFieldValue('release');
     generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
-    var code = "onboard_bot.hid_keyboard(" + sp + "," + ge + "," + re + ")\n";
+    var code = "onboard_bot.hid_keyboard(" + sp + ", " + ge + ", " + re + ")\n";
     return code;
 }
 
@@ -512,7 +512,7 @@ export const analog_mouse_input = function (_, generator) {
     var wheel = generator.valueToCode(this, 'wheel', generator.ORDER_ATOMIC);
     var re = this.getFieldValue('release');
     generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
-    var code = "onboard_bot.hid_mouse(keys=" + key + ",move=(" + x + "," + y + "),wheel=" + wheel + ",release=" + re + ")\n";
+    var code = "onboard_bot.hid_mouse(keys=" + key + ", move=(" + x + ", " + y + "), wheel=" + wheel + ", release=" + re + ")\n";
     return code;
 }
 
@@ -526,7 +526,7 @@ export const analog_keyboard_str = function (_, generator) {
     var str = generator.valueToCode(this, 'str', generator.ORDER_ATOMIC);
     var t = generator.valueToCode(this, 'time', generator.ORDER_ATOMIC);
     generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
-    var code = "onboard_bot.hid_keyboard_str(" + str + ",delay=" + t + ")\n";
+    var code = "onboard_bot.hid_keyboard_str(" + str + ", delay=" + t + ")\n";
     return code;
 }
 
@@ -571,7 +571,7 @@ export const analog_ble_keyboard_input = function (_, generator) {
     var ge = generator.valueToCode(this, 'general', generator.ORDER_ATOMIC);
     var re = this.getFieldValue('release');
     generator.definitions_['import_ble_keyboard'] = 'from ble_hid_keyboard import Keyboard';
-    var code = "ble_keyboard.notify_hid(" + sp + "," + ge + "," + re + ")\n";
+    var code = "ble_keyboard.notify_hid(" + sp + ", " + ge + ", " + re + ")\n";
     return code;
 }
 
@@ -579,7 +579,7 @@ export const analog_ble_keyboard_str = function (_, generator) {
     var str = generator.valueToCode(this, 'str', generator.ORDER_ATOMIC);
     var t = generator.valueToCode(this, 'time', generator.ORDER_ATOMIC);
     generator.definitions_['import_ble_keyboard'] = 'from ble_hid_keyboard import Keyboard';
-    var code = "ble_keyboard.notify_str(" + str + ",delay=" + t + ")\n";
+    var code = "ble_keyboard.notify_str(" + str + ", delay=" + t + ")\n";
     return code;
 }
 
@@ -616,7 +616,7 @@ export const analog_ble_mouse_input = function (_, generator) {
     var wheel = generator.valueToCode(this, 'wheel', generator.ORDER_ATOMIC);
     var re = this.getFieldValue('release');
     generator.definitions_['import_ble_mouse'] = 'from ble_hid_mouse import Mouse';
-    var code = "ble_mouse.notify_hid(" + key + ",(" + x + "," + y + ")," + wheel + "," + re + ")\n";
+    var code = "ble_mouse.notify_hid(" + key + ", (" + x + ", " + y + "), " + wheel + ", " + re + ")\n";
     return code;
 }
 
@@ -658,7 +658,7 @@ export const analog_ble_keyboard_mouse_input = function (_, generator) {
     var ge = generator.valueToCode(this, 'general', generator.ORDER_ATOMIC);
     var re = this.getFieldValue('release');
     generator.definitions_['import_HID_ble_hid'] = 'from ble_hid import HID';
-    var code = "ble_hid.keyboard_notify(" + sp + "," + ge + "," + re + ")\n";
+    var code = "ble_hid.keyboard_notify(" + sp + ", " + ge + ", " + re + ")\n";
     return code;
 }
 
@@ -666,7 +666,7 @@ export const analog_ble_keyboard_mouse_str = function (_, generator) {
     var str = generator.valueToCode(this, 'str', generator.ORDER_ATOMIC);
     var t = generator.valueToCode(this, 'time', generator.ORDER_ATOMIC);
     generator.definitions_['import_HID_ble_hid'] = 'from ble_hid import HID';
-    var code = "ble_hid.keyboard_str(" + str + ",delay=" + t + ")\n";
+    var code = "ble_hid.keyboard_str(" + str + ", delay=" + t + ")\n";
     return code;
 }
 
@@ -677,7 +677,7 @@ export const analog_ble_mouse_keyboard_input = function (_, generator) {
     var wheel = generator.valueToCode(this, 'wheel', generator.ORDER_ATOMIC);
     var re = this.getFieldValue('release');
     generator.definitions_['import_HID_ble_hid'] = 'from ble_hid import HID';
-    var code = "ble_hid.mouse_notify(" + key + ",(" + x + "," + y + ")," + wheel + "," + re + ")\n";
+    var code = "ble_hid.mouse_notify(" + key + ", (" + x + ", " + y + ") ," + wheel + ", " + re + ")\n";
     return code;
 }
 //educore actuator
@@ -773,5 +773,4 @@ export const get_keyboard_light = function (_,generator){
     var key = this.getFieldValue('key');
     var code = "onboard_bot.hid_keyboard_state()["+ key +']';
     return [code,generator.ORDER_ATOMIC]
-
 }

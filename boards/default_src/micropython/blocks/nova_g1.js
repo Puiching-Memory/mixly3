@@ -5,7 +5,7 @@ const NOVAG1_HUE = 100;
 
 export const get_potential_num = {
     init: function () {
-        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
         if (version == "mixgo_nova") { var name = 'Nova G1' }
         this.setColour(NOVAG1_HUE);
         this.appendDummyInput()
@@ -14,11 +14,11 @@ export const get_potential_num = {
         this.setOutput(true, Number);
         this.setInputsInline(true);
     }
-}
+};
 
 export const nova_g1_motor = {
     init: function () {
-        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
         if (version == "mixgo_nova") { var name = 'Nova G1' }
         this.setColour(NOVAG1_HUE);
         this.appendValueInput('PIN')
@@ -43,11 +43,11 @@ export const nova_g1_motor = {
         this.setNextStatement(true, null);
         this.setInputsInline(true);
     }
-}
+};
 
 export const nova_g1_usb = {
     init: function () {
-        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
         if (version == "mixgo_nova") { var name = 'Nova G1' }
         this.setColour(NOVAG1_HUE);
         this.appendValueInput('PIN')
@@ -63,11 +63,11 @@ export const nova_g1_usb = {
         this.setNextStatement(true, null);
         this.setInputsInline(true);
     }
-}
+};
 
 export const nova_g1_spk_en = {
     init: function () {
-        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
         if (version == "mixgo_nova") { var name = 'Nova G1' }
         this.setColour(NOVAG1_HUE);
         this.appendDummyInput()
@@ -81,4 +81,4 @@ export const nova_g1_spk_en = {
         this.setNextStatement(true, null);
         this.setInputsInline(true);
     }
-}
+};

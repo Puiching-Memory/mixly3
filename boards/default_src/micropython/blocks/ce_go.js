@@ -388,7 +388,7 @@ export const educore_car_pin_near = {
         this.setColour(MEGO_HUE);
         this.appendValueInput('car');
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET+Blockly.Msg.MIXGO_PROXIMITY_SENSOR);
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET + Blockly.Msg.MIXGO_PROXIMITY_SENSOR);
         this.setOutput(true, Number);
         this.setInputsInline(true);
     }

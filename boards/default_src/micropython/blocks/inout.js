@@ -149,7 +149,6 @@ export const inout_analog_atten = {
     }
 };
 
-
 export const inout_pin_pressed = {
     init: function () {
         this.setColour(BASE_HUE);
@@ -174,7 +173,11 @@ export const inout_pin_attachInterrupt = {
             .setCheck(Number);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MODE)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_RISING, "machine.Pin.IRQ_RISING"], [Blockly.Msg.MIXLY_FALLING, "machine.Pin.IRQ_FALLING"], [Blockly.Msg.MIXLY_CHANGE, "(machine.Pin.IRQ_RISING | machine.Pin.IRQ_FALLING)"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_RISING, "machine.Pin.IRQ_RISING"],
+                [Blockly.Msg.MIXLY_FALLING, "machine.Pin.IRQ_FALLING"],
+                [Blockly.Msg.MIXLY_CHANGE, "(machine.Pin.IRQ_RISING | machine.Pin.IRQ_FALLING)"]
+            ]), "mode");
         this.appendValueInput('DO')
             .appendField(Blockly.Msg.MIXLY_DO)
         this.setPreviousStatement(true);

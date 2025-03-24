@@ -82,7 +82,6 @@ export const display_scroll_string_delay = {
         this.setNextStatement(true, null);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_ESP32_SCROLL_IMAGE_OR_STRING_DELAY);
-
     }
 };
 
@@ -163,13 +162,27 @@ export const display_image_builtins = {
     init: function () {
         this.jsonInit({
             "colour": DISPLAY_ONBOARD_HUE,
-            "args0": [{
-                "name": "image",
-                "options": [["HEART", "HEART"], ["HEART_SMALL", "HEART_SMALL"], ["HAPPY", "HAPPY"], ["SAD", "SAD"], ["SMILE", "SMILE"], ["SILLY", "SILLY"], ["FABULOUS", "FABULOUS"], ["SURPRISED", "SURPRISED"], ["ASLEEP", "ASLEEP"], ["ANGRY", "ANGRY"], ["CONFUSED", "CONFUSED"], ["NO", "NO"], ["YES", "YES"]
-                    // ,["LEFT_ARROW", "LEFT_ARROW"],["RIGHT_ARROW", "RIGHT_ARROW"],["DRESS", "DRESS"],["TRANSFORMERS", "TRANSFORMERS"],["SCISSORS", "SCISSORS"],["EXIT", "EXIT"],["TREE", "TREE"],["PACMAN", "PACMAN"],["TARGET", "TARGET"],["TSHIRT", "TSHIRT"],["ROLLERSKATE", "ROLLERSKATE"],["DUCK", "DUCK"],["HOUSE", "HOUSE"],["TORTOISE", "TORTOISE"],["BUTTERFLY", "BUTTERFLY"],["STICKFIGURE", "STICKFIGURE"],["GHOST", "GHOST"],["PITCHFORK", "PITCHFORK"],["MUSIC_QUAVERS", "MUSIC_QUAVERS"],["MUSIC_QUAVER", "MUSIC_QUAVER"],["MUSIC_CROTCHET", "MUSIC_CROTCHET"],["COW", "COW"],["RABBIT", "RABBIT"],["SQUARE_SMALL", "SQUARE_SMALL"],["SQUARE", "SQUARE"],["DIAMOND_SMALL", "DIAMOND_SMALL"],["DIAMOND", "DIAMOND"],["CHESSBOARD", "CHESSBOARD"],["TRIANGLE_LEFT", "TRIANGLE_LEFT"],["TRIANGLE", "TRIANGLE"],["SNAKE", "SNAKE"],["UMBRELLA", "UMBRELLA"],["SKULL", "SKULL"],["GIRAFFE", "GIRAFFE"],["SWORD", "SWORD"]
-                ],
-                "type": "field_dropdown"
-            }],
+            "args0": [
+                {
+                    "name": "image",
+                    "options": [
+                        ["HEART", "HEART"],
+                        ["HEART_SMALL", "HEART_SMALL"],
+                        ["HAPPY", "HAPPY"],
+                        ["SAD", "SAD"],
+                        ["SMILE", "SMILE"],
+                        ["SILLY", "SILLY"],
+                        ["FABULOUS", "FABULOUS"],
+                        ["SURPRISED", "SURPRISED"],
+                        ["ASLEEP", "ASLEEP"],
+                        ["ANGRY", "ANGRY"],
+                        ["CONFUSED", "CONFUSED"],
+                        ["NO", "NO"],
+                        ["YES", "YES"]
+                    ],
+                    "type": "field_dropdown"
+                }
+            ],
             "output": ["esp32_image", "List"],
             "helpUrl": "https://microbit-micropython.readthedocs.io/en/latest/image.html#attributes",
             "tooltip": Blockly.Msg.MIXLY_MICROBIT_Built_in_image1,
@@ -190,10 +203,6 @@ export const display_image_builtins_all = {
 
 export const image_arithmetic = {
     init: function () {
-        var OPERATORS = [
-            [Blockly.Msg.MICROBIT_DISPLAY_UNION, 'add'],
-            [Blockly.Msg.MICROBIT_DISPLAY_MINUS, 'sub']
-        ];
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.setOutput(true, "esp32_image");
         this.appendValueInput('A')
@@ -201,7 +210,7 @@ export const image_arithmetic = {
             .appendField(Blockly.Msg.MICROBIT_DISPLAY_MERGE_SHAPE);
         this.appendValueInput('B')
             // .setCheck(["esp32_image", "List", String])
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
         this.setInputsInline(true);
         var thisBlock = this;
         this.setTooltip(function () {
@@ -212,7 +221,11 @@ export const image_arithmetic = {
             };
             return TOOLTIPS[mode];
         });
-    }
+    },
+    OPERATORS: [
+        [Blockly.Msg.MICROBIT_DISPLAY_UNION, 'add'],
+        [Blockly.Msg.MICROBIT_DISPLAY_MINUS, 'sub']
+    ]
 };
 
 export const image_invert = {
@@ -228,12 +241,6 @@ export const image_invert = {
 
 export const display_shift = {
     init: function () {
-        var OPERATORS = [
-            [Blockly.Msg.MIXLY_UP, 'shift_up'],
-            [Blockly.Msg.MIXLY_DOWN, 'shift_down'],
-            [Blockly.Msg.MIXLY_LEFT, 'shift_left'],
-            [Blockly.Msg.MIXLY_RIGHT, 'shift_right'],
-        ];
         //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
         this.setColour(DISPLAY_ONBOARD_HUE);
         // this.setOutput(true);
@@ -244,7 +251,7 @@ export const display_shift = {
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET)
         this.appendDummyInput('')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
         this.appendValueInput('val')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_SHIFT)
             .setCheck(Number);
@@ -264,7 +271,13 @@ export const display_shift = {
             };
             return mode0 + mode1 + TOOLTIPS[mode] + mode2;
         });
-    }
+    },
+    OPERATORS: [
+        [Blockly.Msg.MIXLY_UP, 'shift_up'],
+        [Blockly.Msg.MIXLY_DOWN, 'shift_down'],
+        [Blockly.Msg.MIXLY_LEFT, 'shift_left'],
+        [Blockly.Msg.MIXLY_RIGHT, 'shift_right'],
+    ]
 };
 
 export const display_get_pixel = {
@@ -339,15 +352,7 @@ export const display_clear = {
     }
 };
 
-
-
-
-
-
-
 //mixgo_me onboard_matrix below:
-
-
 
 export const mixgome_display_image_create = {
     init: function () {
@@ -406,27 +411,22 @@ export const mixgo_display_image_create_new = {
     }
 };
 
-
-
 export const mixgome_display_font = {
     init: function () {
-        var OPERATORS = [
-            ['4x5' + Blockly.Msg.MIXGO_ME_DISPLAY_HORIZONTAL, "'4x5'"],
-            ['5x5' + Blockly.Msg.MIXGO_ME_DISPLAY_HORIZONTAL, "'5x5'"],
-            ['5x8' + Blockly.Msg.MIXGO_ME_DISPLAY_VERTICAL, "'5x8'"]
-        ];
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.OLED_SET_FONT)
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-
-    }
+    },
+    OPERATORS: [
+        ['4x5' + Blockly.Msg.MIXGO_ME_DISPLAY_HORIZONTAL, "'4x5'"],
+        ['5x5' + Blockly.Msg.MIXGO_ME_DISPLAY_HORIZONTAL, "'5x5'"],
+        ['5x8' + Blockly.Msg.MIXGO_ME_DISPLAY_VERTICAL, "'5x8'"]
+    ]
 };
-
-
 
 //mpython
 
@@ -532,7 +532,6 @@ export const onboard_oled_scroll_string_delay = {
     }
 };
 
-
 export const onboard_oled_show_frame_string_delay = {
     init: function () {
         this.setColour(DISPLAY_ONBOARD_HUE);
@@ -614,7 +613,6 @@ export const mpython_display_shape_rect = {
                     "type": "input_value",
                     //"check": "Number"
                 }
-
             ],
             "inputsInline": true,
             "helpUrl": Blockly.Msg.mpython_HELPURL,
@@ -665,7 +663,6 @@ export const mpython_display_hvline = {
                     "type": "input_value",
                     //"check": "Number"
                 }
-
             ],
             "inputsInline": true,
             "helpUrl": Blockly.Msg.mpython_HELPURL,
@@ -709,7 +706,6 @@ export const mpython_display_line = {
                     "type": "input_value",
                     //"check": "Number"
                 }
-
             ],
             "inputsInline": true,
             "helpUrl": Blockly.Msg.mpython_HELPURL,
@@ -832,8 +828,6 @@ export const mpython_pbm_image = {
 
 //mixbot onboard_matrix below:
 
-
-
 export const mixbot_display_image_create = {
     init: function () {
         this.appendDummyInput('')
@@ -889,21 +883,20 @@ export const mixbot_display_bright_screen = {
 
 export const mixbot_display_rotate = {
     init: function () {
-        var OPERATORS = [
-            [Blockly.Msg.mixpy_PL_PIE_SHADOW_N, '0'],
-            [Blockly.Msg.CLOCKWISE + '90' + Blockly.Msg.blockpy_setheading_degree, '1'],
-            [Blockly.Msg.CLOCKWISE + '180' + Blockly.Msg.blockpy_setheading_degree, '2'],
-            [Blockly.Msg.CLOCKWISE + '270' + Blockly.Msg.blockpy_setheading_degree, '3']
-        ];
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MIXBOT_SCREEN_ROTATE)
-            .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-
-    }
+    },
+    OPERATORS: [
+        [Blockly.Msg.mixpy_PL_PIE_SHADOW_N, '0'],
+        [Blockly.Msg.CLOCKWISE + '90' + Blockly.Msg.blockpy_setheading_degree, '1'],
+        [Blockly.Msg.CLOCKWISE + '180' + Blockly.Msg.blockpy_setheading_degree, '2'],
+        [Blockly.Msg.CLOCKWISE + '270' + Blockly.Msg.blockpy_setheading_degree, '3']
+    ]
 };
 
 export const bitbot_display_image_create = {
@@ -1042,7 +1035,6 @@ export const onboard_tft_display_shape_rect = {
                     "type": "input_value",
                     //"check": "Number"
                 }
-
             ],
             "inputsInline": true,
             "helpUrl": Blockly.Msg.mpython_HELPURL,
@@ -1090,7 +1082,6 @@ export const onboard_tft_display_hvline = {
                     "type": "input_value",
                     //"check": "Number"
                 }
-
             ],
             "inputsInline": true,
             "helpUrl": Blockly.Msg.mpython_HELPURL,
@@ -1134,7 +1125,6 @@ export const onboard_tft_display_line = {
                     "type": "input_value",
                     //"check": "Number"
                 }
-
             ],
             "inputsInline": true,
             "helpUrl": Blockly.Msg.mpython_HELPURL,
@@ -1314,7 +1304,6 @@ export const onboard_tft_display_shape_circle = {
                     "type": "input_value",
                     //"check": "Number"
                 }
-
             ],
             "inputsInline": true,
             "helpUrl": Blockly.Msg.mpython_HELPURL,

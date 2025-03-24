@@ -11,7 +11,11 @@ export const controls_delay_new = {
         this.appendValueInput("DELAY_TIME", Number)
             .setCheck(Number);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_SECOND, "s"], [Blockly.Msg.MIXLY_mSecond, "ms"], [Blockly.Msg.MIXLY_uSecond, "us"]]), 'Time');
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_SECOND, "s"],
+                [Blockly.Msg.MIXLY_mSecond, "ms"],
+                [Blockly.Msg.MIXLY_uSecond, "us"]
+            ]), 'Time');
         this.setFieldValue('s', 'Time')
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -26,7 +30,11 @@ export const controls_delay = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_DELAY)
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_SECOND, "s"], [Blockly.Msg.MIXLY_mSecond, "ms"], [Blockly.Msg.MIXLY_uSecond, "us"]]), 'Time');
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_SECOND, "s"],
+                [Blockly.Msg.MIXLY_mSecond, "ms"],
+                [Blockly.Msg.MIXLY_uSecond, "us"]
+            ]), 'Time');
         this.appendValueInput("DELAY_TIME", Number)
             .setCheck(Number);
         this.setFieldValue('ms', 'Time')
@@ -67,7 +75,10 @@ export const controls_millis = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_RUNTIME);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_mSecond, "ms"], [Blockly.Msg.MIXLY_uSecond, "us"]]), 'Time');
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_mSecond, "ms"],
+                [Blockly.Msg.MIXLY_uSecond, "us"]
+            ]), 'Time');
         this.setOutput(true, Number);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_ESP32_CONTROLS_MILLIS_TOOLTIP);
@@ -92,7 +103,6 @@ export const controls_uname = {
         this.setColour(SYSTEM_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_CONTORL_UNAME);
-
         this.setInputsInline(true);
         this.setOutput(true);
         this.setTooltip(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN + Blockly.Msg.MIXLY_MICROBIT_PY_CONTORL_UNAME);
@@ -137,7 +147,10 @@ export const system_timer = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_mSecond)
             .appendField(Blockly.Msg.MIXLY_MODE)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_PYTHON_ONE_SHOT, "ONE_SHOT"], [Blockly.Msg.MIXLY_PYTHON_PERIODIC, "PERIODIC"]]), "mode");
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_PYTHON_ONE_SHOT, "ONE_SHOT"],
+                [Blockly.Msg.MIXLY_PYTHON_PERIODIC, "PERIODIC"]
+            ]), "mode");
         this.appendValueInput('callback')
             .appendField(Blockly.Msg.MIXLY_DO)
         this.setPreviousStatement(true);

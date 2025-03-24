@@ -19,7 +19,7 @@ export const pe_g1_dc_motor = function (_, generator) {
     var wheel = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var v = this.getFieldValue('direction');
     var speed = generator.valueToCode(this, 'speed', generator.ORDER_ATOMIC);
-    var code = s + ".motor(" + wheel + ',"' + v + '",' + speed + ")\n";
+    var code = s + ".motor(" + wheel + ', "' + v + '", ' + speed + ")\n";
     return code;
 }
 
@@ -28,7 +28,7 @@ export const pe_g1_dc_motor_speed = function (_, generator) {
     var s = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var wheel = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var v = 'NC';
-    var code = s + ".motor(" + wheel + ',"' + v + '"' + ")\n";
+    var code = s + ".motor(" + wheel + ', "' + v + '"' + ")\n";
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -37,7 +37,7 @@ export const pe_g1_servo_set_angle = function (_, generator) {
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
-    var code = v + '.servo180(' + dropdown_pin + ',' + num + ')\n';
+    var code = v + '.servo180(' + dropdown_pin + ', ' + num + ')\n';
     return code;
 }
 
@@ -46,7 +46,7 @@ export const pe_g1_servo_set_speed = function (_, generator) {
     var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
-    var code = v + '.servo360(' + dropdown_pin + ',' + num + ')\n';
+    var code = v + '.servo360(' + dropdown_pin + ', ' + num + ')\n';
     return code;
 }
 

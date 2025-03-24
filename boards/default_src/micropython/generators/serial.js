@@ -98,13 +98,10 @@ export const system_print_end = function (_, generator) {
 export const system_print_many = function (_, generator) {
     var code = new Array(this.itemCount_);
     var default_value = '0';
-
     for (var n = 0; n < this.itemCount_; n++) {
-
         code[n] = generator.valueToCode(this, 'ADD' + n,
             generator.ORDER_NONE) || default_value;
     }
-
     var code = 'print(' + code.join(', ') + ')\n';
     return code;
 }

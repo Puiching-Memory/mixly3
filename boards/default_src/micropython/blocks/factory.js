@@ -188,8 +188,7 @@ export const factory_declare = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
     }
-}
-
+};
 
 export const factory_callMethod_noreturn = {
     init: function () {

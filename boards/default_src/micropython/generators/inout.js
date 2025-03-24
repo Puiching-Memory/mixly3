@@ -92,7 +92,7 @@ export const inout_pin_attachInterrupt = function (_, generator) {
     var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
     var atta = generator.valueToCode(this, 'DO', generator.ORDER_ATOMIC);
-    var code = 'machine.Pin(' + dropdown_pin + ').irq' + '(handler = ' + atta + ', trigger = ' + dropdown_mode + ')\n'
+    var code = 'machine.Pin(' + dropdown_pin + ').irq' + '(handler=' + atta + ', trigger=' + dropdown_mode + ')\n'
     //var funcName = 'attachInterrupt_func_' + dropdown_pin;
     //var branch = generator.statementToCode(this, 'DO') || generator.PASS;
     //var code2 = 'def' + ' ' + funcName + '(p):\n' + branch + '\n';

@@ -19,7 +19,11 @@ export const controls_delay = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_DELAY)
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_SECOND, "s"], [Blockly.Msg.MIXLY_mSecond, "ms"], [Blockly.Msg.MIXLY_uSecond, "us"]]), 'Time');
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_SECOND, "s"],
+                [Blockly.Msg.MIXLY_mSecond, "ms"],
+                [Blockly.Msg.MIXLY_uSecond, "us"]
+            ]), 'Time');
         this.appendValueInput("DELAY_TIME", Number)
             .setCheck(Number);
         this.setFieldValue('ms', 'Time')
@@ -113,13 +117,12 @@ export const controls_whileUntil = {
             };
             return TOOLTIPS[op];
         });
-    }
+    },
+    OPERATORS: [
+        [Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE, 'WHILE'],
+        [Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL, 'UNTIL']
+    ]
 };
-
-controls_whileUntil.OPERATORS = [
-    [Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE, 'WHILE'],
-    [Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL, 'UNTIL']
-];
 
 export const controls_flow_statements = {
     init: function () {
@@ -163,13 +166,12 @@ export const controls_flow_statements = {
         } else {
             this.setWarningText(Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_WARNING);
         }
-    }
+    },
+    OPERATORS: [
+        [Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, 'BREAK'],
+        [Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, 'CONTINUE']
+    ]
 };
-
-controls_flow_statements.OPERATORS = [
-    [Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, 'BREAK'],
-    [Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, 'CONTINUE']
-];
 
 export const controls_millis = {
     init: function () {

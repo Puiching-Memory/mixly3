@@ -34,7 +34,7 @@ export const sensor_mixgo_button_attachInterrupt = function (_, generator) {
     var dropdown_btn = generator.valueToCode(this, 'btn', generator.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
     var atta = generator.valueToCode(this, 'DO', generator.ORDER_ATOMIC);
-    var code = version + '.' + dropdown_btn + '.irq' + '(handler = ' + atta + ', trigger = ' + dropdown_mode + ')\n'
+    var code = version + '.' + dropdown_btn + '.irq' + '(handler=' + atta + ', trigger=' + dropdown_mode + ')\n'
     return code;
 }
 
@@ -68,7 +68,7 @@ export const sensor_mixgocar42_button_attachInterrupt = function (_, generator) 
     generator.definitions_['import_' + version] = 'import ' + version;
     var dropdown_mode = this.getFieldValue('mode');
     var atta = generator.valueToCode(this, 'DO', generator.ORDER_ATOMIC);
-    var code = version + '.' + 'button.irq' + '(handler = ' + atta + ', trigger = ' + dropdown_mode + ')\n'
+    var code = version + '.' + 'button.irq' + '(handler=' + atta + ', trigger=' + dropdown_mode + ')\n'
     return code;
 }
 
@@ -286,7 +286,7 @@ export const rfid_write = function (_, generator) {
     var sector = generator.valueToCode(this, 'SECTOR', generator.ORDER_ATOMIC);
     var cnt = generator.valueToCode(this, 'CONTENT', generator.ORDER_ATOMIC);
     generator.definitions_['import_' + version + '_onboard_rfid'] = "from " + version + " import onboard_rfid";
-    var code = 'onboard_rfid.write_card(' + cnt + ',' + sector + ')\n';
+    var code = 'onboard_rfid.write_card(' + cnt + ', ' + sector + ')\n';
     return code;
 }
 
@@ -295,7 +295,7 @@ export const rfid_write_return = function (_, generator) {
     var sector = generator.valueToCode(this, 'SECTOR', generator.ORDER_ATOMIC);
     var cnt = generator.valueToCode(this, 'CONTENT', generator.ORDER_ATOMIC);
     generator.definitions_['import_' + version + '_onboard_rfid'] = "from " + version + " import onboard_rfid";
-    var code = 'onboard_rfid.write_card(' + cnt + ',' + sector + ')';
+    var code = 'onboard_rfid.write_card(' + cnt + ', ' + sector + ')';
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -376,7 +376,7 @@ export const sensor_mixgo_touch_slide = function (_, generator) {
         var code = 'onboard_bot.touch_slide()';
     } else {
         generator.definitions_['import_' + version] = 'import ' + version;
-        var code = version + '.touch_slide(3,4)';
+        var code = version + '.touch_slide(3, 4)';
     }
     return [code, generator.ORDER_ATOMIC];
 }
@@ -548,7 +548,7 @@ export const onboard_RTC_set_datetime = function (_, generator) {
     var hour = generator.valueToCode(this, "hour", generator.ORDER_ASSIGNMENT);
     var minute = generator.valueToCode(this, "minute", generator.ORDER_ASSIGNMENT);
     var second = generator.valueToCode(this, "second", generator.ORDER_ASSIGNMENT);
-    var code = 'rtctime.settime((' + year + ',' + month + ',' + day + ',' + hour + ',' + minute + ',' + second + ',0,0))\n';
+    var code = 'rtctime.settime((' + year + ', ' + month + ', ' + day + ', ' + hour + ', ' + minute + ', ' + second + ', 0, 0))\n';
     return code;
 }
 
@@ -914,7 +914,7 @@ export const CI130X_BROADCAST_SANT = function (_, generator) {
     var num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
     var star = this.getFieldValue('star');
     var end = this.getFieldValue('end');
-    var code = 'onboard_asr.play(' + star + ',' + num + ',' + end + ')\n';
+    var code = 'onboard_asr.play(' + star + ', ' + num + ', ' + end + ')\n';
     return code;
 }
 
@@ -926,7 +926,7 @@ export const CI130X_SET_SYSTEM_CMD_SANT = function (_, generator) {
     return code;
 }
 
-export const sensor_get_the_coprocessor_version = function(_,generator){
+export const sensor_get_the_coprocessor_version = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
     var code = 'onboard_bot.version()';

@@ -23,7 +23,7 @@ export const display_show_image_or_string_delay = function (_, generator) {
     generator.definitions_['import_matrix'] = 'import matrix';
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var time = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
-    var code = "matrix.show(" + data + ',' + time + ")\n";
+    var code = "matrix.show(" + data + ', ' + time + ")\n";
     return code;
 }
 
@@ -31,7 +31,7 @@ export const display_scroll_string_delay = function (_, generator) {
     generator.definitions_['import_matrix'] = 'import matrix';
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var time = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
-    var code = "matrix.scroll(" + data + ',' + time + ")\n";
+    var code = "matrix.scroll(" + data + ', ' + time + ")\n";
     return code;
 }
 
@@ -244,7 +244,7 @@ export const display_use_i2c_init = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var row = generator.valueToCode(this, 'row', generator.ORDER_ATOMIC);
     var column = generator.valueToCode(this, 'column', generator.ORDER_ATOMIC);
-    var code = sub + " = ssd1306.SSD1306_I2C(" + row + "," + column + "," + i2csub + ")\n";
+    var code = sub + " = ssd1306.SSD1306_I2C(" + row + ", " + column + ", " + i2csub + ")\n";
     return code;
 }
 
@@ -256,7 +256,7 @@ export const display_draw_4strings = function (_, generator) {
     var value_text_line2 = generator.valueToCode(this, 'Text_line2', generator.ORDER_ASSIGNMENT) || '\'\'';
     var value_text_line3 = generator.valueToCode(this, 'Text_line3', generator.ORDER_ASSIGNMENT) || '\'\'';
     var value_text_line4 = generator.valueToCode(this, 'Text_line4', generator.ORDER_ASSIGNMENT) || '\'\'';
-    var code = varName + '.show_str(' + value_text_line1 + ',' + value_text_line2 + ',' + value_text_line3 + ',' + value_text_line4 + ')\n'
+    var code = varName + '.show_str(' + value_text_line1 + ', ' + value_text_line2 + ', ' + value_text_line3 + ', ' + value_text_line4 + ')\n'
     return code;
 }
 
@@ -285,10 +285,10 @@ export const display_rect = function (_, generator) {
     var code = '';
     switch (checkbox_fill) {
         case "True":
-            code = varName + '.show_fill_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
+            code = varName + '.show_fill_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ', ' + size + ')\n';
             break;
         case "False":
-            code = varName + '.show_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
+            code = varName + '.show_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ', ' + size + ')\n';
             break;
     }
     return code;
@@ -302,8 +302,7 @@ export const image_arithmetic = function (block, generator) {
     var code = '';
     if (op == 'INTERSECTION') {
         code = imga + '-(' + imga + '-' + imgb + ')';
-    }
-    else {
+    } else {
         code = imga + op + imgb;
     }
     return [code, generator.ORDER_ATOMIC];
@@ -450,7 +449,7 @@ export const display_oled_showBitmap = function (_, generator) {
     var bmp = generator.valueToCode(this, 'bitmap_name', generator.ORDER_ATOMIC);
     var w = generator.valueToCode(this, 'WIDTH', generator.ORDER_ATOMIC);
     var h = generator.valueToCode(this, 'HEIGHT', generator.ORDER_ATOMIC);
-    var code = varName + '.show_bitmap(' + location_x + ', ' + location_y + ', ' + bmp + ',' + w + ',' + h + ')\n';
+    var code = varName + '.show_bitmap(' + location_x + ', ' + location_y + ', ' + bmp + ', ' + w + ', ' + h + ')\n';
     return code;
 }
 

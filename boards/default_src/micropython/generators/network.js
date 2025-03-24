@@ -25,7 +25,7 @@ export const network_connect = function (_, generator) {
     var varName = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var id = generator.valueToCode(this, 'id', generator.ORDER_ATOMIC);
     var password = generator.valueToCode(this, 'password', generator.ORDER_ATOMIC);
-    return "" + varName + ".connect(" + id + "," + password + ")\n"
+    return "" + varName + ".connect(" + id + ", " + password + ")\n"
 }
 
 export const network_wifi_connect = function (_, generator) {
@@ -78,7 +78,7 @@ export const network_ap_connect = function (_, generator) {
     var varName = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var essid = generator.valueToCode(this, 'essid', generator.ORDER_ATOMIC);
     var channel = generator.valueToCode(this, 'channel', generator.ORDER_ATOMIC);
-    return "" + varName + ".config(essid = " + essid + ", channel = " + channel + ")\n";
+    return "" + varName + ".config(essid = " + essid + ", channel=" + channel + ")\n";
 }
 
 export const network_scan = function (_, generator) {
@@ -112,7 +112,7 @@ export const network_socket_init = function (_, generator) {
     else if (mode == 'TCP') {
         mode = 'socket.SOCK_STREAM'
     }
-    return "" + varName + " = socket.socket(socket.AF_INET," + mode + ")\n";
+    return "" + varName + " = socket.socket(socket.AF_INET, " + mode + ")\n";
 }
 
 export const network_socket_bind = function (_, generator) {
@@ -180,7 +180,7 @@ export const network_socket_send_to = function (_, generator) {
     var varName = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var content = generator.valueToCode(this, 'content', generator.ORDER_ATOMIC);
     var address = generator.valueToCode(this, 'address', generator.ORDER_ATOMIC);
-    var code = "" + varName + ".sendto(" + content + "," + address + ")\n";
+    var code = "" + varName + ".sendto(" + content + ", " + address + ")\n";
     return code;
 }
 
@@ -198,7 +198,6 @@ export const requests_get = function (_, generator) {
         Blockly.Variables.NAME_TYPE);
     var str = generator.valueToCode(this, 'DOMAIN', generator.ORDER_ATOMIC);
     var code = varName + '= ' + 'requests.get(' + str + ')\n';
-
     return code;
 }
 
@@ -236,7 +235,6 @@ export const requests_get2 = function (_, generator) {
     var str = generator.valueToCode(this, 'URL', generator.ORDER_ATOMIC);
     var code = 'urequests.' + dropdown_type + '(' + str + ')';
     return [code, generator.ORDER_ATOMIC];
-
 };
 
 export const requests_attribute2 = function (_, generator) {
@@ -252,7 +250,7 @@ export const requests_post = function (_, generator) {
     var dropdown_type = this.getFieldValue('TYPE');
     var str = generator.valueToCode(this, 'URL', generator.ORDER_ATOMIC);
     var data = generator.valueToCode(this, 'data', generator.ORDER_ATOMIC);
-    var code = 'urequests.' + dropdown_type + '(' + str + ',data=' + data + ')';
+    var code = 'urequests.' + dropdown_type + '(' + str + ', data=' + data + ')';
     return [code, generator.ORDER_ATOMIC];
 
 };
@@ -275,7 +273,7 @@ export const educore_mqtt_connect = function (_, generator) {
     var password = generator.valueToCode(this, 'PASSWORD', generator.ORDER_ATOMIC);
     // var a = "'" + username.replace("'", "").replace("'", "") + "/" + project.replace("'", "").replace("'", "") + "/'"
     // var code = 'MQTT_USR_PRJ = ' + a + '\n' + 'mqtt_client = mixiot.init_MQTT_client(' + server + ', ' + username + ', ' + password + ', MQTT_USR_PRJ)\n';
-    var code = 'mqttclient.connect(server='+server+', port='+port+',client_id='+client_id+',user='+username+',psd='+password+')\n'
+    var code = 'mqttclient.connect(server='+server+', port='+port+', client_id='+client_id+', user='+username+', psd='+password+')\n'
     return code;
 }
 
@@ -301,7 +299,7 @@ export const educore_mqtt_topic_publish = function (_, generator) {
     generator.definitions_['import_educore_mqttclient'] = "from educore import mqttclient";
     var topic = generator.valueToCode(this, 'TOPIC', generator.ORDER_ATOMIC);
     var msg = generator.valueToCode(this, 'MSG', generator.ORDER_ATOMIC);
-    var code = 'mqtt_client.publish(topic=' + topic + ',content=' + msg + ')\n';
+    var code = 'mqtt_client.publish(topic=' + topic + ', content=' + msg + ')\n';
     return code;
 }
 
