@@ -91,6 +91,8 @@ pins["元控青春"] = {
         ["Warning", "informatio_picture.Warning"],
         ["Bomb", "object_picture.Bomb"],
         ["Boom", "object_picture.Boom"],
+        ["DOOR_CLOSE", "object_picture.DOOR_CLOSE"],
+        ["DOOR_OPEN", "object_picture.DOOR_OPEN"],
         ["Fire", "object_picture.Fire"],
         ["Flowers", "object_picture.Flowers"],
         ["Forest", "object_picture.Forest"],
