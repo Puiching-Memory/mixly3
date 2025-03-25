@@ -525,6 +525,15 @@
         "__size__": 3671,
         "__name__": "ms32006.py"
     },
+    "ms5611": {
+        "__require__": [
+            "utime",
+            "micropython"
+        ],
+        "__file__": true,
+        "__size__": 2351,
+        "__name__": "ms5611.py"
+    },
     "msa301": {
         "__require__": [
             "time",
@@ -578,7 +587,7 @@
     "object_picture": {
         "__require__": [],
         "__file__": true,
-        "__size__": 35094,
+        "__size__": 41926,
         "__name__": "object_picture.py"
     },
     "oled128x64": {

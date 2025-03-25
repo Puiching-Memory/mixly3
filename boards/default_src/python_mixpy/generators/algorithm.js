@@ -6,18 +6,21 @@ export const algorithm_prepare = function (_, generator) {
     var code = line1 + line2 + "vis = [0,1,0,0,0,0,0,0,0]\n";
     code += `position = [[0, 0], [200, 200], [250, 60], [320, 200], [280, 380], [470, 250], [670, 90], [650, 340]]
 sprite.clearAllSprites()
-sprite.createBackground('map_xuexiao')
-
-house = [ sprite.Sprite('mark', 150, 380),
-    sprite.Sprite('School', 115, 195),
-    sprite.Sprite('House25', 264, 67),
-    sprite.Sprite('House36', 320, 200),
-    sprite.Sprite('House47', 290, 371),
-    sprite.Sprite('House25', 479, 233),
-    sprite.Sprite('House36', 674, 96),
-    sprite.Sprite('House47', 642, 318)
+sprite.createBackground('ditu')
+mask = sprite.Sprite('white', 96, 354)
+mask.hide()
+house = [
+    sprite.Sprite('mark', 150, 380),
+    sprite.Sprite('xtxn', 96, 170),
+    sprite.Sprite('xnvijx', 270, 45),
+    sprite.Sprite('xnxbjx', 310, 182),
+    sprite.Sprite('xnsijx', 300, 370),
+    sprite.Sprite('xnkejx', 495, 220),
+    sprite.Sprite('bwbwjx', 716, 85),
+    sprite.Sprite('lelejx', 686, 314)
 ]
 for i in house:
+    i.filterBrighter()
     i.hide()\n`;
     return code;
 }
@@ -26,9 +29,10 @@ export const algorithm_add_school = function () {
     // var code = "path = [1]\n"
     //          + "list1 = [0,1,2,3,4,5,6]\n"
     //          + "list2 = [3,1,0,4,5,6,2]\n";
-    var code = "path = [1]\n"
-        + "car = sprite.Sprite('car', position[1][0], position[1][1])\nhouse[1].show()\n"
-        + `car.nowPos = 1
+    var code = `path = [1]
+mask.show()
+car = sprite.Sprite('xnie', position[1][0], position[1][1])\nhouse[1].show()
+car.nowPos = 1
 def drive(n):
     if g[car.nowPos][n]==1:
         car.slideTo(position[n][0], position[n][1], 1)
@@ -111,20 +115,23 @@ export const algorithm_prepare2 = function (_, generator) {
     var code = line1 + line2 + "vis = [0,1,0,0,0,0,0,0,0]\n";
     code += `position = [[0, 0], [200, 200], [250, 60], [320, 200], [280, 380], [470, 250], [670, 90], [650, 340]]
 sprite.clearAllSprites()
-sprite.createBackground('map_xuexiao')
-
-house = [ sprite.Sprite('mark', 150, 380),
-    sprite.Sprite('School', 115, 195),
-    sprite.Sprite('House25', 264, 67),
-    sprite.Sprite('House36', 320, 200),
-    sprite.Sprite('House47', 290, 371),
-    sprite.Sprite('House25', 479, 233),
-    sprite.Sprite('House36', 674, 96),
-    sprite.Sprite('House47', 642, 318)
+sprite.createBackground('ditu')
+mask = sprite.Sprite('white', 96, 354)
+mask.hide()
+house = [
+    sprite.Sprite('mark', 150, 380),
+    sprite.Sprite('xtxn', 96, 170),
+    sprite.Sprite('xnvijx', 270, 45),
+    sprite.Sprite('xnxbjx', 310, 182),
+    sprite.Sprite('xnsijx', 300, 370),
+    sprite.Sprite('xnkejx', 495, 220),
+    sprite.Sprite('bwbwjx', 716, 85),
+    sprite.Sprite('lelejx', 686, 314)
 ]
-barricade = sprite.Sprite('barricade', 570, 170)
+barricade = sprite.Sprite('barricade', 610, 170)
 barricade.enlargeTo(100)
 for i in house:
+    i.filterBrighter()
     i.hide()\n`;
     return code;
 }
