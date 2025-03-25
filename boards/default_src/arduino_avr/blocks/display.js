@@ -1806,7 +1806,7 @@ export const lcd_display_pattern = {
             .appendField(Blockly.Msg.COLUMN_DISPLAY_IMAGE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.LCD_NUMBERING)
-            .appendField(new Blockly.FieldDropdown(this.NUMBER), "number");
+            .appendField(new Blockly.FieldDropdown(lcd_display_pattern.NUMBER), "number");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(DISPLAY_HUE);
@@ -2121,7 +2121,7 @@ export const TFT_Rotation = {
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
             .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_ROTATE)
-            .appendField(new Blockly.FieldDropdown(this.ROTATION_TYPE), "Rotation_TYPE");
+            .appendField(new Blockly.FieldDropdown(TFT_Rotation.ROTATION_TYPE), "Rotation_TYPE");
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);

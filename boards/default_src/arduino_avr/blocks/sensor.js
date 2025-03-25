@@ -144,7 +144,7 @@ export const ds18b20 = {
             .appendField(Blockly.Msg.MIXLY_DS18B20)
             .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN")
             .appendField(Blockly.Msg.MIXLY_GETTEMPERATUE)
-            .appendField(new Blockly.FieldDropdown(this.UNIT), "UNIT");
+            .appendField(new Blockly.FieldDropdown(ds18b20.UNIT), "UNIT");
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_DS18);
     },
@@ -176,7 +176,7 @@ export const mlx90614_get_data = {
         this.appendDummyInput()
             .appendField("MLX90614" + Blockly.Msg.MLX90614_TYPE)
             .appendField(Blockly.Msg.MIXLY_GET)
-            .appendField(new Blockly.FieldDropdown(this.DATA_TYPE), "mlx90614_data");
+            .appendField(new Blockly.FieldDropdown(mlx90614_get_data.DATA_TYPE), "mlx90614_data");
         this.setInputsInline(true);
         this.setOutput(true, null);
         this.setColour(40);
@@ -246,7 +246,7 @@ export const DS1307_init = {
             .appendField(Blockly.Msg.MIXLY_RTCINIT);
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(new Blockly.FieldDropdown(this.RTC_TYPE), 'RTCType');
+            .appendField(new Blockly.FieldDropdown(DS1307_init.RTC_TYPE), 'RTCType');
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
             .appendField(Blockly.Msg.MIXLY_PIN);
@@ -277,7 +277,7 @@ export const RTC_get_time = {
         //.appendField(new Blockly.FieldTextInput('myRTC'), 'RTCName');
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(new Blockly.FieldDropdown(this.RTC_TIME_TYPE), "TIME_TYPE");
+            .appendField(new Blockly.FieldDropdown(RTC_get_time.RTC_TIME_TYPE), "TIME_TYPE");
         this.setInputsInline(true);
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_RTC_GETTIME.replace('%1', this.getFieldValue("TIME_TYPE")));
@@ -392,7 +392,7 @@ export const SHT20 = {
             .appendField("SHT20" + Blockly.Msg.MIXLY_DHT11_T_H);
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(new Blockly.FieldDropdown(this.SHT20_TYPE), "SHT20_TYPE");
+            .appendField(new Blockly.FieldDropdown(SHT20.SHT20_TYPE), "SHT20_TYPE");
         this.setInputsInline(true);
         this.setOutput(true);
         this.setTooltip();
@@ -411,7 +411,7 @@ export const ADXL345 = {
             .appendField(Blockly.Msg.MIXLY_ADXL345);
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(new Blockly.FieldDropdown(this.ADXL345_GETAB), "ADXL345_PIN");
+            .appendField(new Blockly.FieldDropdown(ADXL345.ADXL345_GETAB), "ADXL345_PIN");
         this.setInputsInline(true);
         this.setOutput(true);
         this.setTooltip();
@@ -799,7 +799,7 @@ export const PS2_Button = {
         this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.PS2_BUTTON)
-            .appendField(new Blockly.FieldDropdown(this.PSBUTTON), "psbt")
+            .appendField(new Blockly.FieldDropdown(PS2_Button.PSBUTTON), "psbt")
             .appendField(Blockly.Msg.MIXLY_PULSEIN_STAT)
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.MIXLY_BUTTON_HOLD, "Button"],
@@ -835,7 +835,7 @@ export const PS2_stk = {
         this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.PS2_stick)
-            .appendField(new Blockly.FieldDropdown(this.PSSTK), "psstk");
+            .appendField(new Blockly.FieldDropdown(PS2_stk.PSSTK), "psstk");
         this.setOutput(true, Number);
         this.setTooltip('');
     },
@@ -852,7 +852,7 @@ export const TCS34725_Get_RGB = {
         this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.TCS34725_Get_RGB)
-            .appendField(new Blockly.FieldDropdown(this.DF_TCS34725_COLOR), "DF_TCS34725_COLOR");
+            .appendField(new Blockly.FieldDropdown(TCS34725_Get_RGB.DF_TCS34725_COLOR), "DF_TCS34725_COLOR");
         this.setInputsInline(true);
         this.setOutput(true);
     },
@@ -1072,7 +1072,7 @@ export const mixgo_MPU9250 = {
             .appendField("MPU9250" + Blockly.Msg.MixGo_MPU9250);
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(new Blockly.FieldDropdown(this.MixGo_MPU9250_GETAB), "MixGo_MPU9250_GETAB");
+            .appendField(new Blockly.FieldDropdown(mixgo_MPU9250.MixGo_MPU9250_GETAB), "MixGo_MPU9250_GETAB");
         this.setInputsInline(true);
         this.setOutput(true);
         this.setTooltip("");

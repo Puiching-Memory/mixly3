@@ -210,7 +210,7 @@ export const image_arithmetic = {
             .appendField(Blockly.Msg.MICROBIT_DISPLAY_MERGE_SHAPE);
         this.appendValueInput('B')
             // .setCheck(["esp32_image", "List", String])
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(image_arithmetic.OPERATORS), 'OP');
         this.setInputsInline(true);
         var thisBlock = this;
         this.setTooltip(function () {
@@ -251,7 +251,7 @@ export const display_shift = {
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET)
         this.appendDummyInput('')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(display_shift.OPERATORS), 'OP');
         this.appendValueInput('val')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_SHIFT)
             .setCheck(Number);
@@ -416,7 +416,7 @@ export const mixgome_display_font = {
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.OLED_SET_FONT)
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(mixgome_display_font.OPERATORS), 'OP');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -721,7 +721,7 @@ export const mpython_pbm_image = {
     init: function () {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_Built_in_image1)
-            .appendField(new Blockly.FieldDropdown(this.IMAGES), 'path');
+            .appendField(new Blockly.FieldDropdown(mpython_pbm_image.IMAGES), 'path');
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.setOutput(true);
     },
@@ -886,7 +886,7 @@ export const mixbot_display_rotate = {
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MIXBOT_SCREEN_ROTATE)
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(mixbot_display_rotate.OPERATORS), 'OP');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);

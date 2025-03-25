@@ -29,7 +29,7 @@ export const spiffs_open_file = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MODE);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown(this.OPEN_MODE), 'MODE');
+            .appendField(new Blockly.FieldDropdown(spiffs_open_file.OPEN_MODE), 'MODE');
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);

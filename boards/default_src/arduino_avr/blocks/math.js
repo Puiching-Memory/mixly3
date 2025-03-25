@@ -37,7 +37,7 @@ export const math_arithmetic = {
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#id4");
         this.appendValueInput('B')
             .setCheck(null)
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(math_arithmetic.OPERATORS), 'OP');
         this.setInputsInline(true);
         // Assign 'this' to a variable for use in the tooltip closure below.
         var thisBlock = this;
@@ -72,7 +72,7 @@ export const math_bit = {
             .setCheck(Number);
         this.appendValueInput('B')
             .setCheck(Number)
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(math_bit.OPERATORS), 'OP');
         this.setInputsInline(true);
         this.setTooltip("");
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#id8");
@@ -97,7 +97,7 @@ export const math_trig = {
         this.setOutput(true, Number);
         this.appendValueInput('NUM')
             .setCheck(Number)
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(math_trig.OPERATORS), 'OP');
         // Assign 'this' to a variable for use in the tooltip closure below.
         var thisBlock = this;
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#id17");
@@ -137,7 +137,7 @@ export const math_to_int = {
         this.setColour(MATH_HUE);
         this.appendValueInput('A')
             .setCheck(Number)
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(math_to_int.OPERATORS), 'OP');
         this.setOutput(true, Number);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#id18");
         var thisBlock = this;
@@ -169,7 +169,7 @@ export const math_to_int = {
 export const arduino_variate_type = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown(this.DATATYPES), "variate_type");
+            .appendField(new Blockly.FieldDropdown(arduino_variate_type.DATATYPES), "variate_type");
         this.setOutput(true, null);
         this.setColour(MATH_HUE);
         this.setTooltip("");
@@ -216,7 +216,7 @@ export const math_max_min = {
         this.appendValueInput('A')
             .setCheck(Number)
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP')
+            .appendField(new Blockly.FieldDropdown(math_max_min.OPERATORS), 'OP')
             .appendField('(');
         this.appendValueInput('B')
             .setCheck(Number)

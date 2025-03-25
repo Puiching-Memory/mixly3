@@ -81,7 +81,7 @@ export const handbit_MSA300 = {
             .appendField(Blockly.Msg.MixGo_MPU9250);
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(new Blockly.FieldDropdown(this.HANDBIT_MSA300_GETAB), "HANDBIT_MSA300_GETAB");
+            .appendField(new Blockly.FieldDropdown(handbit_MSA300.HANDBIT_MSA300_GETAB), "HANDBIT_MSA300_GETAB");
         this.setInputsInline(true);
         this.setOutput(true);
         this.setTooltip("");
@@ -101,7 +101,7 @@ export const handbit_MSA300_action = {
             .appendField(Blockly.Msg.Handbit);
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(new Blockly.FieldDropdown(this.HANDBIT_MSA300_ACTION), "HANDBIT_MSA300_ACTION");
+            .appendField(new Blockly.FieldDropdown(handbit_MSA300_action.HANDBIT_MSA300_ACTION), "HANDBIT_MSA300_ACTION");
         this.setInputsInline(true);
         this.setOutput(true);
         this.setTooltip("");
@@ -138,7 +138,7 @@ export const handbit_rgb_rainbow3 = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(this.DISPLAY_RAINBOW_TYPE), "TYPE");
+            .appendField(new Blockly.FieldDropdown(handbit_rgb_rainbow3.DISPLAY_RAINBOW_TYPE), "TYPE");
         this.appendValueInput("rainbow_color")
             .setCheck(Number)
             .setAlign(Blockly.inputs.Align.RIGHT)

@@ -9,7 +9,7 @@ export const brightness_select = {
     init: function () {
         this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(this.BRIGHTNESS_SELECT), 'STAT');
+            .appendField(new Blockly.FieldDropdown(brightness_select.BRIGHTNESS_SELECT), 'STAT');
         this.setOutput(true, Number);
     },
     BRIGHTNESS_SELECT: [
@@ -84,7 +84,7 @@ export const mixepi_ADXL345_action = {
             .appendField("MIXEPI");
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(new Blockly.FieldDropdown(this.MIXEPI_ADXL345_ACTION), "MIXEPI_ADXL345_ACTION");
+            .appendField(new Blockly.FieldDropdown(mixepi_ADXL345_action.MIXEPI_ADXL345_ACTION), "MIXEPI_ADXL345_ACTION");
         this.setInputsInline(true);
         this.setOutput(true);
         this.setTooltip("");
@@ -121,7 +121,7 @@ export const mixepi_rgb_rainbow3 = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(this.DISPLAY_RAINBOW_TYPE), "TYPE");
+            .appendField(new Blockly.FieldDropdown(mixepi_rgb_rainbow3.DISPLAY_RAINBOW_TYPE), "TYPE");
         this.appendValueInput("rainbow_color")
             .setCheck(Number)
             .setAlign(Blockly.inputs.Align.RIGHT)

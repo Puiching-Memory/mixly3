@@ -132,7 +132,7 @@ export const tone_notes = {
     init: function () {
         this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(this.TONE_NOTES), 'STAT');
+            .appendField(new Blockly.FieldDropdown(tone_notes.TONE_NOTES), 'STAT');
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_TONE_NOTE);
     },
@@ -370,7 +370,7 @@ export const display_rgb_init = {
             .setAlign(Blockly.inputs.Align.RIGHT);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_TYPE)
-            .appendField(new Blockly.FieldDropdown(this.DISPLAY_RGB_TYPE), "TYPE");
+            .appendField(new Blockly.FieldDropdown(display_rgb_init.DISPLAY_RGB_TYPE), "TYPE");
         this.appendValueInput("LEDCOUNT")
             .setCheck(Number)
             .setAlign(Blockly.inputs.Align.RIGHT)
@@ -492,7 +492,7 @@ export const display_rgb_rainbow3 = {
             .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN")
             .setAlign(Blockly.inputs.Align.RIGHT);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(this.DISPLAY_RAINBOW_TYPE), "TYPE");
+            .appendField(new Blockly.FieldDropdown(display_rgb_rainbow3.DISPLAY_RAINBOW_TYPE), "TYPE");
         this.appendValueInput("rainbow_color")
             .setCheck(Number)
             .setAlign(Blockly.inputs.Align.RIGHT)
@@ -544,7 +544,7 @@ export const Mixly_motor = {
         this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MOTOR)
-            .appendField(new Blockly.FieldDropdown(this.MOTOR_TYPE), "MOTOR_TYPE");
+            .appendField(new Blockly.FieldDropdown(Mixly_motor.MOTOR_TYPE), "MOTOR_TYPE");
         this.appendDummyInput("")
         this.appendValueInput("PIN1")
             .setCheck(Number)
@@ -611,7 +611,7 @@ export const GD5800_MP3_Set_Device = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MP3_SOURCE)
             .appendField(Blockly.Msg.MIXLY_STAT)
-            .appendField(new Blockly.FieldDropdown(this.GD5800_MP3_Device), "DEVICEID");
+            .appendField(new Blockly.FieldDropdown(GD5800_MP3_Set_Device.GD5800_MP3_Device), "DEVICEID");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -638,7 +638,7 @@ export const GD5800_MP3_CONTROL = {
             .setCheck(Number);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_STAT)
-            .appendField(new Blockly.FieldDropdown(this.GD5800_MP3_CONTROL_TYPE), "CONTROL_TYPE");
+            .appendField(new Blockly.FieldDropdown(GD5800_MP3_CONTROL.GD5800_MP3_CONTROL_TYPE), "CONTROL_TYPE");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -670,7 +670,7 @@ export const GD5800_MP3_LOOP_MODE = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MP3_LOOP_MODE)
             .appendField(Blockly.Msg.MIXLY_STAT)
-            .appendField(new Blockly.FieldDropdown(this.GD5800_MP3_LOOP_MODE_TYPE), "LOOP_MODE");
+            .appendField(new Blockly.FieldDropdown(GD5800_MP3_LOOP_MODE.GD5800_MP3_LOOP_MODE_TYPE), "LOOP_MODE");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -700,7 +700,7 @@ export const GD5800_MP3_EQ_MODE = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MP3_EQ_MODE)
             .appendField(Blockly.Msg.MIXLY_STAT)
-            .appendField(new Blockly.FieldDropdown(this.GD5800_MP3_EQ_MODE_TYPE), "EQ_MODE");
+            .appendField(new Blockly.FieldDropdown(GD5800_MP3_EQ_MODE.GD5800_MP3_EQ_MODE_TYPE), "EQ_MODE");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -777,8 +777,9 @@ export const voice_module = {
             .setCheck(Number);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MP3_PLAY)
-            .appendField(new Blockly.FieldDropdown(this.VOICE_LIST), "VOICE");
-        this.appendValueInput("WAIT").setCheck(Number).appendField(Blockly.Msg.MIXLY_MICROBIT_WAIT);
+            .appendField(new Blockly.FieldDropdown(voice_module.VOICE_LIST), "VOICE");
+        this.appendValueInput("WAIT").setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_WAIT);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -862,9 +863,9 @@ export const AFMotorRun = {
         this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField("AFMotor" + Blockly.Msg.MIXLY_MOTOR)
-            .appendField(new Blockly.FieldDropdown(this.MOTOR), "motor")
+            .appendField(new Blockly.FieldDropdown(AFMotorRun.MOTOR), "motor")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_Direction)
-            .appendField(new Blockly.FieldDropdown(this.DIRECTION), "direction")
+            .appendField(new Blockly.FieldDropdown(AFMotorRun.DIRECTION), "direction")
             .appendField(Blockly.Msg.MIXLY_SPEED);
         this.appendValueInput("speed", Number)
             .setCheck(Number);
@@ -891,7 +892,7 @@ export const AFMotorStop = {
         this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_STOP + "AFMotor" + Blockly.Msg.MIXLY_MOTOR)
-            .appendField(new Blockly.FieldDropdown(this.MOTOR), "motor");
+            .appendField(new Blockly.FieldDropdown(AFMotorStop.MOTOR), "motor");
         this.setPreviousStatement(true);
         this.setNextStatement(true);
     },
@@ -1079,7 +1080,7 @@ export const arduino_dfplayer_set_1 = {
             .appendField(Blockly.Msg.YX5200_MP3)
             .appendField(new Blockly.FieldTextInput("myPlayer"), "dfplayer_name")
             .appendField(" ")
-            .appendField(new Blockly.FieldDropdown(this.DATA), "set_data");
+            .appendField(new Blockly.FieldDropdown(arduino_dfplayer_set_1.DATA), "set_data");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -1306,8 +1307,10 @@ export const I2Cmotor = {
         this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField("I2C" + Blockly.Msg.MIXLY_MOTOR)
-            .appendField(new Blockly.FieldDropdown(this.I2C_Motor_SELECT), "motor");
-        this.appendValueInput("SPEED").setCheck(Number).appendField(Blockly.Msg.MIXLY_MOTOR_SPEED);
+            .appendField(new Blockly.FieldDropdown(I2Cmotor.I2C_Motor_SELECT), "motor");
+        this.appendValueInput("SPEED")
+            .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_MOTOR_SPEED);
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -1333,7 +1336,7 @@ export const M9101X_S_MP3_CONTROL = {
             .setCheck(Number);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_STAT)
-            .appendField(new Blockly.FieldDropdown(this.M9101X_S_MP3_CONTROL_TYPE), "CONTROL_TYPE");
+            .appendField(new Blockly.FieldDropdown(M9101X_S_MP3_CONTROL.M9101X_S_MP3_CONTROL_TYPE), "CONTROL_TYPE");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);

@@ -201,7 +201,7 @@ export const text_equals_starts_ends = {
         this.appendValueInput("STR1")
             .setCheck([String, Number]);
         this.appendValueInput("STR2")
-            .appendField(new Blockly.FieldDropdown(this.TEXT_DOWHAT), 'DOWHAT')
+            .appendField(new Blockly.FieldDropdown(text_equals_starts_ends.TEXT_DOWHAT), 'DOWHAT')
             .setCheck([String, Number]);
         this.setOutput(true, [Boolean, Number]);
         this.setInputsInline(true);
