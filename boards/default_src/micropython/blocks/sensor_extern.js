@@ -182,7 +182,7 @@ export const sensor_dht11 = {
             .appendField(Blockly.Msg.MIXLY_PIN)
             .setCheck(Number);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(this.METHOD), "WHAT");
+            .appendField(new Blockly.FieldDropdown(sensor_dht11.METHOD), "WHAT");
         this.setOutput(true, Number);
         var thisBlock = this;
         this.setTooltip(function () {
@@ -1665,7 +1665,7 @@ export const PS2_stk = {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.PS2_stick)
-            .appendField(new Blockly.FieldDropdown(this.PSSTK), "psstk");
+            .appendField(new Blockly.FieldDropdown(PS2_stk.PSSTK), "psstk");
         this.setOutput(true, Number);
         this.setTooltip('');
     },
@@ -1739,7 +1739,7 @@ export const PS2_stk_new = {
             .appendField(Blockly.Msg.PS2);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_JOYSTICK)
-            .appendField(new Blockly.FieldDropdown(this.PSSTK), "psstk");
+            .appendField(new Blockly.FieldDropdown(PS2_stk_new.PSSTK), "psstk");
         this.setOutput(true, Number);
         this.setTooltip('');
     },

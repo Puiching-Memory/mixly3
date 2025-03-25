@@ -99,7 +99,7 @@ export const sd_volume = {
         this.setColour(STORAGE_HUE);
         this.appendDummyInput()
             .appendField("SD")
-            .appendField(new Blockly.FieldDropdown(this.VOLUME_TYPE), 'volume_TYPE');
+            .appendField(new Blockly.FieldDropdown(sd_volume.VOLUME_TYPE), 'volume_TYPE');
         this.setOutput(true, Number);
         this.setTooltip();
     },
@@ -285,7 +285,7 @@ export const simple_spiffs_store_spiffs_write = {
             .appendField(Blockly.Msg.MIXLY_SD_NEWLINE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MODE)
-            .appendField(new Blockly.FieldDropdown(this.OPEN_MODE), 'MODE');
+            .appendField(new Blockly.FieldDropdown(simple_spiffs_store_spiffs_write.OPEN_MODE), 'MODE');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_STORE_SDWRITE);

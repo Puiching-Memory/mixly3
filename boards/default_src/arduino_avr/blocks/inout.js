@@ -347,7 +347,7 @@ export const ADS1015_setGain = {
             .appendField(Blockly.Msg.ADS1015_setGain);
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(new Blockly.FieldDropdown(this.GAIN_TYPE), "ADS1015_setGain");
+            .appendField(new Blockly.FieldDropdown(ADS1015_setGain.GAIN_TYPE), "ADS1015_setGain");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);

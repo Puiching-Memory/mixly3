@@ -37,7 +37,7 @@ export const HT16K33_POS = {
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
             .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_SHOWPOINT)
-            .appendField(new Blockly.FieldDropdown(this.DRAW_TYPE), "DrawPixel_TYPE");
+            .appendField(new Blockly.FieldDropdown(HT16K33_POS.DRAW_TYPE), "DrawPixel_TYPE");
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -447,7 +447,7 @@ export const MixGo_rgb_rainbow3 = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(this.DISPLAY_RAINBOW_TYPE), "TYPE");
+            .appendField(new Blockly.FieldDropdown(MixGo_rgb_rainbow3.DISPLAY_RAINBOW_TYPE), "TYPE");
         this.appendValueInput("rainbow_color")
             .setCheck(Number)
             .setAlign(Blockly.inputs.Align.RIGHT)

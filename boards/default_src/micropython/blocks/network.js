@@ -416,7 +416,7 @@ export const requests_attribute = {
         this.setColour(NETWORK_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET)
-            .appendField(new Blockly.FieldDropdown(this.ATTR), 'ATTR')
+            .appendField(new Blockly.FieldDropdown(requests_attribute.ATTR), 'ATTR')
         this.setInputsInline(true);
         this.setOutput(true, String);
         var thisBlock = this;
@@ -446,7 +446,7 @@ export const requests_method = {
         this.setColour(NETWORK_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.blockpy_CONDUCT)
-            .appendField(new Blockly.FieldDropdown(this.METHOD), 'DIR')
+            .appendField(new Blockly.FieldDropdown(requests_method.METHOD), 'DIR')
         this.appendDummyInput("")
             .appendField(Blockly.Msg.blockpy_REQUESTS)
         this.setInputsInline(true);
@@ -557,7 +557,7 @@ export const requests_attribute2 = {
         this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET)
-            .appendField(new Blockly.FieldDropdown(this.ATTR), 'ATTR')
+            .appendField(new Blockly.FieldDropdown(requests_attribute2.ATTR), 'ATTR')
         this.setInputsInline(true);
         this.setOutput(true, String);
     },

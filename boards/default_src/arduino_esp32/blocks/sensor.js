@@ -56,7 +56,7 @@ export const ESP_TCS34725_Get_RGB = {
         this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.TCS34725_Get_RGB)
-            .appendField(new Blockly.FieldDropdown(this.TCS34725_COLOR), "TCS34725_COLOR");
+            .appendField(new Blockly.FieldDropdown(ESP_TCS34725_Get_RGB.TCS34725_COLOR), "TCS34725_COLOR");
         this.setInputsInline(true);
         this.setOutput(true);
     },

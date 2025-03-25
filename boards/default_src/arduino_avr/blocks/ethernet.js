@@ -202,7 +202,7 @@ export const NTP_server_get_time = {
             .appendField(Blockly.Msg.NTP_server_get_time);
         this.appendDummyInput("")
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField(new Blockly.FieldDropdown(this.NTP_TIME_TYPE), "TIME_TYPE");
+            .appendField(new Blockly.FieldDropdown(NTP_server_get_time.NTP_TIME_TYPE), "TIME_TYPE");
         this.setInputsInline(true);
         this.setOutput(true, Number);
     },

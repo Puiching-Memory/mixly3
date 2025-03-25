@@ -145,7 +145,7 @@ export const display_matrix_extern_shift = {
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET)
         this.appendDummyInput('')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(display_matrix_extern_shift.OPERATORS), 'OP');
         this.appendValueInput('val')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_SHIFT)
             .setCheck(Number);
@@ -264,7 +264,7 @@ export const display_matrix_extern_image_builtins = {
         this.setColour(DISPLAY_EXTERN_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_Built_in_image1)
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'image');
+            .appendField(new Blockly.FieldDropdown(display_matrix_extern_image_builtins.OPERATORS), 'image');
         this.setOutput(true, "esp32_image");
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Clear_display);
@@ -297,7 +297,7 @@ export const matrix_extern_image_arithmetic = {
             .appendField(Blockly.Msg.MICROBIT_DISPLAY_MERGE_SHAPE);
         this.appendValueInput('B')
             // .setCheck(["esp32_image", "List", String])
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(matrix_extern_image_arithmetic.OPERATORS), 'OP');
         this.setInputsInline(true);
         var thisBlock = this;
         this.setTooltip(function () {
@@ -396,7 +396,7 @@ export const display_image_size = {
             .setCheck("esp32_image")
         // .appendField(Blockly.Msg.blockpy_USE_LIST);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(display_image_size.OPERATORS), 'OP');
         this.setInputsInline(true);
         this.setOutput(true);
         var thisBlock = this;
@@ -428,7 +428,7 @@ export const display_rect = {
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RECT)
-            .appendField(new Blockly.FieldDropdown(this.STATUS), 'OP')
+            .appendField(new Blockly.FieldDropdown(display_rect.STATUS), 'OP')
         // this.appendValueInput("PIN", Number)
         //    .setCheck(Number)
         //    .setAlign(Blockly.inputs.Align.RIGHT)
@@ -664,7 +664,7 @@ export const display_animate = {
         this.setOutput(true, 'Tuple');
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ESP32_DISPLAY_ANIMATE)
-            .appendField(new Blockly.FieldDropdown(this.ANIMATE), 'ANIMATION')
+            .appendField(new Blockly.FieldDropdown(display_animate.ANIMATE), 'ANIMATION')
         //this.setTooltip(Blockly.Msg.LOGIC_BOOLEAN_TOOLTIP);
     },
     ANIMATE: [
@@ -681,7 +681,7 @@ export const display_circle = {
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MIXPY_TURTLE_DRAW_CIRCLE)
-            .appendField(new Blockly.FieldDropdown(this.STATUS), 'OP')
+            .appendField(new Blockly.FieldDropdown(display_circle.STATUS), 'OP')
         this.jsonInit({
             "message0": Blockly.Msg.MIXLY_HANBIT_SHOW_CIRCLE,
             "args0": [
@@ -1540,7 +1540,7 @@ export const extern_oled_shift = {
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET)
         this.appendDummyInput('')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+            .appendField(new Blockly.FieldDropdown(extern_oled_shift.OPERATORS), 'OP');
         this.appendValueInput('val')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_SHIFT)
             .setCheck(Number);

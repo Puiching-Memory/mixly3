@@ -103,7 +103,7 @@ export const controls_whileUntil = {
         this.appendValueInput('BOOL')
             .setCheck([Boolean, Number])
             .appendField(Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT)
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'MODE');
+            .appendField(new Blockly.FieldDropdown(controls_whileUntil.OPERATORS), 'MODE');
         this.appendStatementInput('DO')
             .appendField(Blockly.Msg.MIXLY_DO);
         this.setPreviousStatement(true);
@@ -127,7 +127,7 @@ export const controls_whileUntil = {
 export const controls_flow_statements = {
     init: function () {
         this.setColour(LOOPS_HUE);
-        var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
+        var dropdown = new Blockly.FieldDropdown(controls_flow_statements.OPERATORS);
         this.appendDummyInput()
             .appendField(dropdown, 'FLOW')
             .appendField(Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP);

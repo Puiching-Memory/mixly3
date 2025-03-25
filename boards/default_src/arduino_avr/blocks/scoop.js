@@ -6,7 +6,7 @@ export const SCoopTask = {
     init: function () {
         this.appendDummyInput()
             .appendField("Scoop Task")
-            .appendField(new Blockly.FieldDropdown(this.NUMBER), "_tasknum");
+            .appendField(new Blockly.FieldDropdown(SCoopTask.NUMBER), "_tasknum");
         this.appendStatementInput("setup")
             .appendField(Blockly.Msg.MIXLY_SETUP)
             .setCheck(null);

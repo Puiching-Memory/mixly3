@@ -19,7 +19,7 @@ export const controls_delay = {
         this.setColour(LOOPS_HUE);
         this.appendValueInput("DELAY_TIME", Number)
             .appendField(Blockly.Msg.MIXLY_DELAY)
-            .appendField(new Blockly.FieldDropdown(this.UNIT), "UNIT")
+            .appendField(new Blockly.FieldDropdown(controls_delay.UNIT), "UNIT")
             .setCheck(Number);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -84,8 +84,9 @@ export const controls_whileUntil = {
         this.appendValueInput("BOOL")
             .setCheck([Boolean, Number])
             .appendField(Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT)
-            .appendField(new Blockly.FieldDropdown(this.OPERATORS), "MODE");
-        this.appendStatementInput("DO").appendField(Blockly.Msg.MIXLY_DO);
+            .appendField(new Blockly.FieldDropdown(controls_whileUntil.OPERATORS), "MODE");
+        this.appendStatementInput("DO")
+            .appendField(Blockly.Msg.MIXLY_DO);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setHelpUrl(
@@ -110,7 +111,7 @@ export const controls_whileUntil = {
 export const controls_flow_statements = {
     init: function () {
         this.setColour(LOOPS_HUE);
-        var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
+        var dropdown = new Blockly.FieldDropdown(controls_flow_statements.OPERATORS);
         this.appendDummyInput()
             .appendField(dropdown, "FLOW")
             .appendField(Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP);
@@ -165,7 +166,7 @@ export const controls_millis = {
         this.setColour(LOOPS_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_RUNTIME)
-            .appendField(new Blockly.FieldDropdown(this.UNIT), "UNIT");
+            .appendField(new Blockly.FieldDropdown(controls_millis.UNIT), "UNIT");
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_MILLIS);
     },
@@ -832,7 +833,7 @@ export const simple_timer = {
     init: function () {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SIMPLE_TIMER)
-            .appendField(new Blockly.FieldDropdown(this.NUMBER), "NO")
+            .appendField(new Blockly.FieldDropdown(simple_timer.NUMBER), "NO")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_SCROLL_INTERVAL);
         this.appendValueInput("timein")
             .setCheck(null);
@@ -894,7 +895,7 @@ export const super_delay_function1 = {
     init: function () {
         this.appendDummyInput()
             .appendField(Blockly.Msg.super_delay_function)
-            .appendField(new Blockly.FieldDropdown(this.NUMBER), "number");
+            .appendField(new Blockly.FieldDropdown(super_delay_function1.NUMBER), "number");
         this.appendStatementInput("delay_function")
             .setCheck(null);
         this.setColour(120);
@@ -926,7 +927,7 @@ export const execute_super_delay_function1 = {
     init: function () {
         this.appendDummyInput()
             .appendField(Blockly.Msg.execute_super_delay_function)
-            .appendField(new Blockly.FieldDropdown(this.NUMBER), "number");
+            .appendField(new Blockly.FieldDropdown(execute_super_delay_function1.NUMBER), "number");
         this.appendValueInput("time_interval")
             .setCheck(null)
             .appendField(Blockly.Msg.time_interval);

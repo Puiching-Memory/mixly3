@@ -539,7 +539,7 @@ export const sensor_dht11 = {
             .appendField(Blockly.Msg.MIXLY_PIN)
             .setCheck(Number);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(this.METHOD), "WHAT");
+            .appendField(new Blockly.FieldDropdown(sensor_dht11.METHOD), "WHAT");
         this.setOutput(true, Number);
         var thisBlock = this;
         this.setTooltip(function () {
