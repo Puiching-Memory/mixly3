@@ -69,7 +69,6 @@ class MS5611:
 
 		P = (D1 * SENS / 2 ** 21 - OFF) / 2 ** 15    
 		H = (1 - (P / 101325) ** (1 / 5.255)) * 44330
-
 		return round(P / 100, 2), round(TEMP / 100, 2), round(H, 2)
 
 	def pressure(self): 
@@ -78,5 +77,5 @@ class MS5611:
 	def temperature(self): 
 		return self.getdata[1]
 
-	def altitude(self): 
-		return self.getdata[2]
+	def altitude(self, reference=1013.25):
+		return (pow((reference / 33.8639), 0.190255) - pow((self.getdata[0] / 33.8639), 0.190255)) / 0.000013125214
