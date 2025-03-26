@@ -2001,7 +2001,7 @@
         </shadow>
       </value>
     </block>
-    <block type="mixgomini_display_image_create" m-show='micropython:esp32c2:mixgo_mini'></block>
+    <block type="mixgomini_display_bitmap_create" m-show='micropython:esp32c2:mixgo_mini'></block>
     <block type="image_arithmetic">
       <value name="A">
         <shadow type="pins_builtinimg"></shadow>
@@ -4986,8 +4986,7 @@
         </value>
       </block>
 
-      <block type="display_image_create"></block>
-      <!-- <block type="mixgo_display_image_create_new"></block> -->
+      <block type="display_bitmap_create"></block>
       <block type="display_matrix_extern_image_builtins">
         <value name="SUB">
           <shadow type="variables_get">

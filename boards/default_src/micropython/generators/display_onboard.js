@@ -222,6 +222,29 @@ export const display_image_create = function (block, generator) {
     return [code, generator.ORDER_ATOMIC];
 }
 
+export const display_bitmap_create = function (block, generator) {
+    const BITMAP = block.getFieldValue('BITMAP');
+    const data = [];
+    for (let i = 0; i < 12; i++) {
+        for (let j = 0; j < 4; j++) {
+            let temp = 0;
+            let str = '';
+            for (let k = 0; k < 8; k++) {
+                if (!BITMAP[i][j * 8 + k]) {
+                    continue;
+                }
+                temp |= BITMAP[i][j * 8 + k] << k;
+            }
+            str = temp.toString(16);
+            if (str.length == 1) {
+                str = '0' + str;
+            }
+            data.push('0x' + str);
+        }
+    }
+    return [`[${data.join(',')}]`, generator.ORDER_ATOMIC];
+}
+
 export const display_clear = function (block, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     if (version == 'mpython') {
@@ -382,6 +405,27 @@ export const mixgome_display_image_create = function (block, generator) {
     return [code, generator.ORDER_ATOMIC];
 }
 
+export const mixgome_display_bitmap_create = function (block, generator) {
+    const BITMAP = block.getFieldValue('BITMAP');
+    const data = [];
+    for (let i = 0; i < 5; i++) {
+        let temp = 0;
+        let str = '';
+        for (let k = 0; k < 8; k++) {
+            if (!BITMAP[i][k]) {
+                continue;
+            }
+            temp |= BITMAP[i][k] << k;
+        }
+        str = temp.toString(16);
+        if (str.length == 1) {
+            str = '0' + str;
+        }
+        data.push('\\x' + str);
+    }
+    return [`bytearray(b'${data.join('')}')`, generator.ORDER_ATOMIC];
+}
+
 export const mixgomini_display_image_create = function (block, generator) {
     var blinkColor = '#ff0000';
     var code = '';
@@ -398,6 +442,27 @@ export const mixgomini_display_image_create = function (block, generator) {
     }
     code = `bytearray(b'${code}')`;
     return [code, generator.ORDER_ATOMIC];
+}
+
+export const mixgomini_display_bitmap_create = function (block, generator) {
+    const BITMAP = block.getFieldValue('BITMAP');
+    const data = [];
+    for (let i = 0; i < 12; i++) {
+        let temp = 0;
+        let str = '';
+        for (let k = 0; k < 8; k++) {
+            if (!BITMAP[k][i]) {
+                continue;
+            }
+            temp |= BITMAP[k][i] << k;
+        }
+        str = temp.toString(16);
+        if (str.length == 1) {
+            str = '0' + str;
+        }
+        data.push('\\x' + str);
+    }
+    return [`bytearray(b'${data.join('')}')`, generator.ORDER_ATOMIC];
 }
 
 export const mixgome_display_font = function (a, generator) {
@@ -442,6 +507,29 @@ export const mixgo_display_image_create_new = function (block, generator) {
 
     var code = "bytearray(b'" + colorList.join('') + "')";
     return [code, generator.ORDER_ATOMIC];
+}
+
+export const mixgo_display_bitmap_create = function (block, generator) {
+    const BITMAP = block.getFieldValue('BITMAP');
+    const data = [];
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 2; j++) {
+            let temp = 0;
+            let str = '';
+            for (let k = 0; k < 8; k++) {
+                if (!BITMAP[i][j * 8 + k]) {
+                    continue;
+                }
+                temp |= BITMAP[i][j * 8 + k] << k;
+            }
+            str = temp.toString(16);
+            if (str.length == 1) {
+                str = '0' + str;
+            }
+            data.push('\\x' + str);
+        }
+    }
+    return [`bytearray(b'${data.join('')}')`, generator.ORDER_ATOMIC];
 }
 
 //mpython

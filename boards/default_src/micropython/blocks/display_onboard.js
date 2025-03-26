@@ -158,6 +158,24 @@ export const display_image_create = {
     }
 };
 
+export const display_bitmap_create = {
+    init: function () {
+        this.appendDummyInput('')
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_CREATE_IMAGE)
+        this.appendDummyInput('')
+            .setAlign(Blockly.inputs.Align.CENTRE)
+            .appendField(new Blockly.FieldBitmap(display_bitmap_create.BITMAP, null, {
+                filledColor: '#000',
+                emptyColor: '#5ba5a5',
+                bgColor: '#e5e7f1'
+            }), 'BITMAP');
+        this.setOutput(true);
+        this.setColour(DISPLAY_ONBOARD_HUE);
+        this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
+    },
+    BITMAP: Array.from({ length: 12 }, () => new Array(32).fill(0))
+};
+
 export const display_image_builtins = {
     init: function () {
         this.jsonInit({
@@ -373,6 +391,24 @@ export const mixgome_display_image_create = {
     }
 };
 
+export const mixgome_display_bitmap_create = {
+    init: function () {
+        this.appendDummyInput('')
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_CREATE_IMAGE)
+        this.appendDummyInput('')
+            .setAlign(Blockly.inputs.Align.CENTRE)
+            .appendField(new Blockly.FieldBitmap(mixgome_display_bitmap_create.BITMAP, null, {
+                filledColor: '#000',
+                emptyColor: '#5ba5a5',
+                bgColor: '#e5e7f1'
+            }), 'BITMAP');
+        this.setOutput(true);
+        this.setColour(DISPLAY_ONBOARD_HUE);
+        this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
+    },
+    BITMAP: Array.from({ length: 5 }, () => new Array(8).fill(0))
+};
+
 export const mixgomini_display_image_create = {
     init: function () {
         this.appendDummyInput('')
@@ -392,6 +428,24 @@ export const mixgomini_display_image_create = {
     }
 };
 
+export const mixgomini_display_bitmap_create = {
+    init: function () {
+        this.appendDummyInput('')
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_CREATE_IMAGE)
+        this.appendDummyInput('')
+            .setAlign(Blockly.inputs.Align.CENTRE)
+            .appendField(new Blockly.FieldBitmap(mixgomini_display_bitmap_create.BITMAP, null, {
+                filledColor: '#000',
+                emptyColor: '#5ba5a5',
+                bgColor: '#e5e7f1'
+            }), 'BITMAP');
+        this.setOutput(true);
+        this.setColour(DISPLAY_ONBOARD_HUE);
+        this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
+    },
+    BITMAP: Array.from({ length: 8 }, () => new Array(12).fill(0))
+};
+
 export const mixgo_display_image_create_new = {
     init: function () {
         this.appendDummyInput('')
@@ -409,6 +463,24 @@ export const mixgo_display_image_create_new = {
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
     }
+};
+
+export const mixgo_display_bitmap_create = {
+    init: function () {
+        this.appendDummyInput('')
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_CREATE_IMAGE)
+        this.appendDummyInput('')
+            .setAlign(Blockly.inputs.Align.CENTRE)
+            .appendField(new Blockly.FieldBitmap(mixgo_display_bitmap_create.BITMAP, null, {
+                filledColor: '#000',
+                emptyColor: '#5ba5a5',
+                bgColor: '#e5e7f1'
+            }), 'BITMAP');
+        this.setOutput(true);
+        this.setColour(DISPLAY_ONBOARD_HUE);
+        this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
+    },
+    BITMAP: Array.from({ length: 8 }, () => new Array(16).fill(0))
 };
 
 export const mixgome_display_font = {

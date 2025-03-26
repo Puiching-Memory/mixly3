@@ -1714,7 +1714,7 @@
         </shadow>
       </value>
     </block>
-    <block type="mixgo_display_image_create_new" m-show='micropython:esp32s2:mixgo_ce'></block>
+    <block type="mixgo_display_bitmap_create" m-show='micropython:esp32s2:mixgo_ce'></block>
     <block type="display_image_builtins_all"></block>
 
     <block type="image_arithmetic">
@@ -4347,8 +4347,7 @@
         </value>
       </block>
 
-      <block type="display_image_create"></block>
-      <!-- <block type="mixgo_display_image_create_new"></block> -->
+      <block type="display_bitmap_create"></block>
       <block type="display_matrix_extern_image_builtins">
         <value name="SUB">
           <shadow type="variables_get">

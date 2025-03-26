@@ -1769,8 +1769,8 @@
       </value>
     </block>
     <block type="mixgome_display_font" m-show='micropython:esp32c3:mixgo_me'></block>
-    <block type="mixgome_display_image_create" m-show='micropython:esp32c3:mixgo_me'></block>
-    <block type="display_image_create" m-show='micropython:esp32c3:mixgo_cc'></block>
+    <block type="mixgome_display_bitmap_create" m-show='micropython:esp32c3:mixgo_me'></block>
+    <block type="display_bitmap_create" m-show='micropython:esp32c3:mixgo_cc'></block>
     <block type="display_image_builtins" m-show='micropython:esp32c3:mixgo_cc'></block>
     <block type="display_image_builtins_all" m-show='micropython:esp32c3:mixgo_me'></block>
     <block type="image_arithmetic">
@@ -4621,8 +4621,7 @@
         </value>
       </block>
 
-      <block type="display_image_create"></block>
-      <!-- <block type="mixgo_display_image_create_new"></block> -->
+      <block type="display_bitmap_create"></block>
       <block type="display_matrix_extern_image_builtins">
         <value name="SUB">
           <shadow type="variables_get">

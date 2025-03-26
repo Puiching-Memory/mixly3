@@ -3456,7 +3456,7 @@
       </value>
     </block>
     
-    <block type="display_image_create"></block>
+    <block type="display_bitmap_create"></block>
     <block type="display_matrix_extern_image_builtins">
        <value name="SUB">
               <shadow type="variables_get">
