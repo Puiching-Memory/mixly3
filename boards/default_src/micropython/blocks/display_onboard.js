@@ -921,6 +921,24 @@ export const mixbot_display_image_create = {
     }
 };
 
+export const mixbot_display_bitmap_create = {
+    init: function () {
+        this.appendDummyInput('')
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_CREATE_IMAGE)
+        this.appendDummyInput('')
+            .setAlign(Blockly.inputs.Align.CENTRE)
+            .appendField(new Blockly.FieldBitmap(mixbot_display_bitmap_create.BITMAP, null, {
+                filledColor: '#000',
+                emptyColor: '#5ba5a5',
+                bgColor: '#e5e7f1'
+            }), 'BITMAP');
+        this.setOutput(true);
+        this.setColour(DISPLAY_ONBOARD_HUE);
+        this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
+    },
+    BITMAP: Array.from({ length: 5 }, () => new Array(5).fill(0))
+};
+
 export const mixbot_display_get_screen_pixel = {
     init: function () {
         this.setColour(DISPLAY_ONBOARD_HUE);
@@ -990,6 +1008,24 @@ export const bitbot_display_image_create = {
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
     }
+};
+
+export const bitbot_display_bitmap_create = {
+    init: function () {
+        this.appendDummyInput('')
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_CREATE_IMAGE)
+        this.appendDummyInput('')
+            .setAlign(Blockly.inputs.Align.CENTRE)
+            .appendField(new Blockly.FieldBitmap(bitbot_display_bitmap_create.BITMAP, null, {
+                filledColor: '#000',
+                emptyColor: '#5ba5a5',
+                bgColor: '#e5e7f1'
+            }), 'BITMAP');
+        this.setOutput(true);
+        this.setColour(DISPLAY_ONBOARD_HUE);
+        this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
+    },
+    BITMAP: Array.from({ length: 12 }, () => new Array(12).fill(0))
 };
 
 export const onboard_tft_show_image_xy = {

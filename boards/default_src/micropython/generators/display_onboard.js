@@ -687,6 +687,27 @@ export const mixbot_display_image_create = function (block, generator) {
     return [code, generator.ORDER_ATOMIC];
 }
 
+export const mixbot_display_bitmap_create = function (block, generator) {
+    const BITMAP = block.getFieldValue('BITMAP');
+    const data = [];
+    for (let i = 0; i < 5; i++) {
+        let temp = 0;
+        let str = '';
+        for (let k = 0; k < 5; k++) {
+            if (!BITMAP[i][k]) {
+                continue;
+            }
+            temp |= BITMAP[i][k] << k;
+        }
+        str = temp.toString(16);
+        if (str.length == 1) {
+            str = '0' + str;
+        }
+        data.push('\\x' + str);
+    }
+    return [`bytearray(b'${data.join('')}')`, generator.ORDER_ATOMIC];
+}
+
 export const mixbot_display_get_screen_pixel = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
@@ -747,6 +768,40 @@ export const bitbot_display_image_create = function (block, generator) {
 
     var code = "b'" + colorList.join('') + "'";
     return [code, generator.ORDER_ATOMIC];
+}
+
+export const bitbot_display_bitmap_create = function (block, generator) {
+    const BITMAP = block.getFieldValue('BITMAP');
+    const data = [];
+    for (let i = 0; i < 12; i++) {
+        let temp = 0;
+        let str = '';
+        for (let k = 0; k < 8; k++) {
+            if (!BITMAP[i][k]) {
+                continue;
+            }
+            temp |= BITMAP[i][k] << k;
+        }
+        str = temp.toString(16);
+        if (str.length == 1) {
+            str = '0' + str;
+        }
+        data.push('\\x' + str);
+        temp = 0;
+        str = '';
+        for (let k = 0; k < 4; k++) {
+            if (!BITMAP[i][k]) {
+                continue;
+            }
+            temp |= BITMAP[i][k + 8] << k;
+        }
+        str = temp.toString(16);
+        if (str.length == 1) {
+            str = '0' + str;
+        }
+        data.push('\\x' + str);
+    }
+    return [`bytearray(b'${data.join('')}')`, generator.ORDER_ATOMIC];
 }
 
 export const onboard_tft_show_image_xy = function (_, generator) {
