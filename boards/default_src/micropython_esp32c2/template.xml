@@ -1986,27 +1986,16 @@
     <block type="cc_g1_turnoff"></block>
   </category>
   <category id="catMINI_G2" colour="40" m-show='micropython:esp32c2:mixgo_mini'>
-    <block type="mini_g2_rfid_readid"></block>
-    <block type="mini_g2_rfid_readcontent">
+    <block type="rfid_status"></block>
+    <block type="rfid_readid"></block>
+    <block type="rfid_readcontent">
       <value name="SECTOR">
         <shadow type="math_number">
           <field name="NUM">0</field>
         </shadow>
       </value>
     </block>
-    <block type="mini_g2_rfid_write">
-      <value name="SECTOR">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-      <value name="CONTENT">
-        <shadow type="text">
-          <field name="TEXT">Mixly</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="mini_g2_rfid_write_outcome">
+    <block type="rfid_write">
       <value name="SECTOR">
         <shadow type="math_number">
           <field name="NUM">0</field>
@@ -2018,7 +2007,18 @@
         </shadow>
       </value>
     </block>
-    <block type="mini_g2_rfid_status"></block>
+    <block type="rfid_write_return">
+      <value name="SECTOR">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="CONTENT">
+        <shadow type="text">
+          <field name="TEXT">Mixly</field>
+        </shadow>
+      </value>
+    </block>
   </category>
   <category id="catIot" colour="#2FAD7A">
     <category id="catBlynk" colour="#2FAD7A">
@@ -3854,7 +3854,14 @@
       </next>
     </block>
 
-    <block type="extern_rfid_readcontent" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="extern_rfid_status" m-hide='micropython:esp32c3:mixgocar_c3'>
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">ysensor</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="extern_rfid_readid" m-hide='micropython:esp32c3:mixgocar_c3'>
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">ysensor</field>
@@ -3866,7 +3873,7 @@
         </shadow>
       </value>
     </block>
-    <block type="extern_rfid_readid" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="extern_rfid_readcontent" m-hide='micropython:esp32c3:mixgocar_c3'>
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">ysensor</field>
@@ -3909,14 +3916,6 @@
       <value name="CONTENT">
         <shadow type="text">
           <field name="TEXT">Mixly</field>
-        </shadow>
-      </value>
-    </block>
-
-    <block type="extern_rfid_status" m-hide='micropython:esp32c3:mixgocar_c3'>
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">ysensor</field>
         </shadow>
       </value>
     </block>

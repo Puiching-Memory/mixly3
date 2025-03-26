@@ -4006,8 +4006,14 @@
         </block>
       </next>
     </block>
-
-    <block type="extern_rfid_readcontent">
+    <block type="extern_rfid_status">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">ysensor</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="extern_rfid_readid">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">ysensor</field>
@@ -4019,7 +4025,7 @@
         </shadow>
       </value>
     </block>
-    <block type="extern_rfid_readid">
+    <block type="extern_rfid_readcontent">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">ysensor</field>
@@ -4062,13 +4068,6 @@
       <value name="CONTENT">
         <shadow type="text">
           <field name="TEXT">Mixly</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="extern_rfid_status">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">ysensor</field>
         </shadow>
       </value>
     </block>

@@ -796,6 +796,21 @@ export const rfid_write_return = {
     }
 };
 
+export const rfid_status = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendDummyInput("")
+            .appendField("RFID")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_RFID_SCAN_OK, "True"],
+                [Blockly.Msg.MIXLY_RFID_SCAN_NOTAGERR, "None"],
+                [Blockly.Msg.MIXLY_RFID_SCAN_ERROR, "False"]
+            ]), "key");
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};
+
 export const sensor_get_acceleration = {
     init: function () {
         this.setColour(SENSOR_ONBOARD_HUE);

@@ -1,5 +1,6 @@
 import * as Blockly from 'blockly/core';
 import * as Mixly from 'mixly';
+import { MicroPythonSensorOnBoardBlocks } from '@mixly/micropython';
 
 const MEG1_HUE = 40;
 
@@ -60,6 +61,69 @@ export const me_g1_varistor = {
     }
 };
 
+/**
+ * @override override "@micropython.MicroPythonSensorOnBoardBlocks.rfid_readid"
+ */
+export const rfid_readid = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField('ME G1');
+        MicroPythonSensorOnBoardBlocks.rfid_readid.init.call(this);
+        this.setColour(MEG1_HUE);
+    }
+};
+
+/**
+ * @override override "@micropython.MicroPythonSensorOnBoardBlocks.rfid_readcontent"
+ */
+export const rfid_readcontent = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField('ME G1');
+        MicroPythonSensorOnBoardBlocks.rfid_readcontent.init.call(this);
+        this.setColour(MEG1_HUE);
+    }
+};
+
+/**
+ * @override override "@micropython.MicroPythonSensorOnBoardBlocks.rfid_write"
+ */
+export const rfid_write = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField('ME G1');
+        MicroPythonSensorOnBoardBlocks.rfid_write.init.call(this);
+        this.setColour(MEG1_HUE);
+    }
+};
+
+/**
+ * @override override "@micropython.MicroPythonSensorOnBoardBlocks.rfid_write_return"
+ */
+export const rfid_write_return = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField('ME G1');
+        MicroPythonSensorOnBoardBlocks.rfid_write_return.init.call(this);
+        this.setColour(MEG1_HUE);
+    }
+};
+
+/**
+ * @override override "@micropython.MicroPythonSensorOnBoardBlocks.rfid_status"
+ */
+export const rfid_status = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField('ME G1');
+        MicroPythonSensorOnBoardBlocks.rfid_status.init.call(this);
+        this.setColour(MEG1_HUE);
+    }
+};
+
+/**
+ * @deprecated To be removed in the future
+ */
 export const me_g1_rfid_readid = {
     init: function () {
         var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
@@ -70,11 +134,17 @@ export const me_g1_rfid_readid = {
             .appendField("RFID" + Blockly.Msg.MIXLY_RFID_READ_CARD);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RFID_READ_CARD_UID);
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
         this.setOutput(true, Number);
         this.setInputsInline(true);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
     }
 };
 
+/**
+ * @deprecated To be removed in the future
+ */
 export const me_g1_rfid_readcontent = {
     init: function () {
         var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
@@ -87,12 +157,42 @@ export const me_g1_rfid_readcontent = {
             .appendField(Blockly.Msg.MIXLY_LIST_INDEX)
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_ALL);
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
         this.setOutput(true, Number);
         this.setInputsInline(true);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
     }
 };
 
+/**
+ * @deprecated To be removed in the future
+ */
 export const me_g1_rfid_write = {
+    init: function () {
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        if (version == "mixgo_me") { var name = 'ME G1' }
+        this.setColour(MEG1_HUE);
+        this.appendDummyInput()
+            .appendField(name)
+            .appendField(Blockly.Msg.MIXLY_COMMUNICATION_RFID_WRITE);
+        this.appendValueInput('SECTOR')
+            .appendField(Blockly.Msg.MIXLY_LIST_INDEX);
+        this.appendValueInput('CONTENT')
+            .appendField(Blockly.Msg.MIXLY_COMMUNICATION_WRITE_NUM);
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
+    }
+};
+
+/**
+ * @deprecated To be removed in the future
+ */
+export const me_g1_rfid_write_outcome = {
     init: function () {
         var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
         if (version == "mixgo_me") { var name = 'ME G1' }
@@ -103,32 +203,20 @@ export const me_g1_rfid_write = {
         this.appendValueInput('SECTOR')
             .appendField(Blockly.Msg.MIXLY_LIST_INDEX)
         this.appendValueInput('CONTENT')
-            .appendField(Blockly.Msg.MIXLY_COMMUNICATION_WRITE_NUM)
-        this.setInputsInline(true);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-    }
-};
-
-export const me_g1_rfid_write_outcome = {
-    init: function(){
-        var version=Mixly.Boards.getSelectedBoardKey().split(':')[2]
-        if(version=="mixgo_me"){var name='ME G1'}
-        this.setColour(MEG1_HUE);
+            .appendField(Blockly.Msg.MIXLY_COMMUNICATION_WRITE_NUM);
         this.appendDummyInput()
-            .appendField(name)
-            .appendField(Blockly.Msg.MIXLY_COMMUNICATION_RFID_WRITE);
-        this.appendValueInput('SECTOR')
-            .appendField(Blockly.Msg.MIXLY_LIST_INDEX)
-        this.appendValueInput('CONTENT')
-            .appendField(Blockly.Msg.MIXLY_COMMUNICATION_WRITE_NUM)
+            .appendField(Blockly.Msg.RETURN_SUCCESS_OR_NOT);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.RETURN_SUCCESS_OR_NOT)
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
         this.setInputsInline(true);
         this.setOutput(true);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
     }
 };
 
+/**
+ * @deprecated To be removed in the future
+ */
 export const me_g1_rfid_status = {
     init: function () {
         var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
@@ -143,7 +231,10 @@ export const me_g1_rfid_status = {
                 [Blockly.Msg.MIXLY_RFID_SCAN_NOTAGERR, "1"],
                 [Blockly.Msg.MIXLY_RFID_SCAN_ERROR, "2"]
             ]), "key");
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
         this.setOutput(true, Number);
         this.setInputsInline(true);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
     }
 };

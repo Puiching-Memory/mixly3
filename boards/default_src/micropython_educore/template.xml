@@ -1522,13 +1522,8 @@
     <block type="sensor_mixgo_cc_mmc5603_calibrate_compass" m-show="micropython:esp32c2:mixgo_mini"></block>
     <block type="sensor_mixgo_cc_mmc5603_get_magnetic" m-show="micropython:esp32c2:mixgo_mini"></block>
     <block type="sensor_mixgo_cc_mmc5603_get_angle" m-show="micropython:esp32c2:mixgo_mini"></block>
-    <block type="rfid_readid" m-show='micropython:esp32c3:mixgo_cc'>
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">rfid</field>
-        </shadow>
-      </value>
-    </block>
+    <block type="rfid_status" m-show='micropython:esp32c3:mixgo_cc'></block>
+    <block type="rfid_readid" m-show='micropython:esp32c3:mixgo_cc'></block>
     <block type="rfid_readcontent" m-show='micropython:esp32c3:mixgo_cc'>
       <value name="SECTOR">
         <shadow type="math_number">
@@ -4108,7 +4103,14 @@
       </next>
     </block>
 
-    <block type="extern_rfid_readcontent" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="extern_rfid_status" m-hide='micropython:esp32c3:mixgocar_c3'>
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">ysensor</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="extern_rfid_readid" m-hide='micropython:esp32c3:mixgocar_c3'>
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">ysensor</field>
@@ -4120,7 +4122,7 @@
         </shadow>
       </value>
     </block>
-    <block type="extern_rfid_readid" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="extern_rfid_readcontent" m-hide='micropython:esp32c3:mixgocar_c3'>
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">ysensor</field>
@@ -4163,14 +4165,6 @@
       <value name="CONTENT">
         <shadow type="text">
           <field name="TEXT">Mixly</field>
-        </shadow>
-      </value>
-    </block>
-
-    <block type="extern_rfid_status" m-hide='micropython:esp32c3:mixgocar_c3'>
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">ysensor</field>
         </shadow>
       </value>
     </block>

@@ -268,28 +268,16 @@ export const sensor_get_temperature = function (_, generator) {
 
 export const rfid_readid = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    if(version == 'mixgo_mini'){
-        generator.definitions_['import_mini_g2'] = 'import mini_g2';
-        generator.definitions_['import_mini_g2_ext_rfid'] = 'from mini_g2 import ext_rfid';
-        var code = 'ext_rfid.read_card(0, x="id")';
-    }else{
-        generator.definitions_['import_' + version + '_onboard_rfid'] = "from " + version + " import onboard_rfid";
-        var code = 'onboard_rfid.read_card(0, x="id")';
-    } 
+    generator.definitions_[`import_${version}_onboard_rfid`] = `from ${version} import onboard_rfid`;
+    var code = 'onboard_rfid.read_card(0, x="id")';
     return [code, generator.ORDER_ATOMIC];
 }
 
 export const rfid_readcontent = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     var sector = generator.valueToCode(this, 'SECTOR', generator.ORDER_ATOMIC);
-    if(version == 'mixgo_mini'){
-        generator.definitions_['import_mini_g2'] = 'import mini_g2';
-        generator.definitions_['import_mini_g2_ext_rfid'] = 'from mini_g2 import ext_rfid';
-        var code = 'ext_rfid.read_card(' + sector + ')';
-    }else{
-        generator.definitions_['import_' + version + '_onboard_rfid'] = "from " + version + " import onboard_rfid";
-        var code = 'onboard_rfid.read_card(' + sector + ', x="content")';
-    }
+    generator.definitions_[`import_${version}_onboard_rfid`] = `from ${version} import onboard_rfid`;
+    var code = `onboard_rfid.read_card(${sector}, x="content")`;
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -297,14 +285,8 @@ export const rfid_write = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     var sector = generator.valueToCode(this, 'SECTOR', generator.ORDER_ATOMIC);
     var cnt = generator.valueToCode(this, 'CONTENT', generator.ORDER_ATOMIC);
-    if(version == 'mixgo_mini'){
-        generator.definitions_['import_mini_g2'] = 'import mini_g2';
-        generator.definitions_['import_mini_g2_ext_rfid'] = 'from mini_g2 import ext_rfid';
-        var code = 'ext_rfid.write_card(' + cnt + ',' + sector + ')\n';
-    }else{
-        generator.definitions_['import_' + version + '_onboard_rfid'] = "from " + version + " import onboard_rfid";
-        var code = 'onboard_rfid.write_card(' + cnt + ', ' + sector + ')\n';
-    }
+    generator.definitions_[`import_${version}_onboard_rfid`] = `from ${version} import onboard_rfid`;
+    var code = `onboard_rfid.write_card(${cnt}, ${sector})\n`;
     return code;
 }
 
@@ -312,13 +294,16 @@ export const rfid_write_return = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     var sector = generator.valueToCode(this, 'SECTOR', generator.ORDER_ATOMIC);
     var cnt = generator.valueToCode(this, 'CONTENT', generator.ORDER_ATOMIC);
-    if (version == "mixgo_mini") {
-        generator.definitions_['import_mini_g2_ext_rfid'] = 'from mini_g2 import ext_rfid';
-        var code = 'ext_rfid.write_card(' + cnt + ',' + sector + ')';
-    } else {
-        generator.definitions_['import_' + version + '_onboard_rfid'] = "from " + version + " import onboard_rfid";
-        var code = 'onboard_rfid.write_card(' + cnt + ', ' + sector + ')';
-    }
+    generator.definitions_[`import_${version}_onboard_rfid`] = `from ${version} import onboard_rfid`;
+    var code = `onboard_rfid.write_card(${cnt}, ${sector})`;
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const rfid_status = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2];
+    var key = this.getFieldValue('key');
+    generator.definitions_[`import_${version}_onboard_rfid`] = `from ${version} import onboard_rfid`;
+    var code = `onboard_rfid.scan_card() == ${key}`;
     return [code, generator.ORDER_ATOMIC];
 }
 

@@ -1442,13 +1442,8 @@
     <block type="sensor_mixgo_cc_mmc5603_calibrate_compass" m-show="micropython:esp32c3:feiyi"></block>
     <block type="sensor_mixgo_cc_mmc5603_get_magnetic" m-show="micropython:esp32c3:feiyi"></block>
     <block type="sensor_mixgo_cc_mmc5603_get_angle" m-show="micropython:esp32c3:feiyi"></block>
-    <block type="rfid_readid" m-show="micropython:esp32c3:feiyi">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">rfid</field>
-        </shadow>
-      </value>
-    </block>
+    <block type="rfid_status" m-show="micropython:esp32c3:feiyi"></block>
+    <block type="rfid_readid" m-show="micropython:esp32c3:feiyi"></block>
     <block type="rfid_readcontent" m-show="micropython:esp32c3:feiyi">
       <value name="SECTOR">
         <shadow type="math_number">
