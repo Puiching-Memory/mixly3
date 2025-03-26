@@ -3918,4 +3918,10 @@ En.MIXLY_SET_MAXIMUM_HISTORICAL_SESSIONS_NUM = 'Set Maximum Number of Historical
 En.MIXLY_LLM_CHAT = 'Chat with Large Language Model';
 En.MIXLY_LLM_CONTENT_CALLBACK = 'Result Output Callback';
 En.MIXLY_EMPTY_HISTORY = 'Clear History';
+En.MIXLY_SET_RADIAN = 'convert radians';
+En.MIXLY_TRANS_TO_ANGLE = 'to angles';
+En.MIXLY_SET_DEGREE = 'convert angles';
+En.MIXLY_TRANS_TO_RADIAN = 'to radians';
+En.MIXLY_REF_TO_PRESSURE = 'Reference pressure';
+En.MIXLY_CAL_TO_ALTITUDE = 'Calculate the altitude';
 })();

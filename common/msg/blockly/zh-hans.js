@@ -4078,5 +4078,10 @@ ZhHans.MIXLY_LLM_CONTENT_CALLBACK = '结果输出回调';
 // ZhHans.MIXLY_SELECT_MODEL = '选择模型';
 // ZhHans.MIXLY_CLEAR_USER_HISTORY = '清除用户的历史记录';
 ZhHans.MIXLY_EMPTY_HISTORY = '清空历史记录';
-
+ZhHans.MIXLY_SET_RADIAN = '将弧度';
+ZhHans.MIXLY_TRANS_TO_ANGLE = '转换为角度';
+ZhHans.MIXLY_SET_DEGREE = '将角度';
+ZhHans.MIXLY_TRANS_TO_RADIAN = '转换为弧度';
+ZhHans.MIXLY_REF_TO_PRESSURE = '参考气压';
+ZhHans.MIXLY_CAL_TO_ALTITUDE = '计算获取海拔';
 })();

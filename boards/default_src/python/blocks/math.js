@@ -675,3 +675,27 @@ export const generate_cartesian_product = {
         }
     }
 }
+
+export const math_radian_to_degree = {
+    init: function () {
+        this.setColour(MATH_HUE);
+        this.setOutput(true)
+        this.appendValueInput('VAR')
+            .appendField(Blockly.Msg.MIXLY_SET_RADIAN);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_TRANS_TO_ANGLE);
+        this.setInputsInline(true);
+    }
+};
+
+export const math_degree_to_radian = {
+    init: function () {
+        this.setColour(MATH_HUE);
+        this.setOutput(true)
+        this.appendValueInput('VAR')
+            .appendField(Blockly.Msg.MIXLY_SET_DEGREE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_TRANS_TO_RADIAN);
+        this.setInputsInline(true);
+    }
+};

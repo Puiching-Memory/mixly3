@@ -822,7 +822,9 @@ export const mpython_pbm_image = {
         ["Water_level_0", "progres_picture.Water_level_0"],
         ["Water_level_1", "progres_picture.Water_level_1"],
         ["Water_level_2", "progres_picture.Water_level_2"],
-        ["Water_level_3", "progres_picture.Water_level_3"]
+        ["Water_level_3", "progres_picture.Water_level_3"],
+        ["YES", "informatio_picture.YES"],
+        ["NO", "informatio_picture.NO"]
     ]
 };
 
@@ -1330,6 +1332,23 @@ export const draw_pointer = {
     }
 };
 
+export const nova_draw_pointer = {
+    init: function () {
+        this.setColour(DISPLAY_ONBOARD_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.DRAW_POINTER)
+            .appendField(Blockly.Msg.DRAW_POINTER_ANGLE);
+        this.appendValueInput('angle');
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_DRAW_POINTER_DU);
+        this.appendValueInput('VAR')
+            .appendField(Blockly.Msg.HTML_COLOUR);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.DRAW_POINTER_TOOLTIP);
+    }
+};
 /**
  * @deprecated To be removed in the future
  */

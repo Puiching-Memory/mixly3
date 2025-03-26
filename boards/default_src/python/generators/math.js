@@ -322,3 +322,17 @@ export const generate_cartesian_product = function (_, generator) {
     }
     return [code, generator.ORDER_ATOMIC];
 }
+
+export const math_radian_to_degree = function (_, generator) {
+    generator.definitions_.import_math = "import math";
+    var v = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    var code = 'math.degrees('+ v + ')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const math_degree_to_radian = function (_, generator) {
+    generator.definitions_.import_math = "import math";
+    var v = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    var code = 'math.radians('+ v + ')';
+    return [code, generator.ORDER_ATOMIC];
+}

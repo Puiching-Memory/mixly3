@@ -4072,4 +4072,10 @@ ZhHant.MIXLY_SET_MAXIMUM_HISTORICAL_SESSIONS_NUM = '設定歷史對話記錄最�
 ZhHant.MIXLY_LLM_CHAT = '與大語言模型進行對話';
 ZhHant.MIXLY_LLM_CONTENT_CALLBACK = '結果輸出回調';
 ZhHant.MIXLY_EMPTY_HISTORY = '清空歷史記錄';
+ZhHant.MIXLY_SET_RADIAN = '將弧度';
+ZhHant.MIXLY_TRANS_TO_ANGLE = '轉換為角度';
+ZhHant.MIXLY_SET_DEGREE = '將角度';
+ZhHant.MIXLY_TRANS_TO_RADIAN = '轉換為弧度';
+ZhHant.MIXLY_REF_TO_PRESSURE = '參考氣壓';
+ZhHant.MIXLY_CAL_TO_ALTITUDE = '計算獲取海拔';
 })();

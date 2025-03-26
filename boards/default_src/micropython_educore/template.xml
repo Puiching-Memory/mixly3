@@ -450,6 +450,20 @@
         </shadow>
       </value>
     </block>
+    <block type="math_radian_to_degree">
+      <value name="VAR">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+        <block type="math_degree_to_radian">
+      <value name="VAR">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
   </category>
   <category id="catLogic" colour="210">
     <block type="logic_compare"></block>
@@ -2182,41 +2196,6 @@
     <block type="cc_g1_read_joystick"></block>
     <block type="cc_g1_read_key"></block>
     <block type="cc_g1_turnoff"></block>
-  </category>
-  <category id="catMINI_G2" colour="40" m-show='micropython:esp32c2:mixgo_mini'>
-    <block type="mini_g2_rfid_readcontent">
-      <value name="SECTOR">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="mini_g2_rfid_readid"></block>
-    <block type="mini_g2_rfid_write">
-      <value name="SECTOR">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-      <value name="CONTENT">
-        <shadow type="text">
-          <field name="TEXT">Mixly</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="mini_g2_rfid_write_outcome">
-      <value name="SECTOR">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-      <value name="CONTENT">
-        <shadow type="text">
-          <field name="TEXT">Mixly</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="mini_g2_rfid_status"></block>
   </category>
   <category id="catIot" colour="#2FAD7A">
     <category id="catBlynk" colour="#2FAD7A">

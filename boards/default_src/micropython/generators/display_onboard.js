@@ -934,9 +934,35 @@ export const onboard_tft_display_shape_circle = function (block, generator) {
 
 export const draw_pointer = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
-    generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
+    if (version == 'mixgo_nova'){
+        generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
+        var angle = generator.valueToCode(this, 'angle', generator.ORDER_ASSIGNMENT);
+        var code = "onboard_tft.pointern(angle=" + angle + ")\n";
+    }else{
+        generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
+        var angle = generator.valueToCode(this, 'angle', generator.ORDER_ASSIGNMENT);
+        var code = "onboard_matrix.pointern(angle=" + angle + ")\n";
+    } 
+    return code;
+}
+
+export const nova_draw_pointer = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2]
+    generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
     var angle = generator.valueToCode(this, 'angle', generator.ORDER_ASSIGNMENT);
-    var code = "onboard_matrix.pointern(angle=" + angle + ")\n";
+    var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    if (color.slice(0, 2) == "0x") {
+        var code = "onboard_tft.pointern(angle=" + angle + ","+ color +")\n";
+    } else {
+        const rgbValues = color.match(/\d+/g);
+        const r = parseInt(rgbValues[0]);
+        const g = parseInt(rgbValues[1]);
+        const b = parseInt(rgbValues[2]);
+        var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+        var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
+        var code = "onboard_tft.pointern(angle=" + angle + ', 0x' + rgb565.toString(16) + ")\n";
+    }
+    var code = "onboard_tft.pointern(angle=" + angle + ")\n";
     return code;
 }
 

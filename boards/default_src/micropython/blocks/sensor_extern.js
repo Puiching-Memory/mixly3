@@ -896,6 +896,22 @@ export const sensor_ms5611_extern = {
     }
 };
 
+export const sensor_ms5611_extern_altitude = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_Altitude + Blockly.Msg.MSG.catSensor + " MS5611")
+            .setCheck("var");
+        this.appendValueInput('VAR')
+            .appendField(Blockly.Msg.MIXLY_REF_TO_PRESSURE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_CAL_TO_ALTITUDE);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+    }
+};
+
 export const sensor_QMC5883L_extern = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
