@@ -157,6 +157,9 @@ export const display_image_builtins_all = function (block, generator) {
     return [code, generator.ORDER_ATOMIC];
 }
 
+/**
+ * @deprecated To be removed in the future
+ */
 export const display_image_create = function (block, generator) {
     var colours = {
         "#000000": "0",
@@ -370,8 +373,9 @@ export const display_bright_screen = function (_, generator) {
     return code;
 }
 
-//mixgo_me onboard_matrix below:
-
+/**
+ * @deprecated To be removed in the future
+ */
 export const mixgome_display_image_create = function (block, generator) {
     var colours = {
         "#000000": "0",
@@ -426,6 +430,9 @@ export const mixgome_display_bitmap_create = function (block, generator) {
     return [`bytearray(b'${data.join('')}')`, generator.ORDER_ATOMIC];
 }
 
+/**
+ * @deprecated To be removed in the future
+ */
 export const mixgomini_display_image_create = function (block, generator) {
     var blinkColor = '#ff0000';
     var code = '';
@@ -473,6 +480,9 @@ export const mixgome_display_font = function (a, generator) {
     return code;
 }
 
+/**
+ * @deprecated To be removed in the future
+ */
 export const mixgo_display_image_create_new = function (block, generator) {
     var colours = {
         "#000000": "0",
@@ -652,8 +662,9 @@ export const mpython_display_line = function (block, generator) {
     return code;
 }
 
-//mixbot onboard_matrix below:
-
+/**
+ * @deprecated To be removed in the future
+ */
 export const mixbot_display_image_create = function (block, generator) {
     var colours = {
         "#000000": "0",
@@ -738,6 +749,9 @@ export const mixbot_display_rotate = function (a, generator) {
     return code;
 }
 
+/**
+ * @deprecated To be removed in the future
+ */
 export const bitbot_display_image_create = function (block, generator) {
     var colours = {
         "#000000": "0",

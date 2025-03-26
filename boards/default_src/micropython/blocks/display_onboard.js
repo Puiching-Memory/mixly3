@@ -139,6 +139,9 @@ export const display_show_frame_string_delay = {
     }
 };
 
+/**
+ * @deprecated To be removed in the future
+ */
 export const display_image_create = {
     init: function () {
         this.appendDummyInput('')
@@ -152,9 +155,12 @@ export const display_image_create = {
                 }), i + '-' + j);
             }
         }
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
         this.setOutput(true);
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
     }
 };
 
@@ -370,8 +376,9 @@ export const display_clear = {
     }
 };
 
-//mixgo_me onboard_matrix below:
-
+/**
+ * @deprecated To be removed in the future
+ */
 export const mixgome_display_image_create = {
     init: function () {
         this.appendDummyInput('')
@@ -385,9 +392,12 @@ export const mixgome_display_image_create = {
                 }), i + '-' + j);
             }
         }
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
         this.setOutput(true);
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
     }
 };
 
@@ -409,6 +419,9 @@ export const mixgome_display_bitmap_create = {
     BITMAP: Array.from({ length: 5 }, () => new Array(8).fill(0))
 };
 
+/**
+ * @deprecated To be removed in the future
+ */
 export const mixgomini_display_image_create = {
     init: function () {
         this.appendDummyInput('')
@@ -422,9 +435,12 @@ export const mixgomini_display_image_create = {
                 }), i + '-' + j);
             }
         }
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
         this.setOutput(true);
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
     }
 };
 
@@ -446,6 +462,9 @@ export const mixgomini_display_bitmap_create = {
     BITMAP: Array.from({ length: 8 }, () => new Array(12).fill(0))
 };
 
+/**
+ * @deprecated To be removed in the future
+ */
 export const mixgo_display_image_create_new = {
     init: function () {
         this.appendDummyInput('')
@@ -459,9 +478,12 @@ export const mixgo_display_image_create_new = {
                 }), i + '-' + j);
             }
         }
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
         this.setOutput(true, "esp32_image");
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
     }
 };
 
@@ -900,8 +922,9 @@ export const mpython_pbm_image = {
     ]
 };
 
-//mixbot onboard_matrix below:
-
+/**
+ * @deprecated To be removed in the future
+ */
 export const mixbot_display_image_create = {
     init: function () {
         this.appendDummyInput('')
@@ -915,9 +938,12 @@ export const mixbot_display_image_create = {
                 }), i + '-' + j);
             }
         }
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
         this.setOutput(true);
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
     }
 };
 
@@ -991,6 +1017,9 @@ export const mixbot_display_rotate = {
     ]
 };
 
+/**
+ * @deprecated To be removed in the future
+ */
 export const bitbot_display_image_create = {
     init: function () {
         this.appendDummyInput('')
@@ -1004,9 +1033,12 @@ export const bitbot_display_image_create = {
                 }), i + '-' + j);
             }
         }
+        this.appendDummyInput()
+            .appendField(`(${Blockly.Msg.MIXLY_DEPRECATED})`);
         this.setOutput(true);
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
+        this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
     }
 };
 
