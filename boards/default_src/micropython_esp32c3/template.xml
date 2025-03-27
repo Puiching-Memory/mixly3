@@ -1435,13 +1435,8 @@
       m-show="micropython:esp32c3:mixgo_cc micropython:esp32c3:mixgo_me"></block>
     <block type="sensor_mixgo_cc_mmc5603_get_angle"
       m-show="micropython:esp32c3:mixgo_cc micropython:esp32c3:mixgo_me"></block>
-    <block type="rfid_readid" m-show='micropython:esp32c3:mixgo_cc'>
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">rfid</field>
-        </shadow>
-      </value>
-    </block>
+    <block type="rfid_status" m-show='micropython:esp32c3:mixgo_cc'></block>
+    <block type="rfid_readid" m-show='micropython:esp32c3:mixgo_cc'></block>
     <block type="rfid_readcontent" m-show='micropython:esp32c3:mixgo_cc'>
       <value name="SECTOR">
         <shadow type="math_number">
