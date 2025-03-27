@@ -1,6 +1,5 @@
 import * as Blockly from 'blockly/core';
 import * as Mixly from 'mixly';
-import { MicroPythonSensorOnBoardBlocks } from '@mixly/micropython';
 
 const MEG1_HUE = 40;
 
@@ -58,66 +57,6 @@ export const me_g1_varistor = {
             .appendField(Blockly.Msg.MIXLY_MIXGO_NOVA_POTENTIAL_NUM);
         this.setOutput(true, Number);
         this.setInputsInline(true);
-    }
-};
-
-/**
- * @override override "@micropython.MicroPythonSensorOnBoardBlocks.rfid_readid"
- */
-export const rfid_readid = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField('ME G1');
-        MicroPythonSensorOnBoardBlocks.rfid_readid.init.call(this);
-        this.setColour(MEG1_HUE);
-    }
-};
-
-/**
- * @override override "@micropython.MicroPythonSensorOnBoardBlocks.rfid_readcontent"
- */
-export const rfid_readcontent = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField('ME G1');
-        MicroPythonSensorOnBoardBlocks.rfid_readcontent.init.call(this);
-        this.setColour(MEG1_HUE);
-    }
-};
-
-/**
- * @override override "@micropython.MicroPythonSensorOnBoardBlocks.rfid_write"
- */
-export const rfid_write = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField('ME G1');
-        MicroPythonSensorOnBoardBlocks.rfid_write.init.call(this);
-        this.setColour(MEG1_HUE);
-    }
-};
-
-/**
- * @override override "@micropython.MicroPythonSensorOnBoardBlocks.rfid_write_return"
- */
-export const rfid_write_return = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField('ME G1');
-        MicroPythonSensorOnBoardBlocks.rfid_write_return.init.call(this);
-        this.setColour(MEG1_HUE);
-    }
-};
-
-/**
- * @override override "@micropython.MicroPythonSensorOnBoardBlocks.rfid_status"
- */
-export const rfid_status = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField('ME G1');
-        MicroPythonSensorOnBoardBlocks.rfid_status.init.call(this);
-        this.setColour(MEG1_HUE);
     }
 };
 

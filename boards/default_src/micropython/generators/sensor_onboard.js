@@ -268,16 +268,34 @@ export const sensor_get_temperature = function (_, generator) {
 
 export const rfid_readid = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    generator.definitions_[`import_${version}_onboard_rfid`] = `from ${version} import onboard_rfid`;
-    var code = 'onboard_rfid.read_card(0, x="id")';
+    var moduleName = version;
+    var objName = 'onboard_rfid';
+    if (version === 'mixgo_mini') {
+        moduleName = 'mini_g2';
+        objName = 'ext_rfid';
+    } else if (version === 'mixgo_me') {
+        moduleName = 'me_g1';
+        objName = 'ext_rc522';
+    }
+    generator.definitions_[`import_${moduleName}_${objName}`] = `from ${moduleName} import ${objName}`;
+    var code = `${objName}.read_card(0, x="id")`;
     return [code, generator.ORDER_ATOMIC];
 }
 
 export const rfid_readcontent = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     var sector = generator.valueToCode(this, 'SECTOR', generator.ORDER_ATOMIC);
-    generator.definitions_[`import_${version}_onboard_rfid`] = `from ${version} import onboard_rfid`;
-    var code = `onboard_rfid.read_card(${sector}, x="content")`;
+    var moduleName = version;
+    var objName = 'onboard_rfid';
+    if (version === 'mixgo_mini') {
+        moduleName = 'mini_g2';
+        objName = 'ext_rfid';
+    } else if (version === 'mixgo_me') {
+        moduleName = 'me_g1';
+        objName = 'ext_rc522';
+    }
+    generator.definitions_[`import_${moduleName}_${objName}`] = `from ${moduleName} import ${objName}`;
+    var code = `${objName}.read_card(${sector}, x="content")`;
     return [code, generator.ORDER_ATOMIC];
 }
 
@@ -285,8 +303,17 @@ export const rfid_write = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     var sector = generator.valueToCode(this, 'SECTOR', generator.ORDER_ATOMIC);
     var cnt = generator.valueToCode(this, 'CONTENT', generator.ORDER_ATOMIC);
-    generator.definitions_[`import_${version}_onboard_rfid`] = `from ${version} import onboard_rfid`;
-    var code = `onboard_rfid.write_card(${cnt}, ${sector})\n`;
+    var moduleName = version;
+    var objName = 'onboard_rfid';
+    if (version === 'mixgo_mini') {
+        moduleName = 'mini_g2';
+        objName = 'ext_rfid';
+    } else if (version === 'mixgo_me') {
+        moduleName = 'me_g1';
+        objName = 'ext_rc522';
+    }
+    generator.definitions_[`import_${moduleName}_${objName}`] = `from ${moduleName} import ${objName}`;
+    var code = `${objName}.write_card(${cnt}, ${sector})`;
     return code;
 }
 
@@ -294,16 +321,34 @@ export const rfid_write_return = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     var sector = generator.valueToCode(this, 'SECTOR', generator.ORDER_ATOMIC);
     var cnt = generator.valueToCode(this, 'CONTENT', generator.ORDER_ATOMIC);
-    generator.definitions_[`import_${version}_onboard_rfid`] = `from ${version} import onboard_rfid`;
-    var code = `onboard_rfid.write_card(${cnt}, ${sector})`;
+    var moduleName = version;
+    var objName = 'onboard_rfid';
+    if (version === 'mixgo_mini') {
+        moduleName = 'mini_g2';
+        objName = 'ext_rfid';
+    } else if (version === 'mixgo_me') {
+        moduleName = 'me_g1';
+        objName = 'ext_rc522';
+    }
+    generator.definitions_[`import_${moduleName}_${objName}`] = `from ${moduleName} import ${objName}`;
+    var code = `${objName}.write_card(${cnt}, ${sector})`;
     return [code, generator.ORDER_ATOMIC];
 }
 
 export const rfid_status = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     var key = this.getFieldValue('key');
-    generator.definitions_[`import_${version}_onboard_rfid`] = `from ${version} import onboard_rfid`;
-    var code = `onboard_rfid.scan_card() == ${key}`;
+    var moduleName = version;
+    var objName = 'onboard_rfid';
+    if (version === 'mixgo_mini') {
+        moduleName = 'mini_g2';
+        objName = 'ext_rfid';
+    } else if (version === 'mixgo_me') {
+        moduleName = 'me_g1';
+        objName = 'ext_rc522';
+    }
+    generator.definitions_[`import_${moduleName}_${objName}`] = `from ${moduleName} import ${objName}`;
+    var code = `${objName}.scan_card() == ${key}`;
     return [code, generator.ORDER_ATOMIC];
 }
 
