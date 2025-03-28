@@ -113,7 +113,7 @@ class StatusBarSerial extends PageBase {
         this.setContent($content);
         this.#$settingMenu_ = $content.find('.setting-menu');
         this.#$settingMenu_.select2({
-            minimumResultsForSearch: 50,
+            minimumResultsForSearch: Infinity,
             dropdownAutoWidth: true,
             dropdownCssClass: 'mixly-scrollbar'
         });

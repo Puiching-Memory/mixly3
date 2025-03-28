@@ -881,7 +881,7 @@ BU.burnWithSpecialBin = () => {
             const $select = layero.find('select');
             $select.select2({
                 data: menu,
-                minimumResultsForSearch: 50,
+                minimumResultsForSearch: Infinity,
                 width: '360px',
                 dropdownCssClass: 'mixly-scrollbar'
             });

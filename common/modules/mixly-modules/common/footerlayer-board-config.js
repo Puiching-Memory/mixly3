@@ -171,7 +171,7 @@ class FooterLayerBoardConfig extends FooterLayer {
         }
         $container.select2({
             data: menu,
-            minimumResultsForSearch: 50,
+            minimumResultsForSearch: Infinity,
             width: 'auto',
             dropdownCssClass: 'mixly-scrollbar select2-board-config'
         });

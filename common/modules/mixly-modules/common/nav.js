@@ -149,7 +149,8 @@ class Nav extends Component {
             minimumResultsForSearch: 10,
             dropdownCssClass: `mixly-scrollbar mixly-${boardSelectTemplate.getId()}`,
             dropdownAutoWidth: true,
-            placeholder: Msg.Lang['nav.selectBoard']
+            placeholder: Msg.Lang['nav.selectBoard'],
+            language: Msg.nowLang
         });
         const portSelectTemplate = HTMLTemplate.get('html/nav/port-selector-div.html');
         this.#$portSelect_ = $(portSelectTemplate.render());

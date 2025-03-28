@@ -81,7 +81,7 @@ class Panel extends Component {
         this.#addEventsListener_();
         this.#$fsSelect_.select2({
             width: '100%',
-            minimumResultsForSearch: 50,
+            minimumResultsForSearch: Infinity,
             dropdownCssClass: 'mixly-scrollbar'
         });
     }

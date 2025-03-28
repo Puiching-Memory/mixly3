@@ -58,7 +58,7 @@ class StatusBarSerialChart extends PageBase {
         this.#$pointNum_ = $template.find('select');
         this.#$pointNum_.select2({
             width: '100%',
-            minimumResultsForSearch: 50,
+            minimumResultsForSearch: Infinity,
             dropdownCssClass: 'mixly-scrollbar'
         });
         this.#$pointNum_.val(this.#totalPoints_).trigger('change');
