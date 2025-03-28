@@ -453,7 +453,8 @@ export const ai_sensor_ailocal_train = {
         this.setColour(AI_SENSOR_HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_LOCAL_TRAIN);
+            .appendField(Blockly.Msg.MIXLY_LOCAL_TRAIN)
+            .setAlign(Blockly.inputs.Align.RIGHT);
         this.appendValueInput("VAR1")
             .appendField(Blockly.Msg.MIXLY_OBJECT_LIST)
             .setAlign(Blockly.inputs.Align.RIGHT);
@@ -468,7 +469,7 @@ export const ai_sensor_ailocal_train = {
             .setAlign(Blockly.inputs.Align.RIGHT);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setInputsInline(true);
+        this.setInputsInline(false);
         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_LOCAL_TRAIN_TOOLTIP);
     }
 };
@@ -478,7 +479,8 @@ export const ai_sensor_ailocal_class = {
         this.setColour(AI_SENSOR_HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_LOCAL_CLASS);
+            .appendField(Blockly.Msg.MIXLY_LOCAL_CLASS)
+            .setAlign(Blockly.inputs.Align.RIGHT);
         this.appendValueInput("VAR1")
             .appendField(Blockly.Msg.MIXLY_OBJECT_LIST)
             .setAlign(Blockly.inputs.Align.RIGHT);
@@ -492,7 +494,7 @@ export const ai_sensor_ailocal_class = {
             .setAlign(Blockly.inputs.Align.RIGHT)
             .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN + "[objects]");
         this.setOutput(true);
-        this.setInputsInline(true);
+        this.setInputsInline(false);
         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_MODEL_NAME_TOOLTIP);
     }
 };
@@ -562,7 +564,8 @@ export const ai_sensor_yolo_recognize = {
         this.setColour(AI_SENSOR_HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_YOLO_RECOGNIZE);
+            .appendField(Blockly.Msg.MIXLY_YOLO_RECOGNIZE)
+            .setAlign(Blockly.inputs.Align.RIGHT);
         this.appendValueInput("VAR1")
             .appendField(Blockly.Msg.MIXLY_ANCHOR)
             .setAlign(Blockly.inputs.Align.RIGHT);
@@ -576,7 +579,7 @@ export const ai_sensor_yolo_recognize = {
             .setAlign(Blockly.inputs.Align.RIGHT)
             .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN + "[objects]");
         this.setOutput(true);
-        this.setInputsInline(true);
+        this.setInputsInline(false);
         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_YOLO_RECOGNIZE_TOOLTIP);
     }
 };
