@@ -354,7 +354,7 @@
     "informatio_picture": {
         "__require__": [],
         "__file__": true,
-        "__size__": 39510,
+        "__size__": 39534,
         "__name__": "informatio_picture.py"
     },
     "irremote": {
@@ -531,7 +531,7 @@
             "micropython"
         ],
         "__file__": true,
-        "__size__": 2351,
+        "__size__": 2452,
         "__name__": "ms5611.py"
     },
     "msa301": {
@@ -888,10 +888,11 @@
             "esp",
             "time",
             "gc",
+            "math",
             "framebuf"
         ],
         "__file__": true,
-        "__size__": 20872,
+        "__size__": 21298,
         "__name__": "uframebuf.py"
     },
     "umqtt": {

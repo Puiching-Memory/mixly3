@@ -3,13 +3,10 @@ framebuf-extend
 
 Micropython library for the framebuf-extend
 =======================================================
-
-#Preliminary composition					20230412	
-
 @dahanzimin From the Mixly Team
 """
 
-import esp, time, gc
+import esp, time, gc, math
 from framebuf import *
 
 class Font_Ascall:
@@ -262,6 +259,15 @@ class FrameBuffer_Base(FrameBuffer):
 	def get_buffer(self):
 		return self._buffer	
 
+	def pointern(self, x=None, y=None, l=None, angle=0, color=0xffff, bg_color=0x0):
+		x = self.width // 2 if x is None else x
+		y = self.height // 2 if y is None else y
+		l = min(self.height // 2 , self.width // 2) if l is None else l
+		radian = math.radians(angle)
+		if self.auto_show: self.fill(bg_color)
+		self.line(x, y, round(x + l * math.sin(radian)), round(y - l * math.cos(radian)), color)
+		if self.auto_show: self.show()
+
 class FrameBuffer_Ascall(FrameBuffer_Base):
 	'''FrameBuffer for Ascall'''
 	def font(self, font):
@@ -382,7 +388,7 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 				yy = y 
 				if size is None:
 					font_len, font_buffer = self._take_buffer(str(data), space, 1)
-					size = min(self.width // font_len, self.height // self._font.height)
+					size = min((self.width // font_len) if font_len > 0 else 1, self.height // self._font.height)
 				size = max(round(size), 1)
 				font_len, font_buffer = self._take_buffer(str(data), space, size)
 				x = (self.width - font_len + space) // 2 if center else x

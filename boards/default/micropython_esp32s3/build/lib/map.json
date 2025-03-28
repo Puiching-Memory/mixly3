@@ -106,11 +106,10 @@
         "__require__": [
             "time",
             "math",
-            "array",
             "struct"
         ],
         "__file__": true,
-        "__size__": 6541,
+        "__size__": 6618,
         "__name__": "music_spk.py"
     },
     "nova_g1": {

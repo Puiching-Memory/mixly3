@@ -13,7 +13,7 @@ dahanzimin From the Mixly Team
 
 import time
 import math
-import array,struct
+import struct
 
 normal_tone = {
 	'A1': 55, 'B1': 62, 'C1': 33, 'D1': 37, 'E1': 41, 'F1': 44, 'G1': 49,
@@ -34,19 +34,25 @@ class MIDI():
 		self._rate = rate
 		self.i2s_bus = i2s_bus
 
-	def _tone(self, frequency, run_ms=1000):
-		# create a buffer containing the pure tone samples
-		samples_per_cycle = self._rate // frequency
-		sample_size_in_bytes = 16 // 8
-		samples = bytearray(samples_per_cycle * sample_size_in_bytes)
-		_range = 32768
-		for i in range(samples_per_cycle):
-			sample = _range + int((_range - 1) * math.sin(2 * math.pi * i / samples_per_cycle))
-			struct.pack_into("<h", samples, i * sample_size_in_bytes, sample)
-	   
-		star = time.ticks_ms() 
-		while time.ticks_diff(time.ticks_ms(), star) <= run_ms:
-			self.i2s_bus.write(samples)
+	def _wave(self, frequency):
+		_period = self._rate // frequency
+		_samples = bytearray()
+		for i in range(_period):
+			sample = 32768 + int((32767) * math.sin(2 * math.pi * i / _period))
+			_samples.extend(struct.pack("<h", sample))
+		return bytes(_samples)
+
+	def _tone(self, frequency, duration_ms=1000):
+		_wave = self._wave(frequency)
+		_samples = self._rate * duration_ms // 1000
+		_data = _wave * (_samples // (len(_wave) // 2) + 1)
+		_data = _data[:_samples * 2]
+
+		_wbytes = 0
+		while _wbytes < len(_data):
+			send_size = min(512, len(_data) - _wbytes)
+			self.i2s_bus.write(_data[_wbytes : _wbytes + send_size])
+			_wbytes += send_size
 
 	def set_tempo(self, ticks=4, bpm=120):
 		self.ticks = ticks
