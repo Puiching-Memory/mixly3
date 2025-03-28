@@ -457,7 +457,7 @@
         </shadow>
       </value>
     </block>
-        <block type="math_degree_to_radian">
+    <block type="math_degree_to_radian">
       <value name="VAR">
         <shadow type="math_number">
           <field name="NUM">1</field>
@@ -1431,7 +1431,6 @@
         </shadow>
       </value>
     </block>
-   
 
 
     <block type="sensor_mixgo_button_is_pressed">
@@ -1691,7 +1690,7 @@
         </shadow>
       </value>
     </block>
-     <block type="educore_ble_sensor_init">
+    <block type="educore_ble_sensor_init">
       <value name="name">
         <shadow type="text">
           <field name="TEXT">ble</field>
@@ -1705,7 +1704,7 @@
         </shadow>
       </value>
     </block>
-    <block type="educore_ble_keyboard_input" >
+    <block type="educore_ble_keyboard_input">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">ble</field>
@@ -1718,7 +1717,7 @@
     </block>
 
 
-   <!-- <block type="actuator_led_bright">
+    <!-- <block type="actuator_led_bright">
       <value name="led">
         <shadow type="number">
         </shadow>
@@ -2000,7 +1999,8 @@
     <block type="image_arithmetic">
       <value name="A">
         <shadow type="pins_builtinimg"></shadow>
-      </value> <value name="B">
+      </value>
+      <value name="B">
         <shadow type="pins_builtinimg"></shadow>
       </value>
     </block>
@@ -2061,7 +2061,7 @@
     <block type="educore_car"></block>
     <block type="educore_car_stepper_keep">
       <value name="car">
-        <shadow type= "variables_get">
+        <shadow type="variables_get">
           <field name="VAR">car</field>
         </shadow>
       </value>
@@ -2073,21 +2073,21 @@
     </block>
     <block type="educore_car_stepper_stop">
       <value name="car">
-        <shadow type= "variables_get">
+        <shadow type="variables_get">
           <field name="VAR">car</field>
         </shadow>
       </value>
     </block>
     <block type="educore_car_pin_near_line">
       <value name="car">
-        <shadow type= "variables_get">
+        <shadow type="variables_get">
           <field name="VAR">car</field>
         </shadow>
       </value>
     </block>
     <block type="educore_car_pin_near">
       <value name="car">
-        <shadow type= "variables_get">
+        <shadow type="variables_get">
           <field name="VAR">car</field>
         </shadow>
       </value>
@@ -2390,7 +2390,7 @@
       </block>
       <block type="procedures_defnoreturn">
         <mutation>
-          <arg name="client"></arg> 
+          <arg name="client"></arg>
           <arg name="topic"></arg>
           <arg name="message"></arg>
         </mutation>
@@ -2922,7 +2922,7 @@
         </statement>
       </block>
     </category>
-    <category id ="catBLEC" colour="140">
+    <category id="catBLEC" colour="140">
       <block type="communicate_bluetooth_handle">
         <value name="VAR">
           <shadow type="variables_get">
@@ -3044,11 +3044,11 @@
         </value>
       </block> -->
       <block type="analog_ble_keyboard_mouse_init">
-          <value name="kname">
-            <shadow type="text">
-              <field name="TEXT">ble_keyboard_mouse</field>
-            </shadow>  
-          </value>
+        <value name="kname">
+          <shadow type="text">
+            <field name="TEXT">ble_keyboard_mouse</field>
+          </shadow>
+        </value>
       </block>
       <block type="ble_keyboard_mouse_get_mac"></block>
       <block type="ble_keyboard_mouse_connect"></block>
@@ -3059,10 +3059,10 @@
           </shadow>
         </value>
       </block>
-      <block type="analog_ble_keyboard_mouse_input" >
+      <block type="analog_ble_keyboard_mouse_input">
         <value name="special">
-            <block type="special_key">
-            </block>
+          <block type="special_key">
+          </block>
         </value>
         <value name="general">
           <block type="general_key">
@@ -3081,7 +3081,7 @@
           </shadow>
         </value>
       </block>
-      <block type="analog_ble_mouse_keyboard_input" >
+      <block type="analog_ble_mouse_keyboard_input">
         <value name="key">
           <block type="mouse_key">
           </block>
@@ -3795,7 +3795,7 @@
         </shadow>
       </value>
     </block>
-    
+
 
     <!-- 
       <block type="sensor_lm35">
@@ -3826,7 +3826,7 @@
         </value>
       </block>      
      -->
-    <block type="communicate_i2c_init" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="communicate_i2c_init">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">i2c_extend</field>
@@ -3862,133 +3862,152 @@
         </block>
       </next>
     </block>
-    <block type="sensor_mpu9250_get_acceleration" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_mpu9250_get_acceleration">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_mpu9250_get_magnetic" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_mpu9250_get_magnetic">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_mpu9250_get_gyro" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_mpu9250_get_gyro">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_mpu9250_temperature" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_mpu9250_temperature">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_bmp" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_bmp">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_sht" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_sht">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_adxl345_get_acceleration" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_adxl345_get_acceleration">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_LTR308_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_LTR308_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_LTR390UV_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_LTR390UV_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_hp203_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_hp203_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_spl06_001_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_spl06_001_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_shtc3_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_ms5611_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_aht11_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_ms5611_extern_altitude">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">xsensor</field>
+        </shadow>
+      </value>
+      <value name="VAR">
+        <shadow type="math_number">
+          <field name="NUM">1013.25</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sensor_shtc3_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_ltr381_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_aht11_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_ucs12071_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_ltr381_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_VL530LX_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_ucs12071_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_QMC5883L_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_VL530LX_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_MAX30102_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_QMC5883L_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="sensor_APDS9960_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_MAX30102_extern">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">xsensor</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sensor_APDS9960_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
@@ -4049,14 +4068,14 @@
       <value name="NUM">
         <block type="logic_null"></block>
       </value>
-    </block>   
-    <block type = "CI130X_SET_SYSTEM_CMD">
+    </block>
+    <block type="CI130X_SET_SYSTEM_CMD">
       <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">xsensor</field>
-        </shadow>
-    </block>     
-    <block type="communicate_spi_init" m-hide='micropython:esp32c3:mixgocar_c3'>
+      <shadow type="variables_get">
+        <field name="VAR">xsensor</field>
+      </shadow>
+    </block>
+    <block type="communicate_spi_init">
       <value name="VAR">
         <shadow type="variables_get">
           <field name="VAR">spi</field>
@@ -4083,7 +4102,7 @@
         </shadow>
       </value>
       <next>
-        <block type="sensor_use_spi_init" m-hide='micropython:esp32c3:mixgocar_c3'>
+        <block type="sensor_use_spi_init">
           <value name="SPISUB">
             <shadow type="variables_get">
               <field name="VAR">spi</field>
@@ -4103,26 +4122,14 @@
       </next>
     </block>
 
-    <block type="extern_rfid_status" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="extern_rfid_status">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">ysensor</field>
         </shadow>
       </value>
     </block>
-    <block type="extern_rfid_readid" m-hide='micropython:esp32c3:mixgocar_c3'>
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">ysensor</field>
-        </shadow>
-      </value>
-      <value name="SECTOR">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="extern_rfid_readcontent" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="extern_rfid_readid">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">ysensor</field>
@@ -4134,7 +4141,19 @@
         </shadow>
       </value>
     </block>
-    <block type="extern_rfid_write" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="extern_rfid_readcontent">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">ysensor</field>
+        </shadow>
+      </value>
+      <value name="SECTOR">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="extern_rfid_write">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">ysensor</field>
@@ -4151,7 +4170,7 @@
         </shadow>
       </value>
     </block>
-    <block type="extern_rfid_write_return" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="extern_rfid_write_return">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">ysensor</field>
@@ -4169,7 +4188,7 @@
       </value>
     </block>
 
-    <block type="weather_have_data" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="weather_have_data">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">ysensor</field>
@@ -4189,14 +4208,14 @@
         </block>
       </value>
     </block>
-    <block type="weather_data" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="weather_data">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">ysensor</field>
         </shadow>
       </value>
     </block>
-    <block type="weather_uart_mixio" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="weather_uart_mixio">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">ysensor</field>
@@ -4209,7 +4228,7 @@
       </value>
     </block>
 
-    <block type="sensor_dht11" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="sensor_dht11">
       <value name="PIN">
         <shadow type="pins_digital_pin"></shadow>
       </value>
@@ -4219,7 +4238,7 @@
         <shadow type="pins_digital_pin"></shadow>
       </value>
     </block>
-    <block type="HCSR04" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="HCSR04">
       <value name="PIN1">
         <shadow type="pins_digital_pin">
           <field name="PIN">4</field>
@@ -4333,7 +4352,7 @@
         </shadow>
       </value>
     </block>
-    <block type="serial_softserial_new" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="serial_softserial_new">
       <value name="RX">
         <shadow type="pins_digital_pin">
           <field name="PIN">0</field>
@@ -4354,7 +4373,7 @@
         </block>
       </next>
     </block>
-    <block type="pm25_get_data" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="pm25_get_data">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">zsensor</field>
@@ -4392,7 +4411,7 @@
         </shadow>
       </value>
       <value name="pc">
-         <shadow type="math_number">
+        <shadow type="math_number">
           <field name="NUM">500</field>
         </shadow>
       </value>
@@ -4475,10 +4494,7 @@
     </block>
 
 
-
-
-
-    <!-- <block type="esp32_music_pitch_init" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <!-- <block type="esp32_music_pitch_init">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">midi</field>
@@ -4490,7 +4506,7 @@
         </shadow>
       </value>
     </block>
-    <block type="esp32_music_pitch" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="esp32_music_pitch">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">midi</field>
@@ -4502,7 +4518,7 @@
         </shadow>
       </value>
     </block>
-    <block type="esp32_music_pitch_with_time" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="esp32_music_pitch_with_time">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">midi</field>
@@ -4519,14 +4535,14 @@
         </shadow>
       </value>
     </block>
-    <block type="esp32_music_stop" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="esp32_music_stop">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">midi</field>
         </shadow>
       </value>
     </block>
-    <block type="esp32_music_play_list" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="esp32_music_play_list">
       <value name="LIST">
         <shadow type="pins_playlist_extern"></shadow>
       </value>
@@ -4536,7 +4552,7 @@
         </shadow>
       </value>
     </block>
-    <block type="esp32_music_set_tempo_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="esp32_music_set_tempo_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">midi</field>
@@ -4553,21 +4569,21 @@
         </shadow>
       </value>
     </block>
-    <block type="esp32_music_get_tempo_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="esp32_music_get_tempo_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">midi</field>
         </shadow>
       </value>
     </block>
-    <block type="esp32_music_reset_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="esp32_music_reset_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">midi</field>
         </shadow>
       </value>
     </block>
-    <block type="actuator_neopixel_init" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="actuator_neopixel_init">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">rgb</field>
@@ -4584,7 +4600,7 @@
         </shadow>
       </value>
     </block>
-    <block type="actuator_neopixel_rgb" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="actuator_neopixel_rgb">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">rgb</field>
@@ -4611,7 +4627,7 @@
         </shadow>
       </value>
     </block>
-    <block type="actuator_neopixel_rgb_all" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="actuator_neopixel_rgb_all">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">rgb</field>
@@ -4633,14 +4649,14 @@
         </shadow>
       </value>
     </block>
-    <block type="actuator_neopixel_write" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="actuator_neopixel_write">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">rgb</field>
         </shadow>
       </value>
     </block>
-    <block type="servo_set_angle" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="servo_set_angle">
       <value name="PIN">
         <shadow type="pins_pwm_pin"></shadow>
       </value>
@@ -4650,12 +4666,12 @@
         </shadow>
       </value>
     </block>
-    <block type="servo_get_angle" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="servo_get_angle">
       <value name="PIN">
         <shadow type="pins_pwm_pin"></shadow>
       </value>
     </block>
-    <block type="servo_set_speed" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="servo_set_speed">
       <value name="PIN">
         <shadow type="pins_pwm_pin"></shadow>
       </value>
@@ -4665,12 +4681,12 @@
         </shadow>
       </value>
     </block>
-    <block type="servo_get_speed" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="servo_get_speed">
       <value name="PIN">
         <shadow type="pins_pwm_pin"></shadow>
       </value>
     </block>
-    <block type="communicate_i2c_init" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="communicate_i2c_init">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">i2c_extend</field>
@@ -4706,7 +4722,7 @@
         </block>
       </next>
     </block>
-    <block type="actuator_ms32006_dcmotor" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="actuator_ms32006_dcmotor">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">Motor</field>
@@ -4718,7 +4734,7 @@
         </shadow>
       </value>
     </block>
-    <block type="actuator_ms32006_stepper" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="actuator_ms32006_stepper">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">Motor</field>
@@ -4735,7 +4751,7 @@
         </shadow>
       </value>
     </block>
-    <block type="serial_softserial_new" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="serial_softserial_new">
       <value name="RX">
         <shadow type="pins_digital_pin">
           <field name="PIN">0</field>
@@ -4756,7 +4772,7 @@
         </block>
       </next>
     </block>
-    <block type="syn6288_set_voice" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="syn6288_set_voice">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">actuator</field>
@@ -4766,14 +4782,14 @@
         <shadow type="pins_tts_voice"></shadow>
       </value>
     </block>
-    <block type="syn6288_get_voice" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="syn6288_get_voice">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">actuator</field>
         </shadow>
       </value>
     </block>
-    <block type="syn6288_builtin_voice" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="syn6288_builtin_voice">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">actuator</field>
@@ -4783,7 +4799,7 @@
         <shadow type="pins_tts_builtin_music"></shadow>
       </value>
     </block>
-    <block type="syn6288_tts_play" m-hide='micropython:esp32c3:mixgocar_c3'>
+    <block type="syn6288_tts_play">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">actuator</field>
@@ -4845,7 +4861,7 @@
     </block> -->
   </category>
   </category>
-  <category id="catExternMonitor" colour='5BA5A5' m-hide='micropython:esp32c3:mixgocar_c3'>
+  <category id="catExternMonitor" colour='5BA5A5'>
     <category id="catMatrix" colour='5BA5A5'>
       <block type="communicate_i2c_init">
         <value name="SUB">

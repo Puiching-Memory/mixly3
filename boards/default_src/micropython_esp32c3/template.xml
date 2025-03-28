@@ -3635,6 +3635,25 @@
         </shadow>
       </value>
     </block>
+    <block type="sensor_ms5611_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">xsensor</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sensor_ms5611_extern_altitude" m-hide='micropython:esp32c3:mixgocar_c3'>
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">xsensor</field>
+        </shadow>
+      </value>
+      <value name="VAR">
+        <shadow type="math_number">
+          <field name="NUM">1013.25</field>
+        </shadow>
+      </value>
+    </block>
     <block type="sensor_shtc3_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
       <value name="SUB">
         <shadow type="variables_get">

@@ -906,8 +906,7 @@ export const sensor_ms5611_extern_altitude = {
             .appendField(Blockly.Msg.MIXLY_REF_TO_PRESSURE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_CAL_TO_ALTITUDE);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
+        this.setOutput(true, Number);
         this.setInputsInline(true);
     }
 };
