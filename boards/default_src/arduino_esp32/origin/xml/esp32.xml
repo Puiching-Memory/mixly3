@@ -2004,7 +2004,7 @@
       </block>
     </statement>
   </block>
-  <block type="serialBT_Init">
+  <block type="serialBT_Init" m-show="esp32 node32s nodemcu-32s m5stick-c m5stack-core-esp32 m5stack-fire bpi-bit esp32cam">
     <value name="CONTENT">
       <shadow type="text">
         <field name="TEXT">ESP32BT</field>
