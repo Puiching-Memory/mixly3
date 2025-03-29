@@ -1,0 +1,5 @@
+.monaco-editor *,
+.monaco-editor ::after,
+.monaco-editor ::before {
+    box-sizing: unset;
+}
