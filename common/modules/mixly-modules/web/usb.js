@@ -39,7 +39,7 @@ class USB extends Serial {
 
         this.requestPort = async function () {
             let options = SELECTED_BOARD?.web?.devices?.usb;
-            if (options && typeof(options) !== 'object') {
+            if (!options || typeof(options) !== 'object') {
                 options = {
                     filters: []
                 };
