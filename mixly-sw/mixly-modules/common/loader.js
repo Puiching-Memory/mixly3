@@ -57,7 +57,7 @@ Loader.init = () => {
 
     if (goog.isElectron) {
         (function(window, document) {
-            var url = 'https://mixly.org/public/app.html';
+            var url = 'https://mixly.org/public/app30.html';
             function detect() {
                 var iframes = document.getElementsByTagName('iframe');
                 for (var i = 0; i < iframes.length; i++) {
