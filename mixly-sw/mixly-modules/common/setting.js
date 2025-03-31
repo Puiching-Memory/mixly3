@@ -3,7 +3,6 @@
 goog.require('ace');
 goog.require('ace.ExtLanguageTools');
 goog.require('layui');
-goog.require('layui.loading');
 goog.require('store');
 goog.require('$.select2');
 goog.require('Mixly.XML');
@@ -30,7 +29,7 @@ const {
 } = Mixly;
 
 const { LANG } = Msg;
-const { element, form, loading, layer } = layui;
+const { element, form, layer } = layui;
 const { USER, SOFTWARE } = Config;
 
 Setting.ID = 'setting-menu';

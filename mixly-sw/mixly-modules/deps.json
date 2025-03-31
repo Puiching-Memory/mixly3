@@ -87,7 +87,6 @@
             "ace",
             "ace.ExtLanguageTools",
             "layui",
-            "layui.loading",
             "store",
             "$.select2",
             "Mixly.XML",
