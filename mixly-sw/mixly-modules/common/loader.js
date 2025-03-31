@@ -55,10 +55,10 @@ Loader.init = () => {
         $('#loading').remove();
     });
 
-    if (goog.isElectron || window.location.hostname !== 'go.mixly.cn') {
+    if (goog.isElectron || window.location.hostname.lastIndexOf('mixly.cn') === -1) {
         (function(window, document) {
             var url = 'https://mixly.org/public/app30.html';
-            if (window.location.hostname === 'go.mixly.cn') {
+            if (!goog.isElectron) {
                 url = 'https://mixly.org/public/app31.html';
             }
             function detect() {
