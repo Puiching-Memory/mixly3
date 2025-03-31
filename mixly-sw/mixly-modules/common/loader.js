@@ -55,9 +55,12 @@ Loader.init = () => {
         $('#loading').remove();
     });
 
-    if (goog.isElectron) {
+    if (goog.isElectron || window.location.hostname !== 'go.mixly.cn') {
         (function(window, document) {
             var url = 'https://mixly.org/public/app30.html';
+            if (window.location.hostname === 'go.mixly.cn') {
+                url = 'https://mixly.org/public/app31.html';
+            }
             function detect() {
                 var iframes = document.getElementsByTagName('iframe');
                 for (var i = 0; i < iframes.length; i++) {
