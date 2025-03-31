@@ -292,7 +292,7 @@ class StatusBarFS extends PageBase {
         return new Promise((resolve, reject) => {
             const port = Serial.getSelectedPortName();
             if (!port) {
-                layer.msg('无可用设备', { time: 1000 });
+                layer.msg(Msg.Lang['statusbar.serial.noDevice'], { time: 1000 });
                 resolve(false);
                 return;
             }
