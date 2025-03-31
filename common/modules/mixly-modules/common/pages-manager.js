@@ -13,7 +13,7 @@ const {
 
 class PagesManager extends Component {
     #tabs_ = null;
-    #$welcomePage_ = null;
+    #welcomePage_ = null;
     #$editorContainer_ = null;
     #$tabsContainer_ = null;
     #pagesRegistry_ = new Registry();
@@ -47,8 +47,8 @@ class PagesManager extends Component {
         this.mountOn($parentContainer);
         let PageType = this.#typesRegistry_.getItem('#welcome');
         if (PageType) {
-            this.#$welcomePage_ = (new PageType()).getContent();
-            $content.replaceWith(this.#$welcomePage_);
+            this.#welcomePage_ = new PageType();
+            this.#showWelcomePage_();
         }
         this.#addEventsListener_();
     }
@@ -84,11 +84,10 @@ class PagesManager extends Component {
             let page = new PageType();
             this.#pagesRegistry_.register(id, page);
             page.setTab($(tabEl));
-            if (this.#$welcomePage_) {
-                if (this.#pagesRegistry_.length() && this.#page_ === 'welcome') {
-                    this.#$welcomePage_.replaceWith(this.getContent());
-                    this.#page_ = 'editor';
-                }
+            if (this.#welcomePage_
+                && this.#pagesRegistry_.length()
+                && this.#page_ === 'welcome') {
+                this.#hideWelcomePage_();
             }
             page.init();
         });
@@ -103,13 +102,29 @@ class PagesManager extends Component {
             }
             page.dispose();
             this.#pagesRegistry_.unregister(id);
-            if (this.#$welcomePage_) {
-                if (!this.#pagesRegistry_.length() && this.#page_ !== 'welcome') {
-                    this.getContent().replaceWith(this.#$welcomePage_);
-                    this.#page_ = 'welcome';
-                }
+            if (this.#welcomePage_
+                && !this.#pagesRegistry_.length()
+                && this.#page_ !== 'welcome') {
+                this.#showWelcomePage_();
             }
         });
+    }
+
+    #showWelcomePage_() {
+        const $parent = this.getContent().parent();
+        this.getContent().detach();
+        $parent.append(this.#welcomePage_.getContent());
+        this.#welcomePage_.onMounted();
+        this.#page_ = 'welcome';
+    }
+
+    #hideWelcomePage_() {
+        const $page = this.#welcomePage_.getContent();
+        const $parent = $page.parent();
+        $page.detach();
+        this.#welcomePage_.onUnmounted();
+        $parent.append(this.getContent());
+        this.#page_ = 'editor';
     }
 
     resize() {
@@ -177,6 +192,11 @@ class PagesManager extends Component {
             this.remove(id);
         }
         this.#tabs_.dispose();
+        this.#welcomePage_ && this.#welcomePage_.dispose();
+        this.#tabs_ = null;
+        this.#welcomePage_ = null;
+        this.#$tabsContainer_ = null;
+        this.#$editorContainer_ = null;
         super.dispose();
     }
 }
