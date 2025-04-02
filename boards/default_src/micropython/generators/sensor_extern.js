@@ -353,8 +353,8 @@ export const sensor_ms5611_extern_altitude = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var v = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     generator.definitions_['import_ms5611'] = 'import ms5611';
-    var code = sub + '.altitude('+ v +')\n';
-    return code ;
+    var code = sub + '.altitude('+ v +')';
+    return [code, generator.ORDER_ATOMIC];
 }
 
 export const sensor_ltr381_extern = function (_, generator) {
