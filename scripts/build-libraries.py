@@ -27,6 +27,8 @@ if __name__ == "__main__":
     if not path.isabs(target_path):
         target_path = path.abspath(path.join(working_path, target_path))
     output = None
+    if not path.exists(target_path):
+        exit(0)
     if path.isfile(target_path):
         exit(0)
     output = {}
