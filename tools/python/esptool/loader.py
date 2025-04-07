@@ -13,9 +13,11 @@ import string
 import struct
 import sys
 import time
+from typing import Optional
 
-from config import load_config_file
-from reset import (
+
+from .config import load_config_file
+from .reset import (
     ClassicReset,
     CustomReset,
     DEFAULT_RESET_DELAY,
@@ -23,8 +25,8 @@ from reset import (
     USBJTAGSerialReset,
     UnixTightReset,
 )
-from util import FatalError, NotImplementedInROMError, UnsupportedCommandError
-from util import byte, hexify, mask_to_shift, pad_to, strip_chip_name
+from .util import FatalError, NotImplementedInROMError, UnsupportedCommandError
+from .util import byte, hexify, mask_to_shift, pad_to, strip_chip_name
 
 try:
     import serial
@@ -59,7 +61,7 @@ except ImportError:
     print(
         "The installed version (%s) of pyserial appears to be too old for esptool.py "
         "(Python interpreter %s). Check the README for installation instructions."
-        % (sys.VERSION, sys.executable)
+        % (serial.VERSION, sys.executable)
     )
     raise
 except Exception:
@@ -96,14 +98,8 @@ DEFAULT_SERIAL_WRITE_TIMEOUT = cfg.getfloat("serial_write_timeout", 10)
 DEFAULT_CONNECT_ATTEMPTS = cfg.getint("connect_attempts", 7)
 # Number of times to try writing a data block
 WRITE_BLOCK_ATTEMPTS = cfg.getint("write_block_attempts", 3)
-
-STUBS_DIR = os.path.join(os.path.dirname(__file__), "targets", "stub_flasher")
-
-
-def get_stub_json_path(chip_name):
-    chip_name = strip_chip_name(chip_name)
-    chip_name = chip_name.replace("esp", "")
-    return os.path.join(STUBS_DIR, f"stub_flasher_{chip_name}.json")
+# Number of times to try opening the serial port
+DEFAULT_OPEN_PORT_ATTEMPTS = cfg.getint("open_port_attempts", 1)
 
 
 def timeout_per_mb(seconds_per_mb, size_bytes):
@@ -155,8 +151,12 @@ def esp32s3_or_newer_function_only(func):
 
 
 class StubFlasher:
-    def __init__(self, json_path):
-        with open(json_path) as json_file:
+    STUB_DIR = os.path.join(os.path.dirname(__file__), "targets", "stub_flasher")
+    # directories will be searched in the order of STUB_SUBDIRS
+    STUB_SUBDIRS = ["1", "2"]
+
+    def __init__(self, chip_name):
+        with open(self.get_json_path(chip_name)) as json_file:
             stub = json.load(json_file)
 
         self.text = base64.b64decode(stub["text"])
@@ -172,6 +172,26 @@ class StubFlasher:
 
         self.bss_start = stub.get("bss_start")
 
+    def get_json_path(self, chip_name):
+        chip_name = strip_chip_name(chip_name)
+        for i, subdir in enumerate(self.STUB_SUBDIRS):
+            json_path = os.path.join(self.STUB_DIR, subdir, f"{chip_name}.json")
+            if os.path.exists(json_path):
+                if i:
+                    print(
+                        f"Warning: Stub version {self.STUB_SUBDIRS[0]} doesn't exist, using {subdir} instead"
+                    )
+
+                return json_path
+        else:
+            raise FileNotFoundError(f"Stub flasher JSON file for {chip_name} not found")
+
+    @classmethod
+    def set_preferred_stub_subdir(cls, subdir):
+        if subdir in cls.STUB_SUBDIRS:
+            cls.STUB_SUBDIRS.remove(subdir)
+            cls.STUB_SUBDIRS.insert(0, subdir)
+
 
 class ESPLoader(object):
     """Base class providing access to ESP ROM & software stub bootloaders.
@@ -179,12 +199,15 @@ class ESPLoader(object):
 
     Don't instantiate this base class directly, either instantiate a subclass or
     call cmds.detect_chip() which will interrogate the chip and return the
-    appropriate subclass instance.
+    appropriate subclass instance. You can also use a context manager as
+    "with detect_chip() as esp:" to ensure the serial port is closed when done.
 
     """
 
     CHIP_NAME = "Espressif device"
     IS_STUB = False
+    STUB_CLASS: Optional[object] = None
+    BOOTLOADER_IMAGE: Optional[object] = None
 
     DEFAULT_PORT = "/dev/ttyUSB0"
 
@@ -201,7 +224,7 @@ class ESPLoader(object):
     ESP_WRITE_REG = 0x09
     ESP_READ_REG = 0x0A
 
-    # Some comands supported by ESP32 and later chips ROM bootloader (or -8266 w/ stub)
+    # Some commands supported by ESP32 and later chips ROM bootloader (or -8266 w/ stub)
     ESP_SPI_SET_PARAMS = 0x0B
     ESP_SPI_ATTACH = 0x0D
     ESP_READ_FLASH_SLOW = 0x0E  # ROM only, much slower than the stub flash read
@@ -245,6 +268,9 @@ class ESPLoader(object):
 
     UART_DATE_REG_ADDR = 0x60000078
 
+    # Whether the SPI peripheral sends from MSB of 32-bit register, or the MSB of valid LSB bits.
+    SPI_ADDR_REG_MSB = True
+
     # This ROM address has a different value on each chip model
     CHIP_DETECT_MAGIC_REG_ADDR = 0x40001000
 
@@ -273,11 +299,15 @@ class ESPLoader(object):
     # Chip IDs that are no longer supported by esptool
     UNSUPPORTED_CHIPS = {6: "ESP32-S3(beta 3)"}
 
+    # Number of attempts to write flash data
+    WRITE_FLASH_ATTEMPTS = 2
+
     def __init__(self, port=DEFAULT_PORT, baud=ESP_ROM_BAUD, trace_enabled=False):
         """Base constructor for ESPLoader bootloader interaction
 
         Don't call this constructor, either instantiate a specific
-        ROM class directly, or use cmds.detect_chip().
+        ROM class directly, or use cmds.detect_chip(). You can use the with
+        statement to ensure the serial port is closed when done.
 
         This base class has all of the instance methods for bootloader
         functionality supported across various chips & stub
@@ -300,7 +330,17 @@ class ESPLoader(object):
 
         if isinstance(port, str):
             try:
-                self._port = serial.serial_for_url(port)
+                self._port = serial.serial_for_url(
+                    port, exclusive=True, do_not_open=True
+                )
+                if sys.platform == "win32":
+                    # When opening a port on Windows,
+                    # the RTS/DTR (active low) lines
+                    # need to be set to False (pulled high)
+                    # to avoid unwanted chip reset
+                    self._port.rts = False
+                    self._port.dtr = False
+                self._port.open()
             except serial.serialutil.SerialException as e:
                 port_issues = [
                     [  # does not exist error
@@ -316,10 +356,7 @@ class ESPLoader(object):
                     port_issues.append(
                         [  # permission denied error
                             re.compile(r"Permission denied", re.IGNORECASE),
-                            (
-                                "Try to add user into dialout group: "
-                                "sudo usermod -a -G dialout $USER"
-                            ),
+                            ("Try to add user into dialout or uucp group."),
                         ],
                     )
 
@@ -350,6 +387,12 @@ class ESPLoader(object):
             # no write timeout for RFC2217 ports
             # need to set the property back to None or it will continue to fail
             self._port.write_timeout = None
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._port.close()
 
     @property
     def serial_port(self):
@@ -499,7 +542,7 @@ class ESPLoader(object):
 
         # ROM bootloaders send some non-zero "val" response. The flasher stub sends 0.
         # If we receive 0 then it probably indicates that the chip wasn't or couldn't be
-        # reseted properly and esptool is talking to the flasher stub.
+        # reset properly and esptool is talking to the flasher stub.
         self.sync_stub_detected = val == 0
 
         for _ in range(7):
@@ -665,6 +708,15 @@ class ESPLoader(object):
                 "Connection may fail if the chip is not in bootloader "
                 "or flasher stub mode.",
             )
+
+        if self._port.name.startswith("socket:"):
+            mode = "no_reset"  # not possible to toggle DTR/RTS over a TCP socket
+            print(
+                "Note: It's not possible to reset the chip over a TCP socket. "
+                "Automatic resetting to bootloader has been disabled, "
+                "reset the chip manually."
+            )
+
         print("Connecting...", end="")
         sys.stdout.flush()
         last_error = None
@@ -701,7 +753,7 @@ class ESPLoader(object):
 
         if not detecting:
             try:
-                from targets import ROM_LIST
+                from .targets import ROM_LIST
 
                 # check the date code registers match what we expect to see
                 chip_magic_value = self.read_reg(ESPLoader.CHIP_DETECT_MAGIC_REG_ADDR)
@@ -788,11 +840,14 @@ class ESPLoader(object):
         """Start downloading an application image to RAM"""
         # check we're not going to overwrite a running stub with this data
         if self.IS_STUB:
-            stub = StubFlasher(get_stub_json_path(self.CHIP_NAME))
+            stub = StubFlasher(self.CHIP_NAME)
             load_start = offset
             load_end = offset + size
             for stub_start, stub_end in [
-                (stub.bss_start, stub.data_start + len(stub.data)),  # DRAM = bss+data
+                (
+                    stub.bss_start or stub.data_start,
+                    stub.data_start + len(stub.data),
+                ),  # DRAM = bss+data
                 (stub.text_start, stub.text_start + len(stub.text)),  # IRAM
             ]:
                 if load_start < stub_end and load_end > stub_start:
@@ -993,7 +1048,7 @@ class ESPLoader(object):
 
     def run_stub(self, stub=None):
         if stub is None:
-            stub = StubFlasher(get_stub_json_path(self.CHIP_NAME))
+            stub = StubFlasher(self.CHIP_NAME)
 
         if self.sync_stub_detected:
             print("Stub is already running. No upload is necessary.")
@@ -1349,7 +1404,9 @@ class ESPLoader(object):
         self.write_reg(
             SPI_USR2_REG, (7 << SPI_USR2_COMMAND_LEN_SHIFT) | spiflash_command
         )
-        if addr and addr_len > 0:
+        if addr_len > 0:
+            if self.SPI_ADDR_REG_MSB:
+                addr = addr << (32 - addr_len)
             self.write_reg(SPI_ADDR_REG, addr)
         if data_bits == 0:
             self.write_reg(SPI_W0_REG, 0)  # clear data register before we read it
@@ -1454,7 +1511,12 @@ class ESPLoader(object):
         #   See the self.XTAL_CLK_DIVIDER parameter for this factor.
         uart_div = self.read_reg(self.UART_CLKDIV_REG) & self.UART_CLKDIV_MASK
         est_xtal = (self._port.baudrate * uart_div) / 1e6 / self.XTAL_CLK_DIVIDER
-        norm_xtal = 40 if est_xtal > 33 else 26
+        if est_xtal > 45:
+            norm_xtal = 48
+        elif est_xtal > 33:
+            norm_xtal = 40
+        else:
+            norm_xtal = 26
         if abs(norm_xtal - est_xtal) > 1:
             print(
                 "WARNING: Detected crystal freq %.2fMHz is quite different to "
@@ -1636,12 +1698,14 @@ class HexFormatter(object):
             while len(s) > 0:
                 line = s[:16]
                 ascii_line = "".join(
-                    c
-                    if (
-                        c == " "
-                        or (c in string.printable and c not in string.whitespace)
+                    (
+                        c
+                        if (
+                            c == " "
+                            or (c in string.printable and c not in string.whitespace)
+                        )
+                        else "."
                     )
-                    else "."
                     for c in line.decode("ascii", "replace")
                 )
                 s = s[16:]

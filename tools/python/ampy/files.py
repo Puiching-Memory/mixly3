@@ -23,7 +23,7 @@ import ast
 import textwrap
 import sys
 
-from pyboard import PyboardError
+from ampy.pyboard import PyboardError
 
 
 BUFFER_SIZE = 32  # Amount of data to read or write to the serial port at a time.

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-#
 # SPDX-FileCopyrightText: 2020-2023 Espressif Systems (Shanghai) CO LTD
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Code was originally licensed under Apache 2.0 before the release of ESP-IDF v5.2
@@ -9,7 +7,7 @@ import os
 import struct
 from typing import List
 
-from util import div_roundup
+from esptool.util import div_roundup
 
 
 class UF2Writer(object):

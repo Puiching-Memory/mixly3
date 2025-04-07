@@ -255,11 +255,11 @@ Boards.changeTo = (boardName) => {
             let pyToolsPath = "{srcPath}/tools/python/";
             let obj = {};
             let pyTools = {
-                'esptool': 'esptool/__init__.py',
+                'esptool': 'esptool_main.py',
                 'kflash': 'kflash.py',
                 'stm32loader': 'stm32loader.py',
                 'stm32bl': 'stm32bl.py',
-                'ampy': 'ampy/cli.py'
+                'ampy': 'ampy_main.py'
             };
             if (!Env.hasSocketServer) {
                 for (let key in pyTools) {

@@ -36,7 +36,7 @@ class AmpyExt extends Ampy {
             run: '{{&ampy}} -p {{&port}} -b {{&baud}} -i 0 run "{{&filePath}}"'
         }
 
-        this.AMPY_PATH = path.join(Env.srcDirPath, './tools/python/ampy/cli.py');
+        this.AMPY_PATH = path.join(Env.srcDirPath, './tools/python/ampy_main.py');
 
         this.AMPY_TEMPLATE = Mustache.render('"{{&python3}}" "{{&ampy}}"', {
             python3: Env.python3Path,

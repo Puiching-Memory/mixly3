@@ -99,6 +99,20 @@ def get_file_size(path_to_file):
     return file_size
 
 
+class PrintOnce:
+    """
+    Class for printing messages just once. Can be useful when running in a loop
+    """
+
+    def __init__(self) -> None:
+        self.already_printed = False
+
+    def __call__(self, text) -> None:
+        if not self.already_printed:
+            print(text)
+            self.already_printed = True
+
+
 class FatalError(RuntimeError):
     """
     Wrapper class for runtime errors that aren't caused by internal bugs, but by
@@ -128,6 +142,12 @@ class FatalError(RuntimeError):
             0x109: "CRC or checksum was invalid",
             0x10A: "Version was invalid",
             0x10B: "MAC address was invalid",
+            0x6001: "Flash operation failed",
+            0x6002: "Flash operation timed out",
+            0x6003: "Flash not initialised properly",
+            0x6004: "Operation not supported by the host SPI bus",
+            0x6005: "Operation not supported by the flash chip",
+            0x6006: "Can't write, protection enabled",
             # Flasher stub error codes
             0xC000: "Bad data length",
             0xC100: "Bad data checksum",

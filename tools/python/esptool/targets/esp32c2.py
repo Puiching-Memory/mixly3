@@ -5,10 +5,11 @@
 
 import struct
 import time
+from typing import Dict
 
 from .esp32c3 import ESP32C3ROM
-from loader import ESPLoader
-from util import FatalError
+from ..loader import ESPLoader
+from ..util import FatalError
 
 
 class ESP32C2ROM(ESP32C3ROM):
@@ -20,8 +21,8 @@ class ESP32C2ROM(ESP32C3ROM):
     DROM_MAP_START = 0x3C000000
     DROM_MAP_END = 0x3C400000
 
-    # Magic value for ESP32C2 ECO0 and ECO1 respectively
-    CHIP_DETECT_MAGIC_VALUE = [0x6F51306F, 0x7C41A06F]
+    # Magic value for ESP32C2 ECO0 , ECO1 and ECO4 respectively
+    CHIP_DETECT_MAGIC_VALUE = [0x6F51306F, 0x7C41A06F, 0x0C21E06F]
 
     EFUSE_BASE = 0x60008800
     EFUSE_BLOCK2_ADDR = EFUSE_BASE + 0x040
@@ -63,6 +64,8 @@ class ESP32C2ROM(ESP32C3ROM):
     ]
 
     UF2_FAMILY_ID = 0x2B88D29C
+
+    KEY_PURPOSES: Dict[int, str] = {}
 
     def get_pkg_version(self):
         num_word = 1
@@ -146,7 +149,7 @@ class ESP32C2ROM(ESP32C3ROM):
             # When chip has not generated AES/encryption key in BLOCK3,
             # the contents will be readable and 0.
             # If the flash encryption is enabled it is expected to have a valid
-            # non-zero key. We break out on first occurance of non-zero value
+            # non-zero key. We break out on first occurrence of non-zero value
             key_word = [0] * 7 if key_len_256 else [0] * 3
             for i in range(len(key_word)):
                 key_word[i] = self.read_reg(self.EFUSE_BLOCK_KEY0_REG + i * 4)
