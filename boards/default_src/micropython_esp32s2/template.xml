@@ -2451,8 +2451,7 @@
         </value>
       </block>
     </category>
-    <category id="catAIOT" colour="205"
-      m-show="micropython:esp32c3:mixgo_me micropython:esp32c3:mixgo_cc">
+    <category id="catAIOT" colour="205">
       <block type="iot_wifi_connect">
         <value name="WIFINAME">
           <shadow type="text">
