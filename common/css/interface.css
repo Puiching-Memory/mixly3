@@ -44,14 +44,3 @@ body[class="light"] {
     bottom: 36px;
     background-position: -64px -92px;
 }
-
-#content_blocks > div > div {
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-
-
-/*Blocks*/
-span#span_blocks, span#span_arduino, select#languageMenu {
-    color: #fff;
-}
