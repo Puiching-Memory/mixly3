@@ -143,24 +143,37 @@ class XScrollbar {
     // 上一次的拖动位置
     let screenX = null;
     let screenY = null;
+    this.$thumbX.onpointerdown = (elemEvent) => {
+      const { currentTarget } = elemEvent;
+      currentTarget.setPointerCapture(elemEvent.pointerId);
+    };
+    this.$thumbX.onpointerup = (elemEvent) => {
+      const { currentTarget } = elemEvent;
+      currentTarget.releasePointerCapture(elemEvent.pointerId);
+    };
     this.$thumbX.addEventListener('mousedown', (e) => {
       this.$trackX.classList.add('x-scrollbar__track--draging');
       this.thumbXActive = true;
       screenX = e.screenX;
-      $('body').addClass('drag-disable');
     });
+    this.$thumbY.onpointerdown = (elemEvent) => {
+      const { currentTarget } = elemEvent;
+      currentTarget.setPointerCapture(elemEvent.pointerId);
+    };
+    this.$thumbY.onpointerup = (elemEvent) => {
+      const { currentTarget } = elemEvent;
+      currentTarget.releasePointerCapture(elemEvent.pointerId);
+    };
     this.$thumbY.addEventListener('mousedown', (e) => {
       this.$trackY.classList.add('x-scrollbar__track--draging');
       this.thumbYActive = true;
       screenY = e.screenY;
-      $('body').addClass('drag-disable');
     });
     this.onMouseup = ((e) => {
       this.$trackX.classList.remove('x-scrollbar__track--draging');
       this.$trackY.classList.remove('x-scrollbar__track--draging');
       this.thumbXActive = false;
       this.thumbYActive = false;
-      $('body').removeClass('drag-disable');
     }).bind(this);
     document.addEventListener('mouseup', this.onMouseup);
     this.onMousemove = ((e) => {
@@ -287,7 +300,6 @@ class XScrollbar {
     document.removeEventListener('mousemove', this.onMousemove);
     this.$container.removeEventListener('wheel', this.onWheel);
     this.$container.removeEventListener('scroll', this.onScroll);
-
     this.$dom.classList.remove('x-scrollbar');
     this.$dom.classList.remove('x-scrollbar-keep');
 
