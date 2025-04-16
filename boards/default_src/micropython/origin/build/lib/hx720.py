@@ -50,18 +50,20 @@ class HX720:
 			self._sck.value(1)
 			self._sck.value(0)
 		
-		return raw_data | 0xFF000000 if raw_data & 0x800000 else raw_data
+		return raw_data if raw_data < (1 << (DATA_BITS - 1)) else raw_data - (1 << DATA_BITS)
 
 	def tare(self, times=10):
 		"""清零传感器"""
-		total = 0
-		for _ in range(times):
-			total += self.read_raw()
-		self.offset = total / times
+		_values = []
+		for _ in range(max(times, 5)):
+			_values.append(self.read_raw())
+		_values = sorted(_values)[2: -2]
+		self.offset = sum(_values) / len(_values)
 
 	def read_weight(self, times=5):
 		"""读取重量数据，返回去掉偏移量的平均值"""
-		total = 0
-		for _ in range(times):
-			total += self.read_raw()
-		return round((total / times - self.offset) / self.scale, 2)
+		_values = []
+		for _ in range(max(times, 3)):
+			_values.append(self.read_raw())
+		_values = sorted(_values)[1: -1]
+		return round((sum(_values) / len(_values)- self.offset) / self.scale, 2)
