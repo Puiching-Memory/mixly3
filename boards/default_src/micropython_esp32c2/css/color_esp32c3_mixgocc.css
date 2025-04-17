@@ -187,6 +187,15 @@ div.blocklyToolboxDiv>div.blocklyToolboxContents>div:nth-child(12)>div.blocklyTr
     background: url('../../../../common/media/mark/sensor2.png') no-repeat;
     background-size: 100% auto;
 }
+#catMINI_G5.blocklyTreeRow>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon {
+    background: url('../../../../common/media/mark/sensor.png') no-repeat;
+    background-size: 100% auto;
+}
+
+#catMINI_G5.blocklyTreeRow.blocklyTreeSelected>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon {
+    background: url('../../../../common/media/mark/sensor2.png') no-repeat;
+    background-size: 100% auto;
+}
 
 #catExternSensor.blocklyTreeRow>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon {
     background: url('../../../../common/media/mark/sensor_extern.png') no-repeat;

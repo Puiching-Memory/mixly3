@@ -2020,6 +2020,50 @@
       </value>
     </block>
   </category>
+  <category id="catMINI_G5" colour="40" m-show='micropython:esp32c2:mixgo_mini'>
+    <block type="rfid_status"></block>
+    <block type="rfid_readid"></block>
+    <block type="rfid_readcontent">
+      <value name="SECTOR">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rfid_write">
+      <value name="SECTOR">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="CONTENT">
+        <shadow type="text">
+          <field name="TEXT">Mixly</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rfid_write_return">
+      <value name="SECTOR">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="CONTENT">
+        <shadow type="text">
+          <field name="TEXT">Mixly</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="CI130X_IDENTIFY_AND_SAVE_SANT"></block>
+    <block type="CI130X_GET_WHETHER_IDENTIFY_SANT"></block>
+    <block type="CI130X_GET_THE_RECOGNIZED_CMD_SANT"></block>
+    <block type="CI130X_BROADCAST_SANT">
+      <value name="NUM">
+        <block type="logic_null"></block>
+      </value>
+    </block>   
+    <block type = "CI130X_SET_SYSTEM_CMD_SANT"></block>
+  </category>
   <category id="catIot" colour="#2FAD7A">
     <category id="catBlynk" colour="#2FAD7A">
       <block type="iot_wifi_connect">

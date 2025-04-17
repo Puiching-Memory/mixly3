@@ -271,7 +271,7 @@ export const rfid_readid = function (_, generator) {
     var moduleName = version;
     var objName = 'onboard_rfid';
     if (version === 'mixgo_mini') {
-        moduleName = 'mini_g2';
+        moduleName = 'mini_gx';
         objName = 'ext_rfid';
     } else if (version === 'mixgo_me') {
         moduleName = 'me_g1';
@@ -288,7 +288,7 @@ export const rfid_readcontent = function (_, generator) {
     var moduleName = version;
     var objName = 'onboard_rfid';
     if (version === 'mixgo_mini') {
-        moduleName = 'mini_g2';
+        moduleName = 'mini_gx';
         objName = 'ext_rfid';
     } else if (version === 'mixgo_me') {
         moduleName = 'me_g1';
@@ -306,7 +306,7 @@ export const rfid_write = function (_, generator) {
     var moduleName = version;
     var objName = 'onboard_rfid';
     if (version === 'mixgo_mini') {
-        moduleName = 'mini_g2';
+        moduleName = 'mini_gx';
         objName = 'ext_rfid';
     } else if (version === 'mixgo_me') {
         moduleName = 'me_g1';
@@ -324,7 +324,7 @@ export const rfid_write_return = function (_, generator) {
     var moduleName = version;
     var objName = 'onboard_rfid';
     if (version === 'mixgo_mini') {
-        moduleName = 'mini_g2';
+        moduleName = 'mini_gx';
         objName = 'ext_rfid';
     } else if (version === 'mixgo_me') {
         moduleName = 'me_g1';
@@ -341,7 +341,7 @@ export const rfid_status = function (_, generator) {
     var moduleName = version;
     var objName = 'onboard_rfid';
     if (version === 'mixgo_mini') {
-        moduleName = 'mini_g2';
+        moduleName = 'mini_gx';
         objName = 'ext_rfid';
     } else if (version === 'mixgo_me') {
         moduleName = 'me_g1';
@@ -934,48 +934,87 @@ export const educore_rfid_sensor_scan_data = function (_, generator) {
 
 export const CI130X_IDENTIFY_AND_SAVE_SANT = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
-    var code = 'onboard_asr.cmd_id()\n';
+    if(version == 'mini_sant'){
+        generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
+        var code = 'onboard_asr.cmd_id()\n';
+    }
+    else if(version == 'mixgo_mini'){
+        generator.definitions_['import_mini_g5_ext_asr'] = 'from mini_g5 import ext_asr';
+        var code = 'ext_asr.cmd_id()\n';
+    }
     return code;
 }
 
 export const CI130X_GET_WHETHER_IDENTIFY_SANT = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
-    var cmd = this.getFieldValue('cmd');
-    var code = 'onboard_asr.result(' + cmd + ')';
+    if(version == 'mini_sant'){
+        generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
+        var cmd = this.getFieldValue('cmd');
+        var code = 'onboard_asr.result(' + cmd + ')';
+    }
+    else if(version == 'mixgo_mini'){
+        generator.definitions_['import_mini_g5_ext_asr'] = 'from mini_g5 import ext_asr';
+        var cmd = this.getFieldValue('cmd');
+        var code = 'ext_asr.result(' + cmd + ')';
+    }
     return [code, generator.ORDER_ATOMIC];
 }
 
 export const CI130X_GET_THE_RECOGNIZED_CMD_SANT = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
-    var key = this.getFieldValue('key');
-    if (key == 'status1') {
-        var code = 'onboard_asr.status()[0]';
-    } else if (key == 'status2') {
-        var code = 'onboard_asr.status()[1]';
-    } else {
-        var code = 'onboard_asr.' + key + '()';
+    if(version == 'mini_sant'){
+        generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
+        var key = this.getFieldValue('key');
+        if (key == 'status1') {
+            var code = 'onboard_asr.status()[0]';
+        } else if (key == 'status2') {
+            var code = 'onboard_asr.status()[1]';
+        } else {
+            var code = 'onboard_asr.' + key + '()';
+        }
+    }else if(version == 'mixgo_mini'){
+        generator.definitions_['import_mini_g5_ext_asr'] = 'from mini_g5 import ext_asr';
+        var key = this.getFieldValue('key');
+        if (key == 'status1') {
+            var code = 'ext_asr.status()[0]';
+        } else if (key == 'status2') {
+            var code = 'ext_asr.status()[1]';
+        } else {
+            var code = 'ext_asr.' + key + '()';
+        }
     }
     return [code, generator.ORDER_ATOMIC];
 }
 
 export const CI130X_BROADCAST_SANT = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
-    var num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
-    var star = this.getFieldValue('star');
-    var end = this.getFieldValue('end');
-    var code = 'onboard_asr.play(' + star + ', ' + num + ', ' + end + ')\n';
+    if(version == 'mini_sant'){
+        generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
+        var num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
+        var star = this.getFieldValue('star');
+        var end = this.getFieldValue('end');
+        var code = 'onboard_asr.play(' + star + ', ' + num + ', ' + end + ')\n';
+    }else if(version == 'mixgo_mini'){
+        generator.definitions_['import_mini_g5_ext_asr'] = 'from mini_g5 import ext_asr';
+        var num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
+        var star = this.getFieldValue('star');
+        var end = this.getFieldValue('end');
+        var code = 'ext_asr.play(' + star + ', ' + num + ', ' + end + ')\n';
+    }
     return code;
 }
 
 export const CI130X_SET_SYSTEM_CMD_SANT = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
-    var cmd = this.getFieldValue('cmd');
-    var code = 'onboard_asr.sys_cmd(' + cmd + ')\n';
+    if(version == 'mini_sant'){
+        generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
+        var cmd = this.getFieldValue('cmd');
+        var code = 'onboard_asr.sys_cmd(' + cmd + ')\n';
+    }else if(version == 'mixgo_mini'){
+        generator.definitions_['import_mini_g5_ext_asr'] = 'from mini_g5 import ext_asr';
+        var cmd = this.getFieldValue('cmd');
+        var code = 'ext_asr.sys_cmd(' + cmd + ')\n';
+    }
     return code;
 }
 
