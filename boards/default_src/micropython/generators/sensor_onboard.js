@@ -939,7 +939,7 @@ export const CI130X_IDENTIFY_AND_SAVE_SANT = function (_, generator) {
         var code = 'onboard_asr.cmd_id()\n';
     }
     else if(version == 'mixgo_mini'){
-        generator.definitions_['import_mini_g5_ext_asr'] = 'from mini_g5 import ext_asr';
+        generator.definitions_['import_mini_gx_ext_asr'] = 'from mini_gx import ext_asr';
         var code = 'ext_asr.cmd_id()\n';
     }
     return code;
@@ -953,7 +953,7 @@ export const CI130X_GET_WHETHER_IDENTIFY_SANT = function (_, generator) {
         var code = 'onboard_asr.result(' + cmd + ')';
     }
     else if(version == 'mixgo_mini'){
-        generator.definitions_['import_mini_g5_ext_asr'] = 'from mini_g5 import ext_asr';
+        generator.definitions_['import_mini_gx_ext_asr'] = 'from mini_gx import ext_asr';
         var cmd = this.getFieldValue('cmd');
         var code = 'ext_asr.result(' + cmd + ')';
     }
@@ -973,7 +973,7 @@ export const CI130X_GET_THE_RECOGNIZED_CMD_SANT = function (_, generator) {
             var code = 'onboard_asr.' + key + '()';
         }
     }else if(version == 'mixgo_mini'){
-        generator.definitions_['import_mini_g5_ext_asr'] = 'from mini_g5 import ext_asr';
+        generator.definitions_['import_mini_gx_ext_asr'] = 'from mini_gx import ext_asr';
         var key = this.getFieldValue('key');
         if (key == 'status1') {
             var code = 'ext_asr.status()[0]';
@@ -995,7 +995,7 @@ export const CI130X_BROADCAST_SANT = function (_, generator) {
         var end = this.getFieldValue('end');
         var code = 'onboard_asr.play(' + star + ', ' + num + ', ' + end + ')\n';
     }else if(version == 'mixgo_mini'){
-        generator.definitions_['import_mini_g5_ext_asr'] = 'from mini_g5 import ext_asr';
+        generator.definitions_['import_mini_gx_ext_asr'] = 'from mini_gx import ext_asr';
         var num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
         var star = this.getFieldValue('star');
         var end = this.getFieldValue('end');
@@ -1011,7 +1011,7 @@ export const CI130X_SET_SYSTEM_CMD_SANT = function (_, generator) {
         var cmd = this.getFieldValue('cmd');
         var code = 'onboard_asr.sys_cmd(' + cmd + ')\n';
     }else if(version == 'mixgo_mini'){
-        generator.definitions_['import_mini_g5_ext_asr'] = 'from mini_g5 import ext_asr';
+        generator.definitions_['import_mini_gx_ext_asr'] = 'from mini_gx import ext_asr';
         var cmd = this.getFieldValue('cmd');
         var code = 'ext_asr.sys_cmd(' + cmd + ')\n';
     }
