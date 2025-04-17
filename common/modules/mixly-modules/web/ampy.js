@@ -95,7 +95,9 @@ class AmpyExt extends Ampy {
     async interrupt(timeout = 1000) {
         for (let i = 0; i < 5; i++) {
             // 中断两次
-            await this.#device_.sendBuffer([3, 3]);
+            await this.#device_.sendBuffer([0x0D, 0x03]);
+            await this.#device_.sleep(100);
+            await this.#device_.sendBuffer([0x03]);
             await this.#device_.sleep(100);
             if (await this.readUntil('>>>', true, timeout)) {
                 return true;
@@ -106,7 +108,7 @@ class AmpyExt extends Ampy {
 
     async enterRawREPL(timeout = 1000) {
         for (let i = 0; i < 5; i++) {
-            await this.#device_.sendBuffer([1]);
+            await this.#device_.sendBuffer([0x01]);
             await this.#device_.sleep(100);
             if (await this.readUntil('raw repl; ctrl-b to exit', true, timeout)) {
                 return true;
@@ -116,7 +118,7 @@ class AmpyExt extends Ampy {
     }
 
     async exitRawREPL(timeout = 5000) {
-        await this.#device_.sendBuffer([2]);
+        await this.#device_.sendBuffer([0x02]);
         await this.#device_.sleep(100);
         let succeed = false;
         if (await this.readUntil('>>>', true, timeout)) {
@@ -126,7 +128,7 @@ class AmpyExt extends Ampy {
     }
 
     async exitREPL(timeout = 5000) {
-        await this.#device_.sendBuffer([4]);
+        await this.#device_.sendBuffer([0x04]);
         await this.#device_.sleep(100);
         let succeed = false;
         if (await this.readUntil('soft reboot', false, timeout)) {
@@ -155,7 +157,7 @@ class AmpyExt extends Ampy {
                 await this.#device_.sleep(10);
             }
         }
-        await this.#device_.sendBuffer([4]);
+        await this.#device_.sendBuffer([0x04]);
         return await this.follow(timeout);
     }
 
@@ -184,7 +186,7 @@ class AmpyExt extends Ampy {
         this.#active_ = true;
         await this.#device_.open(115200);
         await this.#device_.sleep(500);
-        await this.#device_.sendBuffer([2]);
+        await this.#device_.sendBuffer([0x02]);
         if (!await this.interrupt()) {
             throw new Error(Msg.Lang['ampy.interruptFailed']);
         }
