@@ -28,9 +28,10 @@ if __name__ == "__main__":
         target_path = path.abspath(path.join(working_path, target_path))
     output = None
     if not path.exists(target_path):
-        exit(0)
+        os.makedirs(target_path)
     if path.isfile(target_path):
-        exit(0)
+        os.remove(target_path)
+        os.makedirs(target_path)
     output = {}
     content = os.listdir(target_path)
     for i in content:
