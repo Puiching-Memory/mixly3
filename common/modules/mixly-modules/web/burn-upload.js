@@ -701,14 +701,15 @@ BU.uploadWithAmpy = (portName) => {
                 statusBarTerminal.addValue('Writing main.py ');
                 await ampy.put('main.py', code);
                 statusBarTerminal.addValue('Done!\n');
-                /*const rootInfo = await ampy.ls('/');
+                /*const cwd = await ampy.cwd();
+                const rootInfo = await ampy.ls(cwd);
                 let rootMap = {};
                 for (let item of rootInfo) {
                     rootMap[item[0]] = item[1];
                 }
                 if (libraries && libraries instanceof Object) {
                     for (let key in libraries) {
-                        if (rootMap[`/${key}`] !== undefined && rootMap[`/${key}`] === libraries[key].size) {
+                        if (rootMap[`${cwd}/${key}`] !== undefined && rootMap[`${cwd}/${key}`] === libraries[key].size) {
                             statusBarTerminal.addValue(`Skip ${key}\n`);
                             continue;
                         }

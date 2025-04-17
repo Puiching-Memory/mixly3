@@ -20,7 +20,7 @@ def check_path(path):
             return 'file'
         else:
             return 'special file'
-    except OSError:
+    except Exception:
         return 'none'
 
 def listdir(directory):

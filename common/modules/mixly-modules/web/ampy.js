@@ -27,6 +27,7 @@ class AmpyExt extends Ampy {
         this.RM = goog.get(path.join(Env.templatePath, 'python/rm.py'));
         this.RMDIR = goog.get(path.join(Env.templatePath, 'python/rmdir.py'));
         this.GET = goog.get(path.join(Env.templatePath, 'python/get.py'));
+        this.CWD = goog.get(path.join(Env.templatePath, 'python/cwd.py'));
     }
 
     #device_ = null;
@@ -262,7 +263,7 @@ class AmpyExt extends Ampy {
         }
         const { data, dataError } = await this.exec(code, timeout);
         if (dataError) {
-            return '[]';
+            return [];
         }
         return JSON.parse(data.replaceAll('\'', '\"'));
     }
@@ -297,7 +298,6 @@ class AmpyExt extends Ampy {
             oldPath: oldname,
             newPath: newname
         });
-        const result = await this.exec(code, timeout);
         const { dataError } = await this.exec(code, timeout);
         return !dataError;
     }
@@ -310,7 +310,6 @@ class AmpyExt extends Ampy {
             path: filename
         });
         await this.exec(code);
-        const result = await this.exec(code, timeout);
         const { dataError } = await this.exec(code, timeout);
         return !dataError;
     }
@@ -322,9 +321,20 @@ class AmpyExt extends Ampy {
         const code = Mustache.render(AmpyExt.RMDIR, {
             path: directory
         });
-        const result = await this.exec(code, timeout);
         const { dataError } = await this.exec(code, timeout);
         return !dataError;
+    }
+
+    async cwd(timeout = 5000) {
+        if (!this.isActive()) {
+            throw new Error(Msg.Lang['ampy.portIsNotOpen']);
+        }
+        const code = Mustache.render(AmpyExt.CWD, {});
+        const { data, dataError } = await this.exec(code, timeout);
+        if (dataError) {
+            return '/';
+        }
+        return data;
     }
 
     getDevice() {
