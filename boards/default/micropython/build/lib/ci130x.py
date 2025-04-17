@@ -26,7 +26,7 @@ class CI130X:
 			self._rreg(_CI_ID_GET, 3)
 		except:
 			try: #C130X 启动慢，加延时判断
-				time.sleep_ms(500)
+				time.sleep_ms(850)
 				self._rreg(_CI_ID_GET, 3)
 			except:
 				raise AttributeError("Cannot find a CI130X")

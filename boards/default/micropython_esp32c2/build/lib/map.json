@@ -24,16 +24,6 @@
         "__size__": 13061,
         "__name__": "mini_bot.py"
     },
-    "mini_g2": {
-        "__require__": [
-            "gc",
-            "machine",
-            "rc522"
-        ],
-        "__file__": true,
-        "__size__": 544,
-        "__name__": "mini_g2.py"
-    },
     "mini_go": {
         "__require__": [
             "time",
@@ -45,6 +35,17 @@
         "__file__": true,
         "__size__": 8481,
         "__name__": "mini_go.py"
+    },
+    "mini_gx": {
+        "__require__": [
+            "gc",
+            "machine",
+            "rc522",
+            "ci130x"
+        ],
+        "__file__": true,
+        "__size__": 736,
+        "__name__": "mini_gx.py"
     },
     "mixgo_mini": {
         "__require__": [

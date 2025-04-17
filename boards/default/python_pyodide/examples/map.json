@@ -1,1 +1,166 @@
-{}
+{
+    "教学指南米思齐修订版": {
+        "八年级": {
+            "18-2 从物联网服务平台获取数据(python).mix": {
+                "__file__": true,
+                "__name__": "18-2 从物联网服务平台获取数据(python).mix"
+            },
+            "18-3 数据处理(python).mix": {
+                "__file__": true,
+                "__name__": "18-3 数据处理(python).mix"
+            },
+            "19-3 数据可视化(python).mix": {
+                "__file__": true,
+                "__name__": "19-3 数据可视化(python).mix"
+            },
+            "22-2 身高记录仪系统分析端(python).mix": {
+                "__file__": true,
+                "__name__": "22-2 身高记录仪系统分析端(python).mix"
+            },
+            "22-22 手速测试仪系统分析端(python).mix": {
+                "__file__": true,
+                "__name__": "22-22 手速测试仪系统分析端(python).mix"
+            },
+            "9-1 利用HTTP获取互联网中的数据(python).mix": {
+                "__file__": true,
+                "__name__": "9-1 利用HTTP获取互联网中的数据(python).mix"
+            },
+            "9-2 解析数据(python).mix": {
+                "__file__": true,
+                "__name__": "9-2 解析数据(python).mix"
+            },
+            "__file__": false,
+            "__name__": "八年级"
+        },
+        "六年级": {
+            "第10课.mix": {
+                "__file__": true,
+                "__name__": "第10课.mix"
+            },
+            "第12课": {
+                "判断平年与闰年.mix": {
+                    "__file__": true,
+                    "__name__": "判断平年与闰年.mix"
+                },
+                "根据输入的气温给出提示.mix": {
+                    "__file__": true,
+                    "__name__": "根据输入的气温给出提示.mix"
+                },
+                "购买火车票.mix": {
+                    "__file__": true,
+                    "__name__": "购买火车票.mix"
+                },
+                "__file__": false,
+                "__name__": "第12课"
+            },
+            "第13课": {
+                "从1数到100.mix": {
+                    "__file__": true,
+                    "__name__": "从1数到100.mix"
+                },
+                "数数.mix": {
+                    "__file__": true,
+                    "__name__": "数数.mix"
+                },
+                "输出1-n的所有偶数.mix": {
+                    "__file__": true,
+                    "__name__": "输出1-n的所有偶数.mix"
+                },
+                "输出1-n能被5整除的数.mix": {
+                    "__file__": true,
+                    "__name__": "输出1-n能被5整除的数.mix"
+                },
+                "__file__": false,
+                "__name__": "第13课"
+            },
+            "第15课": {
+                "三位密码锁.mix": {
+                    "__file__": true,
+                    "__name__": "三位密码锁.mix"
+                },
+                "找到所有水仙花数.mix": {
+                    "__file__": true,
+                    "__name__": "找到所有水仙花数.mix"
+                },
+                "破解时间估算.mix": {
+                    "__file__": true,
+                    "__name__": "破解时间估算.mix"
+                },
+                "__file__": false,
+                "__name__": "第15课"
+            },
+            "第16课": {
+                "找出最大数.mix": {
+                    "__file__": true,
+                    "__name__": "找出最大数.mix"
+                },
+                "找出最小数.mix": {
+                    "__file__": true,
+                    "__name__": "找出最小数.mix"
+                },
+                "__file__": false,
+                "__name__": "第16课"
+            },
+            "第17课": {
+                "从大到小的选择排序.mix": {
+                    "__file__": true,
+                    "__name__": "从大到小的选择排序.mix"
+                },
+                "排序.mix": {
+                    "__file__": true,
+                    "__name__": "排序.mix"
+                },
+                "__file__": false,
+                "__name__": "第17课"
+            },
+            "第19课": {
+                "冒泡排序(for循环）.mix": {
+                    "__file__": true,
+                    "__name__": "冒泡排序(for循环）.mix"
+                },
+                "冒泡排序.mix": {
+                    "__file__": true,
+                    "__name__": "冒泡排序.mix"
+                },
+                "__file__": false,
+                "__name__": "第19课"
+            },
+            "第21课.mix": {
+                "__file__": true,
+                "__name__": "第21课.mix"
+            },
+            "第23课.mix": {
+                "__file__": true,
+                "__name__": "第23课.mix"
+            },
+            "第3课.mix": {
+                "__file__": true,
+                "__name__": "第3课.mix"
+            },
+            "第8课": {
+                "买水果算价格.mix": {
+                    "__file__": true,
+                    "__name__": "买水果算价格.mix"
+                },
+                "公园购票.mix": {
+                    "__file__": true,
+                    "__name__": "公园购票.mix"
+                },
+                "比较两个数并输出较小数.mix": {
+                    "__file__": true,
+                    "__name__": "比较两个数并输出较小数.mix"
+                },
+                "温度转换.mix": {
+                    "__file__": true,
+                    "__name__": "温度转换.mix"
+                },
+                "__file__": false,
+                "__name__": "第8课"
+            },
+            "__file__": false,
+            "__name__": "六年级"
+        },
+        "__file__": false,
+        "__name__": "教学指南米思齐修订版"
+    }
+}

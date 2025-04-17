@@ -320,7 +320,7 @@
             "micropython"
         ],
         "__file__": true,
-        "__size__": 1794,
+        "__size__": 1949,
         "__name__": "hx720.py"
     },
     "i2cdevice": {
