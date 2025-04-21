@@ -158,7 +158,7 @@ export const IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE = function (_, generator) {
     // var mac_address = 'str(binascii.hexlify(wifi.radio.mac_address))[2:14]'
     // var socket_pool = 'socketpool.SocketPool(wifi.radio)'
     // var ssl_context = 'ssl.create_default_context()'
-    var code = 'sk = analyse_sharekey(\'http://'+server.substring(1, server.length-1)+'/mixio-php/sharekey.php?sk=' + share_code + '\')\n'+
+    var code = 'sk = analyse_sharekey(\'http://' + server.substring(1, server.length - 1) + '/mixio-php/sharekey.php?sk=' + share_code + '\')\n' +
         'MQTT_USR_PRJ = sk[0]+\'/\'+sk[1]+\'/\'\n' +
         'mqtt_client = mixiot.init_MQTT_client(' + server + ', sk[0], sk[2]' + ', MQTT_USR_PRJ)\n';
     return code;
@@ -235,18 +235,28 @@ export const iot_mqtt_data = function (_, generator) {
     return [code, generator.ORDER_ATOMIC];
 }
 
-export const IOT_CONNECT_OLLAMA = function(_,generator) {
-    generator.definitions_['import_Ollama'] = "from ollama import Ollama";
+export const iot_connect_ollama = function (_, generator) {
+    generator.definitions_['import_ollama'] = "from ollama import Ollama";
     var ser = generator.valueToCode(this, 'SERVER', generator.ORDER_ATOMIC);
     var name = generator.valueToCode(this, 'NAME', generator.ORDER_ATOMIC);
     var num = generator.valueToCode(this, 'NUMBER', generator.ORDER_ATOMIC);
-    var code = 'llm = Ollama(' + ser + ', ' + name + ', '+ num +')\n';
+    var code = 'llm = Ollama(' + ser + ', ' + name + ', ' + num + ')\n';
     return code;
+}
 
+export const IOT_CONNECT_OLLAMA = iot_connect_ollama;
+
+export const iot_connect_openai = function (_, generator) {
+    generator.definitions_['import_openai'] = "from openai import OpenAI";
+    var ser = generator.valueToCode(this, 'SERVER', generator.ORDER_ATOMIC);
+    var key = generator.valueToCode(this, 'KEY', generator.ORDER_ATOMIC);
+    var name = generator.valueToCode(this, 'NAME', generator.ORDER_ATOMIC);
+    var num = generator.valueToCode(this, 'NUMBER', generator.ORDER_ATOMIC);
+    var code = `llm = OpenAI(${ser}, ${key}, ${name}, ${num})\n`;
+    return code;
 }
 
 export const use_ollama_llm_to_chat = function (_, generator) {
-    generator.definitions_['import_Ollama'] = "from ollama import Ollama";
     var topic = generator.valueToCode(this, 'TOPIC', generator.ORDER_ATOMIC);
     var method = generator.valueToCode(this, 'METHOD', generator.ORDER_ATOMIC);
     var code = 'llm.chat(' + topic + ', ' + method + ')\n';
@@ -254,48 +264,41 @@ export const use_ollama_llm_to_chat = function (_, generator) {
 }
 
 export const use_ollama_llm_to_chat_return = function (_, generator) {
-    generator.definitions_['import_Ollama'] = "from ollama import Ollama";
     var topic = generator.valueToCode(this, 'TOPIC', generator.ORDER_ATOMIC);
     var code = 'llm.chat(' + topic + ')';
-    return [code,generator.ORDER_ATOMIC];
+    return [code, generator.ORDER_ATOMIC];
 }
 
 // export const ollama_set_timeout = function (_,generator) {
-//     generator.definitions_['import_Ollama'] = "from ollama import Ollama";
 //     var t = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
 //     var code = 'llm.set_timeout(' + t + ')\n';
 //     return code;
 // }
 
 // export const ollama_set_max_retries = function (_,generator) {
-//     generator.definitions_['import_Ollama'] = "from ollama import Ollama";
 //     var t = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
 //     var code = 'llm.set_max_retries(' + t + ')\n';
 //     return code;
 // }
 
 // export const ollama_set_custom_url = function (_,generator) {
-//     generator.definitions_['import_Ollama'] = "from ollama import Ollama";
 //     var t = generator.valueToCode(this, 'TEXT', generator.ORDER_ATOMIC);
 //     var code = 'llm.set_custom_url(' + t + ')\n';
 //     return code;
 // }
 
 // export const ollama_select_model = function (_,generator) {
-//     generator.definitions_['import_Ollama'] = "from ollama import Ollama";
 //     var t = generator.valueToCode(this, 'TEXT', generator.ORDER_ATOMIC);
 //     var code = 'llm.select_model(' + t + ')\n';
 //     return code;
 // }
 
 // export const ollama_clear_user_history = function (_,generator) {
-//     generator.definitions_['import_Ollama'] = "from ollama import Ollama";
 //     var code = 'llm.clear_user_history()\n';
 //     return code;
 // }
 
-export const ollama_empty_history = function (_,generator) {
-    generator.definitions_['import_Ollama'] = "from ollama import Ollama";
+export const ollama_empty_history = function () {
     var code = 'llm.empty_history()\n';
     return code;
 }

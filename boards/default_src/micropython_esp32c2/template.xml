@@ -455,7 +455,7 @@
         </shadow>
       </value>
     </block>
-        <block type="math_degree_to_radian">
+    <block type="math_degree_to_radian">
       <value name="VAR">
         <shadow type="math_number">
           <field name="NUM">1</field>
@@ -1714,7 +1714,7 @@
         </shadow>
       </value>
     </block>
-                                                        
+
     <block type="analog_keyboard_input" m-show="micropython:esp32c2:mixgo_mini">
       <value name="special">
         <block type="special_key">
@@ -1751,7 +1751,7 @@
       </value>
     </block>
     <block type="analog_keyboard_str" m-show="micropython:esp32c2:mixgo_mini">
-     <value name="str">
+      <value name="str">
         <shadow type="text">
           <field name="TEXT">Hello, Mixly!</field>
         </shadow>
@@ -1830,7 +1830,7 @@
     <block type="image_arithmetic">
       <value name="A">
         <shadow type="pins_builtinimg"></shadow>
-      </value> 
+      </value>
       <value name="B">
         <shadow type="pins_builtinimg"></shadow>
       </value>
@@ -2061,8 +2061,8 @@
       <value name="NUM">
         <block type="logic_null"></block>
       </value>
-    </block>   
-    <block type = "CI130X_SET_SYSTEM_CMD_SANT"></block>
+    </block>
+    <block type="CI130X_SET_SYSTEM_CMD_SANT"></block>
   </category>
   <category id="catIot" colour="#2FAD7A">
     <category id="catBlynk" colour="#2FAD7A">
@@ -2817,7 +2817,7 @@
         </statement>
       </block>
     </category>
-    <category id ="catBLEC" colour="140">
+    <category id="catBLEC" colour="140">
       <block type="communicate_bluetooth_handle">
         <value name="VAR">
           <shadow type="variables_get">
@@ -2939,11 +2939,11 @@
         </value>
       </block> -->
       <block type="analog_ble_keyboard_mouse_init">
-          <value name="kname">
-            <shadow type="text">
-              <field name="TEXT">ble_keyboard_mouse</field>
-            </shadow>  
-          </value>
+        <value name="kname">
+          <shadow type="text">
+            <field name="TEXT">ble_keyboard_mouse</field>
+          </shadow>
+        </value>
       </block>
       <block type="ble_keyboard_mouse_get_mac"></block>
       <block type="ble_keyboard_mouse_connect"></block>
@@ -2954,10 +2954,10 @@
           </shadow>
         </value>
       </block>
-      <block type="analog_ble_keyboard_mouse_input" >
+      <block type="analog_ble_keyboard_mouse_input">
         <value name="special">
-            <block type="special_key">
-            </block>
+          <block type="special_key">
+          </block>
         </value>
         <value name="general">
           <block type="general_key">
@@ -2976,7 +2976,7 @@
           </shadow>
         </value>
       </block>
-      <block type="analog_ble_mouse_keyboard_input" >
+      <block type="analog_ble_mouse_keyboard_input">
         <value name="key">
           <block type="mouse_key">
           </block>
@@ -3657,7 +3657,7 @@
         </block>
       </next>
     </block>
-   <block type="sensor_mpu9250_get_acceleration">
+    <block type="sensor_mpu9250_get_acceleration">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
@@ -3863,13 +3863,13 @@
       <value name="NUM">
         <block type="logic_null"></block>
       </value>
-    </block>   
-    <block type = "CI130X_SET_SYSTEM_CMD">
+    </block>
+    <block type="CI130X_SET_SYSTEM_CMD">
       <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">xsensor</field>
-        </shadow>
-    </block>     
+      <shadow type="variables_get">
+        <field name="VAR">xsensor</field>
+      </shadow>
+    </block>
     <block type="communicate_spi_init">
       <value name="VAR">
         <shadow type="variables_get">
@@ -4206,7 +4206,7 @@
         </shadow>
       </value>
       <value name="pc">
-         <shadow type="math_number">
+        <shadow type="math_number">
           <field name="NUM">500</field>
         </shadow>
       </value>
@@ -4217,7 +4217,7 @@
           <field name="VAR">weight</field>
         </shadow>
       </value>
-    </block> 
+    </block>
   </category>
   <category id="catExternActuator" colour='#74A55B'>
     <block type="servo_move" m-show='micropython:esp32c3:mixgocar_c3'>
@@ -6961,63 +6961,85 @@
         </shadow>
       </value>
     </block>
-    <block type="IOT_CONNECT_OLLAMA">
-        <value name="SERVER">
-          <shadow type="text">
-            <field name="TEXT">192.168.1.1</field>
-          </shadow>
-        </value>
-        <value name="NAME">
-          <shadow type="text">
-            <field name="TEXT">qwen2.5-coder:0.5b</field>
-          </shadow>
-        </value>
-        <value name="NUMBER">
-          <shadow type="math_number">
-            <field name="NUM">5</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="use_ollama_llm_to_chat">
-        <value name="TOPIC">
-          <shadow type="text">
-            <field name="TEXT">请介绍一下米思齐？</field>
-          </shadow>
-        </value>
-        <value name="METHOD">
-          <shadow type="factory_block_return">
-            <field name="VALUE">content_callback</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="procedures_defnoreturn">
-        <mutation>
-          <arg name="content"></arg>
-        </mutation>
-        <field name="NAME">content_callback</field>
-        <statement name="STACK">
-          <block type="system_print_end">
-            <value name="VAR">
-              <block type="variables_get">
-                <field name="VAR">content</field>
-              </block>
-            </value>
-            <value name="END">
-              <shadow type="text">
-                <field name="TEXT"></field>
-              </shadow>
-            </value>
-          </block>
-        </statement>
-      </block>
-      <block type="use_ollama_llm_to_chat_return">
-        <value name="TOPIC">
-          <shadow type="text">
-            <field name="TEXT">请介绍一下米思齐？</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="ollama_empty_history"></block>
+    <block type="iot_connect_ollama">
+      <value name="SERVER">
+        <shadow type="text">
+          <field name="TEXT">192.168.1.1</field>
+        </shadow>
+      </value>
+      <value name="NAME">
+        <shadow type="text">
+          <field name="TEXT">qwen2.5-coder:0.5b</field>
+        </shadow>
+      </value>
+      <value name="NUMBER">
+        <shadow type="math_number">
+          <field name="NUM">5</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="iot_connect_openai">
+      <value name="SERVER">
+        <shadow type="text">
+          <field name="TEXT">https://api.deepseek.com</field>
+        </shadow>
+      </value>
+      <value name="KEY">
+        <shadow type="text">
+          <field name="TEXT">API Key</field>
+        </shadow>
+      </value>
+      <value name="NAME">
+        <shadow type="text">
+          <field name="TEXT">deepseek-chat</field>
+        </shadow>
+      </value>
+      <value name="NUMBER">
+        <shadow type="math_number">
+          <field name="NUM">5</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="use_ollama_llm_to_chat">
+      <value name="TOPIC">
+        <shadow type="text">
+          <field name="TEXT">请介绍一下米思齐？</field>
+        </shadow>
+      </value>
+      <value name="METHOD">
+        <shadow type="factory_block_return">
+          <field name="VALUE">content_callback</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="procedures_defnoreturn">
+      <mutation>
+        <arg name="content"></arg>
+      </mutation>
+      <field name="NAME">content_callback</field>
+      <statement name="STACK">
+        <block type="system_print_end">
+          <value name="VAR">
+            <block type="variables_get">
+              <field name="VAR">content</field>
+            </block>
+          </value>
+          <value name="END">
+            <shadow type="text">
+              <field name="TEXT"></field>
+            </shadow>
+          </value>
+        </block>
+      </statement>
+    </block>
+    <block type="use_ollama_llm_to_chat_return">
+      <value name="TOPIC">
+        <shadow type="text">
+          <field name="TEXT">请介绍一下米思齐？</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="ollama_empty_history"></block>
   </category>
 
   <category id="catFactory" name="Factory" colour="#777777">

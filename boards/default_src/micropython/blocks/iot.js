@@ -619,13 +619,37 @@ export const iot_onenetdisconnect = iot_onenet_disconnect;
 export const iot_checkonenet = iot_onenet_check;
 export const iot_publish = iot_onenet_publish;
 
-export const IOT_CONNECT_OLLAMA = {
+export const iot_connect_ollama = {
     init: function () {
         this.setColour(IOT_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_CONNECT_OLLAMA);
         this.appendValueInput('SERVER')
             .appendField(Blockly.Msg.MIXLY_EMQX_SERVER)
+            .setAlign(Blockly.inputs.Align.RIGHT);
+        this.appendValueInput('NAME')
+            .appendField(Blockly.Msg.MODEL_NAME)
+            .setAlign(Blockly.inputs.Align.RIGHT);
+        this.appendValueInput('NUMBER')
+            .appendField(Blockly.Msg.MIXLY_SET_MAXIMUM_HISTORICAL_SESSIONS_NUM);
+        this.setInputsInline(false);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+export const IOT_CONNECT_OLLAMA = iot_connect_ollama;
+
+export const iot_connect_openai = {
+    init: function () {
+        this.setColour(IOT_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_CONNECT_OPENAI);
+        this.appendValueInput('SERVER')
+            .appendField(Blockly.Msg.MIXLY_EMQX_SERVER)
+            .setAlign(Blockly.inputs.Align.RIGHT);
+        this.appendValueInput('KEY')
+            .appendField(Blockly.Msg.MIXLY_API_PRIVATE_KEY)
             .setAlign(Blockly.inputs.Align.RIGHT);
         this.appendValueInput('NAME')
             .appendField(Blockly.Msg.MODEL_NAME)

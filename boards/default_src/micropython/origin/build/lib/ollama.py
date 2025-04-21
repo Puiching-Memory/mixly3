@@ -60,7 +60,7 @@ class Ollama():
                 self._url, headers=self._heads, data=data)
             if response.status_code == 200:
                 break
-            time.slee(1)
+            time.sleep(1)
 
         output = ""
 
@@ -101,7 +101,7 @@ class Ollama():
             self.add_history("assistant", content)
             messages_len = len(self._messages)
             history_num = 2 * self._max_history_num
-            while history_num < len(self._messages):
+            while history_num < messages_len:
                 del self._messages[0]
         else:
             self.clear_user_history()
