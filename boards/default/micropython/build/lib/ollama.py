@@ -4,7 +4,7 @@ import json
 
 
 class Ollama():
-    def __init__(self, url="", model="", max_history_num=0):
+    def __init__(self, url="", model="", max_history_num=0, max_tokens=1024):
         self._heads = {
             "Accept": "text/event-stream",
             # "Cache-Control": "no-cache",
@@ -19,7 +19,8 @@ class Ollama():
         self._data = {
             "stream": True,
             "model": model,
-            "messages": self._messages
+            "messages": self._messages,
+            "max_tokens": max_tokens
         }
 
     def set_timeout(self, timeout):
@@ -60,7 +61,7 @@ class Ollama():
                 self._url, headers=self._heads, data=data)
             if response.status_code == 200:
                 break
-            time.slee(1)
+            time.sleep(1)
 
         output = ""
 
@@ -101,7 +102,7 @@ class Ollama():
             self.add_history("assistant", content)
             messages_len = len(self._messages)
             history_num = 2 * self._max_history_num
-            while history_num < len(self._messages):
+            while history_num < messages_len:
                 del self._messages[0]
         else:
             self.clear_user_history()
