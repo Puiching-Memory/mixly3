@@ -9,7 +9,7 @@ module.exports = {
     cache: false,
     entry: path.resolve(ORI_DIR, 'index.js'),
     output: {
-        filename: "[name].bundle.js",
+        filename: "[name].bundle.[contenthash:8].js",
         path: DEST_DIR,
         clean: true
     },
