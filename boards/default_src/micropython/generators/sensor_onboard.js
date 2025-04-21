@@ -313,7 +313,7 @@ export const rfid_write = function (_, generator) {
         objName = 'ext_rc522';
     }
     generator.definitions_[`import_${moduleName}_${objName}`] = `from ${moduleName} import ${objName}`;
-    var code = `${objName}.write_card(${cnt}, ${sector})`;
+    var code = `${objName}.write_card(${cnt}, ${sector})\n`;
     return code;
 }
 
