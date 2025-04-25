@@ -176,18 +176,13 @@ export const dicts_create_with_noreturn = function (_, generator) {
 
     for (var n = 0; n < this.itemCount_; n++) {
         var keyName = this.getFieldValue('KEY' + n);
-        code[n] = keyName + ":" + (generator.valueToCode(this, 'ADD' + n, generator.ORDER_NONE) || default_value);
+        code[n] = keyName + ": " + (generator.valueToCode(this, 'ADD' + n, generator.ORDER_NONE) || default_value);
     }
     // if (this.itemCount_!=1){
     //  generator.definitions_['var_declare'+varName] = varName+'= '+ '(' + code.join(', ') + ')\n';}
     // else {
     // generator.definitions_['var_declare'+varName] = varName+'= '+ '(' + code.join(', ') + ',)\n';}
-    if (this.itemCount_ != 1) {
-        var code = '{' + code.join(', ') + '}';
-    }
-    else {
-        var code = '{' + code.join(', ') + ',}';
-    }
+    var code = '{' + code.join(', ') + '}';
 
     return [code, generator.ORDER_ATOMIC];
 }
