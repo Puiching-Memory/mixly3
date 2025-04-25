@@ -362,11 +362,12 @@
             "array",
             "time",
             "gc",
+            "machine",
             "esp32",
             "machine"
         ],
         "__file__": true,
-        "__size__": 6243,
+        "__size__": 6913,
         "__name__": "irremote.py"
     },
     "ltr308al": {
@@ -605,7 +606,7 @@
             "json"
         ],
         "__file__": true,
-        "__size__": 3412,
+        "__size__": 3356,
         "__name__": "ollama.py"
     },
     "onenet": {

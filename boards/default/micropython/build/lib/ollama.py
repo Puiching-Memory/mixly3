@@ -4,7 +4,7 @@ import json
 
 
 class Ollama():
-    def __init__(self, url="", model="", max_history_num=0, max_tokens=1024):
+    def __init__(self, url="", model="", max_history_num=0):
         self._heads = {
             "Accept": "text/event-stream",
             # "Cache-Control": "no-cache",
@@ -19,8 +19,7 @@ class Ollama():
         self._data = {
             "stream": True,
             "model": model,
-            "messages": self._messages,
-            "max_tokens": max_tokens
+            "messages": self._messages
         }
 
     def set_timeout(self, timeout):

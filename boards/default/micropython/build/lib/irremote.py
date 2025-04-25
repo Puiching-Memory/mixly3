@@ -3,13 +3,16 @@ IR-Remote
 
 Micropython library for the IR-Remote/Timer(IR_RX&TX)
 ===============================================
-#Preliminary composition               20240302
-
 @dahanzimin From the Mixly Team
 """
 import array, time, gc
-from esp32 import RMT
 from machine import Pin, Timer
+try:
+	from esp32 import RMT
+	TX_MOED = 1
+except:
+	from machine import PWM
+	TX_MOED = 0
 
 '''接收部分'''
 class IR_RX:
@@ -130,9 +133,29 @@ class RC5_RX(IR_RX):
 '''发射部分'''
 class IR_TX:
 	def __init__(self, pin, cfreq=38000, power=60):
-		self._rmt = RMT(0, pin=Pin(pin), clock_div=80, tx_carrier = (cfreq, round(power * 0.75), 1))
+		if TX_MOED:
+			self._rmt = RMT(0, pin=Pin(pin), clock_div=80, tx_carrier = (cfreq, round(power * 0.75), 1))
+		else:
+			self._pwm = PWM(Pin(pin), freq=cfreq, duty_u16=0)
+			self._duty = round(power * 65535 / 100 * 0.75)
+			self._busy = False
 		self._pulses = array.array('H')
 		self.carrier = False
+
+	def _pwm_write_pulses(self, pulses):
+		_flip = True
+		self._busy = True
+		for pulse in pulses:
+			if _flip:
+				self._pwm.duty_u16(self._duty)
+				time.sleep_us(pulse)
+				_flip = False
+			else:
+				self._pwm.duty_u16(0)
+				time.sleep_us(pulse)
+				_flip = True
+		self._pwm.duty_u16(0)
+		self._busy = False
 
 	def transmit(self, cmd=None, addr=None, toggle=None, pulses=None, raw=None):
 		if pulses is None:
@@ -141,13 +164,19 @@ class IR_TX:
 				self.tx(cmd, addr, toggle)
 			else:
 				self.tx_raw(raw)
-			self._rmt.write_pulses(tuple(self._pulses))
+			if TX_MOED:
+				self._rmt.write_pulses(tuple(self._pulses))
+			else:
+				self._pwm_write_pulses(tuple(self._pulses))
 			self._pulses = array.array('H')
 		else:
-			self._rmt.write_pulses(tuple(pulses))
+			if TX_MOED:
+				self._rmt.write_pulses(tuple(pulses))
+			else:
+				self._pwm_write_pulses(tuple(pulses))
 
 	def busy(self):
-		return not self._rmt.wait_done()
+		return not self._rmt.wait_done() if TX_MOED else self._busy
 
 	def _append(self, *times):
 		for t in times:
