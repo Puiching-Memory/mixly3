@@ -57,13 +57,13 @@ if (goog.isElectron && Env.currentPlatform === 'win32') {
   * 获取板卡index或主页面index的路径
   * @type {String} 
   */
-Env.indexDirPath = path.join(htmlPath, '../');
+Env.indexDirPath = path.join(htmlPath, '..');
 
 /**
   * 资源文件夹所在路径
   * @type {String} 
   */
-Env.srcDirPath = path.join(Env.indexDirPath, '../');
+Env.srcDirPath = path.join(Env.indexDirPath, '..');
 
 /**
   * 获取板卡index或主页面index的缩放比例
@@ -93,13 +93,13 @@ Env.thirdPartyJS = [];
   * 默认模板路径
   * @type {String}
   */
-Env.templatePath = path.join(baseJsPath, '../templates/');
+Env.templatePath = path.join(baseJsPath, '../templates');
 
 /**
   * 语言文件路径
   * @type {String}
   */
-Env.msgPath = path.join(baseJsPath, '../msg/');
+Env.msgPath = path.join(baseJsPath, '../msg');
 
 /**
   * 模板index所在路径
@@ -112,7 +112,7 @@ Env.boardIndexPath = path.join(Env.indexDirPath, '../', urlConfig.boardIndex ?? 
   * 模板index所在目录路径
   * @type {String}
   */
-Env.boardDirPath = path.join(Env.boardIndexPath, '../');
+Env.boardDirPath = path.join(Env.boardIndexPath, '..');
 
 if (goog.isElectron) {
     window.setInterval = timers.setInterval;
