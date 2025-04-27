@@ -10,6 +10,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.Workspace');
 goog.require('Mixly.MString');
+goog.require('Mixly.LayerProgress');
 goog.require('Mixly.WebSocket.Serial');
 goog.provide('Mixly.WebSocket.BU');
 
@@ -21,12 +22,15 @@ const {
     Env,
     Workspace,
     MString,
+    LayerProgress,
     WebSocket
 } = Mixly;
 
 const { SELECTED_BOARD } = Config;
 
 const { Serial } = WebSocket;
+
+const { layer } = layui;
 
 
 class WebSocketBU {
@@ -160,15 +164,33 @@ class WebSocketBU {
 
     #running_ = false;
     #upload_ = false;
-    #layerNum_ = null;
+    #killing_ = false;
+    #layer_ = null;
 
-    constructor() {}
+    constructor() {
+        this.#layer_ = new LayerProgress({
+            width: 200,
+            cancelValue: Msg.Lang['nav.btn.stop'],
+            skin: 'layui-anim layui-anim-scale',
+            cancel: () => {
+                if (this.#killing_) {
+                    return false;
+                }
+                this.#layer_.title(`${Msg.Lang['shell.aborting']}...`);
+                this.#killing_ = true;
+                this.kill().catch(Debug.error);
+                return false;
+            },
+            cancelDisplay: false
+        });
+    }
 
     async burn(port) {
         return new Promise(async (resolve, reject) => {
             this.#running_ = true;
             this.#upload_ = false;
-            await this.showProgress();
+            this.#killing_ = false;
+            this.showProgress();
             const config = {
                 boardDirPath: `.${Env.boardDirPath}`,
                 port,
@@ -195,13 +217,13 @@ class WebSocketBU {
         return new Promise(async (resolve, reject) => {
             this.#running_ = true;
             this.#upload_ = true;
-            await this.showProgress();
-
+            this.#killing_ = false;
+            this.showProgress();
             const importsMap = this.getImportModules(code);
             let libraries = {};
             for (let key in importsMap) {
                 const filename = importsMap[key]['__name__'];
-                const data = goog.get(importsMap[key]['__path__']);
+                const data = goog.readFileSync(importsMap[key]['__path__']);
                 libraries[filename] = data;
             }
             const config = {
@@ -250,7 +272,7 @@ class WebSocketBU {
         const libPath = SELECTED_BOARD.upload.libPath;
         for (let i = libPath.length - 1; i >= 0; i--) {
             const dirname = MString.tpl(libPath[i], { indexPath: Env.boardDirPath });
-            const map = goog.getJSON(path.join(dirname, 'map.json'));
+            const map = goog.readJsonSync(path.join(dirname, 'map.json'));
             if (!(map && map instanceof Object)) {
                 continue;
             }
@@ -304,33 +326,14 @@ class WebSocketBU {
         });
     }
 
-    async showProgress() {
-        return new Promise((resolve, reject) => {
-            this.#layerNum_ = layer.open({
-                type: 1,
-                title: `${this.isCompiling ? Msg.Lang['shell.burning'] : Msg.Lang['shell.uploading']}...`,
-                content: $('#mixly-loader-div'),
-                shade: LayerExt.SHADE_NAV,
-                resize: false,
-                closeBtn: 0,
-                success: () => {
-                    $('#mixly-loader-btn').off('click').click(() => {
-                        $('#mixly-loader-btn').css('display', 'none');
-                        layer.title(`${Msg.Lang['shell.aborting']}...`, this.layerNum);
-                        this.kill().catch(Debug.error);
-                    });
-                    resolve();
-                },
-                end: function () {
-                    $('#mixly-loader-btn').off('click');
-                    $('#mixly-loader-btn').css('display', 'inline-block');
-                }
-            });
-        })
+    showProgress() {
+        const message = this.isBurning() ? Msg.Lang['shell.burning'] : Msg.Lang['shell.uploading'];
+        this.#layer_.title(`${message}...`);
+        this.#layer_.show();
     }
 
     hideProgress() {
-        layer.close(this.#layerNum_);
+        this.#layer_.hide();
     }
 
     isUploading() {

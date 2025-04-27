@@ -7,6 +7,7 @@ goog.require('Mixly.Debug');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Workspace');
+goog.require('Mixly.LayerProgress');
 goog.require('Mixly.WebSocket.Serial');
 goog.provide('Mixly.WebSocket.ArduShell');
 
@@ -16,11 +17,13 @@ const {
     LayerExt,
     Msg,
     Workspace,
+    LayerProgress,
     WebSocket
 } = Mixly;
 
-
 const { Serial } = WebSocket;
+
+const { layer } = layui;
 
 
 class WebSocketArduShell {
@@ -56,8 +59,8 @@ class WebSocketArduShell {
                 const { mainStatusBarTabs } = Mixly;
                 const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
                 try {
-                    data = decodeURIComponent(data.replace(/(_E[0-9A-F]{1}_[0-9A-F]{2}_[0-9A-F]{2})+/gm, '%$1'));
-                    data = decodeURIComponent(data.replace(/\\(u[0-9a-fA-F]{4})/gm, '%$1'));
+                    data = unescape(data.replace(/(_E[0-9A-F]{1}_[0-9A-F]{2}_[0-9A-F]{2})+/gm, '%$1'));
+                    data = unescape(data.replace(/\\(u[0-9a-fA-F]{4})/gm, '%$1'));
                 } catch (error) {
                     Debug.error(error);
                 }
@@ -159,15 +162,33 @@ class WebSocketArduShell {
 
     #running_ = false;
     #upload_ = false;
-    #layerNum_ = null;
+    #killing_ = false;
+    #layer_ = null;
 
-    constructor() {}
+    constructor() {
+        this.#layer_ = new LayerProgress({
+            width: 200,
+            cancelValue: Msg.Lang['nav.btn.stop'],
+            skin: 'layui-anim layui-anim-scale',
+            cancel: () => {
+                if (this.#killing_) {
+                    return false;
+                }
+                this.#layer_.title(`${Msg.Lang['shell.aborting']}...`);
+                this.#killing_ = true;
+                this.kill().catch(Debug.error);
+                return false;
+            },
+            cancelDisplay: false
+        });
+    }
 
     async compile(code) {
         return new Promise(async (resolve, reject) => {
             this.#running_ = true;
             this.#upload_ = false;
-            await this.showProgress();
+            this.#killing_ = false;
+            this.showProgress();
             const key = Boards.getSelectedBoardCommandParam();
             const config = { key, code };
             const mixlySocket = WebSocketArduShell.getMixlySocket();
@@ -191,7 +212,8 @@ class WebSocketArduShell {
         return new Promise(async (resolve, reject) => {
             this.#running_ = true;
             this.#upload_ = true;
-            await this.showProgress();
+            this.#killing_ = false;
+            this.showProgress();
             const key = Boards.getSelectedBoardCommandParam();
             const config = { key, code, port };
             const mixlySocket = WebSocketArduShell.getMixlySocket();
@@ -229,33 +251,14 @@ class WebSocketArduShell {
         });
     }
 
-    async showProgress() {
-        return new Promise((resolve, reject) => {
-            this.#layerNum_ = layer.open({
-                type: 1,
-                title: `${this.isCompiling ? Msg.Lang['shell.compiling'] : Msg.Lang['shell.uploading']}...`,
-                content: $('#mixly-loader-div'),
-                shade: LayerExt.SHADE_NAV,
-                resize: false,
-                closeBtn: 0,
-                success: () => {
-                    $('#mixly-loader-btn').off('click').click(() => {
-                        $('#mixly-loader-btn').css('display', 'none');
-                        layer.title(`${Msg.Lang['shell.aborting']}...`, this.layerNum);
-                        this.kill().catch(Debug.error);
-                    });
-                    resolve();
-                },
-                end: function () {
-                    $('#mixly-loader-btn').off('click');
-                    $('#mixly-loader-btn').css('display', 'inline-block');
-                }
-            });
-        })
+    showProgress() {
+        const message = this.isCompiling() ? Msg.Lang['shell.compiling'] : Msg.Lang['shell.uploading'];
+        this.#layer_.title(`${message}...`);
+        this.#layer_.show();
     }
 
     hideProgress() {
-        layer.close(this.#layerNum_);
+        this.#layer_.hide();
     }
 
     isUploading() {
