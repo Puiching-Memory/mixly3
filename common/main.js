@@ -109,22 +109,62 @@ LazyLoad.js([
     }
 
     /**
-     * @function 根据传入的相对路径获取文件数据
-     * @param inPath {string} 文件所在的相对路径
+     * @function 根据传入的相对路径异步获取文件数据
+     * @param filePath {string} 文件所在的相对路径
      * @return {string | null} 请求成功返回请求文本，请求失败或请求超时时返回null
      **/
-    goog.get = (inPath) => {
+    goog.readFile = async (filePath) => {
         let str;
-        if (goog.files[inPath]) {
-            return goog.files[inPath];
+        if (goog.files[filePath]) {
+            return goog.files[filePath];
+        }
+        if (typeof nw === 'object') {
+            const fs = require('fs').promises;
+            const path = require('path');
+            if (filePath.indexOf(window.location.origin) !== -1) {
+                filePath = filePath.replace(window.location.origin, nw.__dirname);
+            } else if (!filePath.indexOf('/')) {
+                filePath = path.resolve(nw.__dirname, './' + filePath);
+            } else {
+                let dirPath;
+                if (await fs.exists(nw.__filename) && await fs.stat(nw.__filename).isFile()) {
+                    dirPath = path.resolve(nw.__filename, '../');
+                } else {
+                    dirPath = nw.__filename;
+                }
+                filePath = path.resolve(dirPath, './' + filePath);
+            }
+            str = await fs.readFile(filePath, 'utf-8');
+        } else {
+            str = await new Promise((resolve, reject) => {
+                $.get(filePath, (data) => {
+                    resolve(data);
+                }, 'text').fail(() => {
+                    reject(`${filePath}获取失败`);
+                });
+            });
+        }
+        goog.files[filePath] = str;
+        return str;
+    }
+
+    /**
+     * @function 根据传入的相对路径同步获取文件数据
+     * @param filePath {string} 文件所在的相对路径
+     * @return {string | null} 请求成功返回请求文本，请求失败或请求超时时返回null
+     **/
+    goog.readFileSync = (filePath) => {
+        let str;
+        if (goog.files[filePath]) {
+            return goog.files[filePath];
         }
         if (typeof nw === 'object') {
             const fs = require('fs');
             const path = require('path');
-            if (inPath.indexOf(window.location.origin) !== -1) {
-                inPath = inPath.replace(window.location.origin, nw.__dirname);
-            } else if (!inPath.indexOf('/')) {
-                inPath = path.resolve(nw.__dirname, './' + inPath);
+            if (filePath.indexOf(window.location.origin) !== -1) {
+                filePath = filePath.replace(window.location.origin, nw.__dirname);
+            } else if (!filePath.indexOf('/')) {
+                filePath = path.resolve(nw.__dirname, './' + filePath);
             } else {
                 let dirPath;
                 if (fs.existsSync(nw.__filename) && fs.statSync(nw.__filename).isFile()) {
@@ -132,30 +172,30 @@ LazyLoad.js([
                 } else {
                     dirPath = nw.__filename;
                 }
-                inPath = path.resolve(dirPath, './' + inPath);
+                filePath = path.resolve(dirPath, './' + filePath);
             }
-            str = fs.readFileSync(inPath, 'utf-8');
+            str = fs.readFileSync(filePath, 'utf-8');
         } else {
             $.ajaxSettings.async = false;
-            $.get(inPath, (data) => {
+            $.get(filePath, (data) => {
                 str = data;
             }, 'text').fail(() => {
-                console.log(inPath, '获取失败');
+                console.log(filePath, '获取失败');
             });
             $.ajaxSettings.async = true;
         }
-        goog.files[inPath] = str;
+        goog.files[filePath] = str;
         return str;
     }
 
     /**
-     * @function 获取对应路径下JSON数据
-     * @param inPath {string} JSON文件的相对路径
+     * @function 异步获取对应路径下JSON数据
+     * @param filePath {string} JSON文件的相对路径
      * @param defaultConfig {object} 默认的JSON配置信息
      * @return {object | null} 当对应路径下文件不存在时将返回null
      **/
-    goog.getJSON = (inPath, defaultValue = {}) => {
-        let jsonStr = goog.get(inPath) ?? '';
+    goog.readJson = async (filePath, defaultValue = {}) => {
+        let jsonStr = await goog.readFile(filePath) ?? '';
         try {
             // 去除JSON字符串中的注释
             jsonStr = jsonStr.replace(/\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/g, (m, g) => g ? '' : m);
@@ -165,6 +205,27 @@ LazyLoad.js([
         }
         return defaultValue;
     }
+
+    /**
+     * @function 同步获取对应路径下JSON数据
+     * @param filePath {string} JSON文件的相对路径
+     * @param defaultConfig {object} 默认的JSON配置信息
+     * @return {object | null} 当对应路径下文件不存在时将返回null
+     **/
+    goog.readJsonSync = (filePath, defaultValue = {}) => {
+        let jsonStr = goog.readFileSync(filePath) ?? '';
+        try {
+            // 去除JSON字符串中的注释
+            jsonStr = jsonStr.replace(/\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/g, (m, g) => g ? '' : m);
+            return { ...defaultValue, ...JSON.parse(jsonStr) };
+        } catch (error) {
+            console.log(error);
+        }
+        return defaultValue;
+    }
+
+    goog.get = goog.readFileSync;
+    goog.getJSON = goog.readJsonSync;
 
     /**
      * @function 添加依赖项
@@ -190,7 +251,7 @@ LazyLoad.js([
      **/
     goog.initDependencies = () => {
         for (let path of goog.MIXLY_DIR_PATH) {
-            const depsJson = goog.getJSON(goog.normalizePath_(goog.basePath + path + '/deps.json'), {});
+            const depsJson = goog.readJsonSync(goog.normalizePath_(goog.basePath + path + '/deps.json'), {});
             if (depsJson && typeof depsJson === 'object') {
                 for (let i in depsJson) {
                     depsJson[i].path = path + depsJson[i].path;
