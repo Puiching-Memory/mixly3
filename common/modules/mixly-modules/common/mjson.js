@@ -1,17 +1,17 @@
 goog.loadJs('common', () => {
 
 goog.require('Mixly.Debug');
-goog.provide('Mixly.MJSON');
+goog.provide('Mixly.MJson');
 
-const { Debug, MJSON } = Mixly;
+const { Debug, MJson } = Mixly;
 
-MJSON.operate = (jsonObj, optFunc) => {
+MJson.operate = (jsonObj, optFunc) => {
     // 循环所有键
     for (var key in jsonObj) {
         //如果对象类型为object类型且数组长度大于0 或者 是对象 ，继续递归解析
         var element = jsonObj[key];
         if (element.length > 0 && typeof (element) == "object" || typeof (element) == "object") {
-            let data = MJSON.operate(element, optFunc);
+            let data = MJson.operate(element, optFunc);
             for (let i in data) {
                 jsonObj[key][i] = data[i];
             }
@@ -28,19 +28,19 @@ MJSON.operate = (jsonObj, optFunc) => {
     return jsonObj;
 }
 
-MJSON.decode = (jsonObj) => {
+MJson.decode = (jsonObj) => {
     // 深度拷贝对象，防止解码或编码时篡改原有对象
     let newJsonObj = structuredClone(jsonObj);
-    return MJSON.operate(newJsonObj, decodeURIComponent);
+    return MJson.operate(newJsonObj, decodeURIComponent);
 }
 
-MJSON.encode = (jsonObj) => {
+MJson.encode = (jsonObj) => {
     // 深度拷贝对象，防止解码或编码时篡改原有对象
     let newJsonObj = structuredClone(jsonObj);
-    return MJSON.operate(newJsonObj, encodeURIComponent);;
+    return MJson.operate(newJsonObj, encodeURIComponent);;
 }
 
-MJSON.parse = (jsonStr) => {
+MJson.parse = (jsonStr) => {
     let jsonObj = null;
     try {
         jsonStr = jsonStr.replace(/\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/g, (m, g) => g ? "" : m);
@@ -51,7 +51,7 @@ MJSON.parse = (jsonStr) => {
     return jsonObj;
 }
 
-MJSON.stringify = (jsonObj) => {
+MJson.stringify = (jsonObj) => {
     let jsonStr = '';
     try {
         jsonStr = JSON.stringify(jsonObj);
@@ -61,8 +61,8 @@ MJSON.stringify = (jsonObj) => {
     return jsonStr;
 }
 
-MJSON.get = (inPath) => {
-    return goog.getJSON(inPath);
+MJson.get = (inPath) => {
+    return goog.readJsonSync(inPath);
 }
 
 });

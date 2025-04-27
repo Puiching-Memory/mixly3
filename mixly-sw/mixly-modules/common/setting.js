@@ -11,7 +11,7 @@ goog.require('Mixly.Msg');
 goog.require('Mixly.BoardManager');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
-goog.require('Mixly.MJSON');
+goog.require('Mixly.MJson');
 goog.require('Mixly.Storage');
 goog.require('Mixly.WebSocket.Socket');
 goog.provide('Mixly.Setting');
@@ -23,7 +23,7 @@ const {
     BoardManager,
     Config,
     Env,
-    MJSON,
+    MJson,
     Storage,
     Setting
 } = Mixly;

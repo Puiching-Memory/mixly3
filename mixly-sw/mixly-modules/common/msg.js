@@ -1,10 +1,10 @@
 (() => {
 
-goog.require('Mixly.MJSON');
+goog.require('Mixly.MJson');
 goog.require('Mixly.Config');
 goog.provide('Mixly.Msg');
 
-const { Msg, MJSON, Config } = Mixly;
+const { Msg, MJson, Config } = Mixly;
 
 const { USER } = Config;
 
@@ -15,9 +15,9 @@ Msg.LANG_PATH = {
 }
 
 Msg.LANG = {
-	"zh-hans": MJSON.get(Msg.LANG_PATH["zh-hans"]),
-	"zh-hant": MJSON.get(Msg.LANG_PATH["zh-hant"]),
-	"en": MJSON.get(Msg.LANG_PATH["en"])
+	"zh-hans": MJson.get(Msg.LANG_PATH["zh-hans"]),
+	"zh-hant": MJson.get(Msg.LANG_PATH["zh-hant"]),
+	"en": MJson.get(Msg.LANG_PATH["en"])
 }
 
 Msg.nowLang = USER.language ?? 'zh-hans';

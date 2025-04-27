@@ -1,14 +1,14 @@
 goog.loadJs('common', () => {
 
 goog.require('Mixly.Config');
-goog.require('Mixly.MJSON')
+goog.require('Mixly.MJson')
 goog.require('Mixly.Debug');
 goog.provide('Mixly.Command');
 
 const {
     Config,
     Command,
-    MJSON,
+    MJson,
     Debug
 } = Mixly;
 
@@ -21,7 +21,7 @@ Command.DEFAULT = {
 }
 
 Command.parse = (commandStr) => {
-    return MJSON.decode(MJSON.parse(commandStr));
+    return MJson.decode(MJson.parse(commandStr));
 }
 
 Command.run = (commandObj) => {

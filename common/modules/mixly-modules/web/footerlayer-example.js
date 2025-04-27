@@ -3,7 +3,7 @@ goog.loadJs('web', () => {
 goog.require('path');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
-goog.require('Mixly.MJSON');
+goog.require('Mixly.MJson');
 goog.require('Mixly.FooterLayerExample');
 goog.require('Mixly.Boards');
 goog.provide('Mixly.Web.FooterLayerExample');
@@ -12,7 +12,7 @@ const {
     Config,
     Env,
     FooterLayerExample,
-    MJSON,
+    MJson,
     Boards,
     Web
 } = Mixly;
@@ -20,7 +20,7 @@ const {
 const { BOARD } = Config;
 
 class FooterLayerExampleExt extends FooterLayerExample {
-    static DIR_TREE = MJSON.get(path.join(Env.boardDirPath, 'examples/map.json')) ?? [];
+    static DIR_TREE = MJson.get(path.join(Env.boardDirPath, 'examples/map.json')) ?? [];
 
     constructor(element) {
         super(element);

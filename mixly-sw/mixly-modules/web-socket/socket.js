@@ -2,7 +2,7 @@
 
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
-goog.require('Mixly.MJSON');
+goog.require('Mixly.MJson');
 goog.require('Mixly.WebSocket');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Command');
@@ -11,7 +11,7 @@ goog.provide('Mixly.WebSocket.Socket');
 const {
     Env,
     Config,
-    MJSON,
+    MJson,
     LayerExt,
     Command
 } = Mixly;
@@ -130,7 +130,7 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
     WS.obj.onmessage = (event) => {
         heartCheck.reset().start();
         let command = Command.parse(event.data);
-        command = MJSON.decode(command);
+        command = MJson.decode(command);
         if (Socket.debug)
             console.log('receive -> ', event.data);
         Command.run(command);
@@ -170,7 +170,7 @@ Socket.sendCommand = (command) => {
     let commandStr = '';
     
     try {
-        commandStr = JSON.stringify(MJSON.encode(command));
+        commandStr = JSON.stringify(MJson.encode(command));
         if (Socket.debug)
             console.log('send -> ', commandStr);
     } catch (e) {

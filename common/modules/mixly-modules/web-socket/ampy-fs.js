@@ -4,7 +4,7 @@ goog.require('path');
 goog.require('Mixly.Env');
 goog.require('Mixly.FS');
 goog.require('Mixly.Debug');
-goog.require('Mixly.MJSON');
+goog.require('Mixly.MJson');
 goog.require('Mixly.WebSocket.Ampy');
 goog.provide('Mixly.WebSocket.AmpyFS');
 
@@ -12,7 +12,7 @@ const {
     Env,
     FS,
     Debug,
-    MJSON,
+    MJson,
     WebSocket
 } = Mixly;
 
@@ -128,7 +128,7 @@ class AmpyFS extends FS {
                 if (!dirs[i]) {
                     continue;
                 }
-                stdout.push(MJSON.parse(dirs[i].replaceAll('\'', '"')));
+                stdout.push(MJson.parse(dirs[i].replaceAll('\'', '"')));
             }
         } catch (e) {
             error = e;

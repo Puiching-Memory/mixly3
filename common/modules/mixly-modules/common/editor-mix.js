@@ -15,7 +15,7 @@ goog.require('Mixly.ContextMenu');
 goog.require('Mixly.Debug');
 goog.require('Mixly.Menu');
 goog.require('Mixly.Boards');
-goog.require('Mixly.MJSON');
+goog.require('Mixly.MJson');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorBlockly');
 goog.require('Mixly.EditorCode');
@@ -37,7 +37,7 @@ const {
     Debug,
     Menu,
     Boards,
-    MJSON,
+    MJson,
     HTMLTemplate,
     LayerExt
 } = Mixly;
@@ -436,7 +436,7 @@ class EditorMix extends EditorBase {
         }
         xml = $xml[0].outerHTML;
         if (config) {
-            xml += `<config>${MJSON.stringify(config)}</config>`;
+            xml += `<config>${MJson.stringify(config)}</config>`;
         }
         xml += `<code>${Base64.encode(code)}</code>`;
         return xml;
@@ -523,7 +523,7 @@ class EditorMix extends EditorBase {
             }
         }
         let config, configStr = configDom && configDom.html();
-        config = configStr? MJSON.parse(configStr) : {};
+        config = configStr? MJson.parse(configStr) : {};
         let boardName = xmlDom.attr('board') ?? '';
         blockPage.getEditor().clear();
         Boards.setSelectedBoard(boardName, config);

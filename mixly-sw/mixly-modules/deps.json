@@ -74,7 +74,7 @@
     {
         "path": "/common/msg.js",
         "require": [
-            "Mixly.MJSON",
+            "Mixly.MJson",
             "Mixly.Config"
         ],
         "provide": [
@@ -95,7 +95,7 @@
             "Mixly.BoardManager",
             "Mixly.Config",
             "Mixly.Env",
-            "Mixly.MJSON",
+            "Mixly.MJson",
             "Mixly.Storage",
             "Mixly.WebSocket.Socket"
         ],
@@ -130,7 +130,7 @@
         "require": [
             "Mixly.Env",
             "Mixly.Config",
-            "Mixly.MJSON",
+            "Mixly.MJson",
             "Mixly.WebSocket",
             "Mixly.LayerExt",
             "Mixly.Command"

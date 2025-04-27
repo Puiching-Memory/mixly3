@@ -112,7 +112,7 @@
         "path": "/common/command.js",
         "require": [
             "Mixly.Config",
-            "Mixly.MJSON",
+            "Mixly.MJson",
             "Mixly.Debug"
         ],
         "provide": [
@@ -309,7 +309,7 @@
             "Mixly.Debug",
             "Mixly.Menu",
             "Mixly.Boards",
-            "Mixly.MJSON",
+            "Mixly.MJson",
             "Mixly.HTMLTemplate",
             "Mixly.EditorBlockly",
             "Mixly.EditorCode",
@@ -598,9 +598,24 @@
         ]
     },
     {
+        "path": "/common/layer-progress.js",
+        "require": [
+            "Mixly.Env",
+            "Mixly.Layer",
+            "Mixly.HTMLTemplate"
+        ],
+        "provide": [
+            "Mixly.LayerProgress"
+        ]
+    },
+    {
         "path": "/common/layer.js",
         "require": [
-            "Mixly.Registry"
+            "dialog",
+            "Mixly.Env",
+            "Mixly.Registry",
+            "Mixly.Component",
+            "Mixly.HTMLTemplate"
         ],
         "provide": [
             "Mixly.Layer"
@@ -712,14 +727,14 @@
             "Mixly.Debug"
         ],
         "provide": [
-            "Mixly.MJSON"
+            "Mixly.MJson"
         ]
     },
     {
         "path": "/common/msg.js",
         "require": [
             "path",
-            "Mixly.MJSON",
+            "Mixly.MJson",
             "Mixly.Config",
             "Mixly.Env",
             "Blockly",
@@ -1210,7 +1225,7 @@
             "Mixly.Env",
             "Mixly.FS",
             "Mixly.Debug",
-            "Mixly.MJSON",
+            "Mixly.MJson",
             "Mixly.Electron.Ampy"
         ],
         "provide": [
@@ -1279,7 +1294,7 @@
         "require": [
             "path",
             "Mixly.Env",
-            "Mixly.MJSON",
+            "Mixly.MJson",
             "Mixly.Electron"
         ],
         "provide": [
@@ -1584,7 +1599,7 @@
             "path",
             "Mixly.Config",
             "Mixly.Env",
-            "Mixly.MJSON",
+            "Mixly.MJson",
             "Mixly.FooterLayerExample",
             "Mixly.Boards"
         ],
@@ -1720,7 +1735,7 @@
             "Mixly.Env",
             "Mixly.FS",
             "Mixly.Debug",
-            "Mixly.MJSON",
+            "Mixly.MJson",
             "Mixly.WebSocket.Ampy"
         ],
         "provide": [
@@ -1751,6 +1766,7 @@
             "Mixly.LayerExt",
             "Mixly.Msg",
             "Mixly.Workspace",
+            "Mixly.LayerProgress",
             "Mixly.WebSocket.Serial"
         ],
         "provide": [
@@ -1770,6 +1786,7 @@
             "Mixly.Config",
             "Mixly.Workspace",
             "Mixly.MString",
+            "Mixly.LayerProgress",
             "Mixly.WebSocket.Serial"
         ],
         "provide": [

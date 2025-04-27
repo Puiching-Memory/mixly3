@@ -1,7 +1,7 @@
 goog.loadJs('common', () => {
 
 goog.require('path');
-goog.require('Mixly.MJSON');
+goog.require('Mixly.MJson');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
 goog.require('Blockly');
@@ -12,7 +12,7 @@ goog.provide('Mixly.Msg');
 
 const {
     Msg,
-    MJSON,
+    MJson,
     Config,
     Env
 } = Mixly;
@@ -32,9 +32,9 @@ Msg.PATH = {
 }
 
 Msg.LANG = {
-    "zh-hans": MJSON.get(Msg.PATH["zh-hans"]),
-    "zh-hant": MJSON.get(Msg.PATH["zh-hant"]),
-    "en": MJSON.get(Msg.PATH["en"])
+    "zh-hans": MJson.get(Msg.PATH["zh-hans"]),
+    "zh-hant": MJson.get(Msg.PATH["zh-hant"]),
+    "en": MJson.get(Msg.PATH["en"])
 }
 
 Msg.nowLang = USER.language ?? 'zh-hans';
