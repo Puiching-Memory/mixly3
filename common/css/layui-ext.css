@@ -1,0 +1,9 @@
+html[data-bs-theme=light] .layui-layer-hui {
+    font-family: "Lato", "Noto Sans SC";
+    background-color: #fff;
+    border: 1px solid #999;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .1);
+    color: rgba(0, 0, 0, 0.85);
+    min-width: 100px;
+    filter: unset;
+}
