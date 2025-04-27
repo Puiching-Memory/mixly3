@@ -19,6 +19,7 @@ goog.require('Mixly.Workspace');
 goog.require('Mixly.Debug');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.MString');
+goog.require('Mixly.LayerFirmware');
 goog.require('Mixly.Web.Serial');
 goog.require('Mixly.Web.Ampy');
 goog.provide('Mixly.Web.BU');
@@ -34,7 +35,8 @@ const {
     Workspace,
     Debug,
     HTMLTemplate,
-    MString
+    MString,
+    LayerFirmware
 } = Mixly;
 
 const {
@@ -52,12 +54,22 @@ const {
 
 BU.uploading = false;
 BU.burning = false;
-
-BU.FILMWARE_LAYER = new HTMLTemplate(
-    goog.readFileSync(path.join(Env.templatePath, 'html/filmware-layer.html'))
-).render({
-    cancel: Msg.Lang['nav.btn.cancel'],
-    burn: Msg.Lang['nav.btn.burn']
+BU.firmwareLayer = new LayerFirmware({
+    width: 400,
+    title: Msg.Lang['nav.btn.burn'],
+    cancelValue: false,
+    skin: 'layui-anim layui-anim-scale',
+    cancel: false,
+    cancelDisplay: false
+});
+BU.firmwareLayer.bind('burn', (info) => {
+    const boardKey = Boards.getSelectedBoardKey();
+    const { web } = SELECTED_BOARD;
+    if (boardKey.indexOf('micropython:esp32s2') !== -1) {
+        BU.burnWithAdafruitEsptool(info, web.burn.erase);
+    } else {
+        BU.burnWithEsptool(info, web.burn.erase);
+    }
 });
 
 const BAUD = goog.platform() === 'darwin' ? 460800 : 921600;
@@ -863,55 +875,16 @@ BU.burnWithSpecialBin = () => {
     let menu = [];
     let firmwareMap = {};
     for (let firmware of firmwares) {
-        if (!firmware?.name && !firmware?.binFile) return;
+        if (!firmware?.name && !firmware?.binFile) continue;
         menu.push({
             id: firmware.name,
             text: firmware.name
         });
         firmwareMap[firmware.name] = firmware.binFile;
     }
-    const layerNum = LayerExt.open({
-        title: [Msg.Lang['nav.btn.burn'], '36px'],
-        area: ['400px', '160px'],
-        max: false,
-        min: false,
-        content: BU.FILMWARE_LAYER,
-        shade: LayerExt.SHADE_ALL,
-        resize: false,
-        success: function (layero, index) {
-            const $select = layero.find('select');
-            $select.select2({
-                data: menu,
-                minimumResultsForSearch: Infinity,
-                width: '360px',
-                dropdownCssClass: 'mixly-scrollbar'
-            });
-            layero.find('button').click((event) => {
-                const $target = $(event.currentTarget);
-                const type = $target.attr('data-id');
-                const binFile = firmwareMap[$select.val()];
-                layer.close(index, () => {
-                    if (type !== 'burn') {
-                        return;
-                    }
-                    const boardKey = Boards.getSelectedBoardKey();
-                    const { web } = SELECTED_BOARD;
-                    if (boardKey.indexOf('micropython:esp32s2') !== -1) {
-                        BU.burnWithAdafruitEsptool(binFile, web.burn.erase);
-                    } else {
-                        BU.burnWithEsptool(binFile, web.burn.erase);
-                    }
-                });
-            });
-        },
-        beforeEnd: function (layero) {
-            layero.find('select').select2('destroy');
-            layero.find('button').off();
-        },
-        end: function () {
-            $(`#layui-layer-shade${layerNum}`).remove();
-        }
-    });
+    BU.firmwareLayer.setMap(firmwareMap);
+    BU.firmwareLayer.setMenu(menu);
+    BU.firmwareLayer.show();
 }
 
 });

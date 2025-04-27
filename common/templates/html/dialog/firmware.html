@@ -1,0 +1,32 @@
+<style>
+    div[m-id="{{d.mId}}"] {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    div[m-id="{{d.mId}}"] > .select2-container {
+        margin: 10px 10px 20px 10px;
+    }
+
+    div[m-id="{{d.mId}}"] > .layui-btn-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    div[m-id="{{d.mId}}"] > .layui-btn-container > button {
+        font-family: "Lato", "Noto Sans SC";
+    }
+</style>
+<div m-id="{{d.mId}}">
+    <select class="type"></select>
+    <div class="layui-btn-container">
+        <button type="button" class="cancel layui-btn layui-btn-sm self-adaption-btn">{{d.cancel}}</button>
+        <button type="button" class="burn layui-btn layui-btn-sm self-adaption-btn">{{d.burn}}</button>
+    </div>
+</div>

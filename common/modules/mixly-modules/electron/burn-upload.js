@@ -10,6 +10,7 @@ goog.require('Mixly.Msg');
 goog.require('Mixly.Workspace');
 goog.require('Mixly.Debug');
 goog.require('Mixly.HTMLTemplate');
+goog.require('Mixly.LayerFirmware');
 goog.require('Mixly.Electron.Serial');
 goog.provide('Mixly.Electron.BU');
 
@@ -24,7 +25,8 @@ const {
     Workspace,
     Serial,
     Debug,
-    HTMLTemplate
+    HTMLTemplate,
+    LayerFirmware
 } = Mixly;
 
 const { BU } = Electron;
@@ -43,16 +45,26 @@ const iconv_lite = Mixly.require('iconv-lite');
 const os = Mixly.require('node:os');
 
 BU.uploading = false;
-
 BU.burning = false;
-
 BU.shell = null;
-
-BU.FILMWARE_LAYER = new HTMLTemplate(
-    goog.readFileSync(path.join(Env.templatePath, 'html/filmware-layer.html'))
-).render({
-    cancel: Msg.Lang['nav.btn.cancel'],
-    burn: Msg.Lang['nav.btn.burn']
+BU.firmwareLayer = new LayerFirmware({
+    width: 400,
+    title: Msg.Lang['nav.btn.burn'],
+    cancelValue: false,
+    skin: 'layui-anim layui-anim-scale',
+    cancel: false,
+    cancelDisplay: false
+});
+BU.firmwareLayer.bind('burn', (info) => {
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+    statusBarTerminal.setValue('');
+    mainStatusBarTabs.changeTo('output');
+    mainStatusBarTabs.show();
+    BU.burning = true;
+    BU.uploading = false;
+    const port = Serial.getSelectedPortName();
+    BU.burnWithPort(port, info);
 });
 
 /**
@@ -613,52 +625,18 @@ BU.burnWithSpecialBin = () => {
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const firmwares = SELECTED_BOARD.burn.special;
     let menu = [];
+    let commandMap = {};
     for (let firmware of firmwares) {
-        if (!firmware?.name && !firmware?.command) return;
+        if (!firmware?.name && !firmware?.command) continue;
         menu.push({
-            id: firmware.command,
+            id: firmware.name,
             text: firmware.name
         });
+        commandMap[firmware.name] = firmware.command;
     }
-    LayerExt.open({
-        title: [Msg.Lang['nav.btn.burn'], '36px'],
-        area: ['400px', '160px'],
-        max: false,
-        min: false,
-        content: BU.FILMWARE_LAYER,
-        shade: Mixly.LayerExt.SHADE_ALL,
-        resize: false,
-        success: function (layero, index) {
-            const $select = layero.find('select');
-            $select.select2({
-                data: menu,
-                minimumResultsForSearch: Infinity,
-                width: '360px',
-                dropdownCssClass: 'mixly-scrollbar'
-            });
-            layero.find('button').click((event) => {
-                const $target = $(event.currentTarget);
-                const type = $target.attr('data-id');
-                const command = $select.val();
-                layer.close(index, () => {
-                    if (type !== 'burn') {
-                        return;
-                    }
-                    statusBarTerminal.setValue('');
-                    mainStatusBarTabs.changeTo('output');
-                    mainStatusBarTabs.show();
-                    BU.burning = true;
-                    BU.uploading = false;
-                    const port = Serial.getSelectedPortName();
-                    BU.burnWithPort(port, command);
-                });
-            });
-        },
-        beforeEnd: function (layero) {
-            layero.find('select').select2('destroy');
-            layero.find('button').off();
-        }
-    });
+    BU.firmwareLayer.setMap(commandMap);
+    BU.firmwareLayer.setMenu(menu);
+    BU.firmwareLayer.show();
 }
 
 /**

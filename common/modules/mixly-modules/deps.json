@@ -598,6 +598,18 @@
         ]
     },
     {
+        "path": "/common/layer-firmware.js",
+        "require": [
+            "Mixly.Env",
+            "Mixly.Msg",
+            "Mixly.Layer",
+            "Mixly.HTMLTemplate"
+        ],
+        "provide": [
+            "Mixly.LayerFirmware"
+        ]
+    },
+    {
         "path": "/common/layer-progress.js",
         "require": [
             "Mixly.Env",
@@ -1283,6 +1295,7 @@
             "Mixly.Workspace",
             "Mixly.Debug",
             "Mixly.HTMLTemplate",
+            "Mixly.LayerFirmware",
             "Mixly.Electron.Serial"
         ],
         "provide": [
@@ -1560,6 +1573,7 @@
             "Mixly.Debug",
             "Mixly.HTMLTemplate",
             "Mixly.MString",
+            "Mixly.LayerFirmware",
             "Mixly.Web.Serial",
             "Mixly.Web.Ampy"
         ],

@@ -25,13 +25,14 @@ class LayerProgress extends Layer {
 
     constructor(config = {}, shadowType = 'nav') {
         const $dialogContent_ = $(HTMLTemplate.get('html/dialog/progress.html').render());
-        config.content = $dialogContent_[0];
+        config.content = $dialogContent_;
         super(config, shadowType);
         this.#$dialogContent_ = $dialogContent_;
     }
 
     dispose() {
         this.#$dialogContent_.remove();
+        this.#$dialogContent_ = null;
         super.dispose();
     }
 }
