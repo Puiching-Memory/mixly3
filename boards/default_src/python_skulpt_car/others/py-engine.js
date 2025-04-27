@@ -1,23 +1,19 @@
 /* eslint-disable new-cap */
 import Sk from './skulpt/skulpt';
+import $ from 'jquery';
+import PyGameZero from './skulpt/pygame-zero';
 import { Events, Debug } from 'mixly';
 import MIXPY_TEMPLATE from '../templates/python/mixpy.py';
-import NUMPY_URL from '../others/skulpt/libs/numpy/__init__.js?url';
-import PYGAL_URL from '../others/skulpt/libs/pygal/__init__.js?url';
-import MATPLOTLIB_URL from '../others/skulpt/libs/matplotlib/__init__.js?url';
-import PYPLOT_URL from '../others/skulpt/libs/pyplot/__init__.js?url';
-import PGZHELPER_URL from '../others/skulpt/libs/pgzhelper/pgzhelper.js?url';
-import SPRITE_URL from '../others/skulpt/libs/sprite/basic.js?url';
+import BLOCKLY_GAME_URL from '../others/skulpt/libs/bg_highlight.js?url';
+import INIT_TOOL_URL from '../others/skulpt/libs/inittool.js?url';
+import BG_NONEHL_URL from '../others/skulpt/libs/bg_nonehl.js?url';
 
 
 // 外部引入的第三方库
 const externalLibs = {
-    './numpy/__init__.js': NUMPY_URL,
-    './pygal/__init__.js': PYGAL_URL,
-    './matplotlib/__init__.js': MATPLOTLIB_URL,
-    './matplotlib/pyplot/__init__.js': PYPLOT_URL,
-    './pgzhelper/__init__.js': PGZHELPER_URL,
-    './sprite/__init__.js': SPRITE_URL
+    './blocklygame/__init__.js': BLOCKLY_GAME_URL,
+    './blocktool/__init__.js': INIT_TOOL_URL,
+    './bg_nonehl/__init__.js': BG_NONEHL_URL
 };
 
 var GLOBAL_VALUE;
@@ -80,6 +76,8 @@ export default class PyEngine {
             height: 500
         };
 
+        PyGameZero.setContainer(container);
+
         //数据分析显示图片
         Sk.MatPlotLibGraphics = {
             target: container,
@@ -137,9 +135,9 @@ export default class PyEngine {
     readFile(file) {
         // console.log("Attempting file: " + Sk.ffi.remapToJs(file));
         // 加载模块
-        // if (PyGameZero.matchModelName(file)) {
-        //     return PyGameZero.load(file);
-        // }
+        if (PyGameZero.matchModelName(file)) {
+            return PyGameZero.load(file);
+        }
         if (externalLibs[file] !== undefined) {
             return Sk.misceval.promiseToSuspension(fetch(externalLibs[file]).then((resp) => resp.text()));
         }
@@ -190,7 +188,7 @@ export default class PyEngine {
 
     kill() {
         // 新增了sprite相关内容
-        window.SPRITE.kill();
+        // window.SPRITE.kill();
         //点击取消按钮发送数据
         Sk.execLimit = 0;
         this.executionEnd_();
@@ -276,20 +274,50 @@ export default class PyEngine {
     run(code) {
         // Reset everything
         this.reset();
-        if (code.indexOf('import sprite') !== -1
-            || code.indexOf('from sprite import') !== -1) {
-            window.SPRITE.runit(Sk.TurtleGraphics.target);
+        if (code.indexOf('import blocklygame') !== -1
+            || code.indexOf('from blocklygame import') !== -1) {
+            PyGameZero.reset();
+            $(Sk.TurtleGraphics.target).empty();
+        }
+        if ((code.indexOf("import blocktool") !== -1) || (code.indexOf("import blocklygame") !== -1) || (code.indexOf("from blocklygame import") !== -1)) {
+            //正则匹配替换block id元素
+            var code_piece = [];
+            code_piece = code.split("\n");
+            for (var i = 0; i < code_piece.length; i++) {
+                if (code_piece[i].indexOf("block_id") >= 0) {
+                    var target = "";
+                    var re = /,?'block_id=[\s\S]*'/.exec(code_piece[i]);
+                    if (re != null) {
+                        target = re[0];
+                        code_piece[i] = code_piece[i].replace(target, "");
+                    }
+                }
+                //检查是否是高亮辅助块\toll，如果是，则将此行代码移除
+                if ((code_piece[i].indexOf("import blocktool") >= 0) || (code_piece[i].indexOf("blocktool.highlight") >= 0)) {
+                    code_piece[i] = "delete";
+                }
+                //如果使用的是分步调试的blocklygame，要将其换成非分步调试的模块bg_nonehl
+                if ((code_piece[i].indexOf("blocklygame") >= 0)) {
+                    code_piece[i] = code_piece[i].replace("blocklygame", "bg_nonehl");
+                }
+            }
+            code = ""
+            for (var i = 0; i < code_piece.length; i++) {
+                if (code_piece[i] != "delete") {
+                    code += code_piece[i] + '\n'
+                }
+            }
         }
         this.programStatus['running'] = true;
         Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, code, true))
             .then(() => {
-                window.SPRITE.running = false;
+                // window.SPRITE.running = false;
                 this.programStatus['running'] = false;
                 this.#events_.run('finished');
             })
             .catch((error) => {
                 Debug.error(error);
-                window.SPRITE.running = false;
+                // window.SPRITE.running = false;
                 this.programStatus['running'] = false;
                 this.#events_.run('error', error);
                 var original = prettyPrintError(error);

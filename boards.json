@@ -142,7 +142,7 @@
             "webSocket": true
         },
         "language": "Python"
-    },
+    },*/
     {
         "boardImg": "./boards/default/python_skulpt/media/webpy.png",
         "boardType": "Python 3 Car",
@@ -154,7 +154,7 @@
             "webSocket": true
         },
         "language": "Python"
-    },*/
+    },
     {
         "boardImg": "./boards/default/micropython_k210_mixgoai/media/mixgoai_compressed.png",
         "boardType": "MixGo AI",

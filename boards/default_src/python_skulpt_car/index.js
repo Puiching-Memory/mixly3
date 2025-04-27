@@ -47,6 +47,8 @@ import * as SkulptPyTurtleGenerators from '@mixly/python-skulpt/generators/turtl
 
 import * as GameGenerators from './generators/game';
 
+import './others/loader';
+
 import './css/color_mixpy_python_skulpt.css';
 
 Object.assign(Blockly.Variables, Variables);
