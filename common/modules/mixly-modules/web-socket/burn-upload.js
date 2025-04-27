@@ -68,7 +68,7 @@ class WebSocketBU {
 
         this.initBurn = function () {
             if (!this.mixlySocket.isConnected()) {
-                layer.msg('服务端已离线', { time: 1000 });
+                layer.msg(Msg.Lang['websocket.offline'], { time: 1000 });
                 return;
             }
             const port = Serial.getSelectedPortName();
@@ -100,7 +100,7 @@ class WebSocketBU {
 
         this.initUpload = function () {
             if (!this.mixlySocket.isConnected()) {
-                layer.msg('服务端已离线', { time: 1000 });
+                layer.msg(Msg.Lang['websocket.offline'], { time: 1000 });
                 return;
             }
             const port = Serial.getSelectedPortName();

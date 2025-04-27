@@ -70,7 +70,7 @@ class WebSocketArduShell {
 
         this.initCompile = function () {
             if (!this.mixlySocket.isConnected()) {
-                layer.msg('服务端已离线', { time: 1000 });
+                layer.msg(Msg.Lang['websocket.offline'], { time: 1000 });
                 return;
             }
             const { mainStatusBarTabs } = Mixly;
@@ -93,7 +93,7 @@ class WebSocketArduShell {
 
         this.initUpload = function () {
             if (!this.mixlySocket.isConnected()) {
-                layer.msg('服务端已离线', { time: 1000 });
+                layer.msg(Msg.Lang['websocket.offline'], { time: 1000 });
                 return;
             }
             const port = Serial.getSelectedPortName();
