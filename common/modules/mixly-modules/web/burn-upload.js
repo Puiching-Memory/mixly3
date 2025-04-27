@@ -20,6 +20,7 @@ goog.require('Mixly.Debug');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.MString');
 goog.require('Mixly.LayerFirmware');
+goog.require('Mixly.LayerProgress');
 goog.require('Mixly.Web.Serial');
 goog.require('Mixly.Web.Ampy');
 goog.provide('Mixly.Web.BU');
@@ -36,7 +37,8 @@ const {
     Debug,
     HTMLTemplate,
     MString,
-    LayerFirmware
+    LayerFirmware,
+    LayerProgress
 } = Mixly;
 
 const {
@@ -70,6 +72,13 @@ BU.firmwareLayer.bind('burn', (info) => {
     } else {
         BU.burnWithEsptool(info, web.burn.erase);
     }
+});
+BU.progressLayer = new LayerProgress({
+    width: 200,
+    cancelValue: false,
+    skin: 'layui-anim layui-anim-scale',
+    cancel: false,
+    cancelDisplay: false
 });
 
 const BAUD = goog.platform() === 'darwin' ? 460800 : 921600;
@@ -132,9 +141,9 @@ const readBinFileAsArrayBuffer = (path, offset) => {
     });
 }
 
-BU.initBurn = () => {
+BU.initBurn = async () => {
     if (['BBC micro:bit', 'Mithon CC'].includes(BOARD.boardType)) {
-        BU.burnByUSB();
+        await BU.burnByUSB();
     } else {
         const { web } = SELECTED_BOARD;
         const boardKey = Boards.getSelectedBoardKey();
@@ -148,9 +157,9 @@ BU.initBurn = () => {
             BU.burnWithSpecialBin();
         } else {
             if (boardKey.indexOf('micropython:esp32s2') !== -1) {
-                BU.burnWithAdafruitEsptool(web.burn.binFile, web.burn.erase);
+                await BU.burnWithAdafruitEsptool(web.burn.binFile, web.burn.erase);
             } else {
-                BU.burnWithEsptool(web.burn.binFile, web.burn.erase);
+                await BU.burnWithEsptool(web.burn.binFile, web.burn.erase);
             }
         }
     }
@@ -214,36 +223,23 @@ BU.burnByUSB = async () => {
         const rightStr = (new Array(50 - nowProgressLen).fill('-')).join('');
         statusBarTerminal.addValue(`[${leftStr}${rightStr}] ${nowPercent}%\n`);
     });
-    layer.open({
-        type: 1,
-        title: `${Msg.Lang['shell.burning']}...`,
-        content: $('#mixly-loader-div'),
-        shade: LayerExt.SHADE_NAV,
-        resize: false,
-        closeBtn: 0,
-        success: async (layero, index) => {
-            $('#mixly-loader-btn').hide();
-            try {
-                await dapLink.flash(buffer);
-                layer.close(index);
-                layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
-                statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
-            } catch (error) {
-                Debug.error(error);
-                layer.close(index);
-                statusBarTerminal.addValue(`==${Msg.Lang['shell.burnFailed']}==\n`);
-            } finally {
-                dapLink.removeAllListeners(DAPjs.DAPLink.EVENT_PROGRESS);
-                await dapLink.disconnect();
-                await webUSB.close();
-                await port.close();
-            }
-        },
-        end: function () {
-            $('#mixly-loader-btn').css('display', 'inline-block');
-            $('#mixly-loader-div').css('display', 'none');
-        }
-    });
+    BU.progressLayer.title(`${Msg.Lang['shell.burning']}...`);
+    BU.progressLayer.show();
+    try {
+        await dapLink.flash(buffer);
+        BU.progressLayer.hide();
+        layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
+        statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
+    } catch (error) {
+        Debug.error(error);
+        BU.progressLayer.hide();
+        statusBarTerminal.addValue(`==${Msg.Lang['shell.burnFailed']}==\n`);
+    } finally {
+        dapLink.removeAllListeners(DAPjs.DAPLink.EVENT_PROGRESS);
+        await dapLink.disconnect();
+        await webUSB.close();
+        await port.close();
+    }
 }
 
 BU.burnWithEsptool = async (binFile, erase) => {
@@ -274,6 +270,8 @@ BU.burnWithEsptool = async (binFile, erase) => {
     statusBarTerminal.setValue(Msg.Lang['shell.burning'] + '...\n');
     mainStatusBarTabs.show();
     mainStatusBarTabs.changeTo('output');
+    BU.progressLayer.title(`${Msg.Lang['shell.burning']}...`);
+    BU.progressLayer.show();
     let esploader = null;
     let transport = null;
     try {
@@ -298,6 +296,7 @@ BU.burnWithEsptool = async (binFile, erase) => {
         Debug.error(error);
         statusBarTerminal.addValue(`\n${error.toString()}\n`);
         await transport.disconnect();
+        BU.progressLayer.hide();
         return;
     }
 
@@ -319,6 +318,7 @@ BU.burnWithEsptool = async (binFile, erase) => {
         statusBarTerminal.addValue("Failed!\n" + Msg.Lang['shell.bin.readFailed'] + "！\n");
         statusBarTerminal.addValue("\n" + e + "\n", true);
         await transport.disconnect();
+        BU.progressLayer.hide();
         return;
     }
     statusBarTerminal.addValue("Done!\n");
@@ -331,39 +331,18 @@ BU.burnWithEsptool = async (binFile, erase) => {
         compress: true,
         calculateMD5Hash: (image) => CryptoJS.MD5(CryptoJS.enc.Latin1.parse(image))
     };
-    layer.open({
-        type: 1,
-        title: Msg.Lang['shell.burning'] + '...',
-        content: $('#mixly-loader-div'),
-        shade: LayerExt.SHADE_NAV,
-        resize: false,
-        closeBtn: 0,
-        success: async function (layero, index) {
-            let cancel = false;
-            $("#mixly-loader-btn").off().click(async () => {
-                cancel = true;
-                try {
-                    await transport.disconnect();
-                } catch (error) {
-                    layer.close(index);
-                    Debug.error(error);
-                }
-            });
-            try {
-                await esploader.writeFlash(flashOptions);
-                layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
-                statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
-            } catch (error) {
-                Debug.error(error);
-                statusBarTerminal.addValue(`==${Msg.Lang['shell.burnFailed']}==\n`);
-            } finally {
-                layer.close(index);
-                if (!cancel) {
-                    await transport.disconnect();
-                }
-            }
-        }
-    });
+    try {
+        await esploader.writeFlash(flashOptions);
+        BU.progressLayer.hide();
+        layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
+        statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
+    } catch (error) {
+        Debug.error(error);
+        BU.progressLayer.hide();
+        statusBarTerminal.addValue(`==${Msg.Lang['shell.burnFailed']}==\n`);
+    } finally {
+        await transport.disconnect();
+    }
 }
 
 BU.burnWithAdafruitEsptool = async (binFile, erase) => {
@@ -394,6 +373,8 @@ BU.burnWithAdafruitEsptool = async (binFile, erase) => {
     statusBarTerminal.setValue(Msg.Lang['shell.burning'] + '...\n');
     mainStatusBarTabs.show();
     mainStatusBarTabs.changeTo('output');
+    BU.progressLayer.title(`${Msg.Lang['shell.burning']}...`);
+    BU.progressLayer.show();
     let esploader = null;
     let transport = null;
     let espStub = null;
@@ -416,6 +397,7 @@ BU.burnWithAdafruitEsptool = async (binFile, erase) => {
         Debug.error(error);
         statusBarTerminal.addValue(`\n${error.toString()}\n`);
         await port.close();
+        BU.progressLayer.hide();
         return;
     }
 
@@ -438,55 +420,37 @@ BU.burnWithAdafruitEsptool = async (binFile, erase) => {
         statusBarTerminal.addValue("\n" + e + "\n", true);
         await espStub.disconnect();
         await espStub.port.close();
+        BU.progressLayer.hide();
         return;
     }
     statusBarTerminal.addValue("Done!\n");
     BU.burning = true;
     BU.uploading = false;
-    const layerNum = layer.open({
-        type: 1,
-        title: Msg.Lang['shell.burning'] + '...',
-        content: $('#mixly-loader-div'),
-        shade: LayerExt.SHADE_NAV,
-        resize: false,
-        closeBtn: 0,
-        success: async function (layero, index) {
-            let cancel = false;
-            $("#mixly-loader-btn").hide();
-            try {
-                if (erase) {
-                    await espStub.eraseFlash();
-                }
-                for (let file of data) {
-                    await espStub.flashData(
-                        file.data,
-                        (bytesWritten, totalBytes) => {
-                            const percent = Math.floor((bytesWritten / totalBytes) * 100) + '%';
-                            statusBarTerminal.addValue(`Writing at 0x${(file.address + bytesWritten).toString(16)}... (${percent})\n`);
-                        },
-                        file.address, true
-                    );
-                }
-                await espStub.disconnect();
-                await espStub.port.close();
-                cancel = true;
-                layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
-                statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
-            } catch (error) {
-                Debug.error(error);
-                statusBarTerminal.addValue(`==${Msg.Lang['shell.burnFailed']}==\n`);
-            } finally {
-                layer.close(index);
-                if (!cancel) {
-                    await espStub.disconnect();
-                    await espStub.port.close();
-                }
-            }
-        },
-        end: function () {
-            $(`#layui-layer-shade${layerNum}`).remove();
+    try {
+        if (erase) {
+            await espStub.eraseFlash();
         }
-    });
+        for (let file of data) {
+            await espStub.flashData(
+                file.data,
+                (bytesWritten, totalBytes) => {
+                    const percent = Math.floor((bytesWritten / totalBytes) * 100) + '%';
+                    statusBarTerminal.addValue(`Writing at 0x${(file.address + bytesWritten).toString(16)}... (${percent})\n`);
+                },
+                file.address, true
+            );
+        }
+        BU.progressLayer.hide();
+        layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
+        statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
+    } catch (error) {
+        Debug.error(error);
+        BU.progressLayer.hide();
+        statusBarTerminal.addValue(`==${Msg.Lang['shell.burnFailed']}==\n`);
+    } finally {
+        await espStub.disconnect();
+        await espStub.port.close();
+    }
 }
 
 BU.getImportModulesName = (code) => {
@@ -562,9 +526,9 @@ BU.initUpload = async () => {
         }
     }
     if (['BBC micro:bit', 'Mithon CC'].includes(BOARD.boardType)) {
-        BU.uploadByUSB(portName);
+        await BU.uploadByUSB(portName);
     } else {
-        BU.uploadWithAmpy(portName);
+        await BU.uploadWithAmpy(portName);
     }
 }
 
@@ -618,58 +582,42 @@ BU.uploadByUSB = async (portName) => {
         const data = goog.readFileSync(importsMap[key]['__path__']);
         FSWrapper.writeFile(filename, data);
     }
-    const layerNum = layer.open({
-        type: 1,
-        title: Msg.Lang['shell.uploading'] + '...',
-        content: $('#mixly-loader-div'),
-        shade: LayerExt.SHADE_NAV,
-        resize: false,
-        closeBtn: 0,
-        success: async function (layero, index) {
-            $('#mixly-loader-btn').hide();
-            try {
-                let prevPercent = 0;
-                await partialFlashing.flashAsync(new BoardId(0x9900), FSWrapper, progress => {
-                    const nowPercent = Math.floor(progress * 100);
-                    if (nowPercent > prevPercent) {
-                        prevPercent = nowPercent;
-                    } else {
-                        return;
-                    }
-                    const nowProgressLen = Math.floor(nowPercent / 2);
-                    const leftStr = new Array(nowProgressLen).fill('=').join('');
-                    const rightStr = (new Array(50 - nowProgressLen).fill('-')).join('');
-                    statusBarTerminal.addValue(`[${leftStr}${rightStr}] ${nowPercent}%\n`);
-                });
-                layer.close(index);
-                layer.msg(Msg.Lang['shell.uploadSucc'], { time: 1000 });
-                statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadSucc']}==\n`);
-                if (!statusBarSerial) {
-                    mainStatusBarTabs.add('serial', portName);
-                    statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
-                }
-                statusBarSerial.setValue('');
-                mainStatusBarTabs.changeTo(portName);
-                await statusBarSerial.open();
-            } catch (error) {
-                await dapWrapper.disconnectAsync();
-                layer.close(index);
-                console.error(error);
-                statusBarTerminal.addValue(`${error}\n`);
-                statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadFailed']}==\n`);
+    BU.progressLayer.title(`${Msg.Lang['shell.uploading']}...`);
+    BU.progressLayer.show();
+    try {
+        let prevPercent = 0;
+        await partialFlashing.flashAsync(new BoardId(0x9900), FSWrapper, progress => {
+            const nowPercent = Math.floor(progress * 100);
+            if (nowPercent > prevPercent) {
+                prevPercent = nowPercent;
+            } else {
+                return;
             }
-            BU.burning = false;
-            BU.uploading = false;
-        },
-        end: function () {
-            $('#mixly-loader-btn').css('display', 'inline-block');
-            $('#mixly-loader-div').css('display', 'none');
-            $(`#layui-layer-shade${layerNum}`).remove();
+            const nowProgressLen = Math.floor(nowPercent / 2);
+            const leftStr = new Array(nowProgressLen).fill('=').join('');
+            const rightStr = (new Array(50 - nowProgressLen).fill('-')).join('');
+            statusBarTerminal.addValue(`[${leftStr}${rightStr}] ${nowPercent}%\n`);
+        });
+        BU.progressLayer.hide();
+        layer.msg(Msg.Lang['shell.uploadSucc'], { time: 1000 });
+        statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadSucc']}==\n`);
+        if (!statusBarSerial) {
+            mainStatusBarTabs.add('serial', portName);
+            statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
         }
-    });
+        statusBarSerial.setValue('');
+        mainStatusBarTabs.changeTo(portName);
+        await statusBarSerial.open();
+    } catch (error) {
+        await dapWrapper.disconnectAsync();
+        Debug.error(error);
+        BU.progressLayer.hide();
+        statusBarTerminal.addValue(`${error}\n`);
+        statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadFailed']}==\n`);
+    }
 }
 
-BU.uploadWithAmpy = (portName) => {
+BU.uploadWithAmpy = async (portName) => {
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     let statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
@@ -681,83 +629,67 @@ BU.uploadWithAmpy = (portName) => {
     const mainWorkspace = Workspace.getMain();
     const editor = mainWorkspace.getEditorsManager().getActive();
     const port = Serial.getPort(portName);
-    const layerNum = layer.open({
-        type: 1,
-        title: Msg.Lang['shell.uploading'] + '...',
-        content: $('#mixly-loader-div'),
-        shade: LayerExt.SHADE_NAV,
-        resize: false,
-        closeBtn: 0,
-        success: async function (layero, index) {
-            $('#mixly-loader-btn').hide();
-            const serial = new Serial(portName);
-            const ampy = new Ampy(serial);
-            const code = editor.getCode();
-            let closePromise = Promise.resolve();
-            if (statusBarSerial) {
-                closePromise = statusBarSerial.close();
-            }
-            try {
-                /*const importsMap = BU.getImportModules(code);
-                let libraries = {};
-                for (let key in importsMap) {
-                    const filename = importsMap[key]['__name__'];
-                    const data = goog.readFileSync(importsMap[key]['__path__']);
-                    libraries[filename] = {
-                        data,
-                        size: importsMap[key]['__size__']
-                    };
-                }*/
-                await closePromise;
-                await ampy.enter();
-                statusBarTerminal.addValue('Writing main.py ');
-                await ampy.put('main.py', code);
-                statusBarTerminal.addValue('Done!\n');
-                /*const cwd = await ampy.cwd();
-                const rootInfo = await ampy.ls(cwd);
-                let rootMap = {};
-                for (let item of rootInfo) {
-                    rootMap[item[0]] = item[1];
-                }
-                if (libraries && libraries instanceof Object) {
-                    for (let key in libraries) {
-                        if (rootMap[`${cwd}/${key}`] !== undefined && rootMap[`${cwd}/${key}`] === libraries[key].size) {
-                            statusBarTerminal.addValue(`Skip ${key}\n`);
-                            continue;
-                        }
-                        statusBarTerminal.addValue(`Writing ${key} `);
-                        await ampy.put(key, libraries[key].data);
-                        statusBarTerminal.addValue('Done!\n');
-                    }
-                }*/
-                await ampy.exit();
-                await ampy.dispose();
-                layer.close(index);
-                layer.msg(Msg.Lang['shell.uploadSucc'], { time: 1000 });
-                statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadSucc']}==\n`);
-                if (!statusBarSerial) {
-                    mainStatusBarTabs.add('serial', portName);
-                    statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
-                }
-                statusBarSerial.setValue('');
-                mainStatusBarTabs.changeTo(portName);
-                await statusBarSerial.open();
-            } catch (error) {
-                ampy.dispose();
-                layer.close(index);
-                Debug.error(error);
-                statusBarTerminal.addValue(`${error}\n`);
-                statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadFailed']}==\n`);
-            }
-            BU.burning = false;
-            BU.uploading = false;
-        },
-        end: function () {
-            $('#mixly-loader-btn').css('display', 'inline-block');
-            $('#mixly-loader-div').css('display', 'none');
-            $(`#layui-layer-shade${layerNum}`).remove();
+    BU.progressLayer.title(`${Msg.Lang['shell.uploading']}...`);
+    BU.progressLayer.show();
+    const serial = new Serial(portName);
+    const ampy = new Ampy(serial);
+    const code = editor.getCode();
+    let closePromise = Promise.resolve();
+    if (statusBarSerial) {
+        closePromise = statusBarSerial.close();
+    }
+    try {
+        /*const importsMap = BU.getImportModules(code);
+        let libraries = {};
+        for (let key in importsMap) {
+            const filename = importsMap[key]['__name__'];
+            const data = goog.readFileSync(importsMap[key]['__path__']);
+            libraries[filename] = {
+                data,
+                size: importsMap[key]['__size__']
+            };
+        }*/
+        await closePromise;
+        await ampy.enter();
+        statusBarTerminal.addValue('Writing main.py ');
+        await ampy.put('main.py', code);
+        statusBarTerminal.addValue('Done!\n');
+        /*const cwd = await ampy.cwd();
+        const rootInfo = await ampy.ls(cwd);
+        let rootMap = {};
+        for (let item of rootInfo) {
+            rootMap[item[0]] = item[1];
         }
-    });
+        if (libraries && libraries instanceof Object) {
+            for (let key in libraries) {
+                if (rootMap[`${cwd}/${key}`] !== undefined && rootMap[`${cwd}/${key}`] === libraries[key].size) {
+                    statusBarTerminal.addValue(`Skip ${key}\n`);
+                    continue;
+                }
+                statusBarTerminal.addValue(`Writing ${key} `);
+                await ampy.put(key, libraries[key].data);
+                statusBarTerminal.addValue('Done!\n');
+            }
+        }*/
+        await ampy.exit();
+        await ampy.dispose();
+        BU.progressLayer.hide();
+        layer.msg(Msg.Lang['shell.uploadSucc'], { time: 1000 });
+        statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadSucc']}==\n`);
+        if (!statusBarSerial) {
+            mainStatusBarTabs.add('serial', portName);
+            statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
+        }
+        statusBarSerial.setValue('');
+        mainStatusBarTabs.changeTo(portName);
+        await statusBarSerial.open();
+    } catch (error) {
+        ampy.dispose();
+        BU.progressLayer.hide();
+        Debug.error(error);
+        statusBarTerminal.addValue(`${error}\n`);
+        statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadFailed']}==\n`);
+    }
 }
 
 function hexToBuf (hex) {

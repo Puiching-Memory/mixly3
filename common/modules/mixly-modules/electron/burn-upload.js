@@ -11,6 +11,7 @@ goog.require('Mixly.Workspace');
 goog.require('Mixly.Debug');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.LayerFirmware');
+goog.require('Mixly.LayerProgress');
 goog.require('Mixly.Electron.Serial');
 goog.provide('Mixly.Electron.BU');
 
@@ -26,7 +27,8 @@ const {
     Serial,
     Debug,
     HTMLTemplate,
-    LayerFirmware
+    LayerFirmware,
+    LayerProgress
 } = Mixly;
 
 const { BU } = Electron;
@@ -65,6 +67,22 @@ BU.firmwareLayer.bind('burn', (info) => {
     BU.uploading = false;
     const port = Serial.getSelectedPortName();
     BU.burnWithPort(port, info);
+});
+BU.killing = false;
+BU.progressLayer = new LayerProgress({
+    width: 200,
+    cancelValue: Msg.Lang['nav.btn.stop'],
+    skin: 'layui-anim layui-anim-scale',
+    cancel: () => {
+        if (BU.killing) {
+            return false;
+        }
+        BU.progressLayer.title(`${Msg.Lang['shell.aborting']}...`);
+        BU.killing = true;
+        BU.cancel();
+        return false;
+    },
+    cancelDisplay: false
 });
 
 /**
@@ -173,11 +191,10 @@ BU.checkNumOfDisks = function (type, stdout, startPath) {
 /**
  * @function 将文件或文件夹下所有文件拷贝到指定文件夹
  * @param type {string} 值为'burn' | 'upload'
- * @param layerNum {number} 烧录或上传加载弹窗的编号，用于关闭此弹窗
  * @param startPath {string} 需要拷贝的文件或文件夹的路径
  * @param desPath {string} 文件的目的路径
  **/
-BU.copyFiles = (type, layerNum, startPath, desPath) => {
+BU.copyFiles = async (type, startPath, desPath) => {
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const { burn, upload } = SELECTED_BOARD;
@@ -193,9 +210,9 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
     if (fs_plus.isFileSync(startPath)) {
         desPath = path.join(desPath, path.basename(startPath));
     }
-    fs_extra.copy(startPath, desPath)
-    .then(() => {
-        layer.close(layerNum);
+    try {
+        await fs_extra.copy(startPath, desPath);
+        BU.progressLayer.hide();
         const message = (type === 'burn'? Msg.Lang['shell.burnSucc'] : Msg.Lang['shell.uploadSucc']);
         layer.msg(message, {
             time: 1000
@@ -210,16 +227,14 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
             const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
             statusBarSerial.open();
         }
-    })
-    .catch((error) => {
-        layer.close(layerNum);
+    } catch (error) {
+        Debug.error(error);
+        BU.progressLayer.hide();
         statusBarTerminal.setValue(error + '\n');
         console.log(error);
-    })
-    .finally(() => {
-        BU.burning = false;
-        BU.uploading = false;
-    });
+    }
+    BU.burning = false;
+    BU.uploading = false;
 }
 
 /**
@@ -231,43 +246,32 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
 BU.initWithDropdownBox = function (type, startPath) {
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
-    const layerNum = layer.open({
-        type: 1,
-        title: (type === 'burn'? Msg.Lang['shell.burning'] : Msg.Lang['shell.uploading']) + '...',
-        content: $('#mixly-loader-div'),
-        shade: LayerExt.SHADE_ALL,
-        resize: false,
-        closeBtn: 0,
-        success: function (layero, index) {
-            $(".layui-layer-page").css("z-index","198910151");
-            $("#mixly-loader-btn").off("click").click(() => {
-                layer.close(index);
-                BU.cancel();
+    const message = (type === 'burn'? Msg.Lang['shell.burning'] : Msg.Lang['shell.uploading']);
+    BU.progressLayer.title(`${message}...`);
+    const desPath = $('#mixly-selector-type option:selected').val();
+    if (type === 'burn') {
+        BU.copyFiles(type, startPath, desPath)
+            .catch((error) => {
+                BU.progressLayer.hide();
+                BU.burning = false;
+                BU.uploading = false;
+                statusBarTerminal.setValue(error + '\n');
             });
-            const desPath = $('#mixly-selector-type option:selected').val();
-            if (type === 'burn') {
-                BU.copyFiles(type, index, startPath, desPath);
-            } else {
-                const mainWorkspace = Workspace.getMain();
-                const editor = mainWorkspace.getEditorsManager().getActive();
-                const code = editor.getCode();
-                fs_extra.outputFile(startPath, code)
-                .then(() => {
-                    BU.copyFiles(type, index, startPath, desPath);
-                })
-                .catch((error) => {
-                    layer.close(index);
-                    BU.burning = false;
-                    BU.uploading = false;
-                    statusBarTerminal.setValue(error + '\n');
-                });
-            }
-        },
-        end: function () {
-            $('#mixly-loader-div').css('display', 'none');
-            $(`#layui-layer-shade${layerNum}`).remove();
-        }
-    });
+    } else {
+        const mainWorkspace = Workspace.getMain();
+        const editor = mainWorkspace.getEditorsManager().getActive();
+        const code = editor.getCode();
+        fs_extra.outputFile(startPath, code)
+            .then(() => {
+                return BU.copyFiles(type, startPath, desPath);
+            })
+            .catch((error) => {
+                BU.progressLayer.hide();
+                BU.burning = false;
+                BU.uploading = false;
+                statusBarTerminal.setValue(error + '\n');
+            });
+    }
 }
 
 /**
@@ -506,26 +510,24 @@ BU.searchLibs = function (dirPath, code, libArr) {
 
 /**
 * @function 通过cmd烧录
- * @param layerNum {number} 烧录或上传加载弹窗的编号，用于关闭此弹窗
 * @param port {string} 所选择的串口
 * @param command {string} 需要执行的指令
 * @return {void}
 */
-BU.burnByCmd = function (layerNum, port, command) {
+BU.burnByCmd = function (port, command) {
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.setValue(Msg.Lang['shell.burning'] + '...\n');
-    BU.runCmd(layerNum, 'burn', port, command);
+    BU.runCmd('burn', port, command);
 }
 
 /**
 * @function 通过cmd上传
-* @param layerNum {number} 烧录或上传加载弹窗的编号，用于关闭此弹窗
 * @param port {string} 所选择的串口
 * @param command {string} 需要执行的指令
 * @return {void}
 */
-BU.uploadByCmd = async function (layerNum, port, command) {
+BU.uploadByCmd = async function (port, command) {
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.setValue(Msg.Lang['shell.uploading'] + '...\n');
@@ -539,27 +541,26 @@ BU.uploadByCmd = async function (layerNum, port, command) {
         BU.copyLib(upload.filePath, '');
     }
     fs_extra.outputFile(upload.filePath, code)
-    .then(() => {
-        BU.runCmd(layerNum, 'upload', port, command);
-    })
-    .catch((error) => {
-        statusBarTerminal.setValue(error.toString() + '\n');
-        console.log(error);
-        layer.close(layerNum);
-        BU.uploading = false;
-    });
+        .then(() => {
+            BU.runCmd('upload', port, command);
+        })
+        .catch((error) => {
+            BU.progressLayer.hide();
+            statusBarTerminal.setValue(error.toString() + '\n');
+            Debug.error(error);
+            BU.uploading = false;
+        });
 }
 
 /**
 * @function 运行cmd
-* @param layerNum {number} 烧录或上传加载弹窗的编号，用于关闭此弹窗
 * @param type {string} 值为 'burn' | 'upload'
 * @param port {string} 所选择的串口
 * @param command {string} 需要执行的指令
 * @param sucFunc {function} 指令成功执行后所要执行的操作
 * @return {void}
 */
-BU.runCmd = function (layerNum, type, port, command, sucFunc) {
+BU.runCmd = function (type, port, command, sucFunc) {
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     mainStatusBarTabs.changeTo('output');
@@ -567,7 +568,7 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
     let nowCommand = MString.tpl(command, { com: port });
 
     BU.shell = child_process.exec(nowCommand, { encoding: 'binary' }, function (error, stdout, stderr) {
-        layer.close(layerNum);
+        BU.progressLayer.hide();
         BU.burning = false;
         BU.uploading = false;
         BU.shell = null;
@@ -605,7 +606,7 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
                 statusBarSerial.open().catch(Debug.error);
             }
         }
-    })
+    });
 
     BU.shell.stdout.on('data', function (data) {
         if (BU.uploading || BU.burning) {
@@ -656,48 +657,23 @@ BU.operateWithPort = (type, port, command) => {
         return;
     }
     const title = (type === 'burn' ? Msg.Lang['shell.burning'] : Msg.Lang['shell.uploading']) + '...';
-    const operate = () => {
-        const layerNum = layer.open({
-            type: 1,
-            title,
-            content: $('#mixly-loader-div'),
-            shade: LayerExt.SHADE_NAV,
-            resize: false,
-            closeBtn: 0,
-            success: function (layero, index) {
-                $(".layui-layer-page").css("z-index","198910151");
-                switch (type) {
-                    case 'burn':
-                        BU.burnByCmd(index, port, command);
-                        break;
-                    case 'upload':
-                    default:
-                        BU.uploadByCmd(index, port, command);
-                }
-                $("#mixly-loader-btn").off("click").click(() => {
-                    $("#mixly-loader-btn").css('display', 'none');
-                    layer.title(Msg.Lang['shell.aborting'] + '...', index);
-                    BU.cancel(type);
-                });
-            },
-            end: function () {
-                $('#mixly-loader-div').css('display', 'none');
-                $("layui-layer-shade" + layerNum).remove();
-                $("#mixly-loader-btn").off("click");
-                $("#mixly-loader-btn").css('display', 'inline-block');
-            }
-        });
-    }
+    BU.progressLayer.title(title);
+    BU.progressLayer.show();
     const { mainStatusBarTabs } = Mixly;
     const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
+    let serialClosePromise = null;
     if (statusBarSerial) {
-        statusBarSerial.close()
-        .finally(() => {
-            operate();
-        });
+        serialClosePromise = statusBarSerial.close();
     } else {
-        operate();
+        serialClosePromise = Promise.resolve();
     }
+    serialClosePromise.finally(() => {
+        if (type === 'burn') {
+            BU.burnByCmd(port, command);
+        } else {
+            BU.uploadByCmd(port, command);
+        }
+    });
 }
 
 /**

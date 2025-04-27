@@ -38,7 +38,6 @@ class Layer extends Component {
         const shadow = Layer.templates.getItem(shadowType);
         this.setContent($(shadow));
         this.#dialog_ = dialog({
-            skin: 'min-dialog tips',
             padding: 0,
             ...config
         });

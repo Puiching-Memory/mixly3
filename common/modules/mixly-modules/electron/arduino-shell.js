@@ -14,6 +14,8 @@ goog.require('Mixly.Msg');
 goog.require('Mixly.MString');
 goog.require('Mixly.Workspace');
 goog.require('Mixly.Serial');
+goog.require('Mixly.LayerProgress');
+goog.require('Mixly.Debug');
 goog.require('Mixly.Electron.Shell');
 goog.provide('Mixly.Electron.ArduShell');
 
@@ -21,6 +23,7 @@ const {
     Env,
     Electron,
     LayerExt,
+    Config,
     Title,
     Boards,
     MFile,
@@ -29,7 +32,8 @@ const {
     MString,
     Workspace,
     Serial,
-    Config
+    LayerProgress,
+    Debug
 } = Mixly;
 
 const { BOARD, SOFTWARE, USER } = Config;
@@ -46,14 +50,29 @@ const {
 } = Electron;
 
 ArduShell.DEFAULT_CONFIG = goog.readJsonSync(path.join(Env.templatePath, 'json/arduino-cli-config.json'));
-
-ArduShell.binFilePath = '';
-
-ArduShell.shellPath = null;
-
-ArduShell.shell = null;
-
 ArduShell.ERROR_ENCODING = Env.currentPlatform == 'win32' ? 'cp936' : 'utf-8';
+ArduShell.binFilePath = '';
+ArduShell.shellPath = null;
+ArduShell.shell = null;
+ArduShell.compiling = false;
+ArduShell.uploading = false;
+ArduShell.killing = false;
+ArduShell.progressLayer = new LayerProgress({
+    width: 200,
+    cancelValue: Msg.Lang['nav.btn.stop'],
+    skin: 'layui-anim layui-anim-scale',
+    cancel: () => {
+        if (ArduShell.killing) {
+            return false;
+        }
+        ArduShell.progressLayer.title(`${Msg.Lang['shell.aborting']}...`);
+        ArduShell.killing = true;
+        ArduShell.cancel();
+        return false;
+    },
+    cancelDisplay: false
+});
+
 
 ArduShell.updateShellPath = () => {
     let shellPath = path.join(Env.clientPath, 'arduino-cli');
@@ -143,32 +162,12 @@ ArduShell.compile = (doFunc = () => {}) => {
     const code = editor.getCode();
     ArduShell.compiling = true;
     ArduShell.uploading = false;
+    ArduShell.killing = false;
     const boardType = Boards.getSelectedBoardCommandParam();
     mainStatusBarTabs.show();
-    const layerNum = layer.open({
-        type: 1,
-        title: Msg.Lang['shell.compiling'] + "...",
-        content: $('#mixly-loader-div'),
-        shade: LayerExt.SHADE_NAV,
-        resize: false,
-        closeBtn: 0,
-        success: () => {
-            $(".layui-layer-page").css("z-index", "198910151");
-            $("#mixly-loader-btn").off("click").click(() => {
-                $("#mixly-loader-btn").css('display', 'none');
-                layer.title(Msg.Lang['shell.aborting'] + '...', layerNum);
-                ArduShell.cancel();
-            });
-        },
-        end: () => {
-            $('#mixly-loader-div').css('display', 'none');
-            $("layui-layer-shade" + layerNum).remove();
-            $("#mixly-loader-btn").off("click");
-            $("#mixly-loader-btn").css('display', 'inline-block');
-        }
-    });
+    ArduShell.progressLayer.title(`${Msg.Lang['shell.compiling']}...`);
+    ArduShell.progressLayer.show();
     statusBarTerminal.setValue(Msg.Lang['shell.compiling'] + "...\n");
-
     let myLibPath = path.join(Env.boardDirPath, "/libraries/myLib/");
     if (fs_plus.isDirectorySync(myLibPath))
         myLibPath += '\",\"';
@@ -202,7 +201,7 @@ ArduShell.compile = (doFunc = () => {}) => {
                  + '\" \"'
                  + codePath
                  + '\" --no-color';
-    ArduShell.runCmd(layerNum, 'compile', cmdStr, code, doFunc);
+    ArduShell.runCmd('compile', cmdStr, code, doFunc);
 }
 
 /**
@@ -214,6 +213,7 @@ ArduShell.initUpload = () => {
     const { mainStatusBarTabs } = Mixly;
     ArduShell.compiling = false;
     ArduShell.uploading = true;
+    ArduShell.killing = false;
     const boardType = Boards.getSelectedBoardCommandParam();
     const uploadType = Boards.getSelectedBoardConfigParam('upload_method');
     let port = Serial.getSelectedPortName();
@@ -256,28 +256,7 @@ ArduShell.upload = (boardType, port) => {
     const mainWorkspace = Workspace.getMain();
     const editor = mainWorkspace.getEditorsManager().getActive();
     const code = editor.getCode();
-    const layerNum = layer.open({
-        type: 1,
-        title: Msg.Lang['shell.uploading'] + "...",
-        content: $('#mixly-loader-div'),
-        shade: LayerExt.SHADE_NAV,
-        resize: false,
-        closeBtn: 0,
-        success: function () {
-            $(".layui-layer-page").css("z-index", "198910151");
-            $("#mixly-loader-btn").off("click").click(() => {
-                $("#mixly-loader-btn").css('display', 'none');
-                layer.title(Msg.Lang['shell.aborting'] + '...', layerNum);
-                ArduShell.cancel();
-            });
-        },
-        end: function () {
-            $('#mixly-loader-div').css('display', 'none');
-            $("layui-layer-shade" + layerNum).remove();
-            $("#mixly-loader-btn").off("click");
-            $("#mixly-loader-btn").css('display', 'inline-block');
-        }
-    });
+    ArduShell.progressLayer.title(`${Msg.Lang['shell.uploading']}...`);
     mainStatusBarTabs.show();
     statusBarTerminal.setValue(Msg.Lang['shell.uploading'] + "...\n");
     const configPath = path.join(ArduShell.shellPath, '../arduino-cli.json'),
@@ -331,7 +310,7 @@ ArduShell.upload = (boardType, port) => {
             + codePath
             + '\" --no-color';
     }
-    ArduShell.runCmd(layerNum, 'upload', cmdStr, code, () => {
+    ArduShell.runCmd('upload', cmdStr, code, () => {
         if (!Serial.portIsLegal(port)) {
             return;
         }
@@ -480,7 +459,7 @@ ArduShell.writeLibFiles = (inPath) => {
 * @param cmd {String} 输入的cmd命令
 * @return void
 */
-ArduShell.runCmd = (layerNum, type, cmd, code, sucFunc) => {
+ArduShell.runCmd = (type, cmd, code, sucFunc) => {
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const testArduinoDirPath = path.join(Env.clientPath, 'testArduino');
@@ -500,7 +479,7 @@ ArduShell.runCmd = (layerNum, type, cmd, code, sucFunc) => {
         return ArduShell.shell.exec(cmd);
     })
     .then((info) => {
-        layer.close(layerNum);
+        ArduShell.progressLayer.hide();
         let message = '';
         if (info.code) {
             message = (type === 'compile' ? Msg.Lang['shell.compileFailed'] : Msg.Lang['shell.uploadFailed']);
@@ -513,8 +492,8 @@ ArduShell.runCmd = (layerNum, type, cmd, code, sucFunc) => {
         layer.msg(message, { time: 1000 });
     })
     .catch((error) => {
-        layer.close(layerNum);
-        console.log(error);
+        ArduShell.progressLayer.hide();
+        Debug.error(error);
     })
     .finally(() => {
         statusBarTerminal.scrollToBottom();
@@ -530,74 +509,56 @@ ArduShell.writeFile = function (readPath, writePath) {
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     ArduShell.compile(function () {
         window.setTimeout(function () {
-            const layerNum = layer.open({
-                type: 1,
-                title: Msg.Lang['shell.saving'] + '...',
-                content: $('#mixly-loader-div'),
-                shade: LayerExt.SHADE_ALL,
-                resize: false,
-                closeBtn: 0,
-                success: function () {
-                    $(".layui-layer-page").css("z-index", "198910151");
-                    $("#mixly-loader-btn").off("click").click(() => {
-                        layer.close(layerNum);
-                        ArduShell.cancel();
-                    });
-                    window.setTimeout(function () {
-                        try {
-                            readPath = readPath.replace(/\\/g, "/");
-                            writePath = writePath.replace(/\\/g, "/");
-                        } catch (e) {
-                            console.log(e);
-                        }
-                        try {
-                            let writeDirPath = writePath.substring(0, writePath.lastIndexOf("."));
-                            let writeFileName = writePath.substring(writePath.lastIndexOf("/") + 1, writePath.lastIndexOf("."));
-                            let writeFileType = writePath.substring(writePath.lastIndexOf(".") + 1);
-                            if (!fs.existsSync(writeDirPath)) {
-                                fs.mkdirSync(writeDirPath);
-                            }
-                            if (fs.existsSync(writePath)) {
-                                fs.unlinkSync(writePath);
-                            }
-                            let readBinFilePath = readPath + "/testArduino.ino." + writeFileType;
-                            let binFileData = fs.readFileSync(readBinFilePath);
-                            fs.writeFileSync(writePath, binFileData);
-                            let binFileType = [
-                                ".eep",
-                                ".hex",
-                                ".with_bootloader.bin",
-                                ".with_bootloader.hex",
-                                ".bin",
-                                ".elf",
-                                ".map",
-                                ".partitions.bin",
-                                ".bootloader.bin"
-                            ]
-                            for (let i = 0; i < binFileType.length; i++) {
-                                let readFilePath = readPath + "/testArduino.ino" + binFileType[i];
-                                let writeFilePath = writeDirPath + "/" + writeFileName + binFileType[i];
-                                if (fs.existsSync(readFilePath)) {
-                                    let binData = fs.readFileSync(readFilePath);
-                                    fs.writeFileSync(writeFilePath, binData);
-                                }
-                            }
-                            layer.msg(Msg.Lang['shell.saveSucc'], {
-                                time: 1000
-                            });
-                        } catch (e) {
-                            console.log(e);
-                            statusBarTerminal.addValue(e + "\n");
-                        }
-                        layer.close(layerNum);
-                    }, 500);
-                },
-                end: function () {
-                    $('#mixly-loader-div').css('display', 'none');
-                    $("layui-layer-shade" + layerNum).remove();
-                    $("#mixly-loader-btn").off("click");
+            ArduShell.progressLayer.title(`${Msg.Lang['shell.saving']}...`);
+            ArduShell.progressLayer.show();
+            window.setTimeout(function () {
+                try {
+                    readPath = readPath.replace(/\\/g, "/");
+                    writePath = writePath.replace(/\\/g, "/");
+                } catch (error) {
+                    Debug.error(error);
                 }
-            });
+                try {
+                    let writeDirPath = writePath.substring(0, writePath.lastIndexOf("."));
+                    let writeFileName = writePath.substring(writePath.lastIndexOf("/") + 1, writePath.lastIndexOf("."));
+                    let writeFileType = writePath.substring(writePath.lastIndexOf(".") + 1);
+                    if (!fs.existsSync(writeDirPath)) {
+                        fs.mkdirSync(writeDirPath);
+                    }
+                    if (fs.existsSync(writePath)) {
+                        fs.unlinkSync(writePath);
+                    }
+                    let readBinFilePath = readPath + "/testArduino.ino." + writeFileType;
+                    let binFileData = fs.readFileSync(readBinFilePath);
+                    fs.writeFileSync(writePath, binFileData);
+                    let binFileType = [
+                        ".eep",
+                        ".hex",
+                        ".with_bootloader.bin",
+                        ".with_bootloader.hex",
+                        ".bin",
+                        ".elf",
+                        ".map",
+                        ".partitions.bin",
+                        ".bootloader.bin"
+                    ]
+                    for (let i = 0; i < binFileType.length; i++) {
+                        let readFilePath = readPath + "/testArduino.ino" + binFileType[i];
+                        let writeFilePath = writeDirPath + "/" + writeFileName + binFileType[i];
+                        if (fs.existsSync(readFilePath)) {
+                            let binData = fs.readFileSync(readFilePath);
+                            fs.writeFileSync(writeFilePath, binData);
+                        }
+                    }
+                    layer.msg(Msg.Lang['shell.saveSucc'], {
+                        time: 1000
+                    });
+                } catch (error) {
+                    Debug.error(error);
+                    statusBarTerminal.addValue(e + "\n");
+                }
+                ArduShell.progressLayer.hide();
+            }, 500);
         }, 1000);
     });
 }

@@ -1276,6 +1276,8 @@
             "Mixly.MString",
             "Mixly.Workspace",
             "Mixly.Serial",
+            "Mixly.LayerProgress",
+            "Mixly.Debug",
             "Mixly.Electron.Shell"
         ],
         "provide": [
@@ -1296,6 +1298,7 @@
             "Mixly.Debug",
             "Mixly.HTMLTemplate",
             "Mixly.LayerFirmware",
+            "Mixly.LayerProgress",
             "Mixly.Electron.Serial"
         ],
         "provide": [
@@ -1574,6 +1577,7 @@
             "Mixly.HTMLTemplate",
             "Mixly.MString",
             "Mixly.LayerFirmware",
+            "Mixly.LayerProgress",
             "Mixly.Web.Serial",
             "Mixly.Web.Ampy"
         ],
