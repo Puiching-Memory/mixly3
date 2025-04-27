@@ -51,18 +51,18 @@ const SOFTWARE_DEFAULT_CONFIG = {
 Config.init = () => {
     const urlConfig = Url.getConfig();
     Config.BOARD = {
-        ...goog.getJSON(path.join(Env.boardDirPath, 'config.json'), BOARD_DEFAULT_CONFIG),
+        ...goog.readJsonSync(path.join(Env.boardDirPath, 'config.json'), BOARD_DEFAULT_CONFIG),
         ...urlConfig
     };
 
     if (typeof Config.BOARD.board === 'string'
         && path.extname(Config.BOARD.board) === '.json') {
-        Config.BOARD.board = goog.getJSON(path.join(Env.boardDirPath, Config.BOARD.board));
+        Config.BOARD.board = goog.readJsonSync(path.join(Env.boardDirPath, Config.BOARD.board));
     }
 
     let pathPrefix = '../';
 
-    Config.SOFTWARE = goog.getJSON(path.join(Env.srcDirPath, 'sw-config.json'), SOFTWARE_DEFAULT_CONFIG);
+    Config.SOFTWARE = goog.readJsonSync(path.join(Env.srcDirPath, 'sw-config.json'), SOFTWARE_DEFAULT_CONFIG);
     Config.pathPrefix = pathPrefix;
 
     Env.hasSocketServer = Config.SOFTWARE?.webSocket?.enabled ? true : false;

@@ -54,7 +54,7 @@ BU.uploading = false;
 BU.burning = false;
 
 BU.FILMWARE_LAYER = new HTMLTemplate(
-    goog.get(path.join(Env.templatePath, 'html/filmware-layer.html'))
+    goog.readFileSync(path.join(Env.templatePath, 'html/filmware-layer.html'))
 ).render({
     cancel: Msg.Lang['nav.btn.cancel'],
     burn: Msg.Lang['nav.btn.burn']
@@ -166,7 +166,7 @@ BU.burnByUSB = async () => {
 
     const { web } = SELECTED_BOARD;
     const { burn } = web;
-    const hexStr = goog.get(path.join(Env.boardDirPath, burn.filePath));
+    const hexStr = goog.readFileSync(path.join(Env.boardDirPath, burn.filePath));
     const hex2Blob = new Blob([ hexStr ], { type: 'text/plain' });
     const buffer = await hex2Blob.arrayBuffer();
     if (!buffer) {
@@ -499,7 +499,7 @@ BU.getImportModules = (code) => {
     const libPath = SELECTED_BOARD.upload.libPath;
     for (let i = libPath.length - 1; i >= 0; i--) {
         const dirname = MString.tpl(libPath[i], { indexPath: Env.boardDirPath });
-        const map = goog.getJSON(path.join(dirname, 'map.json'));
+        const map = goog.readJsonSync(path.join(dirname, 'map.json'));
         if (!(map && map instanceof Object)) {
             continue;
         }
@@ -603,7 +603,7 @@ BU.uploadByUSB = async (portName) => {
     const importsMap = BU.getImportModules(code);
     for (let key in importsMap) {
         const filename = importsMap[key]['__name__'];
-        const data = goog.get(importsMap[key]['__path__']);
+        const data = goog.readFileSync(importsMap[key]['__path__']);
         FSWrapper.writeFile(filename, data);
     }
     const layerNum = layer.open({
@@ -690,7 +690,7 @@ BU.uploadWithAmpy = (portName) => {
                 let libraries = {};
                 for (let key in importsMap) {
                     const filename = importsMap[key]['__name__'];
-                    const data = goog.get(importsMap[key]['__path__']);
+                    const data = goog.readFileSync(importsMap[key]['__path__']);
                     libraries[filename] = {
                         data,
                         size: importsMap[key]['__size__']

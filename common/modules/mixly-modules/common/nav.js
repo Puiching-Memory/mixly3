@@ -28,7 +28,7 @@ class Nav extends Component {
           */
         HTMLTemplate.add(
             'html/nav/nav.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/nav/nav.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/nav/nav.html')))
         );
 
         /**
@@ -37,7 +37,7 @@ class Nav extends Component {
           */
         HTMLTemplate.add(
             'html/nav/nav-btn.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/nav/nav-btn.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/nav/nav-btn.html')))
         );
 
         /**
@@ -46,7 +46,7 @@ class Nav extends Component {
           */
         HTMLTemplate.add(
             'html/nav/nav-item-container.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/nav/nav-item-container.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/nav/nav-item-container.html')))
         );
 
         /**
@@ -55,7 +55,7 @@ class Nav extends Component {
           */
         HTMLTemplate.add(
             'html/nav/nav-item.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/nav/nav-item.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/nav/nav-item.html')))
         );
 
         /**
@@ -64,7 +64,7 @@ class Nav extends Component {
           */
         HTMLTemplate.add(
             'html/nav/board-selector-div.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/nav/board-selector-div.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/nav/board-selector-div.html')))
         );
 
         /**
@@ -73,7 +73,7 @@ class Nav extends Component {
           */
         HTMLTemplate.add(
             'html/nav/port-selector-div.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/nav/port-selector-div.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/nav/port-selector-div.html')))
         );
 
         Nav.Scope = {

@@ -34,12 +34,12 @@ const { USER } = Config;
 
 class FileTree extends Component {
     static {
-        this.FILE_ICON_MAP = goog.getJSON(path.join(Env.templatePath, 'json/file-icons.json'));
-        this.FOLDER_ICON_MAP = goog.getJSON(path.join(Env.templatePath, 'json/folder-icons.json'));
+        this.FILE_ICON_MAP = goog.readJsonSync(path.join(Env.templatePath, 'json/file-icons.json'));
+        this.FOLDER_ICON_MAP = goog.readJsonSync(path.join(Env.templatePath, 'json/folder-icons.json'));
 
         HTMLTemplate.add(
             'html/file-tree.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/file-tree.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/file-tree.html')))
         );
     }
 

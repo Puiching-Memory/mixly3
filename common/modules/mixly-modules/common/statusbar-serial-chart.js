@@ -28,7 +28,7 @@ class StatusBarSerialChart extends PageBase {
     static {
         HTMLTemplate.add(
             'html/statusbar/statusbar-serial-chart.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/statusbar/statusbar-serial-chart.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/statusbar/statusbar-serial-chart.html')))
         );
     }
 

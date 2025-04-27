@@ -53,11 +53,11 @@ class StatusBarsManager extends PagesManager {
     static {
         HTMLTemplate.add(
             'html/statusbar/statusbars-manager.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/statusbar/statusbars-manager.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/statusbar/statusbars-manager.html')))
         );
         HTMLTemplate.add(
             'html/statusbar/statusbars-tab.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/statusbar/statusbars-tab.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/statusbar/statusbars-tab.html')))
         );
         this.typesRegistry = new Registry();
         this.managersRegistry = new Registry();

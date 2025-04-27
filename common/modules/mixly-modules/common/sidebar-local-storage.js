@@ -38,7 +38,7 @@ class SideBarLocalStorage extends PageBase {
     static {
         HTMLTemplate.add(
             'html/sidebar/sidebar-local-storage-open-folder.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/sidebar/sidebar-local-storage-open-folder.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/sidebar/sidebar-local-storage-open-folder.html')))
         );
     }
 

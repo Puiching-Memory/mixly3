@@ -42,12 +42,12 @@ class EditorsManager extends PagesManager {
     static {
         HTMLTemplate.add(
             'html/editor/editor-manager.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/editor/editor-manager.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/editor/editor-manager.html')))
         );
 
         HTMLTemplate.add(
             'html/editor/editor-tab.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/editor/editor-tab.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/editor/editor-tab.html')))
         );
 
         this.typesRegistry = new Registry();

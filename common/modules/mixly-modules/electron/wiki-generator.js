@@ -18,8 +18,8 @@ const fs = Mixly.require('fs');
 
 class WikiGenerator {
     static {
-        this.WIKI_PAGE_FILE = goog.get(path.join(Env.templatePath, 'markdown/wiki-page-file.md'));
-        this.WIKI_PAGE_DIR = goog.get(path.join(Env.templatePath, 'markdown/wiki-page-dir.md'));
+        this.WIKI_PAGE_FILE = goog.readFileSync(path.join(Env.templatePath, 'markdown/wiki-page-file.md'));
+        this.WIKI_PAGE_DIR = goog.readFileSync(path.join(Env.templatePath, 'markdown/wiki-page-dir.md'));
     }
 
     #$xml_ = null;

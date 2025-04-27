@@ -39,7 +39,7 @@ class FooterBar extends Component {
     static {
         HTMLTemplate.add(
             'html/footerbar.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/footerbar.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/footerbar.html')))
         );
     }
 

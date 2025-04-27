@@ -31,22 +31,22 @@ class SideBarsManager extends PagesManager {
     static {
         HTMLTemplate.add(
             'html/sidebar/left-sidebars-manager.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/sidebar/left-sidebars-manager.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/sidebar/left-sidebars-manager.html')))
         );
 
         HTMLTemplate.add(
             'html/sidebar/left-sidebars-tab.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/sidebar/left-sidebars-tab.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/sidebar/left-sidebars-tab.html')))
         );
 
         HTMLTemplate.add(
             'html/sidebar/right-sidebars-manager.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/sidebar/right-sidebars-manager.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/sidebar/right-sidebars-manager.html')))
         );
 
         HTMLTemplate.add(
             'html/sidebar/right-sidebars-tab.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/sidebar/right-sidebars-tab.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/sidebar/right-sidebars-tab.html')))
         );
 
         this.typesRegistry = new Registry();

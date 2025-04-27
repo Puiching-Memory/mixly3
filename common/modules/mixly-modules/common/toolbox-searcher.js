@@ -20,7 +20,7 @@ const {
 class ToolboxSearcher {
     static {
         this.searchHtmlTemplate = new HTMLTemplate(
-            goog.get(path.join(Env.templatePath, 'html/search-div.html'))
+            goog.readFileSync(path.join(Env.templatePath, 'html/search-div.html'))
         );
     }
 

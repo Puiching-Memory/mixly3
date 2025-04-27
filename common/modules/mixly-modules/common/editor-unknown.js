@@ -18,7 +18,7 @@ class EditorUnknown extends EditorBase {
     static {
         HTMLTemplate.add(
             'html/editor/editor-unknown.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/editor/editor-unknown.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/editor/editor-unknown.html')))
         );
     }
 

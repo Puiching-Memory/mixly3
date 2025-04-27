@@ -77,7 +77,7 @@ class FooterLayerExampleExt extends FooterLayerExample {
     }
 
     dataToWorkspace(inPath) {
-        const data = goog.get(path.join(Env.boardDirPath, 'examples', inPath));
+        const data = goog.readFileSync(path.join(Env.boardDirPath, 'examples', inPath));
         this.updateCode(path.extname(inPath), data);
     }
 }

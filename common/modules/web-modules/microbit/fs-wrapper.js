@@ -49,8 +49,8 @@ class microbitFsWrapper {
      * initial main.py
      */
     setupFilesystem(folderPath) {
-        const uPyV1 = goog.get(path.join(folderPath, 'microbit-micropython-v1.hex'));
-        const uPyV2  = goog.get(path.join(folderPath, 'microbit-micropython-v2.hex'));
+        const uPyV1 = goog.readFileSync(path.join(folderPath, 'microbit-micropython-v1.hex'));
+        const uPyV2  = goog.readFileSync(path.join(folderPath, 'microbit-micropython-v2.hex'));
         if (!uPyV1 || !uPyV2) {
             console.error('There was an issue loading the MicroPython Hex files.');
         }

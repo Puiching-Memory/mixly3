@@ -25,7 +25,7 @@ class FooterLayerExample extends FooterLayer {
     static {
         // 弹层模板
         this.menuHTMLTemplate = new HTMLTemplate(
-            goog.get(path.join(Env.templatePath, 'html/footerlayer/footerlayer-example.html'))
+            goog.readFileSync(path.join(Env.templatePath, 'html/footerlayer/footerlayer-example.html'))
         );
     }
 

@@ -28,12 +28,12 @@ class EditorMd extends EditorBase {
     static {
         HTMLTemplate.add(
             'html/editor/editor-md.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/editor/editor-md.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/editor/editor-md.html')))
         );
 
         HTMLTemplate.add(
             'html/editor/editor-md-btns.html',
-            goog.get(path.join(Env.templatePath, 'html/editor/editor-md-btns.html'))
+            goog.readFileSync(path.join(Env.templatePath, 'html/editor/editor-md-btns.html'))
         );
 
         marked.use(markedKatex({ throwOnError: false }));

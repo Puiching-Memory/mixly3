@@ -17,7 +17,7 @@ class EditorWelcome extends EditorBase {
     static {
         HTMLTemplate.add(
             'html/editor/editor-welcome.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/editor/editor-welcome.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/editor/editor-welcome.html')))
         );
     }
 

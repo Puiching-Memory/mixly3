@@ -20,7 +20,7 @@ class ContextMenu {
     static {
         HTMLTemplate.add(
             'html/context-menu-item.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/context-menu-item.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/context-menu-item.html')))
         );
 
         this.getItem = (name, hotKey) => HTMLTemplate.get('html/context-menu-item.html').render({ name, hotKey });

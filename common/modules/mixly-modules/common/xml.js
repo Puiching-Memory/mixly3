@@ -123,7 +123,7 @@ XML.convert = function (str, trimEscaped) {
 for (let i of XML.TEMPLATE_CONFIG) {
     const { type, config, appendToBody } = i;
     if (XML.TEMPLATE_ENV[type]) {
-        const xmlStr = goog.get(path.join(Env.templatePath, i.path));
+        const xmlStr = goog.readFileSync(path.join(Env.templatePath, i.path));
         if (xmlStr) {
             XML.TEMPLATE_STR[type] = xmlStr;
             XML.TEMPLATE_STR_RENDER[type] = XML.render(xmlStr, config);
@@ -139,7 +139,7 @@ if (layui._typeof(BOARD.board) === 'object') {
         const boardConfig = BOARD.board[i];
         if (layui._typeof(boardConfig) === 'object'
          && layui._typeof(boardConfig.xmlPath) === 'string') {
-            const categoriesStr = goog.get(path.join(Env.boardDirPath, boardConfig.xmlPath));
+            const categoriesStr = goog.readFileSync(path.join(Env.boardDirPath, boardConfig.xmlPath));
             if (categoriesStr)
                 XML.CATEGORIES_STR[i] = categoriesStr;
         }

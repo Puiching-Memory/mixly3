@@ -87,7 +87,7 @@ class App extends Component {
     static {
         HTMLTemplate.add(
             'html/app.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/app.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/app.html')))
         );
     }
 

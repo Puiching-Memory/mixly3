@@ -49,12 +49,12 @@ class EditorMix extends EditorBase {
     static {
         HTMLTemplate.add(
             'html/editor/editor-mix.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/editor/editor-mix.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/editor/editor-mix.html')))
         );
 
         HTMLTemplate.add(
             'html/editor/editor-mix-btns.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/editor/editor-mix-btns.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/editor/editor-mix-btns.html')))
         );
     }
 

@@ -48,7 +48,7 @@ window.addEventListener('load', () => {
     }
     const app = new App($('body')[0]);
     Mixly.app = app;
-    const $xml = $(goog.get(Env.boardIndexPath));
+    const $xml = $(goog.readFileSync(Env.boardIndexPath));
     let scrpitPaths = [];
     let cssPaths = [];
     let $categories = null;

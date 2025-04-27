@@ -24,9 +24,9 @@ Config.USER = {
  * @return {void}
  **/
 Config.init = () => {
-    Config.SOFTWARE = goog.getJSON('./sw-config.json', {});
+    Config.SOFTWARE = goog.readJsonSync('./sw-config.json', {});
     console.log('Config.SOFTWARE:', Config.SOFTWARE);
-    Config.BOARDS_INFO = goog.getJSON('./boards.json', {});
+    Config.BOARDS_INFO = goog.readJsonSync('./boards.json', {});
     console.log('Config.BOARDS_INFO:', Config.BOARDS_INFO);
     const boardPageConfig = Url.getConfig();
     Config.BOARD_PAGE = boardPageConfig ?? {};

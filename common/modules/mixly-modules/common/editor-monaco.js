@@ -25,7 +25,7 @@ class EditorMonaco extends EditorBase {
     static {
         HTMLTemplate.add(
             'html/editor/editor-code.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/editor/editor-code.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/editor/editor-code.html')))
         );
 
         this.$monaco = $('<div class="page-item"></div>');

@@ -32,17 +32,17 @@ class StatusBarAmpy extends PageBase {
     static {
         HTMLTemplate.add(
             'html/statusbar/statusbar-ampy.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/statusbar/statusbar-ampy.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/statusbar/statusbar-ampy.html')))
         );
 
         HTMLTemplate.add(
             'html/statusbar/statusbar-ampy-open-fs.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/statusbar/statusbar-ampy-open-fs.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/statusbar/statusbar-ampy-open-fs.html')))
         );
 
         HTMLTemplate.add(
             'html/statusbar/statusbar-ampy-editor-empty.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/statusbar/statusbar-ampy-editor-empty.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/statusbar/statusbar-ampy-editor-empty.html')))
         );
     }
 

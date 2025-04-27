@@ -18,16 +18,16 @@ const {
 
 class AmpyExt extends Ampy {
     static {
-        this.LS = goog.get(path.join(Env.templatePath, 'python/ls.py'));
-        this.LS_RECURSIVE = goog.get(path.join(Env.templatePath, 'python/ls-recursive.py'));
-        this.LS_LONG_FORMAT = goog.get(path.join(Env.templatePath, 'python/ls-long-format.py'));
-        this.MKDIR = goog.get(path.join(Env.templatePath, 'python/mkdir.py'));
-        this.MKFILE = goog.get(path.join(Env.templatePath, 'python/mkfile.py'));
-        this.RENAME = goog.get(path.join(Env.templatePath, 'python/rename.py'));
-        this.RM = goog.get(path.join(Env.templatePath, 'python/rm.py'));
-        this.RMDIR = goog.get(path.join(Env.templatePath, 'python/rmdir.py'));
-        this.GET = goog.get(path.join(Env.templatePath, 'python/get.py'));
-        this.CWD = goog.get(path.join(Env.templatePath, 'python/cwd.py'));
+        this.LS = goog.readFileSync(path.join(Env.templatePath, 'python/ls.py'));
+        this.LS_RECURSIVE = goog.readFileSync(path.join(Env.templatePath, 'python/ls-recursive.py'));
+        this.LS_LONG_FORMAT = goog.readFileSync(path.join(Env.templatePath, 'python/ls-long-format.py'));
+        this.MKDIR = goog.readFileSync(path.join(Env.templatePath, 'python/mkdir.py'));
+        this.MKFILE = goog.readFileSync(path.join(Env.templatePath, 'python/mkfile.py'));
+        this.RENAME = goog.readFileSync(path.join(Env.templatePath, 'python/rename.py'));
+        this.RM = goog.readFileSync(path.join(Env.templatePath, 'python/rm.py'));
+        this.RMDIR = goog.readFileSync(path.join(Env.templatePath, 'python/rmdir.py'));
+        this.GET = goog.readFileSync(path.join(Env.templatePath, 'python/get.py'));
+        this.CWD = goog.readFileSync(path.join(Env.templatePath, 'python/cwd.py'));
     }
 
     #device_ = null;
@@ -223,12 +223,17 @@ class AmpyExt extends Ampy {
         return this.#device_.decode(this.unhexlify(data));
     }
 
-    async put(filename, code, timeout = 5000) {
+    async put(filename, data, timeout = 5000) {
         if (!this.isActive()) {
             throw new Error(Msg.Lang['ampy.portIsNotOpen']);
         }
         await this.exec(`file = open('${filename}', 'wb')`, timeout);
-        const buffer = this.#device_.encode(code);
+        let buffer = null;
+        if (typeof data === 'string') {
+            buffer = this.#device_.encode(data);
+        } else {
+            buffer = data;
+        }
         const len = Math.ceil(buffer.length / 64);
         for (let i = 0; i < len; i++) {
             const writeBuffer = buffer.slice(i * 64, Math.min((i + 1) * 64, buffer.length));

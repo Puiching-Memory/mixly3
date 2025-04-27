@@ -49,7 +49,7 @@ BU.burning = false;
 BU.shell = null;
 
 BU.FILMWARE_LAYER = new HTMLTemplate(
-    goog.get(path.join(Env.templatePath, 'html/filmware-layer.html'))
+    goog.readFileSync(path.join(Env.templatePath, 'html/filmware-layer.html'))
 ).render({
     cancel: Msg.Lang['nav.btn.cancel'],
     burn: Msg.Lang['nav.btn.burn']

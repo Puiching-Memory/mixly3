@@ -21,15 +21,15 @@ class FooterLayerMessage extends FooterLayer {
     // 弹层模板
     static {
         this.menuHTMLTemplate = new HTMLTemplate(
-            goog.get(path.join(Env.templatePath, 'html/footerlayer/footerlayer-message.html'))
+            goog.readFileSync(path.join(Env.templatePath, 'html/footerlayer/footerlayer-message.html'))
         );
 
         this.menuItemHTMLTemplate = new HTMLTemplate(
-            goog.get(path.join(Env.templatePath, 'html/footerlayer/footerlayer-message-item.html'))
+            goog.readFileSync(path.join(Env.templatePath, 'html/footerlayer/footerlayer-message-item.html'))
         );
 
         this.menuItemWithIconHTMLTemplate = new HTMLTemplate(
-            goog.get(path.join(Env.templatePath, 'html/footerlayer/footerlayer-message-item-with-icon.html'))
+            goog.readFileSync(path.join(Env.templatePath, 'html/footerlayer/footerlayer-message-item-with-icon.html'))
         );
 
         this.STYLES = ['primary', 'secondary', 'success', 'danger', 'warning'];

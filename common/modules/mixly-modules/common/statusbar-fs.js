@@ -41,7 +41,7 @@ class Panel extends Component {
     static {
         HTMLTemplate.add(
             'html/statusbar/statusbar-fs-panel.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/statusbar/statusbar-fs-panel.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/statusbar/statusbar-fs-panel.html')))
         );
     }
 
@@ -195,7 +195,7 @@ class StatusBarFS extends PageBase {
     static {
         HTMLTemplate.add(
             'html/statusbar/statusbar-fs.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/statusbar/statusbar-fs.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/statusbar/statusbar-fs.html')))
         );
     }
 

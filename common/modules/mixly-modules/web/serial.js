@@ -43,7 +43,7 @@ class WebSerial extends Serial {
         this.devicesRegistry = new Registry();
         this.type = Serial.type;
         this.DEVICES_SELECT_LAYER = new HTMLTemplate(
-            goog.get(path.join(Env.templatePath, 'html/devices-select-layer.html'))
+            goog.readFileSync(path.join(Env.templatePath, 'html/devices-select-layer.html'))
         );
 
         this.getConfig = function () {

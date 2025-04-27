@@ -35,7 +35,7 @@ class Workspace extends Component {
     static {
         HTMLTemplate.add(
             'html/workspace.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'html/workspace.html')))
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/workspace.html')))
         );
 
         this.workspaces = [];

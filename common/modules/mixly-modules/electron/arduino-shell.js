@@ -45,7 +45,7 @@ const {
     Shell
 } = Electron;
 
-ArduShell.DEFAULT_CONFIG = goog.getJSON(path.join(Env.templatePath, 'json/arduino-cli-config.json'));
+ArduShell.DEFAULT_CONFIG = goog.readJsonSync(path.join(Env.templatePath, 'json/arduino-cli-config.json'));
 
 ArduShell.binFilePath = '';
 
