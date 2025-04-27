@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算力大比拼</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .display {
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            min-height: 30px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #stopBtn {
+            background-color: #f44336;
+        }
+        #clearBtn {
+            background-color: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <h1>算力大比拼</h1>
+    
+    <div class="display" id="equation">准备开始...</div>
+    <div class="display" id="result">-</div>
+    <div class="display" id="timeElapsed">时间: 0.000秒</div>
+    <div class="display" id="numberOfCalculations">计算次数: 0</div>
+    
+    <div class="button-container">
+        <button id="startBtn">开始</button>
+        <button id="stopBtn" disabled>停止</button>
+        <button id="clearBtn">清空</button>
+    </div>
+
+    <script>
+        class Calculator {
+            constructor() {
+                this.equationElement = document.getElementById('equation');
+                this.resultElement = document.getElementById('result');
+                this.timeElapsedElement = document.getElementById('timeElapsed');
+                this.numberOfCalculationsElement = document.getElementById('numberOfCalculations');
+                this.startBtn = document.getElementById('startBtn');
+                this.stopBtn = document.getElementById('stopBtn');
+                this.clearBtn = document.getElementById('clearBtn');
+                
+                this.running = false;
+                this.startTime = 0;
+                this.pausedTime = 0;
+                this.totalElapsedTime = 0;
+                this.numberOfCalculationsValue = 0;
+                this.lastUpdateTime = 0;
+                this.currentIndex = 0;
+                
+                // 固定的四道题目表达式
+                this.questionBank = [
+                    "72 + 36",
+                    "678 - 123",
+                    "16 * 12",
+                    "132 / 11"
+                ];
+                
+                this.setupEventListeners();
+            }
+            
+            setupEventListeners() {
+                this.startBtn.addEventListener('click', () => this.start());
+                this.stopBtn.addEventListener('click', () => this.stop());
+                this.clearBtn.addEventListener('click', () => this.clear());
+            }
+            
+            start() {
+                if (this.running) return;
+                
+                this.running = true;
+                this.startBtn.disabled = true;
+                this.stopBtn.disabled = false;
+                
+                const now = performance.now();
+                if (this.pausedTime > 0) {
+                    this.startTime = now - this.pausedTime;
+                    this.pausedTime = 0;
+                } else {
+                    this.startTime = now;
+                    this.totalElapsedTime = 0;
+                    this.numberOfCalculationsValue = 0;
+                }
+                
+                this.lastUpdateTime = now;
+                
+                this.calculateLoop();
+                this.uiLoop();
+            }
+            
+            calculateLoop() {
+                if (!this.running) return;
+                
+                const batchSize = 999;
+                for (let i = 0; i < batchSize; i++) {
+                    const equation = this.questionBank[this.currentIndex];
+                    const result = eval(equation); 
+                    this.numberOfCalculationsValue++;
+                    this.currentIndex = (this.currentIndex + 1) % 4;
+                }
+                
+                requestAnimationFrame(() => this.calculateLoop());
+            }
+            
+            uiLoop() {
+                if (!this.running) return;
+                
+                const now = performance.now();
+                this.totalElapsedTime = (now - this.startTime) / 1000;
+                
+                const currentEquation = this.questionBank[this.currentIndex];
+                this.equationElement.textContent = currentEquation;
+                this.resultElement.textContent = eval(currentEquation);
+                this.timeElapsedElement.textContent = `时间: ${this.totalElapsedTime.toFixed(3)}秒`;
+                this.numberOfCalculationsElement.textContent = `计算次数: ${this.numberOfCalculationsValue}`;
+                
+                // 每0.2秒更新一次UI
+                setTimeout(() => this.uiLoop(), 200);
+            }
+            
+            stop() {
+                if (!this.running) return;
+                
+                this.running = false;
+                this.startBtn.disabled = false;
+                this.stopBtn.disabled = true;
+                
+                this.pausedTime = performance.now() - this.startTime;
+            }
+            
+            clear() {
+                this.stop();
+                this.equationElement.textContent = '准备开始...';
+                this.resultElement.textContent = '-';
+                this.timeElapsedElement.textContent = '时间: 0.000秒';
+                this.numberOfCalculationsValue = 0;
+                this.numberOfCalculationsElement.textContent = '计算次数: 0';
+                this.pausedTime = 0;
+                this.totalElapsedTime = 0;
+                this.currentIndex = 0;
+            }
+        }
+        
+        // 初始化计算器
+        const calculator = new Calculator();
+    </script>
+</body>
+</html>
