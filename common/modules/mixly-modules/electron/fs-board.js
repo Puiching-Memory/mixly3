@@ -139,7 +139,7 @@ class FSBoardExt extends FSBoard {
         return Mustache.render(template, {
             ...config,
             python3: `"${Env.python3Path}"`,
-            esptool: `"${Env.python3Path}" "${path.join(Env.srcDirPath, 'tools/python/esptool/__init__.py')}"`
+            esptool: `"${Env.python3Path}" "${path.join(Env.srcDirPath, 'tools/python/esptool_main.py')}"`
         });
     }
 

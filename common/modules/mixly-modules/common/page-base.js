@@ -22,7 +22,7 @@ class PageBase extends Component {
 
     constructor() {
         super();
-        this.addEventsType(['addDirty', 'removeDirty', 'active']);
+        this.addEventsType(['created', 'addDirty', 'removeDirty', 'active']);
     }
 
     init() {

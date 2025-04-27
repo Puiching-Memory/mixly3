@@ -16,7 +16,7 @@ class FSBoard {
 
     constructor() {}
 
-    #addParms_(usrFolder, fsType) {
+    #addParams_(usrFolder, fsType) {
         this.#handler_.updateConfig({
             port: Serial.getSelectedPortName()
         });
@@ -25,12 +25,12 @@ class FSBoard {
     }
 
     async download(usrFolder, fsType) {
-        this.#addParms_(usrFolder, fsType);
+        this.#addParams_(usrFolder, fsType);
         this.#handler_.onBeforeDownload();
     }
 
     async upload(usrFolder, fsType) {
-        this.#addParms_(usrFolder, fsType);
+        this.#addParams_(usrFolder, fsType);
         this.#handler_.onBeforeUpload();
     }
 

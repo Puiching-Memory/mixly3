@@ -61,9 +61,7 @@ class ArduinoCLI {
         return true;
     }
 
-    async exec(name, config) {
-
-    }
+    async exec(name, config) {}
 }
 
 });

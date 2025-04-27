@@ -14,7 +14,7 @@ class Component {
     #$content_ = null;
     #mounted_ = false;
     #disposed_ = false;
-    #events_ = new Events(['destroyed', 'created']);
+    #events_ = new Events(['destroyed']);
     #id_ = IdGenerator.generate();
 
     constructor() {}
@@ -63,10 +63,10 @@ class Component {
     }
 
     dispose() {
-        this.runEvent('destroyed');
         this.#$content_.remove();
         this.resetEvent();
         this.#disposed_ = true;
+        this.runEvent('destroyed');
     }
 
     bind(type, func) {

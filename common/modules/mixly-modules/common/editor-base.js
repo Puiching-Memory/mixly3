@@ -41,6 +41,8 @@ class EditorBase extends PageBase {
     undo() {}
 
     redo() {}
+
+    empty() {}
 }
 
 Mixly.EditorBase = EditorBase;
