@@ -188,7 +188,7 @@
 .dark-theme.geras-renderer .blocklyMenu > .blocklyMenuItem {
     background-color: #252525;
     color: #eee;
-    font-family: Segoe WPC,Segoe UI,Microsoft YaHei,sans-serif;
+    font-family: "Lato", "Noto Sans SC";
 }
 
 .dark-theme.zelos-renderer .blocklyMenu > .blocklyMenuItem {
@@ -197,7 +197,7 @@
 }
 
 .dark-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemHighlight {
-    background-color: #2980b9;
+    background-color: var(--app-dark-color);
 }
 
 .blocklyDropDownDiv.dark-theme.zelos-renderer .blocklyMenu > .blocklyMenuItem.blocklyMenuItemHighlight {
@@ -217,7 +217,7 @@
 }
 
 .blocklyMenu > .blocklyMenuItem {
-    font-family: Lato, system-ui, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Lato", "Noto Sans SC";
     margin: 0px 5px;
     border-radius: 5px;
     box-sizing: content-box;

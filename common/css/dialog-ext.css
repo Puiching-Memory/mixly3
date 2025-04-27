@@ -8,14 +8,18 @@
     right: 7px !important;
 }
 
+.ui-dialog-body > .ui-dialog-content {
+    padding: 0;
+}
+
 html[data-bs-theme=dark] .ui-dialog {
-    background-color: #2B2D30;
-    border: 1px solid #444444;
+    background-color: #252525;
+    border: 1px solid #454545;
     color: #eee;
 }
 
 html[data-bs-theme=dark] .ui-popup-focus .ui-dialog {
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgb(0 0 0 / 50%);
 }
 
 html[data-bs-theme=dark] .ui-popup-modal .ui-dialog {

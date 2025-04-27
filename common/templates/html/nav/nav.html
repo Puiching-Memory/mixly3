@@ -86,20 +86,17 @@
     }
 
     ul[m-id="{{d.mId}}"] .layui-nav-item {
+        font-family: "Lato", "Noto Sans SC";
         line-height: var(--nav-height);
         cursor: pointer;
     }
 
     ul[m-id="{{d.mId}}"] .layui-nav-child {
-        top: calc(var(--nav-height) + 1px);
+        top: var(--nav-height);
     }
 
     ul[m-id="{{d.mId}}"] dl {
         z-index: 1001;
-    }
-
-    .layui-nav .layui-nav-item a {
-        padding: 0 17px !important;
     }
 
     ul[m-id="{{d.mId}}"] > div {
@@ -114,6 +111,7 @@
     }
 
     ul[m-id="{{d.mId}}"] .left-btn-container button {
+        font-family: "Lato", "Noto Sans SC";
         height: var(--nav-left-btn-height);
         font-size: calc(var(--nav-left-btn-font-size) + 4px);
         margin: 2px;
@@ -148,7 +146,7 @@
 
     ul[m-id="{{d.mId}}"] .layui-nav-item dd {
         margin: 0;
-        font-family: Segoe WPC,Segoe UI,Microsoft YaHei,sans-serif;
+        font-family: "Lato", "Noto Sans SC";
     }
 
     ul[m-id="{{d.mId}}"] .layui-nav-item dd > a {
@@ -156,11 +154,11 @@
         line-height: 14px;
         border-radius: 5px;
         box-sizing: content-box;
-        padding: 5px 10px !important;
+        padding: 5px 7px 4px 7px !important;
         margin: 0px 5px;
         border-radius: 5px;
-        min-width: 60px;
-        font-family: Segoe WPC,Segoe UI,Microsoft YaHei,sans-serif;
+        min-width: 100px;
+        font-family: "Lato", "Noto Sans SC";
     }
 
     ul[m-id="{{d.mId}}"] .layui-nav-item dd > a {
@@ -179,7 +177,7 @@
     }
 
     html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] .layui-nav-item dd > a:hover {
-        background-color: #2980b9;
+        background-color: var(--app-dark-color);
     }
 
     html[data-bs-theme=light] ul[m-id="{{d.mId}}"] hr {
@@ -204,7 +202,7 @@
     }
 
     ul[m-id="{{d.mId}}"] > .editor-btn-container > .copyright {
-        font-family: "YaHei Consolas Hybrid", "Microsoft Yahei Light", "Arial";
+        font-family: "Lato", "Noto Sans SC";
         font-size: 12px;
         color: #fff !important;
         text-align: center;
@@ -239,6 +237,7 @@
     }
 
     ul[m-id="{{d.mId}}"] > .editor-btn-container .group > button {
+        font-family: "Lato", "Noto Sans SC";
         border-radius: 4px;
         padding: 0 2px;
         margin: 0 4px;

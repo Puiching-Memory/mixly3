@@ -182,7 +182,7 @@
   max-width: 26em;
   padding: .25em 0;
   margin: .3em;
-  font-family: Segoe WPC,Segoe UI,Microsoft YaHei,sans-serif;
+  font-family: "Lato", "Noto Sans SC";
   font-size: 13px;
   list-style-type: none;
   background: #fff;
@@ -329,7 +329,7 @@ html[data-bs-theme=dark] .context-menu-item.context-menu-disabled {
 }
 
 html[data-bs-theme=dark] .context-menu-item.context-menu-hover {
-  background-color: #2980b9 !important;
+  background-color: var(--app-dark-color) !important;
 }
 
 html[data-bs-theme=dark] .context-menu-separator {

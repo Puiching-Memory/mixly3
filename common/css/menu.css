@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
     white-space: nowrap;
+    font-family: "Lato", "Noto Sans SC";
 }
 
 .menu-line > div {
