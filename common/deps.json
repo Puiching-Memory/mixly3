@@ -4,10 +4,6 @@
         "provide": ["layui"],
         "require": []
     }, {
-        "path": "ui/layui/extend/loading/loading.js",
-        "provide": ["layui.loading"],
-        "require": ["layui", "path"]
-    }, {
         "path": "ui/bootstrap/bootstrap.min.js",
         "provide": ["bootstrap"],
         "require": ["Popper"]
@@ -94,6 +90,10 @@
     }, {
         "path": "modules/web-modules/lazyload.js",
         "provide": ["LazyLoad"],
+        "require": []
+    }, {
+        "path": "modules/web-modules/jszip.min.js",
+        "provide": ["JSZip"],
         "require": []
     }, {
         "path": "modules/web-modules/base64.min.js",
@@ -290,6 +290,10 @@
     }, {
         "path": "ui/fomantic-ui/semantic.min.js",
         "provide": ["$.fomanticUI"],
+        "require": ["$"]
+    }, {
+        "path": "modules/web-modules/dialog-plus.min.js",
+        "provide": ["dialog"],
         "require": ["$"]
     }, {
         "path": "modules/web-modules/marked/marked.min.js",
