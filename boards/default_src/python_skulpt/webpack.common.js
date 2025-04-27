@@ -21,6 +21,9 @@ module.exports = merge(common, {
                 test: /\.js$/,
                 resourceQuery: /url/,
                 type: 'asset/resource',
+                generator: {
+                    filename: "[name]_[contenthash:8][ext]",
+                }
             }
         ]
     }

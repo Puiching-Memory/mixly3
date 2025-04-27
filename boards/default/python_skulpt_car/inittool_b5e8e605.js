@@ -1,0 +1,1 @@
+var $builtinmodule=function(i){let n={__name__:new Sk.builtin.str("blocktool")};return n.highlight=new Sk.builtin.func((function(i){return new Sk.misceval.promiseToSuspension(new Promise((function(n){setTimeout((()=>{var o;o=i,o=Sk.ffi.remapToJs(o),Mixly.Editor.blockEditor.highlightBlock(o),n(Sk.builtin.none.none$)}),800)})))})),n};
