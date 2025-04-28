@@ -7,6 +7,7 @@ Micropython library for the IR-Remote/Timer(IR_RX&TX)
 """
 import array, time, gc
 from machine import Pin, Timer
+from os import uname
 try:
 	from esp32 import RMT
 	TX_MOED = 1
@@ -27,7 +28,7 @@ class IR_RX:
 		self._pulses = array.array('H')
 		self.code = [None, None, None, memoryview(self._pulses)] 	#存放[cmd, addr, data, pulses]
 		Pin(pin, Pin.IN).irq(handler=self._irq_cb, trigger=(Pin.IRQ_FALLING | Pin.IRQ_RISING))
-		Timer(timer_id).init(period=5, mode=Timer.PERIODIC, callback=self._timer_cb)
+		Timer(0 if "-C2" in uname().machine else timer_id).init(period=5, mode=Timer.PERIODIC, callback=self._timer_cb)
 
 	def _irq_cb(self, pin):
 		if not self._enable:
@@ -67,8 +68,8 @@ class IR_RX:
 		self._enable = onoff
 
 class NEC_RX(IR_RX):
-	def __init__(self, pin, bits=None, callback=None):
-		super().__init__(pin, callback, timeout=15000)
+	def __init__(self, pin, bits=None, callback=None, timer_id=1):
+		super().__init__(pin, callback, timer_id=timer_id)
 		self._bits = bits
 
 	def decode(self):
@@ -103,8 +104,8 @@ class NEC_RX(IR_RX):
 				self.code[0:3] = None, None, value
 
 class RC5_RX(IR_RX):
-	def __init__(self, pin, callback=None):
-		super().__init__(pin, callback, timeout=15000)
+	def __init__(self, pin, callback=None, timer_id=1):
+		super().__init__(pin, callback, timer_id=timer_id)
 
 	def decode(self):
 		pulse_len = len(self._pulses)
