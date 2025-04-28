@@ -363,11 +363,12 @@
             "time",
             "gc",
             "machine",
+            "os",
             "esp32",
             "machine"
         ],
         "__file__": true,
-        "__size__": 6913,
+        "__size__": 7002,
         "__name__": "irremote.py"
     },
     "ltr308al": {
