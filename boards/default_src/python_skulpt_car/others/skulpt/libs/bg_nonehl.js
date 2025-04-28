@@ -579,7 +579,6 @@ var $builtinmodule = function (name) {
                 return true
             }else{
                 if(maze.mlevel==5 || maze.mlevel==7 ||maze.mlevel==6){
-                    console.log(11)
                     return true
                 }else{
                     if(actor.marker_num==maze_marker_num){
@@ -1172,7 +1171,6 @@ var $builtinmodule = function (name) {
             Sk.builtin.pyCheckArgs("isSuccess", arguments, 1,1);
             return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
                 var state=checkFinish()
-                console.log(state)
                 if(state==true){
                     setTimeout(function() {
                         layer.alert("挑战成功！", { shade: false });

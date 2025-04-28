@@ -1166,13 +1166,6 @@
 
   <!-- 游戏：需要添加 -->
   <category id="catGame" name="game" colour="270">
-    <block type="initSettedMap_1"></block>
-    <block type="initSettedMap_2"></block>
-    <block type="initSettedMap_3"></block>
-    <block type="initSettedMap_4"></block>
-    <block type="initSettedMap_5"></block>
-    <block type="initSettedMap_6"></block>
-    <block type="initSettedMap_7"></block>
     <block type="move_direction_steps">
       <value name="times">
         <shadow type="math_number">

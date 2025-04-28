@@ -12,6 +12,13 @@ class PythonShell {
             this.pythonShell = new PythonShell();
         }
 
+        this.steprun = function () {
+            const mainWorkspace = Workspace.getMain();
+            const editor = mainWorkspace.getEditorsManager().getActive();
+            const code = editor.getCode();
+            return this.pythonShell.steprun(code);
+        }
+
         this.run = function () {
             const mainWorkspace = Workspace.getMain();
             const editor = mainWorkspace.getEditorsManager().getActive();
@@ -77,7 +84,6 @@ class PythonShell {
         this.#statusBarTerminal_ = this.#statusBarsManager_.getStatusBarById('output');
         this.#statusBarImage_ = this.#statusBarsManager_.getStatusBarById('images');
         this.#pyEngine_ = new PyEngine({}, new MixpyProject());
-        console.log(this.#statusBarImage_.getContent().children())
         this.#pyEngine_.loadEngine(this.#statusBarImage_.getContent().children()[0]);
         this.#addEventsListener_();
     }
@@ -155,6 +161,19 @@ class PythonShell {
         this.#inputResolve_ = resolve;
         this.#inputReject_ = reject;
         this.#enterInput_();
+    }
+
+    async steprun(code) {
+        await this.stop();
+        this.#statusBarsManager_.changeTo('output');
+        this.#statusBarsManager_.show();
+        this.#statusBarTerminal_.setValue(`${Msg.Lang['shell.running']}...\n`);
+        this.#running_ = true;
+        if (code.indexOf('import blocklygame') !== -1
+            || code.indexOf('from blocklygame import') !== -1) {
+            this.#statusBarsManager_.changeTo('images');
+        }
+        this.#pyEngine_.steprun(code);
     }
 
     async run(code) {

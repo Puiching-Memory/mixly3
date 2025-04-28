@@ -270,6 +270,53 @@ export default class PyEngine {
 
     /**
      * Runs the given python code, resetting the console and Trace Table.
+     * 分步调试代码
+     */
+    steprun(code) {
+        // Reset everything
+        this.reset();
+        if (code.indexOf('import blocklygame') !== -1
+            || code.indexOf('from blocklygame import') !== -1) {
+            PyGameZero.reset();
+            $(Sk.TurtleGraphics.target).empty();
+        }
+        //如果是第五关、第七关，则需要把检查循环次数的代码加进去
+        if (code.indexOf("settedMap(4") != -1 | code.indexOf("settedMap(6") != -1) {
+            if (code.indexOf("moveDirection") != -1) {//初始化的时候不加这行代码
+                code = code + "actor.isCirculationRight()\n"
+            }
+        }
+
+        //除了第六关，其他把检查是否成功代码加进去
+        if (code.indexOf("settedMap(5)") == -1) {
+            if (code.indexOf("moveDirection") != -1) {//初始化的时候不加这行代码
+                code = code + "actor.isSuccess()\n"
+            }
+        }
+        this.programStatus['running'] = true;
+        Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, code, true))
+            .then(() => {
+                // window.SPRITE.running = false;
+                this.programStatus['running'] = false;
+                this.#events_.run('finished');
+            })
+            .catch((error) => {
+                Debug.error(error);
+                // window.SPRITE.running = false;
+                this.programStatus['running'] = false;
+                this.#events_.run('error', error);
+                var original = prettyPrintError(error);
+                this.#events_.run('finished');
+                //hack for kill program with time limiterror
+                if (original.indexOf("TimeLimitError") !== -1) {
+                    return;
+                }
+                this.executionEnd_();
+            });
+    }
+
+    /**
+     * Runs the given python code, resetting the console and Trace Table.
      */
     run(code) {
         // Reset everything
@@ -306,6 +353,19 @@ export default class PyEngine {
                 if (code_piece[i] != "delete") {
                     code += code_piece[i] + '\n'
                 }
+            }
+        }
+        //如果是第五关、第七关，则需要把检查循环次数的代码加进去
+        if (code.indexOf("settedMap(4") != -1 | code.indexOf("settedMap(6") != -1) {
+            if (code.indexOf("moveDirection") != -1) {//初始化的时候不加这行代码
+                code = code + "actor.isCirculationRight();\n"
+            }
+        }
+
+        //除了第六关，其他把检查是否成功代码加进去
+        if (code.indexOf("settedMap(5)") == -1) {
+            if (code.indexOf("moveDirection") != -1) {//初始化的时候不加这行代码
+                code = code + "actor.isSuccess();\n"
             }
         }
         this.programStatus['running'] = true;

@@ -2,7 +2,7 @@
 var $builtinmodule = function (name) {
 	let mod= {__name__: new Sk.builtin.str("blocklygame")};
     
-    var svg = d3.select('#blocklySVG').append('svg');
+    var svg = d3.select(Sk.TurtleGraphics.target).append('svg');
     
     //其他变量设置
     var map=//迷宫布局
@@ -63,7 +63,8 @@ var $builtinmodule = function (name) {
         marker_num:0,
         oil:1,//表示小车有充足的油量（为了适应教材而新增的变量）
         traffic_light:22,//表示红绿灯为绿灯
-        circulation_num:0//小车在赛道中循环的次数
+        circulation_num:0,//小车在赛道中循环的次数
+        invisible_mark:0//在地图中不可显示的标记数目，用于检测小车是否沿着特定路线走。规定不可见的标记点INVIMAKER=24
     };
     //迷宫变量
     var maze_SQUARE_SIZE = 50;
@@ -84,7 +85,8 @@ var $builtinmodule = function (name) {
             OPEN: 1,
             START: 2,
             FINISH: 3,
-            AWARD:4//金币奖励
+            AWARD:4,//金币奖励
+            INVIMAKER:24
         },
         //迷宫部分参数指定
         MAZE_WIDTH : maze_SQUARE_SIZE * maze_COLS,
@@ -92,7 +94,8 @@ var $builtinmodule = function (name) {
         PATH_WIDTH : maze_SQUARE_SIZE / 3,
         result :  ResultType.UNSET,
         finish : {x:0,y:0},
-        type:1//类型为用户自定义的
+        type:1,//类型为用户自定义的
+        INVIMNUM : 0
     };
     
     //已经设置好的关卡的map
@@ -363,7 +366,7 @@ var $builtinmodule = function (name) {
      * @param {number=} opt_angle Optional angle (in degrees) to rotate Pegman.
      */
     var displayPegman = function(x, y, d, opt_angle) {
-        var pegmanIcon = $('#pegman');
+        var pegmanIcon = $(Sk.TurtleGraphics.target).find('#pegman');
         if(actor.type=='animate'){
             if(maze.type==0){
                 pegmanIcon.attr('x', x * maze_SQUARE_SIZE - d * actor.width+ 1);
@@ -383,7 +386,7 @@ var $builtinmodule = function (name) {
             pegmanIcon.attr('x', x * maze_SQUARE_SIZE + 1);
             pegmanIcon.attr('y', maze_SQUARE_SIZE * (y + 0.5) - actor.height / 2 );
         }
-        var clipRect = $('#clipRect');
+        var clipRect = $(Sk.TurtleGraphics.target).find('#clipRect');
         clipRect.attr('x', x * maze_SQUARE_SIZE + 1);
         clipRect.attr('y', pegmanIcon.attr('y'));
       };
@@ -391,7 +394,8 @@ var $builtinmodule = function (name) {
     var initPegman=function(){
         // Pegman's clipPath element, whose (x, y) is reset by Maze.displayPegman
         svg.append('clipPath').attr('id','pegmanClipPath')
-        d3.select("#pegmanClipPath").append('rect').attr('id','clipRect').attr('width', actor.width).attr('height', actor.height)
+        const elem = Sk.TurtleGraphics.target.querySelector("#pegmanClipPath");
+        d3.select(elem).append('rect').attr('id','clipRect').attr('width', actor.width).attr('height', actor.height)
 
         if(actor.type=="animate"){
             if(maze.type==0){
@@ -462,13 +466,13 @@ var $builtinmodule = function (name) {
                 var top = tile_SHAPES[tileShape][1];
                 // Tile's clipPath element.
                 svg.append('clipPath').attr('id','tileClipPath' + tileId)
-                d3.select("#tileClipPath" + tileId).append('rect').attr('x', x * maze_SQUARE_SIZE).attr('y', y * maze_SQUARE_SIZE).attr('width',  maze_SQUARE_SIZE).attr('height',  maze_SQUARE_SIZE)
-               
+                const elem = Sk.TurtleGraphics.target.querySelector("#tileClipPath" + tileId);
+                d3.select(elem).append('rect').attr('x', x * maze_SQUARE_SIZE).attr('y', y * maze_SQUARE_SIZE).attr('width',  maze_SQUARE_SIZE).attr('height',  maze_SQUARE_SIZE)
                 if(maze.type==0){//非用户自定义
                     // Tile sprite.
                     if ((map[y][x] != maze.SquareType.WALL) && (map[y][x] != maze.SquareType.OIL_STATION) && (map[y][x] != maze.SquareType.TRAFFIC_LIGHT)&& (map[y][x] != maze.SquareType.LIGHT_GREEN)&& (map[y][x] != maze.SquareType.LIGHT_RED)) {
                         svg.append('image').attr('x', x * maze_SQUARE_SIZE).attr('y', y * maze_SQUARE_SIZE).attr('width',maze_SQUARE_SIZE ).attr('height',maze_SQUARE_SIZE )
-                        .attr('clip-path', 'url(#tileClipPath' + tileId + ')').attr('xlink:href',maze.tiles)
+                        .attr('clip-path', 'url(#tileClipPath' + tileId + ')').attr('xlink:href',maze.tiles);
                         tileId++;
                     } 
                 }else{
@@ -519,7 +523,7 @@ var $builtinmodule = function (name) {
                         actor.y= y;
                     } else if (map[y][x] == maze.SquareType.FINISH) {
                         // Move the finish icon into position.
-                        var finishIcon = $('#finish');
+                        var finishIcon = $(Sk.TurtleGraphics.target).find('#finish');
                         finishIcon.attr('x', maze_SQUARE_SIZE * (x + 0.5) -
                             finishIcon.attr('width') / 2);
                         finishIcon.attr('y', maze_SQUARE_SIZE * (y + 0.6) -
@@ -538,7 +542,7 @@ var $builtinmodule = function (name) {
                         svg.append('image').attr('id','finish').attr('width',  maze_SQUARE_SIZE*0.8).attr('height', maze_SQUARE_SIZE*0.8).attr('xlink:href',maze.marker)
                         actor.x= x;
                         actor.y= y;
-                        var finishIcon = $('#finish');
+                        var finishIcon = $(Sk.TurtleGraphics.target).find('#finish');
                         finishIcon.attr('x', maze_SQUARE_SIZE * x+5 );
                         finishIcon.attr('y', maze_SQUARE_SIZE * y+5);
                         maze.finish={x:x,y:y}
@@ -574,7 +578,6 @@ var $builtinmodule = function (name) {
                 return true
             }else{
                 if(maze.mlevel==5 || maze.mlevel==7 ||maze.mlevel==6){
-                    console.log(11)
                     return true
                 }else{
                     if(actor.marker_num==maze_marker_num){
@@ -713,7 +716,7 @@ var $builtinmodule = function (name) {
      var hasCoin=function(x , y) {
         if(map[y][x]==maze.SquareType.AWARD){//如果此处是金币
             setTimeout(function() {
-                $('#coin'+y+x).remove()
+                $(Sk.TurtleGraphics.target).find('#coin'+y+x).remove()
             }, actor.stepSpeed * 3)
             map[y][x]=maze.SquareType.OPEN
             actor.coin_point+=1
@@ -1147,7 +1150,8 @@ var $builtinmodule = function (name) {
                             map[actor.y][actor.x+1]=Math.random()>0.5? maze.SquareType.LIGHT_RED:maze.SquareType.LIGHT_GREEN;//随机刷新红绿灯的状态
                             actor.traffic_light=map[actor.y][actor.x+1];
                             if(actor.traffic_light==maze.SquareType.LIGHT_RED){//图像变为红灯
-                                d3.select("#lightgreen").remove();
+                                const elem = Sk.TurtleGraphics.target.querySelector("#lightgreen");
+                                d3.select(elem).remove();
                                 svg.append('image').attr('id','lightred').attr('x',(actor.x+1) * maze_SQUARE_SIZE-5).attr('y',actor.y * maze_SQUARE_SIZE+5).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
                                 .attr('xlink:href','../common/js/skulpt_mixcar/pic/redlight.png')
                             }   
@@ -1307,7 +1311,6 @@ var $builtinmodule = function (name) {
             Sk.builtin.pyCheckArgs("isSuccess", arguments, 1,1);
             return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
                 var state=checkFinish()
-                console.log(state)
                 if(state==true){
                     setTimeout(function() {
                         layer.alert("挑战成功！", { shade: false });
