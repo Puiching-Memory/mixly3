@@ -258,6 +258,8 @@ ArduShell.upload = (boardType, port) => {
     const code = editor.getCode();
     ArduShell.progressLayer.title(`${Msg.Lang['shell.uploading']}...`);
     mainStatusBarTabs.show();
+    ArduShell.progressLayer.title(`${Msg.Lang['shell.uploading']}...`);
+    ArduShell.progressLayer.show();
     statusBarTerminal.setValue(Msg.Lang['shell.uploading'] + "...\n");
     const configPath = path.join(ArduShell.shellPath, '../arduino-cli.json'),
     defaultLibPath = path.join(ArduShell.shellPath, '../libraries'),
