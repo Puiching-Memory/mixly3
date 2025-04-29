@@ -1,11 +1,13 @@
-import STATUS_BAR_IMAGE_TEMPLATE from '../templates/html/statusbar-image.html';
+import $ from 'jquery';
+import { Msg } from 'blockly/core';
 import {
     PageBase,
     HTMLTemplate,
     StatusBarsManager,
     Workspace
 } from 'mixly';
-import $ from 'jquery';
+import STATUS_BAR_IMAGE_TEMPLATE from '../templates/html/statusbar-image.html';
+
 
 class StatusBarImage extends PageBase {
     static {
@@ -18,7 +20,12 @@ class StatusBarImage extends PageBase {
             StatusBarsManager.typesRegistry.register(['images'], StatusBarImage);
             const mainWorkspace = Workspace.getMain();
             const statusBarsManager = mainWorkspace.getStatusBarsManager();
-            statusBarsManager.add('images', 'images', '图像');
+            statusBarsManager.add({
+                type: 'images',
+                id: 'images',
+                name: Msg.MIXLY_MICROBIT_IMAGE,
+                title: Msg.MIXLY_MICROBIT_IMAGE
+            });
             statusBarsManager.changeTo('output');
         }
     }

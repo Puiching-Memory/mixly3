@@ -83,7 +83,12 @@ class Workspace extends Component {
         this.#$dragVRight_ = $content.find('.drag-v-right');
         this.#$dragH_ = $content.find('.drag-h');
         this.#statusBarsManager_ = new StatusBarsManager($content.find('.statusbars')[0]);
-        this.#statusBarsManager_.add('terminal', 'output', Msg.Lang['statusbar.output']);
+        this.#statusBarsManager_.add({
+            type: 'terminal',
+            id: 'output',
+            name: Msg.Lang['statusbar.output'],
+            title: Msg.Lang['statusbar.output']
+        });
         this.#statusBarsManager_.changeTo('output');
         this.#editorsManager_ = new EditorsManager($content.find('.editors')[0]);
         this.#leftSideBarsManager_ = new LeftSideBarsManager($content.find('.left-sidebars')[0]);

@@ -105,10 +105,12 @@ class App extends Component {
         this.#nav_ = new Nav();
         this.#nav_.mountOn($content.find('.mixly-nav'));
         this.#workspace_ = new Workspace($content.find('.mixly-workspace')[0]);
-        this.#workspace_.getEditorsManager().getTabs().addTab({
+        const editorsManager = this.#workspace_.getEditorsManager();
+        editorsManager.add({
+            type: '.mix',
+            id: 'Untitled-1.mix',
             name: 'Untitled-1.mix',
             title: 'Untitled-1.mix',
-            type: '.mix',
             favicon: 'fileicon-mix'
         });
         this.#footerbar_ = new FooterBar();

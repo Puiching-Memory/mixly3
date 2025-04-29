@@ -1,11 +1,11 @@
-import * as Blockly from 'blockly/core';
+import $ from 'jquery';
+import { Msg } from 'blockly/core';
 import {
     PageBase,
     HTMLTemplate,
     StatusBarsManager,
     Workspace
 } from 'mixly';
-import $ from 'jquery';
 import '../language/loader';
 import STATUS_BAR_IMAGE_TEMPLATE from '../templates/html/statusbar-image.html';
 
@@ -21,7 +21,12 @@ export default class StatusBarImage extends PageBase {
             StatusBarsManager.typesRegistry.register(['images'], StatusBarImage);
             const mainWorkspace = Workspace.getMain();
             const statusBarsManager = mainWorkspace.getStatusBarsManager();
-            statusBarsManager.add('images', 'images', Blockly.Msg.PYTHON_PYODIDE_IMAGE);
+            statusBarsManager.add({
+                type: 'images',
+                id: 'images',
+                name: Msg.PYTHON_PYODIDE_IMAGE,
+                title: Msg.PYTHON_PYODIDE_IMAGE
+            });
             statusBarsManager.changeTo('output');
             return statusBarsManager.get('images');
         }

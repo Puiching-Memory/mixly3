@@ -200,7 +200,12 @@ class StatusBarsManager extends PagesManager {
                     isHtmlName: true,
                     name: ContextMenu.getItem(Msg.Lang['statusbar.ampy'], ''),
                     callback: (key, opt) => {
-                        this.add('ampy', 'ampy', Msg.Lang['statusbar.ampy'], '');
+                        this.add({
+                            type: 'ampy',
+                            id: 'ampy',
+                            name: Msg.Lang['statusbar.ampy'],
+                            title: Msg.Lang['statusbar.ampy']
+                        });
                         this.changeTo('ampy');
                     }
                 }

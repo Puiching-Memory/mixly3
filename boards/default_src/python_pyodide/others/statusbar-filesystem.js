@@ -41,7 +41,12 @@ export default class StatusBarFileSystem extends PageBase {
             StatusBarsManager.typesRegistry.register(['file-system'], StatusBarFileSystem);
             const mainWorkspace = Workspace.getMain();
             const statusBarsManager = mainWorkspace.getStatusBarsManager();
-            statusBarsManager.add('file-system', 'file-system', Blockly.Msg.PYTHON_PYODIDE_FILE_SYSTEM);
+            statusBarsManager.add({
+                type: 'file-system',
+                id: 'file-system',
+                name: Blockly.Msg.PYTHON_PYODIDE_FILE_SYSTEM,
+                title: Blockly.Msg.PYTHON_PYODIDE_FILE_SYSTEM
+            });
             statusBarsManager.changeTo('output');
             return statusBarsManager.get('file-system');
         }

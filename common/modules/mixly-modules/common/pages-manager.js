@@ -152,12 +152,19 @@ class PagesManager extends Component {
         return this.get(this.#activeId_);
     }
 
-    add(type, id, name = null, title = null, favicon = null) {
-        this.#tabs_.addTab({
-            name: name ?? id,
-            title: title ?? id,
-            type, favicon, id
-        });
+    add(...args) {
+        if (args[0] && typeof args[0] === 'object') {
+            this.#tabs_.addTab(args[0]);
+        } else {
+            const [type, id, name, title, favicon] = args;
+            this.#tabs_.addTab({
+                type,
+                id,
+                name: name ?? id,
+                title: title ?? id,
+                favicon
+            });
+        }
     }
 
     remove(id) {
