@@ -10,29 +10,43 @@ export const servo_move = function (_, generator) {
     var dropdown_pin = this.getFieldValue('PIN');
     var value_degree = generator.valueToCode(this, 'DEGREE', generator.ORDER_ATOMIC);
     var delay_time = generator.valueToCode(this, 'DELAY_TIME', generator.ORDER_ATOMIC) || '0'
-    generator.definitions_['include_ESP32_Servo'] = '#include <ESP32_Servo.h>';
-    generator.definitions_['var_declare_servo' + dropdown_pin] = 'Servo servo_' + dropdown_pin + ';';
-    generator.setups_['setup_servo_' + dropdown_pin] = 'servo_' + dropdown_pin + '.attach(' + dropdown_pin + ',500,2500);';
-    var code = 'servo_' + dropdown_pin + '.write(' + value_degree + ');\n' + 'delay(' + delay_time + ');\n';
+    generator.definitions_['include_ESP32Servo'] = '#include <ESP32Servo.h>';
+    generator.definitions_[`var_declare_servo_${dropdown_pin}`] = `Servo servo_${dropdown_pin};`;
+    generator.setups_['setup_servo'] = 'ESP32PWM::allocateTimer(0);\n'
+        + generator.INDENT + 'ESP32PWM::allocateTimer(1);\n'
+        + generator.INDENT + 'ESP32PWM::allocateTimer(2);\n'
+        + generator.INDENT + 'ESP32PWM::allocateTimer(3);\n';
+    generator.setups_[`setup_servo_${dropdown_pin}`] = `servo_${dropdown_pin}.setPeriodHertz(50);\n`
+        + generator.INDENT + `servo_${dropdown_pin}.attach(${dropdown_pin}, 500, 2500);`;
+    var code = `servo_${dropdown_pin}.write(${value_degree});\ndelay(${delay_time});\n`;
     return code;
 }
 
 export const servo_writeMicroseconds = function (_, generator) {
     var dropdown_pin = this.getFieldValue('PIN');
     var value_degree = generator.valueToCode(this, 'DEGREE', generator.ORDER_ATOMIC);
-    generator.definitions_['include_ESP32_Servo'] = '#include <ESP32_Servo.h>';
-    generator.definitions_['var_declare_servo' + dropdown_pin] = 'Servo servo_' + dropdown_pin + ';';
-    generator.setups_['setup_servo_' + dropdown_pin] = 'servo_' + dropdown_pin + '.attach(' + dropdown_pin + ');';
-    var code = 'servo_' + dropdown_pin + '.writeMicroseconds(' + value_degree + ');\n';
+    generator.definitions_['include_ESP32Servo'] = '#include <ESP32Servo.h>';
+    generator.definitions_[`var_declare_servo_${dropdown_pin}`] = `Servo servo_${dropdown_pin};`;
+    generator.setups_['setup_servo'] = 'ESP32PWM::allocateTimer(0);\n'
+        + generator.INDENT + 'ESP32PWM::allocateTimer(1);\n'
+        + generator.INDENT + 'ESP32PWM::allocateTimer(2);\n'
+        + generator.INDENT + 'ESP32PWM::allocateTimer(3);\n';
+    generator.setups_[`setup_servo_${dropdown_pin}`] = `servo_${dropdown_pin}.attach(${dropdown_pin});`;
+    var code = `servo_${dropdown_pin}.writeMicroseconds(${value_degree});\n`;
     return code;
 }
 
 export const servo_read_degrees = function (_, generator) {
     var dropdown_pin = this.getFieldValue('PIN');
-    generator.definitions_['include_ESP32_Servo'] = '#include <ESP32_Servo.h>';
-    generator.definitions_['var_declare_servo' + dropdown_pin] = 'Servo servo_' + dropdown_pin + ';';
-    generator.setups_['setup_servo_' + dropdown_pin] = 'servo_' + dropdown_pin + '.attach(' + dropdown_pin + ');';
-    var code = 'servo_' + dropdown_pin + '.read()';
+    generator.definitions_['include_ESP32Servo'] = '#include <ESP32Servo.h>';
+    generator.definitions_[`var_declare_servo_${dropdown_pin}`] = `Servo servo_${dropdown_pin};`;
+    generator.setups_['setup_servo'] = 'ESP32PWM::allocateTimer(0);\n'
+        + generator.INDENT + 'ESP32PWM::allocateTimer(1);\n'
+        + generator.INDENT + 'ESP32PWM::allocateTimer(2);\n'
+        + generator.INDENT + 'ESP32PWM::allocateTimer(3);\n';
+    generator.setups_[`setup_servo_${dropdown_pin}`] = `servo_${dropdown_pin}.setPeriodHertz(50);\n`
+        + generator.INDENT + `servo_${dropdown_pin}.attach(${dropdown_pin}, 500, 2500);`;
+    var code = `servo_${dropdown_pin}.read()`;
     return [code, generator.ORDER_ATOMIC];
 }
 
