@@ -139,7 +139,7 @@ export const DS1302_init = function (_, generator) {
     generator.definitions_['include_ThreeWire'] = '#include <ThreeWire.h>';
     generator.definitions_['include_RtcDS1302'] = '#include <RtcDS1302.h>';
     //generator.definitions_['var_declare_RtcDateTime_dt'] = 'const RtcDateTime dt;';
-    generator.definitions_['var_declare_ThreeWire'] = 'ThreeWire ' + 'myWire(' + dropdown_dat + ',' + dropdown_clk + ',' + dropdown_rst + ');';
+    generator.definitions_['var_declare_ThreeWire'] = 'ThreeWire ' + 'myWire(' + dropdown_dat + ', ' + dropdown_clk + ', ' + dropdown_rst + ');';
     generator.definitions_['var_declare_RtcDS1302'] = 'RtcDS1302<ThreeWire> Rtc(myWire);';
     generator.setups_['setup_Rtc.Begin'] = 'Rtc.Begin();\n  Rtc.SetIsRunning(true);';
     return "";
@@ -155,8 +155,7 @@ export const DS1307_init = function (_, generator) {
         generator.definitions_['include_SoftwareWire'] = '#include <SoftwareWire.h>';
         generator.definitions_['var_declare_SoftwareWire'] = 'SoftwareWire myWire(' + SDA + ',' + SCL + ');';
         generator.definitions_['var_declare_' + RTCType] = RTCType + '<SoftwareWire> Rtc(myWire);';
-    }
-    else {
+    } else {
         generator.definitions_['include_Wire'] = '#include <Wire.h>';
         generator.definitions_['var_declare_' + RTCType] = RTCType + '<TwoWire> Rtc(Wire);';
     }

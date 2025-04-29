@@ -58,6 +58,7 @@ import {
     ArduinoESP8266PinoutBlocks,
     ArduinoESP8266EthernetGenerators,
     ArduinoESP8266PinoutGenerators,
+    ArduinoESP8266SensorGenerators,
     ArduinoESP8266ZhHans,
     ArduinoESP8266ZhHant,
     ArduinoESP8266En
@@ -134,5 +135,6 @@ Object.assign(
     ArduinoAVRTextGenerators,
     ArduinoAVRToolsGenerators,
     ArduinoESP8266EthernetGenerators,
-    ArduinoESP8266PinoutGenerators
+    ArduinoESP8266PinoutGenerators,
+    ArduinoESP8266SensorGenerators
 );

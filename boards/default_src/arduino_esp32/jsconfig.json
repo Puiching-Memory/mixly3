@@ -8,6 +8,9 @@
             ],
             "@mixly/arduino-avr": [
                 "../arduino_avr"
+            ],
+            "@mixly/arduino-esp8266": [
+                "../arduino_esp8266"
             ]
         }
     },

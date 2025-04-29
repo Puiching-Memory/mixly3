@@ -1,3 +1,6 @@
+import { ArduinoESP8266SensorGenerators } from '@mixly/arduino-esp8266';
+
+
 export const chaoshengbo = function (_, generator) {
     var dropdown_pin1 = this.getFieldValue('PIN1');
     var dropdown_pin2 = this.getFieldValue('PIN2');
@@ -74,3 +77,5 @@ export const ESP_TCS34725_Get_RGB = function (_, generator) {
     const RGB = this.getFieldValue('TCS34725_COLOR');
     return ['getRGB(\'' + RGB + '\')', generator.ORDER_ATOMIC];
 }
+
+export const DS1307_init = ArduinoESP8266SensorGenerators.DS1307_init;

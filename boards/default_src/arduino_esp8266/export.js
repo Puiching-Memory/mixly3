@@ -3,6 +3,7 @@ import * as ArduinoESP8266EthernetBlocks from './blocks/ethernet';
 import * as ArduinoESP8266PinoutBlocks from './blocks/pinout';
 import * as ArduinoESP8266EthernetGenerators from './generators/ethernet';
 import * as ArduinoESP8266PinoutGenerators from './generators/pinout';
+import * as ArduinoESP8266SensorGenerators from './generators/sensor';
 
 import ArduinoESP8266ZhHans from './language/zh-hans';
 import ArduinoESP8266ZhHant from './language/zh-hant';
@@ -14,6 +15,7 @@ export {
     ArduinoESP8266PinoutBlocks,
     ArduinoESP8266EthernetGenerators,
     ArduinoESP8266PinoutGenerators,
+    ArduinoESP8266SensorGenerators,
     ArduinoESP8266ZhHans,
     ArduinoESP8266ZhHant,
     ArduinoESP8266En
