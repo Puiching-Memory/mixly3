@@ -192,6 +192,12 @@
           box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
 }
 
+.tippy-box > .tippy-content > .context-menu-list {
+    -webkit-box-shadow: unset;
+    box-shadow: unset;
+    border-radius: 0.25rem;
+}
+
 .context-menu-item {
   position: relative;
   -webkit-box-sizing: content-box;
@@ -240,6 +246,10 @@
 .context-menu-input.context-menu-hover {
   color: #2f2f2f; 
   cursor: pointer;
+}
+
+.context-menu-submenu.context-menu-hover:after {
+  border-color: transparent transparent transparent #fff;
 }
 
 .context-menu-submenu:after {
