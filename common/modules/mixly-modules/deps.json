@@ -634,16 +634,6 @@
         ]
     },
     {
-        "path": "/common/level-selector.js",
-        "require": [
-            "layui",
-            "Mixly.Msg"
-        ],
-        "provide": [
-            "Mixly.LevelSelector"
-        ]
-    },
-    {
         "path": "/common/loader.js",
         "require": [
             "path",
