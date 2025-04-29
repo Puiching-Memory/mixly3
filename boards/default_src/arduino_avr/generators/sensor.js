@@ -460,8 +460,7 @@ export const sensor_encoder_handle = function (_, generator) {
             cbFuncName += 'OnLowerOverflow';
     }
     generator.definitions_['function_' + cbFuncName] = `void ${cbFuncName}(ESPRotary& encoder${dropdownType}) {\n`
-        + `  ${statementsDo}`
-        + `}\n`;
+        + statementsDo + `}\n`;
     generator.setups_['setup_' + cbFuncName] = `encoder${dropdownType}.${dropdownOperateType}(${cbFuncName});`;
     var code = '';
     return code;
