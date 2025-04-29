@@ -802,6 +802,12 @@
     </block>
     <block type="tcs230_Get_RGB">
     </block>
+    <block type="MPU6050_update">
+    </block>
+    <block type="MPU6050">
+    </block>
+    <block type="mixgo_MPU9250">
+    </block>
     <block type="SHT20">
     </block>
     <block type="AHT20_21">
@@ -1066,12 +1072,6 @@
           </statement>
         </block>
       </statement>
-    </block>
-    <block type="MPU6050_update">
-    </block>
-    <block type="MPU6050">
-    </block>
-    <block type="mixgo_MPU9250">
     </block>
     <block type="PS2_init">
     </block>

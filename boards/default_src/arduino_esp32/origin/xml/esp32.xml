@@ -893,6 +893,12 @@
   </block>
   <block type="tcs230_Get_RGB">
   </block>
+  <block type="MPU6050_update">
+  </block>
+  <block type="MPU6050">
+  </block>
+  <block type="mixgo_MPU9250">
+  </block>
   <block type="SHT20">
   </block>
   <block type="ADXL345">
@@ -911,18 +917,35 @@
       </shadow>
     </value>
   </block>
-  <block type="MPU6050_update">
-  </block>
-  <block type="MPU6050">
-  </block>
-  <block type="mixgo_MPU9250">
-  </block>
   <block type="BME280_READ">
     <value name="address">
       <shadow type="math_number">
         <field name="NUM">0x77</field>
       </shadow>
     </value>
+  </block>
+  <block type="sensor_encoder_init">
+    <value name="CLK">
+      <shadow type="pins_digital">
+        <field name="PIN">2</field>
+      </shadow>
+    </value>
+    <value name="DT">
+      <shadow type="pins_digital">
+        <field name="PIN">3</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="sensor_encoder_get">
+  </block>
+  <block type="sensor_encoder_set">
+    <value name="DATA">
+      <shadow type="math_number">
+        <field name="NUM">0</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="sensor_encoder_handle">
   </block>
   <!--DS1302-->
   <block type="DS1302_init">
@@ -1091,35 +1114,71 @@
     </value>
   </block>
   <block type="get_keypad_num"></block>
+  <block type="gps_init">
+    <value name="RX">
+      <shadow type="pins_digital">
+        <field name="PIN">0</field>
+      </shadow>
+    </value>
+    <value name="TX">
+      <shadow type="pins_digital">
+        <field name="PIN">2</field>
+      </shadow>
+    </value>
+    <value name="CONTENT">
+      <shadow type="math_number">
+        <field name="NUM">4800</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="controls_whileUntil">
+    <field name="MODE">WHILE</field>
+    <value name="BOOL">
+      <block type="gps_data_available"></block>
+    </value>
+    <statement name="DO">
+      <block type="controls_if">
+        <value name="IF0">
+          <block type="gps_data_encode"></block>
+        </value>
+        <statement name="DO0">
+          <block type="controls_if">
+            <value name="IF0">
+              <block type="gps_xxx_isValid">
+                <field name="WHAT">location</field>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="serial_println">
+                <field name="serial_select">Serial</field>
+                <value name="CONTENT">
+                  <block type="gps_getData_xxx">
+                    <field name="WHAT">location.lat</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="serial_println">
+                    <field name="serial_select">Serial</field>
+                    <value name="CONTENT">
+                      <block type="gps_getData_xxx">
+                        <field name="WHAT">location.lng</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
   <block type="PS2_init">
   </block>
   <block type="PS2_update">
   </block>
   <block type="PS2_Button"></block>
   <block type="PS2_stk"></block>
-  <block type="sensor_encoder_init">
-    <value name="CLK">
-      <shadow type="pins_digital">
-        <field name="PIN">2</field>
-      </shadow>
-    </value>
-    <value name="DT">
-      <shadow type="pins_digital">
-        <field name="PIN">3</field>
-      </shadow>
-    </value>
-  </block>
-  <block type="sensor_encoder_get">
-  </block>
-  <block type="sensor_encoder_set">
-    <value name="DATA">
-      <shadow type="math_number">
-        <field name="NUM">0</field>
-      </shadow>
-    </value>
-  </block>
-  <block type="sensor_encoder_handle">
-  </block>
 </category>
 <category id="catActuator" colour="100">
   <block type="HR8833_Motor_Setup">

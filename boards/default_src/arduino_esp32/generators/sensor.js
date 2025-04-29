@@ -79,3 +79,15 @@ export const ESP_TCS34725_Get_RGB = function (_, generator) {
 }
 
 export const DS1307_init = ArduinoESP8266SensorGenerators.DS1307_init;
+
+export const gps_init = function (_, generator) {
+    generator.definitions_['include_TinyGPS++'] = '#include <TinyGPS++.h>';
+    generator.definitions_['include_HardwareSerial'] = '#include <HardwareSerial.h>';
+    var rx = generator.valueToCode(this, 'RX', generator.ORDER_ATOMIC);
+    var tx = generator.valueToCode(this, 'TX', generator.ORDER_ATOMIC);
+    var bt = generator.valueToCode(this, 'CONTENT', generator.ORDER_ATOMIC)
+    generator.definitions_['var_declare_TinyGPSPlus_gps'] = 'TinyGPSPlus gps;';
+    generator.definitions_['var_declare_gps_ss'] = 'HardwareSerial gps_ss(2);';
+    generator.setups_['setup_serial_gps_ss'] = `gps_ss.begin(${bt}, SERIAL_8N1, ${rx}, ${tx});`;
+    return '';
+}
