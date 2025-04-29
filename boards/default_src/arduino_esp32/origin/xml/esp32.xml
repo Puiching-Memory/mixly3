@@ -1037,6 +1037,60 @@
   </block>
   <block type="get_system_date_time">
   </block>
+  <block type="Arduino_keypad_4_4_start">
+    <value name="keypad_row">
+      <block type="keypad_row_data">
+        <value name="keypad_row_1">
+          <shadow type="pins_digital">
+            <field name="PIN">0</field>
+          </shadow>
+        </value>
+        <value name="keypad_row_2">
+          <shadow type="pins_digital">
+            <field name="PIN">2</field>
+          </shadow>
+        </value>
+        <value name="keypad_row_3">
+          <shadow type="pins_digital">
+            <field name="PIN">4</field>
+          </shadow>
+        </value>
+        <value name="keypad_row_4">
+          <shadow type="pins_digital">
+            <field name="PIN">5</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <value name="keypad_col">
+      <block type="keypad_col_data">
+        <value name="keypad_col_1">
+          <shadow type="pins_digital">
+            <field name="PIN">12</field>
+          </shadow>
+        </value>
+        <value name="keypad_col_2">
+          <shadow type="pins_digital">
+            <field name="PIN">13</field>
+          </shadow>
+        </value>
+        <value name="keypad_col_3">
+          <shadow type="pins_digital">
+            <field name="PIN">14</field>
+          </shadow>
+        </value>
+        <value name="keypad_col_4">
+          <shadow type="pins_digital">
+            <field name="PIN">15</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <value name="keypad_type">
+      <block type="keypad_type_data"></block>
+    </value>
+  </block>
+  <block type="get_keypad_num"></block>
   <block type="PS2_init">
   </block>
   <block type="PS2_update">
