@@ -611,6 +611,13 @@
       </shadow>
     </value>
   </block>
+  <block type="loop_array">
+    <value name="name">
+      <shadow type="math_number">
+        <field name="NUM">mylist</field>
+      </shadow>
+    </value>
+  </block>
   <block type="lists_array2_setup">
     <field name="lists_create_type">int</field>
     <field name="lists_create_name">mylist</field>
@@ -679,7 +686,7 @@
   <block type="create_array2_with_text">
     <value name="name">
       <shadow type="math_number">
-        <field name="NUM">array</field>
+        <field name="NUM">mylist</field>
       </shadow>
     </value>
     <value name="line">
@@ -701,7 +708,7 @@
   <block type="lists2SetValueByIndex">
     <value name="name">
       <shadow type="math_number">
-        <field name="NUM">array</field>
+        <field name="NUM">mylist</field>
       </shadow>
     </value>
     <value name="line">
@@ -723,7 +730,7 @@
   <block type="lists2GetValueByIndex">
     <value name="name">
       <shadow type="math_number">
-        <field name="NUM">array</field>
+        <field name="NUM">mylist</field>
       </shadow>
     </value>
     <value name="line">
@@ -734,13 +741,6 @@
     <value name="list">
       <shadow type="math_number">
         <field name="NUM">0</field>
-      </shadow>
-    </value>
-  </block>
-  <block type="loop_array">
-    <value name="name">
-      <shadow type="math_number">
-        <field name="NUM">array</field>
       </shadow>
     </value>
   </block>
@@ -893,6 +893,12 @@
   </block>
   <block type="tcs230_Get_RGB">
   </block>
+  <block type="MPU6050_update">
+  </block>
+  <block type="MPU6050">
+  </block>
+  <block type="mixgo_MPU9250">
+  </block>
   <block type="SHT20">
   </block>
   <block type="ADXL345">
@@ -911,12 +917,6 @@
       </shadow>
     </value>
   </block>
-  <block type="MPU6050_update">
-  </block>
-  <block type="MPU6050">
-  </block>
-  <block type="mixgo_MPU9250">
-  </block>
   <block type="BME280_READ">
     <value name="address">
       <shadow type="math_number">
@@ -924,12 +924,6 @@
       </shadow>
     </value>
   </block>
-  <block type="PS2_init">
-  </block>
-  <block type="PS2_update">
-  </block>
-  <block type="PS2_Button"></block>
-  <block type="PS2_stk"></block>
   <block type="sensor_encoder_init">
     <value name="CLK">
       <shadow type="pins_digital">
@@ -953,6 +947,238 @@
   </block>
   <block type="sensor_encoder_handle">
   </block>
+  <!--DS1302-->
+  <block type="DS1302_init">
+    <value name="RST">
+      <shadow type="pins_digital">
+        <field name="PIN">0</field>
+      </shadow>
+    </value>
+    <value name="DAT">
+      <shadow type="pins_digital">
+        <field name="PIN">1</field>
+      </shadow>
+    </value>
+    <value name="CLK">
+      <shadow type="pins_digital">
+        <field name="PIN">2</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="DS1307_init">
+    <value name="SDA">
+      <shadow type="pins_digital">
+        <field name="PIN">0</field>
+      </shadow>
+    </value>
+    <value name="SCL">
+      <shadow type="pins_digital">
+        <field name="PIN">1</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="RTC_get_time"></block>
+  <block type="RTC_time">
+    <value name="hour">
+      <shadow type="math_number">
+        <field name="NUM">8</field>
+      </shadow>
+    </value>
+    <value name="minute">
+      <shadow type="math_number">
+        <field name="NUM">0</field>
+      </shadow>
+    </value>
+    <value name="second">
+      <shadow type="math_number">
+        <field name="NUM">0</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="RTC_date">
+    <value name="year">
+      <shadow type="math_number">
+        <field name="NUM">2020</field>
+      </shadow>
+    </value>
+    <value name="month">
+      <shadow type="math_number">
+        <field name="NUM">1</field>
+      </shadow>
+    </value>
+    <value name="day">
+      <shadow type="math_number">
+        <field name="NUM">1</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="RTC_set_time">
+    <value name="date">
+      <shadow type="text">
+        <field name="TEXT">Jan/01/2020</field>
+      </shadow>
+      <block type="RTC_date">
+        <value name="year">
+          <shadow type="math_number">
+            <field name="NUM">2020</field>
+          </shadow>
+        </value>
+        <value name="month">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="day">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <value name="time">
+      <shadow type="text">
+        <field name="TEXT">12:34:56</field>
+      </shadow>
+      <block type="RTC_time">
+        <value name="hour">
+          <shadow type="math_number">
+            <field name="NUM">8</field>
+          </shadow>
+        </value>
+        <value name="minute">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="second">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+  </block>
+  <block type="get_system_date_time">
+  </block>
+  <block type="Arduino_keypad_4_4_start">
+    <value name="keypad_row">
+      <block type="keypad_row_data">
+        <value name="keypad_row_1">
+          <shadow type="pins_digital">
+            <field name="PIN">0</field>
+          </shadow>
+        </value>
+        <value name="keypad_row_2">
+          <shadow type="pins_digital">
+            <field name="PIN">2</field>
+          </shadow>
+        </value>
+        <value name="keypad_row_3">
+          <shadow type="pins_digital">
+            <field name="PIN">4</field>
+          </shadow>
+        </value>
+        <value name="keypad_row_4">
+          <shadow type="pins_digital">
+            <field name="PIN">5</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <value name="keypad_col">
+      <block type="keypad_col_data">
+        <value name="keypad_col_1">
+          <shadow type="pins_digital">
+            <field name="PIN">12</field>
+          </shadow>
+        </value>
+        <value name="keypad_col_2">
+          <shadow type="pins_digital">
+            <field name="PIN">13</field>
+          </shadow>
+        </value>
+        <value name="keypad_col_3">
+          <shadow type="pins_digital">
+            <field name="PIN">14</field>
+          </shadow>
+        </value>
+        <value name="keypad_col_4">
+          <shadow type="pins_digital">
+            <field name="PIN">15</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <value name="keypad_type">
+      <block type="keypad_type_data"></block>
+    </value>
+  </block>
+  <block type="get_keypad_num"></block>
+  <block type="gps_init">
+    <value name="RX">
+      <shadow type="pins_digital">
+        <field name="PIN">0</field>
+      </shadow>
+    </value>
+    <value name="TX">
+      <shadow type="pins_digital">
+        <field name="PIN">2</field>
+      </shadow>
+    </value>
+    <value name="CONTENT">
+      <shadow type="math_number">
+        <field name="NUM">4800</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="controls_whileUntil">
+    <field name="MODE">WHILE</field>
+    <value name="BOOL">
+      <block type="gps_data_available"></block>
+    </value>
+    <statement name="DO">
+      <block type="controls_if">
+        <value name="IF0">
+          <block type="gps_data_encode"></block>
+        </value>
+        <statement name="DO0">
+          <block type="controls_if">
+            <value name="IF0">
+              <block type="gps_xxx_isValid">
+                <field name="WHAT">location</field>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="serial_println">
+                <field name="serial_select">Serial</field>
+                <value name="CONTENT">
+                  <block type="gps_getData_xxx">
+                    <field name="WHAT">location.lat</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="serial_println">
+                    <field name="serial_select">Serial</field>
+                    <value name="CONTENT">
+                      <block type="gps_getData_xxx">
+                        <field name="WHAT">location.lng</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="PS2_init">
+  </block>
+  <block type="PS2_update">
+  </block>
+  <block type="PS2_Button"></block>
+  <block type="PS2_stk"></block>
 </category>
 <category id="catActuator" colour="100">
   <block type="HR8833_Motor_Setup">
@@ -2004,7 +2230,8 @@
       </block>
     </statement>
   </block>
-  <block type="serialBT_Init" m-show="esp32 node32s nodemcu-32s m5stick-c m5stack-core-esp32 m5stack-fire bpi-bit esp32cam">
+  <block type="serialBT_Init"
+    m-show="esp32 node32s nodemcu-32s m5stick-c m5stack-core-esp32 m5stack-fire bpi-bit esp32cam">
     <value name="CONTENT">
       <shadow type="text">
         <field name="TEXT">ESP32BT</field>
@@ -2096,7 +2323,7 @@
   <block type="i2c_slave_write_array">
     <value name="array">
       <shadow type="math_number">
-        <field name="NUM">array</field>
+        <field name="NUM">mylist</field>
       </shadow>
     </value>
     <value name="length">
