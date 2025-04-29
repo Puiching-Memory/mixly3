@@ -259,19 +259,14 @@ export const lists_array2_setup_get_data = function (_, generator) {
     return code1;
 }
 
+import FUNC_ARRAY_ROTATE_LOOP_TEMPLATE from '../templates/func-array-rotate-loop.c';
+
 // 一维数组循环
 export const loop_array = function (_, generator) {
-    var type = this.getFieldValue('TYPE');
     var mode = this.getFieldValue('mode');
     var name = generator.valueToCode(this, 'name', generator.ORDER_ATOMIC);
-    if (mode == 0) {
-        generator.definitions_['loop_array1'] = 'void array_left_loop() {\n  ' + type + ' item =0;\n  item = ' + name + '[(int)(0)];\n  for (int i = (2); i <= (sizeof(' + name + ')/sizeof(' + name + '[0])); i = i + (1)) {\n    ' + name + '[(int)((i - 1) - 1)] = ' + name + '[(int)(i - 1)];\n  }\n  ' + name + '[(int)(sizeof(' + name + ')/sizeof(' + name + '[0]) - 1)] = item;\n}\n';
-        var code = 'array_left_loop();\n';
-    }
-    if (mode == 1) {
-        generator.definitions_['loop_array'] = 'void array_right_loop() {\n  ' + type + ' item =0;\n  item = ' + name + '[(int)(sizeof(' + name + ')/sizeof(' + name + '[0]) - 1)];\n  for (int i = (sizeof(' + name + ')/sizeof(' + name + '[0])); i >= (1); i = i + (-1)) {\n    ' + name + '[(int)((i + 1) - 1)] = ' + name + '[(int)(i - 1)];\n  }\n  ' + name + '[(int)(0)] = item;\n}\n';
-        var code = 'array_right_loop();\n';
-    }
+    generator.definitions_['function_array_rotate_loop'] = FUNC_ARRAY_ROTATE_LOOP_TEMPLATE;
+    var code = `array_rotate_loop(${name}, sizeof(${name}[0]), sizeof(${name}) / sizeof(${name}[0]), ${mode});\n`;
     return code;
 }
 

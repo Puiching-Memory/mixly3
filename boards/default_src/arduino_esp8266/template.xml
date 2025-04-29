@@ -536,6 +536,13 @@
         </shadow>
       </value>
     </block>
+    <block type="loop_array">
+      <value name="name">
+        <shadow type="math_number">
+          <field name="NUM">mylist</field>
+        </shadow>
+      </value>
+    </block>
     <block type="lists_array2_setup">
       <field name="lists_create_type">int</field>
       <field name="lists_create_name">mylist</field>
@@ -604,7 +611,7 @@
     <block type="create_array2_with_text">
       <value name="name">
         <shadow type="math_number">
-          <field name="NUM">array</field>
+          <field name="NUM">mylist</field>
         </shadow>
       </value>
       <value name="line">
@@ -626,7 +633,7 @@
     <block type="lists2SetValueByIndex">
       <value name="name">
         <shadow type="math_number">
-          <field name="NUM">array</field>
+          <field name="NUM">mylist</field>
         </shadow>
       </value>
       <value name="line">
@@ -648,7 +655,7 @@
     <block type="lists2GetValueByIndex">
       <value name="name">
         <shadow type="math_number">
-          <field name="NUM">array</field>
+          <field name="NUM">mylist</field>
         </shadow>
       </value>
       <value name="line">
@@ -659,13 +666,6 @@
       <value name="list">
         <shadow type="math_number">
           <field name="NUM">0</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="loop_array">
-      <value name="name">
-        <shadow type="math_number">
-          <field name="NUM">array</field>
         </shadow>
       </value>
     </block>

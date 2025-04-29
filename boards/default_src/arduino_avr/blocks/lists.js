@@ -721,10 +721,9 @@ export const loop_array = {
     init: function () {
         this.appendValueInput("name")
             .setCheck(null)
-            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_CONTORL_GET_TYPE)
-            .appendField(new Blockly.FieldDropdown(DATATYPES), "TYPE")
             .appendField(Blockly.Msg.MIXLY_LIST_NAME);
         this.appendDummyInput()
+            .setAlign(Blockly.inputs.Align.RIGHT)
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.LEFT_CYCLE, "0"],
                 [Blockly.Msg.RIGHT_CYCLE, "1"]
@@ -732,7 +731,7 @@ export const loop_array = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(LISTS_HUE);
-        this.setTooltip(Blockly.Msg.LEFT_CYCLE + Blockly.Msg.LEFT_CYCLE1 + Blockly.Msg.RIGHT_CYCLE + Blockly.Msg.RIGHT_CYCLE1);
+        this.setTooltip('');
         this.setHelpUrl("");
     }
 };
