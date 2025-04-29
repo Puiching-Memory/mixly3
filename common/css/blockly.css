@@ -221,8 +221,9 @@
     margin: 0px 5px;
     border-radius: 5px;
     box-sizing: content-box;
-    padding: 0.2em 1em;
+    padding: 0.38em 1em;
     font-size: 13px;
+    line-height: 1;
     min-width: 9em;
 }
 
