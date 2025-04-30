@@ -189,6 +189,16 @@ function createWindow(filePath = null, indexUrl = null) {
         win.webContents.send('command', commandStr);
     });
 
+    //保存文件
+    electronLocalshortcut.register(win, 'CmdOrCtrl+S', () => {
+        const commandObj = {
+            obj: 'Mixly.Electron.File',
+            func: 'save'
+        }
+        const commandStr = JSON.stringify(commandObj);
+        win.webContents.send('command', commandStr);
+    });
+
     //新建文件
     electronLocalshortcut.register(win, 'CmdOrCtrl+N', () => {
         const commandObj = {
