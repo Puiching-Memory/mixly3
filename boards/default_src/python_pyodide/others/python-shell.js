@@ -1,6 +1,7 @@
 import * as Blockly from 'blockly/core';
 import * as path from 'path';
 import $ from 'jquery';
+import mixlySprite from './pixi-sprite';
 import {
     Workspace,
     Env,
@@ -213,7 +214,12 @@ export default class PythonShell {
         if (code.indexOf('import matplotlib.pyplot') !== -1) {
             code += '\nplt.clf()\n';
         }
-        this.#statusBarsManager_.changeTo('output');
+        mixlySprite.runit(this.#statusBarImage_.getContent()[0]);
+        if (code.indexOf('import sprite') !== -1 || code.indexOf('from sprite import') !== -1) {
+            this.#statusBarsManager_.changeTo('images');
+        } else {
+            this.#statusBarsManager_.changeTo('output');
+        }
         this.#statusBarsManager_.show();
         this.#statusBarTerminal_.setValue(`${Msg.Lang['shell.running']}...\n`);
         this.#running_ = true;

@@ -22,7 +22,8 @@
         "@basthon/kernel-loader": "^0.62.21",
         "@zenfs/core": "^1.4.0",
         "@zenfs/dom": "^1.0.6",
-        "idb-keyval": "^6.2.1"
+        "idb-keyval": "^6.2.1",
+        "pixi.js": "^3.0.8"
     },
     "main": "./export.js",
     "author": "Mixly Team",
