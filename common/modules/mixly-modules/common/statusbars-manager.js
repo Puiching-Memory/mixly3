@@ -86,6 +86,7 @@ class StatusBarsManager extends PagesManager {
 
     #shown_ = false;
     #dropdownMenu_ = null;
+    #$dropdownBtn_ = null;
 
     constructor(element) {
         const managerHTMLTemplate = HTMLTemplate.get('html/statusbar/statusbars-manager.html');
@@ -103,6 +104,7 @@ class StatusBarsManager extends PagesManager {
         this.tabId = tabHTMLTemplate.id;
         this.id = IdGenerator.generate();
         this.addEventsType(['show', 'hide', 'onSelectMenu', 'getMenu']);
+        this.#$dropdownBtn_ = $tab.find('.statusbar-dropdown-menu > button');
         $tab.find('.statusbar-close > button').click(() => this.hide());
         this.#addDropdownMenu_();
         this.#addEventsListener_();
@@ -146,7 +148,6 @@ class StatusBarsManager extends PagesManager {
     }
 
     #addDropdownMenu_() {
-        const selector = `div[m-id="${this.tabId}"] > .statusbar-dropdown-menu > .layui-btn`;
         let menu = new Menu();
         let serialChildMenu = new Menu(true);
         menu.add({
@@ -239,7 +240,7 @@ class StatusBarsManager extends PagesManager {
                 });
             }
         });
-        this.#dropdownMenu_ = new DropdownMenu(selector);
+        this.#dropdownMenu_ = new DropdownMenu(this.#$dropdownBtn_[0]);
         this.#dropdownMenu_.register('menu', menu);
         this.#dropdownMenu_.bind('getMenu', () => 'menu');
     }
@@ -277,6 +278,9 @@ class StatusBarsManager extends PagesManager {
 
     dispose() {
         StatusBarsManager.remove(this);
+        this.#dropdownMenu_.dispose();
+        this.#$dropdownBtn_.remove();
+        this.#$dropdownBtn_ = null;
         super.dispose();
     }
 }

@@ -190,6 +190,7 @@
         "path": "/common/dropdown-menu.js",
         "require": [
             "tippy",
+            "Mixly.IdGenerator",
             "Mixly.ContextMenu"
         ],
         "provide": [
