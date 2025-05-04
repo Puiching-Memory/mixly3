@@ -572,7 +572,7 @@ class App extends Component {
                 return true;
             },
             callback: (elem) => {
-                const href = 'https://gitee.com/mixly2/mixly2.0_src/issues';
+                const href = 'https://gitee.com/bnu_mixly/mixly3/issues';
                 Url.open(href);
             },
             scopeType: Nav.Scope.RIGHT,
