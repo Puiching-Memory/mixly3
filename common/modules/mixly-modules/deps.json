@@ -49,6 +49,7 @@
             "Mixly.Web.FS",
             "Mixly.Web.File",
             "Mixly.Web.Serial",
+            "Mixly.WebCompiler.ArduShell",
             "Mixly.WebSocket.File",
             "Mixly.WebSocket.Serial",
             "Mixly.WebSocket.ArduShell",
@@ -653,7 +654,8 @@
             "Mixly.API2",
             "Mixly.Electron.LibManager",
             "Mixly.Electron.File",
-            "Mixly.WebSocket.Socket"
+            "Mixly.WebCompiler.Loader",
+            "Mixly.WebSocket.Loader"
         ],
         "provide": [
             "Mixly.Loader"
@@ -917,6 +919,16 @@
             "Mixly.SideBarsManager",
             "Mixly.LeftSideBarsManager",
             "Mixly.RightSideBarsManager"
+        ]
+    },
+    {
+        "path": "/common/socket.js",
+        "require": [
+            "io",
+            "Mixly"
+        ],
+        "provide": [
+            "Mixly.Socket"
         ]
     },
     {
@@ -1556,7 +1568,6 @@
             "ESPTool",
             "AdafruitESPTool",
             "CryptoJS",
-            "AvrUploader",
             "Mixly.Env",
             "Mixly.LayerExt",
             "Mixly.Config",
@@ -1713,19 +1724,37 @@
         ]
     },
     {
-        "path": "/web-compiler/compiler.js",
+        "path": "/web-compiler/arduino-shell.js",
         "require": [
-            "Mixly.Url",
-            "Mixly.Config",
-            "Mixly.LayerExt",
+            "layui",
+            "avrbro",
+            "ESPTool",
+            "AdafruitESPTool",
+            "CryptoJS",
+            "dayjs.duration",
             "Mixly.Boards",
-            "Mixly.MFile",
+            "Mixly.Debug",
+            "Mixly.LayerExt",
             "Mixly.Msg",
-            "Mixly.Web.BU",
-            "Mixly.Web.Serial"
+            "Mixly.Workspace",
+            "Mixly.LayerProgress",
+            "Mixly.Web.Serial",
+            "Mixly.WebCompiler"
         ],
         "provide": [
-            "Mixly.WebCompiler.Compiler"
+            "Mixly.WebCompiler.ArduShell"
+        ]
+    },
+    {
+        "path": "/web-compiler/loader.js",
+        "require": [
+            "Mixly.Debug",
+            "Mixly.StatusBarsManager",
+            "Mixly.Socket",
+            "Mixly.WebCompiler.ArduShell"
+        ],
+        "provide": [
+            "Mixly.WebCompiler.Loader"
         ]
     },
     {
@@ -1812,6 +1841,21 @@
         ]
     },
     {
+        "path": "/web-socket/loader.js",
+        "require": [
+            "Mixly.Debug",
+            "Mixly.StatusBarsManager",
+            "Mixly.Socket",
+            "Mixly.WebSocket.Serial",
+            "Mixly.WebSocket.ArduShell",
+            "Mixly.WebSocket.BU",
+            "Mixly.WebSocket.Ampy"
+        ],
+        "provide": [
+            "Mixly.WebSocket.Loader"
+        ]
+    },
+    {
         "path": "/web-socket/serial.js",
         "require": [
             "Mixly.Serial",
@@ -1826,24 +1870,8 @@
         ]
     },
     {
-        "path": "/web-socket/socket.js",
-        "require": [
-            "Mixly.Debug",
-            "Mixly.StatusBarsManager",
-            "Mixly.WebSocket",
-            "Mixly.WebSocket.Serial",
-            "Mixly.WebSocket.ArduShell",
-            "Mixly.WebSocket.BU",
-            "Mixly.WebSocket.Ampy"
-        ],
-        "provide": [
-            "Mixly.WebSocket.Socket"
-        ]
-    },
-    {
         "path": "/web-socket/web-socket.js",
         "require": [
-            "io",
             "Mixly"
         ],
         "provide": [

@@ -1,6 +1,10 @@
 goog.loadJs('web', () => {
 
 goog.require('layui');
+goog.require('avrbro');
+goog.require('ESPTool');
+goog.require('AdafruitESPTool');
+goog.require('CryptoJS');
 goog.require('dayjs.duration');
 goog.require('Mixly.Boards');
 goog.require('Mixly.Debug');
@@ -8,8 +12,9 @@ goog.require('Mixly.LayerExt');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Workspace');
 goog.require('Mixly.LayerProgress');
-goog.require('Mixly.WebSocket.Serial');
-goog.provide('Mixly.WebSocket.ArduShell');
+goog.require('Mixly.Web.Serial');
+goog.require('Mixly.WebCompiler');
+goog.provide('Mixly.WebCompiler.ArduShell');
 
 const {
     Boards,
@@ -18,15 +23,25 @@ const {
     Msg,
     Workspace,
     LayerProgress,
-    WebSocket
+    Web,
+    WebCompiler
 } = Mixly;
 
-const { Serial } = WebSocket;
-
+const { Serial } = Web;
 const { layer } = layui;
+const { ESPLoader, Transport } = ESPTool;
 
 
-class WebSocketArduShell {
+function hexToBinaryString (hex) {
+  let binaryString = '';
+  for (let i = 0; i < hex.length; i += 2) {
+    const byte = parseInt(hex.substr(i, 2), 16);
+    binaryString += String.fromCharCode(byte);
+  }
+  return binaryString;
+}
+
+class WebCompilerArduShell {
     static {
         this.mixlySocket = null;
         this.socket = null;
@@ -43,7 +58,7 @@ class WebSocketArduShell {
         this.init = function (mixlySocket) {
             this.mixlySocket = mixlySocket;
             this.socket = mixlySocket.getSocket();
-            this.shell = new WebSocketArduShell();
+            this.shell = new WebCompilerArduShell();
             const socket = this.socket;
 
             socket.on('arduino.dataEvent', (data) => {
@@ -83,6 +98,7 @@ class WebSocketArduShell {
             statusBarTerminal.setValue(`${Msg.Lang['shell.compiling']}...\n`);
             this.shell.compile(code)
                 .then((info) => {
+                    console.log(info)
                     this.endCallback(info.code, info.time);
                 })
                 .catch((error) => {
@@ -191,7 +207,7 @@ class WebSocketArduShell {
             this.showProgress();
             const key = Boards.getSelectedBoardCommandParam();
             const config = { key, code };
-            const mixlySocket = WebSocketArduShell.getMixlySocket();
+            const mixlySocket = WebCompilerArduShell.getMixlySocket();
             mixlySocket.emit('arduino.compile', config, (response) => {
                 this.hideProgress();
                 if (response.error) {
@@ -215,27 +231,137 @@ class WebSocketArduShell {
             this.#killing_ = false;
             this.showProgress();
             const key = Boards.getSelectedBoardCommandParam();
-            const config = { key, code, port };
-            const mixlySocket = WebSocketArduShell.getMixlySocket();
-            mixlySocket.emit('arduino.upload', config, (response) => {
-                this.hideProgress();
+            const config = { key, code };
+            const mixlySocket = WebCompilerArduShell.getMixlySocket();
+            mixlySocket.emit('arduino.upload', config, async (response) => {
                 if (response.error) {
+                    this.hideProgress();
                     reject(response.error);
                     return;
                 }
                 const [error, result] = response;
                 if (error) {
+                    this.hideProgress();
                     reject(error);
-                } else {
-                    resolve(result);
+                    return;
                 }
+                if (result.code !== 0) {
+                    this.hideProgress();
+                    resolve(result);
+                    return;
+                }
+                const { files } = result;
+                try {
+                    const keys = Boards.getSelectedBoardKey().split(':');
+                    if (`${keys[0]}:${keys[1]}` === 'arduino:avr') {
+                        await this.uploadWithAvrbro(port, files);
+                    } else {
+                        await this.uploadWithEsptool(port, files);
+                    }
+                } catch (error) {
+                    this.hideProgress();
+                    reject(error);
+                    return;
+                }
+                this.hideProgress();
+                result.files = null;
+                resolve(result);
             });
         });
     }
 
+    async uploadWithEsptool(port, files) {
+        console.log(port, files)
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+        let esploader = null;
+        let transport = null;
+        let baudrate = 115200;
+        let eraseAll = true;
+        try {
+            const keys = Boards.getSelectedBoardKey().split(':');
+            if (`${keys[0]}:${keys[1]}` === 'esp32:esp32') {
+                baudrate = Boards.getSelectedBoardConfigParam('UploadSpeed');
+                eraseAll = Boards.getSelectedBoardConfigParam('EraseFlash') === 'all';
+            } else {
+                baudrate = Boards.getSelectedBoardConfigParam('baud');
+                eraseAll = Boards.getSelectedBoardConfigParam('wipe') === 'all';
+            }
+            transport = new Transport(Serial.getPort(port), false);
+            esploader = new ESPLoader({
+                transport,
+                baudrate,
+                terminal: {
+                    clean() {},
+                    writeLine(data) {
+                        statusBarTerminal.addValue(data + '\n');
+                    },
+                    write(data) {
+                        statusBarTerminal.addValue(data);
+                    }
+                }
+            });
+            let chip = await esploader.main();
+        } catch (error) {
+            await transport.disconnect();
+            throw new Error(error);
+        }
+        let data = [];
+        statusBarTerminal.addValue("\n");
+        for (let file of files) {
+            if (file.data && file.offset) {
+                data.push({
+                    address: parseInt(file.offset, 16),
+                    data: hexToBinaryString(file.data)
+                });
+            }
+        }
+        const flashOptions = {
+            fileArray: data,
+            flashSize: 'keep',
+            eraseAll,
+            compress: true,
+            calculateMD5Hash: (image) => CryptoJS.MD5(CryptoJS.enc.Latin1.parse(image))
+        };
+        try {
+            await esploader.writeFlash(flashOptions);
+            await transport.setDTR(false);
+            await new Promise((resolve) => setTimeout(resolve, 100));
+            await transport.setDTR(true);
+            await transport.disconnect();
+        } catch (error) {
+            await transport.disconnect();
+            throw new Error(error);
+        }
+    }
+
+    async uploadWithAvrbro(port, files) {
+        const key = Boards.getSelectedBoardKey();
+        const boardId = key.split(':')[2];
+        let boardName = '';
+        if (boardId === 'uno') {
+            boardName = 'uno';
+        } else if (boardId === 'nano') {
+            const cpu = Boards.getSelectedBoardConfigParam('cpu');
+            if (cpu === 'atmega328old') {
+                boardName = 'nano';
+            } else {
+                boardName = 'nano (new bootloader)';
+            }
+        } else if (boardId === 'pro') {
+            boardName = 'pro-mini';
+        } else if (boardId === 'mega') {
+            boardName = 'mega';
+        } else if (boardId === 'leonardo') {
+            boardName = 'leonardo';
+        }
+        const buffer = avrbro.parseHex(files[0].data);
+        await avrbro.flash(Serial.getPort(port), buffer, { boardName });
+    }
+
     async kill() {
         return new Promise(async (resolve, reject) => {
-            const mixlySocket = WebSocketArduShell.getMixlySocket();
+            const mixlySocket = WebCompilerArduShell.getMixlySocket();
             mixlySocket.emit('arduino.kill', (response) => {
                 if (response.error) {
                     reject(response.error);
@@ -270,6 +396,6 @@ class WebSocketArduShell {
     }
 }
 
-WebSocket.ArduShell = WebSocketArduShell;
+WebCompiler.ArduShell = WebCompilerArduShell;
 
 });

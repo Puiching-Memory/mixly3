@@ -2,21 +2,22 @@ goog.loadJs('web', () => {
 
 goog.require('Mixly.Debug');
 goog.require('Mixly.StatusBarsManager');
-goog.require('Mixly.WebSocket');
+goog.require('Mixly.Socket');
 goog.require('Mixly.WebSocket.Serial');
 goog.require('Mixly.WebSocket.ArduShell');
 goog.require('Mixly.WebSocket.BU');
 goog.require('Mixly.WebSocket.Ampy');
-goog.provide('Mixly.WebSocket.Socket');
+goog.provide('Mixly.WebSocket.Loader');
 
 const {
     Debug,
     StatusBarsManager,
+    Socket,
     WebSocket
 } = Mixly;
 
 const {
-    Socket,
+    Loader,
     Serial,
     ArduShell,
     BU,
@@ -24,8 +25,8 @@ const {
 } = WebSocket;
 
 
-Socket.init = function () {
-    const mixlySocket = new WebSocket('wss://127.0.0.1:4000', {
+Loader.init = function () {
+    const mixlySocket = new Socket(`wss://${location.hostname}:4000/all`, {
         path: '/mixly-socket/',
         reconnection: true,
         reconnectionDelayMax: 10000,

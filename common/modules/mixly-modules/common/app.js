@@ -27,6 +27,7 @@ goog.require('Mixly.Web.BU');
 goog.require('Mixly.Web.FS');
 goog.require('Mixly.Web.File');
 goog.require('Mixly.Web.Serial');
+goog.require('Mixly.WebCompiler.ArduShell');
 goog.require('Mixly.WebSocket.File');
 goog.require('Mixly.WebSocket.Serial');
 goog.require('Mixly.WebSocket.ArduShell');
@@ -49,6 +50,7 @@ const {
     EditorMix,
     Electron = {},
     Web = {},
+    WebCompiler = {},
     WebSocket = {}
 } = Mixly;
 
@@ -70,11 +72,17 @@ const {
     FS,
     File,
     LibManager,
-    ArduShell,
     BU,
     PythonShell,
     Serial
 } = currentObj;
+
+let ArduShell = null;
+if (!goog.isElectron && Env.hasCompiler) {
+    ArduShell = WebCompiler.ArduShell;
+} else {
+    ArduShell = currentObj.ArduShell;
+}
 
 const { BOARD, SELECTED_BOARD } = Config;
 

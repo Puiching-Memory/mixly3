@@ -128,8 +128,8 @@
         "provide": ["PouchDB"],
         "require": []
     }, {
-        "path": "modules/web-modules/avr-uploader.min.js",
-        "provide": ["AvrUploader"],
+        "path": "modules/web-modules/avrbro.min.js",
+        "provide": ["avrbro"],
         "require": []
     }, {
         "path": "modules/web-modules/microbit/microbit-fs.umd.min.js",
