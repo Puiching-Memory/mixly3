@@ -1441,6 +1441,7 @@
     {
         "path": "/electron/loader.js",
         "require": [
+            "path",
             "Mixly.Url",
             "Mixly.Config",
             "Mixly.Env",
