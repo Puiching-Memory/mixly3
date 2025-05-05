@@ -146,6 +146,11 @@
     box-sizing: unset;
 }
 
+.classic-theme.thrasos-renderer .blocklyMenu > .blocklyMenuItem {
+    background-color: #fff;
+    color: #2f2f2f;
+}
+
 .classic-theme.geras-renderer .blocklyMenu > .blocklyMenuItem {
     background-color: #fff;
     color: #2f2f2f;
@@ -183,6 +188,12 @@
     background: #252525;
     border: 1px solid #454545;
     box-sizing: unset;
+}
+
+.dark-theme.thrasos-renderer .blocklyMenu > .blocklyMenuItem {
+    background-color: #252525;
+    color: #eee;
+    font-family: "Lato", "Noto Sans SC";
 }
 
 .dark-theme.geras-renderer .blocklyMenu > .blocklyMenuItem {
@@ -232,5 +243,9 @@
 }
 
 .geras-renderer.dark-theme .blocklyText {
+    color: #000;
+}
+
+.thrasos-renderer.dark-theme .blocklyText {
     color: #000;
 }
