@@ -661,7 +661,7 @@ class App extends Component {
         if (goog.isElectron) {
             Loader.onbeforeunload();
         } else {
-            let href = Env.srcDirPath + 'index.html?' + Url.jsonToUrl({ boardType: BOARD.boardType });
+            let href = Env.srcDirPath + '/index.html?' + Url.jsonToUrl({ boardType: BOARD.boardType });
             window.location.replace(href);
         }
     }
