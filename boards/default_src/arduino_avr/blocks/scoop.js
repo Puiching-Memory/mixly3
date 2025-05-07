@@ -15,7 +15,7 @@ export const SCoopTask = {
             .setCheck(null);
         this.setColour(SCOOP_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SCOOP);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#scoop-task");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/02Control.html#scoop-task");
     },
     NUMBER: [
         ["1", "1"],
@@ -37,7 +37,7 @@ export const SCoop_yield = {
         this.setPreviousStatement(false, null);
         this.setNextStatement(false, null);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SCOOP_YIELD);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#scoop-task");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/02Control.html#scoop-task");
     }
 };
 

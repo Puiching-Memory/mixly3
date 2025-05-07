@@ -49,7 +49,7 @@ export const inout_digital_write2 = {
         this.setNextStatement(true, null);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.LANG_INOUT_DIGITAL_WRITE_TOOLTIP);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id2");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/01Input-Output.html#id2");
     }
 };
 
@@ -61,7 +61,7 @@ export const inout_digital_read = {
             .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN");
         this.setOutput(true, [Boolean, Number]);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_DIGITAL_READ);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id7");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/01Input-Output.html#id6");
     }
 };
 
@@ -74,7 +74,7 @@ export const inout_digital_read2 = {
         this.setInputsInline(true);
         this.setOutput(true, [Boolean, Number]);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_DIGITAL_READ);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id19");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/01Input-Output.html#id6");
     }
 };
 
@@ -91,7 +91,7 @@ export const inout_analog_write = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_ANALOG_WRITE);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id13");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/01Input-Output.html#id16");
     }
 };
 
@@ -104,7 +104,7 @@ export const inout_analog_read = {
         this.setInputsInline(true);
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_ANALOG_READ);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id13");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/01Input-Output.html#id11");
     }
 };
 
@@ -166,7 +166,7 @@ export const controls_attachInterrupt = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_ATTACHINTERRUPT);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id25");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/01Input-Output.html#id20");
     }
 };
 
@@ -180,7 +180,7 @@ export const controls_detachInterrupt = {
         this.setNextStatement(true);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_DETACHINTERRUPT);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id30");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/01Input-Output.html#id24");
     }
 };
 
@@ -231,7 +231,7 @@ export const inout_pulseIn = {
             ]), "STAT");
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_pulseIn);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id33");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/01Input-Output.html#id27");
     }
 };
 
@@ -253,7 +253,7 @@ export const inout_pulseIn2 = {
         this.setInputsInline(true);
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_pulseIn2);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id33");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/01Input-Output.html#id27");
     }
 };
 
@@ -281,7 +281,7 @@ export const inout_shiftout = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_shiftout);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#shiftout");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/01Input-Output.html#shiftout");
     }
 };
 

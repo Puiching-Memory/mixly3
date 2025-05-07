@@ -9,7 +9,7 @@ export const base_setup = {
         this.appendStatementInput("DO").appendField("");
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_SETUP);
         this.setHelpUrl(
-            "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id2"
+            "https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/02Control.html#id2"
         );
     }
 };
@@ -26,7 +26,7 @@ export const controls_delay = {
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_DELAY);
         this.setHelpUrl(
-            "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id9"
+            "https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/02Control.html#id9"
         );
     },
     UNIT: [
@@ -58,7 +58,7 @@ export const controls_for = {
         this.setNextStatement(true);
         this.setInputsInline(true);
         this.setHelpUrl(
-            "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id2"
+            "https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/02Control.html#for"
         );
         var thisBlock = this;
         this.setTooltip(function () {
@@ -90,7 +90,7 @@ export const controls_whileUntil = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setHelpUrl(
-            "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#while"
+            "https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/02Control.html#while"
         );
         var thisBlock = this;
         this.setTooltip(function () {
@@ -193,7 +193,7 @@ export const controls_if = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setHelpUrl(
-            "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#if"
+            "https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/02Control.html#if"
         );
         this.setMutator(
             new Blockly.icons.MutatorIcon(
@@ -535,7 +535,7 @@ export const controls_switch_case = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setHelpUrl(
-            "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#switch"
+            "https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/02Control.html#switch"
         );
         this.setMutator(
             new Blockly.icons.MutatorIcon(["controls_case", "controls_default"], this)
@@ -743,7 +743,7 @@ export const controls_mstimer2 = {
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_MSTIMER2);
         this.setHelpUrl(
-            "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#MsTimer2"
+            "https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/02Control.html#mstimer2"
         );
     }
 };
@@ -757,7 +757,7 @@ export const controls_mstimer2_start = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setHelpUrl(
-            "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id45"
+            "https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/02Control.html#id36"
         );
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_MSTIMER2_START);
     }
@@ -773,7 +773,7 @@ export const controls_mstimer2_stop = {
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_MSTIMER2_STOP);
         this.setHelpUrl(
-            "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id48"
+            "https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/02Control.html#id38"
         );
     }
 };
@@ -808,7 +808,7 @@ export const controls_interrupts = {
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_ALLOW_INTERRUPT);
         this.setHelpUrl(
-            "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id51"
+            "https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/02Control.html#id43"
         );
     }
 };
@@ -822,7 +822,7 @@ export const controls_nointerrupts = {
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_CONTROL_NOINTERRUPTS);
         this.setHelpUrl(
-            "https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id55"
+            "https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/02Control.html#id46"
         );
     }
 };
@@ -844,7 +844,7 @@ export const simple_timer = {
             .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
         this.setColour(120);
         this.setTooltip();
-        this.setHelpUrl("");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/02Control.html#id40");
     },
     NUMBER: [
         ["1", "1"],
