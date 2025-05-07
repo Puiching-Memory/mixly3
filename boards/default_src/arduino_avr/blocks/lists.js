@@ -448,6 +448,7 @@ export const lists_length = {
             .appendField(new Blockly.FieldTextInput('mylist'), 'VAR');
         this.setTooltip(Blockly.Msg.LISTS_LENGTH_TOOLTIP);
         this.setOutput(true, Number);
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/06Lists.html#mylist");
     }
 };
 
@@ -472,7 +473,7 @@ export const create_array2_with_text = {
             .appendField(Blockly.Msg.MIXLY_ESP32_SET);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setHelpUrl("");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/06Lists.html#array");
     }
 };
 
@@ -514,7 +515,7 @@ export const get_array2_value = {
             .appendField('(' + Blockly.Msg.MIXLY_DEPRECATED + ')');
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setHelpUrl("");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/06Lists.html#arraymn");
         this.setWarningText(Blockly.Msg.MIXLY_DEPRECATED_WARNING_TEXT);
     }
 };
@@ -535,7 +536,7 @@ export const lists2SetValueByIndex = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-        this.setHelpUrl("");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/06Lists.html#mn");
         this.setTooltip(Blockly.Msg.LANG_LISTS_SET_VALUE_BY_INDEX_TOOLTIP);
     }
 };
@@ -553,7 +554,7 @@ export const lists2GetValueByIndex = {
             .appendField(Blockly.Msg.DATAFRAME_COLUMN);
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setHelpUrl("");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/06Lists.html#arraymn");
         this.setTooltip(Blockly.Msg.LANG_LISTS_GET_VALUE_BY_INDEX_TOOLTIP);
     }
 };

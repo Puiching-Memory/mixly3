@@ -271,7 +271,7 @@ export const substring = {
         this.setOutput(true, null);
         this.setColour(TEXTS_HUE);
         this.setTooltip(Blockly.Msg.SUBSTRING_HELP);
-        this.setHelpUrl("");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/05Text.html#id13");
     }
 };
 
@@ -291,7 +291,7 @@ export const letter_conversion = {
         this.setNextStatement(true, null);
         this.setColour(TEXTS_HUE);
         this.setTooltip(Blockly.Msg.LETTER_CONVERSION_HELP);
-        this.setHelpUrl("");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/05Text.html#id19");
     }
 };
 
@@ -312,7 +312,7 @@ export const data_replacement = {
         this.setNextStatement(true, null);
         this.setColour(TEXTS_HUE);
         this.setTooltip(Blockly.Msg.DATA_REPLACEMENT_HELP);
-        this.setHelpUrl("");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/05Text.html#id23");
     }
 };
 
@@ -328,7 +328,7 @@ export const eliminate = {
         this.setNextStatement(true, null);
         this.setColour(TEXTS_HUE);
         this.setTooltip(Blockly.Msg.ELIMINATE_HELP);
-        this.setHelpUrl("");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/05Text.html#id27");
     }
 };
 
@@ -349,7 +349,7 @@ export const first_and_last = {
         this.setOutput(true, null);
         this.setColour(TEXTS_HUE);
         this.setTooltip(Blockly.Msg.FIRST_AND_LAST_HELP);
-        this.setHelpUrl("");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/05Text.html#id31");
     }
 };
 
