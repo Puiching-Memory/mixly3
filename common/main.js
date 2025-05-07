@@ -265,4 +265,31 @@ LazyLoad.js([
     goog.initDependencies();
     goog.require('Mixly.Loader');
 
+    // 主页面 鼠标滚轮翻页
+    let lastWheelTime = 0;
+    window.addEventListener('wheel', (event) => {
+        if (goog.VIEW !== 'home') return; // 仅在主页面生效
+        if (event.timeStamp - lastWheelTime < 200) return; // 添加节流 防止滚动过快性能开销过大
+        lastWheelTime = event.timeStamp;
+        const subButton = document.querySelector('.layui-icon.layui-carousel-arrow[lay-type="sub"]');
+        const addButton = document.querySelector('.layui-icon.layui-carousel-arrow[lay-type="add"]');
+    
+        // debug:记录滚动信息到控制台
+        // console.log('鼠标滚轮事件:', {
+        //     page:goog.VIEW,
+        //     deltaY: event.deltaY,
+        //     deltaX: event.deltaX,
+        //     deltaZ: event.deltaZ,
+        //     deltaMode: event.deltaMode,
+        //     timestamp: event.timeStamp
+        // });
+        
+        if (event.deltaY > 0) {
+            addButton?.click();
+        }
+        else {
+            subButton?.click();
+        }
+    });
+
 });
