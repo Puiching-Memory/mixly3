@@ -18,9 +18,11 @@
         }
     },
     "webSocket": {
+        "url": "",
         "enabled": false
     },
     "webCompiler": {
+        "url": "",
         "enabled": false
     },
     "behaviorRecord": {

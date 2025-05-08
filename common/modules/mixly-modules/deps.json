@@ -1750,6 +1750,7 @@
         "path": "/web-compiler/loader.js",
         "require": [
             "Mixly.Debug",
+            "Mixly.Config",
             "Mixly.StatusBarsManager",
             "Mixly.Socket",
             "Mixly.WebCompiler.ArduShell"
@@ -1845,6 +1846,7 @@
         "path": "/web-socket/loader.js",
         "require": [
             "Mixly.Debug",
+            "Mixly.Config",
             "Mixly.StatusBarsManager",
             "Mixly.Socket",
             "Mixly.WebSocket.Serial",
