@@ -23,7 +23,7 @@ export const logic_compare = {
             ['>', 'GT'],
             ['\u2265', 'GTE']
         ];
-        //this.setHelpUrl(Blockly.Msg.LOGIC_COMPARE_HELPURL);
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/04Logic.html#id2");
         this.setColour(LOGIC_HUE);
         this.setOutput(true, Boolean);
         this.appendValueInput('A');
@@ -58,7 +58,7 @@ export const logic_operation = {
             [Blockly.Msg.LOGIC_OPERATION_AND, 'AND'],
             [Blockly.Msg.LOGIC_OPERATION_OR, 'OR']
         ];
-        //this.setHelpUrl(Blockly.Msg.LOGIC_OPERATION_HELPURL);
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/04Logic.html#id12");
         this.setColour(LOGIC_HUE);
         this.setOutput(true, Boolean);
         this.appendValueInput('A')
@@ -144,5 +144,6 @@ export const logic_true_or_false = {
         this.setOutput(true);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_LOGIT_TRUEORFALSE);
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/04Logic.html#id17");
     }
 };

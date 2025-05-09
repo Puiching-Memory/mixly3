@@ -167,11 +167,11 @@ function createWindow(filePath = null, indexUrl = null) {
 
     //打开帮助页面
     electronLocalshortcut.register(win, 'CmdOrCtrl+H', () => {
-        var sendObj = {};
-        sendObj.type = "help";
-        var sendStr = JSON.stringify(sendObj);
-        win.webContents.send('ping', sendStr);
-        //win.webContents.executeJavaScript('alert("this is a test!");');
+        const winHelp = new BrowserWindow({ parent: win });
+        //打开子窗口
+        winHelp.loadURL("https://mixly.readthedocs.io/zh-cn/latest/contents.html");
+        //直接调用系统默认浏览器打开
+        //shell.openExternal("https://mixly.readthedocs.io/zh-cn/latest/contents.html")
     });
 
     //创建一个新页面
