@@ -233,7 +233,7 @@
         "require": []
     }, {
         "path": "modules/web-modules/esptool.min.js",
-        "provide": ["ESPTool"],
+        "provide": ["esptooljs"],
         "require": []
     }, {
         "path": "modules/web-modules/adafruit-esptool/index.js",

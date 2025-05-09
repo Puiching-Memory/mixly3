@@ -1566,7 +1566,7 @@
             "FSWrapper",
             "DAPWrapper",
             "PartialFlashing",
-            "ESPTool",
+            "esptooljs",
             "AdafruitESPTool",
             "CryptoJS",
             "Mixly.Env",
@@ -1729,7 +1729,7 @@
         "require": [
             "layui",
             "avrbro",
-            "ESPTool",
+            "esptooljs",
             "AdafruitESPTool",
             "CryptoJS",
             "dayjs.duration",
