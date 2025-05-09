@@ -5,7 +5,7 @@ goog.require('BoardId');
 goog.require('FSWrapper');
 goog.require('DAPWrapper');
 goog.require('PartialFlashing');
-goog.require('ESPTool');
+goog.require('esptooljs');
 goog.require('AdafruitESPTool');
 goog.require('CryptoJS');
 goog.require('Mixly.Env');
@@ -51,7 +51,7 @@ const { BOARD, SELECTED_BOARD } = Config;
 const {
     ESPLoader,
     Transport
-} = ESPTool;
+} = esptooljs;
 
 BU.uploading = false;
 BU.burning = false;
@@ -332,6 +332,9 @@ BU.burnWithEsptool = async (binFile, erase) => {
     };
     try {
         await esploader.writeFlash(flashOptions);
+        await transport.setDTR(false);
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        await transport.setDTR(true);
         BU.progressLayer.hide();
         layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
         statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);

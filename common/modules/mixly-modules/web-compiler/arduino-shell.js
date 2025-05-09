@@ -2,7 +2,7 @@ goog.loadJs('web', () => {
 
 goog.require('layui');
 goog.require('avrbro');
-goog.require('ESPTool');
+goog.require('esptooljs');
 goog.require('AdafruitESPTool');
 goog.require('CryptoJS');
 goog.require('dayjs.duration');
@@ -29,7 +29,7 @@ const {
 
 const { Serial } = Web;
 const { layer } = layui;
-const { ESPLoader, Transport } = ESPTool;
+const { ESPLoader, Transport } = esptooljs;
 
 
 function hexToBinaryString (hex) {
@@ -98,7 +98,6 @@ class WebCompilerArduShell {
             statusBarTerminal.setValue(`${Msg.Lang['shell.compiling']}...\n`);
             this.shell.compile(code)
                 .then((info) => {
-                    console.log(info)
                     this.endCallback(info.code, info.time);
                 })
                 .catch((error) => {
@@ -271,7 +270,6 @@ class WebCompilerArduShell {
     }
 
     async uploadWithEsptool(port, files) {
-        console.log(port, files)
         const { mainStatusBarTabs } = Mixly;
         const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         let esploader = null;

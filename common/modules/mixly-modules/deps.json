@@ -1566,7 +1566,7 @@
             "FSWrapper",
             "DAPWrapper",
             "PartialFlashing",
-            "ESPTool",
+            "esptooljs",
             "AdafruitESPTool",
             "CryptoJS",
             "Mixly.Env",
@@ -1729,7 +1729,7 @@
         "require": [
             "layui",
             "avrbro",
-            "ESPTool",
+            "esptooljs",
             "AdafruitESPTool",
             "CryptoJS",
             "dayjs.duration",
@@ -1750,6 +1750,7 @@
         "path": "/web-compiler/loader.js",
         "require": [
             "Mixly.Debug",
+            "Mixly.Config",
             "Mixly.StatusBarsManager",
             "Mixly.Socket",
             "Mixly.WebCompiler.ArduShell"
@@ -1845,6 +1846,7 @@
         "path": "/web-socket/loader.js",
         "require": [
             "Mixly.Debug",
+            "Mixly.Config",
             "Mixly.StatusBarsManager",
             "Mixly.Socket",
             "Mixly.WebSocket.Serial",
