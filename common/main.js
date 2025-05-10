@@ -6,7 +6,7 @@
     window.VIEW = scriptUrl.searchParams.get('view') || 'board';
     let config = {};
     try {
-        config = JSON.parse(localStorage.getItem('mixly2.0') ?? '{}');
+        config = JSON.parse(localStorage.getItem('mixly3.0') ?? '{}');
     } catch (error) {
         console.log(error);
     }

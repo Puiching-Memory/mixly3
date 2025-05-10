@@ -14,7 +14,7 @@ const { Env, Config } = Mixly;
 const { SOFTWARE } = Config;
 
 /**
-  * 获取当前mixly2.0的路径
+  * 获取当前mixly的路径
   * @type {String}
   */
 Env.clientPath = null;
