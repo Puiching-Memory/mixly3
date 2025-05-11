@@ -166,11 +166,13 @@ class AmpyExt extends Ampy {
         if (data.length < 1) {
             throw new Error(Msg.Lang['ampy.waitingFirstEOFTimeout']);
         }
-        let start = data.toLowerCase().indexOf('>ok');
-        if (start === -1){
+        let start = data.toLowerCase().lastIndexOf('ok');
+        if (start === -1) {
             start = 0;
+        } else {
+            start += 2;
         }
-        data = data.substring(start + 3, data.length - 1);
+        data = data.substring(start, data.length - 1);
         let dataError = await this.readUntil('\x04', true, timeout);
         if (dataError.length < 1) {
             throw new Error(Msg.Lang['ampy.secondEOFTimeout']);
