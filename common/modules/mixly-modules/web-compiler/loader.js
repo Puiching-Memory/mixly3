@@ -26,7 +26,13 @@ const { SOFTWARE } = Config;
 Loader.init = function () {
     let url = '';
     if (SOFTWARE.webCompiler?.url) {
-        url = SOFTWARE.webCompiler.url;
+        const info = new window.URL(SOFTWARE.webCompiler.url);
+        if (info.hostname === 'default') {
+            info.hostname = window.location.hostname;
+            url = info.origin;
+        } else {
+            url = SOFTWARE.webCompiler.url;
+        }
     } else {
         url = `wss://${window.location.host}`;
     }

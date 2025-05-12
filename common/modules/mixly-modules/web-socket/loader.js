@@ -32,7 +32,13 @@ const { SOFTWARE } = Config;
 Loader.init = function () {
     let url = '';
     if (SOFTWARE.webSocket?.url) {
-        url = SOFTWARE.webSocket.url;
+        const info = new window.URL(SOFTWARE.webSocket.url);
+        if (info.hostname === 'default') {
+            info.hostname = window.location.hostname;
+            url = info.origin;
+        } else {
+            url = SOFTWARE.webSocket.url;
+        }
     } else {
         url = `wss://${window.location.host}`;
     }
