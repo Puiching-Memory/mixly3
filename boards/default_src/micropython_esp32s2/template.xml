@@ -4018,6 +4018,45 @@
         </shadow>
       </value>
     </block>
+    <block type="actuator_neopixel_rgb_show_all_chase">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">rgb</field>
+        </shadow>
+      </value>
+      <value name="RVALUE">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="GVALUE">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="BVALUE">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="time">
+        <shadow type="math_number">
+          <field name="NUM">1000</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="actuator_neopixel_rgb_show_all_rainbow">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">rgb</field>
+        </shadow>
+      </value>
+      <value name="time">
+        <shadow type="math_number">
+          <field name="NUM">1000</field>
+        </shadow>
+      </value>
+    </block>
     <block type="actuator_neopixel_write">
       <value name="SUB">
         <shadow type="variables_get">

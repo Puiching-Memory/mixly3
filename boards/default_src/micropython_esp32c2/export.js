@@ -3,6 +3,7 @@ import * as MicropythonESP32C2InoutBlocks from './blocks/inout';
 import * as MicropythonESP32C2MiniG2Blocks from './blocks/mini_g2';
 import * as MicropythonESP32C2MEGOBlocks from './blocks/me_go';
 import * as MicropythonESP32C2PinsBlocks from './blocks/pins';
+import * as MicropythonESP32C2ActuatorExternGenerators from './generators/actuator_extern';
 import * as MicropythonESP32C2InoutGenerators from './generators/inout';
 import * as MicropythonESP32C2MiniG2Generators from './generators/mini_g2';
 import * as MicropythonESP32C2MEGOGenerators from './generators/me_go';
@@ -14,6 +15,7 @@ export {
     MicropythonESP32C2MiniG2Blocks,
     MicropythonESP32C2MEGOBlocks,
     MicropythonESP32C2PinsBlocks,
+    MicropythonESP32C2ActuatorExternGenerators,
     MicropythonESP32C2InoutGenerators,
     MicropythonESP32C2MiniG2Generators,
     MicropythonESP32C2MEGOGenerators,

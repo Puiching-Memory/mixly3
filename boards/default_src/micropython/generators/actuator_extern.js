@@ -178,41 +178,54 @@ export const actuator_extern_led_brightness = function (_, generator) {
 }
 
 export const actuator_neopixel_init = function (_, generator) {
-    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var dropdown_rgbpin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
-    var value_ledcount = generator.valueToCode(this, 'LEDCOUNT', generator.ORDER_ATOMIC);
+    const v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    const dropdown_rgbpin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    const value_ledcount = generator.valueToCode(this, 'LEDCOUNT', generator.ORDER_ATOMIC);
     generator.definitions_['import_machine'] = 'import machine';
-    generator.definitions_['import_neopixel'] = 'import neopixel';
-    var code = v + ' = neopixel.NeoPixel(machine.Pin(' + dropdown_rgbpin + '), ' + value_ledcount + ')\n';
+    generator.definitions_['import_ws2812_Neopixel'] = 'from ws2812 import NeoPixel';
+    const code = `${v} = NeoPixel(machine.Pin(${dropdown_rgbpin}), ${value_ledcount})\n`;
     return code;
 }
 
 export const actuator_neopixel_rgb_all = function (_, generator) {
-    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var value_rvalue = generator.valueToCode(this, 'RVALUE', generator.ORDER_ATOMIC);
-    var value_gvalue = generator.valueToCode(this, 'GVALUE', generator.ORDER_ATOMIC);
-    var value_bvalue = generator.valueToCode(this, 'BVALUE', generator.ORDER_ATOMIC);
-    var code = v + '.fill((' + value_rvalue + ', ' + value_gvalue + ', ' + value_bvalue + '))\n';
+    const v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    const value_rvalue = generator.valueToCode(this, 'RVALUE', generator.ORDER_ATOMIC);
+    const value_gvalue = generator.valueToCode(this, 'GVALUE', generator.ORDER_ATOMIC);
+    const value_bvalue = generator.valueToCode(this, 'BVALUE', generator.ORDER_ATOMIC);
+    const code = `${v}.fill((${value_rvalue}, ${value_gvalue}, ${value_bvalue}))\n`;
     return code;
 }
 
 export const actuator_neopixel_write = function (_, generator) {
-    generator.definitions_['import_machine'] = 'import machine';
-    generator.definitions_['import_neopixel'] = 'import neopixel';
-    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var code = v + '.write()\n';
+    const v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    const code = `${v}.write()\n`;
     return code;
 }
 
 export const actuator_neopixel_rgb = function (_, generator) {
-    generator.definitions_['import_machine'] = 'import machine';
-    generator.definitions_['import_neopixel'] = 'import neopixel';
-    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var value_led = generator.valueToCode(this, '_LED_', generator.ORDER_ATOMIC);
-    var value_rvalue = generator.valueToCode(this, 'RVALUE', generator.ORDER_ATOMIC);
-    var value_gvalue = generator.valueToCode(this, 'GVALUE', generator.ORDER_ATOMIC);
-    var value_bvalue = generator.valueToCode(this, 'BVALUE', generator.ORDER_ATOMIC);
-    var code = v + '[' + value_led + '] = (' + value_rvalue + ', ' + value_gvalue + ', ' + value_bvalue + ')\n';
+    const v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    const value_led = generator.valueToCode(this, '_LED_', generator.ORDER_ATOMIC);
+    const value_rvalue = generator.valueToCode(this, 'RVALUE', generator.ORDER_ATOMIC);
+    const value_gvalue = generator.valueToCode(this, 'GVALUE', generator.ORDER_ATOMIC);
+    const value_bvalue = generator.valueToCode(this, 'BVALUE', generator.ORDER_ATOMIC);
+    const code = `${v}[${value_led}] = (${value_rvalue}, ${value_gvalue}, ${value_bvalue})\n`;
+    return code;
+}
+
+export const actuator_neopixel_rgb_show_all_chase = function (_, generator) {
+    const v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    const value_rvalue = generator.valueToCode(this, 'RVALUE', generator.ORDER_ATOMIC);
+    const value_gvalue = generator.valueToCode(this, 'GVALUE', generator.ORDER_ATOMIC);
+    const value_bvalue = generator.valueToCode(this, 'BVALUE', generator.ORDER_ATOMIC);
+    const number_time = generator.valueToCode(this, 'time', generator.ORDER_ATOMIC);
+    const code = `${v}.color_chase(${value_rvalue}, ${value_gvalue}, ${value_bvalue}, ${number_time})\n`;
+    return code;
+}
+
+export const actuator_neopixel_rgb_show_all_rainbow = function (_, generator) {
+    const v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    const number_time = generator.valueToCode(this, 'time', generator.ORDER_ATOMIC);
+    const code = `${v}.rainbow_cycle(${number_time})\n`;
     return code;
 }
 

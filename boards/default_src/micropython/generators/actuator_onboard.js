@@ -203,49 +203,49 @@ export const rm_actuator_led_brightness = function (_, generator) {
 }
 
 export const actuator_onboard_neopixel_write = function (_, generator) {
-    var version = Boards.getSelectedBoardKey().split(':')[2]
-    generator.definitions_['import_' + version + '_onboard_rgb'] = 'from ' + version + ' import onboard_rgb';
-    var code = 'onboard_rgb.write()\n';
+    const version = Boards.getSelectedBoardKey().split(':')[2];
+    generator.definitions_[`import_${version}_onboard_rgb`] = `from ${version} import onboard_rgb`;
+    const code = 'onboard_rgb.write()\n';
     return code;
 }
 
 export const actuator_onboard_neopixel_rgb = function (_, generator) {
-    var version = Boards.getSelectedBoardKey().split(':')[2]
-    generator.definitions_['import_' + version + '_onboard_rgb'] = 'from ' + version + ' import onboard_rgb';
-    var value_led = generator.valueToCode(this, '_LED_', generator.ORDER_ATOMIC);
-    var value_rvalue = generator.valueToCode(this, 'RVALUE', generator.ORDER_ATOMIC);
-    var value_gvalue = generator.valueToCode(this, 'GVALUE', generator.ORDER_ATOMIC);
-    var value_bvalue = generator.valueToCode(this, 'BVALUE', generator.ORDER_ATOMIC);
-    var code = 'onboard_rgb[' + value_led + '] = (' + value_rvalue + ', ' + value_gvalue + ', ' + value_bvalue + ')\n';
+    const version = Boards.getSelectedBoardKey().split(':')[2];
+    generator.definitions_[`import_${version}_onboard_rgb`] = `from ${version} import onboard_rgb`;
+    const value_led = generator.valueToCode(this, '_LED_', generator.ORDER_ATOMIC);
+    const value_rvalue = generator.valueToCode(this, 'RVALUE', generator.ORDER_ATOMIC);
+    const value_gvalue = generator.valueToCode(this, 'GVALUE', generator.ORDER_ATOMIC);
+    const value_bvalue = generator.valueToCode(this, 'BVALUE', generator.ORDER_ATOMIC);
+    const code = `onboard_rgb[${value_led}] = (${value_rvalue}, ${value_gvalue}, ${value_bvalue})\n`;
     return code;
 }
 
 export const actuator_onboard_neopixel_rgb_all = function (_, generator) {
-    var version = Boards.getSelectedBoardKey().split(':')[2]
-    generator.definitions_['import_' + version + '_onboard_rgb'] = 'from ' + version + ' import onboard_rgb';
-    var value_rvalue = generator.valueToCode(this, 'RVALUE', generator.ORDER_ATOMIC);
-    var value_gvalue = generator.valueToCode(this, 'GVALUE', generator.ORDER_ATOMIC);
-    var value_bvalue = generator.valueToCode(this, 'BVALUE', generator.ORDER_ATOMIC);
-    var code = 'onboard_rgb.fill((' + value_rvalue + ', ' + value_gvalue + ', ' + value_bvalue + '))\n';
+    const version = Boards.getSelectedBoardKey().split(':')[2];
+    generator.definitions_[`import_${version}_onboard_rgb`] = `from ${version} import onboard_rgb`;
+    const value_rvalue = generator.valueToCode(this, 'RVALUE', generator.ORDER_ATOMIC);
+    const value_gvalue = generator.valueToCode(this, 'GVALUE', generator.ORDER_ATOMIC);
+    const value_bvalue = generator.valueToCode(this, 'BVALUE', generator.ORDER_ATOMIC);
+    const code = `onboard_rgb.fill((${value_rvalue}, ${value_gvalue}, ${value_bvalue}))\n`;
     return code;
 }
 
 export const actuator_onboard_neopixel_rgb_show_all_chase = function (_, generator) {
-    var version = Boards.getSelectedBoardKey().split(':')[2]
-    generator.definitions_['import_' + version + '_onboard_rgb'] = 'from ' + version + ' import onboard_rgb';
-    var value_rvalue = generator.valueToCode(this, 'RVALUE', generator.ORDER_ATOMIC);
-    var value_gvalue = generator.valueToCode(this, 'GVALUE', generator.ORDER_ATOMIC);
-    var value_bvalue = generator.valueToCode(this, 'BVALUE', generator.ORDER_ATOMIC);
-    var number_time = generator.valueToCode(this, 'time', generator.ORDER_ATOMIC);
-    var code = 'onboard_rgb.color_chase(' + value_rvalue + ', ' + value_gvalue + ', ' + value_bvalue + ', ' + number_time + ')\n';
+    const version = Boards.getSelectedBoardKey().split(':')[2];
+    generator.definitions_[`import_${version}_onboard_rgb`] = `from ${version} import onboard_rgb`;
+    const value_rvalue = generator.valueToCode(this, 'RVALUE', generator.ORDER_ATOMIC);
+    const value_gvalue = generator.valueToCode(this, 'GVALUE', generator.ORDER_ATOMIC);
+    const value_bvalue = generator.valueToCode(this, 'BVALUE', generator.ORDER_ATOMIC);
+    const number_time = generator.valueToCode(this, 'time', generator.ORDER_ATOMIC);
+    const code = `onboard_rgb.color_chase(${value_rvalue}, ${value_gvalue}, ${value_bvalue}, ${number_time})\n`;
     return code;
 }
 
 export const actuator_onboard_neopixel_rgb_show_all_rainbow = function (_, generator) {
-    var version = Boards.getSelectedBoardKey().split(':')[2]
-    generator.definitions_['import_' + version + '_onboard_rgb'] = 'from ' + version + ' import onboard_rgb';
-    var number_time = generator.valueToCode(this, 'time', generator.ORDER_ATOMIC);
-    var code = 'onboard_rgb.rainbow_cycle(' + number_time + ')\n';
+    const version = Boards.getSelectedBoardKey().split(':')[2];
+    generator.definitions_[`import_${version}_onboard_rgb`] = `from ${version} import onboard_rgb`;
+    const number_time = generator.valueToCode(this, 'time', generator.ORDER_ATOMIC);
+    const code = `onboard_rgb.rainbow_cycle(${number_time})\n`;
     return code;
 }
 
