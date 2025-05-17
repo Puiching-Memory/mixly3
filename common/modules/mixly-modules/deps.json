@@ -23,13 +23,15 @@
         "path": "/common/app.js",
         "require": [
             "path",
-            "layui",
+            "hotkeys",
             "Mixly.Url",
             "Mixly.Config",
             "Mixly.Env",
             "Mixly.Msg",
             "Mixly.Drag",
             "Mixly.Nav",
+            "Mixly.Menu",
+            "Mixly.ContextMenu",
             "Mixly.Workspace",
             "Mixly.FooterBar",
             "Mixly.HTMLTemplate",
@@ -185,6 +187,20 @@
             "Mixly.Drag",
             "Mixly.DragH",
             "Mixly.DragV"
+        ]
+    },
+    {
+        "path": "/common/dropdown-menu-group.js",
+        "require": [
+            "tippy",
+            "Mixly.Menu",
+            "Mixly.Registry",
+            "Mixly.IdGenerator",
+            "Mixly.ContextMenu",
+            "Mixly.DropdownMenu"
+        ],
+        "provide": [
+            "Mixly.DropdownMenuGroup"
         ]
     },
     {
@@ -462,6 +478,7 @@
         "path": "/common/footerlayer-board-config.js",
         "require": [
             "path",
+            "tippy",
             "Blockly",
             "layui",
             "$.select2",
@@ -769,7 +786,10 @@
             "Mixly.XML",
             "Mixly.Msg",
             "Mixly.HTMLTemplate",
-            "Mixly.Component"
+            "Mixly.Component",
+            "Mixly.Menu",
+            "Mixly.ContextMenu",
+            "Mixly.DropdownMenuGroup"
         ],
         "provide": [
             "Mixly.Nav"

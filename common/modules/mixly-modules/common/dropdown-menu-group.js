@@ -18,13 +18,13 @@ const {
 
 
 class DropdownMenuGroup {
-    #shown_ = false;
     #singleton_ = null;
     #menuItems_ = [];
     #ids_ = {};
     #instanceIds_ = {};
     #activeInstance_ = null;
-    #hided_ = false;
+    #instanceShown_ = false;
+    #menuShown_ = false;
     #trigged_ = false;
     #$instancePopper_ = null;
     #$instanceContent_ = null;
@@ -44,27 +44,28 @@ class DropdownMenuGroup {
             delay: [200, null],
             onShow: () => {
                 if (this.#activeInstance_) {
-                    this.show(this.#activeInstance_.id);
+                    this.showMenu(this.#activeInstance_.id);
                 }
-                this.#shown_ = true;
+                this.#instanceShown_ = true;
             },
             onTrigger: (_, event) => {
                 const id = $(event.currentTarget).attr('data-id');
-                if (this.#shown_) {
+                if (this.#instanceShown_) {
                     if (this.#activeInstance_) {
                         this.#trigged_ = true;
-                        this.hide(this.#activeInstance_.id);
+                        this.hideMenu(this.#activeInstance_.id);
                         this.#activeInstance_ = null;
                     }
-                    this.show(id);
+                    this.showMenu(id);
                 }
                 this.#activeInstance_ = this.#instanceIds_[id].instance;
             },
             onHide: () => {
-                if (this.#hided_) {
-                    this.#shown_ = false;
+                if (this.#menuShown_) {
+                    return false;
                 }
-                return this.#hided_;
+                this.#instanceShown_ = false;
+                return true;
             }
         });
         this.#$instancePopper_ = $(this.#singleton_.popper);
@@ -102,15 +103,15 @@ class DropdownMenuGroup {
             },
             events: {
                 show: (opt) => {
-                    this.#hided_ = false;
+                    this.#menuShown_ = true;
                     this.#singleton_.setProps({});
                 },
                 hide: (opt) => {
-                    if (this.trigged_) {
-                        this.trigged_ = false;
+                    if (this.#trigged_) {
+                        this.#trigged_ = false;
                         return true;
                     }
-                    this.#hided_ = true;
+                    this.#menuShown_ = false;
                     this.#singleton_.hide();
                 }
             }
@@ -176,12 +177,12 @@ class DropdownMenuGroup {
         item = null;
     }
 
-    show(instanceId) {
+    showMenu(instanceId) {
         const item = this.#instanceIds_[instanceId];
         item.$menu.contextMenu();
     }
 
-    hide(instanceId) {
+    hideMenu(instanceId) {
         const item = this.#instanceIds_[instanceId];
         item.$menu.contextMenu('hide');
     }
