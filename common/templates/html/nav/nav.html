@@ -63,7 +63,7 @@
     }
 
     ul[m-id="{{d.mId}}"] button > a {
-        color: rgba(255,255,255,.7);
+        color: rgba(255, 255, 255, .7);
         -webkit-transition: all .3s;
     }
 
@@ -106,14 +106,25 @@
         align-items: center;
     }
 
-    ul[m-id="{{d.mId}}"] .left-btn-container {
+    ul[m-id="{{d.mId}}"] > div > .left-btn-container,
+    ul[m-id="{{d.mId}}"] > .right-area > .right-menu-container  {
         display: inline-flex;
     }
 
-    ul[m-id="{{d.mId}}"] .left-btn-container button {
+    ul[m-id="{{d.mId}}"] > div > .left-btn-container > button[m-id="home-btn"] {
+        font-size: 18px;
+    }
+
+    ul[m-id="{{d.mId}}"] > .right-area > .right-menu-container {
+        margin-left: 10px;
+        z-index: 2000;
+    }
+
+    ul[m-id="{{d.mId}}"] > div > .left-btn-container > button,
+    ul[m-id="{{d.mId}}"] > .right-area > .right-menu-container > button {
         font-family: "Lato", "Noto Sans SC";
         height: var(--nav-left-btn-height);
-        font-size: calc(var(--nav-left-btn-font-size) + 4px);
+        font-size: 14px;
         margin: 2px;
     }
 

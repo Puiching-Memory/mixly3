@@ -7,6 +7,9 @@ goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.Component');
+goog.require('Mixly.Menu');
+goog.require('Mixly.ContextMenu');
+goog.require('Mixly.DropdownMenuGroup');
 goog.provide('Mixly.Nav');
 
 const {
@@ -14,7 +17,10 @@ const {
     XML,
     Msg,
     HTMLTemplate,
-    Component
+    Component,
+    Menu,
+    ContextMenu,
+    DropdownMenuGroup
 } = Mixly;
 
 const { element } = layui;
@@ -76,6 +82,15 @@ class Nav extends Component {
             new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/nav/port-selector-div.html')))
         );
 
+        /**
+          * 下拉菜单遮罩
+          * @type {String}
+          */
+        HTMLTemplate.add(
+            'html/nav/shadow.html',
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/nav/shadow.html')))
+        );
+
         Nav.Scope = {
             'LEFT': -1,
             'CENTER': 0,
@@ -123,8 +138,9 @@ class Nav extends Component {
     #$editorBtnsContainer_ = null;
     #$boardSelect_ = null;
     #$portSelect_ = null;
-    #$shadow_ = $('<div style="position:absolute;z-index:1000;width:100%;background:transparent;bottom:0px;top:var(--nav-height);"></div>');
+    #$shadow_ = $(HTMLTemplate.get('html/nav/shadow.html').render());
     #btns_ = [];
+    #rightDropdownMenuGroup_ = null;
 
     constructor() {
         super();
@@ -175,7 +191,9 @@ class Nav extends Component {
         this.#$shadow_.click(() => $merge.select2('close'));
         this.addEventsType(['changeBoard', 'changePort']);
         this.#addEventsListener_();
+        this.#rightDropdownMenuGroup_ = new DropdownMenuGroup(this.#$rightMenuContainer_[0]);
         Nav.add(this);
+        this.list = [];
     }
 
     onMounted() {
@@ -193,6 +211,22 @@ class Nav extends Component {
 
     getPortSelector() {
         return this.#$portSelect_;
+    }
+
+    getBoardName() {
+        return this.#$boardSelect_.find(':selected').text();
+    }
+
+    getBoardKey() {
+        return this.#$boardSelect_.val();
+    }
+
+    getPortName() {
+        return this.#$portSelect_.find(':selected').text();
+    }
+
+    getPortKey() {
+        return this.#$portSelect_.val();
     }
 
     /**
@@ -237,24 +271,6 @@ class Nav extends Component {
                 text: displayText
             }));
             break;
-        case Nav.Scope.RIGHT:
-            if (typeof id === 'string') {
-                config.$btn = $(HTMLTemplate.get('html/nav/nav-item-container.html').render({
-                    mId: id,
-                    text: displayText
-                }));
-            } else {
-                if (displayText) {
-                    config.$btn = $(HTMLTemplate.get('html/nav/nav-item.html').render({
-                        mId: id.join('-'),
-                        icon,
-                        text: displayText
-                    }));
-                } else {
-                    config.$btn = $('<hr>');
-                }
-            }
-            break;
         }
         this.#add_(config);
         return config;
@@ -277,14 +293,9 @@ class Nav extends Component {
             this.#addCenterBtn_(config);
             break;
         case Nav.Scope.RIGHT:
-            if (typeof id === 'string') {
-                this.#addRightMenu_(config);
-            } else {
-                this.#addRightMenuItem_(config);
-            }
+            this.#addRightBtn_(config);
             break;
         }
-        element.render('nav', 'nav-filter');
     }
 
     /**
@@ -373,10 +384,6 @@ class Nav extends Component {
         this.resize();
     }
 
-    #removeLeftBtn_(config) {
-
-    }
-
     #addCenterBtn_(config) {
         const { id = '', weight = 0 } = config;
         let $btn = null;
@@ -401,74 +408,13 @@ class Nav extends Component {
         this.resize();
     }
 
-    #removeCenterBtn_(config) {
-
-    }
-
-    #addRightMenu_(config) {
-        const { id = '', weight = 0, preconditionFn } = config;
+    #addRightBtn_(config) {
+        const { preconditionFn } = config;
         if (!preconditionFn()) {
             return;
         }
-        const $btns = this.#$rightMenuContainer_.children('li');
-        let $btn = null;
-        for (let i = 0; $btns[i]; i++) {
-            const mId = $($btns[i]).attr('m-id');
-            if (!this.#btns_[mId]) {
-                continue;
-            }
-            if (weight < this.#btns_[mId].weight) {
-                $btn = this.#btns_[mId].$btn;
-                break;
-            }
-        }
-        if ($btn) {
-            $btn.before(config.$btn);
-        } else {
-            this.#$rightMenuContainer_.append(config.$btn);
-        }
-        config.width = this.#getElemWidth_(config.$btn);
-        this.#btns_[id] = config;
+        this.#rightDropdownMenuGroup_.add(config);
         this.resize();
-    }
-
-    #removeRightMenu_(config) {
-
-    }
-
-    #addRightMenuItem_(config) {
-        const { id = [], weight = 0, preconditionFn } = config;
-        if (!preconditionFn()) {
-            return;
-        }
-        const $li = this.#$rightMenuContainer_.children(`[m-id="${id[0]}"]`);
-        let $btn = null;
-        if (!$li.length) {
-            return;
-        }
-        const $container_ = $li.find('.layui-nav-child');
-        const $btns = $container_.find('dd');
-        for (let i = 0; $btns[i]; i++) {
-            const mId = $($btns[i]).attr('m-id');
-            if (!this.#btns_[mId]) {
-                continue;
-            }
-            if (weight < this.#btns_[mId].weight) {
-                $btn = this.#btns_[mId].$btn;
-                break;
-            }
-        }
-        if ($btn) {
-            $btn.before(config.$btn);
-        } else {
-            $container_.append(config.$btn);
-        }
-        config.width = this.#getElemWidth_(config.$btn);
-        this.#btns_[id.join('-')] = config;
-    }
-
-    #removeRightMenuItem_(config) {
-
     }
 
     resize() {

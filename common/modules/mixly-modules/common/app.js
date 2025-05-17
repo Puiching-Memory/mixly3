@@ -1,13 +1,15 @@
 goog.loadJs('common', () => {
 
 goog.require('path');
-goog.require('layui');
+goog.require('hotkeys');
 goog.require('Mixly.Url');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Drag');
 goog.require('Mixly.Nav');
+goog.require('Mixly.Menu');
+goog.require('Mixly.ContextMenu');
 goog.require('Mixly.Workspace');
 goog.require('Mixly.FooterBar');
 goog.require('Mixly.HTMLTemplate');
@@ -27,6 +29,7 @@ goog.require('Mixly.Web.BU');
 goog.require('Mixly.Web.FS');
 goog.require('Mixly.Web.File');
 goog.require('Mixly.Web.Serial');
+goog.require('Mixly.WebCompiler.ArduShell');
 goog.require('Mixly.WebSocket.File');
 goog.require('Mixly.WebSocket.Serial');
 goog.require('Mixly.WebSocket.ArduShell');
@@ -40,6 +43,8 @@ const {
     Msg,
     Drag,
     Nav,
+    Menu,
+    ContextMenu,
     Workspace,
     FooterBar,
     HTMLTemplate,
@@ -49,6 +54,7 @@ const {
     EditorMix,
     Electron = {},
     Web = {},
+    WebCompiler = {},
     WebSocket = {}
 } = Mixly;
 
@@ -70,17 +76,19 @@ const {
     FS,
     File,
     LibManager,
-    ArduShell,
     BU,
     PythonShell,
     Serial
 } = currentObj;
 
+let ArduShell = null;
+if (!goog.isElectron && Env.hasCompiler) {
+    ArduShell = WebCompiler.ArduShell;
+} else {
+    ArduShell = currentObj.ArduShell;
+}
+
 const { BOARD, SELECTED_BOARD } = Config;
-
-const { layer } = layui;
-
-const electron = Mixly.require('electron');
 
 
 class App extends Component {
@@ -116,7 +124,6 @@ class App extends Component {
         this.#footerbar_ = new FooterBar();
         this.#footerbar_.mountOn($content.find('.mixly-footerbar'));
         this.#addEventsListenerForNav_();
-        this.#addEventsListenerForWorkspace_();
         this.#addObserver_();
         Mixly.mainStatusBarTabs = this.#workspace_.getStatusBarsManager();
         Serial.refreshPorts();
@@ -433,211 +440,202 @@ class App extends Component {
             $a.addClass('codicon-layout-panel');
         });
 
+        const fileMenu = new Menu();
+        const settingMenu = new Menu();
+
         this.#nav_.register({
             id: 'file',
-            displayText: Msg.Lang['nav.btn.file'],
-            preconditionFn: () => {
-                return true;
-            },
+            displayText: `${Msg.Lang['nav.btn.file']}(F)`,
             scopeType: Nav.Scope.RIGHT,
-            weight: 1
-        });
-
-        this.#nav_.register({
-            icon: 'icon-doc-new',
-            id: ['file', 'new-file'],
-            displayText: Msg.Lang['nav.btn.file.new'],
-            preconditionFn: () => {
-                return true;
-            },
-            callback: () => File.new(),
-            scopeType: Nav.Scope.RIGHT,
-            weight: 1
-        });
-
-        this.#nav_.register({
-            icon: 'icon-doc',
-            id: ['file', 'open-file'],
-            displayText: Msg.Lang['nav.btn.file.open'],
-            preconditionFn: () => {
-                return true;
-            },
-            callback: (elem) => File.open(),
-            scopeType: Nav.Scope.RIGHT,
-            weight: 2
-        });
-
-        this.#nav_.register({
-            id: ['file', 'hr'],
-            scopeType: Nav.Scope.RIGHT,
-            weight: 3
-        });
-
-        this.#nav_.register({
-            icon: 'icon-floppy',
-            id: ['file', 'save-file'],
-            displayText: Msg.Lang['nav.btn.file.save'],
-            preconditionFn: () => {
-                return true;
-            },
-            callback: (elem) => File.save(),
-            scopeType: Nav.Scope.RIGHT,
-            weight: 4
-        });
-
-        this.#nav_.register({
-            icon: 'icon-save-as',
-            id: ['file', 'save-as-file'],
-            displayText: Msg.Lang['nav.btn.file.saveAs'],
-            preconditionFn: () => {
-                return true;
-            },
-            callback: () => File.saveAs(),
-            scopeType: Nav.Scope.RIGHT,
-            weight: 5
-        });
-
-        this.#nav_.register({
-            id: ['file', 'hr'],
-            preconditionFn: () => {
-                return goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary;
-            },
-            scopeType: Nav.Scope.RIGHT,
-            weight: 6
-        });
-
-        this.#nav_.register({
-            icon: 'icon-export',
-            id: ['file', 'export-file'],
-            displayText: Msg.Lang['nav.btn.file.exportAs'],
-            preconditionFn: () => {
-                return goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary;
-            },
-            callback: (elem) => File.exportLib(),
-            scopeType: Nav.Scope.RIGHT,
-            weight: 7
+            weight: 1,
+            menu: fileMenu
         });
 
         this.#nav_.register({
             id: 'setting',
-            displayText: Msg.Lang['nav.btn.setting'],
+            displayText: `${Msg.Lang['nav.btn.setting']}(S)`,
+            scopeType: Nav.Scope.RIGHT,
+            weight: 2,
+            menu: settingMenu
+        });
+
+        fileMenu.add({
+            weight: 0,
+            id: 'new',
             preconditionFn: () => {
                 return true;
             },
-            scopeType: Nav.Scope.RIGHT,
-            weight: 1
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['nav.btn.file.new'], 'Ctrl+N'),
+                callback: () => File.new()
+            }
         });
 
-        this.#nav_.register({
-            icon: 'icon-menu',
-            id: ['setting', 'manage-libs'],
-            displayText: Msg.Lang['nav.btn.setting.manageLibs'],
+        hotkeys('ctrl+n', function(event) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            File.new();
+        });
+
+        fileMenu.add({
+            weight: 1,
+            id: 'open-file',
+            preconditionFn: () => {
+                return true;
+            },
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['nav.btn.file.open'], 'Ctrl+O'),
+                callback: (key, opt) => File.open()
+            }
+        });
+
+        hotkeys('ctrl+o', function(event) {
+            event.preventDefault();
+            File.open();
+        });
+
+        fileMenu.add({
+            weight: 2,
+            id: 'sep1',
+            data: '---------'
+        });
+
+        fileMenu.add({
+            weight: 3,
+            id: 'save',
+            preconditionFn: () => {
+                return true;
+            },
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['nav.btn.file.save'], 'Ctrl+S'),
+                callback: () => File.save()
+            }
+        });
+
+        hotkeys('ctrl+s', function(event) {
+            event.preventDefault();
+            File.save();
+        });
+
+        fileMenu.add({
+            weight: 4,
+            id: 'save-as',
+            preconditionFn: () => {
+                return true;
+            },
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['nav.btn.file.saveAs'], 'Ctrl+Shift+S'),
+                callback: () => File.saveAs()
+            }
+        });
+
+        hotkeys('ctrl+shift+s', function(event) {
+            event.preventDefault();
+            File.saveAs();
+        });
+
+        fileMenu.add({
+            weight: 5,
+            id: 'sep2',
             preconditionFn: () => {
                 return goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary;
             },
-            callback: () => LibManager.showManageDialog(),
-            scopeType: Nav.Scope.RIGHT,
-            weight: 1
+            data: '---------'
         });
 
-        /*this.#nav_.register({
-            icon: 'icon-upload-1',
-            id: ['setting', 'firmware'],
-            displayText: Msg.Lang['nav.btn.setting.firmware'],
+        fileMenu.add({
+            weight: 6,
+            id: 'export',
             preconditionFn: () => {
-                if (goog.isElectron) {
-                    return !!BOARD?.burn?.special;
-                } else {
-                    return !!BOARD?.web?.burn?.special;
-                }
+                return goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary;
             },
-            callback: () => BU.burnWithSpecialBin(),
-            scopeType: Nav.Scope.RIGHT,
-            weight: 2
-        });*/
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['nav.btn.file.exportAs'], 'Ctrl+E'),
+                callback: () => File.exportLib()
+            }
+        });
 
-        this.#nav_.register({
-            icon: 'icon-comment-1',
-            id: ['setting', 'feedback'],
-            displayText: Msg.Lang['nav.btn.setting.feedback'],
+        if (goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary) {
+            hotkeys('ctrl+e', function(event) {
+                event.preventDefault();
+                File.exportLib();
+            });
+        }
+
+        settingMenu.add({
+            weight: 0,
+            id: 'feedback',
             preconditionFn: () => {
                 return true;
             },
-            callback: (elem) => {
-                const href = 'https://gitee.com/mixly2/mixly2.0_src/issues';
-                Url.open(href);
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['nav.btn.setting.feedback'], 'Ctrl+Shift+F'),
+                callback: () => {
+                    const href = 'https://gitee.com/bnu_mixly/mixly3/issues';
+                    Url.open(href);
+                }
+            }
+        });
+
+        hotkeys('ctrl+shift+f', function(event) {
+            const href = 'https://gitee.com/bnu_mixly/mixly3/issues';
+            Url.open(href);
+        });
+
+        settingMenu.add({
+            weight: 1,
+            id: 'wiki',
+            preconditionFn: () => {
+                return true;
             },
-            scopeType: Nav.Scope.RIGHT,
-            weight: 2
-        });
-    }
-
-    #addEventsListenerForWorkspace_() {
-        const editorsManager = this.#workspace_.getEditorsManager();
-        const editorTabs = editorsManager.getTabs();
-
-        editorTabs.bind('tabCheckDestroy', (event) => {
-            const { tabEl } = event.detail;
-            const id = $(tabEl).attr('data-tab-id');
-            const editor = editorsManager.get(id);
-            if (!editor) {
-                return;
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem('文档', 'Ctrl+H'),
+                callback: () => {
+                    const href = 'https://mixly.readthedocs.io/zh-cn/latest/contents.html';
+                    Url.open(href);
+                }
             }
-            if (editor.isDirty()) {
-                layer.confirm(`是否保存对${path.basename(id)}的修改？`, {
-                    title: false,
-                    shade: LayerExt.SHADE_ALL,
-                    resize: false,
-                    btn: ['保存', '不保存', '取消'],
-                    closeBtn: 1,
-                    btn1: (index) => {
-                        const $tab = editor.getTab();
-                        if ($tab.attr('data-link-file') === 'true') {
-                            FS.writeFile($tab.attr('data-tab-id'), editor.getValue())
-                            .then(() => {
-                                editor.removeDirty();
-                                editorsManager.remove(id);
-                                layer.close(index);
-                                layer.msg('已保存文件');
-                            })
-                            .catch(Debug.error);
-                        } else {
-                            FS.showSaveFilePicker(id, $tab.attr('data-tab-type'))
-                            .then((filePath) => {
-                                if (!filePath) {
-                                    return Promise.resolve(true);
-                                }
-                                return FS.writeFile(filePath, editor.getValue());
-                            })
-                            .then((status) => {
-                                if (status) {
-                                    return;
-                                }
-                                editor.removeDirty();
-                                editorsManager.remove(id);
-                                layer.close(index);
-                                layer.msg('已保存文件');
-                            })
-                            .catch(Debug.error);
-                        }
-                    },
-                    btn2: (index) => {
-                        editor.removeDirty();
-                        editorsManager.remove(id);
-                        layer.close(index);
-                    },
-                    btn3: (index) => {
-                        layer.close(index);
-                    },
-                    success: (layero) => {
-                        const { classList } = layero[0].childNodes[1].childNodes[0];
-                        classList.remove('layui-layer-close2');
-                        classList.add('layui-layer-close1');
-                    }
-                });
-            }
-            return !editor.isDirty();
         });
+
+        hotkeys('ctrl+h', function(event) {
+            const href = 'https://mixly.readthedocs.io/zh-cn/latest/contents.html';
+            Url.open(href);
+        });
+
+        settingMenu.add({
+            weight: 2,
+            id: 'sep1',
+            preconditionFn: () => {
+                return goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary;
+            },
+            data: '---------'
+        });
+
+        settingMenu.add({
+            weight: 3,
+            id: 'manage-libraries',
+            preconditionFn: () => {
+                return goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary;
+            },
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['nav.btn.setting.manageLibs'], 'Ctrl+M'),
+                callback: () => LibManager.showManageDialog()
+            }
+        });
+
+        if (goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary) {
+            hotkeys('ctrl+m', function(event) {
+                LibManager.showManageDialog();
+            });
+        }
     }
 
     #addObserver_() {
@@ -653,7 +651,7 @@ class App extends Component {
         if (goog.isElectron) {
             Loader.onbeforeunload();
         } else {
-            let href = Env.srcDirPath + 'index.html?' + Url.jsonToUrl({ boardType: BOARD.boardType });
+            let href = path.join(Env.srcDirPath, 'index.html') + '?' + Url.jsonToUrl({ boardType: BOARD.boardType });
             window.location.replace(href);
         }
     }

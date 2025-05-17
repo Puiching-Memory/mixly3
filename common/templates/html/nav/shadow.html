@@ -1,12 +1,11 @@
 <style>
     div[m-id="{{d.mId}}"] {
         position: absolute;
-        left: 0px;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
+        z-index: 1000;
+        width: 100%;
         background: transparent;
-        z-index: 400;
+        bottom: 0px;
+        top: var(--nav-height);
     }
 </style>
 <div m-id="{{d.mId}}"></div>

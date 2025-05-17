@@ -102,12 +102,12 @@ function createWindow(filePath = null, indexUrl = null) {
     else
         win.loadFile('./src/index.html');
 
-    //打开或关闭开发者工具
+    // 打开或关闭开发者工具
     electronLocalshortcut.register(win, 'CmdOrCtrl+Shift+I', () => {
         win.webContents.toggleDevTools();
     });
 
-    //重载页面
+    // 重载页面
     electronLocalshortcut.register(win, 'CmdOrCtrl+R', () => {
         //win.reload();
         sendCommand({
@@ -117,96 +117,20 @@ function createWindow(filePath = null, indexUrl = null) {
         }, win);
     });
 
-    //重载页面
+    // 重载页面
     electronLocalshortcut.register(win, 'CmdOrCtrl+Shift+R', () => {
         win.reload();
     });
 
-    //最小化窗口
-    electronLocalshortcut.register(win, 'CmdOrCtrl+M', () => {
-        win.minimize();
-    });
-
-    //关闭窗口
-    electronLocalshortcut.register(win, 'CmdOrCtrl+W', () => {
-        win.close();
-    });
-
-    //还原窗口
-    electronLocalshortcut.register(win, 'CmdOrCtrl+0', () => {
-        win.webContents.setZoomFactor(1);
-    });
-
-    //放大窗口
-    electronLocalshortcut.register(win, 'CmdOrCtrl+Shift+=', () => {
-        let actualZoom = win.webContents.getZoomFactor();
-        if (actualZoom == null) {
-            actualZoom = 1;
-        }
-        if (actualZoom < 1.5) {
-            win.webContents.setZoomFactor(actualZoom + 0.1);
-        }
-    });
-
-    //缩小窗口
-    electronLocalshortcut.register(win, 'CmdOrCtrl+Shift+-', () => {
-        let actualZoom = win.webContents.getZoomFactor();
-        if (actualZoom == null) {
-            actualZoom = 1;
-        }
-        if (actualZoom > 0.5) {
-            win.webContents.setZoomFactor(actualZoom - 0.1);
-        }
-    });
-
-    //重启
+    // 重启
     electronLocalshortcut.register(win, 'CmdOrCtrl+Q', () => {
         app.relaunch();
         app.exit(0);
     });
 
-    //打开帮助页面
-    electronLocalshortcut.register(win, 'CmdOrCtrl+H', () => {
-        var sendObj = {};
-        sendObj.type = "help";
-        var sendStr = JSON.stringify(sendObj);
-        win.webContents.send('ping', sendStr);
-        //win.webContents.executeJavaScript('alert("this is a test!");');
-    });
-
-    //创建一个新页面
+    // 创建一个新页面
     electronLocalshortcut.register(win, 'CmdOrCtrl+Shift+N', () => {
         createWindow(null);
-    });
-
-    //文件另存为
-    electronLocalshortcut.register(win, 'CmdOrCtrl+Shift+S', () => {
-        const commandObj = {
-            obj: 'Mixly.Electron.File',
-            func: 'saveAs'
-        }
-        const commandStr = JSON.stringify(commandObj);
-        win.webContents.send('command', commandStr);
-    });
-
-    //保存文件
-    electronLocalshortcut.register(win, 'CmdOrCtrl+S', () => {
-        const commandObj = {
-            obj: 'Mixly.Electron.File',
-            func: 'save'
-        }
-        const commandStr = JSON.stringify(commandObj);
-        win.webContents.send('command', commandStr);
-    });
-
-    //新建文件
-    electronLocalshortcut.register(win, 'CmdOrCtrl+N', () => {
-        const commandObj = {
-            obj: 'Mixly.Electron.File',
-            func: 'newFile'
-        }
-        const commandStr = JSON.stringify(commandObj);
-        win.webContents.send('command', commandStr);
     });
 
     win.once('ready-to-show', () => {
@@ -225,32 +149,6 @@ function createWindow(filePath = null, indexUrl = null) {
     win.on('closed', function () {
         win = null;
     });
-    
-    /*if (process.platform === 'win32') {
-        getLibsJson(function (jsonData) {
-            if (!jsonData?.version) return;
-            cloudSoftwareJson = JSON.stringify(jsonData);
-            //var updateSoftware = changeVersion(app.getVersion(), jsonData.version);
-            var updateSoftware = (app.getVersion() != jsonData.version);
-            if (updateSoftware) {
-                var sendObj = {};
-                sendObj.type = "update";
-                sendObj.oldVersion = app.getVersion();
-                sendObj.newVersion = jsonData.version;
-                var sendStr = JSON.stringify(sendObj);
-                setTimeout(function () {
-                    win.webContents.send('ping', sendStr);
-                }, 1000);
-            }
-        });
-
-        ipcMain.on('ping', (event, arg) => {
-            if (arg == "update") {
-                shell.openPath(nodePath.join(__dirname, '../../一键更新.bat'));
-            }
-            event.reply('ping', 'get');
-        });
-    }*/
 
     win.on('unresponsive', async () => {
         const { response } = await dialog.showMessageBox({

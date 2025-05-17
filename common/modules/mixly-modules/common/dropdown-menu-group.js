@@ -1,0 +1,211 @@
+goog.loadJs('common', () => {
+
+goog.require('tippy');
+goog.require('Mixly.Menu');
+goog.require('Mixly.Registry');
+goog.require('Mixly.IdGenerator');
+goog.require('Mixly.ContextMenu');
+goog.require('Mixly.DropdownMenu');
+goog.provide('Mixly.DropdownMenuGroup');
+
+const {
+    Menu,
+    Registry,
+    IdGenerator,
+    ContextMenu,
+    DropdownMenu
+} = Mixly;
+
+
+class DropdownMenuGroup {
+    #shown_ = false;
+    #singleton_ = null;
+    #menuItems_ = [];
+    #ids_ = {};
+    #instanceIds_ = {};
+    #activeInstance_ = null;
+    #hided_ = false;
+    #trigged_ = false;
+    #$instancePopper_ = null;
+    #$instanceContent_ = null;
+    #$content_ = null;
+    constructor(elem) {
+        this.#$content_ = $(elem);
+        this.#$content_.css('z-index', 200);
+        this.#singleton_ = tippy.createSingleton([], {
+            interactive: true,
+            maxWidth: 'none',
+            offset: [0, 3],
+            appendTo: document.body,
+            arrow: false,
+            placement: 'bottom-end',
+            animation: 'shift-toward-extreme',
+            hideOnClick: false,
+            delay: [200, null],
+            onShow: () => {
+                if (this.#activeInstance_) {
+                    this.show(this.#activeInstance_.id);
+                }
+                this.#shown_ = true;
+            },
+            onTrigger: (_, event) => {
+                const id = $(event.currentTarget).attr('data-id');
+                if (this.#shown_) {
+                    if (this.#activeInstance_) {
+                        this.#trigged_ = true;
+                        this.hide(this.#activeInstance_.id);
+                        this.#activeInstance_ = null;
+                    }
+                    this.show(id);
+                }
+                this.#activeInstance_ = this.#instanceIds_[id].instance;
+            },
+            onHide: () => {
+                if (this.#hided_) {
+                    this.#shown_ = false;
+                }
+                return this.#hided_;
+            }
+        });
+        this.#$instancePopper_ = $(this.#singleton_.popper);
+        this.#$instancePopper_.addClass('mixly-drapdown-menu');
+        this.#$instanceContent_ = this.#$instancePopper_.children().children();
+    }
+
+    add(item) {
+        if (!item.id) {
+            if (item.type) {
+                item.id = item.type;
+            } else {
+                item.id = IdGenerator.generate();
+            }
+        }
+        if (!item.weight) {
+            item.weight = 0;
+        }
+        this.remove(item.id);
+        item.$elem = $(`<button class="layui-btn layui-btn-xs layui-btn-primary mixly-nav">${item.displayText}</button>`);
+        const instance = tippy(item.$elem[0]);
+        item.$elem.attr('data-id', instance.id);
+        item.instance = instance;
+        const contextMenuId = IdGenerator.generate();
+        const selector = `body > .mixly-dropdown-menus > div[m-id="${contextMenuId}"]`;
+        const contextMenu = new ContextMenu(selector, {
+            trigger: 'none',
+            appendTo: this.#$instanceContent_,
+            shadow: true,
+            autoHide: false,
+            async: false,
+            zIndex: 150,
+            position: (opt) => {
+                opt.$menu.css('margin', 0);
+            },
+            events: {
+                show: (opt) => {
+                    this.#hided_ = false;
+                    this.#singleton_.setProps({});
+                },
+                hide: (opt) => {
+                    if (this.trigged_) {
+                        this.trigged_ = false;
+                        return true;
+                    }
+                    this.#hided_ = true;
+                    this.#singleton_.hide();
+                }
+            }
+        });
+        item.contextMenu = contextMenu;
+        contextMenu.register('menu', item.menu);
+        contextMenu.bind('getMenu', () => 'menu');
+        item.$menu = $(`<div m-id="${contextMenuId}"><div>`);
+        DropdownMenu.$container.append(item.$menu);
+        let i = 0;
+        for (; i < this.#menuItems_.length; i++) {
+            if (this.#menuItems_[i].weight <= item.weight) {
+                continue;
+            }
+            break;
+        }
+        if (i === this.#menuItems_.length) {
+            if (this.#menuItems_.length) {
+                this.#menuItems_[i - 1].$elem.after(item.$elem);
+            } else {
+                this.#$content_.append(item.$elem);
+            }
+        } else {
+            this.#menuItems_[i].$elem.before(item.$elem);
+        }
+        this.#menuItems_.splice(i, 0, item);
+        this.#ids_[item.id] = item;
+        this.#instanceIds_[instance.id] = item;
+        const instances = [];
+        for (let menuItem of this.#menuItems_) {
+            instances.push(menuItem.instance);
+        }
+        this.#singleton_.setInstances(instances);
+        return item.id;
+    }
+
+    getContextMenu(id) {
+        if (!this.#ids_[id]) {
+            return null;
+        }
+        return this.#ids_[id].contextMenu;
+    }
+
+    remove(id) {
+        let item = this.#ids_[id];
+        if (!item) {
+            return;
+        }
+        delete this.#ids_[id];
+        const instanceId = item.instance.id;
+        delete this.#instanceIds_[instanceId];
+        for (let i in this.#menuItems_) {
+            if (this.#menuItems_[i].id !== id) {
+                continue;
+            }
+            this.#menuItems_.splice(i, 1);
+            break;
+        }
+        item.instance.destroy();
+        item.contextMenu.dispose();
+        item.$elem.remove();
+        item.$menu.remove();
+        item = null;
+    }
+
+    show(instanceId) {
+        const item = this.#instanceIds_[instanceId];
+        item.$menu.contextMenu();
+    }
+
+    hide(instanceId) {
+        const item = this.#instanceIds_[instanceId];
+        item.$menu.contextMenu('hide');
+    }
+
+    dispose() {
+        super.dispose();
+        this.#$instanceContent_.remove();
+        this.#$instanceContent_ = null;
+        this.#$instancePopper_.remove();
+        this.#$instancePopper_ = null;
+        this.#$content_.empty();
+        this.#$content_ = null;
+        for (let id in this.#ids_) {
+            this.remove(id);
+        }
+        this.#singleton_.destroy();
+        this.#singleton_ = null;
+        this.#menuItems_ = null;
+        this.#ids_ = null;
+        this.#instanceIds_ = null;
+        this.#activeInstance_ = null;
+    }
+}
+
+Mixly.DropdownMenuGroup = DropdownMenuGroup;
+
+});
