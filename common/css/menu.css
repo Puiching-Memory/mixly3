@@ -15,7 +15,12 @@
     cursor: inherit;
 }
 
+.mixly-drapdown-menu {
+    width: fit-content;
+}
+
 .mixly-drapdown-menu > .tippy-box {
+    width: fit-content;
     border: none !important;
 }
 

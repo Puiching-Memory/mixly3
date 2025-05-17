@@ -10,7 +10,9 @@
 @import "./drag.css";
 @import "./button.css";
 @import "./xscrollbar.css";
-@import "./tippy-ext.css";
+@import "./tippy/tippy.min.css";
+@import "./tippy/shift-toward-extreme.min.css";
+@import "./tippy/tippy.ext.css";
 @import "./scrollbar.css";
 @import "./select2.min.css";
 @import "./select2-ext.css";
