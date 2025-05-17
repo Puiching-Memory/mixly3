@@ -39,16 +39,6 @@ const { BOARD, USER, SELECTED_BOARD } = Config;
 
 
 
-/**
- * INFO = {
- *      "boardName": {
- *          "key": string | null,
- *          "config": object | null,
- *          "default": object | null
- *      }
- * }
- **/
-Boards.INFO = {};
 
 Boards.NAME = [];
 

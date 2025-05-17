@@ -35,11 +35,13 @@ class StatusBar extends EditorAce {
     }
 
     #addContextMenu_() {
-        this.#contextMenu_ = new ContextMenu(`div[page-id="${this.getId()}"]`);
+        this.#contextMenu_ = new ContextMenu(`div[page-id="${this.getId()}"]`, {
+            zIndex: 300
+        });
         let menu = new Menu();
         menu.add({
             weight: 0,
-            type: 'copy',
+            id: 'copy',
             data: {
                 isHtmlName: true,
                 name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.copy'], 'Ctrl+C'),

@@ -1,6 +1,7 @@
 goog.loadJs('common', () => {
 
 goog.require('path');
+goog.require('tippy');
 goog.require('Blockly');
 goog.require('layui');
 goog.require('$.select2');
@@ -148,7 +149,7 @@ class FooterLayerBoardConfig extends FooterLayer {
             allowHTML: true,
             interactive: true,
             placement: 'left',
-            offset: [ 0, 16 ]
+            offset: [0, 16]
         });
     }
 

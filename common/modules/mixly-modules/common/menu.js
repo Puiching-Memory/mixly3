@@ -45,7 +45,7 @@ class Menu {
             break;
         }
         this.#menuItems_.splice(i, 0, item);
-        this.#ids_[id] = true;
+        this.#ids_[id] = item;
         return id;
     }
 
@@ -68,13 +68,23 @@ class Menu {
         this.#menuItems_ = [];
     }
 
+    hasKey(id) {
+        return !!this.#ids_[id];
+    }
+
     getItem(id) {
         return this.#ids_[id] ?? null;
     }
 
     getAllItems() {
         if (this.#isDynamic_) {
-            this.runEvent('onRead');
+            this.empty();
+            const results = this.runEvent('onRead');
+            if (results?.length) {
+                for (let item of results[0]) {
+                    this.add(item);
+                }
+            }
         }
         return this.#menuItems_;
     }

@@ -151,7 +151,7 @@ class StatusBarsManager extends PagesManager {
         let serialChildMenu = new Menu(true);
         menu.add({
             weight: 0,
-            type: 'serial-default',
+            id: 'serial-default',
             preconditionFn: () => {
                 return !!Serial.getCurrentPortsName().length;
             },
@@ -165,7 +165,7 @@ class StatusBarsManager extends PagesManager {
         });
         menu.add({
             weight: 1,
-            type: 'serial',
+            id: 'serial',
             children: serialChildMenu,
             data: {
                 isHtmlName: true,
@@ -175,7 +175,7 @@ class StatusBarsManager extends PagesManager {
 
         /*menu.add({
             weight: 2,
-            type: 'lib',
+            id: 'lib',
             data: {
                 isHtmlName: true,
                 name: ContextMenu.getItem('第三方库管理', ''),
@@ -190,19 +190,19 @@ class StatusBarsManager extends PagesManager {
             && !['BBC micro:bit', 'Mithon CC'].includes(BOARD.boardType)) {
             menu.add({
                 weight: 2,
-                type: 'sep1',
+                id: 'sep1',
                 data: '---------'
             });
             menu.add({
                 weight: 3,
-                type: 'ampy',
+                id: 'ampy',
                 data: {
                     isHtmlName: true,
                     name: ContextMenu.getItem(Msg.Lang['statusbar.ampy'], ''),
                     callback: (key, opt) => {
                         this.add({
-                            type: 'ampy',
                             id: 'ampy',
+                            type: 'ampy',
                             name: Msg.Lang['statusbar.ampy'],
                             title: Msg.Lang['statusbar.ampy']
                         });
@@ -212,14 +212,14 @@ class StatusBarsManager extends PagesManager {
             });
         }
         serialChildMenu.bind('onRead', () => {
-            let options = this.#getMenu_() ?? {};
+            const options = this.#getMenu_() ?? {};
             options.list = options.list ?? [];
             options.empty = options.empty ?? Msg.Lang['statusbar.serial.noPort'];
-            serialChildMenu.empty();
+            const result = [];
             if (!options.list.length) {
-                serialChildMenu.add({
+                result.push({
                     weight: 1,
-                    type: 'empty',
+                    id: 'empty',
                     data: {
                         isHtmlName: true,
                         name: options.empty,
@@ -228,9 +228,9 @@ class StatusBarsManager extends PagesManager {
                 });
             }
             for (let i in options.list) {
-                serialChildMenu.add({
+                result.push({
                     weight: 1,
-                    type: `serial${i}`,
+                    id: `serial${i}`,
                     data: {
                         isHtmlName: true,
                         name: options.list[i],
@@ -238,6 +238,7 @@ class StatusBarsManager extends PagesManager {
                     }
                 });
             }
+            return result;
         });
         this.#dropdownMenu_ = new DropdownMenu(selector);
         this.#dropdownMenu_.register('menu', menu);

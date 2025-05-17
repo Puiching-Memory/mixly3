@@ -250,7 +250,7 @@ class FileTree extends Component {
         let menu = new Menu();
         menu.add({
             weight: 0,
-            type: 'new_folder',
+            id: 'new_folder',
             preconditionFn: ($trigger) => {
                 let type = $trigger.attr('type');
                 return ['root', 'folder'].includes(type);
@@ -272,7 +272,7 @@ class FileTree extends Component {
         });
         menu.add({
             weight: 1,
-            type: 'new_file',
+            id: 'new_file',
             preconditionFn: ($trigger) => {
                 let type = $trigger.attr('type');
                 return ['root', 'folder'].includes(type);
@@ -294,7 +294,7 @@ class FileTree extends Component {
         });
         menu.add({
             weight: 2,
-            type: 'sep1',
+            id: 'sep1',
             preconditionFn: ($trigger) => {
                 let type = $trigger.attr('type');
                 return ['folder'].includes(type);
@@ -303,7 +303,7 @@ class FileTree extends Component {
         });
         menu.add({
             weight: 3,
-            type: 'cut',
+            id: 'cut',
             preconditionFn: ($trigger) => {
                 let type = $trigger.attr('type');
                 return ['file', 'folder'].includes(type);
@@ -319,7 +319,7 @@ class FileTree extends Component {
         });
         menu.add({
             weight: 4,
-            type: 'copy',
+            id: 'copy',
             preconditionFn: ($trigger) => {
                 let type = $trigger.attr('type');
                 return ['file', 'folder'].includes(type);
@@ -335,7 +335,7 @@ class FileTree extends Component {
         });
         menu.add({
             weight: 5,
-            type: 'paste',
+            id: 'paste',
             preconditionFn: ($trigger) => {
                 let type = $trigger.attr('type');
                 return ['folder'].includes(type);
@@ -351,12 +351,12 @@ class FileTree extends Component {
         });
         menu.add({
             weight: 6,
-            type: 'sep2',
+            id: 'sep2',
             data: '---------'
         });
         menu.add({
             weight: 7,
-            type: 'copy_path',
+            id: 'copy_path',
             data: {
                 isHtmlName: true,
                 name: ContextMenu.getItem(Msg.Lang['fileTree.copyPath'], ''),
@@ -375,7 +375,7 @@ class FileTree extends Component {
         });
         menu.add({
             weight: 8,
-            type: 'rename',
+            id: 'rename',
             preconditionFn: ($trigger) => {
                 let type = $trigger.attr('type');
                 return ['file', 'folder'].includes(type);
@@ -396,7 +396,7 @@ class FileTree extends Component {
         });
         menu.add({
             weight: 9,
-            type: 'del',
+            id: 'del',
             preconditionFn: ($trigger) => {
                 let type = $trigger.attr('type');
                 return ['file', 'folder'].includes(type);

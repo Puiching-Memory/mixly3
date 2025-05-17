@@ -94,12 +94,12 @@ class EditorMix extends EditorBase {
         let codeMenu = contextMenu.getItem('code');
         codeMenu.add({
             weight: 6,
-            type: 'sep2',
+            id: 'sep2',
             data: '---------'
         });
         codeMenu.add({
             weight: 7,
-            type: 'block',
+            id: 'block',
             data: {
                 isHtmlName: false,
                 name: Msg.Lang['editor.contextMenu.exitCodeEditor'],
@@ -109,7 +109,7 @@ class EditorMix extends EditorBase {
         let blockMenu = new Menu();
         blockMenu.add({
             weight: 0,
-            type: 'copy',
+            id: 'copy',
             data: {
                 isHtmlName: true,
                 name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.copy'], 'Ctrl+C'),
@@ -118,12 +118,12 @@ class EditorMix extends EditorBase {
         });
         blockMenu.add({
             weight: 1,
-            type: 'sep1',
+            id: 'sep1',
             data: '---------'
         });
         blockMenu.add({
             weight: 2,
-            type: 'code',
+            id: 'code',
             data: {
                 isHtmlName: false,
                 name: Msg.Lang['editor.contextMenu.enterCodeEditor'],

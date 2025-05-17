@@ -35,7 +35,7 @@ class ContextMenu {
                 if (item.children) {
                     item.data.items = this.generate(item.children);
                 }
-                menuItems[item.type] = item.data;
+                menuItems[item.id] = item.data;
             }
             return menuItems;
         }

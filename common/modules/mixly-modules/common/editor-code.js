@@ -45,11 +45,13 @@ class EditorCode extends EditorMonaco {
     }
 
     #addContextMenu_() {
-        this.#contextMenu_ = new ContextMenu(`div[page-id="${this.getId()}"]`);
+        this.#contextMenu_ = new ContextMenu(`div[page-id="${this.getId()}"]`, {
+            zIndex: 300
+        });
         let menu = new Menu();
         menu.add({
             weight: 0,
-            type: 'cut',
+            id: 'cut',
             data: {
                 isHtmlName: true,
                 name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.cut'], 'Ctrl+X'),
@@ -58,7 +60,7 @@ class EditorCode extends EditorMonaco {
         });
         menu.add({
             weight: 1,
-            type: 'copy',
+            id: 'copy',
             data: {
                 isHtmlName: true,
                 name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.copy'], 'Ctrl+C'),
@@ -67,7 +69,7 @@ class EditorCode extends EditorMonaco {
         });
         menu.add({
             weight: 2,
-            type: 'paste',
+            id: 'paste',
             data: {
                 isHtmlName: true,
                 name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.paste'], 'Ctrl+V'),
@@ -76,12 +78,12 @@ class EditorCode extends EditorMonaco {
         });
         menu.add({
             weight: 3,
-            type: 'sep1',
+            id: 'sep1',
             data: '---------'
         });
         menu.add({
             weight: 4,
-            type: 'togglecomment',
+            id: 'togglecomment',
             data: {
                 isHtmlName: true,
                 name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.togglecomment'], 'Ctrl+/'),
@@ -90,7 +92,7 @@ class EditorCode extends EditorMonaco {
         });
         menu.add({
             weight: 5,
-            type: 'toggleBlockComment',
+            id: 'toggleBlockComment',
             data: {
                 isHtmlName: true,
                 name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.toggleBlockComment'], 'Shift+Alt+A'),
