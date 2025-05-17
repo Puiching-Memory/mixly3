@@ -7,9 +7,9 @@ goog.provide('Mixly.LocalStorage');
 const { MArray, LocalStorage } = Mixly;
 
 LocalStorage.PATH = {
-    USER: 'mixly2.0/user',
-    BOARD: 'mixly2.0/boards/{{d.boardType}}/user',
-    THIRD_PARTY: 'mixly2.0/boards/{{d.boardType}}/third_party/{{d.thirdPartyName}}'
+    USER: 'mixly3.0/user',
+    BOARD: 'mixly3.0/boards/{{d.boardType}}/user',
+    THIRD_PARTY: 'mixly3.0/boards/{{d.boardType}}/third_party/{{d.thirdPartyName}}'
 };
 
 LocalStorage.set = function (path, value) {

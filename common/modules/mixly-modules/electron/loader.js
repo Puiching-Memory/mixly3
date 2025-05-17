@@ -1,5 +1,6 @@
 goog.loadJs('electron', () => {
 
+goog.require('path');
 goog.require('Mixly.Url');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
@@ -32,7 +33,7 @@ Loader.onbeforeunload = function(reload = false) {
             window.location.reload(true);
         }
     }
-    let href = Env.srcDirPath + '/index.html?' + Url.jsonToUrl({ boardType: BOARD.boardType ?? 'None' });
+    let href = path.join(Env.srcDirPath, 'index.html') + '?' + Url.jsonToUrl({ boardType: BOARD.boardType ?? 'None' });
     let endPromise = [];
     const { mainStatusBarTabs } = Mixly;
     Serial.getCurrentPortsName().map((name) => {

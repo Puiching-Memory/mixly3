@@ -128,7 +128,7 @@ class WebSocketArduShell {
                     statusBarSerial.open()
                         .then(() => {
                             const baudRates = code.match(/(?<=Serial.begin[\s]*\([\s]*)[0-9]*(?=[\s]*\))/g);
-                            if (!baudRates.length) {
+                            if (!baudRates?.length) {
                                 return statusBarSerial.setBaudRate(9600);
                             } else {
                                 return statusBarSerial.setBaudRate(baudRates[0] - 0);

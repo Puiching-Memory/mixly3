@@ -1,31 +1,48 @@
 goog.loadJs('web', () => {
 
 goog.require('Mixly.Debug');
+goog.require('Mixly.Config');
 goog.require('Mixly.StatusBarsManager');
-goog.require('Mixly.WebSocket');
+goog.require('Mixly.Socket');
 goog.require('Mixly.WebSocket.Serial');
 goog.require('Mixly.WebSocket.ArduShell');
 goog.require('Mixly.WebSocket.BU');
 goog.require('Mixly.WebSocket.Ampy');
-goog.provide('Mixly.WebSocket.Socket');
+goog.provide('Mixly.WebSocket.Loader');
 
 const {
     Debug,
+    Config,
     StatusBarsManager,
+    Socket,
     WebSocket
 } = Mixly;
 
 const {
-    Socket,
+    Loader,
     Serial,
     ArduShell,
     BU,
     Ampy
 } = WebSocket;
 
+const { SOFTWARE } = Config;
 
-Socket.init = function () {
-    const mixlySocket = new WebSocket('wss://127.0.0.1:4000', {
+
+Loader.init = function () {
+    let url = '';
+    if (SOFTWARE.webSocket?.url) {
+        const info = new window.URL(SOFTWARE.webSocket.url);
+        if (info.hostname === 'default') {
+            info.hostname = window.location.hostname;
+            url = info.origin;
+        } else {
+            url = SOFTWARE.webSocket.url;
+        }
+    } else {
+        url = `wss://${window.location.host}`;
+    }
+    const mixlySocket = new Socket(`${url}/all`, {
         path: '/mixly-socket/',
         reconnection: true,
         reconnectionDelayMax: 10000,

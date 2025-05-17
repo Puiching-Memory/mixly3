@@ -5,10 +5,9 @@ goog.require('BoardId');
 goog.require('FSWrapper');
 goog.require('DAPWrapper');
 goog.require('PartialFlashing');
-goog.require('ESPTool');
+goog.require('esptooljs');
 goog.require('AdafruitESPTool');
 goog.require('CryptoJS');
-goog.require('AvrUploader');
 goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
@@ -52,7 +51,7 @@ const { BOARD, SELECTED_BOARD } = Config;
 const {
     ESPLoader,
     Transport
-} = ESPTool;
+} = esptooljs;
 
 BU.uploading = false;
 BU.burning = false;
@@ -333,6 +332,9 @@ BU.burnWithEsptool = async (binFile, erase) => {
     };
     try {
         await esploader.writeFlash(flashOptions);
+        await transport.setDTR(false);
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        await transport.setDTR(true);
         BU.progressLayer.hide();
         layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
         statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
@@ -660,6 +662,9 @@ BU.uploadWithAmpy = async (portName) => {
         for (let item of rootInfo) {
             rootMap[item[0]] = item[1];
         }
+        if (cwd === '/') {
+            cwd = '';
+        }
         if (libraries && libraries instanceof Object) {
             for (let key in libraries) {
                 if (rootMap[`${cwd}/${key}`] !== undefined && rootMap[`${cwd}/${key}`] === libraries[key].size) {
@@ -690,110 +695,6 @@ BU.uploadWithAmpy = async (portName) => {
         statusBarTerminal.addValue(`${error}\n`);
         statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadFailed']}==\n`);
     }
-}
-
-function hexToBuf (hex) {
-    var typedArray = new Uint8Array(hex.match(/[\da-f]{2}/gi).map(function (h) {
-        return parseInt(h, 16)
-    }));
-    
-    return typedArray.buffer;
-}
-
-BU.uploadWithEsptool = async (endType, obj, layerType) => {
-    const portName = 'web-serial';
-    const portObj = Serial.portsOperator[portName];
-    const { serialport, toolConfig } = portObj;
-    let prevBaud = toolConfig.baudRates;
-    if (prevBaud !== 115200) {
-        toolConfig.baudRates = 115200;
-        await serialport.setBaudRate(toolConfig.baudRates);
-    }
-    const { mainStatusBarTabs } = Mixly;
-    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
-    let firmwareData = obj.data;
-    if (endType || typeof firmwareData !== 'object') {
-        statusBarTerminal.addValue(Msg.Lang['shell.bin.readFailed'] + "！\n");
-        layer.close(layerType);
-        return;
-    }
-    layer.title(Msg.Lang['shell.uploading'] + '...', layerType);
-    statusBarTerminal.addValue(Msg.Lang['shell.bin.reading'] + "... ");
-    let firmwareList = [];
-    for (let i of firmwareData) {
-        if (!i.offset || !i.data) {
-            continue;
-        }
-        const firmware = {
-            offset: i.offset,
-            binBuf: hexToBuf(i.data)
-        };
-        firmwareList.push(firmware);
-    }
-    statusBarTerminal.addValue("Done!\n");
-    BU.burning = true;
-    BU.uploading = false;
-    statusBarTerminal.addValue(Msg.Lang['shell.uploading'] + '...\n');
-    mainStatusBarTabs.show();
-    mainStatusBarTabs.changeTo('output');
-    try {
-        SerialPort.refreshOutputBuffer = false;
-        SerialPort.refreshInputBuffer = true;
-        await espTool.reset();
-        if (await clickSync()) {
-            // await clickErase();
-            for (let i of firmwareList) {
-                await clickProgram(i.offset, i.binBuf);
-            }
-        }
-        layer.close(layerType);
-        layer.msg(Msg.Lang['shell.uploadSucc'], { time: 1000 });
-        statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadSucc']}==\n`);
-        Serial.reset(portName, 'upload');
-        mainStatusBarTabs.changeTo(portName);
-    } catch (error) {
-        Debug.error(error);
-        layer.close(layerType);
-        statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadFailed']}==\n`);
-    } finally {
-        SerialPort.refreshOutputBuffer = true;
-        SerialPort.refreshInputBuffer = false;
-        const code = MFile.getCode();
-        const baudRateList = code.match(/(?<=Serial.begin[\s]*\([\s]*)[0-9]*(?=[\s]*\))/g);
-        if (baudRateList && Serial.BAUDRATES.includes(baudRateList[0]-0)) {
-            prevBaud = baudRateList[0]-0;
-        }
-        if (toolConfig.baudRates !== prevBaud) {
-            toolConfig.baudRates = prevBaud;
-            await serialport.setBaudRate(prevBaud);
-        }
-    }
-}
-
-BU.uploadWithAvrUploader = async (endType, obj, layerType) => {
-    let firmwareData = obj.data;
-    const { mainStatusBarTabs } = Mixly;
-    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
-    if (endType || typeof firmwareData !== 'object') {
-        statusBarTerminal.addValue(Msg.Lang['shell.bin.readFailed'] + "！\n");
-        layer.close(layerType);
-        return;
-    }
-    statusBarTerminal.addValue(Msg.Lang['shell.uploading'] + '...\n');
-    layer.title(Msg.Lang['shell.uploading'] + '...', layerType);
-    let uploadSucMessageShow = true;
-    AvrUploader.upload(firmwareData[0].data, (progress) => {
-        if (progress >= 100 && uploadSucMessageShow) {
-            statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadSucc']}==\n`);
-            layer.msg(Msg.Lang['shell.uploadSucc'], { time: 1000 });
-            layer.close(layerType);
-            uploadSucMessageShow = false;
-        }
-    }, true)
-    .catch((error) => {
-        layer.close(layerType);
-        statusBarTerminal.addValue(`==${Msg.Lang['shell.uploadFailed']}==\n`);
-    });
 }
 
 /**

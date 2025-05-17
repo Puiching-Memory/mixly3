@@ -1028,7 +1028,7 @@ export const special_key = {
                 [Blockly.Msg.MIXLY_SPECIAL_KEY0, "0x00"],
                 [Blockly.Msg.MIXLY_SPECIAL_KEY1, "0x01"],
                 [Blockly.Msg.MIXLY_SPECIAL_KEY2, "0x02"],
-                [Blockly.Msg.MIXLY_SPECIAL_KEY1, "0x04"],
+                [Blockly.Msg.MIXLY_SPECIAL_KEY4, "0x04"],
                 [Blockly.Msg.MIXLY_SPECIAL_KEY8, "0x08"],
                 [Blockly.Msg.MIXLY_SPECIAL_KEY16, "0x10"],
                 [Blockly.Msg.MIXLY_SPECIAL_KEY32, "0x20"],

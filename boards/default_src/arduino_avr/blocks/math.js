@@ -19,7 +19,7 @@ export const math_number = {
                 Blockly.FieldTextInput.math_number_validator), 'NUM');
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MATH_NUMBER_TOOLTIP);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#id2");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/03Mathematics.html#id2");
     }
 };
 
@@ -34,7 +34,7 @@ export const math_arithmetic = {
         this.setOutput(true, Number);
         this.appendValueInput('A')
             .setCheck(null);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#id4");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/03Mathematics.html#id4");
         this.appendValueInput('B')
             .setCheck(null)
             .appendField(new Blockly.FieldDropdown(math_arithmetic.OPERATORS), 'OP');
@@ -75,7 +75,7 @@ export const math_bit = {
             .appendField(new Blockly.FieldDropdown(math_bit.OPERATORS), 'OP');
         this.setInputsInline(true);
         this.setTooltip("");
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#id8");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/03Mathematics.html#id8");
     },
     OPERATORS: [
         ['&', '&'],
@@ -100,7 +100,7 @@ export const math_trig = {
             .appendField(new Blockly.FieldDropdown(math_trig.OPERATORS), 'OP');
         // Assign 'this' to a variable for use in the tooltip closure below.
         var thisBlock = this;
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#id17");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/03Mathematics.html#id21");
         this.setTooltip(function () {
             var mode = thisBlock.getFieldValue('OP');
             var TOOLTIPS = {
@@ -139,7 +139,7 @@ export const math_to_int = {
             .setCheck(Number)
             .appendField(new Blockly.FieldDropdown(math_to_int.OPERATORS), 'OP');
         this.setOutput(true, Number);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#id18");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/03Mathematics.html#id35");
         var thisBlock = this;
         this.setTooltip(function () {
             var mode = thisBlock.getFieldValue('OP');
@@ -226,7 +226,7 @@ export const math_max_min = {
             .setAlign(Blockly.inputs.Align.RIGHT)
             .appendField(')');
         this.setInputsInline(true);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#min-max");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/03Mathematics.html#min-max");
         this.setOutput(true, Number);
         var thisBlock = this;
         this.setTooltip(function () {
@@ -255,7 +255,7 @@ export const math_random_seed = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_MATH_RANDOM_SEED);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#randomseed");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/03Mathematics.html#randomseed");
     }
 };
 
@@ -276,7 +276,7 @@ export const math_random_int = {
             .appendField(Blockly.Msg.LANG_MATH_RANDOM_INT_INPUT_TO);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MATH_RANDOM_INT_TOOLTIP);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#random");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/03Mathematics.html#random");
     }
 };
 
@@ -299,7 +299,7 @@ export const math_constrain = {
             .appendField(Blockly.Msg.LANG_MATH_CONSTRAIN_INPUT_HIGH);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MATH_CONSTRAIN_TOOLTIP);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#constrain");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/03Mathematics.html#constrain");
     }
 };
 
@@ -330,7 +330,7 @@ export const base_map = {
         this.setInputsInline(true);
         this.setOutput(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_MATH_MAP);
-        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#map");
+        this.setHelpUrl("https://mixly.readthedocs.io/zh-cn/latest/Arduino/AVR/03Mathematics.html#map");
     }
 };
 

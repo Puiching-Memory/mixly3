@@ -16,7 +16,8 @@ goog.require('Mixly.Debug');
 goog.require('Mixly.API2');
 goog.require('Mixly.Electron.LibManager');
 goog.require('Mixly.Electron.File');
-goog.require('Mixly.WebSocket.Socket');
+goog.require('Mixly.WebCompiler.Loader');
+goog.require('Mixly.WebSocket.Loader');
 goog.provide('Mixly.Loader');
 
 const {
@@ -35,16 +36,20 @@ const {
     API2,
     Electron = {},
     Web = {},
+    WebCompiler = {},
     WebSocket = {}
 } = Mixly;
 
 const { LibManager, File } = goog.isElectron? Electron : Web;
-const { Socket } = WebSocket;
 
 
 window.addEventListener('load', () => {
-    if (!goog.isElectron && Env.hasSocketServer) {
-        Socket.init();
+    if (!goog.isElectron) {
+        if (Env.hasSocketServer) {
+            WebSocket.Loader.init();
+        } else if (Env.hasCompiler) {
+            WebCompiler.Loader.init();
+        }
     }
     const app = new App($('body')[0]);
     Mixly.app = app;

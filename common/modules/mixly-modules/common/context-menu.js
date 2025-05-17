@@ -41,10 +41,11 @@ class ContextMenu {
         }
     }
 
+    #selector_ = null;
     #menus_ = new Registry();
     #events_ = new Events(['getMenu']);
     constructor(selector, config = {}) {
-        this.selector = selector;
+        this.#selector_ = selector;
         this.menu = $.contextMenu({
             selector,
             build: ($trigger) => {
@@ -67,20 +68,20 @@ class ContextMenu {
         return ContextMenu.generate(menu, $trigger, e);
     }
 
-    dispose() {
-        $.contextMenu('destroy', this.selector);
-        this.#events_.reset();
-        this.#menus_.reset();
-        this.menu = null;
-        this.selector = null;
-    }
-
     show() {
-        $(this.selector).contextMenu();
+        $(this.#selector_).contextMenu();
     }
 
     hide() {
-        $(this.selector).contextMenu('hide');
+        $(this.#selector_).contextMenu('hide');
+    }
+
+    dispose() {
+        $.contextMenu('destroy', this.#selector_);
+        this.#events_.reset();
+        this.#menus_.reset();
+        this.menu = null;
+        this.#selector_ = null;
     }
 
     bind(type, func) {

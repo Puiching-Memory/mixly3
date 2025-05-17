@@ -398,7 +398,7 @@ export const actuator_neopixel_init = {
     init: function () {
         this.setColour(ACTUATOR_EXTERN_HUE);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_RGB)
+            .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput('SUB')
             .appendField(Blockly.Msg.MIXLY_SETUP)
             .setCheck("var");
@@ -421,7 +421,7 @@ export const actuator_neopixel_rgb = {
     init: function () {
         this.setColour(ACTUATOR_EXTERN_HUE);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_RGB)
+            .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput('SUB')
             .setCheck("var");
         // .appendField(Blockly.Msg.MIXLY_SETUP)
@@ -453,7 +453,7 @@ export const actuator_neopixel_rgb_all = {
     init: function () {
         this.setColour(ACTUATOR_EXTERN_HUE);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_RGB)
+            .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput('SUB')
             .setCheck("var");
         this.appendValueInput("RVALUE")
@@ -480,11 +480,7 @@ export const actuator_neopixel_write = {
     init: function () {
         this.setColour(ACTUATOR_EXTERN_HUE);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_RGB)
-        // this.appendValueInput("PIN", Number)
-        //    .setCheck(Number)
-        //    .setAlign(Blockly.inputs.Align.RIGHT)
-        //    .appendField(Blockly.Msg.MIXLY_PIN);
+            .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput('SUB')
             .setCheck("var");
         this.appendDummyInput()
@@ -494,6 +490,58 @@ export const actuator_neopixel_write = {
         this.setNextStatement(true, null);
         this.setTooltip('');
         this.setTooltip(Blockly.Msg.MIXLY_ESP32_MUSIC_WRI);
+    }
+};
+
+export const actuator_neopixel_rgb_show_all_rainbow = {
+    init: function () {
+        this.setColour(ACTUATOR_EXTERN_HUE);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_RGB);
+        this.appendValueInput('SUB')
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_RAINBOW);
+        this.appendValueInput('time')
+            .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_DURATION)
+            .appendField(Blockly.Msg.MIXLY_MILLIS);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip('');
+    }
+};
+
+export const actuator_neopixel_rgb_show_all_chase = {
+    init: function () {
+        this.setColour(ACTUATOR_EXTERN_HUE);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_RGB);
+        this.appendValueInput('SUB')
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_CHASE);
+        this.appendValueInput("RVALUE")
+            .setCheck(Number)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.MIXLY_RGB_R);
+        this.appendValueInput("GVALUE")
+            .setCheck(Number)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.MIXLY_RGB_G);
+        this.appendValueInput("BVALUE")
+            .setCheck(Number)
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField(Blockly.Msg.MIXLY_RGB_B);
+        this.appendValueInput('time')
+            .setCheck(Number)
+            .appendField(Blockly.Msg.PYTHON_RANGE_STEP)
+            .appendField(Blockly.Msg.MIXLY_MILLIS);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip('');
     }
 };
 
