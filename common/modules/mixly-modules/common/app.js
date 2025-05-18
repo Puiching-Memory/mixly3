@@ -569,6 +569,34 @@ class App extends Component {
 
         settingMenu.add({
             weight: 0,
+            id: 'manage-libraries',
+            preconditionFn: () => {
+                return goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary;
+            },
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['nav.btn.setting.manageLibs'], 'Ctrl+M'),
+                callback: () => LibManager.showManageDialog()
+            }
+        });
+
+        if (goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary) {
+            hotkeys('ctrl+m', function(event) {
+                LibManager.showManageDialog();
+            });
+        }
+
+        settingMenu.add({
+            weight: 1,
+            id: 'sep1',
+            preconditionFn: () => {
+                return goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary;
+            },
+            data: '---------'
+        });
+
+        settingMenu.add({
+            weight: 2,
             id: 'feedback',
             preconditionFn: () => {
                 return true;
@@ -589,7 +617,7 @@ class App extends Component {
         });
 
         settingMenu.add({
-            weight: 1,
+            weight: 3,
             id: 'wiki',
             preconditionFn: () => {
                 return true;
@@ -608,34 +636,6 @@ class App extends Component {
             const href = 'https://mixly.readthedocs.io/zh-cn/latest/contents.html';
             Url.open(href);
         });
-
-        settingMenu.add({
-            weight: 2,
-            id: 'sep1',
-            preconditionFn: () => {
-                return goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary;
-            },
-            data: '---------'
-        });
-
-        settingMenu.add({
-            weight: 3,
-            id: 'manage-libraries',
-            preconditionFn: () => {
-                return goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary;
-            },
-            data: {
-                isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['nav.btn.setting.manageLibs'], 'Ctrl+M'),
-                callback: () => LibManager.showManageDialog()
-            }
-        });
-
-        if (goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary) {
-            hotkeys('ctrl+m', function(event) {
-                LibManager.showManageDialog();
-            });
-        }
     }
 
     #addObserver_() {
