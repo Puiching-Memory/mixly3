@@ -1,6 +1,6 @@
 import * as goog from 'goog';
 import { Msg } from 'blockly/core';
-import { Workspace, ContextMenu } from 'mixly';
+import { Workspace, Menu } from 'mixly';
 import FSArduEsp32Handler from './fs-board-handler';
 
 
@@ -25,7 +25,7 @@ export default function addBoardFSItem () {
         },
         data: {
             isHtmlName: true,
-            name: ContextMenu.getItem(Msg.BOARD_FS, ''),
+            name: Menu.getItem(Msg.BOARD_FS),
             callback: () => {
                 statusBarsManager.add({
                     type: 'board-fs',

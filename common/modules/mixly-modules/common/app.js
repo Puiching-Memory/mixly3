@@ -9,7 +9,6 @@ goog.require('Mixly.Msg');
 goog.require('Mixly.Drag');
 goog.require('Mixly.Nav');
 goog.require('Mixly.Menu');
-goog.require('Mixly.ContextMenu');
 goog.require('Mixly.Workspace');
 goog.require('Mixly.FooterBar');
 goog.require('Mixly.HTMLTemplate');
@@ -44,7 +43,6 @@ const {
     Drag,
     Nav,
     Menu,
-    ContextMenu,
     Workspace,
     FooterBar,
     HTMLTemplate,
@@ -467,7 +465,7 @@ class App extends Component {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['nav.btn.file.new'], 'Ctrl+N'),
+                name: Menu.getItem(Msg.Lang['nav.btn.file.new'], 'Ctrl+N', 'icon-doc-new'),
                 callback: () => File.new()
             }
         });
@@ -486,7 +484,7 @@ class App extends Component {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['nav.btn.file.open'], 'Ctrl+O'),
+                name: Menu.getItem(Msg.Lang['nav.btn.file.open'], 'Ctrl+O', 'icon-doc'),
                 callback: (key, opt) => File.open()
             }
         });
@@ -510,7 +508,7 @@ class App extends Component {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['nav.btn.file.save'], 'Ctrl+S'),
+                name: Menu.getItem(Msg.Lang['nav.btn.file.save'], 'Ctrl+S', 'icon-floppy'),
                 callback: () => File.save()
             }
         });
@@ -528,7 +526,7 @@ class App extends Component {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['nav.btn.file.saveAs'], 'Ctrl+Shift+S'),
+                name: Menu.getItem(Msg.Lang['nav.btn.file.saveAs'], 'Ctrl+Shift+S', 'icon-save-as'),
                 callback: () => File.saveAs()
             }
         });
@@ -555,7 +553,7 @@ class App extends Component {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['nav.btn.file.exportAs'], 'Ctrl+E'),
+                name: Menu.getItem(Msg.Lang['nav.btn.file.exportAs'], 'Ctrl+E', 'icon-export'),
                 callback: () => File.exportLib()
             }
         });
@@ -575,7 +573,7 @@ class App extends Component {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['nav.btn.setting.manageLibs'], 'Ctrl+M'),
+                name: Menu.getItem(Msg.Lang['nav.btn.setting.manageLibs'], 'Ctrl+M', 'icon-menu'),
                 callback: () => LibManager.showManageDialog()
             }
         });
@@ -603,7 +601,7 @@ class App extends Component {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['nav.btn.setting.feedback'], 'Ctrl+Shift+F'),
+                name: Menu.getItem(Msg.Lang['nav.btn.setting.feedback'], 'Ctrl+Shift+F', 'icon-comment-1'),
                 callback: () => {
                     const href = 'https://gitee.com/bnu_mixly/mixly3/issues';
                     Url.open(href);
@@ -624,7 +622,7 @@ class App extends Component {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem('文档', 'Ctrl+H'),
+                name: Menu.getItem(Msg.Lang['nav.btn.setting.wiki'], 'Ctrl+H', 'icon-book-open'),
                 callback: () => {
                     const href = 'https://mixly.readthedocs.io/zh-cn/latest/contents.html';
                     Url.open(href);

@@ -79,6 +79,7 @@
     "nav.btn.setting.manageLibs": "Manage libs",
     "nav.btn.setting.firmware": "Firmware",
     "nav.btn.setting.feedback": "Feedback",
+    "nav.btn.setting.wiki": "Wiki",
     "shell.compiling": "Compiling",
     "shell.compileFailed": "Compile failed",
     "shell.compileSucc": "Compile successful",

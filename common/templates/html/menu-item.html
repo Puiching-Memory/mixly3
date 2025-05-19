@@ -1,0 +1,11 @@
+<div class="menu-line">
+    {{# if (d.icon) { }}
+    <label class="text {{d.icon}}">{{d.name}}</label>
+    {{# } else { }}
+    <label class="item">{{d.name}}</label>
+    {{# } }}
+    <div class="sep"></div>
+    {{# if (d.hotKey) { }}
+    <label class="hot-key">{{d.hotKey}}</label>
+    {{# } }}
+</div>

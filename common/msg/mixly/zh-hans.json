@@ -79,6 +79,7 @@
     "nav.btn.setting.manageLibs": "管理库",
     "nav.btn.setting.firmware": "固件",
     "nav.btn.setting.feedback": "反馈",
+    "nav.btn.setting.wiki": "文档",
     "shell.compiling": "编译中",
     "shell.compileFailed": "编译失败",
     "shell.compileSucc": "编译成功",

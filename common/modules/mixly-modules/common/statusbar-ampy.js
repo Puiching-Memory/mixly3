@@ -9,7 +9,7 @@ goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.DragV');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.Serial');
-goog.require('Mixly.ContextMenu');
+goog.require('Mixly.Menu');
 goog.require('Mixly.AmpyFileTree');
 goog.provide('Mixly.StatusBarAmpy');
 
@@ -21,7 +21,7 @@ const {
     DragV,
     StatusBar,
     Serial,
-    ContextMenu,
+    Menu,
     AmpyFileTree
 } = Mixly;
 
@@ -168,7 +168,7 @@ class StatusBarAmpy extends PageBase {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['statusbar.ampy.refresh'], ''),
+                name: Menu.getItem(Msg.Lang['statusbar.ampy.refresh'], ''),
                 callback: (_, { $trigger }) => {
                     let type = $trigger.attr('type');
                     if (type === 'root') {
@@ -205,7 +205,7 @@ class StatusBarAmpy extends PageBase {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['statusbar.ampy.exit'], ''),
+                name: Menu.getItem(Msg.Lang['statusbar.ampy.exit'], ''),
                 callback: () => {
                     this.closeFS();
                 }
@@ -227,7 +227,7 @@ class StatusBarAmpy extends PageBase {
             id: 'cut',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.cut'], 'Ctrl+X'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.cut'], 'Ctrl+X'),
                 callback: () => this.#editor_.cut()
             }
         });
@@ -236,7 +236,7 @@ class StatusBarAmpy extends PageBase {
             id: 'copy',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.copy'], 'Ctrl+C'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.copy'], 'Ctrl+C'),
                 callback: () => this.#editor_.copy()
             }
         });
@@ -245,7 +245,7 @@ class StatusBarAmpy extends PageBase {
             id: 'paste',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.paste'], 'Ctrl+V'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.paste'], 'Ctrl+V'),
                 callback: () => this.#editor_.paste()
             }
         });
@@ -259,7 +259,7 @@ class StatusBarAmpy extends PageBase {
             id: 'togglecomment',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.togglecomment'], 'Ctrl+/'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.togglecomment'], 'Ctrl+/'),
                 callback: () => this.#editor_.commentLine()
             }
         });
@@ -268,7 +268,7 @@ class StatusBarAmpy extends PageBase {
             id: 'toggleBlockComment',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.toggleBlockComment'], 'Shift+Alt+A'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.toggleBlockComment'], 'Shift+Alt+A'),
                 callback: (key, opt) => this.#editor_.blockComment()
             }
         });*/
@@ -290,7 +290,7 @@ class StatusBarAmpy extends PageBase {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['file.save'], 'Ctrl+S'),
+                name: Menu.getItem(Msg.Lang['file.save'], 'Ctrl+S'),
                 callback: async () => {
                     await this.put();
                 }

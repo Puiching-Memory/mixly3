@@ -11,7 +11,7 @@ goog.require('Mixly.StatusBar');
 goog.require('Mixly.SideBarsManager');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.PageBase');
-goog.require('Mixly.ContextMenu');
+goog.require('Mixly.Menu');
 goog.require('Mixly.StatusBarSerialOutput');
 goog.require('Mixly.StatusBarSerialChart');
 goog.require('Mixly.Electron.Serial');
@@ -29,7 +29,7 @@ const {
     RightSideBarsManager,
     HTMLTemplate,
     PageBase,
-    ContextMenu,
+    Menu,
     StatusBarSerialOutput,
     StatusBarSerialChart,
     Electron = {},
@@ -186,7 +186,7 @@ class StatusBarSerial extends PageBase {
                 },
                 data: {
                     isHtmlName: true,
-                    name: ContextMenu.getItem(Msg.Lang['statusbar.serial.interrupt'], 'Ctrl+C'),
+                    name: Menu.getItem(Msg.Lang['statusbar.serial.interrupt'], 'Ctrl+C'),
                     callback: (key, opt) => this.interrupt().catch(Debug.error)
                 }
             });
@@ -200,7 +200,7 @@ class StatusBarSerial extends PageBase {
                 },
                 data: {
                     isHtmlName: true,
-                    name: ContextMenu.getItem(Msg.Lang['statusbar.serial.reset'], 'Ctrl+D'),
+                    name: Menu.getItem(Msg.Lang['statusbar.serial.reset'], 'Ctrl+D'),
                     callback: (key, opt) => this.reset().catch(Debug.error)
                 }
             });
@@ -213,7 +213,7 @@ class StatusBarSerial extends PageBase {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['statusbar.serial.toggle'], ''),
+                name: Menu.getItem(Msg.Lang['statusbar.serial.toggle'], ''),
                 callback: (key, opt) => this.toggle().catch(Debug.error)
             }
         });

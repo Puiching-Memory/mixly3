@@ -257,7 +257,7 @@ class FileTree extends Component {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['fileTree.newFolder'], ''),
+                name: Menu.getItem(Msg.Lang['fileTree.newFolder'], ''),
                 callback: (_, { $trigger }) => {
                     let type = $trigger.attr('type');
                     if (type === 'root') {
@@ -279,7 +279,7 @@ class FileTree extends Component {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['fileTree.newFile'], ''),
+                name: Menu.getItem(Msg.Lang['fileTree.newFile'], ''),
                 callback: (_, { $trigger }) => {
                     let type = $trigger.attr('type');
                     if (type === 'root') {
@@ -310,7 +310,7 @@ class FileTree extends Component {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.cut'], ''),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.cut'], ''),
                 callback: (_, { $trigger }) => {
                     let id = $trigger.attr('id');
                     this.cutNode(id);
@@ -326,7 +326,7 @@ class FileTree extends Component {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.copy'], ''),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.copy'], ''),
                 callback: (_, { $trigger }) => {
                     let id = $trigger.attr('id');
                     this.copyNode(id);
@@ -342,7 +342,7 @@ class FileTree extends Component {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.paste'], ''),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.paste'], ''),
                 callback: (_, { $trigger }) => {
                     let id = $trigger.attr('id');
                     this.pasteNode(id);
@@ -359,7 +359,7 @@ class FileTree extends Component {
             id: 'copy_path',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['fileTree.copyPath'], ''),
+                name: Menu.getItem(Msg.Lang['fileTree.copyPath'], ''),
                 callback: (_, { $trigger }) => {
                     let outPath = null;
                     let type = $trigger.attr('type');
@@ -382,7 +382,7 @@ class FileTree extends Component {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['fileTree.rename'], ''),
+                name: Menu.getItem(Msg.Lang['fileTree.rename'], ''),
                 callback: (_, { $trigger }) => {
                     let type = $trigger.attr('type');
                     let id = $trigger.attr('id');
@@ -403,7 +403,7 @@ class FileTree extends Component {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['fileTree.delete'], ''),
+                name: Menu.getItem(Msg.Lang['fileTree.delete'], ''),
                 callback: (_, { $trigger }) => {
                     let type = $trigger.attr('type');
                     let id = $trigger.attr('id');

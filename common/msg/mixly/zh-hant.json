@@ -80,6 +80,7 @@
     "nav.btn.setting.manageLibs": "管理函式庫",
     "nav.btn.setting.firmware": "韌體",
     "nav.btn.setting.feedback": "回饋",
+    "nav.btn.setting.wiki": "維基",
     "shell.compiling": "編譯中",
     "shell.compileFailed": "編譯失敗",
     "shell.compileSucc": "編譯成功",

@@ -1,30 +1,20 @@
 goog.loadJs('common', () => {
 
 goog.require('$.contextMenu');
-goog.require('Mixly.XML');
-goog.require('Mixly.Env');
+goog.require('Mixly.Menu');
 goog.require('Mixly.Events');
 goog.require('Mixly.Registry');
-goog.require('Mixly.HTMLTemplate');
 goog.provide('Mixly.ContextMenu');
 
 const {
-    XML,
-    Env,
+    Menu,
     Events,
-    Registry,
-    HTMLTemplate
+    Registry
 } = Mixly;
+
 
 class ContextMenu {
     static {
-        HTMLTemplate.add(
-            'html/context-menu-item.html',
-            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/context-menu-item.html')))
-        );
-
-        this.getItem = (name, hotKey) => HTMLTemplate.get('html/context-menu-item.html').render({ name, hotKey });
-
         this.generate = (menu, $trigger) => {
             let menuItems = {};
             for (let item of menu.getAllItems()) {

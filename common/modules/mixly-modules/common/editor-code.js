@@ -6,9 +6,9 @@ goog.require('Mixly.Config');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
+goog.require('Mixly.Menu');
 goog.require('Mixly.ContextMenu');
 goog.require('Mixly.IdGenerator');
-goog.require('Mixly.Menu');
 goog.require('Mixly.EditorMonaco');
 goog.provide('Mixly.EditorCode');
 
@@ -17,9 +17,9 @@ const {
     XML,
     Env,
     Msg,
+    Menu,
     ContextMenu,
     IdGenerator,
-    Menu,
     EditorMonaco
 } = Mixly;
 const { USER } = Config;
@@ -54,7 +54,7 @@ class EditorCode extends EditorMonaco {
             id: 'cut',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.cut'], 'Ctrl+X'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.cut'], 'Ctrl+X'),
                 callback: (key, opt) => this.cut()
             }
         });
@@ -63,7 +63,7 @@ class EditorCode extends EditorMonaco {
             id: 'copy',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.copy'], 'Ctrl+C'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.copy'], 'Ctrl+C'),
                 callback: (key, opt) => this.copy()
             }
         });
@@ -72,7 +72,7 @@ class EditorCode extends EditorMonaco {
             id: 'paste',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.paste'], 'Ctrl+V'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.paste'], 'Ctrl+V'),
                 callback: (key, opt) => this.paste()
             }
         });
@@ -86,7 +86,7 @@ class EditorCode extends EditorMonaco {
             id: 'togglecomment',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.togglecomment'], 'Ctrl+/'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.togglecomment'], 'Ctrl+/'),
                 callback: (key, opt) => this.commentLine()
             }
         });
@@ -95,7 +95,7 @@ class EditorCode extends EditorMonaco {
             id: 'toggleBlockComment',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.toggleBlockComment'], 'Shift+Alt+A'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.toggleBlockComment'], 'Shift+Alt+A'),
                 callback: (key, opt) => this.blockComment()
             }
         });

@@ -1,17 +1,33 @@
 goog.loadJs('common', () => {
 
+goog.require('Mixly.Env');
 goog.require('Mixly.Debug');
-goog.require('Mixly.IdGenerator');
 goog.require('Mixly.Events');
+goog.require('Mixly.IdGenerator');
+goog.require('Mixly.HTMLTemplate');
 goog.provide('Mixly.Menu');
 
 const {
+    Env,
     Debug,
+    Events,
     IdGenerator,
-    Events
+    HTMLTemplate
 } = Mixly;
 
+
 class Menu {
+    static {
+        HTMLTemplate.add(
+            'html/menu-item.html',
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/menu-item.html')))
+        );
+
+        this.getItem = (name, hotKey = '', icon = '') => {
+            return HTMLTemplate.get('html/menu-item.html').render({ name, hotKey, icon });
+        };
+    }
+
     #menuItems_ = [];
     #ids_ = {};
     #isDynamic_ = false;

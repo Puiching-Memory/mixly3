@@ -6,7 +6,6 @@ goog.require('Mixly.IdGenerator');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.HTMLTemplate');
-goog.require('Mixly.ContextMenu');
 goog.require('Mixly.Debug');
 goog.require('Mixly.Menu');
 goog.require('Mixly.PageBase');
@@ -21,7 +20,6 @@ const {
     XML,
     Env,
     HTMLTemplate,
-    ContextMenu,
     Debug,
     Menu,
     PageBase,
@@ -78,7 +76,7 @@ class SideBarLocalStorage extends PageBase {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem('打开新文件夹', ''),
+                name: Menu.getItem('打开新文件夹', ''),
                 callback: () => {
                     this.showDirectoryPicker();
                 }

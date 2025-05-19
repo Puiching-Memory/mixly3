@@ -8,7 +8,7 @@ import {
     HTMLTemplate,
     DragV,
     StatusBar,
-    ContextMenu,
+    Menu,
     Debug,
     StatusBarsManager,
     Workspace
@@ -155,7 +155,7 @@ export default class StatusBarFileSystem extends PageBase {
             type: 'copy_path',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['fileTree.copyPath'], ''),
+                name: Menu.getItem(Msg.Lang['fileTree.copyPath']),
                 callback: (_, { $trigger }) => {
                     let outPath = null;
                     let type = $trigger.attr('type');
@@ -198,7 +198,7 @@ export default class StatusBarFileSystem extends PageBase {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['statusbar.ampy.refresh'], ''),
+                name: Menu.getItem(Msg.Lang['statusbar.ampy.refresh']),
                 callback: (_, { $trigger }) => {
                     let type = $trigger.attr('type');
                     if (type === 'root') {
@@ -235,7 +235,7 @@ export default class StatusBarFileSystem extends PageBase {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['statusbar.ampy.exit'], ''),
+                name: Menu.getItem(Msg.Lang['statusbar.ampy.exit']),
                 callback: () => {
                     this.closeFS();
                 }
@@ -257,7 +257,7 @@ export default class StatusBarFileSystem extends PageBase {
             type: 'cut',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.cut'], 'Ctrl+X'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.cut'], 'Ctrl+X'),
                 callback: () => this.#editor_.cut()
             }
         });
@@ -266,7 +266,7 @@ export default class StatusBarFileSystem extends PageBase {
             type: 'copy',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.copy'], 'Ctrl+C'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.copy'], 'Ctrl+C'),
                 callback: () => this.#editor_.copy()
             }
         });
@@ -275,7 +275,7 @@ export default class StatusBarFileSystem extends PageBase {
             type: 'paste',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.paste'], 'Ctrl+V'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.paste'], 'Ctrl+V'),
                 callback: () => this.#editor_.paste()
             }
         });
@@ -289,7 +289,7 @@ export default class StatusBarFileSystem extends PageBase {
             type: 'togglecomment',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.togglecomment'], 'Ctrl+/'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.togglecomment'], 'Ctrl+/'),
                 callback: () => this.#editor_.commentLine()
             }
         });
@@ -311,7 +311,7 @@ export default class StatusBarFileSystem extends PageBase {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['file.save'], 'Ctrl+S'),
+                name: Menu.getItem(Msg.Lang['file.save'], 'Ctrl+S'),
                 callback: async () => {
                     await this.put();
                 }

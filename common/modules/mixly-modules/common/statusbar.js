@@ -22,6 +22,7 @@ const {
 } = Mixly;
 const { USER } = Config;
 
+
 class StatusBar extends EditorAce {
     #contextMenu_ = null;
     constructor() {
@@ -44,7 +45,7 @@ class StatusBar extends EditorAce {
             id: 'copy',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.copy'], 'Ctrl+C'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.copy'], 'Ctrl+C'),
                 callback: (key, opt) => this.copy()
             }
         });

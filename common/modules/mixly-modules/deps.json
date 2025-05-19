@@ -31,7 +31,6 @@
             "Mixly.Drag",
             "Mixly.Nav",
             "Mixly.Menu",
-            "Mixly.ContextMenu",
             "Mixly.Workspace",
             "Mixly.FooterBar",
             "Mixly.HTMLTemplate",
@@ -149,11 +148,9 @@
         "path": "/common/context-menu.js",
         "require": [
             "$.contextMenu",
-            "Mixly.XML",
-            "Mixly.Env",
+            "Mixly.Menu",
             "Mixly.Events",
-            "Mixly.Registry",
-            "Mixly.HTMLTemplate"
+            "Mixly.Registry"
         ],
         "provide": [
             "Mixly.ContextMenu"
@@ -282,9 +279,9 @@
             "Mixly.XML",
             "Mixly.Env",
             "Mixly.Msg",
+            "Mixly.Menu",
             "Mixly.ContextMenu",
             "Mixly.IdGenerator",
-            "Mixly.Menu",
             "Mixly.EditorMonaco"
         ],
         "provide": [
@@ -322,12 +319,11 @@
             "Mixly.Msg",
             "Mixly.Config",
             "Mixly.Env",
-            "Mixly.LayerExt",
-            "Mixly.ContextMenu",
             "Mixly.Debug",
             "Mixly.Menu",
             "Mixly.Boards",
             "Mixly.MJson",
+            "Mixly.LayerExt",
             "Mixly.HTMLTemplate",
             "Mixly.EditorBlockly",
             "Mixly.EditorCode",
@@ -700,9 +696,11 @@
     {
         "path": "/common/menu.js",
         "require": [
+            "Mixly.Env",
             "Mixly.Debug",
+            "Mixly.Events",
             "Mixly.IdGenerator",
-            "Mixly.Events"
+            "Mixly.HTMLTemplate"
         ],
         "provide": [
             "Mixly.Menu"
@@ -787,8 +785,6 @@
             "Mixly.Msg",
             "Mixly.HTMLTemplate",
             "Mixly.Component",
-            "Mixly.Menu",
-            "Mixly.ContextMenu",
             "Mixly.DropdownMenuGroup"
         ],
         "provide": [
@@ -908,7 +904,6 @@
             "Mixly.XML",
             "Mixly.Env",
             "Mixly.HTMLTemplate",
-            "Mixly.ContextMenu",
             "Mixly.Debug",
             "Mixly.Menu",
             "Mixly.PageBase",
@@ -963,7 +958,7 @@
             "Mixly.DragV",
             "Mixly.StatusBar",
             "Mixly.Serial",
-            "Mixly.ContextMenu",
+            "Mixly.Menu",
             "Mixly.AmpyFileTree"
         ],
         "provide": [
@@ -1093,7 +1088,7 @@
             "Mixly.SideBarsManager",
             "Mixly.HTMLTemplate",
             "Mixly.PageBase",
-            "Mixly.ContextMenu",
+            "Mixly.Menu",
             "Mixly.StatusBarSerialOutput",
             "Mixly.StatusBarSerialChart",
             "Mixly.Electron.Serial",
@@ -1137,7 +1132,6 @@
             "Mixly.StatusBarLibs",
             "Mixly.StatusBarAmpy",
             "Mixly.PagesManager",
-            "Mixly.ContextMenu",
             "Mixly.DropdownMenu",
             "Mixly.Menu",
             "Mixly.IdGenerator",

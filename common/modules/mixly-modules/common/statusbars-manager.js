@@ -14,7 +14,6 @@ goog.require('Mixly.StatusBarFS');
 goog.require('Mixly.StatusBarLibs');
 goog.require('Mixly.StatusBarAmpy')
 goog.require('Mixly.PagesManager');
-goog.require('Mixly.ContextMenu');
 goog.require('Mixly.DropdownMenu');
 goog.require('Mixly.Menu');
 goog.require('Mixly.IdGenerator');
@@ -36,7 +35,6 @@ const {
     StatusBarLibs,
     StatusBarAmpy,
     PagesManager,
-    ContextMenu,
     DropdownMenu,
     Menu,
     IdGenerator,
@@ -158,7 +156,7 @@ class StatusBarsManager extends PagesManager {
             },
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['statusbar.openSelectedPort'], ''),
+                name: Menu.getItem(Msg.Lang['statusbar.openSelectedPort'], ''),
                 callback: (key, opt) => {
                     this.openSelectedPort();
                 }
@@ -170,7 +168,7 @@ class StatusBarsManager extends PagesManager {
             children: serialChildMenu,
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['statusbar.openPort'], '')
+                name: Menu.getItem(Msg.Lang['statusbar.openPort'], '')
             }
         });
 
@@ -179,7 +177,7 @@ class StatusBarsManager extends PagesManager {
             id: 'lib',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem('第三方库管理', ''),
+                name: Menu.getItem('第三方库管理', ''),
                 callback: (key, opt) => {
                     this.add('libs', 'libs', '第三方库管理');
                     this.changeTo('libs');
@@ -199,7 +197,7 @@ class StatusBarsManager extends PagesManager {
                 id: 'ampy',
                 data: {
                     isHtmlName: true,
-                    name: ContextMenu.getItem(Msg.Lang['statusbar.ampy'], ''),
+                    name: Menu.getItem(Msg.Lang['statusbar.ampy'], ''),
                     callback: (key, opt) => {
                         this.add({
                             id: 'ampy',

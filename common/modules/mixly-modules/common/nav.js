@@ -7,8 +7,6 @@ goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.Component');
-goog.require('Mixly.Menu');
-goog.require('Mixly.ContextMenu');
 goog.require('Mixly.DropdownMenuGroup');
 goog.provide('Mixly.Nav');
 
@@ -18,8 +16,6 @@ const {
     Msg,
     HTMLTemplate,
     Component,
-    Menu,
-    ContextMenu,
     DropdownMenuGroup
 } = Mixly;
 

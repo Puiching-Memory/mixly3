@@ -10,12 +10,11 @@ goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
-goog.require('Mixly.LayerExt');
-goog.require('Mixly.ContextMenu');
 goog.require('Mixly.Debug');
 goog.require('Mixly.Menu');
 goog.require('Mixly.Boards');
 goog.require('Mixly.MJson');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorBlockly');
 goog.require('Mixly.EditorCode');
@@ -33,7 +32,6 @@ const {
     Msg,
     Config,
     Env,
-    ContextMenu,
     Debug,
     Menu,
     Boards,
@@ -44,6 +42,7 @@ const {
 const { BOARD, SOFTWARE } = Config;
 
 const { form } = layui;
+
 
 class EditorMix extends EditorBase {
     static {
@@ -112,7 +111,7 @@ class EditorMix extends EditorBase {
             id: 'copy',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['editor.contextMenu.copy'], 'Ctrl+C'),
+                name: Menu.getItem(Msg.Lang['editor.contextMenu.copy'], 'Ctrl+C'),
                 callback: (key, opt) => codePage.copy()
             }
         });
