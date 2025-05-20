@@ -152,7 +152,7 @@ export default class StatusBarFileSystem extends PageBase {
 
         fileTreeMenu.add({
             weight: 7,
-            type: 'copy_path',
+            id: 'copy_path',
             data: {
                 isHtmlName: true,
                 name: Menu.getItem(Msg.Lang['fileTree.copyPath']),
@@ -171,7 +171,7 @@ export default class StatusBarFileSystem extends PageBase {
 
         fileTreeMenu.add({
             weight: 14,
-            type: 'sep5',
+            id: 'sep5',
             preconditionFn: ($trigger) => {
                 const selectedNodeId = this.#fileTree_.getSelectedNodeId();
                 let type = $trigger.attr('type');
@@ -186,7 +186,7 @@ export default class StatusBarFileSystem extends PageBase {
 
         fileTreeMenu.add({
             weight: 15,
-            type: 'refresh',
+            id: 'refresh',
             preconditionFn: ($trigger) => {
                 const selectedNodeId = this.#fileTree_.getSelectedNodeId();
                 let type = $trigger.attr('type');
@@ -218,7 +218,7 @@ export default class StatusBarFileSystem extends PageBase {
 
         fileTreeMenu.add({
             weight: 16,
-            type: 'sep6',
+            id: 'sep6',
             preconditionFn: ($trigger) => {
                 let type = $trigger.attr('type');
                 return ['root'].includes(type);
@@ -228,7 +228,7 @@ export default class StatusBarFileSystem extends PageBase {
 
         fileTreeMenu.add({
             weight: 17,
-            type: 'exit',
+            id: 'exit',
             preconditionFn: ($trigger) => {
                 let type = $trigger.attr('type');
                 return ['root'].includes(type);
@@ -254,7 +254,7 @@ export default class StatusBarFileSystem extends PageBase {
 
         editorMenu.add({
             weight: 0,
-            type: 'cut',
+            id: 'cut',
             data: {
                 isHtmlName: true,
                 name: Menu.getItem(Msg.Lang['editor.contextMenu.cut'], 'Ctrl+X'),
@@ -263,7 +263,7 @@ export default class StatusBarFileSystem extends PageBase {
         });
         editorMenu.add({
             weight: 1,
-            type: 'copy',
+            id: 'copy',
             data: {
                 isHtmlName: true,
                 name: Menu.getItem(Msg.Lang['editor.contextMenu.copy'], 'Ctrl+C'),
@@ -272,7 +272,7 @@ export default class StatusBarFileSystem extends PageBase {
         });
         editorMenu.add({
             weight: 2,
-            type: 'paste',
+            id: 'paste',
             data: {
                 isHtmlName: true,
                 name: Menu.getItem(Msg.Lang['editor.contextMenu.paste'], 'Ctrl+V'),
@@ -281,12 +281,12 @@ export default class StatusBarFileSystem extends PageBase {
         });
         editorMenu.add({
             weight: 3,
-            type: 'sep1',
+            id: 'sep1',
             data: '---------'
         });
         editorMenu.add({
             weight: 4,
-            type: 'togglecomment',
+            id: 'togglecomment',
             data: {
                 isHtmlName: true,
                 name: Menu.getItem(Msg.Lang['editor.contextMenu.togglecomment'], 'Ctrl+/'),
@@ -296,7 +296,7 @@ export default class StatusBarFileSystem extends PageBase {
 
         editorMenu.add({
             weight: 6,
-            type: 'sep2',
+            id: 'sep2',
             preconditionFn: () => {
                 return this.#changed_;
             },
@@ -305,7 +305,7 @@ export default class StatusBarFileSystem extends PageBase {
 
         editorMenu.add({
             weight: 7,
-            type: 'save',
+            id: 'save',
             preconditionFn: () => {
                 return this.#changed_;
             },

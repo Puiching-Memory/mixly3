@@ -233,6 +233,7 @@ class FileTree extends Component {
     #addContextMenu_() {
         const selector = `div[page-id="${this.getId()}"] .jstree-node, div[page-id="${this.getId()}"] > button`;
         this.#contextMenu_ = new ContextMenu(selector, {
+            zIndex: 300,
             events: {
                 hide: ({ $trigger }) => {
                     $trigger.removeClass('active');
