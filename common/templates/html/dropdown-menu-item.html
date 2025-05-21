@@ -1,0 +1,14 @@
+<style>
+    button[m-id="{{d.mId}}"] > i {
+        margin-left: 2px;
+        -webkit-transition: all .2s;
+    }
+
+    button[m-id="{{d.mId}}"] > i.menu-shown {
+        transform: rotate(180deg);
+    }
+</style>
+<button m-id="{{d.mId}}" class="mixly-nav layui-btn layui-btn-xs layui-btn-primary">
+    {{d.text}}
+    <i class="layui-icon layui-icon-down"></i>
+</button>

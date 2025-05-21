@@ -189,9 +189,12 @@
     {
         "path": "/common/dropdown-menu-group.js",
         "require": [
+            "path",
             "tippy",
+            "Mixly.Env",
             "Mixly.Menu",
             "Mixly.Registry",
+            "Mixly.HTMLTemplate",
             "Mixly.IdGenerator",
             "Mixly.ContextMenu",
             "Mixly.DropdownMenu"

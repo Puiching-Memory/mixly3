@@ -443,7 +443,7 @@ class App extends Component {
 
         this.#nav_.register({
             id: 'file',
-            displayText: `${Msg.Lang['nav.btn.file']}(F)`,
+            displayText: Msg.Lang['nav.btn.file'],
             scopeType: Nav.Scope.RIGHT,
             weight: 1,
             menu: fileMenu
@@ -451,7 +451,7 @@ class App extends Component {
 
         this.#nav_.register({
             id: 'setting',
-            displayText: `${Msg.Lang['nav.btn.setting']}(S)`,
+            displayText: Msg.Lang['nav.btn.setting'],
             scopeType: Nav.Scope.RIGHT,
             weight: 2,
             menu: settingMenu

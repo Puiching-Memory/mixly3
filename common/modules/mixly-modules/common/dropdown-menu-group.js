@@ -1,16 +1,21 @@
 goog.loadJs('common', () => {
 
+goog.require('path');
 goog.require('tippy');
+goog.require('Mixly.Env');
 goog.require('Mixly.Menu');
 goog.require('Mixly.Registry');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.ContextMenu');
 goog.require('Mixly.DropdownMenu');
 goog.provide('Mixly.DropdownMenuGroup');
 
 const {
+    Env,
     Menu,
     Registry,
+    HTMLTemplate,
     IdGenerator,
     ContextMenu,
     DropdownMenu
@@ -18,6 +23,13 @@ const {
 
 
 class DropdownMenuGroup {
+    static {
+        HTMLTemplate.add(
+            'html/dropdown-menu-item.html',
+            new HTMLTemplate(goog.readFileSync(path.join(Env.templatePath, 'html/dropdown-menu-item.html')))
+        );
+    }
+
     #singleton_ = null;
     #menuItems_ = [];
     #ids_ = {};
@@ -85,9 +97,12 @@ class DropdownMenuGroup {
             item.weight = 0;
         }
         this.remove(item.id);
-        item.$elem = $(`<button class="layui-btn layui-btn-xs layui-btn-primary mixly-nav">${item.displayText}</button>`);
+        item.$elem = $(HTMLTemplate.get('html/dropdown-menu-item.html').render({
+            text: item.displayText
+        }));
         const instance = tippy(item.$elem[0]);
         item.$elem.attr('data-id', instance.id);
+        item.$i = item.$elem.children('i');
         item.instance = instance;
         const contextMenuId = IdGenerator.generate();
         const selector = `body > .mixly-dropdown-menus > div[m-id="${contextMenuId}"]`;
@@ -103,10 +118,12 @@ class DropdownMenuGroup {
             },
             events: {
                 show: (opt) => {
+                    item.$i.addClass('menu-shown');
                     this.#menuShown_ = true;
                     this.#singleton_.setProps({});
                 },
                 hide: (opt) => {
+                    item.$i.removeClass('menu-shown');
                     if (this.#trigged_) {
                         this.#trigged_ = false;
                         return true;
@@ -153,6 +170,10 @@ class DropdownMenuGroup {
             return null;
         }
         return this.#ids_[id].contextMenu;
+    }
+
+    getInstance() {
+        return this.#singleton_;
     }
 
     remove(id) {
