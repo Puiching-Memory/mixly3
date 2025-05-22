@@ -33,12 +33,13 @@ Loader.init = function () {
     let url = '';
     if (SOFTWARE.webSocket?.url) {
         const info = new window.URL(SOFTWARE.webSocket.url);
+        if (window.location.protocol === 'http:') {
+            info.protocol = 'ws:';
+        }
         if (info.hostname === 'default') {
             info.hostname = window.location.hostname;
-            url = info.origin;
-        } else {
-            url = SOFTWARE.webSocket.url;
         }
+        url = info.origin;
     } else {
         url = `wss://${window.location.host}`;
     }

@@ -27,12 +27,13 @@ Loader.init = function () {
     let url = '';
     if (SOFTWARE.webCompiler?.url) {
         const info = new window.URL(SOFTWARE.webCompiler.url);
+        if (window.location.protocol === 'http:') {
+            info.protocol = 'ws:';
+        }
         if (info.hostname === 'default') {
             info.hostname = window.location.hostname;
-            url = info.origin;
-        } else {
-            url = SOFTWARE.webCompiler.url;
         }
+        url = info.origin;
     } else {
         url = `wss://${window.location.host}`;
     }
