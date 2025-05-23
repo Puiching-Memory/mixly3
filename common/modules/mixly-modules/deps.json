@@ -1745,7 +1745,7 @@
         "path": "/web-compiler/arduino-shell.js",
         "require": [
             "layui",
-            "avrbro",
+            "AVRUploader",
             "esptooljs",
             "AdafruitESPTool",
             "CryptoJS",

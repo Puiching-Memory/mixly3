@@ -1,7 +1,7 @@
 goog.loadJs('web', () => {
 
 goog.require('layui');
-goog.require('avrbro');
+goog.require('AVRUploader');
 goog.require('esptooljs');
 goog.require('AdafruitESPTool');
 goog.require('CryptoJS');
@@ -253,7 +253,7 @@ class WebCompilerArduShell {
                 try {
                     const keys = Boards.getSelectedBoardKey().split(':');
                     if (`${keys[0]}:${keys[1]}` === 'arduino:avr') {
-                        await this.uploadWithAvrbro(port, files);
+                        await this.uploadWithAVRUploader(port, files);
                     } else {
                         await this.uploadWithEsptool(port, files);
                     }
@@ -333,28 +333,27 @@ class WebCompilerArduShell {
         }
     }
 
-    async uploadWithAvrbro(port, files) {
+    async uploadWithAVRUploader(port, files) {
         const key = Boards.getSelectedBoardKey();
         const boardId = key.split(':')[2];
-        let boardName = '';
-        if (boardId === 'uno') {
-            boardName = 'uno';
-        } else if (boardId === 'nano') {
+        let boardName = 'uno';
+        if (boardId === 'nano') {
             const cpu = Boards.getSelectedBoardConfigParam('cpu');
             if (cpu === 'atmega328old') {
                 boardName = 'nano';
             } else {
-                boardName = 'nano (new bootloader)';
+                boardName = 'nanoOldBootloader';
             }
         } else if (boardId === 'pro') {
-            boardName = 'pro-mini';
+            boardName = 'proMini';
         } else if (boardId === 'mega') {
             boardName = 'mega';
         } else if (boardId === 'leonardo') {
             boardName = 'leonardo';
         }
-        const buffer = avrbro.parseHex(files[0].data);
-        await avrbro.flash(Serial.getPort(port), buffer, { boardName });
+        const serial = Serial.getPort(port);
+        const text = files[0].data;
+        await AVRUploader.upload(serial, boardName, text);
     }
 
     async kill() {
