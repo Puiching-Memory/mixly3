@@ -8,7 +8,7 @@ Micropython library for the WS2812 NeoPixel-RGB(method inheritance)
 from time import sleep
 
 class NeoPixel:
-	def __init__(self, func, n, bpp=3, ORDER=(1, 0, 2, 3)):
+	def __init__(self, func, n, bpp=3, ORDER=(0, 1, 2, 3)):
 		self.func = func
 		self.bpp = bpp
 		self.rgbs = n
