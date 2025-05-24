@@ -8,7 +8,7 @@
         "type": "command",
         "portSelect": "all",
         "micropython:esp32s3:mixgo_sant": {
-            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/Mixgo_Sant_lib-v1.23.0.bin\" 0xE00000 \"{indexPath}/../micropython/build/HZK16_GBK.bin\""
+            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/Mixgo_Sant_lib-v1.13.0.bin\" 0xE00000 \"{indexPath}/../micropython/build/HZK16_GBK.bin\""
         },
         "micropython:esp32s3:mixgo_nova": {
             "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/Mixgo_Nova_lib-v1.21.0.bin\" 0x700000 \"{indexPath}/../micropython/build/HZK12.bin\""
@@ -69,7 +69,7 @@
                 "binFile": [
                     {
                         "offset": "0x0000",
-                        "path": "./build/Mixgo_Sant_lib-v1.23.0.bin"
+                        "path": "./build/Mixgo_Sant_lib-v1.13.0.bin"
                     }, {
                         "offset": "0xE00000",
                         "path": "../micropython/build/HZK16_GBK.bin"
