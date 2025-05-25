@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-const AI_LOCAL_VOICE_HUE = '#D1D431'; 
+const AI_LOCAL_VOICE_HUE = '#2FAD7A'; 
 const AI_LOCAL_GRAPH_HUE = '#90A244'; 
 
 //voice part

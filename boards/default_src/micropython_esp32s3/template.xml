@@ -2333,7 +2333,7 @@
         </value>
       </block>
     </category>
-    <category id="catAIvoicesensor" colour="#D1D431">
+    <category id="catAIvoicesensor" colour="#2FAD7A">
       <block type="VOICE_RECOGNITION_CONTROL"></block>
       <block type="CI130X_IDENTIFY_AND_SAVE_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
       <block type="CI130X_GET_WHETHER_IDENTIFY_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
@@ -5116,7 +5116,7 @@
         </value>
       </block>
 
-      <block type="display_image_create_bitmap"></block>
+      <!-- <block type="display_image_create_bitmap"></block> -->
       <block type="display_matrix_extern_image_builtins">
         <value name="SUB">
           <shadow type="variables_get">
@@ -5133,7 +5133,8 @@
         </value>
       <value name="A">
           <shadow type="pins_builtinimg_extern"></shadow>
-        </value>> <value name="B">
+        </value>
+        <value name="B">
           <shadow type="pins_builtinimg_extern"></shadow>
         </value>
       </block>

@@ -40,6 +40,8 @@ En.MSG = {
     catAIOT:"Intelligent IOT",
     catAIsensor:"MixGoAI Sensor",
     catAIsensor2:"MixGoAI image identification",
+    catAIgraphsensor:"Image processing",
+    catAIvoicesensor:"Speech processing",
     catSensor: "Sensor",
     catActuator: "Actuator",
     catExternSensor: "External Sensor",
@@ -64,6 +66,7 @@ En.MSG = {
     catTurtle: "Turtle",
     catTuple: "Tuple",
     catIot: "IOT",
+    catAIonboard:"On-board intelligence",
     catSet: "Set",
     catData: "Data",
     catAlgorithm: "Algorithm",
@@ -3926,4 +3929,25 @@ En.MIXLY_SET_DEGREE = 'convert angles';
 En.MIXLY_TRANS_TO_RADIAN = 'to radians';
 En.MIXLY_REF_TO_PRESSURE = 'Reference pressure';
 En.MIXLY_CAL_TO_ALTITUDE = 'Calculate the altitude';
+En.MIXLY_SHOOTING_SIZE = 'Capture Size';  
+En.MIXLY_SHOOT_AND_SAVE_PICTURE = 'Capture and Save Photo';  
+En.MIXLY_GET_PICTURE_DATA = 'Get Image Data';  
+En.MIXlY_SCREEN_SHOW_CAM_SHOOT = 'Display Camera Capture on Screen';  
+En.MIXlY_STOP_SCREEN_DISPLAY = 'Turn Off Real-Time LCD Display of Camera Capture';  
+En.MIXLY_RECOGNITION = 'Detection';  
+En.MIXLY_GET_QR_CODE_RECOGNITION_RESULT = 'Get QR Code Detection Result';  
+En.MIXLY_GET_QR_CODE_RECOGNITION_RESULT_TOOLTIP = 'Returns None if no result is detected. If detected, a green square appears in the top-left corner, and the QR code information is returned.';  
+En.COLOUR_RGB_GREY = "Gray";  
+En.MIXLY_CUSTOM_STUDY = "Custom Learning";  
+En.MIXLY_GET_COLOR_DETECTION_RESULT = 'Get Color Detection Result';  
+En.MIXLY_GET_COLOR_DETECTION_RESULT_TOOLTIP = 'Get color detection results, returning the number of rectangular regions and their top-left and bottom-right coordinates (4 values).';  
+En.MIXLY_CAT_FACE = 'Cat Face';  
+En.MIXLY_GET_CAT_FACE_DETECTION_RESULT = 'Get Cat Face Detection Result';  
+En.MIXLY_GET_CAT_FACE_DETECTION_RESULT_TOOLTIP = 'Get cat face detection results, returning the number of rectangular regions and their top-left and bottom-right coordinates (4 values).';  
+En.MIXLY_GET_PEOPLE_FACE_DETECTION_RESULT = 'Get Face Detection Result';  
+En.MIXLY_GET_PEOPLE_FACE_DETECTION_RESULT_TOOLTIP = 'Get face detection results, returning the number of rectangular regions, their bounding box coordinates, and five key facial landmarks. Explanation: v[0]: number of faces; v[1-4]: top-left and bottom-right coordinates; v[5-14]: left eye, right eye, nose, left mouth corner, right mouth corner coordinates.';  
+En.MIXLY_GET_PEOPLE_FACE_RECOGNITION_RESULT = 'Get Face Recognition Result';  
+En.MIXLY_GET_PEOPLE_FACE_RECOGNITION_RESULT_TOOLTIP = 'Get face recognition results, returning face ID (starting from 1), rectangular regions, and corresponding 5-point coordinates. Explanation: v[0]: number of faces; v[1-4]: top-left and bottom-right coordinates; v[5-14]: left eye, right eye, nose, left mouth corner, right mouth corner coordinates.';  
+En.FACE_ENROLL = 'Enroll Face';  
+En.MIXLY_DELETE_PEOPLE_FACE_ID = 'Delete Face ID Information';  
 })();

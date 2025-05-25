@@ -39,6 +39,8 @@ ZhHant.MSG = {
     catAIOT:"智能物聯",
     catAIsensor:"MixGoAI智能感測",
     catAIsensor2:"MixGoAI圖像識別",
+    catAIgraphsensor:"圖像處理",
+    catAIvoicesensor:"語音處理",
     catSensor: "感測器",
     catActuator: "執行器",
     catExternSensor: "外接感測器",
@@ -65,6 +67,7 @@ ZhHant.MSG = {
     catTurtle: "海龜畫圖",
     catTuple: "元組",
     catIot: "物聯網",
+    catAIonboard:"板載智能",
     catSet: "集合",
     catData: "數據分析",
     catAlgorithm: "算法",
@@ -4080,4 +4083,25 @@ ZhHant.MIXLY_SET_DEGREE = '將角度';
 ZhHant.MIXLY_TRANS_TO_RADIAN = '轉換為弧度';
 ZhHant.MIXLY_REF_TO_PRESSURE = '參考氣壓';
 ZhHant.MIXLY_CAL_TO_ALTITUDE = '計算獲取海拔';
+ZhHant.MIXLY_SHOOTING_SIZE = '拍攝尺寸';
+ZhHant.MIXLY_SHOOT_AND_SAVE_PICTURE = '拍攝照片並保存';
+ZhHant.MIXLY_GET_PICTURE_DATA = '獲取圖像數據';
+ZhHant.MIXlY_SCREEN_SHOW_CAM_SHOOT = '屏幕顯示攝像頭採集圖像';
+ZhHant.MIXlY_STOP_SCREEN_DISPLAY = '關閉攝像頭採集圖像LCD實時顯示';
+ZhHant.MIXLY_RECOGNITION = '檢測';
+ZhHant.MIXLY_GET_QR_CODE_RECOGNITION_RESULT = '獲取二維碼檢測結果';
+ZhHant.MIXLY_GET_QR_CODE_RECOGNITION_RESULT_TOOLTIP = '無檢測結果返回None,有結果左上角出現綠色小方塊，並返回二維碼信息。'
+ZhHant.COLOUR_RGB_GREY = "灰色";
+ZhHant.MIXLY_CUSTOM_STUDY = "自定義學習";
+ZhHant.MIXLY_GET_COLOR_DETECTION_RESULT = '獲取顏色檢測結果';
+ZhHant.MIXLY_GET_COLOR_DETECTION_RESULT_TOOLTIP ='獲取顏色採集結果，返回矩形區域數量和對應的左上角和右下角坐標(4個值)。';
+ZhHant.MIXLY_CAT_FACE = '貓臉';
+ZhHant.MIXLY_GET_CAT_FACE_DETECTION_RESULT = '獲取貓臉檢測結果';
+ZhHant.MIXLY_GET_CAT_FACE_DETECTION_RESULT_TOOLTIP = '獲取貓臉檢測結果，返回矩形區域數量和對應的左上角和右下角坐標(4個值)。';
+ZhHant.MIXLY_GET_PEOPLE_FACE_DETECTION_RESULT = '獲取人臉檢測結果';
+ZhHant.MIXLY_GET_PEOPLE_FACE_DETECTION_RESULT_TOOLTIP = '獲取人臉檢測結果，返回矩形區域數量、對應的矩形框左邊以及五點關鍵特徵值。說明:v[0]:人臉數量;v[1-4]:矩形左上角和右下角坐標;v[5-14]:左眼、右眼、鼻子、左嘴角、右嘴角坐標。';
+ZhHant.MIXLY_GET_PEOPLE_FACE_RECOGNITION_RESULT = '獲取人臉識別結果';
+ZhHant.MIXLY_GET_PEOPLE_FACE_RECOGNITION_RESULT_TOOLTIP = '獲取人臉識別結果,獲取人識別結果,返回人臉ID(ID從1開始)、矩形區域和和對應的5點坐標。說明:v[0]:人臉數量;v[1-4]:矩形左上角和右下角坐標;v[5-14]:左眼、右眼、鼻子、左嘴角、右嘴角坐標。';
+ZhHant.FACE_ENROLL = '錄入人臉';
+ZhHant.MIXLY_DELETE_PEOPLE_FACE_ID = '刪除人臉ID信息';
 })();
