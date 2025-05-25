@@ -1079,7 +1079,25 @@ export const onboard_tft_show_image_xy = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.OLED_BITMAP_OR_STRING);
+    }
+};
+
+export const onboard_tft_show_image_xy_direct = {
+    init: function () {
+        this.setColour(DISPLAY_ONBOARD_HUE);
+        this.appendValueInput("x")
+            .setCheck(Number)
+            .appendField(Blockly.Msg.OLED_BITMAP)
+            .appendField('x');
+        this.appendValueInput("y")
+            .setCheck(Number)
+            .appendField('y');
+        this.appendValueInput("direct")
+            .setCheck(String)
+            .appendField(Blockly.Msg.MIXLY_AipImageClassify_Image + Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_THE_PATH);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
     }
 };
 

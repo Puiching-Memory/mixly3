@@ -447,3 +447,23 @@ div.blocklyToolboxDiv>div.blocklyToolboxContents>div:nth-child(12)>div.blocklyTr
     background: url('../../../../common/media/mark/comuni2.png') no-repeat;
     background-size: 100% auto;
 }
+
+#catAIgraphsensor.blocklyTreeRow>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon {
+    background: url('../../../../common/media/mark/image.png') no-repeat;
+    background-size: 100% auto;
+}
+
+#catAIgraphsensor.blocklyTreeRow.blocklyTreeSelected>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon {
+    background: url('../../../../common/media/mark/image2.png') no-repeat;
+    background-size: 100% auto;
+}
+
+#catAIvoicesensor.blocklyTreeRow>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon {
+    background: url('../../../../common/media/mark/AIvoice.png') no-repeat;
+    background-size: 100% auto;
+}
+
+#catAIvoicesensor.blocklyTreeRow.blocklyTreeSelected>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon {
+    background: url('../../../../common/media/mark/AIvoice2.png') no-repeat;
+    background-size: 100% auto;
+}

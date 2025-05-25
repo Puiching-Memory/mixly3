@@ -840,6 +840,16 @@ export const onboard_tft_show_image_xy = function (_, generator) {
     return code;
 }
 
+export const onboard_tft_show_image_xy_direct = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2];
+    generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
+    var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
+    var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
+    var direct = generator.valueToCode(this, 'direct', generator.ORDER_ASSIGNMENT);
+    var code = "onboard_tft.pictrue(" + x + ',' + y + ',' + direct + ")\n";
+    return code;
+}
+
 export const onboard_tft_show_image_or_string_delay = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";

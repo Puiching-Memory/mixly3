@@ -1434,13 +1434,13 @@
       </value>
     </block>
     <block type="sensor_mixgo_touch_slide"></block>
-    <block type="sensor_mixgo_pin_near" m-show='micropython:esp32s3:mixgo_sant'></block>
-    <block type="sensor_mixgo_nova_pin_near" m-show='micropython:esp32s3:mixgo_nova'></block>
+    <!-- <block type="sensor_mixgo_pin_near" m-show='micropython:esp32s3:mixgo_sant'></block> -->
+    <block type="sensor_mixgo_nova_pin_near"></block>
     <block type="sensor_mixgo_LTR308" m-show='micropython:esp32s3:mixgo_sant'></block>
     <block type="sensor_mixgo_nova_LTR308" m-show='micropython:esp32s3:mixgo_nova'></block>
     <block type="sensor_mixgo_sant_color" m-show='micropython:esp32s3:mixgo_sant'></block>
     <block type="sensor_sound"></block>
-    <block type="sensor_hp203" m-show='micropython:esp32s3:mixgo_sant'></block>
+    <!-- <block type="sensor_hp203" m-show='micropython:esp32s3:mixgo_sant'></block> -->
     <block type="sensor_aht11"></block>
     <block type="sensor_get_acceleration"></block>
     <block type="sensor_mixgo_cc_mmc5603_calibrate_compass"></block>
@@ -1479,15 +1479,6 @@
         </shadow>
       </value>
     </block>
-    <block type="CI130X_IDENTIFY_AND_SAVE_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
-    <block type="CI130X_GET_WHETHER_IDENTIFY_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
-    <block type="CI130X_GET_THE_RECOGNIZED_CMD_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
-    <block type="CI130X_BROADCAST_SANT" m-show='micropython:esp32s3:mixgo_sant'>
-      <value name="NUM">
-        <block type="logic_null"></block>
-      </value>
-    </block>
-    <block type="CI130X_SET_SYSTEM_CMD_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
     <block type="onboard_RTC_set_datetime">
       <value name="year">
         <shadow type="math_number">
@@ -1870,6 +1861,23 @@
         </block>
         <shadow type="tuple_create_with_text_return">
           <field name="TEXT">255,255,0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="onboard_tft_show_image_xy_direct" m-show="micropython:esp32s3:mixgo_sant">
+      <value name="x">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="direct">
+        <shadow type="text">
+          <field name="TEXT">12.jpg</field>
         </shadow>
       </value>
     </block>
@@ -2289,6 +2297,54 @@
       </value>
     </block>
   </category>
+  <category id="catAIonboard" colour="#2FAD7A">
+    <category id="catAIgraphsensor" colour="#90A244">
+      <block type="CREATE_CAMERA"></block>
+      <block type="SHOOT_AND_SAVE_PICTURE">
+        <value name="direct">
+          <shadow type="text">
+            <field name="TEXT">12.jpg</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="GET_PICTURE_DATA"></block>
+      <block type="SCREEN_SHOW_CAM_GRAPH_SHOOT"></block>
+      <block type="STOP_SCREEN_DISPLAY"></block>
+      <block type="INIT_QR_CODE_RECOGNITION"></block>
+      <block type="START_QR_CODE_RECOGNITION"></block>
+      <block type="GET_QR_CODE_RECOGNITION_DATA"></block>
+      <block type="INIT_COLOR_DETECTION"></block>
+      <block type="START_COLOR_DETECTION"></block>
+      <block type="GET_COLOR_DETECTION_RESULT"></block>
+      <block type="INIT_CAT_FACE_DETECTION"></block>
+      <block type="START_CAT_FACE_DETECTION"></block>
+      <block type="GET_CAT_FACE_DETECTION_RESULT"></block>
+      <block type="INIT_PEOPLE_FACE_DETECTION"></block>
+      <block type="START_PEOPLE_FACE_DETECTION"></block>
+      <block type="GET_PEOPLE_FACE_DETECTION_RESULT"></block>
+      <block type="INIT_PEOPLE_FACE_RECOGNITION"></block>
+      <block type="PEOPLE_FACE_ENROLL"></block>
+      <block type="GET_PEOPLE_FACE_RECOGNITION_RESULT"></block>
+      <block type="DELETE_PEOPLE_FACE_ID">
+        <value name="ID">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+    <category id="catAIvoicesensor" colour="#D1D431">
+      <block type="CI130X_IDENTIFY_AND_SAVE_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
+      <block type="CI130X_GET_WHETHER_IDENTIFY_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
+      <block type="CI130X_GET_THE_RECOGNIZED_CMD_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
+      <block type="CI130X_BROADCAST_SANT" m-show='micropython:esp32s3:mixgo_sant'>
+        <value name="NUM">
+          <block type="logic_null"></block>
+        </value>
+      </block>
+      <block type="CI130X_SET_SYSTEM_CMD_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
+    </category>
+  </category> 
   <category id="catSANT_G2" colour="40" m-show='micropython:esp32s3:mixgo_sant'>
     <block type="rfid_status"></block>
     <block type="rfid_readid"></block>

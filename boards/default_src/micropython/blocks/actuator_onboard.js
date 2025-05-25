@@ -951,7 +951,7 @@ export const set_power_output = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.ME_GO_MOTOR_EXTERN)
             .appendField(Blockly.Msg.PIN_NUMBERING)
-            .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"]]), "index");
+            .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"],["4", "4"]]), "index");
         this.appendValueInput('duty')
             .setCheck(Number)
             .setAlign(Blockly.inputs.Align.RIGHT)

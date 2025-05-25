@@ -3,6 +3,7 @@ import * as MicroPythonActuatorOnBoardBlocks from './blocks/actuator_onboard';
 import * as MicroPythonActuatorBlocks from './blocks/actuator';
 import * as MicroPythonAISensorBlocks from './blocks/ai_sensor';
 import * as MicroPythonAIBlocks from './blocks/ai';
+import * as MicroPythonAILocalBlocks from './blocks/ai_local';
 import * as MicroPythonBlynkBlocks from './blocks/blynk';
 import * as MicroPythonCCG1Blocks from './blocks/cc_g1';
 import * as MicroPythonCEGOBlocks from './blocks/ce_go';
@@ -29,6 +30,7 @@ import * as MicroPythonActuatorExternGenerators from './generators/actuator_exte
 import * as MicroPythonActuatorOnBoardGenerators from './generators/actuator_onboard';
 import * as MicroPythonActuatorGenerators from './generators/actuator';
 import * as MicroPythonAISensorGenerators from './generators/ai_sensor';
+import * as MicroPythonAILocalGenerators from './generators/ai_local';
 import * as MicroPythonAIGenerators from './generators/ai';
 import * as MicroPythonBlynkGenerators from './generators/blynk';
 import * as MicroPythonCCG1Generators from './generators/cc_g1';
@@ -58,6 +60,7 @@ export {
     MicroPythonActuatorBlocks,
     MicroPythonAISensorBlocks,
     MicroPythonAIBlocks,
+    MicroPythonAILocalBlocks,
     MicroPythonBlynkBlocks,
     MicroPythonCCG1Blocks,
     MicroPythonCEGOBlocks,
@@ -84,6 +87,7 @@ export {
     MicroPythonActuatorGenerators,
     MicroPythonAISensorGenerators,
     MicroPythonAIGenerators,
+    MicroPythonAILocalGenerators,
     MicroPythonBlynkGenerators,
     MicroPythonCCG1Generators,
     MicroPythonCEGOGenerators,

@@ -39,6 +39,8 @@ ZhHans.MSG = {
     catAIOT:"智能物联",
     catAIsensor:"MixGoAI智能传感",
     catAIsensor2:"MixGoAI图像识别",
+    catAIgraphsensor:"图像处理",
+    catAIvoicesensor:"语音处理",
     catSensor: "传感器",
     catActuator: "执行器",
     catExternSensor: "外接传感",
@@ -65,6 +67,7 @@ ZhHans.MSG = {
     catTurtle: "海龟画图",
     catTuple: "元组",
     catIot: "物联网",
+    catAIonboard:"板载智能",
     catSet: "集合",
     catData: "数据分析",
     catAlgorithm: "算法",
@@ -4086,4 +4089,25 @@ ZhHans.MIXLY_SET_DEGREE = '将角度';
 ZhHans.MIXLY_TRANS_TO_RADIAN = '转换为弧度';
 ZhHans.MIXLY_REF_TO_PRESSURE = '参考气压';
 ZhHans.MIXLY_CAL_TO_ALTITUDE = '计算获取海拔';
+ZhHans.MIXLY_SHOOTING_SIZE = '拍摄尺寸';
+ZhHans.MIXLY_SHOOT_AND_SAVE_PICTURE = '拍摄照片并保存';
+ZhHans.MIXLY_GET_PICTURE_DATA = '获取图像数据';
+ZhHans.MIXlY_SCREEN_SHOW_CAM_SHOOT = '屏幕显示摄像头采集图像';
+ZhHans.MIXlY_STOP_SCREEN_DISPLAY = '关闭摄像头采集图像LCD实时显示';
+ZhHans.MIXLY_RECOGNITION = '检测';
+ZhHans.MIXLY_GET_QR_CODE_RECOGNITION_RESULT = '获取二维码检测结果';
+ZhHans.MIXLY_GET_QR_CODE_RECOGNITION_RESULT_TOOLTIP = '无检测结果返回None,有结果左上角出现绿色小方块，并返回二维码信息。'
+ZhHans.COLOUR_RGB_GREY = "灰色";
+ZhHans.MIXLY_CUSTOM_STUDY = "自定义学习";
+ZhHans.MIXLY_GET_COLOR_DETECTION_RESULT = '获取颜色检测结果';
+ZhHans.MIXLY_GET_COLOR_DETECTION_RESULT_TOOLTIP ='获取颜色采集结果，返回矩形区域数量和对应的左上角和右下角坐标(4个值)。';
+ZhHans.MIXLY_CAT_FACE = '猫脸';
+ZhHans.MIXLY_GET_CAT_FACE_DETECTION_RESULT = '获取猫脸检测结果';
+ZhHans.MIXLY_GET_CAT_FACE_DETECTION_RESULT_TOOLTIP = '获取猫脸检测结果，返回矩形区域数量和对应的左上角和右下角坐标(4个值)。';
+ZhHans.MIXLY_GET_PEOPLE_FACE_DETECTION_RESULT = '获取人脸检测结果';
+ZhHans.MIXLY_GET_PEOPLE_FACE_DETECTION_RESULT_TOOLTIP = '获取人脸检测结果，返回矩形区域数量、对应的矩形框左边以及五点关键特征值。说明:v[0]:人脸数量;v[1-4]:矩形左上角和右下角坐标;v[5-14]:左眼、右眼、鼻子、左嘴角、右嘴角坐标。';
+ZhHans.MIXLY_GET_PEOPLE_FACE_RECOGNITION_RESULT = '获取人脸识别结果';
+ZhHans.MIXLY_GET_PEOPLE_FACE_RECOGNITION_RESULT_TOOLTIP = '获取人脸识别结果,获取人识别结果,返回人脸ID(ID从1开始)、矩形区域和和对应的5点坐标。说明:v[0]:人脸数量;v[1-4]:矩形左上角和右下角坐标;v[5-14]:左眼、右眼、鼻子、左嘴角、右嘴角坐标。';
+ZhHans.FACE_ENROLL = '录入人脸';
+ZhHans.MIXLY_DELETE_PEOPLE_FACE_ID = '删除人脸ID信息';
 })();
