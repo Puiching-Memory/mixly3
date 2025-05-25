@@ -3,6 +3,21 @@ const AI_LOCAL_VOICE_HUE = '#D1D431';
 const AI_LOCAL_GRAPH_HUE = '#90A244'; 
 
 //voice part
+export const VOICE_RECOGNITION_CONTROL = {
+    init: function () {
+        this.setColour(AI_LOCAL_VOICE_HUE);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_AipSpeech_asr)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_ON,"1"],
+                [Blockly.Msg.MIXLY_OFF,"0"]
+            ]),"control")
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+    }
+}
+
 export const CI130X_IDENTIFY_AND_SAVE_SANT = {
     init: function () {
         this.setColour(AI_LOCAL_VOICE_HUE);

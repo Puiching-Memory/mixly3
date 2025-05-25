@@ -2297,7 +2297,7 @@
       </value>
     </block>
   </category>
-  <category id="catAIonboard" colour="#2FAD7A">
+  <category id="catAIonboard" colour="#2FAD7A" m-show='micropython:esp32s3:mixgo_sant'>
     <category id="catAIgraphsensor" colour="#90A244">
       <block type="CREATE_CAMERA"></block>
       <block type="SHOOT_AND_SAVE_PICTURE">
@@ -2334,6 +2334,7 @@
       </block>
     </category>
     <category id="catAIvoicesensor" colour="#D1D431">
+      <block type="VOICE_RECOGNITION_CONTROL"></block>
       <block type="CI130X_IDENTIFY_AND_SAVE_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
       <block type="CI130X_GET_WHETHER_IDENTIFY_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
       <block type="CI130X_GET_THE_RECOGNIZED_CMD_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>

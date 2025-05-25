@@ -1,6 +1,14 @@
 import { Boards } from 'mixly';
 
 //voice part
+export const VOICE_RECOGNITION_CONTROL = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2];
+    generator.definitions_['import_' + version + '_onboard_bot'] = 'from ' + version + ' import onboard_bot';
+    var control = this.getFieldValue('control');
+    var code = 'onboard_bot.asr_en('+ control +')\n';
+    return code;
+}
+
 export const CI130X_IDENTIFY_AND_SAVE_SANT = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     if(version == 'mixgo_sant'){
