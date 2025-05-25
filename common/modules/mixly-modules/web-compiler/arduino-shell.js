@@ -340,9 +340,9 @@ class WebCompilerArduShell {
         if (boardId === 'nano') {
             const cpu = Boards.getSelectedBoardConfigParam('cpu');
             if (cpu === 'atmega328old') {
-                boardName = 'nano';
-            } else {
                 boardName = 'nanoOldBootloader';
+            } else {
+                boardName = 'nano';
             }
         } else if (boardId === 'pro') {
             boardName = 'proMini';
