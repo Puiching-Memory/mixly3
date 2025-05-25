@@ -7111,7 +7111,7 @@
     <block type="iot_connect_ollama">
       <value name="SERVER">
         <shadow type="text">
-          <field name="TEXT">192.168.1.1</field>
+          <field name="TEXT">http://192.168.1.1</field>
         </shadow>
       </value>
       <value name="NAME">
