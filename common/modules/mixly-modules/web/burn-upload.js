@@ -6,7 +6,6 @@ goog.require('FSWrapper');
 goog.require('DAPWrapper');
 goog.require('PartialFlashing');
 goog.require('esptooljs');
-goog.require('AdafruitESPTool');
 goog.require('CryptoJS');
 goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
@@ -47,11 +46,7 @@ const {
 } = Web;
 
 const { BOARD, SELECTED_BOARD } = Config;
-
-const {
-    ESPLoader,
-    Transport
-} = esptooljs;
+const { ESPLoader, Transport } = esptooljs;
 
 BU.uploading = false;
 BU.burning = false;
@@ -155,11 +150,7 @@ BU.initBurn = async () => {
         if (web.burn.special && web.burn.special instanceof Array) {
             BU.burnWithSpecialBin();
         } else {
-            if (boardKey.indexOf('micropython:esp32s2') !== -1) {
-                await BU.burnWithAdafruitEsptool(web.burn.binFile, web.burn.erase);
-            } else {
-                await BU.burnWithEsptool(web.burn.binFile, web.burn.erase);
-            }
+            await BU.burnWithEsptool(web.burn.binFile, web.burn.erase);
         }
     }
 }
@@ -344,114 +335,6 @@ BU.burnWithEsptool = async (binFile, erase) => {
         statusBarTerminal.addValue(`==${Msg.Lang['shell.burnFailed']}==\n`);
     } finally {
         await transport.disconnect();
-    }
-}
-
-BU.burnWithAdafruitEsptool = async (binFile, erase) => {
-    const { mainStatusBarTabs } = Mixly;
-    let portName = Serial.getSelectedPortName();
-    if (!portName) {
-        try {
-            await BU.requestPort();
-            portName = Serial.getSelectedPortName();
-            if (!portName) {
-                return;
-            }
-        } catch (error) {
-            Debug.error(error);
-            return;
-        }
-    }
-    const port = Serial.getPort(portName);
-    if (['HIDDevice', 'USBDevice'].includes(port.constructor.name)) {
-        layer.msg(Msg.Lang['burn.notSupport'], { time: 1000 });
-        return;
-    }
-    const statusBarSerial = mainStatusBarTabs.getStatusBarById(portName);
-    if (statusBarSerial) {
-        await statusBarSerial.close();
-    }
-    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
-    statusBarTerminal.setValue(Msg.Lang['shell.burning'] + '...\n');
-    mainStatusBarTabs.show();
-    mainStatusBarTabs.changeTo('output');
-    BU.progressLayer.title(`${Msg.Lang['shell.burning']}...`);
-    BU.progressLayer.show();
-    let esploader = null;
-    let transport = null;
-    let espStub = null;
-    try {
-        await port.open({ baudRate: 115200 });
-        esploader = new AdafruitESPTool.ESPLoader(port, {
-            log(...args) {
-                statusBarTerminal.addValue(args.join('') + '\n');
-            },
-            debug(...args) {
-                statusBarTerminal.addValue(args.join('') + '\n');
-            },
-            error(...args) {
-                statusBarTerminal.addValue(args.join('') + '\n');
-            }
-        });
-        await esploader.initialize();
-        espStub = await esploader.runStub();
-    } catch (error) {
-        Debug.error(error);
-        statusBarTerminal.addValue(`\n${error.toString()}\n`);
-        await port.close();
-        BU.progressLayer.hide();
-        return;
-    }
-
-    statusBarTerminal.addValue(Msg.Lang['shell.bin.reading'] + "...");
-    let firmwarePromise = [];
-    statusBarTerminal.addValue("\n");
-    for (let i of binFile) {
-        if (i.path && i.offset) {
-            let absolutePath = path.join(Env.boardDirPath, i.path);
-            // statusBarTerminal.addValue(`${Msg.Lang['读取固件'] + ' '
-            //     + Msg.Lang['路径']}:${absolutePath}, ${Msg.Lang['偏移']}:${i.offset}\n`);
-            firmwarePromise.push(readBinFileAsArrayBuffer(absolutePath, i.offset));
-        }
-    }
-    let data = null;
-    try {
-        data = await Promise.all(firmwarePromise);
-    } catch (error) {
-        statusBarTerminal.addValue("Failed!\n" + Msg.Lang['shell.bin.readFailed'] + "！\n");
-        statusBarTerminal.addValue("\n" + e + "\n", true);
-        await espStub.disconnect();
-        await espStub.port.close();
-        BU.progressLayer.hide();
-        return;
-    }
-    statusBarTerminal.addValue("Done!\n");
-    BU.burning = true;
-    BU.uploading = false;
-    try {
-        if (erase) {
-            await espStub.eraseFlash();
-        }
-        for (let file of data) {
-            await espStub.flashData(
-                file.data,
-                (bytesWritten, totalBytes) => {
-                    const percent = Math.floor((bytesWritten / totalBytes) * 100) + '%';
-                    statusBarTerminal.addValue(`Writing at 0x${(file.address + bytesWritten).toString(16)}... (${percent})\n`);
-                },
-                file.address, true
-            );
-        }
-        BU.progressLayer.hide();
-        layer.msg(Msg.Lang['shell.burnSucc'], { time: 1000 });
-        statusBarTerminal.addValue(`==${Msg.Lang['shell.burnSucc']}==\n`);
-    } catch (error) {
-        Debug.error(error);
-        BU.progressLayer.hide();
-        statusBarTerminal.addValue(`==${Msg.Lang['shell.burnFailed']}==\n`);
-    } finally {
-        await espStub.disconnect();
-        await espStub.port.close();
     }
 }
 

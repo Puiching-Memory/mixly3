@@ -3,7 +3,6 @@ goog.loadJs('web', () => {
 goog.require('layui');
 goog.require('AVRUploader');
 goog.require('esptooljs');
-goog.require('AdafruitESPTool');
 goog.require('CryptoJS');
 goog.require('dayjs.duration');
 goog.require('Mixly.Boards');

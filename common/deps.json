@@ -236,10 +236,6 @@
         "provide": ["esptooljs"],
         "require": []
     }, {
-        "path": "modules/web-modules/adafruit-esptool/index.js",
-        "provide": ["AdafruitESPTool"],
-        "require": []
-    }, {
         "path": "modules/web-modules/crypto-js.min.js",
         "provide": ["CryptoJS"],
         "require": []
