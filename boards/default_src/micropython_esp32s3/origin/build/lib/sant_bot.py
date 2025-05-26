@@ -89,8 +89,9 @@ class BOT035:
     def cam_reset(self, value):
         self._wreg(_BOT035_CMD, (self._rreg(_BOT035_CMD) & 0xEF) | (value << 4))
 
-    def asr_en(self, value=None):
+    def asr_en(self, value=None, delay=500):
         self._wreg(_BOT035_CMD, (self._rreg(_BOT035_CMD) & 0xF3) | (value << 2))
+        time.sleep_ms(delay)
 
     def uart_select(self, value):
         self._wreg(_BOT035_CMD, (self._rreg(_BOT035_CMD) & 0xFC) | value)

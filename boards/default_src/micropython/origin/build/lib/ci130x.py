@@ -16,6 +16,7 @@ _CI_ID_NUM			= const(0x06)
 _CI_ID_CLE			= const(0x07)
 _CI_ID_PACTRL		= const(0x09)
 _CI_ID_END			= const(0x5A)
+_TIME_SNUM 			= const(0x75)
 
 class CI130X:
 	def __init__(self, i2c_bus, addr=_CI_ADDRESS):
@@ -65,7 +66,7 @@ class CI130X:
 		"""播放命令词对应ID语音"""
 		self._wreg(bytes([_CI_ID_SET, value, 0, _CI_ID_END]))
 		while blocking:
-			time.sleep_ms(10)
+			time.sleep_ms(15)
 			if not self.status()[1]:
 				break
 
@@ -88,6 +89,31 @@ class CI130X:
 		if end is not None: 
 			self.play_id(end)
 			time.sleep_ms(delay)
+
+	def play_time(self, times=None, detail=True, delay=10):
+		"""播报时间"""
+		data = time.localtime() if times is None else times
+		if detail:
+			for i in range(0, 3):			#年 月 日
+				self.play_num(data[i])
+				time.sleep_ms(delay)
+				self.play_id(_TIME_SNUM + i)
+				time.sleep_ms(delay)
+
+		for i in range(3, 5):				#时 分
+			self.play_num(data[i])
+			time.sleep_ms(delay)
+			self.play_id(_TIME_SNUM + i)
+			time.sleep_ms(delay)
+
+		if detail:
+			self.play_num(data[5])			#秒
+			time.sleep_ms(delay)
+			self.play_id(_TIME_SNUM + 5)
+			time.sleep_ms(delay)
+			self.play_id(_TIME_SNUM + 6)	#星期
+			time.sleep_ms(delay)
+			self.play_num(data[6] + 1)
 
 	def pa_ctrl(self, value=True, delay=10):
 		self._wreg(bytes([_CI_ID_PACTRL, int(value), 0, _CI_ID_END]))

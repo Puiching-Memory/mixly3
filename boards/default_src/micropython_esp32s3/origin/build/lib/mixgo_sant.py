@@ -63,8 +63,8 @@ except Exception as e:
 
 '''ASR-Sensor'''
 try :
-	from ci130xx import CI130X
-	onboard_asr = CI130X(inboard_i2c, onboard_bot.asr_en)
+	from ci1302x import CI1302
+	onboard_asr = CI1302(inboard_i2c)
 except Exception as e:
 	print("Warning: Failed to communicate with CI130X (ASR) or",e)
 
