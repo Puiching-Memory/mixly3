@@ -140,16 +140,9 @@ Python.init = function () {
 }
 
 function optimizeShowCalls(code) {
-    // 正则说明：
-    // - 使用 /s 修饰符让 . 可以匹配换行符
-    // - 匹配所有 show() 调用（包括后面的换行符）
-    // - 但需要确保后续代码中还有 pixel 操作（说明不是最后一个 show()）
-    const regex = /onboard_tft\.show\(\)\s*\n(?=.*?onboard_tft\.[hline|vline|line|rect|fill_rect|ellipse|pixel])/gs;
-
-    // 替换所有中间 show() 调用为空字符串
+    const regex = /onboard_tft\.show\(\)\s*(?=.*?onboard_tft\.[hline|vline|line|rect|fill_rect|ellipse|pixel])/gm;
     return code.replace(regex, '');
 }
-
 
 Python.finish = function (code) {
     // Convert the definitions dictionary into a list.
@@ -171,27 +164,27 @@ Python.finish = function (code) {
         }
     }
     if (imports.length) {
-        imports.push('\n\n');
+        imports.push('\n');
     }
     if (definitions_var.length) {
-        definitions_var.push('\n\n');
+        definitions_var.push('\n');
     }
     if (definitions_fun.length) {
-        definitions_fun.push('\n\n');
+        definitions_fun.push('\n');
     }
     var functions = [];
     for (var name in Python.functions_) {
         functions.push(Python.functions_[name]);
     }
     if (functions.length) {
-        functions.push('\n\n');
+        functions.push('\n');
     }
     var setups = [];
     for (var name in Python.setups_) {
         setups.push(Python.setups_[name]);
     }
     if (setups.length) {
-        setups.push('\n\n');
+        setups.push('\n');
     }
     var loops = [];
     for (var name in Python.loops_) {
