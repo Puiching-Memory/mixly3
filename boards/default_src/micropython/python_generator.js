@@ -144,7 +144,7 @@ function optimizeShowCalls(code) {
     // - 使用 /s 修饰符让 . 可以匹配换行符
     // - 匹配所有 show() 调用（包括后面的换行符）
     // - 但需要确保后续代码中还有 pixel 操作（说明不是最后一个 show()）
-    const regex = /onboard_tft\.show\(\)\s*\n(?=.*?onboard_tft\.pixel)/gs;
+    const regex = /onboard_tft\.show\(\)\s*\n(?=.*?onboard_tft\.[hline|vline|line|rect|fill_rect|ellipse|pixel])/gs;
 
     // 替换所有中间 show() 调用为空字符串
     return code.replace(regex, '');
