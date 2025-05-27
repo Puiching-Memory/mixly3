@@ -54,6 +54,8 @@ import * as MicroPythonSerialGenerators from './generators/serial';
 import * as MicroPythonSystemGenerators from './generators/system';
 import * as MicroPythonWeatherGenerators from './generators/weather';
 
+import { Python } from './python_generator';
+
 export {
     MicroPythonActuatorExternBlocks,
     MicroPythonActuatorOnBoardBlocks,
@@ -108,5 +110,6 @@ export {
     MicroPythonSensorGenerators,
     MicroPythonSerialGenerators,
     MicroPythonSystemGenerators,
-    MicroPythonWeatherGenerators
+    MicroPythonWeatherGenerators,
+    Python
 };

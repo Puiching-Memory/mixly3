@@ -29,8 +29,7 @@ import {
     PythonHtmlGenerators,
     PythonUtilityGenerators,
     Procedures,
-    Variables,
-    Python
+    Variables
 } from '@mixly/python';
 
 import {
@@ -73,7 +72,8 @@ import {
     MicroPythonSensorOnBoardGenerators,
     MicroPythonSerialGenerators,
     MicroPythonSystemGenerators,
-    MicroPythonWeatherGenerators
+    MicroPythonWeatherGenerators,
+    Python
 } from '@mixly/micropython';
 
 import {
