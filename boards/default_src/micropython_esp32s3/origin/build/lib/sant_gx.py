@@ -1,7 +1,7 @@
 """
-SANT G2 -MixGo SANT EXT G2
+SANT GX -MixGo SANT EXT G3
 
-MicroPython library for the SANT G2 (Expansion board for MixGo SANT)
+MicroPython library for the SANT GX (Expansion board for MixGo SANT)
 =======================================================
 @dahanzimin From the Mixly Team
 """

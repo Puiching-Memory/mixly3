@@ -11,10 +11,8 @@ from tftlcd import LCD15
 class ST7789(uframebuf.FrameBuffer_Uincode):
 	def __init__(self, width=240, height=240, reset=None, backlight=None, direction=1, font_address=0x700000):
 		if reset is not None:
-			reset(0)
-			time.sleep_ms(50)
-			reset(1)
-			time.sleep_ms(100)
+			reset(0, 50)
+			reset(1, 100)
 		self.display = LCD15(portrait=direction)
 		self._width = width
 		self._height = height

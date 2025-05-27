@@ -64,7 +64,7 @@ except Exception as e:
 '''ASR-Sensor'''
 try :
 	from ci1302x import CI1302
-	onboard_asr = CI1302(inboard_i2c)
+	onboard_asr = CI1302(inboard_i2c, onboard_bot.asr_en)
 except Exception as e:
 	print("Warning: Failed to communicate with CI130X (ASR) or",e)
 
@@ -80,15 +80,16 @@ onboard_music = MIDI(46, pa_ctrl=onboard_bot.spk_en)
 class KEYSensor:
 	def __init__(self, pin, range):
 		self.pin = pin
-		self.adc = ADC(Pin(pin), atten=ADC.ATTN_0DB)
+		self.adc = ADC(Pin(pin))
+		self.adc.atten(ADC.ATTN_0DB)
 		self.range = range
 		self.flag = True
 
 	def _value(self):
 		values = []
-		for _ in range(50):
+		for _ in range(25):
 			values.append(self.adc.read())
-			time.sleep_us(2)
+			time.sleep_us(5)
 		return (self.range-200) < min(values) < (self.range+200)
 
 	def get_presses(self, delay = 1):

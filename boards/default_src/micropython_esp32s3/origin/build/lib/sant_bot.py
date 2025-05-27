@@ -33,7 +33,14 @@ class BOT035:
     def _rreg(self, reg, nbytes=1):
         '''Read memory address'''
         self._i2c.writeto(_BOT035_ADDRESS, reg.to_bytes(1, 'little'))
-        return  int.from_bytes(self._i2c.readfrom(_BOT035_ADDRESS, nbytes), 'little')
+        return int.from_bytes(self._i2c.readfrom(_BOT035_ADDRESS, nbytes), 'little')
+
+    def _bits(self, offset, mask, value=None, delay=100, reg=_BOT035_CMD):
+        if value is None:
+            return (self._rreg(reg) & mask) >> offset
+        else:
+            self._wreg(reg, (self._rreg(reg) & (~ mask & 0xFF)) | (value << offset))
+            time.sleep_ms(delay)
 
     def reset(self):
         self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_PWM, b' Ndddd\x00\x00\x00\x8c\xb0')
@@ -77,24 +84,25 @@ class BOT035:
         else:
             self._wreg(_BOT035_LED + index, max(min(duty, 100), 0))
 
-    def tft_reset(self, value):
-        self._wreg(_BOT035_CMD, (self._rreg(_BOT035_CMD) & 0x7F) | (value << 7))
+    def tft_reset(self, value=None, delay=50):
+        return self._bits(7, 0x80, value, delay)
 
-    def spk_en(self, value):
-        self._wreg(_BOT035_CMD, (self._rreg(_BOT035_CMD) & 0xBF) | (value << 6))
+    def spk_en(self, value=None, delay=10):
+        return self._bits(6, 0x40, value, delay)
 
-    def cam_en(self, value):
-        self._wreg(_BOT035_CMD, (self._rreg(_BOT035_CMD) & 0xDF) | (value << 5))
-    
-    def cam_reset(self, value):
-        self._wreg(_BOT035_CMD, (self._rreg(_BOT035_CMD) & 0xEF) | (value << 4))
+    def cam_en(self, value=None, delay=500):
+        """Convert to high level effective"""
+        value = value if value is None else ~ value & 0x01
+        return self._bits(5, 0x20, value, delay)
+ 
+    def cam_reset(self, value=None, delay=50):
+        return self._bits(4, 0x10, value, delay)
 
-    def asr_en(self, value=None, delay=500):
-        self._wreg(_BOT035_CMD, (self._rreg(_BOT035_CMD) & 0xF3) | (value << 2))
-        time.sleep_ms(delay)
+    def asr_en(self, value=None, delay=700):
+        return self._bits(2, 0x0C, value, delay)
 
-    def uart_select(self, value):
-        self._wreg(_BOT035_CMD, (self._rreg(_BOT035_CMD) & 0xFC) | value)
+    def uart_select(self, value=None, delay=50):
+        return self._bits(0, 0x03, value, delay)
 
     def rgb_sync(self, buffer, n=12):
         self._i2c.writeto_mem(_BOT035_ADDRESS, _BOT035_RGB, buffer if len(buffer) < n else buffer[:n])

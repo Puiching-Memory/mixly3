@@ -13,8 +13,7 @@ from mixgo_sant import onboard_bot
 
 class GC032A(Camera):
     def __init__(self, framesize=LCD, hmirror=None):
-        onboard_bot.cam_en(0)
-        time.sleep_ms(500)
+        onboard_bot.cam_en(1, 500)
         super().__init__()
         super().set_framesize(framesize)
         time.sleep_ms(100)
@@ -26,5 +25,4 @@ class GC032A(Camera):
 
     def deinit(self):
         super().deinit()
-        time.sleep_ms(100)
-        onboard_bot.cam_en(1)
+        onboard_bot.cam_en(0,100)
