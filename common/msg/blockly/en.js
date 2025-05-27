@@ -35,7 +35,7 @@ En.MSG = {
     catCC_G1:"CC G1",
     catMINI_G2:"MINI G2",
     catMINI_G5:"MINI G5",
-    catSANT_G2:"SANT G2",
+    catSANT_G3:"SANT G3",
     catNova_G1:"Nova G1",
     catAIOT:"Intelligent IOT",
     catAIsensor:"MixGoAI Sensor",
