@@ -205,11 +205,11 @@ Python.finish = function (code) {
         text = imports.join('\n') + definitions_var.join('\n') + definitions_fun.join('\n')
             + functions.join('\n') + setups.join('') + code + codeEnd.join('\n');
     }
-    try {
-        text = optimizeShowCalls(text);
-    } catch (error) {
-        console.log(error);
-    }
+    // try {
+    //     text = optimizeShowCalls(text);
+    // } catch (error) {
+    //     console.log(error);
+    // }
     return text;
 }
 
