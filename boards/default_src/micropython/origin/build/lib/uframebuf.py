@@ -161,50 +161,44 @@ class FrameBuffer_Base(FrameBuffer):
 		self.width = width
 		self.height = height
 		self._buffer = buf
-		self.auto_show = True
-
-	def __getitem__(self, key):
-		x, y = key
-		return self.pixel(x, y)
-
-	def __setitem__(self, key, value):
-		x, y = key
-		self.pixel(x, y, value)
 
 	def show(self):
 		print("External inheritance is required to override this method")
 
-	def shift(self, x, y, rotate=False):
+	def write(self):
+		self.show()
+
+	def shift(self, x, y, rotate=False, sync=True):
 		"""Shift pixels by x and y"""
 		if x > 0:  # Shift Right
 			for _ in range(x):
 				for row in range(0, self.height):
-					last_pixel = self[self.width - 1, row] if rotate else 0
+					last_pixel = super().pixel(self.width - 1, row) if rotate else 0
 					for col in range(self.width - 1, 0, -1):
-						self[col, row] = self[col - 1, row]
-					self[0, row] = last_pixel
+						super().pixel(col, row, super().pixel(col - 1, row))
+					super().pixel(0, row, last_pixel)
 		elif x < 0:  # Shift Left
 			for _ in range(-x):
 				for row in range(0, self.height):
-					last_pixel = self[0, row] if rotate else 0
+					last_pixel = super().pixel(0, row) if rotate else 0
 					for col in range(0, self.width - 1):
-						self[col, row] = self[col + 1, row]
-					self[self.width - 1, row] = last_pixel
+						super().pixel(col, row, super().pixel(col + 1, row))
+					super().pixel(self.width - 1, row, last_pixel)
 		if y > 0:  # Shift Up
 			for _ in range(y):
 				for col in range(0, self.width):
-					last_pixel = self[col, self.height - 1] if rotate else 0
+					last_pixel = super().pixel(col, self.height - 1) if rotate else 0
 					for row in range(self.height - 1, 0, -1):
-						self[col, row] = self[col, row - 1]
-					self[col, 0] = last_pixel
+						super().pixel(col, row, super().pixel(col, row - 1))
+					super().pixel(col, 0, last_pixel)
 		elif y < 0:  # Shift Down
 			for _ in range(-y):
 				for col in range(0, self.width):
-					last_pixel = self[col, 0] if rotate else 0
+					last_pixel = super().pixel(col, 0) if rotate else 0
 					for row in range(0, self.height - 1):
-						self[col, row] = self[col, row + 1]
-					self[col, self.height - 1] = last_pixel
-		if self.auto_show: self.show()
+						super().pixel(col, row, super().pixel(col, row + 1))
+					super().pixel(col, self.height - 1, last_pixel)
+		if sync: self.show()
 
 	def shift_right(self, num, rotate=False):
 		"""Shift all pixels right"""
@@ -252,21 +246,57 @@ class FrameBuffer_Base(FrameBuffer):
 		else:
 			raise ValueError("This graphic operation is not supported")
 
-	def set_buffer(self, buffer):
+	def set_buffer(self, buffer, sync=True):
 		for i in range(min(len(buffer),len(self._buffer))):
 			self._buffer[i] = self._buffer[i] | buffer[i]
+		if sync: self.show()
 
 	def get_buffer(self):
 		return self._buffer	
 
-	def pointern(self, x=None, y=None, l=None, angle=0, color=0xffff, bg_color=0x0):
+	def pointern(self, x=None, y=None, l=None, angle=0, color=0xffff, bg_color=0x0, sync=True):
 		x = self.width // 2 if x is None else x
 		y = self.height // 2 if y is None else y
 		l = min(self.height // 2 , self.width // 2) if l is None else l
 		radian = math.radians(angle)
-		if self.auto_show: self.fill(bg_color)
-		self.line(x, y, round(x + l * math.sin(radian)), round(y - l * math.cos(radian)), color)
-		if self.auto_show: self.show()
+		if sync: super().fill(bg_color)
+		super().line(x, y, round(x + l * math.sin(radian)), round(y - l * math.cos(radian)), color)
+		if sync: self.show()
+
+	def pixel(self, x, y, color=None, sync=True):
+		if color is None:
+			return super().pixel(x, y)
+		else:
+			super().pixel(x, y, color)
+			if sync: self.show()
+
+	def vline(self, x, y, h, c, sync=True):
+		super().vline(x, y, h, c)
+		if sync: self.show()
+
+	def hline(self, x, y, w, c, sync=True):
+		super().hline(x, y, w, c)
+		if sync: self.show()
+
+	def line(self, x1, y1, x2, y2, c, sync=True):
+		super().line(x1, y1, x2, y2, c)
+		if sync: self.show()
+
+	def rect(self, x, y, w, h, c, sync=True):
+		super().rect(x, y, w, h, c)
+		if sync: self.show()
+
+	def fill_rect(self, x, y, w, h, c, sync=True):
+		super().fill_rect(x, y, w, h, c)
+		if sync: self.show()
+
+	def ellipse(self, x, y, xr, yr, c, f=False, sync=True):
+		super().ellipse(x, y, xr, yr, c, f)
+		if sync: self.show()
+
+	def fill(self, c, sync=True):
+		super().fill(c)
+		if sync: self.show()
 
 class FrameBuffer_Ascall(FrameBuffer_Base):
 	'''FrameBuffer for Ascall'''
@@ -282,22 +312,21 @@ class FrameBuffer_Ascall(FrameBuffer_Base):
 		for char_x in range(width):
 			for char_y in range(height):
 				if (buffer_info[char_x] >> char_y) & 0x1:
-					self.pixel(x + char_x, y + char_y, 1) if height <= self.height else self.pixel(y + char_y, self.height-(x + char_x), 1)
+					self.pixel(x + char_x, y + char_y, 1, sync=False) if height <= self.height else self.pixel(y + char_y, self.height - (x + char_x), 1, sync=False)
 
-	def shows(self, data, space=0, center=True):
+	def shows(self, data, space=0, center=True, sync=True):
 		"""Display character"""
 		if data is not None:
-			self.fill(0)
+			self.fill(0, sync=False)
 			if type(data) in [list, bytes, tuple, bytearray]:
-				self.set_buffer(data)
-				if self.auto_show: self.show()
+				self.set_buffer(data, sync)
 			else:
 				data=str(data)
 				x = (self.width - len(data) * (self._font.font_width + space) + space) // 2 if center else 0
 				for char in data:
 					self.bitmap(self._font.chardata(char), x) 
-					x=self._font.font_width + x + space
-				if self.auto_show: self.show()
+					x = self._font.font_width + x + space
+				if sync: self.show()
 
 	def frame(self, data, delay=500):
 		"""Display one frame per character"""
@@ -305,15 +334,14 @@ class FrameBuffer_Ascall(FrameBuffer_Base):
 			if type(data) in [list,tuple]:
 				for dat in data:
 					if type(dat) in [list,bytes,tuple,bytearray]:
-						self.fill(0)
-						self.set_buffer(dat)
-						self.show()
+						self.fill(0, sync=False)
+						self.set_buffer(data, True)
 						time.sleep_ms(delay)
 			else:
 				data=str(data)
 				x=(self.width - self._font.font_width) // 2 
 				for char in data:
-					self.fill(0)
+					self.fill(0, sync=False)
 					self.bitmap(self._font.chardata(char), x)
 					self.show()
 					time.sleep_ms(delay) 
@@ -325,7 +353,7 @@ class FrameBuffer_Ascall(FrameBuffer_Base):
 			str_len = len(data) * (self._font.font_width + space) - space
 			for i in range(str_len + self.width + 1):	
 				x = -i + self.width
-				self.fill(0)
+				self.fill(0, sync=False)
 				for char in data:
 					self.bitmap(self._font.chardata(char),x)
 					x = self._font.font_width + x + space
@@ -334,11 +362,11 @@ class FrameBuffer_Ascall(FrameBuffer_Base):
 
 class FrameBuffer_Uincode(FrameBuffer_Base):
 	'''FrameBuffer for Uincode'''
-	def font(self, font_address):
+	def font(self, font_address=0x700000):
 		"""Font selection or externally defined font code"""
 		self._font = Font_Uincode(font_address)
 
-	def image(self, path, x=None, y=None, size=None, invert=0, color=0xffff):
+	def image(self, path, x=None, y=None, size=None, invert=0, color=0xffff, bold=0, sync=True):
 		"""Set buffer to value of Python Imaging Library image"""
 		if type(path) is str :
 			buffer_info, (width, height) = Image().load(path, invert) 
@@ -352,11 +380,11 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 		size = max(round(size), 1)
 		x =(self.width - width * size) // 2 if x is None else x
 		y =(self.height - height * size) // 2 if y is None else y
-		if self.auto_show: self.fill_rect(x, y, width * size, height * size, 0)
-		self.bitmap((buffer_info,(width, height)), x, y, size, color)    
-		if self.auto_show: self.show()
+		if sync: self.fill_rect(x, y, width * size, height * size, 0, sync=False)
+		self.bitmap((buffer_info,(width, height)), x, y, size, bold, color)    
+		if sync: self.show()
 
-	def bitmap(self, buffer, x=0, y=0, size=1, color=0xffff):
+	def bitmap(self, buffer, x=0, y=0, size=1, bold=0, color=0xffff):
 		"""Graphic model display(buffer,(width,height))"""    
 		buffer_info,(width,height)=buffer    
 		if x < -width*size or x >= self.width or y < -height*size or y >= self.height:        
@@ -365,7 +393,7 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 		for j in range(height):
 			for i in range(width):
 				if buffer_info[j * bytewidth + i // 8] & (0x80 >> (i & 7)):
-					self.fill_rect(x + i * size, y + j * size, size, size, color)  
+					self.fill_rect(x + i * size, y + j * size, int(size + bold), int(size + bold), color, sync=False)  
 
 	def _take_buffer(self, strs, space, size=1):
 		'''Get character lattice information first'''
@@ -377,13 +405,12 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 			font_len = font_len + buffer[1][0] * size + space
 		return font_len, font_buffer
 
-	def shows(self, data, space=0, center=True, x=0, y=None, size=None, color=0xffff, bg_color=0x0):
+	def shows(self, data, space=0, center=True, x=0, y=None, size=None, color=0xffff, bold=0, bg_color=0x0, sync=True):
 		"""Display character"""
 		if data is not None:
 			if type(data) in [list, bytes, tuple, bytearray]:
-				if self.auto_show: self.fill(bg_color)
-				self.set_buffer(data)
-				if self.auto_show: self.show()
+				if sync: self.fill(bg_color, sync=False)
+				self.set_buffer(data, sync)
 			else:
 				yy = y 
 				if size is None:
@@ -393,20 +420,20 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 				font_len, font_buffer = self._take_buffer(str(data), space, size)
 				x = (self.width - font_len + space) // 2 if center else x
 				y = (self.height - self._font.height * size) // 2 if y is None else y
-				if self.auto_show:
+				if sync:
 					if yy is None:
-						self.fill(bg_color)
+						self.fill(bg_color, sync=False)
 					else:
-						self.fill_rect(x - 1, y - 1, font_len + 2, font_buffer[0][1][1] * size + 2, bg_color)
+						self.fill_rect(x - 1, y - 1, font_len + 2, font_buffer[0][1][1] * size + 2, bg_color, sync=False)
 				for buffer in font_buffer:    #Display character
-					self.bitmap(buffer, x, y, size, color)
+					self.bitmap(buffer, x, y, size, bold, color)
 					x = buffer[1][0] * size + x + space
-				if self.auto_show: self.show()
+				if sync: self.show()
 
-	def texts(self, data, space_x=0, space_y=1, x=0, y=0, size=1, color=0xffff, bg_color=0x0):
+	def texts(self, data, space_x=0, space_y=1, x=0, y=0, size=1, color=0xffff, bold=0, bg_color=0x0, sync=True):
 		size = max(round(size), 1)
 		lines = data.split('\n')
-		if self.auto_show: self.fill(bg_color)
+		if sync: self.fill(bg_color, sync=False)
 		for line in lines:
 			for char in line:
 				buffer = self._font.chardata(char)
@@ -414,23 +441,22 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 					x = 0
 					y = buffer[1][1] * size + y + space_y
 				if y > self.height:
-					if self.auto_show: self.show()
+					if sync: self.show()
 					return None
-				self.bitmap(buffer, x, y, size, color)
+				self.bitmap(buffer, x, y, size, bold, color)
 				x = buffer[1][0] * size + x + space_x
 			x = 0
 			y = self._font.height * size + y + space_y
-		if self.auto_show: self.show()
+		if sync: self.show()
 
-	def frame(self, data, delay=500, size=None, color=0xffff, bg_color=0x0):
+	def frame(self, data, delay=500, size=None, color=0xffff, bold=0, bg_color=0x0):
 		"""Display one frame per character"""
 		if data is not None:
 			if type(data) in [list, tuple]:
 				for dat in data:
 					if type(dat) in [list, bytes, tuple,  bytearray]:
-						if self.auto_show: self.fill(bg_color)
-						self.set_buffer(dat)
-						self.show()
+						self.fill(bg_color, sync=False)
+						self.set_buffer(data, True)
 						time.sleep_ms(delay)
 			else:
 				size = self.height // (self._font.height * 3) if size is None else size
@@ -439,12 +465,12 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 				for buffer in font_buffer:
 					x=(self.width - buffer[1][0] * size) // 2 
 					y=(self.height - buffer[1][1] * size) // 2 
-					if self.auto_show: self.fill(bg_color)
-					self.bitmap(buffer, x, y, size, color)
+					self.fill(bg_color, sync=False)
+					self.bitmap(buffer, x, y, size, bold, color)
 					self.show()
 					time.sleep_ms(delay) 
 
-	def scroll(self, data, space=0, speed=20, y=None, size=None, step= None, color=0xffff, bg_color=0x0):
+	def scroll(self, data, space=0, speed=20, y=None, size=None, step= None, color=0xffff, bold=0, bg_color=0x0):
 		"""Scrolling characters"""
 		if data is not None:
 			size = self.height // (self._font.height * 3) if size is None else size
@@ -454,9 +480,9 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 			for i in range(0, font_len - space + self.width, step):
 				x = -i + self.width
 				y = (self.height - self._font.height * size) // 2 if y is None else y
-				if self.auto_show: self.fill_rect(x - 2 , y - 2 , self.width -x + 4, font_buffer[0][1][1] * size + 4, bg_color)
+				self.fill_rect(x - 2 , y - 2 , self.width -x + 4, font_buffer[0][1][1] * size + 4, bg_color, sync=False)
 				for buffer in font_buffer:
-					self.bitmap(buffer, x, y, size, color)
+					self.bitmap(buffer, x, y, size, bold, color)
 					x = buffer[1][0] * size + x + space
 				self.show()
 				time.sleep_ms(speed)
