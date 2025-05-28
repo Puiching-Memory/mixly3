@@ -285,7 +285,9 @@ BU.burnWithEsptool = async (binFile, erase) => {
     } catch (error) {
         Debug.error(error);
         statusBarTerminal.addValue(`\n${error.toString()}\n`);
-        await transport.disconnect();
+        if (port.connected) {
+            await transport.disconnect();
+        }
         BU.progressLayer.hide();
         return;
     }
@@ -307,7 +309,9 @@ BU.burnWithEsptool = async (binFile, erase) => {
     } catch (error) {
         statusBarTerminal.addValue("Failed!\n" + Msg.Lang['shell.bin.readFailed'] + "！\n");
         statusBarTerminal.addValue("\n" + e + "\n", true);
-        await transport.disconnect();
+        if (port.connected) {
+            await transport.disconnect();
+        }
         BU.progressLayer.hide();
         return;
     }
@@ -334,7 +338,9 @@ BU.burnWithEsptool = async (binFile, erase) => {
         BU.progressLayer.hide();
         statusBarTerminal.addValue(`==${Msg.Lang['shell.burnFailed']}==\n`);
     } finally {
-        await transport.disconnect();
+        if (port.connected) {
+            await transport.disconnect();
+        }
     }
 }
 
