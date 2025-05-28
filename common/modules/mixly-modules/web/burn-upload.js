@@ -75,7 +75,7 @@ BU.progressLayer = new LayerProgress({
     cancelDisplay: false
 });
 
-const BAUD = 460800;
+const BAUD = goog.platform() === 'darwin' ? 460800 : 921600;
 
 if (['BBC micro:bit', 'Mithon CC'].includes(BOARD.boardType)) {
     FSWrapper.setupFilesystem(path.join(Env.boardDirPath, 'build'));
