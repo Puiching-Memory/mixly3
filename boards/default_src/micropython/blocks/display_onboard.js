@@ -376,6 +376,17 @@ export const display_clear = {
     }
 };
 
+export const display_available = {
+    init: function () {
+        this.setColour(DISPLAY_ONBOARD_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_SHOW + Blockly.Msg.MIXLY_DISPLAY_MATRIX_WRITE_NOW);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+    }
+};
+
 /**
  * @deprecated To be removed in the future
  */

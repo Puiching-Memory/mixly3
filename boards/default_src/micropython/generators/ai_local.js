@@ -137,6 +137,12 @@ export const AI_CAMERA_INIT = function (_, generator) {
     return code;
 }
 
+export const GET_QR_CODE_RECOGNITION_DATA = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var code = sub + '.code_recognitionn()';
+    return [code, generator.ORDER_ATOMIC];
+}
+
 export const GET_COLOR_DETECTION_NUM = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var color = this.getFieldValue('color');

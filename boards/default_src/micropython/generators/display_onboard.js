@@ -263,6 +263,13 @@ export const display_clear = function (block, generator) {
     return code;
 }
 
+export const display_available = function (block, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2];
+    generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
+    var code = 'onboard_tft.write()\n';
+    return code;
+}
+
 export const image_arithmetic = function (a, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";

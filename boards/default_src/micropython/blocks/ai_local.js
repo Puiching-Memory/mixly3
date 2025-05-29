@@ -322,6 +322,19 @@ export const AI_CAMERA_INIT = {
     }
 };
 
+
+export const GET_QR_CODE_RECOGNITION_DATA = { 
+    init: function () {
+        this.setColour(AI_LOCAL_GRAPH_HUE);
+                this.appendValueInput('SUB')
+            .setCheck("var");
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_GET_QR_CODE_RECOGNITION_RESULT);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
 export const GET_COLOR_DETECTION_NUM = { 
     init: function () {
         this.setColour(AI_LOCAL_GRAPH_HUE);
