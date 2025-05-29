@@ -233,7 +233,20 @@ export const CI130X_SET_SYSTEM_CMD_SANT = {
     }
 };
 
-
+export const CI130X_BROADCAST_SYSTEM_TIME = {
+    init: function () {
+        this.setColour(AI_LOCAL_VOICE_HUE);
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_DETAILED, "1"], 
+                [Blockly.Msg.MIXLY_Concise, "0"]
+            ]), "cmd")
+            .appendField(Blockly.Msg.MIXLY_BROADCAST_SYSTEM_TIME)
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+    }
+};
 
 
 //graph part

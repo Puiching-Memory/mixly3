@@ -4122,4 +4122,7 @@ ZhHans.MIXLY_RIGHT_MOUSE_CORNER = '右嘴角';
 ZhHans.MIXLY_RECOGNITION_RECGNITION = '识别';
 ZhHans.MIXLY_synchronize = '实时刷新';
 ZhHans.MIXLY_Display_long_text = '显示长文本';
+ZhHans.MIXLY_BROADCAST_SYSTEM_TIME = '播报系统时间';
+ZhHans.MIXLY_DETAILED = '详细地';
+ZhHans.MIXLY_Concise = '简洁地';
 })();

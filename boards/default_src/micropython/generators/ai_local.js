@@ -95,7 +95,13 @@ export const CI130X_SET_SYSTEM_CMD_SANT = function (_, generator) {
     return code;
 }
 
-
+export const CI130X_BROADCAST_SYSTEM_TIME = function (_, generator) {
+    var version = Boards.getSelectedBoardKey().split(':')[2];
+    generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
+    var cmd = this.getFieldValue('cmd');
+    var code = 'onboard_asr.play_time(' + cmd + ')\n';
+    return code;
+}
 
 
 

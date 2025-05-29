@@ -2485,6 +2485,7 @@
         </value>
       </block>
       <block type="CI130X_SET_SYSTEM_CMD_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
+      <block type="CI130X_BROADCAST_SYSTEM_TIME" m-show='micropython:esp32s3:mixgo_sant'>
     </category>
   </category> 
   <category id="catSANT_G3" colour="40" m-show='micropython:esp32s3:mixgo_sant'>

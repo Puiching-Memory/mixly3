@@ -966,6 +966,7 @@ export const onboard_tft_display_line = function (block, generator) {
     var s = this.getFieldValue('sync');
     if (color.slice(0, 2) == "0x") {
         var code = 'onboard_tft.line(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', ' + color + ',sync=' + s +')\n';
+    } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
         const g = parseInt(rgbValues[1]);
