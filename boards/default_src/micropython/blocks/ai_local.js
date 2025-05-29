@@ -244,9 +244,9 @@ export const CREATE_CAMERA = {
             .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.MIXLY_SMARTCAMERA)
             .appendField(Blockly.Msg.LISTS_SET_INDEX_SET + Blockly.Msg.MIXLY_SHOOTING_SIZE)
             .appendField(new Blockly.FieldDropdown([
+                ['LCD : 240px*240px', "LCD"],
                 ['VGA : 640px*480px', "VGA"],
                 ['QVGA : 320px*240px', "QVGA"],
-                ['LCD : 240px*240px', "LCD"],
                 ['QQVGA : 160px*120px', "QQVGA"]
             ]), "cmd")
         this.setPreviousStatement(true);
@@ -274,6 +274,7 @@ export const GET_PICTURE_DATA = {
             .appendField(Blockly.Msg.MIXLY_GET_PICTURE_DATA);
         this.setOutput(true);
         this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_GET_PICTURE_DATA_TOOLTIP);
     }
 };
 
@@ -299,47 +300,35 @@ export const STOP_SCREEN_DISPLAY = {
     }
 };
 
-export const INIT_QR_CODE_RECOGNITION= {
+export const AI_CAMERA_INIT = {
     init: function () {
         this.setColour(AI_LOCAL_GRAPH_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_MAKE)
+            .setCheck("var");
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.MIXLY_QR_CODE_RECOGNTITION);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
+            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_QR_CODE + Blockly.Msg.MIXLY_RECOGNITION, "CODE_DETECTION"],
+                [Blockly.Msg.MIXLY_COLOR_RECOGNTITION, "COLOR_DETECTION"],
+                [Blockly.Msg.MIXLY_EMOTION_DETEECTION, "MOTION_DETECTON"],
+                [Blockly.Msg.MIXLY_CAT_FACE + Blockly.Msg.MIXLY_RECOGNITION, "CAT_FACE_DETECTION"],
+                [Blockly.Msg.MIXLY_FACE_CLASSIFIER, "FACE_DETECTION"],
+                [Blockly.Msg.MIXLY_AipFace, "FACE_RECOGNITION"]
+            ]), "kind");
         this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
     }
 };
 
-
-
-export const START_QR_CODE_RECOGNITION= {
+export const GET_COLOR_DETECTION_NUM = { 
     init: function () {
         this.setColour(AI_LOCAL_GRAPH_HUE);
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_MSTIMER2_START + Blockly.Msg.MIXLY_QR_CODE + Blockly.Msg.MIXLY_RECOGNITION);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setInputsInline(true);
-    }
-};
-
-export const GET_QR_CODE_RECOGNITION_DATA = { 
-    init: function () {
-        this.setColour(AI_LOCAL_GRAPH_HUE);
+                this.appendValueInput('SUB')
+            .setCheck("var");
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_GET_QR_CODE_RECOGNITION_RESULT);
-        this.setOutput(true);
-        this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.MIXLY_GET_QR_CODE_RECOGNITION_RESULT_TOOLTIP);
-    }
-};
-
-export const INIT_COLOR_DETECTION= {
-    init: function () {
-        this.setColour(AI_LOCAL_GRAPH_HUE);
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.MIXLY_ESP32_APDS9960_COLOR);
-        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_RECOGNITION + Blockly.Msg.MIXLY_HOW_MUCH)
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.COLOUR_RGB_RED,"0"],
                 [Blockly.Msg.COLOUR_RGB_ORANGE,"1"],
@@ -351,107 +340,170 @@ export const INIT_COLOR_DETECTION= {
                 [Blockly.Msg.COLOUR_RGB_WHITE,"7"],
                 [Blockly.Msg.COLOUR_RGB_GREY,"8"],
                 [Blockly.Msg.MIXLY_CUSTOM_STUDY,"9"]
-            ]),'color')
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setInputsInline(true);
-    }
-};
-
-export const START_COLOR_DETECTION= {
-    init: function () {
-        this.setColour(AI_LOCAL_GRAPH_HUE);
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_MSTIMER2_START + Blockly.Msg.HTML_COLOUR + Blockly.Msg.MIXLY_RECOGNITION);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setInputsInline(true);
-    }
-};
-
-export const GET_COLOR_DETECTION_RESULT = { 
-    init: function () {
-        this.setColour(AI_LOCAL_GRAPH_HUE);
+            ]),'color');
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_GET_COLOR_DETECTION_RESULT);
+            .appendField(Blockly.Msg.MIXLY_Pixel_block);
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.MIXLY_GET_COLOR_DETECTION_RESULT_TOOLTIP);
+        // this.setTooltip(Blockly.Msg.MIXLY_GET_COLOR_DETECTION_RESULT_TOOLTIP);
     }
 };
 
-export const INIT_CAT_FACE_DETECTION= {
+export const GET_COLOR_DETECTION_LOCATION = { 
     init: function () {
         this.setColour(AI_LOCAL_GRAPH_HUE);
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.MIXLY_CAT_FACE +Blockly.Msg.MIXLY_RECOGNITION);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setInputsInline(true);
-    }
-};
-
-export const START_CAT_FACE_DETECTION= {
-    init: function () {
-        this.setColour(AI_LOCAL_GRAPH_HUE);
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_MSTIMER2_START + Blockly.Msg.MIXLY_CAT_FACE + Blockly.Msg.MIXLY_RECOGNITION);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setInputsInline(true);
-    }
-};
-
-export const GET_CAT_FACE_DETECTION_RESULT = { 
-    init: function () {
-        this.setColour(AI_LOCAL_GRAPH_HUE);
+        this.appendValueInput('SUB')
+            .setCheck("var");
+        this.appendValueInput('NO')
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_4DIGITDISPLAY_NOMBER1);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_GET_CAT_FACE_DETECTION_RESULT);
+            .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY_NOMBER2)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.COLOUR_RGB_RED,"0"],
+                [Blockly.Msg.COLOUR_RGB_ORANGE,"1"],
+                [Blockly.Msg.COLOUR_RGB_YELLOW,"2"],
+                [Blockly.Msg.COLOUR_RGB_GREEN,"3"],
+                [Blockly.Msg.COLOUR_RGB_CYAN,"4"],
+                [Blockly.Msg.COLOUR_RGB_BLUE,"5"],
+                [Blockly.Msg.COLOUR_RGB_PURPLE,"6"],
+                [Blockly.Msg.COLOUR_RGB_WHITE,"7"],
+                [Blockly.Msg.COLOUR_RGB_GREY,"8"],
+                [Blockly.Msg.MIXLY_CUSTOM_STUDY,"9"]
+            ]),'color');
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_Pixel_block + Blockly.Msg.blockpy_set_of + Blockly.Msg.MIXLY_POSITION_XY);
+        this.setOutput(true);
+        this.setInputsInline(true);
+        // this.setTooltip(Blockly.Msg.MIXLY_GET_COLOR_DETECTION_RESULT_TOOLTIP);
+    }
+};
+
+export const GET_CAT_FACE_DETECTION_NUM = { 
+    init: function () {
+        this.setColour(AI_LOCAL_GRAPH_HUE);
+                this.appendValueInput('SUB')
+            .setCheck("var");
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_RECOGNITION + Blockly.Msg.MIXLY_HOW_MUCH +Blockly.Msg.MIXLY_CAT_FACE)
+        this.setOutput(true);
+        this.setInputsInline(true);
+        // this.setTooltip(Blockly.Msg.MIXLY_GET_COLOR_DETECTION_RESULT_TOOLTIP);
+    }
+};
+
+export const GET_CAT_FACE_DETECTION_LOCATION = { 
+    init: function () {
+        this.setColour(AI_LOCAL_GRAPH_HUE);
+        this.appendValueInput('SUB')
+            .setCheck("var");
+        this.appendValueInput('NO')
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_4DIGITDISPLAY_NOMBER1);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY_NOMBER2 + Blockly.Msg.MIXLY_CAT_FACE + Blockly.Msg.blockpy_set_of + Blockly.Msg.MIXLY_POSITION_XY);
+        this.setOutput(true);
+        this.setInputsInline(true);
+        // this.setTooltip(Blockly.Msg.MIXLY_GET_COLOR_DETECTION_RESULT_TOOLTIP);
+    }
+};
+
+export const GET_FACE_DETECTION_NUM = { 
+    init: function () {
+        this.setColour(AI_LOCAL_GRAPH_HUE);
+                this.appendValueInput('SUB')
+            .setCheck("var");
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_RECOGNITION + Blockly.Msg.MIXLY_HOW_MUCH +Blockly.Msg.MIXLY_FACE)
+        this.setOutput(true);
+        this.setInputsInline(true);
+        // this.setTooltip(Blockly.Msg.MIXLY_GET_COLOR_DETECTION_RESULT_TOOLTIP);
+    }
+};
+
+export const GET_FACE_DETECTION_LOCATION = { 
+    init: function () {
+        this.setColour(AI_LOCAL_GRAPH_HUE);
+        this.appendValueInput('SUB')
+            .setCheck("var");
+        this.appendValueInput('NO')
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_4DIGITDISPLAY_NOMBER1);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY_NOMBER2 + Blockly.Msg.MIXLY_FACE + Blockly.Msg.blockpy_set_of + Blockly.Msg.MIXLY_POSITION_XY);
+        this.setOutput(true);
+        this.setInputsInline(true);
+        // this.setTooltip(Blockly.Msg.MIXLY_GET_COLOR_DETECTION_RESULT_TOOLTIP);
+    }
+};
+
+export const GET_FACE_DETECTION_KEYPOINT_LOCATION = { 
+    init: function () {
+        this.setColour(AI_LOCAL_GRAPH_HUE);
+        this.appendValueInput('SUB')
+            .setCheck("var");
+        this.appendValueInput('NO')
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_4DIGITDISPLAY_NOMBER1);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY_NOMBER2 + Blockly.Msg.MIXLY_FACE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_KEYPOINT)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_LEFT_EYE,"0"],
+                [Blockly.Msg.MIXLY_RIGHT_EYE,"1"],
+                [Blockly.Msg.MIXLY_NOSE,"2"],
+                [Blockly.Msg.MIXLY_LEFT_MOUSE_CORNER,"3"],
+                [Blockly.Msg.MIXLY_RIGHT_MOUSE_CORNER,"4"]
+            ]),'kp')
+            .appendField(Blockly.Msg.blockpy_set_of + Blockly.Msg.MIXLY_POSITION_XY);
         this.setOutput(true);
         this.setInputsInline(true);
     }
 };
 
-export const INIT_PEOPLE_FACE_DETECTION= {
+export const GET_FACE_RECOGNITION_ID = { 
     init: function () {
         this.setColour(AI_LOCAL_GRAPH_HUE);
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.MIXLY_FACE_CLASSIFIER);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setInputsInline(true);
-    }
-};
-
-export const START_PEOPLE_FACE_DETECTION= {
-    init: function () {
-        this.setColour(AI_LOCAL_GRAPH_HUE);
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_MSTIMER2_START + Blockly.Msg.MIXLY_FACE_CLASSIFIER + '/' + Blockly.Msg.MIXLY_AipFace);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setInputsInline(true);
-    }
-};
-
-export const GET_PEOPLE_FACE_DETECTION_RESULT = { 
-    init: function () {
-        this.setColour(AI_LOCAL_GRAPH_HUE);
+                this.appendValueInput('SUB')
+            .setCheck("var");
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_GET_PEOPLE_FACE_DETECTION_RESULT);
+            .appendField(Blockly.Msg.MIXLY_RECOGNITION_RECGNITION + Blockly.Msg.MIXLY_FACE + 'ID');
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.MIXLY_GET_PEOPLE_FACE_DETECTION_RESULT_TOOLTIP);
     }
 };
 
-export const INIT_PEOPLE_FACE_RECOGNITION= {
+export const GET_FACE_RECOGNITION_ID_LOCATION = { 
     init: function () {
         this.setColour(AI_LOCAL_GRAPH_HUE);
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.MIXLY_AipFace);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
+        this.appendValueInput('SUB')
+            .setCheck("var");
+        this.appendValueInput('NO')
+            .appendField(Blockly.Msg.MIXLY_GET +'ID'+ Blockly.Msg.MIXLY_AS);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.blockpy_set_of + Blockly.Msg.MIXLY_FACE + Blockly.Msg.blockpy_set_of + Blockly.Msg.MIXLY_POSITION_XY);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const GET_FACE_RECOGNITION_ID_KEYPOINT_LOCATION = { 
+    init: function () {
+        this.setColour(AI_LOCAL_GRAPH_HUE);
+        this.appendValueInput('SUB')
+            .setCheck("var");
+        this.appendValueInput('NO')
+            .appendField(Blockly.Msg.MIXLY_GET + 'ID'+ Blockly.Msg.MIXLY_AS);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.blockpy_set_of + Blockly.Msg.MIXLY_FACE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_KEYPOINT)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_LEFT_EYE,"0"],
+                [Blockly.Msg.MIXLY_RIGHT_EYE,"1"],
+                [Blockly.Msg.MIXLY_NOSE,"2"],
+                [Blockly.Msg.MIXLY_LEFT_MOUSE_CORNER,"3"],
+                [Blockly.Msg.MIXLY_RIGHT_MOUSE_CORNER,"4"]
+            ]),'kp')
+            .appendField(Blockly.Msg.blockpy_set_of + Blockly.Msg.MIXLY_POSITION_XY);
+        this.setOutput(true);
         this.setInputsInline(true);
     }
 };
@@ -459,6 +511,8 @@ export const INIT_PEOPLE_FACE_RECOGNITION= {
 export const PEOPLE_FACE_ENROLL = { 
     init: function () {
         this.setColour(AI_LOCAL_GRAPH_HUE);
+        this.appendValueInput('SUB')
+            .setCheck("var");
         this.appendDummyInput()
             .appendField(Blockly.Msg.FACE_ENROLL);
         this.setOutput(true);
@@ -466,20 +520,11 @@ export const PEOPLE_FACE_ENROLL = {
     }
 };
 
-export const GET_PEOPLE_FACE_RECOGNITION_RESULT = { 
-    init: function () {
-        this.setColour(AI_LOCAL_GRAPH_HUE);
-        this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_GET_PEOPLE_FACE_RECOGNITION_RESULT);
-        this.setOutput(true);
-        this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.MIXLY_GET_PEOPLE_FACE_RECOGNITION_RESULT_TOOLTIP);
-    }
-};
-
 export const DELETE_PEOPLE_FACE_ID= {
     init: function () {
         this.setColour(AI_LOCAL_GRAPH_HUE);
+        this.appendValueInput('SUB')
+            .setCheck("var");
         this.appendValueInput("ID")
             .appendField(Blockly.Msg.MIXLY_DELETE_PEOPLE_FACE_ID);
         this.setPreviousStatement(true);

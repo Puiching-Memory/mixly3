@@ -63,10 +63,6 @@ export const CI130X_GET_THE_RECOGNIZED_CMD_SANT = function (_, generator) {
     return [code, generator.ORDER_ATOMIC];
 }
 
-
-
-
-//graph part
 export const CI130X_BROADCAST_SANT = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     if(version == 'mixgo_sant'){
@@ -99,6 +95,11 @@ export const CI130X_SET_SYSTEM_CMD_SANT = function (_, generator) {
     return code;
 }
 
+
+
+
+
+//graph part
 export const CREATE_CAMERA = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     generator.definitions_['import_camera'] = 'import camera';
@@ -119,7 +120,7 @@ export const GET_PICTURE_DATA = function (_, generator) {
 }
 
 export const SCREEN_SHOW_CAM_GRAPH_SHOOT = function (_, generator) {
-    var code = 'cam.display()\n'+'time.sleep(1)\n';
+    var code = 'cam.display()\n';
     return code;
 }
 
@@ -128,99 +129,93 @@ export const STOP_SCREEN_DISPLAY = function (_, generator) {
     return code;
 }
 
-export const INIT_QR_CODE_RECOGNITION = function (_, generator) {
-    generator.definitions_['import_esp_ai'] = 'import esp_ai';
-    var code = 'qr_code = esp_ai.code_recognition()\n';
+export const AI_CAMERA_INIT = function (_, generator) {
+    generator.definitions_['from_ai_camera_import_AI'] = 'from ai_camera import AI';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var cmd = this.getFieldValue('kind');
+    var code = sub +' = ai_camera.AI(ai_camera.' + cmd + ')\n';
     return code;
 }
 
-export const START_QR_CODE_RECOGNITION = function (_, generator) {
-    generator.definitions_['import_esp_ai'] = 'import esp_ai';
-    var code = 'qr_code.start()\n';
-    return code;
-}
-
-export const GET_QR_CODE_RECOGNITION_DATA = function (_, generator) {
-    var code = 'qr_code.read()';
-    return [code, generator.ORDER_ATOMIC];
-}
-
-export const INIT_COLOR_DETECTION = function (_, generator) {
-    generator.definitions_['import_esp_ai'] = 'import esp_ai';
+export const GET_COLOR_DETECTION_NUM = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var color = this.getFieldValue('color');
-    var code = 'color = esp_ai.color_detection('+ color +')\n';
-    return code;
-}
-
-export const START_COLOR_DETECTION = function (_, generator) {
-    generator.definitions_['import_esp_ai'] = 'import esp_ai';
-    var code = 'color.start()\n';
-    return code;
-}
-
-export const GET_COLOR_DETECTION_RESULT = function (_, generator) {
-    generator.definitions_['import_esp_ai'] = 'import esp_ai';
-    var code = 'color.read()';
+    var code = sub + '.color_detection('+ color +",'len')";
     return [code, generator.ORDER_ATOMIC];
 }
 
-export const INIT_CAT_FACE_DETECTION = function (_, generator) {
-    generator.definitions_['import_esp_ai'] = 'import esp_ai';
-    var code = 'cat = esp_ai.cat_detection()\n';
-    return code;
-}
-
-export const START_CAT_FACE_DETECTION = function (_, generator) {
-    generator.definitions_['import_esp_ai'] = 'import esp_ai';
-    var code = 'cat.start()\n';
-    return code;
-}
-
-export const GET_CAT_FACE_DETECTION_RESULT = function (_, generator) {
-    generator.definitions_['import_esp_ai'] = 'import esp_ai';
-    var code = 'cat.read()';
+export const GET_COLOR_DETECTION_LOCATION = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var num = generator.valueToCode(this, 'NO', generator.ORDER_ATOMIC);
+    var color = this.getFieldValue('color');
+    var code = sub + '.color_detection('+ color +",'pos',"+ num +')';
     return [code, generator.ORDER_ATOMIC];
 }
 
-export const INIT_PEOPLE_FACE_DETECTION = function (_, generator) {
-    generator.definitions_['import_esp_ai'] = 'import esp_ai';
-    var code = 'face = esp_ai.face_detection()\n';
-    return code;
-}
-
-export const START_PEOPLE_FACE_DETECTION = function (_, generator) {
-    generator.definitions_['import_esp_ai'] = 'import esp_ai';
-    var code = 'face.start()\n';
-    return code;
-}
-
-export const GET_PEOPLE_FACE_DETECTION_RESULT = function (_, generator) {
-    generator.definitions_['import_esp_ai'] = 'import esp_ai';
-    var code = 'face.read()';
+export const GET_CAT_FACE_DETECTION_NUM = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var code = sub + ".cat_detection('len')";
     return [code, generator.ORDER_ATOMIC];
 }
 
-export const INIT_PEOPLE_FACE_RECOGNITION = function (_, generator) {
-    generator.definitions_['import_esp_ai'] = 'import esp_ai';
-    var code = 'face = esp_ai.face_recognition()\n';
-    return code;
+export const GET_CAT_FACE_DETECTION_LOCATION = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var num = generator.valueToCode(this, 'NO', generator.ORDER_ATOMIC);
+    var code = sub + ".cat_detection(,'pos',"+ num +')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const GET__FACE_DETECTION_NUM = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var code = sub + ".face_detection('len')";
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const GET_FACE_DETECTION_LOCATION = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var num = generator.valueToCode(this, 'NO', generator.ORDER_ATOMIC);
+    var code = sub + ".face_detection('pos',"+ num +')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const GET_FACE_DETECTION_KEYPOINT_LOCATION = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var num = generator.valueToCode(this, 'NO', generator.ORDER_ATOMIC);
+    var kp = this.getFieldValue('kp');
+    var code = sub + ".face_detection('keypoint',"+ num +','+ kp +')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const GET_FACE_RECOGNITION_ID = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var code = sub + ".face_recognition('len')";
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const GET_FACE_RECOGNITION_ID_LOCATION = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var num = generator.valueToCode(this, 'NO', generator.ORDER_ATOMIC);
+    var code = sub + ".face_recognition('pos',"+ num +')';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const GET_FACE_RECOGNITION_ID_KEYPOINT_LOCATION = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var num = generator.valueToCode(this, 'NO', generator.ORDER_ATOMIC);
+    var kp = this.getFieldValue('kp');
+    var code = sub + ".face_recognition('keypoint',"+ num +','+ kp +')';
+    return [code, generator.ORDER_ATOMIC];
 }
 
 export const PEOPLE_FACE_ENROLL = function (_, generator) {
-    generator.definitions_['import_esp_ai'] = 'import esp_ai';
-    var code = 'face.enroll()';
-    return [code, generator.ORDER_ATOMIC];
-}
-
-export const GET_PEOPLE_FACE_RECOGNITION_RESULT = function (_, generator) {
-    generator.definitions_['import_esp_ai'] = 'import esp_ai';
-    var code = 'face.recognize()';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var code = sub + '.face_enroll()';
     return [code, generator.ORDER_ATOMIC];
 }
 
 export const DELETE_PEOPLE_FACE_ID = function (_, generator) {
-    generator.definitions_['import_esp_ai'] = 'import esp_ai';
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var id = generator.valueToCode(this, 'ID', generator.ORDER_ATOMIC);
-    var code = 'face.delete('+ id +')\n';
+    var code = sub + '.face_delete('+ id +')\n';
     return code;
 }

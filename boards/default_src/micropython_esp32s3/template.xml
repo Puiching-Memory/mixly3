@@ -2310,22 +2310,133 @@
       <block type="GET_PICTURE_DATA"></block>
       <block type="SCREEN_SHOW_CAM_GRAPH_SHOOT"></block>
       <block type="STOP_SCREEN_DISPLAY"></block>
-      <block type="INIT_QR_CODE_RECOGNITION"></block>
-      <block type="START_QR_CODE_RECOGNITION"></block>
-      <block type="GET_QR_CODE_RECOGNITION_DATA"></block>
-      <block type="INIT_COLOR_DETECTION"></block>
-      <block type="START_COLOR_DETECTION"></block>
-      <block type="GET_COLOR_DETECTION_RESULT"></block>
-      <block type="INIT_CAT_FACE_DETECTION"></block>
-      <block type="START_CAT_FACE_DETECTION"></block>
-      <block type="GET_CAT_FACE_DETECTION_RESULT"></block>
-      <block type="INIT_PEOPLE_FACE_DETECTION"></block>
-      <block type="START_PEOPLE_FACE_DETECTION"></block>
-      <block type="GET_PEOPLE_FACE_DETECTION_RESULT"></block>
-      <block type="INIT_PEOPLE_FACE_RECOGNITION"></block>
-      <block type="PEOPLE_FACE_ENROLL"></block>
-      <block type="GET_PEOPLE_FACE_RECOGNITION_RESULT"></block>
+      <block type="AI_CAMERA_INIT">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ai</field>
+            </shadow>
+          </value>
+      </block>
+      <block type="GET_QR_CODE_RECOGNITION_DATA">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">ai</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="GET_COLOR_DETECTION_NUM">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">ai</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="GET_COLOR_DETECTION_LOCATION">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">ai</field>
+          </shadow>
+        </value>
+        <value name="NO">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>  
+      </block>
+      <block type="GET_CAT_FACE_DETECTION_NUM">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">ai</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="GET_CAT_FACE_DETECTION_LOCATION">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">ai</field>
+          </shadow>
+        </value>
+        <value name="NO">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>  
+      </block>
+      <block type="GET_FACE_DETECTION_NUM">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">ai</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="GET_FACE_DETECTION_LOCATION">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">ai</field>
+          </shadow>
+        </value>
+        <value name="NO">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>  
+      </block>
+      <block type="GET_FACE_DETECTION_KEYPOINT_LOCATION">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">ai</field>
+          </shadow>
+        </value>
+        <value name="NO">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>  
+      </block>
+      <block type="GET_FACE_RECOGNITION_ID">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">ai</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="GET_FACE_RECOGNITION_ID_LOCATION">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">ai</field>
+          </shadow>
+        </value>
+        <value name="NO">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>  
+      </block>
+      <block type="GET_FACE_RECOGNITION_ID_KEYPOINT_LOCATION">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">ai</field>
+          </shadow>
+        </value>
+        <value name="NO">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>  
+      </block>
+      <block type="PEOPLE_FACE_ENROLL">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">ai</field>
+          </shadow>
+        </value>
+      </block>
       <block type="DELETE_PEOPLE_FACE_ID">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">ai</field>
+          </shadow>
+        </value>
         <value name="ID">
           <shadow type="math_number">
             <field name="NUM">0</field>

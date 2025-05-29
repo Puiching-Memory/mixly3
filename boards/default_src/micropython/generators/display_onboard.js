@@ -846,7 +846,7 @@ export const onboard_tft_show_image_xy_direct = function (_, generator) {
     var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
     var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
     var direct = generator.valueToCode(this, 'direct', generator.ORDER_ASSIGNMENT);
-    var code = "onboard_tft.pictrue(" + x + ',' + y + ',' + direct + ")\n";
+    var code = "onboard_tft.picture(" + x + ',' + y + ',' + direct + ")\n";
     return code;
 }
 
