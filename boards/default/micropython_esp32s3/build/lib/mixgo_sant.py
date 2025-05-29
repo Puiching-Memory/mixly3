@@ -1,5 +1,5 @@
 """
-mixgo_sant Onboard resources
+mixgo_sant Onboard resources(v1.9)
 
 Micropython library for the mixgo_sant Onboard resources
 =======================================================
@@ -13,93 +13,83 @@ import time, gc, st7789_cf, math
 rtc_clock = RTC()
 
 '''I2C-onboard'''
-#onboard_i2c = I2C(0)
-onboard_i2c = SoftI2C(scl=Pin(47), sda=Pin(48), freq=400000)
+#inboard_i2c = I2C(0)
+inboard_i2c = SoftI2C(scl=Pin(47), sda=Pin(48), freq=400000)
+onboard_i2c = SoftI2C(scl=Pin(47), sda=Pin(38), freq=400000)
 
 '''BOT035-Sensor'''
 try :
 	import sant_bot
-	onboard_bot = sant_bot.BOT035(onboard_i2c)
+	onboard_bot = sant_bot.BOT035(inboard_i2c)
 except Exception as e:
 	print("Warning: Failed to communicate with BOT035 (Coprocessor) or",e)
 
-'''SPI-onboard'''
-onboard_spi = SPI(1, baudrate=80000000, polarity=1, phase=1)
-
-onboard_bot.tft_reset(0)
-time.sleep_ms(50)
-onboard_bot.tft_reset(1)
-time.sleep_ms(150)
-
-'''SPI-onboard'''
-onboard_spi = SPI(1, baudrate=80000000, polarity=1, phase=1)
-
 '''TFT/240*240'''
-onboard_tft = st7789_cf.ST7789(onboard_spi, 240, 240, dc_pin=40, backlight=onboard_bot.tft_brightness, font_address=0xE00000)
+onboard_tft = st7789_cf.ST7789(reset=onboard_bot.tft_reset, backlight=onboard_bot.tft_brightness, font_address=0xE00000)
 
 '''ACC-Sensor'''
 try :
 	import sc7a20
-	onboard_acc = sc7a20.SC7A20(onboard_i2c)     
+	onboard_acc = sc7a20.SC7A20(inboard_i2c)
 except Exception as e:
 	print("Warning: Failed to communicate with SC7A20H (ACC) or",e)
 
-'''ALS_PS_CS-Sensor'''
+'''ALS_PS-Sensor *2'''
 try :
-	import mk_pb4023
-	onboard_als = mk_pb4023.MK_PB4023(onboard_i2c)     
+	import ltr553als
+	onboard_als_l = ltr553als.LTR_553ALS(onboard_i2c)
 except Exception as e:
-	print("Warning: Failed to communicate with MK_PB4023 (ALS&PS&CS) or",e)
+	print("Warning: Failed to communicate with TR_553ALS-L (ALS&PS) or",e)
+
+try :
+	#import ltr553als
+	onboard_als_r = ltr553als.LTR_553ALS(inboard_i2c)
+except Exception as e:
+	print("Warning: Failed to communicate with TR_553ALS-R (ALS&PS) or",e)
 
 '''THS-Sensor'''
 try :
 	import shtc3
-	onboard_ths = shtc3.SHTC3(onboard_i2c)     
+	onboard_ths = shtc3.SHTC3(inboard_i2c)
 except Exception as e:
 	print("Warning: Failed to communicate with GXHTC3 (THS) or",e)
 
 '''MGS-Sensor'''
 try :
 	import mmc5603
-	onboard_mgs = mmc5603.MMC5603(onboard_i2c)
+	onboard_mgs = mmc5603.MMC5603(inboard_i2c)
 except Exception as e:
 	print("Warning: Failed to communicate with MMC5603 (MGS) or",e)
 
-'''BPS-Sensor'''
-try :
-	import spl06_001
-	onboard_bps = spl06_001.SPL06(onboard_i2c)     
-except Exception as e:
-	print("Warning: Failed to communicate with SPL06-001 (BPS) or",e)
-
 '''ASR-Sensor'''
 try :
-	import ci130x
-	onboard_asr = ci130x.CI130X(onboard_i2c)     
+	from ci1302x import CI1302
+	onboard_asr = CI1302(inboard_i2c, onboard_bot.asr_en)
 except Exception as e:
 	print("Warning: Failed to communicate with CI130X (ASR) or",e)
 
 '''2RGB_WS2812'''    
-from ws2812 import NeoPixel
-onboard_rgb = NeoPixel(Pin(21), 4)
+from ws2812x import NeoPixel
+onboard_rgb = NeoPixel(onboard_bot.rgb_sync, 4)
 
 '''1Buzzer-Music'''
-from music import MIDI
-onboard_music = MIDI(16, pa_ctrl=onboard_asr.pa_ctrl)
+from musicx import MIDI
+onboard_music = MIDI(46, pa_ctrl=onboard_bot.spk_en)
 
 '''5KEY_Sensor'''
 class KEYSensor:
 	def __init__(self, pin, range):
 		self.pin = pin
-		self.adc = ADC(Pin(pin), atten=ADC.ATTN_0DB)
+		self.adc = ADC(Pin(pin))
+		self.adc.atten(ADC.ATTN_0DB)
 		self.range = range
 		self.flag = True
-	
+
 	def _value(self):
 		values = []
-		for _ in range(50):
+		for _ in range(25):
 			values.append(self.adc.read())
-			time.sleep_us(2)
+			time.sleep_us(5)
 		return (self.range-200) < min(values) < (self.range+200)
 
 	def get_presses(self, delay = 1):
@@ -135,26 +125,22 @@ class Button(KEYSensor):
 		return not self.key.value()
 
 B1key = Button(0)
-B2key = KEYSensor(15,0)
-A1key = KEYSensor(15,2300)
-A2key = KEYSensor(15,1650)
-A3key = KEYSensor(15,850)
-A4key = KEYSensor(15,2900)
+B2key = KEYSensor(17, 0)
+A1key = KEYSensor(17, 1600)
+A2key = KEYSensor(17, 1100)
+A3key = KEYSensor(17, 550)
+A4key = KEYSensor(17, 2100)
 
 '''2-LED''' 
 class LED:
-	def __init__(self, pins=[]):
-		self._pins = [PWM(Pin(pin), duty_u16=0) for pin in pins]
-		self._brightness = [0 for _ in range(len(self._pins))]
+	def __init__(self, func):
+		self._func = func
 
 	def setbrightness(self, index, val):
-		if not 0 <= val <= 100:
-			raise ValueError("Brightness must be in the range: 0-100%")
-		self._brightness[index - 1] = val
-		self._pins[index - 1].duty_u16(val * 65535 // 100)
+		self._func(index, val)
 
 	def getbrightness(self, index):
-		return self._brightness[index - 1]
+		return self._func(index)
 
 	def setonoff(self, index, val):
 		if val == -1:
@@ -167,7 +153,7 @@ class LED:
 	def getonoff(self, index):
 		return True if self.getbrightness(index) > 50 else False
 
-onboard_led = LED(pins=[45, 46])
+onboard_led = LED(onboard_bot.led_pwm)
 
 class Voice_Energy:
 	def read(self):

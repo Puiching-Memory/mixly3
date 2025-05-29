@@ -12,6 +12,7 @@ class Ollama():
             "Content-Type": "application/json"
         }
         self._url = url
+        self._chat_url = "{}/api/chat".format(self._url)
         self._max_retries = 1
         self._max_history_num = max_history_num
         self._timeout = 10000
@@ -30,6 +31,7 @@ class Ollama():
 
     def set_custom_url(self, url):
         self._url = url
+        self._chat_url = "{}/api/chat".format(self._url)
 
     def select_model(self, model_name):
         self._data["model"] = model_name
@@ -57,7 +59,7 @@ class Ollama():
         data = json.dumps(self._data).encode('utf-8')
         for i in range(0, self._max_retries):
             response = urequests.post(
-                self._url, headers=self._heads, data=data)
+                self._chat_url, headers=self._heads, data=data)
             if response.status_code == 200:
                 break
             time.sleep(1)

@@ -225,7 +225,7 @@
             "micropython"
         ],
         "__file__": true,
-        "__size__": 2770,
+        "__size__": 3484,
         "__name__": "ci130x.py"
     },
     "debugnet": {
@@ -370,6 +370,15 @@
         "__file__": true,
         "__size__": 7002,
         "__name__": "irremote.py"
+    },
+    "keypad": {
+        "__require__": [
+            "machine",
+            "time"
+        ],
+        "__file__": true,
+        "__size__": 1725,
+        "__name__": "keypad.py"
     },
     "ltr308al": {
         "__require__": [
@@ -607,7 +616,7 @@
             "json"
         ],
         "__file__": true,
-        "__size__": 3356,
+        "__size__": 3477,
         "__name__": "ollama.py"
     },
     "onenet": {
@@ -905,7 +914,7 @@
             "framebuf"
         ],
         "__file__": true,
-        "__size__": 21298,
+        "__size__": 21078,
         "__name__": "uframebuf.py"
     },
     "umqtt": {

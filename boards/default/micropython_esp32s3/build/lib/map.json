@@ -1,4 +1,32 @@
 {
+    "ai_camera": {
+        "__require__": [
+            "esp_ai",
+            "micropython"
+        ],
+        "__file__": true,
+        "__size__": 3981,
+        "__name__": "ai_camera.py"
+    },
+    "camera": {
+        "__require__": [
+            "time",
+            "sensor",
+            "machine",
+            "mixgo_sant"
+        ],
+        "__file__": true,
+        "__size__": 964,
+        "__name__": "camera.py"
+    },
+    "ci1302x": {
+        "__require__": [
+            "ci130x"
+        ],
+        "__file__": true,
+        "__size__": 811,
+        "__name__": "ci1302x.py"
+    },
     "es8374": {
         "__require__": [
             "time",
@@ -52,18 +80,17 @@
             "gc",
             "st7789_cf",
             "math",
-            "ws2812",
-            "music",
+            "ws2812x",
+            "musicx",
             "sant_bot",
             "sc7a20",
-            "mk_pb4023",
+            "ltr553als",
             "shtc3",
             "mmc5603",
-            "spl06_001",
-            "ci130x"
+            "ci1302x"
         ],
         "__file__": true,
-        "__size__": 6782,
+        "__size__": 6354,
         "__name__": "mixgo_sant.py"
     },
     "mixgo_zero": {
@@ -102,6 +129,15 @@
         "__size__": 3173,
         "__name__": "mixgo_zero_voice.py"
     },
+    "musicx": {
+        "__require__": [
+            "time",
+            "machine"
+        ],
+        "__file__": true,
+        "__size__": 6992,
+        "__name__": "musicx.py"
+    },
     "music_spk": {
         "__require__": [
             "time",
@@ -127,7 +163,7 @@
             "micropython"
         ],
         "__file__": true,
-        "__size__": 3783,
+        "__size__": 5065,
         "__name__": "sant_bot.py"
     },
     "sant_g2": {
@@ -140,6 +176,17 @@
         "__file__": true,
         "__size__": 729,
         "__name__": "sant_g2.py"
+    },
+    "sant_gx": {
+        "__require__": [
+            "gc",
+            "machine",
+            "rc522",
+            "cbr817"
+        ],
+        "__file__": true,
+        "__size__": 731,
+        "__name__": "sant_gx.py"
     },
     "sdcard": {
         "__require__": [
@@ -166,11 +213,18 @@
         "__require__": [
             "time",
             "uframebuf",
-            "machine",
-            "micropython"
+            "tftlcd"
         ],
         "__file__": true,
-        "__size__": 2825,
+        "__size__": 1518,
         "__name__": "st7789_cf.py"
+    },
+    "ws2812x": {
+        "__require__": [
+            "time"
+        ],
+        "__file__": true,
+        "__size__": 1617,
+        "__name__": "ws2812x.py"
     }
 }
