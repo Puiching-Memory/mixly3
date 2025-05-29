@@ -6,7 +6,7 @@ export const display_show_image = function (_, generator) {
     if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
-        var s = this.getFieldValue('sync');
+        var s = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
         var code = "onboard_tft.image(" + data + ", color=0xffff,sync="+ s +")\n";
     } else {
         if (version == "educore") {
@@ -25,9 +25,9 @@ export const display_show_image_or_string_delay = function (_, generator) {
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var space = generator.valueToCode(this, 'space', generator.ORDER_ASSIGNMENT);
     var op = this.getFieldValue('center');
-    var s = this.getFieldValue('sync');
     if (version == "mixgo_sant" || version == "mixgo_nova") {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
+        var s = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
         var code = "onboard_tft.shows(" + data + ", space=" + space + ', center=' + op + ",sync="+ s +")\n";
         return code;
     } else if (version == "educore") {
@@ -45,7 +45,7 @@ export const display_show_frame_string = function (_, generator) {
     if (version == 'mpython' || version == 'educore') {
         generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_oled";
         var code = "onboard_oled.frame(" + data + ")\n";
-    } else if (version == 'mixgo_nova'||'mixgo_sant') {
+    } else if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
         var code = "onboard_tft.frame(" + data + ", color=0xffff)\n";
@@ -64,7 +64,7 @@ export const display_show_frame_string_delay = function (_, generator) {
         generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_oled";
         var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
         var code = "onboard_oled.frame(" + data + ', delay=' + time + ")\n";
-    } else if (version == 'mixgo_nova'||'mixgo_sant') {
+    } else if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var code = "onboard_tft.frame(" + data + ', size=5 , delay=' + time + ', color=0xffff)\n';
     } else {
@@ -80,7 +80,7 @@ export const display_scroll_string = function (_, generator) {
         generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_oled";
         var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
         var code = "onboard_oled.scroll(" + data + ")\n";
-    } else if (version == 'mixgo_nova'||'mixgo_sant') {
+    } else if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
         var code = "onboard_tft.scroll(" + data + ", color=0xffff)\n";
@@ -100,7 +100,7 @@ export const display_scroll_string_delay = function (_, generator) {
     if (version == 'mpython' || version == 'educore') {
         generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_oled";
         var code = "onboard_oled.scroll(" + data + ', speed=' + time + ', space=' + space + ")\n";
-    } else if (version == 'mixgo_nova'||'mixgo_sant') {
+    } else if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var code = "onboard_tft.scroll(" + data + ', y=0, size=5, speed=' + time + ', space=' + space + ', color=0xffff)\n';
     } else {
@@ -143,7 +143,7 @@ export const display_image_builtins = function (block, generator) {
 
 export const display_image_builtins_all = function (block, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    if (version == 'mixgo_nova'||'mixgo_sant') {
+    if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
         const PIN_VALUE = block.getFieldValue('image');
         const data = PIN_VALUE.split('.');
         if (data.length !== 2) {
@@ -255,9 +255,9 @@ export const display_clear = function (block, generator) {
     if (version == 'mpython') {
         generator.definitions_['import_' + version + '_onboard_oled'] = "from " + version + " import onboard_oled";
         var code = 'onboard_oled.fill(0)\n' + 'onboard_oled.show()\n';
-    } else if (version == 'mixgo_nova'||'mixgo_sant') {
+    } else if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
-        var s = this.getFieldValue('sync');
+        var s = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
         var code = 'onboard_tft.fill(0,sync='+s+')\n';
     } else {
         generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
@@ -298,11 +298,11 @@ export const display_shift = function (a, generator) {
         var op = a.getFieldValue("OP");
         var value = generator.valueToCode(a, 'val', generator.ORDER_ATOMIC);
         var code = 'onboard_oled.' + op + '(' + value + ')\n';
-    } else if (version == 'mixgo_nova'||'mixgo_sant') {
+    } else if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var op = a.getFieldValue("OP");
         var value = generator.valueToCode(a, 'val', generator.ORDER_ATOMIC);
-        var s = this.getFieldValue('sync');
+        var s = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
         var code = 'onboard_tft.' + op + '(' + value + ',sync='+ s +')\n';
     } else {
         generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
@@ -326,7 +326,7 @@ export const display_get_pixel = function (block, generator) {
         var value_x = generator.valueToCode(block, 'x', generator.ORDER_ATOMIC);
         var value_y = generator.valueToCode(block, 'y', generator.ORDER_ATOMIC);
         var code = 'onboard_oled.pixel(int(' + value_x + '), int(' + value_y + '))';
-    } else if (version == 'mixgo_nova'||'mixgo_sant') {
+    } else if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var value_x = generator.valueToCode(block, 'x', generator.ORDER_ATOMIC);
         var value_y = generator.valueToCode(block, 'y', generator.ORDER_ATOMIC);
@@ -343,7 +343,7 @@ export const display_get_pixel = function (block, generator) {
 
 export const display_bright_point = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    if (version == 'mixgo_nova'||'mixgo_sant') {
+    if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
         var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
@@ -360,7 +360,7 @@ export const display_bright_point = function (_, generator) {
 
 export const display_get_screen_pixel = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    if (version == 'mixgo_nova'||'mixgo_sant') {
+    if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var code = 'onboard_tft.get_brightness()';
     } else {
@@ -372,7 +372,7 @@ export const display_get_screen_pixel = function (_, generator) {
 
 export const display_bright_screen = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
-    if (version == 'mixgo_nova'||'mixgo_sant') {
+    if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
         var code = 'onboard_tft.set_brightness(' + x + ')\n';
@@ -837,7 +837,7 @@ export const onboard_tft_show_image_xy = function (_, generator) {
     var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
     var size = generator.valueToCode(this, 'size', generator.ORDER_ASSIGNMENT);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
-    var s = this.getFieldValue('sync');
+    var s = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
         var code = "onboard_tft.image(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', color='+ color +",sync=" + s +")\n";
     } else {
@@ -871,7 +871,7 @@ export const onboard_tft_show_image_or_string_delay = function (_, generator) {
     var size = generator.valueToCode(this, 'size', generator.ORDER_ASSIGNMENT);
     var space = generator.valueToCode(this, 'space', generator.ORDER_ASSIGNMENT);
     var op = this.getFieldValue('center');
-    var s = this.getFieldValue('sync');
+    var s = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
         var code = "onboard_tft.shows(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', space=' + space + ', center=' + op + ', color=' + color + ",sync=" + s + ")\n";
@@ -917,7 +917,7 @@ export const onboard_tft_display_shape_rect = function (block, generator) {
     var h = generator.valueToCode(block, 'h', generator.ORDER_ATOMIC);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var shape = block.getFieldValue('shape');
-    var s = this.getFieldValue('sync');
+    var s = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
         var code = 'onboard_tft.' + shape + '(' + x + ', ' + y + ', ' + w + ', ' + h + ', ' + color + ',sync=' + s +')\n';
     } else {
@@ -940,7 +940,7 @@ export const onboard_tft_display_hvline = function (block, generator) { //水平
     var var_length = generator.valueToCode(block, 'length', generator.ORDER_ATOMIC);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var hv = block.getFieldValue('dir_h_v');
-    var s = this.getFieldValue('sync');
+    var s = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
         var code = 'onboard_tft.' + (('0' == hv) ? 'v' : 'h') + 'line(' + x + ', ' + y + ', ' + var_length + ', ' + color + ',sync=' + s +')\n';
     } else {
@@ -963,7 +963,7 @@ export const onboard_tft_display_line = function (block, generator) {
     var x2 = generator.valueToCode(block, 'x2', generator.ORDER_ATOMIC);
     var y2 = generator.valueToCode(block, 'y2', generator.ORDER_ATOMIC);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
-    var s = this.getFieldValue('sync');
+    var s = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
         var code = 'onboard_tft.line(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', ' + color + ',sync=' + s +')\n';
     } else {
@@ -993,7 +993,7 @@ export const onboard_tft_bright_point = function (_, generator) {
     var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
     var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
-    var s = this.getFieldValue('sync');
+    var s = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
         var code = 'onboard_tft.pixel(int(' + x + '), int(' + y + '), ' + color + ',sync='+ s + ")\n";
     } else {
@@ -1012,7 +1012,7 @@ export const onboard_tft_fill = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
     generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ASSIGNMENT);
-    var s = this.getFieldValue('sync');
+    var s = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
         var code = 'onboard_tft.fill(' + color + ',sync=' + s +')\n';
     } else {
@@ -1103,7 +1103,7 @@ export const onboard_tft_display_shape_circle = function (block, generator) {
     var R = generator.valueToCode(block, 'r', generator.ORDER_ATOMIC);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var shape = block.getFieldValue('shape');
-    var s = this.getFieldValue('sync');
+    var s = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
         var code = 'onboard_tft.ellipse(' + x + ', ' + y + ', ' + R + ', ' + R + ', ' + color + ', ' + shape + ',sync=' + s +')\n';
     } else {
@@ -1120,7 +1120,7 @@ export const onboard_tft_display_shape_circle = function (block, generator) {
 
 export const draw_pointer = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2]
-    if (version == 'mixgo_nova'||'mixgo_sant'){
+    if (JSFuncs.getPlatform() === 'Python ESP32-S3'){
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var angle = generator.valueToCode(this, 'angle', generator.ORDER_ASSIGNMENT);
         var code = "onboard_tft.pointern(angle=" + angle + ")\n";
@@ -1160,7 +1160,7 @@ export const onboard_tft_show_texts = function (_, generator) {
     var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
     var size = generator.valueToCode(this, 'size', generator.ORDER_ASSIGNMENT);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
-    var s = this.getFieldValue('sync');
+    var s = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
         var code = "onboard_tft.texts(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', color='+ color +",sync=" + s +")\n";
     } else {
@@ -1179,11 +1179,6 @@ export const onboard_tft_show_texts = function (_, generator) {
  * @deprecated To be removed in the future
  */
 export const onboard_tft_show_image = display_show_image;
-
-/**
- * @deprecated To be removed in the future
- */
-export const onboard_tft_scroll_string = display_scroll_string;
 
 /**
  * @deprecated To be removed in the future

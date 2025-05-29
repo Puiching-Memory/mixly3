@@ -237,11 +237,8 @@ export const CI130X_BROADCAST_SYSTEM_TIME = {
     init: function () {
         this.setColour(AI_LOCAL_VOICE_HUE);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_DETAILED, "1"], 
-                [Blockly.Msg.MIXLY_Concise, "0"]
-            ]), "cmd")
-            .appendField(Blockly.Msg.MIXLY_BROADCAST_SYSTEM_TIME)
+            .appendField(Blockly.Msg.MIXLY_DETAILED + Blockly.Msg.MIXLY_BROADCAST_SYSTEM_TIME);
+        this.appendValueInput('boolean');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
@@ -295,11 +292,8 @@ export const SCREEN_SHOW_CAM_GRAPH_SHOOT = {
     init: function () {
         this.setColour(AI_LOCAL_GRAPH_HUE);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_MICROBIT_Turn_on_display,"display"],
-                [Blockly.Msg.MIXLY_MICROBIT_Turn_off_display,"display_stop"]
-            ]),"control")
             .appendField(Blockly.Msg.MIXlY_SCREEN_SHOW_CAM_SHOOT);
+        this.appendValueInput('boolean');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);

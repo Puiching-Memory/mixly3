@@ -98,12 +98,10 @@ export const CI130X_SET_SYSTEM_CMD_SANT = function (_, generator) {
 export const CI130X_BROADCAST_SYSTEM_TIME = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
-    var cmd = this.getFieldValue('cmd');
-    var code = 'onboard_asr.play_time(' + cmd + ')\n';
+    var bool = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
+    var code = 'onboard_asr.play_time(' + bool + ')\n';
     return code;
 }
-
-
 
 //graph part
 export const CREATE_CAMERA = function (_, generator) {
@@ -126,8 +124,8 @@ export const GET_PICTURE_DATA = function (_, generator) {
 }
 
 export const SCREEN_SHOW_CAM_GRAPH_SHOOT = function (_, generator) {
-    var con = this.getFieldValue('control');
-    var code = 'cam.'+ con +'()\n';
+    var bool = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
+    var code = 'cam.display('+ bool +')\n';
     return code;
 }
 

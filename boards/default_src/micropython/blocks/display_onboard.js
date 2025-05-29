@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-import { Boards, Profile } from 'mixly';
+import { Boards, Profile, JSFuncs } from 'mixly';
 
 const DISPLAY_ONBOARD_HUE = '#569A98';
 
@@ -10,13 +10,9 @@ export const display_show_image = {
             .setCheck([String, "esp32_image", "List", 'Tuple'])
             .appendField(Blockly.Msg.MIXLY_ESP32_SHOW_IMAGE_OR_STRING);
         var version = Boards.getSelectedBoardKey()
-        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
-            this.appendDummyInput()
-                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
-                .appendField(new Blockly.FieldDropdown([
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
-                ]),"sync");
+        if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
+            this.appendValueInput('boolean')
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':');
         }
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -43,14 +39,9 @@ export const display_show_image_or_string_delay = {
                 [Blockly.Msg.MICROPYTHON_DISPLAY_YES, "True"],
                 [Blockly.Msg.MICROPYTHON_DISPLAY_NO, "False"]
             ]), 'center')
-        var version = Boards.getSelectedBoardKey()
-        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
-            this.appendDummyInput()
-                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
-                .appendField(new Blockly.FieldDropdown([
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
-                ]),"sync");
+        if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
+            this.appendValueInput('boolean')
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':');
         }
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -300,13 +291,9 @@ export const display_shift = {
         this.appendDummyInput('')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_UNIT)
         var version = Boards.getSelectedBoardKey()
-        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
-            this.appendDummyInput()
-                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
-                .appendField(new Blockly.FieldDropdown([
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
-                ]),"sync");
+        if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
+            this.appendValueInput('boolean')
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':');
         }
         var thisBlock = this;
         this.setTooltip(function () {
@@ -397,13 +384,9 @@ export const display_clear = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_Clear_display);
         var version = Boards.getSelectedBoardKey()
-        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
-            this.appendDummyInput()
-                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
-                .appendField(new Blockly.FieldDropdown([
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
-                ]),"sync");
+        if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
+            this.appendValueInput('boolean')
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':');
         }
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -1124,13 +1107,9 @@ export const onboard_tft_show_image_xy = {
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.HTML_COLOUR);
         var version = Boards.getSelectedBoardKey()
-        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
-            this.appendDummyInput()
-                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
-                .appendField(new Blockly.FieldDropdown([
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
-                ]),"sync");
+        if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
+            this.appendValueInput('boolean')
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':');
         }
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -1184,13 +1163,9 @@ export const onboard_tft_show_image_or_string_delay = {
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.HTML_COLOUR);
         var version = Boards.getSelectedBoardKey()
-        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
-            this.appendDummyInput()
-                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
-                .appendField(new Blockly.FieldDropdown([
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
-                ]),"sync");
+        if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
+            this.appendValueInput('boolean')
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':');
         }
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -1261,12 +1236,8 @@ export const onboard_tft_display_shape_rect = {
                     //"check": "Number"
                 },
                 {
-                    "name": "sync",
-                    "options": [
-                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
-                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
-                    ],
-                    "type": "field_dropdown"
+                    "name": "boolean",
+                    "type": "input_value",
                 }
             ],
             "inputsInline": true,
@@ -1316,12 +1287,8 @@ export const onboard_tft_display_hvline = {
                     //"check": "Number"
                 },
                 {
-                    "name": "sync",
-                    "options": [
-                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
-                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
-                    ],
-                    "type": "field_dropdown"
+                    "name": "boolean",
+                    "type": "input_value",
                 }
             ],
             "inputsInline": true,
@@ -1367,12 +1334,8 @@ export const onboard_tft_display_line = {
                     //"check": "Number"
                 },
                 {
-                    "name": "sync",
-                    "options": [
-                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
-                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
-                    ],
-                    "type": "field_dropdown"
+                    "name": "boolean",
+                    "type": "input_value",
                 }
             ],
             "inputsInline": true,
@@ -1417,13 +1380,9 @@ export const onboard_tft_bright_point = {
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.HTML_COLOUR);
         var version = Boards.getSelectedBoardKey()
-        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
-            this.appendDummyInput()
-                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
-                .appendField(new Blockly.FieldDropdown([
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
-                ]),"sync");
+        if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
+            this.appendValueInput('boolean')
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':');
         }
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -1438,13 +1397,9 @@ export const onboard_tft_fill = {
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.MIXLY_SCREEN_FILL);
         var version = Boards.getSelectedBoardKey()
-        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
-            this.appendDummyInput()
-                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
-                .appendField(new Blockly.FieldDropdown([
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
-                ]),"sync");
+        if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
+            this.appendValueInput('boolean')
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':');
         }
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -1572,12 +1527,8 @@ export const onboard_tft_display_shape_circle = {
                     //"check": "Number"
                 },
                 {
-                    "name": "sync",
-                    "options": [
-                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
-                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
-                    ],
-                    "type": "field_dropdown"
+                    "name": "boolean",
+                    "type": "input_value",
                 }
             ],
             "inputsInline": true,
@@ -1640,13 +1591,9 @@ export const onboard_tft_show_texts = {
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.HTML_COLOUR);
         var version = Boards.getSelectedBoardKey()
-        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
-            this.appendDummyInput()
-                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
-                .appendField(new Blockly.FieldDropdown([
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
-                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
-                ]),"sync");
+        if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
+            this.appendValueInput('boolean')
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':');
         }
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);

@@ -1835,6 +1835,10 @@
       <value name="data">
         <shadow type="pins_builtinimg"></shadow>
       </value>
+      <value name="boolean">
+          <shadow type="logic_boolean">
+          </shadow>
+        </value>
     </block>
     <block type="onboard_tft_show_image_xy">
       <value name="data">
@@ -1863,6 +1867,10 @@
           <field name="TEXT">255,255,0</field>
         </shadow>
       </value>
+      <value name="boolean">
+          <shadow type="logic_boolean">
+          </shadow>
+        </value>
     </block>
     <block type="display_show_image_or_string_delay">
       <value name="data">
@@ -1875,6 +1883,10 @@
           <field name="NUM">0</field>
         </shadow>
       </value>
+      <value name="boolean">
+          <shadow type="logic_boolean">
+          </shadow>
+        </value>
     </block>
     <block type="onboard_tft_show_image_or_string_delay">
       <value name="data">
@@ -1910,6 +1922,10 @@
           <field name="TEXT">255,255,0</field>
         </shadow>
       </value>
+      <value name="boolean">
+          <shadow type="logic_boolean">
+          </shadow>
+        </value>
     </block>
     <block type="onboard_tft_show_texts">
       <value name="data">
@@ -1940,6 +1956,10 @@
           <field name="TEXT">255,255,0</field>
         </shadow>
       </value>
+      <value name="boolean">
+          <shadow type="logic_boolean">
+          </shadow>
+        </value>
     </block>
     <block type="onboard_tft_show_image_xy_direct" m-show="micropython:esp32s3:mixgo_sant">
       <value name="x">
@@ -2056,6 +2076,10 @@
           <field name="TEXT">255,255,0</field>
         </shadow>
       </value>
+      <value name="boolean">
+          <shadow type="logic_boolean">
+          </shadow>
+        </value>
     </block>
     <block type="onboard_tft_display_line">
       <value name="x1">
@@ -2086,6 +2110,10 @@
           <field name="TEXT">255,255,0</field>
         </shadow>
       </value>
+      <value name="boolean">
+          <shadow type="logic_boolean">
+          </shadow>
+        </value>
     </block>
     <block type="onboard_tft_display_shape_rect">
       <value name="x">
@@ -2116,6 +2144,10 @@
           <field name="TEXT">255,255,0</field>
         </shadow>
       </value>
+      <value name="boolean">
+          <shadow type="logic_boolean">
+          </shadow>
+        </value>
     </block>
     <block type="onboard_tft_display_shape_circle">
       <value name="x">
@@ -2141,6 +2173,10 @@
           <field name="TEXT">255,255,0</field>
         </shadow>
       </value>
+      <value name="boolean">
+          <shadow type="logic_boolean">
+          </shadow>
+        </value>
     </block>
     <block type="display_shift">
       <value name="val">
@@ -2148,6 +2184,10 @@
           <field name="NUM">1</field>
         </shadow>
       </value>
+      <value name="boolean">
+          <shadow type="logic_boolean">
+          </shadow>
+        </value>
     </block>
     <block type="onboard_tft_get_pixel">
       <value name="x">
@@ -2180,6 +2220,10 @@
           <field name="TEXT">255,255,0</field>
         </shadow>
       </value>
+      <value name="boolean">
+          <shadow type="logic_boolean">
+          </shadow>
+        </value>
     </block>
     <block type="display_get_screen_pixel"></block>
     <block type="display_bright_screen">
@@ -2198,8 +2242,17 @@
           <field name="TEXT">255,255,0</field>
         </shadow>
       </value>
+      <value name="boolean">
+          <shadow type="logic_boolean">
+          </shadow>
+        </value>
     </block>
-    <block type="display_clear"></block>
+    <block type="display_clear">
+      <value name="boolean">
+        <shadow type="logic_boolean">
+        </shadow>
+      </value>
+    </block>
     <block type="display_available"></block>
     <block type="onboard_tft_clock_init" m-show="micropython:esp32s3:mixgo_sant">
       <value name="SUB">
@@ -2339,7 +2392,12 @@
         </value>
       </block>
       <block type="GET_PICTURE_DATA"></block>
-      <block type="SCREEN_SHOW_CAM_GRAPH_SHOOT"></block>
+      <block type="SCREEN_SHOW_CAM_GRAPH_SHOOT">
+        <value name="boolean">
+          <shadow type="logic_boolean">
+          </shadow>
+        </value>
+      </block>
       <block type="AI_CAMERA_INIT">
           <value name="SUB">
             <shadow type="variables_get">
@@ -2486,6 +2544,11 @@
       </block>
       <block type="CI130X_SET_SYSTEM_CMD_SANT" m-show='micropython:esp32s3:mixgo_sant'></block>
       <block type="CI130X_BROADCAST_SYSTEM_TIME" m-show='micropython:esp32s3:mixgo_sant'>
+        <value name="boolean">
+          <shadow type="logic_boolean">
+          </shadow>
+        </value>
+      </block>
     </category>
   </category> 
   <category id="catSANT_G3" colour="40" m-show='micropython:esp32s3:mixgo_sant'>
