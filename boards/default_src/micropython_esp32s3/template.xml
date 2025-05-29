@@ -1864,23 +1864,6 @@
         </shadow>
       </value>
     </block>
-    <block type="onboard_tft_show_image_xy_direct" m-show="micropython:esp32s3:mixgo_sant">
-      <value name="x">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-      <value name="y">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-      <value name="direct">
-        <shadow type="text">
-          <field name="TEXT">12.jpg</field>
-        </shadow>
-      </value>
-    </block>
     <block type="display_show_image_or_string_delay">
       <value name="data">
         <shadow type="text">
@@ -1925,6 +1908,23 @@
         </block>
         <shadow type="tuple_create_with_text_return">
           <field name="TEXT">255,255,0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="onboard_tft_show_image_xy_direct" m-show="micropython:esp32s3:mixgo_sant">
+      <value name="x">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="direct">
+        <shadow type="text">
+          <field name="TEXT">12.jpg</field>
         </shadow>
       </value>
     </block>

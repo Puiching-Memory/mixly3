@@ -4121,4 +4121,5 @@ ZhHans.MIXLY_NOSE = '鼻子';
 ZhHans.MIXLY_LEFT_MOUSE_CORNER = '左嘴角';
 ZhHans.MIXLY_RIGHT_MOUSE_CORNER = '右嘴角';
 ZhHans.MIXLY_RECOGNITION_RECGNITION = '识别';
+ZhHans.MIXLY_synchronize = '实时刷新';
 })();

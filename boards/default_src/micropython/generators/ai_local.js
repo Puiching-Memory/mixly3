@@ -130,7 +130,7 @@ export const STOP_SCREEN_DISPLAY = function (_, generator) {
 }
 
 export const AI_CAMERA_INIT = function (_, generator) {
-    generator.definitions_['from_ai_camera_import_AI'] = 'from ai_camera import AI';
+    generator.definitions_['import_ai_camera'] = 'import ai_camera';
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var cmd = this.getFieldValue('kind');
     var code = sub +' = ai_camera.AI(ai_camera.' + cmd + ')\n';
@@ -139,7 +139,7 @@ export const AI_CAMERA_INIT = function (_, generator) {
 
 export const GET_QR_CODE_RECOGNITION_DATA = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
-    var code = sub + '.code_recognitionn()';
+    var code = sub + '.code_recognition()';
     return [code, generator.ORDER_ATOMIC];
 }
 

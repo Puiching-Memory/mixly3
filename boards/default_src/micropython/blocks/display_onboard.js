@@ -9,6 +9,15 @@ export const display_show_image = {
         this.appendValueInput('data')
             .setCheck([String, "esp32_image", "List", 'Tuple'])
             .appendField(Blockly.Msg.MIXLY_ESP32_SHOW_IMAGE_OR_STRING);
+        var version = Boards.getSelectedBoardKey()
+        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
+            this.appendDummyInput()
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
+                .appendField(new Blockly.FieldDropdown([
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
+                ]),"sync");
+        }
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -34,6 +43,15 @@ export const display_show_image_or_string_delay = {
                 [Blockly.Msg.MICROPYTHON_DISPLAY_YES, "True"],
                 [Blockly.Msg.MICROPYTHON_DISPLAY_NO, "False"]
             ]), 'center')
+        var version = Boards.getSelectedBoardKey()
+        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
+            this.appendDummyInput()
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
+                .appendField(new Blockly.FieldDropdown([
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
+                ]),"sync");
+        }
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -1087,6 +1105,15 @@ export const onboard_tft_show_image_xy = {
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_NUMBER);
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.HTML_COLOUR);
+        var version = Boards.getSelectedBoardKey()
+        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
+            this.appendDummyInput()
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
+                .appendField(new Blockly.FieldDropdown([
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
+                ]),"sync");
+        }
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -1138,6 +1165,15 @@ export const onboard_tft_show_image_or_string_delay = {
             ]), 'center')
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.HTML_COLOUR);
+        var version = Boards.getSelectedBoardKey()
+        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
+            this.appendDummyInput()
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
+                .appendField(new Blockly.FieldDropdown([
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
+                ]),"sync");
+        }
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);

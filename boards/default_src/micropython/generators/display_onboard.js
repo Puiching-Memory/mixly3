@@ -6,7 +6,8 @@ export const display_show_image = function (_, generator) {
     if (JSFuncs.getPlatform() === 'Python ESP32-S3') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
-        var code = "onboard_tft.image(" + data + ", color=0xffff)\n";
+        var s = this.getFieldValue('sync');
+        var code = "onboard_tft.image(" + data + ", color=0xffff,sync="+ s +")\n";
     } else {
         if (version == "educore") {
             generator.definitions_['import_' + version + '_oled'] = "from " + version + " import oled";
@@ -24,9 +25,10 @@ export const display_show_image_or_string_delay = function (_, generator) {
     var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var space = generator.valueToCode(this, 'space', generator.ORDER_ASSIGNMENT);
     var op = this.getFieldValue('center');
+    var s = this.getFieldValue('sync');
     if (version == "mixgo_sant" || version == "mixgo_nova") {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
-        var code = "onboard_tft.shows(" + data + ", space=" + space + ', center=' + op + ")\n";
+        var code = "onboard_tft.shows(" + data + ", space=" + space + ', center=' + op + ",sync="+ s +")\n";
         return code;
     } else if (version == "educore") {
         generator.definitions_['import_' + version + '_oled'] = "from " + version + " import oled";
@@ -255,7 +257,7 @@ export const display_clear = function (block, generator) {
         var code = 'onboard_oled.fill(0)\n' + 'onboard_oled.show()\n';
     } else if (version == 'mixgo_nova'||'mixgo_sant') {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
-        var code = 'onboard_tft.fill(0)\n' + 'onboard_tft.show()\n';
+        var code = 'onboard_tft.fill(0)\n';
     } else {
         generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
         var code = 'onboard_matrix.fill(0)\n' + 'onboard_matrix.show()\n';
@@ -343,7 +345,7 @@ export const display_bright_point = function (_, generator) {
         generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
         var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
         var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
-        var code = 'onboard_tft.pixel(int(' + x + '), int(' + y + '), 0xffff)\n' + 'onboard_tft.show()\n';
+        var code = 'onboard_tft.pixel(int(' + x + '), int(' + y + '), 0xffff)\n';
     } else {
         generator.definitions_['import_' + version + '_onboard_matrix'] = "from " + version + " import onboard_matrix";
         var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
@@ -833,8 +835,9 @@ export const onboard_tft_show_image_xy = function (_, generator) {
     var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
     var size = generator.valueToCode(this, 'size', generator.ORDER_ASSIGNMENT);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    var s = this.getFieldValue('sync');
     if (color.slice(0, 2) == "0x") {
-        var code = "onboard_tft.image(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', color=' + color + ")\n";
+        var code = "onboard_tft.image(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', color='+ color +",sync=" + s +")\n";
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -842,7 +845,7 @@ export const onboard_tft_show_image_xy = function (_, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = "onboard_tft.image(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', color=0x' + rgb565.toString(16) + ")\n";
+        var code = "onboard_tft.image(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', color=0x' + rgb565.toString(16) + ",sync=" + s + ")\n";
     }
     return code;
 }
@@ -866,9 +869,10 @@ export const onboard_tft_show_image_or_string_delay = function (_, generator) {
     var size = generator.valueToCode(this, 'size', generator.ORDER_ASSIGNMENT);
     var space = generator.valueToCode(this, 'space', generator.ORDER_ASSIGNMENT);
     var op = this.getFieldValue('center');
+    var s = this.getFieldValue('sync');
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
-        var code = "onboard_tft.shows(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', space=' + space + ', center=' + op + ', color=' + color + ")\n";
+        var code = "onboard_tft.shows(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', space=' + space + ', center=' + op + ', color=' + color + ",sync=" + s + ")\n";
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -876,7 +880,7 @@ export const onboard_tft_show_image_or_string_delay = function (_, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = "onboard_tft.shows(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', space=' + space + ', center=' + op + ', color=0x' + rgb565.toString(16) + ")\n";
+        var code = "onboard_tft.shows(" + data + ', x=' + x + ', y=' + y + ', size=' + size + ', space=' + space + ', center=' + op + ', color=0x' + rgb565.toString(16) +",sync=" + s +")\n";
     }
     return code;
 }
@@ -912,7 +916,7 @@ export const onboard_tft_display_shape_rect = function (block, generator) {
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var shape = block.getFieldValue('shape');
     if (color.slice(0, 2) == "0x") {
-        var code = 'onboard_tft.' + shape + '(' + x + ', ' + y + ', ' + w + ', ' + h + ', ' + color + ')\n' + 'onboard_tft.show()\n';
+        var code = 'onboard_tft.' + shape + '(' + x + ', ' + y + ', ' + w + ', ' + h + ', ' + color + ')\n';
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -920,7 +924,7 @@ export const onboard_tft_display_shape_rect = function (block, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = 'onboard_tft.' + shape + '(' + x + ', ' + y + ', ' + w + ', ' + h + ', 0x' + rgb565.toString(16) + ')\n' + 'onboard_tft.show()\n';
+        var code = 'onboard_tft.' + shape + '(' + x + ', ' + y + ', ' + w + ', ' + h + ', 0x' + rgb565.toString(16) + ')\n';
     }
     return code;
 }
@@ -934,7 +938,7 @@ export const onboard_tft_display_hvline = function (block, generator) { //水平
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var hv = block.getFieldValue('dir_h_v');
     if (color.slice(0, 2) == "0x") {
-        var code = 'onboard_tft.' + (('0' == hv) ? 'v' : 'h') + 'line(' + x + ', ' + y + ', ' + var_length + ', ' + color + ')\n' + 'onboard_tft.show()\n';
+        var code = 'onboard_tft.' + (('0' == hv) ? 'v' : 'h') + 'line(' + x + ', ' + y + ', ' + var_length + ', ' + color + ')\n';
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -942,7 +946,7 @@ export const onboard_tft_display_hvline = function (block, generator) { //水平
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = 'onboard_tft.' + (('0' == hv) ? 'v' : 'h') + 'line(' + x + ', ' + y + ', ' + var_length + ', 0x' + rgb565.toString(16) + ')\n' + 'onboard_tft.show()\n';
+        var code = 'onboard_tft.' + (('0' == hv) ? 'v' : 'h') + 'line(' + x + ', ' + y + ', ' + var_length + ', 0x' + rgb565.toString(16) + ')\n';
     }
     return code;
 }
@@ -956,15 +960,14 @@ export const onboard_tft_display_line = function (block, generator) {
     var y2 = generator.valueToCode(block, 'y2', generator.ORDER_ATOMIC);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
-        var code = 'onboard_tft.line(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', ' + color + ')\n' + 'onboard_tft.show()\n';
-    } else {
+        var code = 'onboard_tft.line(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', ' + color + ')\n';
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
         const g = parseInt(rgbValues[1]);
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = 'onboard_tft.line(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', 0x' + rgb565.toString(16) + ')\n' + 'onboard_tft.show()\n';
+        var code = 'onboard_tft.line(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', 0x' + rgb565.toString(16) + ')\n';
     }
     return code;
 }
@@ -985,7 +988,7 @@ export const onboard_tft_bright_point = function (_, generator) {
     var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     if (color.slice(0, 2) == "0x") {
-        var code = 'onboard_tft.pixel(int(' + x + '), int(' + y + '), ' + color + ")\n" + 'onboard_tft.show()\n';
+        var code = 'onboard_tft.pixel(int(' + x + '), int(' + y + '), ' + color + ")\n";
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -993,7 +996,7 @@ export const onboard_tft_bright_point = function (_, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = 'onboard_tft.pixel(int(' + x + '), int(' + y + '), 0x' + rgb565.toString(16) + ")\n" + 'onboard_tft.show()\n';
+        var code = 'onboard_tft.pixel(int(' + x + '), int(' + y + '), 0x' + rgb565.toString(16) + ")\n";
     }
     return code;
 }
@@ -1003,7 +1006,7 @@ export const onboard_tft_fill = function (_, generator) {
     generator.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ASSIGNMENT);
     if (color.slice(0, 2) == "0x") {
-        var code = 'onboard_tft.fill(' + color + ')\nonboard_tft.show()\n';
+        var code = 'onboard_tft.fill(' + color + ')\n';
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -1011,7 +1014,7 @@ export const onboard_tft_fill = function (_, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = 'onboard_tft.fill(0x' + rgb565.toString(16) + ')\nonboard_tft.show()\n';
+        var code = 'onboard_tft.fill(0x' + rgb565.toString(16) + ')\n';
     }
     return code;
 }
@@ -1093,7 +1096,7 @@ export const onboard_tft_display_shape_circle = function (block, generator) {
     var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var shape = block.getFieldValue('shape');
     if (color.slice(0, 2) == "0x") {
-        var code = 'onboard_tft.ellipse(' + x + ', ' + y + ', ' + R + ', ' + R + ', ' + color + ', ' + shape + ')\n' + 'onboard_tft.show()\n';
+        var code = 'onboard_tft.ellipse(' + x + ', ' + y + ', ' + R + ', ' + R + ', ' + color + ', ' + shape + ')\n';
     } else {
         const rgbValues = color.match(/\d+/g);
         const r = parseInt(rgbValues[0]);
@@ -1101,7 +1104,7 @@ export const onboard_tft_display_shape_circle = function (block, generator) {
         const b = parseInt(rgbValues[2]);
         var rgb = "0x" + ((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
         var rgb565 = (rgb & 0xf80000) >> 8 | (rgb & 0xfc00) >> 5 | (rgb & 0xff) >> 3;
-        var code = 'onboard_tft.ellipse(' + x + ', ' + y + ', ' + R + ', ' + R + ', 0x' + rgb565.toString(16) + ', ' + shape + ')\n' + 'onboard_tft.show()\n';
+        var code = 'onboard_tft.ellipse(' + x + ', ' + y + ', ' + R + ', ' + R + ', 0x' + rgb565.toString(16) + ', ' + shape + ')\n';
     }
     return code;
 }
