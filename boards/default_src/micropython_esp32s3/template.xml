@@ -1911,6 +1911,36 @@
         </shadow>
       </value>
     </block>
+    <block type="onboard_tft_show_texts">
+      <value name="data">
+        <shadow type="text">
+          <field name="TEXT">Mixly</field>
+        </shadow>
+      </value>
+      <value name="x">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="size">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="VAR">
+        <block type="display_color_seclet">
+          <field name="COLOR">#ffffff</field>
+        </block>
+        <shadow type="tuple_create_with_text_return">
+          <field name="TEXT">255,255,0</field>
+        </shadow>
+      </value>
+    </block>
     <block type="onboard_tft_show_image_xy_direct" m-show="micropython:esp32s3:mixgo_sant">
       <value name="x">
         <shadow type="math_number">
@@ -2310,7 +2340,6 @@
       </block>
       <block type="GET_PICTURE_DATA"></block>
       <block type="SCREEN_SHOW_CAM_GRAPH_SHOOT"></block>
-      <block type="STOP_SCREEN_DISPLAY"></block>
       <block type="AI_CAMERA_INIT">
           <value name="SUB">
             <shadow type="variables_get">

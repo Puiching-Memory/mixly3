@@ -282,18 +282,11 @@ export const SCREEN_SHOW_CAM_GRAPH_SHOOT = {
     init: function () {
         this.setColour(AI_LOCAL_GRAPH_HUE);
         this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_MICROBIT_Turn_on_display,"display"],
+                [Blockly.Msg.MIXLY_MICROBIT_Turn_off_display,"display_stop"]
+            ]),"control")
             .appendField(Blockly.Msg.MIXlY_SCREEN_SHOW_CAM_SHOOT);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setInputsInline(true);
-    }
-};
-
-export const STOP_SCREEN_DISPLAY = { 
-    init: function () {
-        this.setColour(AI_LOCAL_GRAPH_HUE);
-        this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXlY_STOP_SCREEN_DISPLAY);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
@@ -311,7 +304,6 @@ export const AI_CAMERA_INIT = {
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.MIXLY_QR_CODE + Blockly.Msg.MIXLY_RECOGNITION, "CODE_DETECTION"],
                 [Blockly.Msg.MIXLY_COLOR_RECOGNTITION, "COLOR_DETECTION"],
-                [Blockly.Msg.MIXLY_EMOTION_DETEECTION, "MOTION_DETECTON"],
                 [Blockly.Msg.MIXLY_CAT_FACE + Blockly.Msg.MIXLY_RECOGNITION, "CAT_FACE_DETECTION"],
                 [Blockly.Msg.MIXLY_FACE_CLASSIFIER, "FACE_DETECTION"],
                 [Blockly.Msg.MIXLY_AipFace, "FACE_RECOGNITION"]

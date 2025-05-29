@@ -299,6 +299,15 @@ export const display_shift = {
             .setCheck(Number);
         this.appendDummyInput('')
             .appendField(Blockly.Msg.DISPLAY_IMAGE_UNIT)
+        var version = Boards.getSelectedBoardKey()
+        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
+            this.appendDummyInput()
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
+                .appendField(new Blockly.FieldDropdown([
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
+                ]),"sync");
+        }
         var thisBlock = this;
         this.setTooltip(function () {
             var mode = thisBlock.getFieldValue('OP');
@@ -387,6 +396,15 @@ export const display_clear = {
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_Clear_display);
+        var version = Boards.getSelectedBoardKey()
+        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
+            this.appendDummyInput()
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
+                .appendField(new Blockly.FieldDropdown([
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
+                ]),"sync");
+        }
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -1241,6 +1259,14 @@ export const onboard_tft_display_shape_rect = {
                     "name": "VAR",
                     "type": "input_value",
                     //"check": "Number"
+                },
+                {
+                    "name": "sync",
+                    "options": [
+                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
+                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
+                    ],
+                    "type": "field_dropdown"
                 }
             ],
             "inputsInline": true,
@@ -1288,6 +1314,14 @@ export const onboard_tft_display_hvline = {
                     "name": "VAR",
                     "type": "input_value",
                     //"check": "Number"
+                },
+                {
+                    "name": "sync",
+                    "options": [
+                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
+                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
+                    ],
+                    "type": "field_dropdown"
                 }
             ],
             "inputsInline": true,
@@ -1331,6 +1365,14 @@ export const onboard_tft_display_line = {
                     "name": "VAR",
                     "type": "input_value",
                     //"check": "Number"
+                },
+                {
+                    "name": "sync",
+                    "options": [
+                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
+                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
+                    ],
+                    "type": "field_dropdown"
                 }
             ],
             "inputsInline": true,
@@ -1374,6 +1416,15 @@ export const onboard_tft_bright_point = {
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_PLOT_POINT_Y);
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.HTML_COLOUR);
+        var version = Boards.getSelectedBoardKey()
+        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
+            this.appendDummyInput()
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
+                .appendField(new Blockly.FieldDropdown([
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
+                ]),"sync");
+        }
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -1385,7 +1436,16 @@ export const onboard_tft_fill = {
     init: function () {
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.appendValueInput('VAR')
-            .appendField(Blockly.Msg.MIXLY_SCREEN_FILL)
+            .appendField(Blockly.Msg.MIXLY_SCREEN_FILL);
+        var version = Boards.getSelectedBoardKey()
+        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
+            this.appendDummyInput()
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
+                .appendField(new Blockly.FieldDropdown([
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
+                ]),"sync");
+        }
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -1510,6 +1570,14 @@ export const onboard_tft_display_shape_circle = {
                     "name": "VAR",
                     "type": "input_value",
                     //"check": "Number"
+                },
+                {
+                    "name": "sync",
+                    "options": [
+                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
+                        [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
+                    ],
+                    "type": "field_dropdown"
                 }
             ],
             "inputsInline": true,
@@ -1554,6 +1622,38 @@ export const nova_draw_pointer = {
         this.setTooltip(Blockly.Msg.DRAW_POINTER_TOOLTIP);
     }
 };
+
+export const onboard_tft_show_texts = {
+    init: function () {
+        this.setColour(DISPLAY_ONBOARD_HUE);
+        this.appendValueInput('data')
+            .appendField(Blockly.Msg.MIXLY_Display_long_text);
+        this.appendValueInput("x")
+            .setCheck(Number)
+            .appendField('x');
+        this.appendValueInput("y")
+            .setCheck(Number)
+            .appendField('y');
+        this.appendValueInput("size")
+            .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_NUMBER);
+        this.appendValueInput('VAR')
+            .appendField(Blockly.Msg.HTML_COLOUR);
+        var version = Boards.getSelectedBoardKey()
+        if (version == 'micropython:esp32s3:mixgo_nova'||'micropython:esp32s3:mixgo_sant') {
+            this.appendDummyInput()
+                .appendField( Blockly.Msg.MIXLY_synchronize + ':')
+                .appendField(new Blockly.FieldDropdown([
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE,"1"],
+                    [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE,"0"]
+                ]),"sync");
+        }
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+    }
+};
+
 /**
  * @deprecated To be removed in the future
  */

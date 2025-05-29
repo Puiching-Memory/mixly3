@@ -120,12 +120,8 @@ export const GET_PICTURE_DATA = function (_, generator) {
 }
 
 export const SCREEN_SHOW_CAM_GRAPH_SHOOT = function (_, generator) {
-    var code = 'cam.display()\n';
-    return code;
-}
-
-export const STOP_SCREEN_DISPLAY = function (_, generator) {
-    var code = 'cam.display_stop()\n';
+    var con = this.getFieldValue('control');
+    var code = 'cam.'+ con +'()\n';
     return code;
 }
 
@@ -167,11 +163,11 @@ export const GET_CAT_FACE_DETECTION_NUM = function (_, generator) {
 export const GET_CAT_FACE_DETECTION_LOCATION = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var num = generator.valueToCode(this, 'NO', generator.ORDER_ATOMIC);
-    var code = sub + ".cat_detection(,'pos',"+ num +')';
+    var code = sub + ".cat_detection('pos',"+ num +')';
     return [code, generator.ORDER_ATOMIC];
 }
 
-export const GET__FACE_DETECTION_NUM = function (_, generator) {
+export const GET_FACE_DETECTION_NUM = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     var code = sub + ".face_detection('len')";
     return [code, generator.ORDER_ATOMIC];
