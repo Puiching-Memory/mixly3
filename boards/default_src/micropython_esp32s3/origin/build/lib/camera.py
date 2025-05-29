@@ -25,4 +25,10 @@ class GC032A(Camera):
 
     def deinit(self):
         super().deinit()
-        onboard_bot.cam_en(0,100)
+        onboard_bot.cam_en(0, 100)
+
+    def display(self, show=True):
+        if show:
+            super().display()
+        else:
+            super().display_stop()
