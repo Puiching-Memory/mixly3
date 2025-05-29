@@ -139,11 +139,6 @@ Python.init = function () {
     }
 }
 
-function optimizeShowCalls(code) {
-    const regex = /onboard_tft\.show\(\)\s*(?=.*?onboard_tft\.[hline|vline|line|rect|fill_rect|ellipse|pixel])/gm;
-    return code.replace(regex, '');
-}
-
 Python.finish = function (code) {
     // Convert the definitions dictionary into a list.
     if (code !== "") {
@@ -205,11 +200,6 @@ Python.finish = function (code) {
         text = imports.join('\n') + definitions_var.join('\n') + definitions_fun.join('\n')
             + functions.join('\n') + setups.join('') + code + codeEnd.join('\n');
     }
-    // try {
-    //     text = optimizeShowCalls(text);
-    // } catch (error) {
-    //     console.log(error);
-    // }
     return text;
 }
 
