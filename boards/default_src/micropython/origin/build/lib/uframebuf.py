@@ -168,26 +168,53 @@ class FrameBuffer_Base(FrameBuffer):
 	def write(self):
 		self.show()
 
-	def shift(self, x, y, sync=True):
+	def shift(self, x, y, rotate=False, sync=True):
 		"""Shift pixels by x and y"""
-		super().scroll(x, y)
+		if x > 0:  # Shift Right
+			for _ in range(x):
+				for row in range(0, self.height):
+					last_pixel = super().pixel(self.width - 1, row) if rotate else 0
+					for col in range(self.width - 1, 0, -1):
+						super().pixel(col, row, super().pixel(col - 1, row))
+					super().pixel(0, row, last_pixel)
+		elif x < 0:  # Shift Left
+			for _ in range(-x):
+				for row in range(0, self.height):
+					last_pixel = super().pixel(0, row) if rotate else 0
+					for col in range(0, self.width - 1):
+						super().pixel(col, row, super().pixel(col + 1, row))
+					super().pixel(self.width - 1, row, last_pixel)
+		if y > 0:  # Shift Up
+			for _ in range(y):
+				for col in range(0, self.width):
+					last_pixel = super().pixel(col, self.height - 1) if rotate else 0
+					for row in range(self.height - 1, 0, -1):
+						super().pixel(col, row, super().pixel(col, row - 1))
+					super().pixel(col, 0, last_pixel)
+		elif y < 0:  # Shift Down
+			for _ in range(-y):
+				for col in range(0, self.width):
+					last_pixel = super().pixel(col, 0) if rotate else 0
+					for row in range(0, self.height - 1):
+						super().pixel(col, row, super().pixel(col, row + 1))
+					super().pixel(col, self.height - 1, last_pixel)
 		if sync: self.show()
 
-	def shift_right(self, num, sync=True):
+	def shift_right(self, num, rotate=False, sync=True):
 		"""Shift all pixels right"""
-		self.shift(num, 0, sync)
+		self.shift(num, 0, rotate, sync)
 
-	def shift_left(self, num, sync=True):
+	def shift_left(self, num, rotate=False, sync=True):
 		"""Shift all pixels left"""
-		self.shift(-num, 0, sync)
+		self.shift(-num, 0, rotate, sync)
 
-	def shift_up(self, num, sync=True):
+	def shift_up(self, num, rotate=False, sync=True):
 		"""Shift all pixels up"""
-		self.shift(0, -num, sync)
+		self.shift(0, -num, rotate, sync)
 
-	def shift_down(self, num, sync=True):
+	def shift_down(self, num, rotate=False, sync=True):
 		"""Shift all pixels down"""
-		self.shift(0, num, sync)
+		self.shift(0, num, rotate, sync)
 
 	def map_invert(self, own):
 		"""Graph invert operation"""
@@ -338,6 +365,11 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 	def font(self, font_address=0x700000):
 		"""Font selection or externally defined font code"""
 		self._font = Font_Uincode(font_address)
+
+	def shift(self, x, y, rotate=False, sync=True):
+		'''Reshaping Inheritance Methods'''
+		super().scroll(x, y)
+		if sync: self.show()
 
 	def image(self, path, x=None, y=None, size=None, invert=0, color=0xffff, bold=0, sync=True):
 		"""Set buffer to value of Python Imaging Library image"""
