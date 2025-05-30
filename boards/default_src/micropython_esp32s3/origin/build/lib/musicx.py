@@ -4,11 +4,8 @@ Music buzzer
 Micropython library for the Music buzzer
 =======================================================
 
-#Based on Author: qiren123(MIDI Music) 	           	20220618
-#Make changes to instantiation			 			20220622
-#Increase level reversal selection					20220716
-
-dahanzimin From the Mixly Team
+#Based on Author: qiren123(MIDI Music)
+@dahanzimin From the Mixly Team
 """
 
 from time import sleep_ms
@@ -97,8 +94,8 @@ class MIDI():
 			self.set_duration(int(tone[(pos + 1):]))
 			tone = tone[:pos]
 
-	def play(self, tune, duration=None):
-		if self._pa_ctrl: self._pa_ctrl(1)
+	def play(self, tune, duration=None, pa_delay=100):
+		if self._pa_ctrl: self._pa_ctrl(1, pa_delay)
 		self._pwm = PWM(Pin(self._pin), duty=1023 if self._invert else 0)
 		if duration is None:
 			self.set_default(tune[0])
@@ -110,32 +107,32 @@ class MIDI():
 				continue
 			midi = self.midi(tone)
 			self._pwm.duty(1023-self._volume) if self._invert else self._pwm.duty(self._volume)
-			self._pwm.freq(midi[0])  
+			self._pwm.freq(midi[0])
 			sleep_ms(midi[1])
 			self._pwm.freq(40000)
 			sleep_ms(1)
-		if self._pa_ctrl: self._pa_ctrl(0)
+		if self._pa_ctrl: self._pa_ctrl(0, 0)
 		self._pwm.deinit()
 		sleep_ms(10)
 
-	def pitch(self, freq):
-		if self._pa_ctrl: self._pa_ctrl(1)
+	def pitch(self, freq, pa_delay=100):
+		if self._pa_ctrl: self._pa_ctrl(1, pa_delay)
 		self._pwm = PWM(Pin(self._pin))
 		self._pwm.duty(1023-self._volume) if self._invert else self._pwm.duty(self._volume)
-		self._pwm.freq(int(freq)) 
+		self._pwm.freq(int(freq))
 
-	def pitch_time(self, freq, delay):
-		if self._pa_ctrl: self._pa_ctrl(1)
+	def pitch_time(self, freq, delay, pa_delay=100):
+		if self._pa_ctrl: self._pa_ctrl(1, pa_delay)
 		self._pwm = PWM(Pin(self._pin))
 		self._pwm.duty(1023-self._volume) if self._invert else self._pwm.duty(self._volume)
-		self._pwm.freq(int(freq))  
+		self._pwm.freq(int(freq))
 		sleep_ms(delay)
-		if self._pa_ctrl: self._pa_ctrl(0)
+		if self._pa_ctrl: self._pa_ctrl(0, 0)
 		self._pwm.deinit()
 		sleep_ms(10)
-		
+
 	def stop(self):
-		if self._pa_ctrl: self._pa_ctrl(0)
+		if self._pa_ctrl: self._pa_ctrl(0, 0)
 		if self._pwm: self._pwm.deinit()
 		sleep_ms(10)
 
