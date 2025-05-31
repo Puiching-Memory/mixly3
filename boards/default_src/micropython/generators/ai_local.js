@@ -99,7 +99,7 @@ export const CI130X_BROADCAST_SYSTEM_TIME = function (_, generator) {
     var version = Boards.getSelectedBoardKey().split(':')[2];
     generator.definitions_['import_' + version + '_onboard_asr'] = 'from ' + version + ' import onboard_asr';
     var bool = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
-    var code = 'onboard_asr.play_time(' + bool + ')\n';
+    var code = 'onboard_asr.play_time(detail=' + bool + ')\n';
     return code;
 }
 
@@ -125,7 +125,7 @@ export const GET_PICTURE_DATA = function (_, generator) {
 
 export const SCREEN_SHOW_CAM_GRAPH_SHOOT = function (_, generator) {
     var bool = generator.valueToCode(this, 'boolean', generator.ORDER_ATOMIC);
-    var code = 'cam.display('+ bool +')\n';
+    var code = 'cam.display(show='+ bool +')\n';
     return code;
 }
 

@@ -4137,28 +4137,28 @@
         </shadow>
       </value>
     </block>
-    <block type="CI130X_IDENTIFY_AND_SAVE" m-hide='micropython:esp32s3:mixgo_sant'>
+    <block type="CI130X_IDENTIFY_AND_SAVE">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="CI130X_GET_WHETHER_IDENTIFY" m-hide='micropython:esp32s3:mixgo_sant'>
+    <block type="CI130X_GET_WHETHER_IDENTIFY">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="CI130X_GET_THE_RECOGNIZED_CMD" m-hide='micropython:esp32s3:mixgo_sant'>
+    <block type="CI130X_GET_THE_RECOGNIZED_CMD">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
-    <block type="CI130X_BROADCAST" m-hide='micropython:esp32s3:mixgo_sant'>
+    <block type="CI130X_BROADCAST">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
@@ -4168,7 +4168,7 @@
         <block type="logic_null"></block>
       </value>
     </block>
-    <block type="CI130X_SET_SYSTEM_CMD" m-hide='micropython:esp32s3:mixgo_sant'>
+    <block type="CI130X_SET_SYSTEM_CMD">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
