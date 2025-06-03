@@ -104,3 +104,7 @@ class AI:
             self._ai.delete(_id)  
         else:
             raise AttributeError('This model can only run face recognition')
+
+    def stop(self):
+        if self._ai is not None:
+            self._ai.stop()

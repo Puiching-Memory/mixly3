@@ -156,9 +156,11 @@ class LED:
 onboard_led = LED(onboard_bot.led_pwm)
 
 class Voice_Energy:
-	def read(self):
-		_dat = onboard_asr._rreg(0x08, 3) #在语音识别里获取
-		return (_dat[0] | _dat[1] << 8) // 10
+	def read(self, samples=10):
+		values = []
+		for _ in range(samples):
+			values.append(int.from_bytes(onboard_asr._rreg(0x08, 3)[:2], 'little')) #在语音识别里获取
+		return sorted(values)[samples // 2]
 
 onboard_sound = Voice_Energy()
 
