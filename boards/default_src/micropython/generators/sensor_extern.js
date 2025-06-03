@@ -1088,3 +1088,70 @@ export const weigh_sensor_get_weight = function (_, generator) {
     var code = v + ".read_weight(10)";
     return [code, generator.ORDER_ATOMIC];
 }
+
+export const line_tube_foot = function (_, generator) {
+    generator.definitions_['import_machine_Pin'] = "from machine import Pin";
+    generator.definitions_['import_keypad_Keypad'] = "from keypad import Keypad";
+    var pin1 = generator.valueToCode(this, 'PIN1', generator.ORDER_ATOMIC);
+    var pin2 = generator.valueToCode(this, 'PIN2', generator.ORDER_ATOMIC);
+    var pin3 = generator.valueToCode(this, 'PIN3', generator.ORDER_ATOMIC);
+    var pin4 = generator.valueToCode(this, 'PIN4', generator.ORDER_ATOMIC);
+    var code = '[Pin(' + pin1 +'),Pin(' + pin2 +'),Pin(' + pin3 +'),Pin(' + pin4 +')]';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const column_tube_foot = function (_, generator) {
+    generator.definitions_['import_machine_Pin'] = "from machine import Pin";
+    generator.definitions_['import_keypad_Keypad'] = "from keypad import Keypad";
+    var pin1 = generator.valueToCode(this, 'PIN1', generator.ORDER_ATOMIC);
+    var pin2 = generator.valueToCode(this, 'PIN2', generator.ORDER_ATOMIC);
+    var pin3 = generator.valueToCode(this, 'PIN3', generator.ORDER_ATOMIC);
+    var pin4 = generator.valueToCode(this, 'PIN4', generator.ORDER_ATOMIC);
+    var code = '[Pin(' + pin1 +'),Pin(' + pin2 +'),Pin(' + pin3 +'),Pin(' + pin4 +')]';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const define_keyboards = function (_, generator) {
+    generator.definitions_['import_machine_Pin'] = "from machine import Pin";
+    generator.definitions_['import_keypad_Keypad'] = "from keypad import Keypad";
+    var var1 = this.getFieldValue('VAR1');
+    var var2 = this.getFieldValue('VAR2');
+    var var3 = this.getFieldValue('VAR3');
+    var var4 = this.getFieldValue('VAR4');
+    var var5 = this.getFieldValue('VAR5');
+    var var6 = this.getFieldValue('VAR6');
+    var var7 = this.getFieldValue('VAR7');
+    var var8 = this.getFieldValue('VAR8');
+    var var9 = this.getFieldValue('VAR9');
+    var var10 = this.getFieldValue('VAR10');
+    var var11 = this.getFieldValue('VAR11');
+    var var12 = this.getFieldValue('VAR12');
+    var var13 = this.getFieldValue('VAR13');
+    var var14 = this.getFieldValue('VAR14');
+    var var15 = this.getFieldValue('VAR15');
+    var var16 = this.getFieldValue('VAR16');
+    var code = "[\n['"+var1+"','"+var2+"','"+var3+"','"+var4+"'],\n['"+var5+"','"+var6+"','"+var7+"','"+var8+"'],\n['"+var9+"','"+var10+"','"+var11+"','"+var12+"'],\n['"+var13+"','"+var14+"','"+var15+"','"+var16+"']]"
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const init_matrix_keyboard = function (_, generator) {
+    generator.definitions_['import_machine_Pin'] = "from machine import Pin";
+    generator.definitions_['import_keypad_Keypad'] = "from keypad import Keypad";
+    var varName = generator.variableDB_.getName(this.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+    var argument1 = generator.valueToCode(this, 'VALUE1',
+        generator.ORDER_ASSIGNMENT) || 'None';
+    var argument2 = generator.valueToCode(this, 'VALUE2',
+        generator.ORDER_ASSIGNMENT) || 'None';
+    var argument3 = generator.valueToCode(this, 'VALUE3',
+        generator.ORDER_ASSIGNMENT) || 'None';
+    var code = varName +'= Keypad('+ argument1 +','+argument2+','+argument3+')'
+    return code;
+}
+
+export const get_keboards_value = function (_, generator) {
+    generator.definitions_['import_machine_Pin'] = "from machine import Pin";
+    generator.definitions_['import_keypad_Keypad'] = "from keypad import Keypad";
+    var varName = generator.variableDB_.getName(this.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+    var code = varName + '.read_keypad()'
+    return [code, generator.ORDER_ATOMIC];
+}

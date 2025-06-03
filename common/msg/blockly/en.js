@@ -3964,4 +3964,7 @@ En.MIXLY_synchronize = 'Synchronize';
 En.MIXLY_Display_long_text = 'Display long text';
 En.MIXLY_BROADCAST_SYSTEM_TIME = 'Broadcast system time';
 En.MIXLY_DETAILED = 'Detailed';
+En.MIXLY_line_tube_foot = 'line tube foot';
+En.MIXLY_column_tube_foot = 'column tube foot';
+En.MIXLY_DEFINE_KEYBOARDS= 'define the keyboard';
 })();

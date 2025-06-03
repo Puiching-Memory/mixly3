@@ -4118,4 +4118,7 @@ ZhHant.MIXLY_synchronize = '實時刷新';
 ZhHant.MIXLY_Display_long_text = '顯示長文本';
 ZhHant.MIXLY_BROADCAST_SYSTEM_TIME = '播報系統時間';
 ZhHant.MIXLY_DETAILED = '詳細地';
+ZhHant.MIXLY_line_tube_foot = '行管腳';
+ZhHant.MIXLY_column_tube_foot = '列管腳';
+ZhHant.MIXLY_DEFINE_KEYBOARDS= '定義鍵盤';
 })();

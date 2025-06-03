@@ -1380,10 +1380,8 @@
     <block type="serial_readstr"></block>
     <block type="serial_readline"></block>
   </category>
-  <!--<category
-  id="catOnBoard" name="catOnBoard" colour="65">-->
   <category id="catOnBoardSensor" name="catOnBoardSensor" colour="#947C54"
-    m-hide='micropython:esp32s2:generic'>
+    m-hide='micropython:esp32s3:generic'>
     <block type="sensor_mixgo_button_is_pressed">
       <value name="btn">
         <shadow type="pins_button">
@@ -1542,7 +1540,7 @@
 
   </category>
   <category id="catOnBoardActuator" name="catOnBoardActuator" colour="#6C9858"
-    m-hide='micropython:esp32s2:generic'>
+    m-hide='micropython:esp32s3:generic'>
     <block type="actuator_led_bright">
       <value name="led">
         <shadow type="number">
@@ -1829,7 +1827,7 @@
       </value>
     </block>
   </category>
-  <category id="catOnBoardDisplay" colour='#78B5B4'>
+  <category id="catOnBoardDisplay" colour='#78B5B4' m-hide='micropython:esp32s3:generic'>
     <block type="display_image_builtins_all"></block>
     <block type="display_show_image">
       <value name="data">
@@ -2587,7 +2585,7 @@
     </block>
     <block type="interaction_whether_to_interaction_SANT"></block>
   </category>
-  <category id="catIot" colour="#2FAD7A">
+  <category id="catIot" colour="#2FAD7A" m-hide='micropython:esp32s3:generic'>
     <category id="catMixIO" colour="#526FC3">
       <block type="iot_wifi_connect">
         <value name="WIFINAME">
@@ -3104,7 +3102,7 @@
       </block>
     </category>
   </category>
-  <category id="catGroup" colour="140">
+  <category id="catGroup" colour="140" m-hide='micropython:esp32s3:generic'>
     <category id="catBLE" colour="140">
       <block type="communicate_bluetooth_central_init">
         <value name="VAR">
@@ -3895,36 +3893,7 @@
       </block>
     </category>
   </category>
-  <category id="catExternSensor" colour='#A58C5B'>
-    <!-- 
-    <block type="sensor_lm35">
-      <value name="PIN">
-        <shadow type="pins_analog_pin"></shadow>
-      </value>
-    </block>
-    <block type="sensor_dht11">
-      <value name="PIN">
-        <shadow type="pins_digital_pin"></shadow>
-      </value>
-    </block>
-    <block type="sensor_ds18x20">
-      <value name="PIN">
-        <shadow type="pins_digital_pin"></shadow>
-      </value>
-    </block>
-    <block type="HCSR04">
-      <value name="PIN1">
-        <shadow type="pins_digital_pin">
-          <field name="PIN">0</field>
-        </shadow>
-      </value>
-      <value name="PIN2">
-        <shadow type="pins_digital_pin">
-          <field name="PIN">4</field>
-        </shadow>
-      </value>
-    </block>      
-     -->
+  <category id="catExternSensor" colour='#A58C5B' m-hide='micropython:esp32s3:generic'>
     <block type="communicate_i2c_init">
       <value name="SUB">
         <shadow type="variables_get">
@@ -4522,8 +4491,75 @@
         </shadow>
       </value>
     </block>
+    <block type="init_matrix_keyboard">
+      <field name ="VAR">KEYPAD_4_4</field>
+      <value name="VALUE1">
+        <block type="line_tube_foot">
+          <value name="PIN1">
+            <shadow type="pins_digital_pin">
+            </shadow>
+          </value>
+          <value name="PIN2">
+            <shadow type="pins_digital_pin">
+            </shadow>
+          </value>
+          <value name="PIN3">
+            <shadow type="pins_digital_pin">
+            </shadow>
+          </value>
+          <value name="PIN4">
+            <shadow type="pins_digital_pin">
+            </shadow>
+          </value>
+        </block>
+      </value>
+      <value name="VALUE2">
+        <block type="column_tube_foot">
+          <value name="PIN1">
+            <shadow type="pins_digital_pin">
+            </shadow>
+          </value>
+          <value name="PIN2">
+            <shadow type="pins_digital_pin">
+            </shadow>
+          </value>
+          <value name="PIN3">
+            <shadow type="pins_digital_pin">
+            </shadow>
+          </value>
+          <value name="PIN4">
+            <shadow type="pins_digital_pin">
+            </shadow>
+          </value>
+        </block>
+      </value>
+      <value name="VALUE3">
+        <block type="define_keyboards">
+          <field name ="VAR1">1</field>
+          <field name ="VAR2">2</field>
+          <field name ="VAR3">3</field>
+          <field name ="VAR4">A</field>
+          <field name ="VAR5">4</field>
+          <field name ="VAR6">5</field>
+          <field name ="VAR7">6</field>
+          <field name ="VAR8">B</field>
+          <field name ="VAR9">7</field>
+          <field name ="VAR10">8</field>
+          <field name ="VAR11">9</field>
+          <field name ="VAR12">C</field>
+          <field name ="VAR13">*</field>
+          <field name ="VAR14">0</field>
+          <field name ="VAR15">#</field>
+          <field name ="VAR16">D</field>
+        </block>
+      </value>
+    </block>
+    <block type="get_keboards_value">
+      <field name ="VAR">KEYPAD_4_4</field>
+    </block>
+
   </category>
-  <category id="catExternActuator" colour='#74A55B'>
+  <category id="catExternActuator" colour='#74A55B' m-hide='micropython:esp32s3:generic'>
     <block type="esp32_music_pitch_init">
       <value name="SUB">
         <shadow type="variables_get">
@@ -4958,7 +4994,7 @@
     </block>
     <block type="nova_g1_spk_en"></block>
   </category>
-  <category id="catExternMonitor" colour='5BA5A5'>
+  <category id="catExternMonitor" colour='5BA5A5' m-hide='micropython:esp32s3:generic'>
     <category id="catMatrix" colour='5BA5A5'>
       <block type="communicate_i2c_init">
         <value name="SUB">
@@ -5967,7 +6003,7 @@
       </block>
     </category>
   </category>
-  <category id="catAIsensor" colour="#90A244">
+  <category id="catAIsensor" colour="#90A244" m-hide='micropython:esp32s3:generic'>
     <block type="serial_softserial_new">
       <value name="RX">
         <shadow type="pins_digital_pin">
@@ -6386,7 +6422,7 @@
       </value>
     </block>
   </category>
-  <category id="catAIsensor2" colour="#90A244">
+  <category id="catAIsensor2" colour="#90A244" m-hide='micropython:esp32s3:generic'>
     <block type="serial_softserial_new">
       <value name="RX">
         <shadow type="pins_digital_pin">
@@ -6751,43 +6787,8 @@
         </shadow>
       </value>
     </block>
-
-    <!--   <block type="variables_set">
-      <field name="VAR">info</field>
-      <value name="VALUE">
-      <block type="ai_sensor_yolo_recognize">
-        <value name="SUB">
-          <shadow type="variables_get">
-            <field name="VAR">ai_sensor</field>
-          </shadow>
-        </value>
-        <value name="VAR1">
-          <shadow type="tuple_create_with_text_return">
-            <field name="TEXT">0.1606, 0.3562, 0.4712, 0.9568, 0.9877, 1.9108, 1.8761, 3.5310, 3.4423,
-    5.6823</field>
-          </shadow>
-        </value>
-        <value name="VAR2">
-          <shadow type="text">
-              <field name="TEXT">/sd/masks.kmodel</field>
-            </shadow>
-        </value>  
-        <value name="VAR4">
-          <shadow type="text">
-              <field name="TEXT">外部模型加载</field>
-            </shadow>
-        </value>      
-      </block>
-  </block>
-  <block type="ai_sensor_yolo_recognize_result">
-    <value name="VAR">
-      <shadow type="variables_get">
-        <field name="VAR">objects</field>
-      </shadow>
-    </value>
-  </block> -->
   </category>
-  <category id="catFile" colour="0">
+  <category id="catFile" colour="0" m-hide='micropython:esp32s3:generic'>
     <block type="sdcard_use_spi_init">
       <value name="SPISUB">
         <block type="communicate_spi_onboard"></block>
@@ -6953,7 +6954,7 @@
     </block>
   </category>
 
-  <category id="catNetwork" colour="225">
+  <category id="catNetwork" colour="225" m-hide='micropython:esp32s3:generic'>
     <block type="iot_wifi_connect">
       <value name="WIFINAME">
         <shadow type="text">
@@ -7327,7 +7328,7 @@
     </block>
     <block type="urequests_response"></block> -->
   </category>
-  <category id="catCommunicate" colour="#3288dd">
+  <category id="catCommunicate" colour="#3288dd" m-hide='micropython:esp32s3:generic'>
     <block type="variables_set">
       <field name="VAR">response</field>
       <value name="VALUE">

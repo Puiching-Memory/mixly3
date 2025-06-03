@@ -2300,3 +2300,98 @@ export const weigh_sensor_get_weight = {
         this.setInputsInline(true);
     }
 };
+
+export const init_matrix_keyboard = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.MIXLY_Keypad)
+            .setAlign(Blockly.ALIGN_RIGHT)
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput(''), 'VAR')
+            .setAlign(Blockly.ALIGN_RIGHT)
+        this.appendValueInput('VALUE1')
+            .appendField(Blockly.Msg.MIXLY_line_tube_foot + '#')
+            .setAlign(Blockly.ALIGN_RIGHT)
+        this.appendValueInput('VALUE2')
+            .appendField(Blockly.Msg.MIXLY_column_tube_foot + '#')
+            .setAlign(Blockly.ALIGN_RIGHT)
+        this.appendValueInput('VALUE3')
+            .appendField(Blockly.Msg.MIXLY_DEFINE_KEYBOARDS)
+            .setAlign(Blockly.ALIGN_RIGHT)
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(false);
+    }
+}
+
+export const line_tube_foot ={
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput('PIN1')
+            .appendField('1#')
+        this.appendValueInput('PIN2')
+            .appendField('2#')
+        this.appendValueInput('PIN3')
+            .appendField('3#')
+        this.appendValueInput('PIN4')
+            .appendField('4#')
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+}
+
+export const column_tube_foot = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput('PIN1')
+            .appendField('1#')
+        this.appendValueInput('PIN2')
+            .appendField('2#')
+        this.appendValueInput('PIN3')
+            .appendField('3#')
+        this.appendValueInput('PIN4')
+            .appendField('4#')
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+}
+
+export const define_keyboards = {
+    init:function(){
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput(''), 'VAR1')
+            .appendField(new Blockly.FieldTextInput(''), 'VAR2')
+            .appendField(new Blockly.FieldTextInput(''), 'VAR3')
+            .appendField(new Blockly.FieldTextInput(''), 'VAR4')
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput(''), 'VAR5')
+            .appendField(new Blockly.FieldTextInput(''), 'VAR6')
+            .appendField(new Blockly.FieldTextInput(''), 'VAR7')
+            .appendField(new Blockly.FieldTextInput(''), 'VAR8')
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput(''), 'VAR9')
+            .appendField(new Blockly.FieldTextInput(''), 'VAR10')
+            .appendField(new Blockly.FieldTextInput(''), 'VAR11')
+            .appendField(new Blockly.FieldTextInput(''), 'VAR12')
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput(''), 'VAR13')
+            .appendField(new Blockly.FieldTextInput(''), 'VAR14')
+            .appendField(new Blockly.FieldTextInput(''), 'VAR15')
+            .appendField(new Blockly.FieldTextInput(''), 'VAR16')
+        this.setOutput(true);
+        this.setInputsInline(false);
+    }
+}
+
+export const get_keboards_value = {
+    init:function(){
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput(''), 'VAR')
+            .appendField(Blockly.Msg.MIXLY_Keypad_GETKEY)
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }    
+}
