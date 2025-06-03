@@ -29,8 +29,6 @@ class CBR817:
 	def __init__(self, i2c_bus, addr=CBR_ADDRESS, tx_power=3, threshold=5000, noise=256, delay=500, lock=500):
 		self._device  = i2c_bus
 		self._address = addr
-		_str_i2c = str(self._device)	#唤醒需要SCL管脚给高脉冲
-		self._scl = Pin(int(_str_i2c[_str_i2c.find('=') + 1 : _str_i2c.find(",")]), Pin.OUT, Pin.OPEN_DRAIN)
 
 		self._configure()
 		self.tx_power(tx_power)
@@ -49,8 +47,10 @@ class CBR817:
 
 	def _wake(self):
 		'''Wake up from low power consumption'''
-		self._scl.value(0)
-		time.sleep_us(10)
+		try:
+			self._wreg(CBR_SEL_REG, 0xC0)
+		except :
+			pass
 
 	def threshold(self, value=None):
 		self._wake()
