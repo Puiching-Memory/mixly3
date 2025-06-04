@@ -68,7 +68,7 @@ class AI:
     def motion_recognition(self, threshold=50):
         if self._func == MOTION_DEECTION:
             if self._once: self._init(threshold)
-            return self._ai.read()
+            return bool(self._ai.read() >= threshold)
         else:
             raise AttributeError('This model can only run motion recognition')
 

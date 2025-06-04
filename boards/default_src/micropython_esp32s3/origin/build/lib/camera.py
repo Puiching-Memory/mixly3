@@ -12,9 +12,9 @@ from machine import SoftI2C, Pin
 from mixgo_sant import onboard_bot
 
 class GC032A(Camera):
-    def __init__(self, framesize=LCD, hmirror=None):
+    def __init__(self, framesize=LCD, hmirror=None, frame=1):
         onboard_bot.cam_en(1, 500)
-        super().__init__()
+        super().__init__(frame)
         super().set_framesize(framesize)
         time.sleep_ms(100)
         if hmirror is not None:
