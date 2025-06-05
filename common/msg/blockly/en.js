@@ -3967,4 +3967,6 @@ En.MIXLY_DETAILED = 'Detailed';
 En.MIXLY_line_tube_foot = 'line tube foot';
 En.MIXLY_column_tube_foot = 'column tube foot';
 En.MIXLY_DEFINE_KEYBOARDS= 'define the keyboard';
+En.MIXLY_TVOC_CO2_SENSOR = 'TVOC,formaldehyde and carbon dioxide sensors';
+En.MIXLY_TVOC_CO2_SENSOR_GRT_DATA = 'Obtain the concentrations of TVOC(mg/m³), formaldehyde (mg/m³), and carbon dioxide (ppm)';
 })();

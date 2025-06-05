@@ -719,10 +719,13 @@ export const sensor_use_uart_init = function (_, generator) {
     var code = ''
     if (s == 'PM') {
         generator.definitions_['import_pm2_5'] = 'import pm2_5';
-        code = v + '=pm2_5.PM2_5(' + key + ')\n';
+        code = v + '= pm2_5.PM2_5(' + key + ')\n';
     } else if (s == 'GNSS') {
         generator.definitions_['import_gnss'] = 'import gnss';
-        code = v + '=gnss.NMEA0183(' + key + ')\n';
+        code = v + '= gnss.NMEA0183(' + key + ')\n';
+    } else if (s == 'TVOC'){
+        generator.definitions_['import_tvoc07s'] = 'import tvoc07s';
+        code = v + '= tvoc07s.TVOC(' + key + ')\n';
     }
     return code;
 }
@@ -747,6 +750,13 @@ export const gnss_have_data = function (_, generator) {
     var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
     generator.definitions_['import_gnss'] = 'import gnss';
     var code = sub + '.any()';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const tvoc_get_data = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    generator.definitions_['import_tvoc07s'] = 'import tvoc07s';
+    var code = sub + '.read()';
     return [code, generator.ORDER_ATOMIC];
 }
 

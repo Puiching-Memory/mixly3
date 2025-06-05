@@ -4121,4 +4121,6 @@ ZhHant.MIXLY_DETAILED = '詳細地';
 ZhHant.MIXLY_line_tube_foot = '行管腳';
 ZhHant.MIXLY_column_tube_foot = '列管腳';
 ZhHant.MIXLY_DEFINE_KEYBOARDS= '定義鍵盤';
+ZhHant.MIXLY_TVOC_CO2_SENSOR = 'TVOC、甲醛、二氧化碳傳感器';
+ZhHant.MIXLY_TVOC_CO2_SENSOR_GRT_DATA = '獲取TVOC(mg/m3) 、甲醛(mg/m3)、二氧化碳的濃度(ppm)';
 })();

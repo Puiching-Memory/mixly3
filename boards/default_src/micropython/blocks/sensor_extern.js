@@ -1782,7 +1782,8 @@ export const sensor_use_uart_init = {
             .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.MIXLY_PM25_SENSOR, "PM"],
-                [Blockly.Msg.MIXLY_GNSS_SENSOR, "GNSS"]
+                [Blockly.Msg.MIXLY_GNSS_SENSOR, "GNSS"],
+                [Blockly.Msg.MIXLY_TVOC_CO2_SENSOR, "TVOC"]
             ]), "sensor");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
@@ -1848,6 +1849,19 @@ export const gnss_get_data = {
             };
             return TOOLTIPS[mode];
         });
+    }
+};
+
+export const tvoc_get_data = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_TVOC_CO2_SENSOR)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_TVOC_CO2_SENSOR_GRT_DATA)
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
     }
 };
 

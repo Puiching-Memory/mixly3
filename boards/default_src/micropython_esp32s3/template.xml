@@ -2585,7 +2585,7 @@
     </block>
     <block type="interaction_whether_to_interaction_SANT"></block>
   </category>
-  <category id="catIot" colour="#2FAD7A" m-hide='micropython:esp32s3:generic'>
+  <category id="catIot" colour="#2FAD7A">
     <category id="catMixIO" colour="#526FC3">
       <block type="iot_wifi_connect">
         <value name="WIFINAME">
@@ -3102,7 +3102,7 @@
       </block>
     </category>
   </category>
-  <category id="catGroup" colour="140" m-hide='micropython:esp32s3:generic'>
+  <category id="catGroup" colour="140">
     <category id="catBLE" colour="140">
       <block type="communicate_bluetooth_central_init">
         <value name="VAR">
@@ -3893,7 +3893,7 @@
       </block>
     </category>
   </category>
-  <category id="catExternSensor" colour='#A58C5B' m-hide='micropython:esp32s3:generic'>
+  <category id="catExternSensor" colour='#A58C5B'>
     <block type="communicate_i2c_init">
       <value name="SUB">
         <shadow type="variables_get">
@@ -4462,6 +4462,13 @@
         </shadow>
       </value>
     </block>
+    <block type="tvoc_get_data">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">zsensor</field>
+        </shadow>
+      </value>
+    </block>
     <block type="sensor_weigh_init">
       <value name="SUB">
         <shadow type="variables_get">
@@ -4559,7 +4566,7 @@
     </block>
 
   </category>
-  <category id="catExternActuator" colour='#74A55B' m-hide='micropython:esp32s3:generic'>
+  <category id="catExternActuator" colour='#74A55B'>
     <block type="esp32_music_pitch_init">
       <value name="SUB">
         <shadow type="variables_get">
@@ -4994,7 +5001,7 @@
     </block>
     <block type="nova_g1_spk_en"></block>
   </category>
-  <category id="catExternMonitor" colour='5BA5A5' m-hide='micropython:esp32s3:generic'>
+  <category id="catExternMonitor" colour='5BA5A5'>
     <category id="catMatrix" colour='5BA5A5'>
       <block type="communicate_i2c_init">
         <value name="SUB">
@@ -6003,7 +6010,7 @@
       </block>
     </category>
   </category>
-  <category id="catAIsensor" colour="#90A244" m-hide='micropython:esp32s3:generic'>
+  <category id="catAIsensor" colour="#90A244">
     <block type="serial_softserial_new">
       <value name="RX">
         <shadow type="pins_digital_pin">
@@ -6422,7 +6429,7 @@
       </value>
     </block>
   </category>
-  <category id="catAIsensor2" colour="#90A244" m-hide='micropython:esp32s3:generic'>
+  <category id="catAIsensor2" colour="#90A244">
     <block type="serial_softserial_new">
       <value name="RX">
         <shadow type="pins_digital_pin">
@@ -6788,7 +6795,7 @@
       </value>
     </block>
   </category>
-  <category id="catFile" colour="0" m-hide='micropython:esp32s3:generic'>
+  <category id="catFile" colour="0">
     <block type="sdcard_use_spi_init">
       <value name="SPISUB">
         <block type="communicate_spi_onboard"></block>
@@ -6954,7 +6961,7 @@
     </block>
   </category>
 
-  <category id="catNetwork" colour="225" m-hide='micropython:esp32s3:generic'>
+  <category id="catNetwork" colour="225">
     <block type="iot_wifi_connect">
       <value name="WIFINAME">
         <shadow type="text">
@@ -7328,7 +7335,7 @@
     </block>
     <block type="urequests_response"></block> -->
   </category>
-  <category id="catCommunicate" colour="#3288dd" m-hide='micropython:esp32s3:generic'>
+  <category id="catCommunicate" colour="#3288dd">
     <block type="variables_set">
       <field name="VAR">response</field>
       <value name="VALUE">
