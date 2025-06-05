@@ -4128,4 +4128,5 @@ ZhHans.MIXLY_column_tube_foot = '列管脚';
 ZhHans.MIXLY_DEFINE_KEYBOARDS= '定义键盘';
 ZhHans.MIXLY_TVOC_CO2_SENSOR = 'TVOC、甲醛、二氧化碳传感器';
 ZhHans.MIXLY_TVOC_CO2_SENSOR_GRT_DATA = '获取TVOC(mg/m3) 、甲醛(mg/m3)、二氧化碳的浓度(ppm)';
+ZhHans.MIXLY_IMAGE_ACQUISITION = '图像采集';
 })();

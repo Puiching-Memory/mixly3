@@ -225,3 +225,9 @@ export const DELETE_PEOPLE_FACE_ID = function (_, generator) {
     var code = sub + '.face_delete('+ id +')\n';
     return code;
 }
+
+export const AI_STOP_ACQUISITION = function (_, generator) {
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var code = sub + '.stop()';
+    return [code, generator.ORDER_ATOMIC];
+}

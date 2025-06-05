@@ -544,3 +544,17 @@ export const DELETE_PEOPLE_FACE_ID= {
         this.setInputsInline(true);
     }
 };
+
+
+export const AI_STOP_ACQUISITION = { 
+    init: function () {
+        this.setColour(AI_LOCAL_GRAPH_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_STOP)
+            .setCheck("var");
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_IMAGE_ACQUISITION);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};

@@ -276,6 +276,9 @@ export const rfid_readid = function (_, generator) {
     } else if (version === 'mixgo_me') {
         moduleName = 'me_g1';
         objName = 'ext_rc522';
+    }else if (version === 'mixgo_sant'){
+        moduleName = 'sant_gx';
+        objName = 'ext_rfid';
     }
     generator.definitions_[`import_${moduleName}_${objName}`] = `from ${moduleName} import ${objName}`;
     var code = `${objName}.read_card(0, x="id")`;
@@ -293,6 +296,9 @@ export const rfid_readcontent = function (_, generator) {
     } else if (version === 'mixgo_me') {
         moduleName = 'me_g1';
         objName = 'ext_rc522';
+    }else if (version === 'mixgo_sant'){
+        moduleName = 'sant_gx';
+        objName = 'ext_rfid';
     }
     generator.definitions_[`import_${moduleName}_${objName}`] = `from ${moduleName} import ${objName}`;
     var code = `${objName}.read_card(${sector}, x="content")`;
@@ -311,6 +317,9 @@ export const rfid_write = function (_, generator) {
     } else if (version === 'mixgo_me') {
         moduleName = 'me_g1';
         objName = 'ext_rc522';
+    }else if (version === 'mixgo_sant'){
+        moduleName = 'sant_gx';
+        objName = 'ext_rfid';
     }
     generator.definitions_[`import_${moduleName}_${objName}`] = `from ${moduleName} import ${objName}`;
     var code = `${objName}.write_card(${cnt}, ${sector})\n`;
@@ -329,6 +338,9 @@ export const rfid_write_return = function (_, generator) {
     } else if (version === 'mixgo_me') {
         moduleName = 'me_g1';
         objName = 'ext_rc522';
+    }else if (version === 'mixgo_sant'){
+        moduleName = 'sant_gx';
+        objName = 'ext_rfid';
     }
     generator.definitions_[`import_${moduleName}_${objName}`] = `from ${moduleName} import ${objName}`;
     var code = `${objName}.write_card(${cnt}, ${sector})`;
@@ -346,6 +358,9 @@ export const rfid_status = function (_, generator) {
     } else if (version === 'mixgo_me') {
         moduleName = 'me_g1';
         objName = 'ext_rc522';
+    } else if (version === 'mixgo_sant'){
+        moduleName = 'sant_gx';
+        objName = 'ext_rfid';
     }
     generator.definitions_[`import_${moduleName}_${objName}`] = `from ${moduleName} import ${objName}`;
     var code = `${objName}.scan_card() == ${key}`;
