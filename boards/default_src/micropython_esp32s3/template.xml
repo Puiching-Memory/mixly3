@@ -2591,12 +2591,7 @@
       </value>
     </block>
     <block type="interaction_whether_to_interaction_SANT"></block>
-    <block type="radar_set_DETECTION_THRESHOLD" >
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">xsensor</field>
-        </shadow>
-      </value>
+    <block type="radar_set_DETECTION_THRESHOLD_SANT" >
       <value name="VAR">
         <shadow type="math_number">
           <field name="NUM">5000</field>
@@ -2605,13 +2600,6 @@
       <value name="VAR2">
         <shadow type="math_number">
           <field name="NUM">500</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="interaction_whether_to_interaction" >
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">xsensor</field>
         </shadow>
       </value>
     </block>
